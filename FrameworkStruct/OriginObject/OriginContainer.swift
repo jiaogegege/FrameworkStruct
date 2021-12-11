@@ -89,22 +89,22 @@ extension OriginContainer: ContainerProtocol
     func mutate(key: AnyHashable, value: Any) {
         self.container[key] = self.getCopy(origin: value)
         //提交数据的时候，要对所有数据源发出通知
-        self.dispatchChange(key: key, value: self.getCopy(origin: value))
+        self.dispatchChange(key: key, value: self.get(key: key) as Any)
     }
     
-    func commit(key: AnyHashable, value: Any) {
+    @objc func commit(key: AnyHashable, value: Any) {
         //子类实现和具体存取器的交互
     }
     
-    func commitAll() {
+    @objc func commitAll() {
         //子类实现和具体存取器的交互
     }
     
-    func refresh(key: AnyHashable) {
+    @objc func refresh(key: AnyHashable) {
         //子类实现和具体存取器的交互
     }
     
-    func refreshAll() {
+    @objc func refreshAll() {
         //子类实现和具体存取器的交互
     }
     
@@ -123,6 +123,14 @@ extension OriginContainer: ContainerProtocol
         {
             return nsData.copy()
         }
+        else if let array = origin as? Array<Any>
+        {
+            return array.copy()
+        }
+        else if let dic = origin as? Dictionary<AnyHashable, Any>
+        {
+            return dic.copy()
+        }
         else
         {
             return origin as Any
@@ -132,15 +140,14 @@ extension OriginContainer: ContainerProtocol
     //订阅数据
     func subscribe<T>(key: AnyHashable, delegate: T) where T : AnyObject, T : ContainerServices
     {
-        let pointer = Unmanaged.passUnretained(delegate as AnyObject).toOpaque()
         if let weakArr = self.delegates[key]
         {
-            weakArr.addPointer(pointer)
+            weakArr.addObject(delegate)
         }
         else
         {
             let weakArray = NSPointerArray.weakObjects()
-            weakArray.addPointer(pointer)
+            weakArray.addObject(delegate)
             self.delegates[key] = weakArray
         }
     }
@@ -149,12 +156,14 @@ extension OriginContainer: ContainerProtocol
     func dispatchChange(key: AnyHashable, value: Any)
     {
         let array = self.delegates[key]
+        array?.addPointer(nil)
+        array?.compact()
         let count = array?.count ?? 0
         if count > 0
         {
             for i in 0..<count
             {
-                let delegate = array?.pointer(at: i)
+                let delegate = array?.object(at: i)
                 if let delegateOp = delegate as? ContainerServices
                 {
                     delegateOp.containerDidUpdateData(key: key, value: value)

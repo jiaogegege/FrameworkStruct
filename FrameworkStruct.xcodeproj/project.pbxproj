@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -143,6 +144,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 			children = (
 				EADB0147276243D3001B7223 /* README.md */,
 				EADB0146276243D3001B7223 /* Utility.swift */,
+				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				EADB01102762422D001B7223 /* PlistAccessor.swift in Sources */,
 				EAC8A84527625D490088293F /* SDImageHEICCoder.m in Sources */,
 				EAC8A87C27625D490088293F /* UIImage+Metadata.m in Sources */,
+				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,
 				EAC8A86D27625D490088293F /* SDImageLoadersManager.m in Sources */,
 				EAC8A85627625D490088293F /* SDWebImageCacheSerializer.m in Sources */,
 				EADB00DC27624012001B7223 /* BasicViewController.swift in Sources */,
