@@ -1,0 +1,89 @@
+//
+//  CustomTheme.swift
+//  FrameworkStruct
+//
+//  Created by  蒋 雪姣 on 2021/12/9.
+//
+
+/**
+ * 主题对象，对应不同的主题
+ */
+import UIKit
+
+class CustomTheme: NSObject, ThemeProtocol
+{
+    //主题数据模型
+    var theme: ThemeModel
+    
+    //初始化方法
+    required init(theme: ThemeModel)
+    {
+        self.theme = theme
+    }
+    
+    //MARK: 主题属性
+    //主色调
+    var mainColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.mainColor)
+    }
+    //标题主色调
+    var mainTitleColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.mainTitleColor)
+    }
+    //副标题
+    var subTitleColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.subTitleColor)
+    }
+    //文本内容
+    var contentTextColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.contentTextColor)
+    }
+    //提示文本
+    var hintTextColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.hintTextColor)
+    }
+    //主字体
+    var mainFont: UIFont {
+        return UIFont.init(name: theme.mainFont, size: CGFloat(theme.mainFontSize.floatValue)) ?? UIFont.systemFont(ofSize: CGFloat(theme.mainFontSize.floatValue))
+    }
+    
+    var secondaryFont: UIFont {
+        return UIFont.init(name: theme.secondaryFont, size: CGFloat(theme.secondaryFontSize.floatValue)) ?? UIFont.systemFont(ofSize: CGFloat(theme.secondaryFontSize.floatValue))
+    }
+    
+    var hintFont: UIFont {
+        return UIFont.init(name: theme.hintFont, size: CGFloat(theme.hintFontSize.floatValue)) ?? UIFont.systemFont(ofSize: CGFloat(theme.hintFontSize.floatValue))
+    }
+    
+    func getImage(imgName: String) -> UIImage? {
+        let imgStr = imgName + self.theme.imageSuffix
+        return UIImage(named: imgStr)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func desString() -> String
+    {
+        let typeStr = type(of: self)
+        return typeStr.description()
+    }
+    
+
+}

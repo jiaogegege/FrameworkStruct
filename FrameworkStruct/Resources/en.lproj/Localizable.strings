@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  FrameworkStruct
+
+  Created by 蒋雪姣 on 2021/12/9.
+  
+*/
+
+/**
+ * app中各种文案国际化
+ * 英文
+ */
+
+confirm = "Confirm";
+cancel = "Cancel";
+waterfall = "Waterfall";

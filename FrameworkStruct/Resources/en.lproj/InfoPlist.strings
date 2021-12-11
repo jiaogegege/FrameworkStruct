@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  FrameworkStruct
+
+  Created by 蒋雪姣 on 2021/12/9.
+  
+*/
+
+/**
+ * 设置app中系统文字
+ * 英文
+ */
+
+//app桌面显示名称
+CFBundleDisplayName = "FrameworkStruct";
