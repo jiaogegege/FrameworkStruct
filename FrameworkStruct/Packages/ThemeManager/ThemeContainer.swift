@@ -13,12 +13,17 @@
  */
 import UIKit
 
+//主题容器提供的数据key
+enum ThemeContainerDataKey: Int {
+    case currentTheme = 0   //当前主题
+    case allTheme = 1   //所有主题列表
+}
+
 class ThemeContainer: OriginContainer {
-    var udAcs = UDAccessor.shared
-    var plAcs = PlistAccessor.shared
-    //当前主题
-    var currentTheme: CustomTheme!
+    var udAccessor = UserDefaultsAccessor.shared   //UserDefaulits存取器
+    var plAccessor = PlistAccessor.shared    //plist存取器
     
+
     //初始化方法
     override init() {
         super.init()
@@ -28,19 +33,19 @@ class ThemeContainer: OriginContainer {
     //尝试获取当前主题，如果没有，那么选择默认主题
     func getCurrentTheme()
     {
-        if let current = udAcs.readString(key: currentThemeKey)
+        if let current = udAccessor.readString(key: currentThemeKey)
         {
-            let themeDict = plAcs.read(fileName: current)
+            let themeDict = plAccessor.read(fileName: current)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
-            self.currentTheme = CustomTheme.init(theme: curThemeModel!)
+            self.mutate(key: ThemeContainerDataKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
         }
         else
         {
-            let themeDict = plAcs.read(fileName: sPinkThemeFileName)
+            let themeDict = plAccessor.read(fileName: sPinkThemeFileName)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
-            self.currentTheme = CustomTheme.init(theme: curThemeModel!)
-            //保存当前主题
-            self.udAcs.write(key: currentThemeKey, value: sPinkThemeFileName)
+            self.mutate(key: ThemeContainerDataKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
+            //保存当前主题标识
+            self.udAccessor.write(key: currentThemeKey, value: sPinkThemeFileName)
         }
     }
     

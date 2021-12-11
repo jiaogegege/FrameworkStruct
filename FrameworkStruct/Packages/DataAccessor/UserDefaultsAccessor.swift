@@ -1,5 +1,5 @@
 //
-//  UDAccessor.swift
+//  UserDefaultsAccessor.swift
 //  FrameworkStruct
 //
 //  Created by 蒋雪姣 on 2021/12/9.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class UDAccessor: OriginAccessor
+class UserDefaultsAccessor: OriginAccessor
 {
     //单例
-    static let shared = UDAccessor()
+    static let shared = UserDefaultsAccessor()
     
     //NSUserDefaults
     var ud = UserDefaults.standard
@@ -23,12 +23,12 @@ class UDAccessor: OriginAccessor
     
     override func copy() -> Any
     {
-        return self // UDAccessor.shared
+        return self // UserDefaultsAccessor.shared
     }
         
     override func mutableCopy() -> Any
     {
-        return self // UDAccessor.shared
+        return self // UserDefaultsAccessor.shared
     }
     
     /**

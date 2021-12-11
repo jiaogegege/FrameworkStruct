@@ -136,7 +136,7 @@
 		EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB01352762433C001B7223 /* CustomTheme.swift */; };
 		EADB014427624391001B7223 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB014227624391001B7223 /* UserManager.swift */; };
 		EADB0148276243D3001B7223 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB0146276243D3001B7223 /* Utility.swift */; };
-		EADB0155276245D3001B7223 /* UDAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB0154276245D3001B7223 /* UDAccessor.swift */; };
+		EADB0155276245D3001B7223 /* UserDefaultsAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */; };
 		EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015827624B4C001B7223 /* BlueTheme.plist */; };
 		EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015927624B4C001B7223 /* RedTheme.plist */; };
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
@@ -451,7 +451,7 @@
 		EADB0147276243D3001B7223 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EADB014B276243FC001B7223 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EADB014F2762450E001B7223 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		EADB0154276245D3001B7223 /* UDAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDAccessor.swift; sourceTree = "<group>"; };
+		EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessor.swift; sourceTree = "<group>"; };
 		EADB015827624B4C001B7223 /* BlueTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BlueTheme.plist; sourceTree = "<group>"; };
 		EADB015927624B4C001B7223 /* RedTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedTheme.plist; sourceTree = "<group>"; };
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
@@ -951,7 +951,7 @@
 			children = (
 				EADB010F2762422D001B7223 /* README.md */,
 				EADB010E2762422D001B7223 /* PlistAccessor.swift */,
-				EADB0154276245D3001B7223 /* UDAccessor.swift */,
+				EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */,
 			);
 			path = DataAccessor;
 			sourceTree = "<group>";
@@ -1186,7 +1186,7 @@
 				EADB00E82762410D001B7223 /* MacroConst.swift in Sources */,
 				EADB01392762433C001B7223 /* ThemeModel.m in Sources */,
 				EAC8A88027625D490088293F /* SDImageCachesManagerOperation.m in Sources */,
-				EADB0155276245D3001B7223 /* UDAccessor.swift in Sources */,
+				EADB0155276245D3001B7223 /* UserDefaultsAccessor.swift in Sources */,
 				EAC8A77227625BA70088293F /* NSString+MJExtension.m in Sources */,
 				EAC8A77427625BA70088293F /* MJFoundation.m in Sources */,
 				EAC8A87527625D490088293F /* UIImage+MemoryCacheCost.m in Sources */,
