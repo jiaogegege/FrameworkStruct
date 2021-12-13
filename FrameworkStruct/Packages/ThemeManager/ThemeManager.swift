@@ -23,7 +23,7 @@ class ThemeManager: OriginManager
     private override init()
     {
         super.init()
-        
+        self.themeContainer.subscribe(key: TCGetKey.currentTheme, delegate: self)
     }
     
     //重写复制方法
@@ -56,6 +56,29 @@ extension ThemeManager
         return self.themeContainer.getAllTheme()
     }
     
+    //切换主题
+    func changeTheme(theme: CustomTheme)
+    {
+        themeContainer.setCurrentTheme(newTheme: theme)
+    }
+    
+}
+
+/**
+ * 订阅主题容器服务
+ */
+extension ThemeManager: ContainerServices
+{
+    func containerDidUpdateData(key: AnyHashable, value: Any) {
+        if let k = key as? TCGetKey
+        {
+            //切换当前主题的服务
+            if k == TCGetKey.currentTheme
+            {
+                
+            }
+        }
+    }
     
     
 }

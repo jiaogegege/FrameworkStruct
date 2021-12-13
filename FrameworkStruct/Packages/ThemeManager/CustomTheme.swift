@@ -10,7 +10,7 @@
  */
 import UIKit
 
-class CustomTheme: NSObject, ThemeProtocol
+class CustomTheme: ThemeProtocol
 {
     //主题数据模型
     var theme: ThemeModel
@@ -19,6 +19,12 @@ class CustomTheme: NSObject, ThemeProtocol
     required init(theme: ThemeModel)
     {
         self.theme = theme
+    }
+    
+    //主题名
+    func getThemeName() -> String
+    {
+        return self.theme.name
     }
     
     //MARK: 主题属性
@@ -81,8 +87,7 @@ class CustomTheme: NSObject, ThemeProtocol
     
     func desString() -> String
     {
-        let typeStr = type(of: self)
-        return typeStr.description()
+        return self.theme.name
     }
     
 

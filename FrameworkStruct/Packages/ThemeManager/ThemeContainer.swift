@@ -63,13 +63,22 @@ class ThemeContainer: OriginContainer
     fileprivate func initCustomTheme(themeName: String) -> CustomTheme?
     {
         var theme: CustomTheme? = nil
-        if let themeConfig = udAccessor.readString(key: themeName)
-        {
-            let themeDict = plAccessor.read(fileName: themeConfig)
-            let themeModel = ThemeModel.mj_object(withKeyValues: themeDict)
-            theme = CustomTheme.init(theme: themeModel!)
-        }
+        let themeConfig = plAccessor.read(fileName: themeName)
+        let themeModel = ThemeModel.mj_object(withKeyValues: themeConfig)
+        theme = CustomTheme.init(theme: themeModel!)
         return theme
+    }
+    
+    //保存当前主题到UserDefaults
+    override func commit(key: AnyHashable, value: Any)
+    {
+        if let k = key as? TCGetKey
+        {
+            if k == TCGetKey.currentTheme
+            {
+                udAccessor.write(key: currentThemeKey, value: value)
+            }
+        }
     }
     
 
@@ -91,6 +100,7 @@ extension ThemeContainer
     func setCurrentTheme(newTheme: CustomTheme)
     {
         self.mutate(key: TCGetKey.currentTheme, value: newTheme)
+        self.commit(key: TCGetKey.currentTheme, value: newTheme.theme.fileName)
     }
     
     //获取所有主题列表

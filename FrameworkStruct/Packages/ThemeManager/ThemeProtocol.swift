@@ -10,7 +10,7 @@
  */
 import Foundation
 
-protocol ThemeProtocol: OriginProtocol
+protocol ThemeProtocol
 {
     //MARK: 颜色
     //主题色

@@ -69,10 +69,10 @@ extension UIColor
         let bString = String(cString[cString.index(cString.startIndex, offsetBy: 4)..<cString.index(cString.startIndex, offsetBy: 6)])
         
         // Scan values
-        var r = 0, g = 0, b = 0
-        Scanner(string: rString).scanInt(&r)
-        Scanner(string: gString).scanInt(&g)
-        Scanner(string: bString).scanInt(&b)
+        var r: UInt64 = 0, g: UInt64 = 0, b: UInt64 = 0
+        Scanner(string: rString).scanHexInt64(&r)
+        Scanner(string: gString).scanHexInt64(&g)
+        Scanner(string: bString).scanHexInt64(&b)
         return UIColor.colorWithRGBA(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: alpha)
     }
     

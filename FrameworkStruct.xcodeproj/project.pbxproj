@@ -144,6 +144,7 @@
 		EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015827624B4C001B7223 /* BlueTheme.plist */; };
 		EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015927624B4C001B7223 /* RedTheme.plist */; };
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
+		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -463,6 +464,7 @@
 		EADB015827624B4C001B7223 /* BlueTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BlueTheme.plist; sourceTree = "<group>"; };
 		EADB015927624B4C001B7223 /* RedTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedTheme.plist; sourceTree = "<group>"; };
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
+		EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -895,6 +897,7 @@
 				EADB0147276243D3001B7223 /* README.md */,
 				EADB0146276243D3001B7223 /* Utility.swift */,
 				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
+				EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1163,6 +1166,7 @@
 				EAC8A84F27625D490088293F /* SDAnimatedImageView.m in Sources */,
 				EAC8A87F27625D490088293F /* UIColor+SDHexString.m in Sources */,
 				EAC8A86A27625D490088293F /* SDImageGIFCoder.m in Sources */,
+				EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */,
 				EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */,
 				EAC8A86727625D490088293F /* UIImage+ExtendedCacheData.m in Sources */,
 				EAC8A88227625D490088293F /* SDDeviceHelper.m in Sources */,

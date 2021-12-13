@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ThemeModel : NSObject
 
 @property(nonatomic, copy)NSString *id;
+@property(nonatomic, copy)NSString *fileName;
 @property(nonatomic, copy)NSString *name;
 @property(nonatomic, copy)NSString *mainColor;
 @property(nonatomic, copy)NSString *mainTitleColor;

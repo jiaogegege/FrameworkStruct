@@ -4,6 +4,8 @@
 <dict>
 	<key>id</key>
 	<string>1</string>
+	<key>fileName</key>
+	<string>PinkTheme.plist</string>
 	<key>name</key>
 	<string>pink_theme</string>
 	<key>mainColor</key>

@@ -7,11 +7,18 @@
 
 import UIKit
 
-class ThemeSelectViewController: UIViewController
+class ThemeSelectViewController: BasicViewController
 {
     //MARK: 属性
     //视图组件
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var segment: UISegmentedControl!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var switcher: UISwitch!
+    @IBOutlet weak var progress: UIProgressView!
     
     //内部属性
     let themeMgr = ThemeManager.shared  //主题管理器
@@ -27,20 +34,30 @@ class ThemeSelectViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.configUI()
-        self.initData()
     }
     
-    func configUI()
+    override func createUI()
     {
-        self.tableView.register(SelectThemeCell.self, forCellReuseIdentifier: SelectThemeCellKey)
+        super.createUI()
+        self.tableView.register(UINib(nibName: SelectThemeCellKey, bundle: nil), forCellReuseIdentifier: SelectThemeCellKey)
         
     }
     
-    func initData()
+    override func configUI() {
+        self.changeTheme(theme: themeMgr.currentTheme)
+    }
+    
+    override func initData()
     {
         self.themeArray = themeMgr.allTheme
     }
+
+    
+    
+    
+    
+    
+    
 
     
 }
@@ -55,11 +72,43 @@ extension ThemeSelectViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SelectThemeCellKey, for: indexPath) as! SelectThemeCell
         cell.theme = self.themeArray?[indexPath.row]
+        cell.update()
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if let theme = self.themeArray?[indexPath.row]
+        {
+            themeMgr.changeTheme(theme: theme)
+            self.changeTheme(theme: themeMgr.currentTheme)
+        }
+    }
+    
+}
+
+//MARK: 主题切换
+extension ThemeSelectViewController
+{
+    //主题切换通知
+    override func themeDidChange(notify: Notification) {
+        self.changeTheme(theme: notify.userInfo![FSNotification.changeThemeNotification.getParameter()] as! CustomTheme)
+    }
+    
+    //切换主题
+    func changeTheme(theme: CustomTheme)
+    {
+        label.backgroundColor = theme.mainColor
+        label.textColor = theme.mainTitleColor
+        button.setTitleColor(theme.mainColor, for: .normal)
+        segment.selectedSegmentTintColor = theme.mainColor
+        textField.textColor = theme.mainColor
+        slider.tintColor = theme.mainColor
+        switcher.onTintColor = theme.mainColor
+        progress.progressTintColor = theme.mainColor
     }
     
 }
