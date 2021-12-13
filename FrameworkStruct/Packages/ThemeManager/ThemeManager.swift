@@ -16,7 +16,9 @@ class ThemeManager: OriginManager
     //单例对象
     static let shared = ThemeManager()
     //主题容器
-    var themeContainer: ThemeContainer = ThemeContainer()
+    fileprivate var themeContainer: ThemeContainer = ThemeContainer()
+    //当前主题
+    fileprivate var currentTheme: CustomTheme? = nil
     
     //MARK: 方法
     //私有化init方法
@@ -47,8 +49,17 @@ class ThemeManager: OriginManager
 extension ThemeManager
 {
     //当前主题对象
-    var currentTheme: CustomTheme {
-        return self.themeContainer.getCurrentTheme()
+    func getCurrentTheme() -> CustomTheme
+    {
+        if let curTheme = self.currentTheme
+        {
+            return curTheme
+        }
+        else
+        {
+            self.currentTheme = self.themeContainer.getCurrentTheme()
+            return self.currentTheme!
+        }
     }
     
     //所有主题对象
@@ -59,7 +70,7 @@ extension ThemeManager
     //切换主题
     func changeTheme(theme: CustomTheme)
     {
-        themeContainer.setCurrentTheme(newTheme: theme)
+        self.themeContainer.setCurrentTheme(newTheme: theme)
     }
     
 }
@@ -69,13 +80,14 @@ extension ThemeManager
  */
 extension ThemeManager: ContainerServices
 {
-    func containerDidUpdateData(key: AnyHashable, value: Any) {
+    func containerDidUpdateData(key: AnyHashable, value: Any)
+    {
         if let k = key as? TCGetKey
         {
             //切换当前主题的服务
             if k == TCGetKey.currentTheme
             {
-                
+                self.currentTheme = (value as! CustomTheme)
             }
         }
     }

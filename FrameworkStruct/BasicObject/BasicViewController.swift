@@ -17,6 +17,7 @@ class BasicViewController: UIViewController
         self.configUI()
         self.initData()
         self.addNotification()
+        self.updateUI()
     }
     
     //创建界面，一般用来创建界面组件，留给子类实现
@@ -27,6 +28,12 @@ class BasicViewController: UIViewController
     
     //配置界面，用来设置界面组件，比如frame，约束，颜色等，留给子类实现
     func configUI()
+    {
+        
+    }
+    
+    //更新界面，一般是更新界面上的一些数据
+    func updateUI()
     {
         
     }
@@ -50,12 +57,7 @@ class BasicViewController: UIViewController
     //添加通知
     func addNotification()
     {
-        self.addThemeNotification()
-    }
-    
-    //添加主题通知
-    func addThemeNotification()
-    {
+        //添加主题通知
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: NSNotification.Name(FSNotification.changeThemeNotification.rawValue), object: nil)
     }
 
@@ -79,7 +81,7 @@ class BasicViewController: UIViewController
     
     
     
-    
+    //析构方法，清理一些资源
     deinit {
         print(TimeEmbellisher.currentTime() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
         NotificationCenter.default.removeObserver(self)

@@ -44,7 +44,7 @@ class ThemeSelectViewController: BasicViewController
     }
     
     override func configUI() {
-        self.changeTheme(theme: themeMgr.currentTheme)
+        self.changeTheme(theme: themeMgr.getCurrentTheme())
     }
     
     override func initData()
@@ -84,7 +84,7 @@ extension ThemeSelectViewController: UITableViewDelegate, UITableViewDataSource
         if let theme = self.themeArray?[indexPath.row]
         {
             themeMgr.changeTheme(theme: theme)
-            self.changeTheme(theme: themeMgr.currentTheme)
+            self.changeTheme(theme: themeMgr.getCurrentTheme())
         }
     }
     
@@ -95,6 +95,7 @@ extension ThemeSelectViewController
 {
     //主题切换通知
     override func themeDidChange(notify: Notification) {
+        super.themeDidChange(notify: notify)
         self.changeTheme(theme: notify.userInfo![FSNotification.changeThemeNotification.getParameter()] as! CustomTheme)
     }
     
