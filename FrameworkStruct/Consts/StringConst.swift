@@ -11,7 +11,6 @@
 import Foundation
 
 //MARK: 项目通用字符串定义
-
 /**
  * 通用字符串建议以`s`开头，表示`string`，方便区分
  */
@@ -34,7 +33,6 @@ let sAppId = "1476239189"
 
 
 //MARK: 项目中文案定义，国际化文案
-
 extension String
 {
     //瀑布流
@@ -43,7 +41,8 @@ extension String
     static var sConfirm = localized(originStr: "confirm")
     //取消
     static var sCancel = localized(originStr: "cancel")
-    
+    //主题选择
+    static var sThemeSelect = localized(originStr: "themeSelect")
     
     
     
@@ -56,3 +55,9 @@ extension String
     }
     
 }
+
+//MARK: Storyboard文件名定义
+//主界面
+let sMainSB = "Main"
+//启动界面
+let slaunchSB = "LaunchScreen"

@@ -15,7 +15,8 @@ class ThemeManager: OriginManager
     //MARK: 属性
     //单例对象
     static let shared = ThemeManager()
-    
+    //主题容器
+    var themeContainer: ThemeContainer = ThemeContainer()
     
     //MARK: 方法
     //私有化init方法
@@ -45,5 +46,16 @@ class ThemeManager: OriginManager
  */
 extension ThemeManager
 {
+    //当前主题对象
+    var currentTheme: CustomTheme {
+        return self.themeContainer.getCurrentTheme()
+    }
+    
+    //所有主题对象
+    var allTheme: [CustomTheme] {
+        return self.themeContainer.getAllTheme()
+    }
+    
+    
     
 }

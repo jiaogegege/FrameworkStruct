@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
+		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
+		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
 		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
@@ -144,6 +147,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
+		EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
+		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
 		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
@@ -925,6 +931,8 @@
 				EADB00F6276241D4001B7223 /* README.md */,
 				EADB00F4276241D4001B7223 /* GCWaterfallFlowLayout.h */,
 				EADB00F5276241D4001B7223 /* GCWaterfallFlowLayout.m */,
+				EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */,
+				EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -945,6 +953,7 @@
 				EADB00B527623E42001B7223 /* Views */,
 				EADB007E27623B59001B7223 /* ViewController.swift */,
 				EADB00EA2762416E001B7223 /* JCollectionViewController.swift */,
+				EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -1099,6 +1108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EADB008727623B5A001B7223 /* LaunchScreen.storyboard in Resources */,
+				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
@@ -1183,6 +1193,7 @@
 				EAC8A87727625D490088293F /* SDWebImageCacheKeyFilter.m in Sources */,
 				EADB00AF27623C76001B7223 /* OriginMonitor.swift in Sources */,
 				EAC8A86127625D490088293F /* SDWebImagePrefetcher.m in Sources */,
+				EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */,
 				EAC8A84927625D490088293F /* SDWebImageOperation.m in Sources */,
 				EADB00B227623C76001B7223 /* OriginEmbellisher.swift in Sources */,
 				EAC8A87427625D490088293F /* SDImageCacheDefine.m in Sources */,
@@ -1213,6 +1224,7 @@
 				EAC8A85027625D490088293F /* UIImage+ForceDecode.m in Sources */,
 				EAC8A75027625B450088293F /* AFURLRequestSerialization.m in Sources */,
 				EAC8A77027625BA70088293F /* NSObject+MJProperty.m in Sources */,
+				EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */,
 				EADB00A727623C76001B7223 /* OriginAdapter.swift in Sources */,
 				EADB00A827623C76001B7223 /* OriginDocument.swift in Sources */,
 				EAC8A86F27625D490088293F /* SDWebImageTransition.m in Sources */,

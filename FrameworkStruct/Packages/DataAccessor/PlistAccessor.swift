@@ -37,13 +37,13 @@ class PlistAccessor: OriginAccessor
      * - parameters:
      * - fileName:文件名，包括后缀，也可以没有后缀
      */
-    func read(fileName: String) -> Dictionary<String, AnyHashable>
+    func read(fileName: String) -> Dictionary<String, Any>
     {
         let fileNameArr = fileName.components(separatedBy: ".")
         let bundle = Bundle.main
         let filePath = bundle.path(forResource: fileNameArr.first, ofType: "plist") ?? ""
         let fileDict = NSDictionary(contentsOfFile: filePath)
-        return fileDict as! Dictionary<String, String>
+        return fileDict as! Dictionary<String, Any>
     }
     
     /**

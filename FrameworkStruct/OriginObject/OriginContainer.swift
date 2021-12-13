@@ -70,7 +70,11 @@ class OriginContainer: NSObject
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
     
-    
+    //MARK: 方法
+    override init()
+    {
+        
+    }
     
 }
 
