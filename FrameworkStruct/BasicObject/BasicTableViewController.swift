@@ -7,83 +7,82 @@
 
 import UIKit
 
-class BasicTableViewController: UITableViewController {
-
-    override func viewDidLoad() {
+class BasicTableViewController: UITableViewController
+{
+    //MARK: 方法
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.createUI()
+        self.configUI()
+        self.initData()
+        self.addNotification()
+    }
+    
+    //创建界面，一般用来创建界面组件，留给子类实现
+    func createUI()
+    {
+        
+    }
+    
+    //配置界面，用来设置界面组件，比如frame，约束，颜色等，留给子类实现
+    func configUI()
+    {
+        
+    }
+    
+    //初始化控制器数据，比如一些状态和变量，留给子类实现
+    func initData()
+    {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: 通知处理
+    //添加通知
+    func addNotification()
+    {
+        self.addThemeNotification()
+    }
+    
+    //添加主题通知
+    func addThemeNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: NSNotification.Name(FSNotification.changeThemeNotification.rawValue), object: nil)
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    //处理主题通知的方法
+    @objc dynamic func themeDidChange(notify: Notification)
+    {
+        //留给子类实现
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    deinit {
+        print(TimeEmbellisher.currentTime() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
+        NotificationCenter.default.removeObserver(self)
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

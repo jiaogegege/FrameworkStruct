@@ -73,7 +73,12 @@ class Utility: NSObject
         }
     }
     
-    
+    //获得一个对象的类名
+    static func getObjClassName(obj: AnyObject) -> String
+    {
+        let typeName = type(of: obj).description()
+        return typeName.components(separatedBy: ".").last!
+    }
     
     
     

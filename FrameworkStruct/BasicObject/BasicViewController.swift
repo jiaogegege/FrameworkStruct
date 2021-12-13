@@ -9,7 +9,7 @@ import UIKit
 
 class BasicViewController: UIViewController
 {
-
+    //MARK: 方法
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -81,6 +81,7 @@ class BasicViewController: UIViewController
     
     
     deinit {
+        print(TimeEmbellisher.currentTime() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
         NotificationCenter.default.removeObserver(self)
     }
     
