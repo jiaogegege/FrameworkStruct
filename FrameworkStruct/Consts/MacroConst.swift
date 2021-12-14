@@ -29,7 +29,7 @@ enum FSNotification: String
     
     
     //如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
-    func getParameter() -> String
+    func paramKey() -> String
     {
         switch self {
         case .changeThemeNotification:

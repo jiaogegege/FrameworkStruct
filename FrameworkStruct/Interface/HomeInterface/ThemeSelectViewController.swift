@@ -22,7 +22,7 @@ class ThemeSelectViewController: BasicViewController
     
     //内部属性
     let themeMgr = ThemeManager.shared  //主题管理器
-    var themeArray: [CustomTheme]? = nil    //主题列表
+    var themeArray: [ThemeProtocol]? = nil    //主题列表
     
     
     static func getViewController() -> ThemeSelectViewController
@@ -44,7 +44,7 @@ class ThemeSelectViewController: BasicViewController
     }
     
     override func configUI() {
-        self.changeTheme(theme: themeMgr.getCurrentTheme())
+        self.themeChanged(theme: themeMgr.getCurrentTheme())
     }
     
     override func initData()
@@ -96,11 +96,11 @@ extension ThemeSelectViewController
     //主题切换通知
     override func themeDidChange(notify: Notification) {
         super.themeDidChange(notify: notify)
-        self.changeTheme(theme: notify.userInfo![FSNotification.changeThemeNotification.getParameter()] as! CustomTheme)
+        self.themeChanged(theme: notify.userInfo![FSNotification.changeThemeNotification.paramKey()] as! ThemeProtocol)
     }
     
     //切换主题更新UI
-    func changeTheme(theme: CustomTheme)
+    func themeChanged(theme: ThemeProtocol)
     {
         label.backgroundColor = theme.mainColor
         label.textColor = theme.mainTitleColor

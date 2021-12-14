@@ -21,13 +21,12 @@ class CustomTheme: ThemeProtocol
         self.theme = theme
     }
     
+    //MARK: 主题属性
     //主题名
-    func getThemeName() -> String
-    {
-        return self.theme.name
+    var themeName: String {
+        return theme.name
     }
     
-    //MARK: 主题属性
     //主色调
     var mainColor: UIColor {
         return UIColor.colorWithHex(colorStr: theme.mainColor)

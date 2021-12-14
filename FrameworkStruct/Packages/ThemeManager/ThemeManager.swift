@@ -50,7 +50,7 @@ class ThemeManager: OriginManager
 extension ThemeManager
 {
     //当前主题对象
-    func getCurrentTheme() -> CustomTheme
+    func getCurrentTheme() -> ThemeProtocol
     {
         if let curTheme = self.currentTheme
         {
@@ -64,17 +64,18 @@ extension ThemeManager
     }
     
     //所有主题对象
-    var allTheme: [CustomTheme] {
+    var allTheme: [ThemeProtocol] {
         return self.themeContainer.getAllTheme()
     }
     
     //切换主题
-    func changeTheme(theme: CustomTheme)
+    func changeTheme(theme: ThemeProtocol)
     {
+        let newTheme = theme as! CustomTheme
         //选择了不同的主题才切换
-        if self.currentTheme?.theme.id != theme.theme.id
+        if self.currentTheme?.theme.id != newTheme.theme.id
         {
-            self.themeContainer.setCurrentTheme(newTheme: theme)
+            self.themeContainer.setCurrentTheme(newTheme: newTheme)
         }
     }
     
@@ -94,10 +95,9 @@ extension ThemeManager: ContainerServices
             {
                 self.currentTheme = (value as! CustomTheme)
                 //发出切换主题的通知
-                NotificationCenter.default.post(name: NSNotification.Name(FSNotification.changeThemeNotification.rawValue), object: nil, userInfo: [FSNotification.changeThemeNotification.getParameter(): self.currentTheme!])
+                NotificationCenter.default.post(name: NSNotification.Name(FSNotification.changeThemeNotification.rawValue), object: nil, userInfo: [FSNotification.changeThemeNotification.paramKey(): self.currentTheme!])
             }
         }
     }
-    
     
 }

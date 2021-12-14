@@ -13,6 +13,9 @@ import Foundation
 protocol ThemeProtocol
 {
     //MARK: 颜色
+    //主题名
+    var themeName: String {get}
+    
     //主题色
     var mainColor: UIColor {get}
     

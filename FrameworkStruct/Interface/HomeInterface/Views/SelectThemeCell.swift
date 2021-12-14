@@ -14,7 +14,7 @@ class SelectThemeCell: UITableViewCell {
     //MARK: 属性
     @IBOutlet weak var nameLabel: UILabel!  //主题名称
     //主题对象
-    var theme: CustomTheme? = nil
+    var theme: ThemeProtocol? = nil
     
     
     //MARK: 方法
@@ -22,7 +22,7 @@ class SelectThemeCell: UITableViewCell {
     func update()
     {
         self.nameLabel.textColor = theme?.mainColor
-        self.nameLabel.text = self.theme?.getThemeName()
+        self.nameLabel.text = self.theme?.themeName
     }
     
 

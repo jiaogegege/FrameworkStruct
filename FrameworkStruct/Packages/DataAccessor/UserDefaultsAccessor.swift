@@ -77,6 +77,7 @@ class UserDefaultsAccessor: OriginAccessor
     func write(key: String, value: Any)
     {
         ud.set(value, forKey: key)
+        ud.synchronize()
     }
     
     /**
