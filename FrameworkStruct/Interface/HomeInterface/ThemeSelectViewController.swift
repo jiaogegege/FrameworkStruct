@@ -99,7 +99,7 @@ extension ThemeSelectViewController
         self.changeTheme(theme: notify.userInfo![FSNotification.changeThemeNotification.getParameter()] as! CustomTheme)
     }
     
-    //切换主题
+    //切换主题更新UI
     func changeTheme(theme: CustomTheme)
     {
         label.backgroundColor = theme.mainColor
