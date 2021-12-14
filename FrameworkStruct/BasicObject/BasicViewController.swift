@@ -83,7 +83,7 @@ class BasicViewController: UIViewController
     
     //析构方法，清理一些资源
     deinit {
-        print(TimeEmbellisher.currentTime() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
+        print(TimeEmbellisher.getCurrentTime() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
         NotificationCenter.default.removeObserver(self)
     }
     

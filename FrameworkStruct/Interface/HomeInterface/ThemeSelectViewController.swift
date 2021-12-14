@@ -83,8 +83,8 @@ extension ThemeSelectViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let theme = self.themeArray?[indexPath.row]
         {
+            //切换主题
             themeMgr.changeTheme(theme: theme)
-            self.changeTheme(theme: themeMgr.getCurrentTheme())
         }
     }
     

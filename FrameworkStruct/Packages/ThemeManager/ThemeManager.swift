@@ -17,7 +17,7 @@ class ThemeManager: OriginManager
     static let shared = ThemeManager()
     //主题容器
     fileprivate var themeContainer: ThemeContainer = ThemeContainer()
-    //当前主题
+    //当前主题，主要用于缓存，防止多次从容器中读取
     fileprivate var currentTheme: CustomTheme? = nil
     
     //MARK: 方法
@@ -25,6 +25,7 @@ class ThemeManager: OriginManager
     private override init()
     {
         super.init()
+        //订阅当前主题更新服务
         self.themeContainer.subscribe(key: TCGetKey.currentTheme, delegate: self)
     }
     
@@ -70,7 +71,11 @@ extension ThemeManager
     //切换主题
     func changeTheme(theme: CustomTheme)
     {
-        self.themeContainer.setCurrentTheme(newTheme: theme)
+        //选择了不同的主题才切换
+        if self.currentTheme?.theme.id != theme.theme.id
+        {
+            self.themeContainer.setCurrentTheme(newTheme: theme)
+        }
     }
     
 }
@@ -88,6 +93,8 @@ extension ThemeManager: ContainerServices
             if k == TCGetKey.currentTheme
             {
                 self.currentTheme = (value as! CustomTheme)
+                //发出切换主题的通知
+                NotificationCenter.default.post(name: NSNotification.Name(FSNotification.changeThemeNotification.rawValue), object: nil, userInfo: [FSNotification.changeThemeNotification.getParameter(): self.currentTheme!])
             }
         }
     }

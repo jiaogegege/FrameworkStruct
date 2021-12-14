@@ -52,7 +52,7 @@ class Utility: NSObject
         return NSTemporaryDirectory()
     }
     
-    //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象，其他返回原始值（结构体、枚举等）
+    //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
     static func getCopy(origin: Any?) -> Any
     {
         if let nsData = origin as? NSObject

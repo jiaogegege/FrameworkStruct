@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ji2-ip-udq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ji2-ip-udq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -22,7 +23,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" id="cff-dz-KJZ">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -70,10 +71,9 @@
                                     <outlet property="delegate" destination="YwH-6r-cRG" id="R9T-Gf-fNz"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eZ-OW-jPg">
-                                <rect key="frame" x="20" y="364" width="125" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标签标签标签标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eZ-OW-jPg">
+                                <rect key="frame" x="20" y="364" width="139" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="Q99-Lk-t4h"/>
                                     <constraint firstAttribute="height" constant="41" id="raM-md-hVd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -81,19 +81,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzA-Th-Yd4">
-                                <rect key="frame" x="184" y="364" width="125" height="41"/>
+                                <rect key="frame" x="198" y="364" width="184" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="QxI-o7-JL8"/>
                                     <constraint firstAttribute="height" constant="41" id="da7-g5-tvt"/>
                                 </constraints>
-                                <state key="normal" title="按钮">
+                                <state key="normal" title="按钮按钮按钮按钮按钮">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ohM-yg-6bZ">
                                 <rect key="frame" x="17" y="428" width="131" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="131" id="Mbp-h4-SCx"/>
                                     <constraint firstAttribute="height" constant="30" id="kmo-Dv-Zfw"/>
                                 </constraints>
                                 <segments>
@@ -157,6 +155,7 @@
                             <constraint firstItem="qzA-Th-Yd4" firstAttribute="leading" secondItem="8eZ-OW-jPg" secondAttribute="trailing" constant="39" id="mKA-bL-dvD"/>
                             <constraint firstItem="bjF-oF-HMf" firstAttribute="top" secondItem="ohM-yg-6bZ" secondAttribute="bottom" constant="48" id="t1m-RN-pUK"/>
                             <constraint firstItem="dkj-ZK-Kou" firstAttribute="leading" secondItem="iAE-yG-QO9" secondAttribute="leading" id="w5Z-kH-1PL"/>
+                            <constraint firstItem="iAE-yG-QO9" firstAttribute="trailing" secondItem="qzA-Th-Yd4" secondAttribute="trailing" constant="32" id="wYf-Ol-HKX"/>
                         </constraints>
                     </view>
                     <connections>

@@ -14,7 +14,8 @@
 import UIKit
 
 //主题容器提供的可获取的数据key
-enum TCGetKey: Int {
+enum TCGetKey: Int
+{
     case currentTheme = 1000   //当前主题
     case allTheme = 1001   //所有主题列表
 }

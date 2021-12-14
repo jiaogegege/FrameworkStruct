@@ -87,13 +87,13 @@ extension OriginContainer: ContainerProtocol
 {
     func get(key: AnyHashable) -> Any? {
         let data = self.container[key]
-        return self.getCopy(origin: data)
+        return Utility.getCopy(origin: data)
     }
     
     func mutate(key: AnyHashable, value: Any) {
-        self.container[key] = self.getCopy(origin: value)
+        self.container[key] = Utility.getCopy(origin: value)
         //提交数据的时候，要对所有数据源发出通知
-        self.dispatchChange(key: key, value: self.get(key: key) as Any)
+        self.dispatch(key: key, value: self.get(key: key) as Any)
     }
     
     @objc func commit(key: AnyHashable, value: Any) {
@@ -120,27 +120,6 @@ extension OriginContainer: ContainerProtocol
         self.container.removeAll()
     }
     
-    //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象，其他返回原始值（结构体、枚举等）
-    func getCopy(origin: Any?) -> Any
-    {
-        if let nsData = origin as? NSObject
-        {
-            return nsData.copy()
-        }
-        else if let array = origin as? Array<Any>
-        {
-            return array.copy()
-        }
-        else if let dic = origin as? Dictionary<AnyHashable, Any>
-        {
-            return dic.copy()
-        }
-        else
-        {
-            return origin as Any
-        }
-    }
-    
     //订阅数据
     func subscribe<T>(key: AnyHashable, delegate: T) where T : AnyObject, T : ContainerServices
     {
@@ -157,7 +136,7 @@ extension OriginContainer: ContainerProtocol
     }
     
     //当数据变化的时候，通知所有订阅对象
-    func dispatchChange(key: AnyHashable, value: Any)
+    func dispatch(key: AnyHashable, value: Any)
     {
         let array = self.delegates[key]
         array?.addPointer(nil)

@@ -7,6 +7,7 @@
 
 /**
  * 定义各种颜色
+ * 颜色转换
  */
 import Foundation
 
@@ -34,7 +35,7 @@ extension UIColor
     //MARK: 颜色相关方法
     
     //16进制颜色字符串转UIColor
-    //colorStr:支持@“#123456”、 @“0X123456”、 @“123456”三种格式
+    //colorStr:支持“#123456”、 “0X123456”、 “123456”三种格式
     static func colorWithHex(colorStr: String , alpha: CGFloat = 1) -> UIColor
     {
         //删除字符串中的空格

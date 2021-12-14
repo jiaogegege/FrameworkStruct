@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     //设置界面
     func configUI()
     {
-        self.view.backgroundColor = UIColor.cAccent
+        
     }
 
     
