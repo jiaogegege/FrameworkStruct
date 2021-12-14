@@ -76,6 +76,27 @@ class OriginContainer: NSObject
         
     }
     
+    //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
+    func getCopy(origin: Any?) -> Any
+    {
+        if let nsData = origin as? NSObject
+        {
+            return nsData.copy()
+        }
+        else if let array = origin as? Array<Any>
+        {
+            return array.copy()
+        }
+        else if let dic = origin as? Dictionary<AnyHashable, Any>
+        {
+            return dic.copy()
+        }
+        else
+        {
+            return origin as Any
+        }
+    }
+    
 }
 
 
@@ -87,11 +108,11 @@ extension OriginContainer: ContainerProtocol
 {
     func get(key: AnyHashable) -> Any? {
         let data = self.container[key]
-        return Utility.getCopy(origin: data)
+        return self.getCopy(origin: data)
     }
     
     func mutate(key: AnyHashable, value: Any) {
-        self.container[key] = Utility.getCopy(origin: value)
+        self.container[key] = self.getCopy(origin: value)
         //提交数据的时候，要对所有数据源发出通知
         self.dispatch(key: key, value: self.get(key: key) as Any)
     }

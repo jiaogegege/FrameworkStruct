@@ -18,5 +18,5 @@ let sPinkThemeFileName = "PinkTheme.plist"
 let sRedThemeFileName = "RedTheme.plist"
 let sBlueThemeFileName = "BlueTheme.plist"
 
-//当前选择的主题
-let currentThemeKey = "currentThemeKey"
+//当前选择的主题读写UserDefaults的key
+let udCurrentThemeKey = "udCurrentThemeKey"
