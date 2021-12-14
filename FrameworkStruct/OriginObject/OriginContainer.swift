@@ -53,6 +53,9 @@ protocol ContainerProtocol
     //参数：key：订阅的数据key；delegate：订阅该数据的对象，必须是class
     func subscribe<T: AnyObject & ContainerServices>(key: AnyHashable, delegate: T)
     
+    //当数据变化的时候，通知所有订阅对象
+    func dispatch(key: AnyHashable, value: Any)
+    
 }
 
 

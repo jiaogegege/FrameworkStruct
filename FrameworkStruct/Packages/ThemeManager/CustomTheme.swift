@@ -61,6 +61,7 @@ class CustomTheme: ThemeProtocol
         return UIFont.init(name: theme.hintFont, size: CGFloat(theme.hintFontSize.floatValue)) ?? UIFont.systemFont(ofSize: CGFloat(theme.hintFontSize.floatValue))
     }
     
+    //获取图片，不同主题的图片后缀不同
     func getImage(imgName: String) -> UIImage? {
         let imgStr = imgName + self.theme.imageSuffix
         return UIImage(named: imgStr)
@@ -70,21 +71,7 @@ class CustomTheme: ThemeProtocol
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     func desString() -> String
     {
         return self.theme.name
