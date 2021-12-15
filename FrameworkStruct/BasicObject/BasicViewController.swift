@@ -285,13 +285,13 @@ class BasicViewController: UIViewController
     func addNotification()
     {
         //添加主题通知
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: NSNotification.Name(FSNotification.changeThemeNotification.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: NSNotification.Name(FSNotification.changeTheme.rawValue), object: nil)
     }
 
     //处理主题通知的方法
     @objc func themeDidChange(notify: Notification)
     {
-        self.theme = notify.userInfo![FSNotification.changeThemeNotification.paramKey()] as! ThemeProtocol
+        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey()] as! ThemeProtocol
         self.themeConfigUI(theme: self.theme)
     }
 

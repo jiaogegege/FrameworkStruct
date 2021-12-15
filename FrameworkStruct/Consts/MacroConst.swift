@@ -25,7 +25,7 @@ let kScreenHeight = UIScreen.main.bounds.size.height
 enum FSNotification: String
 {
     //切换主题的通知
-    case changeThemeNotification = "changeThemeNotification"
+    case changeTheme = "changeTheme"
     
     
     //如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
@@ -33,8 +33,8 @@ enum FSNotification: String
     {
         switch self
         {
-            case .changeThemeNotification:
-                return "themeKey"   //后跟`CustomTheme`对象
+            case .changeTheme:
+                return "themeKey"   //后跟`ThemeProtocol`对象
         
         }
     }
