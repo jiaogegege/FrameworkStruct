@@ -31,10 +31,7 @@ class JCollectionViewController: BasicViewController
         self.collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "collectionfooterview")
         self.view.addSubview(self.collectionView)
     }
-    
-    deinit {
-        print("dealloc")
-    }
+
 }
 
 //MARK: collectionview代理方法

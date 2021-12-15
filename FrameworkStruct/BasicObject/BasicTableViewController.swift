@@ -289,7 +289,7 @@ class BasicTableViewController: UITableViewController
     }
 
     //处理主题通知的方法
-    @objc func themeDidChange(notify: Notification)
+    @objc fileprivate func themeDidChange(notify: Notification)
     {
         self.theme = notify.userInfo![FSNotification.changeTheme.paramKey()] as! ThemeProtocol
         self.themeConfigUI(theme: self.theme)
