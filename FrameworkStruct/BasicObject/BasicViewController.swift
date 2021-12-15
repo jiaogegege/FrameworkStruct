@@ -98,7 +98,7 @@ class BasicViewController: UIViewController
     //如果子类覆写这个方法，需要调用父类方法
     func configUI()
     {
-        self.themeUpdateUI(theme: self.theme)
+        self.themeConfigUI(theme: self.theme)
     }
     
     //更新界面，一般是更新界面上的一些数据
@@ -292,12 +292,12 @@ class BasicViewController: UIViewController
     @objc func themeDidChange(notify: Notification)
     {
         self.theme = notify.userInfo![FSNotification.changeThemeNotification.paramKey()] as! ThemeProtocol
-        self.themeUpdateUI(theme: self.theme)
+        self.themeConfigUI(theme: self.theme)
     }
 
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
-    func themeUpdateUI(theme: ThemeProtocol)
+    func themeConfigUI(theme: ThemeProtocol)
     {
         //留给子类实现
     }
