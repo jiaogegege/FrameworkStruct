@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JCollectionViewController: UIViewController
+class JCollectionViewController: BasicViewController
 {
 //MARK: 属性
     var collectionView: UICollectionView!

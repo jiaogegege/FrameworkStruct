@@ -24,8 +24,10 @@ extension UIColor
     @objc static var cAccent = UIColor(named: "AccentColor")
     //黑色333333
     @objc static var cBlack333333 = UIColor.colorFromHex(value: 0x333333)
-    
-    
+    //f4f4f4
+    @objc static var cGrayf4f4f4 = UIColor.colorFromHex(value: 0xf4f4f4)
+    //0xff709b
+    @objc static var cPinkff709b = UIColor.colorFromHex(value: 0xff709b)
     
     
     

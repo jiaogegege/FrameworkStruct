@@ -19,6 +19,12 @@ extension UIImage
      */
     //app图标
     @objc static var iAppIcon:UIImage? = UIImage(named: "AppIcon")
+    //cell向右箭头
+    @objc static var iRightArrow: UIImage? = UIImage(named: "right_arrow")
+    //返回按钮图片
+    @objc static var iBackDark: UIImage? = UIImage(named: "common_back_dark")
+    @objc static var iBackLight: UIImage? = UIImage(named: "common_back_light")
+    @objc static var iBackClose: UIImage? = UIImage(named: "common_back_close")
     
     
 }

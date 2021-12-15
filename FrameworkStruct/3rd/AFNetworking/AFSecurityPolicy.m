@@ -64,8 +64,14 @@ static id AFPublicKeyForCertificate(NSData *certificate) {
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     __Require_noErr_Quiet(SecTrustEvaluate(allowedTrust, &result), _out);
 #pragma clang diagnostic pop
-
-    allowedPublicKey = (__bridge_transfer id)SecTrustCopyKey(allowedTrust);
+    if (@available(iOS 14.0, *))
+    {
+        allowedPublicKey = (__bridge_transfer id)SecTrustCopyKey(allowedTrust);
+    }
+    else
+    {
+        allowedPublicKey = (__bridge_transfer id)SecTrustCopyPublicKey(allowedTrust);
+    }
 
 _out:
     if (allowedTrust) {
@@ -126,7 +132,14 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         __Require_noErr_Quiet(SecTrustEvaluate(trust, &result), _out);
 #pragma clang diagnostic pop
-        [trustChain addObject:(__bridge_transfer id)SecTrustCopyKey(trust)];
+        if (@available(iOS 14.0, *))
+        {
+            [trustChain addObject:(__bridge_transfer id)SecTrustCopyKey(trust)];
+        }
+        else
+        {
+            [trustChain addObject:(__bridge_transfer id)SecTrustCopyPublicKey(trust)];
+        }
 
     _out:
         if (trust) {

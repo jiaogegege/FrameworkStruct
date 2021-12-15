@@ -40,19 +40,35 @@ class ThemeSelectViewController: BasicViewController
     {
         super.createUI()
         self.tableView.register(UINib(nibName: SelectThemeCellKey, bundle: nil), forCellReuseIdentifier: SelectThemeCellKey)
-        
     }
     
     override func configUI() {
-        self.themeChanged(theme: themeMgr.getCurrentTheme())
+        super.configUI()
     }
     
     override func initData()
     {
+        super.initData()
         self.themeArray = themeMgr.allTheme
     }
-
     
+    override func updateUI() {
+        super.updateUI()
+    }
+
+    //切换主题更新UI
+    override func themeUpdateUI(theme: ThemeProtocol)
+    {
+        super.themeUpdateUI(theme: theme)
+        label.backgroundColor = theme.mainColor
+        label.textColor = theme.mainTitleColor
+        button.setTitleColor(theme.mainColor, for: .normal)
+        segment.selectedSegmentTintColor = theme.mainColor
+        textField.textColor = theme.mainColor
+        slider.tintColor = theme.mainColor
+        switcher.onTintColor = theme.mainColor
+        progress.progressTintColor = theme.mainColor
+    }
     
     
     
@@ -90,26 +106,4 @@ extension ThemeSelectViewController: UITableViewDelegate, UITableViewDataSource
     
 }
 
-//MARK: 主题切换
-extension ThemeSelectViewController
-{
-    //主题切换通知
-    override func themeDidChange(notify: Notification) {
-        super.themeDidChange(notify: notify)
-        self.themeChanged(theme: notify.userInfo![FSNotification.changeThemeNotification.paramKey()] as! ThemeProtocol)
-    }
-    
-    //切换主题更新UI
-    func themeChanged(theme: ThemeProtocol)
-    {
-        label.backgroundColor = theme.mainColor
-        label.textColor = theme.mainTitleColor
-        button.setTitleColor(theme.mainColor, for: .normal)
-        segment.selectedSegmentTintColor = theme.mainColor
-        textField.textColor = theme.mainColor
-        slider.tintColor = theme.mainColor
-        switcher.onTintColor = theme.mainColor
-        progress.progressTintColor = theme.mainColor
-    }
-    
-}
+
