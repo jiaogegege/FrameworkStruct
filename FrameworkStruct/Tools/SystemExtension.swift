@@ -11,6 +11,27 @@
 import Foundation
 
 /**
+ * String
+ */
+extension String
+{
+    //计算字符串尺寸大小
+    func sizeWith(font: UIFont, maxWidth: CGFloat) -> CGSize
+    {
+        let rect = self.boundingRect(with: CGSize(width: maxWidth, height: 9999.0), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSAttributedString.Key.font : font], context: nil)
+        return rect.size
+    }
+    
+    //计算字符串高度
+    func heigtWith(font: UIFont, maxWidth: CGFloat) -> CGFloat
+    {
+        let size = self.sizeWith(font: font, maxWidth: maxWidth)
+        return size.height
+    }
+    
+}
+
+/**
  * Array
  */
 extension Array
