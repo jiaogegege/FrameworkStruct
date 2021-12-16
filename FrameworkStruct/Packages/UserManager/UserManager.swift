@@ -21,7 +21,6 @@ class UserManager: OriginManager {
     private override init()
     {
         super.init()
-        
     }
     
     //重写复制方法

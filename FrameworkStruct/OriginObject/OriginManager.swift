@@ -27,7 +27,15 @@ protocol ManagerProtocol
  */
 class OriginManager: NSObject
 {
-
+    //监控器，每一个管理器在创建的时候都要加入到监控器中
+    weak var monitor: ManagerMonitor!
+    
+    override init()
+    {
+        self.monitor = ManagerMonitor.shared
+        super.init()
+        monitor.addItem(item: self)
+    }
 }
 
 
