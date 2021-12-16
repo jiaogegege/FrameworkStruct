@@ -21,20 +21,20 @@ protocol MonitorProtocol
     var itemCount: Int {get}
     
     //获取监控器中所有元素
-    func allItems() -> [AnyObject]
+    func allItems() -> [NSObject]
     
     //某个元素是否存在监控器中
-    func isItemExist(item: AnyObject) -> Bool
+    func isItemExist(item: NSObject) -> Bool
     
     //添加一个元素
-    func addItem(item: AnyObject)
+    func addItem(item: NSObject)
     
     //删除一个元素
-    func deleteItem(item: AnyObject)
+    func deleteItem(item: NSObject)
     
     //获取一个元素
     //暂时不知道这个方法的作用，留作扩展
-    func getItem() -> AnyObject
+    func getItem() -> NSObject?
 }
 
 
@@ -44,7 +44,9 @@ protocol MonitorProtocol
  */
 class OriginMonitor: NSObject
 {
-    
+    //容器
+    fileprivate var container: FSVector = FSVector<NSObject>()
+
 }
 
 
@@ -55,27 +57,32 @@ class OriginMonitor: NSObject
 extension OriginMonitor: MonitorProtocol
 {
     var itemCount: Int {
-        <#code#>
+        return self.container.count()
     }
     
-    func allItems() -> [AnyObject] {
-        <#code#>
+    func allItems() -> [NSObject] {
+        return self.container.allItems()
     }
     
-    func isItemExist(item: AnyObject) -> Bool {
-        <#code#>
+    func isItemExist(item: NSObject) -> Bool {
+        let index = self.container.indexOf(item: item)
+        if index >= 0
+        {
+            return true
+        }
+        return false
     }
     
-    func addItem(item: AnyObject) {
-        <#code#>
+    func addItem(item: NSObject) {
+        self.container.pushBack(item: item)
     }
     
-    func deleteItem(item: AnyObject) {
-        <#code#>
+    func deleteItem(item: NSObject) {
+        _ = self.container.pop(item: item)
     }
     
-    func getItem() -> AnyObject {
-        <#code#>
+    func getItem() -> NSObject? {
+        return nil
     }
     
     

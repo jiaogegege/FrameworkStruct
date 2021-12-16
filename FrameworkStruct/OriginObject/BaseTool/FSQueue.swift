@@ -42,6 +42,20 @@ extension FSQueue
             return it
         }
     }
+    
+    //获取所有元素，元素还在容器中
+    func allItems() -> [T]
+    {
+        if self.isEmpty()
+        {
+            return []
+        }
+        else
+        {
+            let newArr = self.queue
+            return newArr
+        }
+    }
 
     //获取所有元素，如果容器为空，返回nil；容器中不再保存元素
     func popAll() -> [T]?

@@ -9,11 +9,19 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    //MARK: 属性
+    var monitor = MonitorMonitor.shared
 
-
+    //初始化应用程序数据
+    func initData()
+    {
+        
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.initData()
+        
         return true
     }
 

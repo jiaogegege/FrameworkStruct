@@ -76,6 +76,20 @@ extension FSVector
         }
         return nil
     }
+    
+    //获取所有元素，元素还在容器中
+    func allItems() -> [T]
+    {
+        if self.isEmpty()
+        {
+            return []
+        }
+        else
+        {
+            let newArr = self.vector
+            return newArr
+        }
+    }
 
     ///弹出头部元素，元素不在容器中
     func popFirst() -> T?
@@ -105,6 +119,24 @@ extension FSVector
             self.vector.removeLast()
             return it
         }
+    }
+    
+    ///弹出某个元素，元素不在容器中，如果元素不存在容器中，返回NO
+    func pop(item: T) -> Bool
+    {
+        if !self.isEmpty()
+        {
+            if self.vector.contains(item: item)
+            {
+                let index = self.indexOf(item: item)
+                if index >= 0
+                {
+                    self.vector.remove(at: index)
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     ///弹出index的某个元素，元素不在容器中，如果index的元素不存在，返回nil

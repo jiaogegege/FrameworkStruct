@@ -32,7 +32,14 @@ protocol AccessorProtocol
  */
 class OriginAccessor: NSObject
 {
+    //监控器，每一个存取器在创建的时候都要加入到监控器中
+    weak var monitor: OriginMonitor?
     
+    init(monitor: OriginMonitor) {
+        self.monitor = monitor
+        super.init()
+        monitor.addItem(item: self)
+    }
 }
 
 

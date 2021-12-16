@@ -8,7 +8,7 @@
 /**
  * 主要对各种系统组件进行扩展
  */
-import Foundation
+import UIKit
 
 /**
  * String

@@ -13,6 +13,14 @@
 		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
+		EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */; };
+		EA922562276B1BCF00192E2E /* ContainerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922561276B1BCF00192E2E /* ContainerMonitor.swift */; };
+		EA922564276B1BDB00192E2E /* AccessorMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922563276B1BDB00192E2E /* AccessorMonitor.swift */; };
+		EA922566276B1BF200192E2E /* AdapterMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922565276B1BF200192E2E /* AdapterMonitor.swift */; };
+		EA922568276B1BFE00192E2E /* WorkerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922567276B1BFE00192E2E /* WorkerMonitor.swift */; };
+		EA92256B276B207C00192E2E /* MonitorMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92256A276B207C00192E2E /* MonitorMonitor.swift */; };
+		EA92256D276B27E100192E2E /* CheckerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92256C276B27E100192E2E /* CheckerMonitor.swift */; };
+		EA92256F276B282500192E2E /* EmbellisherMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92256E276B282500192E2E /* EmbellisherMonitor.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -157,6 +165,15 @@
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
 		EA92255D276AE48700192E2E /* FSVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSVector.swift; sourceTree = "<group>"; };
+		EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerMonitor.swift; sourceTree = "<group>"; };
+		EA922561276B1BCF00192E2E /* ContainerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerMonitor.swift; sourceTree = "<group>"; };
+		EA922563276B1BDB00192E2E /* AccessorMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessorMonitor.swift; sourceTree = "<group>"; };
+		EA922565276B1BF200192E2E /* AdapterMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterMonitor.swift; sourceTree = "<group>"; };
+		EA922567276B1BFE00192E2E /* WorkerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerMonitor.swift; sourceTree = "<group>"; };
+		EA922569276B1C1600192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA92256A276B207C00192E2E /* MonitorMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorMonitor.swift; sourceTree = "<group>"; };
+		EA92256C276B27E100192E2E /* CheckerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerMonitor.swift; sourceTree = "<group>"; };
+		EA92256E276B282500192E2E /* EmbellisherMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbellisherMonitor.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -486,6 +503,15 @@
 		EA922558276AD54D00192E2E /* Monitor */ = {
 			isa = PBXGroup;
 			children = (
+				EA922569276B1C1600192E2E /* README.md */,
+				EA92256A276B207C00192E2E /* MonitorMonitor.swift */,
+				EA922563276B1BDB00192E2E /* AccessorMonitor.swift */,
+				EA92256C276B27E100192E2E /* CheckerMonitor.swift */,
+				EA922561276B1BCF00192E2E /* ContainerMonitor.swift */,
+				EA922565276B1BF200192E2E /* AdapterMonitor.swift */,
+				EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */,
+				EA92256E276B282500192E2E /* EmbellisherMonitor.swift */,
+				EA922567276B1BFE00192E2E /* WorkerMonitor.swift */,
 			);
 			path = Monitor;
 			sourceTree = "<group>";
@@ -881,8 +907,8 @@
 		EADB009627623C34001B7223 /* OriginObject */ = {
 			isa = PBXGroup;
 			children = (
-				EA922559276AD64300192E2E /* BaseTool */,
 				EADB009E27623C76001B7223 /* README.md */,
+				EA922559276AD64300192E2E /* BaseTool */,
 				EADB009D27623C76001B7223 /* OriginProtocol.swift */,
 				EADB00A227623C76001B7223 /* OriginModel.swift */,
 				EADB00A427623C76001B7223 /* OriginAccessor.swift */,
@@ -905,10 +931,10 @@
 				EADB0125276242FD001B7223 /* StatusManager */,
 				EA922558276AD54D00192E2E /* Monitor */,
 				EADB014027624387001B7223 /* UserManager */,
-				EADB012D27624328001B7223 /* ThemeManager */,
-				EADB0121276242E2001B7223 /* NetworkAdapter */,
+				EADB012D27624328001B7223 /* ThemePackage */,
+				EADB0121276242E2001B7223 /* NetworkPackage */,
 				EADB010C27624213001B7223 /* DataAccessor */,
-				EADB014E276244F2001B7223 /* DatabaseAccessor */,
+				EADB014E276244F2001B7223 /* DatabasePackage */,
 				EADB011427624233001B7223 /* DataContainer */,
 				EADB0119276242C7001B7223 /* Embellisher */,
 			);
@@ -1013,12 +1039,12 @@
 			path = Embellisher;
 			sourceTree = "<group>";
 		};
-		EADB0121276242E2001B7223 /* NetworkAdapter */ = {
+		EADB0121276242E2001B7223 /* NetworkPackage */ = {
 			isa = PBXGroup;
 			children = (
 				EADB0122276242EB001B7223 /* README.md */,
 			);
-			path = NetworkAdapter;
+			path = NetworkPackage;
 			sourceTree = "<group>";
 		};
 		EADB0125276242FD001B7223 /* StatusManager */ = {
@@ -1032,7 +1058,7 @@
 			path = StatusManager;
 			sourceTree = "<group>";
 		};
-		EADB012D27624328001B7223 /* ThemeManager */ = {
+		EADB012D27624328001B7223 /* ThemePackage */ = {
 			isa = PBXGroup;
 			children = (
 				EADB01312762433C001B7223 /* README.md */,
@@ -1045,7 +1071,7 @@
 				EADB012F2762433C001B7223 /* ThemeManager.swift */,
 				EADB015727624B39001B7223 /* Resource */,
 			);
-			path = ThemeManager;
+			path = ThemePackage;
 			sourceTree = "<group>";
 		};
 		EADB014027624387001B7223 /* UserManager */ = {
@@ -1057,12 +1083,12 @@
 			path = UserManager;
 			sourceTree = "<group>";
 		};
-		EADB014E276244F2001B7223 /* DatabaseAccessor */ = {
+		EADB014E276244F2001B7223 /* DatabasePackage */ = {
 			isa = PBXGroup;
 			children = (
 				EADB014F2762450E001B7223 /* README.md */,
 			);
-			path = DatabaseAccessor;
+			path = DatabasePackage;
 			sourceTree = "<group>";
 		};
 		EADB015727624B39001B7223 /* Resource */ = {
@@ -1172,12 +1198,14 @@
 				EADB00D927624012001B7223 /* BasicProtocol.swift in Sources */,
 				EADB00F7276241D4001B7223 /* GCWaterfallFlowLayout.m in Sources */,
 				EAC8A85127625D490088293F /* SDImageAWebPCoder.m in Sources */,
+				EA922562276B1BCF00192E2E /* ContainerMonitor.swift in Sources */,
 				EADB013B2762433C001B7223 /* ThemeConst.swift in Sources */,
 				EADB01372762433C001B7223 /* ThemeContainer.swift in Sources */,
 				EAC8A87B27625D490088293F /* UIView+WebCache.m in Sources */,
 				EAC8A85827625D490088293F /* SDGraphicsImageRenderer.m in Sources */,
 				EAC8A86627625D490088293F /* SDAnimatedImageRep.m in Sources */,
 				EAC8A76F27625BA70088293F /* MJExtensionConst.m in Sources */,
+				EA922566276B1BF200192E2E /* AdapterMonitor.swift in Sources */,
 				EAC8A85A27625D490088293F /* SDImageCodersManager.m in Sources */,
 				EAC8A86C27625D490088293F /* SDWebImageDownloaderOperation.m in Sources */,
 				EADB007F27623B59001B7223 /* ViewController.swift in Sources */,
@@ -1191,6 +1219,7 @@
 				EAC8A84F27625D490088293F /* SDAnimatedImageView.m in Sources */,
 				EAC8A87F27625D490088293F /* UIColor+SDHexString.m in Sources */,
 				EAC8A86A27625D490088293F /* SDImageGIFCoder.m in Sources */,
+				EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */,
 				EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */,
 				EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */,
 				EAC8A86727625D490088293F /* UIImage+ExtendedCacheData.m in Sources */,
@@ -1210,6 +1239,7 @@
 				EAC8A75227625B450088293F /* AFSecurityPolicy.m in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
 				EAC8A85327625D490088293F /* UIImage+Transform.m in Sources */,
+				EA922564276B1BDB00192E2E /* AccessorMonitor.swift in Sources */,
 				EAC8A85C27625D490088293F /* SDMemoryCache.m in Sources */,
 				EAC8A88327625D490088293F /* SDWeakProxy.m in Sources */,
 				EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */,
@@ -1221,6 +1251,7 @@
 				EAC8A87327625D490088293F /* SDImageGraphics.m in Sources */,
 				EAC8A85927625D490088293F /* UIImage+GIF.m in Sources */,
 				EAC8A87727625D490088293F /* SDWebImageCacheKeyFilter.m in Sources */,
+				EA922568276B1BFE00192E2E /* WorkerMonitor.swift in Sources */,
 				EADB00AF27623C76001B7223 /* OriginMonitor.swift in Sources */,
 				EAC8A86127625D490088293F /* SDWebImagePrefetcher.m in Sources */,
 				EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */,
@@ -1242,7 +1273,9 @@
 				EAC8A86527625D490088293F /* SDDiskCache.m in Sources */,
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,
 				EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */,
+				EA92256D276B27E100192E2E /* CheckerMonitor.swift in Sources */,
 				EADB012B2762430B001B7223 /* SMVector.m in Sources */,
+				EA92256F276B282500192E2E /* EmbellisherMonitor.swift in Sources */,
 				EADB00B027623C76001B7223 /* OriginAccessor.swift in Sources */,
 				EAC8A85527625D490088293F /* SDImageLoader.m in Sources */,
 				EAC8A87127625D490088293F /* NSData+ImageContentType.m in Sources */,
@@ -1265,6 +1298,7 @@
 				EADB00E72762410D001B7223 /* ColorConst.swift in Sources */,
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
 				EADB00AC27623C76001B7223 /* OriginWorker.swift in Sources */,
+				EA92256B276B207C00192E2E /* MonitorMonitor.swift in Sources */,
 				EAC8A88527625D490088293F /* SDFileAttributeHelper.m in Sources */,
 				EADB011F276242D1001B7223 /* StringEmbellisher.swift in Sources */,
 				EADB00DA27624012001B7223 /* BasicTabbarController.swift in Sources */,

@@ -17,9 +17,9 @@ class PlistAccessor: OriginAccessor
     static let shared = PlistAccessor()
     
     //私有化初始化方法
-    private override init()
+    private init()
     {
-        
+        super.init(monitor: AccessorMonitor.shared)
     }
     
     override func copy() -> Any
@@ -81,39 +81,6 @@ class PlistAccessor: OriginAccessor
         }
         return Dictionary()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

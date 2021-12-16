@@ -5,6 +5,10 @@
 //  Created by 蒋雪姣 on 2021/12/9.
 //
 
+/**
+ * UserDefaults存取器
+ * 专门用于读写配置信息
+ */
 import UIKit
 
 class UserDefaultsAccessor: OriginAccessor
@@ -16,9 +20,9 @@ class UserDefaultsAccessor: OriginAccessor
     var ud = UserDefaults.standard
     
     //私有化初始化方法
-    private override init()
+    private init()
     {
-        
+        super.init(monitor: AccessorMonitor.shared)
     }
     
     override func copy() -> Any
@@ -88,4 +92,11 @@ class UserDefaultsAccessor: OriginAccessor
         ud.removeObject(forKey: key)
     }
     
+    
+    
+    //返回数据源相关信息
+    override func accessorDataSourceInfo() -> Dictionary<String, String> {
+        let infoDict = ["type": "UserDefaults"]
+        return infoDict
+    }
 }
