@@ -21,6 +21,13 @@
 		EA92256B276B207C00192E2E /* MonitorMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92256A276B207C00192E2E /* MonitorMonitor.swift */; };
 		EA92256D276B27E100192E2E /* CheckerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92256C276B27E100192E2E /* CheckerMonitor.swift */; };
 		EA92256F276B282500192E2E /* EmbellisherMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92256E276B282500192E2E /* EmbellisherMonitor.swift */; };
+		EA92257B276B3E7C00192E2E /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA922571276B3E7C00192E2E /* SVRadialGradientLayer.m */; };
+		EA92257C276B3E7C00192E2E /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA922574276B3E7C00192E2E /* SVProgressAnimatedView.m */; };
+		EA92257D276B3E7C00192E2E /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA922577276B3E7C00192E2E /* SVProgressHUD.m */; };
+		EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA922578276B3E7C00192E2E /* SVIndefiniteAnimatedView.m */; };
+		EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */; };
+		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
+		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -174,6 +181,18 @@
 		EA92256A276B207C00192E2E /* MonitorMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorMonitor.swift; sourceTree = "<group>"; };
 		EA92256C276B27E100192E2E /* CheckerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerMonitor.swift; sourceTree = "<group>"; };
 		EA92256E276B282500192E2E /* EmbellisherMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbellisherMonitor.swift; sourceTree = "<group>"; };
+		EA922571276B3E7C00192E2E /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		EA922572276B3E7C00192E2E /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		EA922573276B3E7C00192E2E /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		EA922574276B3E7C00192E2E /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		EA922575276B3E7C00192E2E /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		EA922576276B3E7C00192E2E /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		EA922577276B3E7C00192E2E /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		EA922578276B3E7C00192E2E /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		EA92257A276B3E7C00192E2E /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -476,7 +495,6 @@
 		EADB01342762433C001B7223 /* ThemeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		EADB01352762433C001B7223 /* CustomTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTheme.swift; sourceTree = "<group>"; };
 		EADB01362762433C001B7223 /* ThemeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeModel.h; sourceTree = "<group>"; };
-		EADB014127624391001B7223 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EADB014227624391001B7223 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		EADB0146276243D3001B7223 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		EADB0147276243D3001B7223 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -494,6 +512,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +543,40 @@
 				EA92255D276AE48700192E2E /* FSVector.swift */,
 			);
 			path = BaseTool;
+			sourceTree = "<group>";
+		};
+		EA922570276B3E7C00192E2E /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				EA922573276B3E7C00192E2E /* SVProgressHUD.h */,
+				EA922577276B3E7C00192E2E /* SVProgressHUD.m */,
+				EA922576276B3E7C00192E2E /* SVRadialGradientLayer.h */,
+				EA922571276B3E7C00192E2E /* SVRadialGradientLayer.m */,
+				EA922572276B3E7C00192E2E /* SVIndefiniteAnimatedView.h */,
+				EA922578276B3E7C00192E2E /* SVIndefiniteAnimatedView.m */,
+				EA92257A276B3E7C00192E2E /* SVProgressAnimatedView.h */,
+				EA922574276B3E7C00192E2E /* SVProgressAnimatedView.m */,
+				EA922575276B3E7C00192E2E /* SVProgressHUD-Prefix.pch */,
+				EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		EA922580276B3EAA00192E2E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA922581276B3EAA00192E2E /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA922583276B42D200192E2E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				EADB014227624391001B7223 /* UserManager.swift */,
+				EA922584276B439700192E2E /* ControllerManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		EAC8A73E27625B450088293F /* AFNetworking */ = {
@@ -819,6 +872,7 @@
 			children = (
 				EADB007927623B59001B7223 /* FrameworkStruct */,
 				EADB007827623B59001B7223 /* Products */,
+				EA922580276B3EAA00192E2E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -928,15 +982,15 @@
 			isa = PBXGroup;
 			children = (
 				EADB00FF27624201001B7223 /* README.md */,
-				EADB0125276242FD001B7223 /* StatusManager */,
 				EA922558276AD54D00192E2E /* Monitor */,
-				EADB014027624387001B7223 /* UserManager */,
-				EADB012D27624328001B7223 /* ThemePackage */,
-				EADB0121276242E2001B7223 /* NetworkPackage */,
-				EADB010C27624213001B7223 /* DataAccessor */,
-				EADB014E276244F2001B7223 /* DatabasePackage */,
+				EA922583276B42D200192E2E /* Manager */,
 				EADB011427624233001B7223 /* DataContainer */,
+				EADB010C27624213001B7223 /* DataAccessor */,
 				EADB0119276242C7001B7223 /* Embellisher */,
+				EADB014E276244F2001B7223 /* DatabasePackage */,
+				EADB0121276242E2001B7223 /* NetworkPackage */,
+				EADB012D27624328001B7223 /* ThemePackage */,
+				EADB0125276242FD001B7223 /* StatusManager */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -963,6 +1017,7 @@
 		EADB009A27623C4C001B7223 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				EA922570276B3E7C00192E2E /* SVProgressHUD */,
 				EAC8A77827625D480088293F /* SDWebImage */,
 				EAC8A75527625BA70088293F /* MJExtension */,
 				EAC8A73E27625B450088293F /* AFNetworking */,
@@ -1074,15 +1129,6 @@
 			path = ThemePackage;
 			sourceTree = "<group>";
 		};
-		EADB014027624387001B7223 /* UserManager */ = {
-			isa = PBXGroup;
-			children = (
-				EADB014127624391001B7223 /* README.md */,
-				EADB014227624391001B7223 /* UserManager.swift */,
-			);
-			path = UserManager;
-			sourceTree = "<group>";
-		};
 		EADB014E276244F2001B7223 /* DatabasePackage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1165,6 +1211,7 @@
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
+				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
@@ -1212,6 +1259,7 @@
 				EADB01102762422D001B7223 /* PlistAccessor.swift in Sources */,
 				EAC8A84527625D490088293F /* SDImageHEICCoder.m in Sources */,
 				EAC8A87C27625D490088293F /* UIImage+Metadata.m in Sources */,
+				EA922585276B439700192E2E /* ControllerManager.swift in Sources */,
 				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,
 				EAC8A86D27625D490088293F /* SDImageLoadersManager.m in Sources */,
 				EAC8A85627625D490088293F /* SDWebImageCacheSerializer.m in Sources */,
@@ -1232,12 +1280,14 @@
 				EADB00AB27623C76001B7223 /* OriginContainer.swift in Sources */,
 				EAC8A87027625D490088293F /* SDImageTransformer.m in Sources */,
 				EAC8A87D27625D490088293F /* UIButton+WebCache.m in Sources */,
+				EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */,
 				EADB012A2762430B001B7223 /* StatusManager.m in Sources */,
 				EAC8A87227625D490088293F /* UIImageView+WebCache.m in Sources */,
 				EAC8A84C27625D490088293F /* SDImageIOAnimatedCoder.m in Sources */,
 				EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */,
 				EAC8A75227625B450088293F /* AFSecurityPolicy.m in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
+				EA92257C276B3E7C00192E2E /* SVProgressAnimatedView.m in Sources */,
 				EAC8A85327625D490088293F /* UIImage+Transform.m in Sources */,
 				EA922564276B1BDB00192E2E /* AccessorMonitor.swift in Sources */,
 				EAC8A85C27625D490088293F /* SDMemoryCache.m in Sources */,
@@ -1277,6 +1327,7 @@
 				EADB012B2762430B001B7223 /* SMVector.m in Sources */,
 				EA92256F276B282500192E2E /* EmbellisherMonitor.swift in Sources */,
 				EADB00B027623C76001B7223 /* OriginAccessor.swift in Sources */,
+				EA92257D276B3E7C00192E2E /* SVProgressHUD.m in Sources */,
 				EAC8A85527625D490088293F /* SDImageLoader.m in Sources */,
 				EAC8A87127625D490088293F /* NSData+ImageContentType.m in Sources */,
 				EAC8A87827625D490088293F /* SDWebImageDefine.m in Sources */,
@@ -1298,6 +1349,7 @@
 				EADB00E72762410D001B7223 /* ColorConst.swift in Sources */,
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
 				EADB00AC27623C76001B7223 /* OriginWorker.swift in Sources */,
+				EA92257B276B3E7C00192E2E /* SVRadialGradientLayer.m in Sources */,
 				EA92256B276B207C00192E2E /* MonitorMonitor.swift in Sources */,
 				EAC8A88527625D490088293F /* SDFileAttributeHelper.m in Sources */,
 				EADB011F276242D1001B7223 /* StringEmbellisher.swift in Sources */,
@@ -1417,12 +1469,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1473,11 +1527,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};

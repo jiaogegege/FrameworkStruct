@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: 属性
     var monitor = MonitorMonitor.shared
-
+    
     //初始化应用程序数据
     func initData()
     {
