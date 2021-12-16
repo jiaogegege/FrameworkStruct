@@ -17,7 +17,24 @@ import Foundation
  */
 protocol MonitorProtocol
 {
+    //监控器中所有元素的数量
+    var itemCount: Int {get}
     
+    //获取监控器中所有元素
+    func allItems() -> [AnyObject]
+    
+    //某个元素是否存在监控器中
+    func isItemExist(item: AnyObject) -> Bool
+    
+    //添加一个元素
+    func addItem(item: AnyObject)
+    
+    //删除一个元素
+    func deleteItem(item: AnyObject)
+    
+    //获取一个元素
+    //暂时不知道这个方法的作用，留作扩展
+    func getItem() -> AnyObject
 }
 
 
@@ -27,7 +44,7 @@ protocol MonitorProtocol
  */
 class OriginMonitor: NSObject
 {
-
+    
 }
 
 
@@ -37,6 +54,30 @@ class OriginMonitor: NSObject
  */
 extension OriginMonitor: MonitorProtocol
 {
+    var itemCount: Int {
+        <#code#>
+    }
+    
+    func allItems() -> [AnyObject] {
+        <#code#>
+    }
+    
+    func isItemExist(item: AnyObject) -> Bool {
+        <#code#>
+    }
+    
+    func addItem(item: AnyObject) {
+        <#code#>
+    }
+    
+    func deleteItem(item: AnyObject) {
+        <#code#>
+    }
+    
+    func getItem() -> AnyObject {
+        <#code#>
+    }
+    
     
 }
 

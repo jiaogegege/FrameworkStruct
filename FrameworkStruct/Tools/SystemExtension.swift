@@ -47,6 +47,11 @@ extension Array
         return newArray
     }
     
+    //让Array支持contains方法
+    func contains<T>(item: T) -> Bool where T : Equatable {
+        return self.filter({$0 as? T == item}).count > 0
+    }
+    
 }
 
 
@@ -103,4 +108,5 @@ extension NSPointerArray
         guard index < count else { return }
         removePointer(at: index)
     }
+    
 }
