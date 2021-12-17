@@ -170,6 +170,7 @@
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
 		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
 		EA92255D276AE48700192E2E /* FSVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSVector.swift; sourceTree = "<group>"; };
@@ -523,6 +524,7 @@
 		EA77951D276C389200D9707F /* Worker */ = {
 			isa = PBXGroup;
 			children = (
+				EA779520276C5BC500D9707F /* README.md */,
 			);
 			path = Worker;
 			sourceTree = "<group>";
