@@ -1,1 +1,30 @@
 
+/* Class = "UILabel"; text = "标签标签标签标签"; ObjectID = "8eZ-OW-jPg"; */
+"8eZ-OW-jPg.text" = "标签标签标签标签";
+
+/* Class = "UITextField"; text = "文本框"; ObjectID = "9By-2U-rQF"; */
+"9By-2U-rQF.text" = "文本框";
+
+/* Class = "UIButton"; configuration.title = "cancel"; ObjectID = "Gts-fm-rjT"; */
+"Gts-fm-rjT.configuration.title" = "取消";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Gts-fm-rjT"; */
+"Gts-fm-rjT.normalTitle" = "取消按钮";
+
+/* Class = "UIViewController"; title = "主题选择"; ObjectID = "YwH-6r-cRG"; */
+"YwH-6r-cRG.title" = "主题选择";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "eIu-su-Ywp"; */
+"eIu-su-Ywp.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kUw-Ev-eJK"; */
+"kUw-Ev-eJK.text" = "Label";
+
+/* Class = "UISegmentedControl"; ohM-yg-6bZ.segmentTitles[0] = "First"; ObjectID = "ohM-yg-6bZ"; */
+"ohM-yg-6bZ.segmentTitles[0]" = "First";
+
+/* Class = "UISegmentedControl"; ohM-yg-6bZ.segmentTitles[1] = "Second"; ObjectID = "ohM-yg-6bZ"; */
+"ohM-yg-6bZ.segmentTitles[1]" = "Second";
+
+/* Class = "UIButton"; normalTitle = "按钮按钮按钮按钮按钮"; ObjectID = "qzA-Th-Yd4"; */
+"qzA-Th-Yd4.normalTitle" = "按钮按钮按钮按钮按钮";

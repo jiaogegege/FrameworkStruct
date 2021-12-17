@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let titleArray = [String.sWaterfall, String.sThemeSelect]
+    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +49,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         {
             let themeVC = ThemeSelectViewController.getViewController()
             self.navigationController?.pushViewController(themeVC, animated: true)
+        }
+        else if indexPath.row == 2
+        {
+            let vc = ModalTestViewController.getViewController()
+            vc.modalPresentationStyle = .pageSheet
+//            vc.isModalInPresentation = true
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

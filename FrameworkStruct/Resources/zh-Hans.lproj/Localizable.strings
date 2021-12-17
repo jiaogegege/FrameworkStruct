@@ -15,3 +15,4 @@ confirm = "确定";
 cancel = "取消";
 waterfall = "瀑布流";
 themeSelect = "主题选择";
+modalShow = "模态显示";

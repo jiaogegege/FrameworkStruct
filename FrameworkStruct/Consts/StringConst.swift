@@ -43,6 +43,8 @@ extension String
     static var sCancel = localized(originStr: "cancel")
     //主题选择
     static var sThemeSelect = localized(originStr: "themeSelect")
+    //模态显示
+    static var sModalShow = localized(originStr: "modalShow")
     
     
     

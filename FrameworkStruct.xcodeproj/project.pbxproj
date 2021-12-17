@@ -11,6 +11,7 @@
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
 		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
+		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
 		EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */; };
@@ -171,6 +172,9 @@
 		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
+		EA779524276C70AD00D9707F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		EA779526276C70DD00D9707F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
 		EA92255D276AE48700192E2E /* FSVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSVector.swift; sourceTree = "<group>"; };
@@ -451,13 +455,11 @@
 		EADB00A527623C76001B7223 /* OriginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginManager.swift; sourceTree = "<group>"; };
 		EADB00A627623C76001B7223 /* OriginEmbellisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginEmbellisher.swift; sourceTree = "<group>"; };
 		EADB00BB27623EA3001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EADB00BE27623EF0001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		EADB00BF27623EF0001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EADB00C027623EF0001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EADB00C627623F29001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EADB00C927623F2A001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EADB00CC27623F39001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		EADB00CE27623F3C001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		EADB00CF27624011001B7223 /* FrameworkStruct-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FrameworkStruct-Bridging-Header.h"; sourceTree = "<group>"; };
 		EADB00D027624012001B7223 /* NSObject+PropertyListing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PropertyListing.m"; sourceTree = "<group>"; };
 		EADB00D127624012001B7223 /* BasicProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicProtocol.swift; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 				EADB007E27623B59001B7223 /* ViewController.swift */,
 				EADB00EA2762416E001B7223 /* JCollectionViewController.swift */,
 				EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */,
+				EA779521276C68AF00D9707F /* ModalTestViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -1339,6 +1342,7 @@
 				EAC8A85F27625D490088293F /* SDWebImageDownloaderResponseModifier.m in Sources */,
 				EAC8A84627625D490088293F /* NSImage+Compatibility.m in Sources */,
 				EAC8A84D27625D490088293F /* UIImageView+HighlightedWebCache.m in Sources */,
+				EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */,
 				EAC8A88427625D490088293F /* SDInternalMacros.m in Sources */,
 				EAC8A86527625D490088293F /* SDDiskCache.m in Sources */,
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,
@@ -1400,8 +1404,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				EADB008127623B59001B7223 /* Base */,
-				EADB00BE27623EF0001B7223 /* zh-Hans */,
-				EADB00CE27623F3C001B7223 /* en */,
+				EA779524276C70AD00D9707F /* en */,
+				EA779526276C70DD00D9707F /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
