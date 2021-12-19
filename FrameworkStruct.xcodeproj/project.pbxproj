@@ -29,6 +29,9 @@
 		EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */; };
 		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
 		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
+		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
+		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
+		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -199,6 +202,14 @@
 		EA92257A276B3E7C00192E2E /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
 		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
+		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAA4E83276F3EC900C45712 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		EAAA4E87276F3EF600C45712 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
+		EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadManager.swift; sourceTree = "<group>"; };
+		EAAA4E8E276F57BB00C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -593,13 +604,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA922583276B42D200192E2E /* Manager */ = {
+		EA922583276B42D200192E2E /* BusinessManager */ = {
 			isa = PBXGroup;
 			children = (
+				EAAA4E81276F3E4900C45712 /* README.md */,
 				EADB014227624391001B7223 /* UserManager.swift */,
-				EA922584276B439700192E2E /* ControllerManager.swift */,
 			);
-			path = Manager;
+			path = BusinessManager;
+			sourceTree = "<group>";
+		};
+		EAAA4E80276F3E2F00C45712 /* ComponentManager */ = {
+			isa = PBXGroup;
+			children = (
+				EAAA4E82276F3E7800C45712 /* README.md */,
+				EA922584276B439700192E2E /* ControllerManager.swift */,
+				EAAA4E83276F3EC900C45712 /* AlertManager.swift */,
+				EAAA4E87276F3EF600C45712 /* ToastManager.swift */,
+				EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */,
+			);
+			path = ComponentManager;
+			sourceTree = "<group>";
+		};
+		EAAA4E8D276F57AA00C45712 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				EAAA4E8E276F57BB00C45712 /* README.md */,
+				EADB0121276242E2001B7223 /* NetworkAdapter */,
+				EAAA4E91276F64E000C45712 /* BlueToothAdapter */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
+		EAAA4E91276F64E000C45712 /* BlueToothAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				EAAA4E92276F64F200C45712 /* README.md */,
+			);
+			path = BlueToothAdapter;
+			sourceTree = "<group>";
+		};
+		EAAA4E93276F657D00C45712 /* DataChecker */ = {
+			isa = PBXGroup;
+			children = (
+				EAAA4E94276F658400C45712 /* README.md */,
+			);
+			path = DataChecker;
 			sourceTree = "<group>";
 		};
 		EAC8A73E27625B450088293F /* AFNetworking */ = {
@@ -910,13 +959,13 @@
 		EADB007927623B59001B7223 /* FrameworkStruct */ = {
 			isa = PBXGroup;
 			children = (
-				EADB009627623C34001B7223 /* OriginObject */,
-				EADB009327623C1E001B7223 /* BasicObject */,
 				EADB009527623C2D001B7223 /* Interface */,
 				EADB009927623C48001B7223 /* ViewComponents */,
+				EADB009227623C15001B7223 /* Storyboard */,
+				EADB009627623C34001B7223 /* OriginObject */,
+				EADB009327623C1E001B7223 /* BasicObject */,
 				EADB009727623C3B001B7223 /* Packages */,
 				EADB009827623C42001B7223 /* Tools */,
-				EADB009227623C15001B7223 /* Storyboard */,
 				EADB009427623C25001B7223 /* Consts */,
 				EADB009127623C06001B7223 /* Resources */,
 				EADB009A27623C4C001B7223 /* 3rd */,
@@ -986,12 +1035,12 @@
 				EADB009E27623C76001B7223 /* README.md */,
 				EA922559276AD64300192E2E /* OriginTool */,
 				EADB009D27623C76001B7223 /* OriginProtocol.swift */,
+				EADB00A327623C76001B7223 /* OriginMonitor.swift */,
 				EADB00A227623C76001B7223 /* OriginModel.swift */,
 				EADB00A427623C76001B7223 /* OriginAccessor.swift */,
 				EADB00A127623C76001B7223 /* OriginChecker.swift */,
 				EADB009F27623C76001B7223 /* OriginContainer.swift */,
 				EADB009C27623C76001B7223 /* OriginDocument.swift */,
-				EADB00A327623C76001B7223 /* OriginMonitor.swift */,
 				EADB009B27623C76001B7223 /* OriginAdapter.swift */,
 				EADB00A527623C76001B7223 /* OriginManager.swift */,
 				EADB00A627623C76001B7223 /* OriginEmbellisher.swift */,
@@ -1004,14 +1053,15 @@
 			isa = PBXGroup;
 			children = (
 				EADB00FF27624201001B7223 /* README.md */,
+				EA922558276AD54D00192E2E /* Monitor */,
 				EA77951D276C389200D9707F /* Worker */,
 				EADB0119276242C7001B7223 /* Embellisher */,
-				EA922583276B42D200192E2E /* Manager */,
-				EA922558276AD54D00192E2E /* Monitor */,
+				EA922583276B42D200192E2E /* BusinessManager */,
+				EAAA4E80276F3E2F00C45712 /* ComponentManager */,
+				EAAA4E8D276F57AA00C45712 /* Adapter */,
+				EAAA4E93276F657D00C45712 /* DataChecker */,
 				EADB011427624233001B7223 /* DataContainer */,
 				EADB010C27624213001B7223 /* DataAccessor */,
-				EADB014E276244F2001B7223 /* DatabasePackage */,
-				EADB0121276242E2001B7223 /* NetworkPackage */,
 				EADB012D27624328001B7223 /* ThemePackage */,
 			);
 			path = Packages;
@@ -1095,6 +1145,7 @@
 				EADB010F2762422D001B7223 /* README.md */,
 				EADB010E2762422D001B7223 /* PlistAccessor.swift */,
 				EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */,
+				EADB014E276244F2001B7223 /* DatabaseAccessor */,
 			);
 			path = DataAccessor;
 			sourceTree = "<group>";
@@ -1117,12 +1168,12 @@
 			path = Embellisher;
 			sourceTree = "<group>";
 		};
-		EADB0121276242E2001B7223 /* NetworkPackage */ = {
+		EADB0121276242E2001B7223 /* NetworkAdapter */ = {
 			isa = PBXGroup;
 			children = (
 				EADB0122276242EB001B7223 /* README.md */,
 			);
-			path = NetworkPackage;
+			path = NetworkAdapter;
 			sourceTree = "<group>";
 		};
 		EADB0125276242FD001B7223 /* StatusManager */ = {
@@ -1152,12 +1203,12 @@
 			path = ThemePackage;
 			sourceTree = "<group>";
 		};
-		EADB014E276244F2001B7223 /* DatabasePackage */ = {
+		EADB014E276244F2001B7223 /* DatabaseAccessor */ = {
 			isa = PBXGroup;
 			children = (
 				EADB014F2762450E001B7223 /* README.md */,
 			);
-			path = DatabasePackage;
+			path = DatabaseAccessor;
 			sourceTree = "<group>";
 		};
 		EADB015727624B39001B7223 /* Resource */ = {
@@ -1259,6 +1310,7 @@
 				EADB00AD27623C76001B7223 /* OriginChecker.swift in Sources */,
 				EAC8A86B27625D490088293F /* SDImageFrame.m in Sources */,
 				EAC8A88927625D490088293F /* SDAssociatedObject.m in Sources */,
+				EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */,
 				EAC8A87627625D490088293F /* SDImageCacheConfig.m in Sources */,
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,
 				EAC8A85D27625D490088293F /* SDWebImageCompat.m in Sources */,
@@ -1287,6 +1339,7 @@
 				EAC8A86D27625D490088293F /* SDImageLoadersManager.m in Sources */,
 				EAC8A85627625D490088293F /* SDWebImageCacheSerializer.m in Sources */,
 				EADB00DC27624012001B7223 /* BasicViewController.swift in Sources */,
+				EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */,
 				EAC8A84F27625D490088293F /* SDAnimatedImageView.m in Sources */,
 				EAC8A87F27625D490088293F /* UIColor+SDHexString.m in Sources */,
 				EAC8A86A27625D490088293F /* SDImageGIFCoder.m in Sources */,
@@ -1364,6 +1417,7 @@
 				EAC8A77027625BA70088293F /* NSObject+MJProperty.m in Sources */,
 				EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */,
 				EADB00A727623C76001B7223 /* OriginAdapter.swift in Sources */,
+				EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */,
 				EADB00A827623C76001B7223 /* OriginDocument.swift in Sources */,
 				EAC8A86F27625D490088293F /* SDWebImageTransition.m in Sources */,
 				EAC8A86327625D490088293F /* NSButton+WebCache.m in Sources */,
