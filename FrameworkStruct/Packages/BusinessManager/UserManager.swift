@@ -10,7 +10,8 @@
  */
 import UIKit
 
-class UserManager: OriginManager {
+class UserManager: OriginManager
+{
     //MARK: 属性
     //单例对象
     static let shared = UserManager()
