@@ -42,19 +42,3 @@ enum FSNotification: String
 }
 
 
-//VC返回按钮样式
-enum VCBackStyle
-{
-    case dark, light, close, none
-}
-
-//VC背景色样式
-enum VCBackgroundStyle
-{
-    case black  //0x000000
-    case white  //0xffffff
-    case lightGray  //0xf4f4f4
-    case pink   //0xff709b
-    case clear
-    case none   //什么都不做
-}

@@ -37,3 +37,22 @@ class UserManager: OriginManager
     }
     
 }
+
+/**
+ * 外部接口方法
+ */
+extension UserManager
+{
+    //获得用户id
+    func getUserId() -> String
+    {
+        return ""
+    }
+    
+    //获得用户token
+    func getUserToken() -> String
+    {
+        return ""
+    }
+    
+}
