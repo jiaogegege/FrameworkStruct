@@ -10,6 +10,8 @@ import UIKit
 class BasicViewController: UIViewController
 {
     //MARK: 属性
+    //状态管理器
+    var stMgr: StatusManager = StatusManager(capacity: 5)
     //获取当前主题
     var theme = ThemeManager.shared.getCurrentTheme()
     
@@ -101,16 +103,16 @@ class BasicViewController: UIViewController
         self.themeConfigUI(theme: self.theme)
     }
     
-    //更新界面，一般是更新界面上的一些数据
+    //初始化控制器数据，比如一些状态和变量
     //如果子类覆写这个方法，需要调用父类方法
-    func updateUI()
+    func initData()
     {
         
     }
     
-    //初始化控制器数据，比如一些状态和变量
+    //更新界面，一般是更新界面上的一些数据
     //如果子类覆写这个方法，需要调用父类方法
-    func initData()
+    func updateUI()
     {
         
     }

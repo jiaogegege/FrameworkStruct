@@ -123,7 +123,10 @@
     [_dict removeAllObjects];
 }
 
-
+- (void)dealloc
+{
+    NSLog(@"StatusManager: dealloc");
+}
 
 
 @end
