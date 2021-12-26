@@ -45,7 +45,8 @@ extension String
     static var sThemeSelect = localized(originStr: "themeSelect")
     //模态显示
     static var sModalShow = localized(originStr: "modalShow")
-    
+    //约束测试
+    static var constraintTest = localized(originStr: "constraintTest")
     
     
     

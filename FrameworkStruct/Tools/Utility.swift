@@ -23,33 +23,25 @@ class Utility: NSObject
     //获得沙盒文件夹路径
     static func getHomePath() -> String
     {
-        let homePath = NSHomeDirectory()
-        return homePath
+        return SandBoxAccessor.getHomeDirectory()
     }
     
     //获得Documents文件夹路径
     static func getDocumentPath() -> String
     {
-        // 检索指定路径
-        // 第一个参数：指定的搜索路径
-        // 第二个参数：检索的范围（沙盒内）
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let docPath = paths.first
-        return docPath!
+        return SandBoxAccessor.getDocumentDirectory()
     }
     
     //获得Library路径
     static func getLibraryPath() -> String
     {
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let libPath = paths.last
-        return libPath!
+        return SandBoxAccessor.getLibraryDirectory()
     }
     
     //获取 Temp 的路径
     static func getTempPath() -> String
     {
-        return NSTemporaryDirectory()
+        return SandBoxAccessor.getTempDirectory()
     }
     
     //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
@@ -79,6 +71,28 @@ class Utility: NSObject
         let typeName = type(of: obj).description()
         return typeName.components(separatedBy: ".").last!
     }
+    
+    //根据基础UI的宽度计算缩放后的宽度
+    //参数1:需要适配的宽度值；参数2:作为比较基准的屏幕宽度
+    static func fitWidth(val: CGFloat ,base: CGFloat) -> CGFloat
+    {
+        let value = val * (kScreenWidth / base)
+        return value
+    }
+    
+    // iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
+    static func adjustsScrollViewInsetNever(controller: UIViewController, scrollView: UIScrollView)
+    {
+        if #available(iOS 11.0, *)
+        {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+        else if controller.isKind(of: UIViewController.self)
+        {
+            controller.automaticallyAdjustsScrollViewInsets = false
+        }
+    }
+
     
     
     

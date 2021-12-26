@@ -6,16 +6,14 @@
 //
 
 /**
- * 程序中的基础协议，定义全局通用的接口方法
+ * 程序中的基础定义，定义全局通用的接口方法和各种基础数据
+ * 一般和具体的业务逻辑无关，而是关于程序和组件本身的定义
  */
 import Foundation
 import UIKit
 
- protocol BasicProtocol {
-    /**
-     *
-     */
-    
+protocol BasicProtocol
+{
     
 }
 

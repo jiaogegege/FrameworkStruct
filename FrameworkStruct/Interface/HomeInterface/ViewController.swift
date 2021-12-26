@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow]
+    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.constraintTest]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +56,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
             vc.modalPresentationStyle = .pageSheet
 //            vc.isModalInPresentation = true
             self.present(vc, animated: true, completion: nil)
+        }
+        else if indexPath.row == 3
+        {
+            let vc = ConstraintTestViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
