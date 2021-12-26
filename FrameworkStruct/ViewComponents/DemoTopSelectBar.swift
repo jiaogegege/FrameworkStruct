@@ -125,6 +125,6 @@ class DemoTopSelectBar: UIView
     }
 
     deinit {
-        print("demotopselectbar dealloc")
+        print("DemoTopSelectBar: dealloc")
     }
 }

@@ -125,7 +125,7 @@
 
 - (void)dealloc
 {
-    NSLog(@"StatusManager: dealloc");
+//    NSLog(@"StatusManager: dealloc");
 }
 
 
