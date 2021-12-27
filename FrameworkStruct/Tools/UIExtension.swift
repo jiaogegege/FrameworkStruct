@@ -9,6 +9,7 @@
  * UI组件扩展
  */
 import Foundation
+import UIKit
 
 extension UIViewController
 {
@@ -27,12 +28,22 @@ extension UIViewController
     
 }
 
+
 extension UIView
 {
-    
-}
-
-extension UILabel
-{
+    /**
+     * 切圆角
+     * - Parameters:
+     *  - conrners
+     *  - radius 圆角弧度
+     */
+    func addCorner(conrners: UIRectCorner , radius: CGFloat)
+    {
+        let maskPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: conrners, cornerRadii: CGSize(width: radius, height: radius))
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = self.bounds
+        maskLayer.path = maskPath.cgPath
+        self.layer.mask = maskLayer
+    }
     
 }
