@@ -24,6 +24,12 @@ class MonitorMonitor: OriginMonitor
     //数据容器监控器
     var containerMonitor: ContainerMonitor!
     
+    //文档监控器
+    var documentMonitor: DocumentMonitor!
+    
+    //文档处理器监控器
+    var handlerMonitor: HandlerMonitor!
+    
     //适配器监控器
     var adapterMonitor: AdapterMonitor!
     
@@ -42,6 +48,8 @@ class MonitorMonitor: OriginMonitor
         self.accessorMonitor = AccessorMonitor.shared
         self.checkerMonitor = CheckerMonitor.shared
         self.containerMonitor = ContainerMonitor.shared
+        self.documentMonitor = DocumentMonitor.shared
+        self.handlerMonitor = HandlerMonitor.shared
         self.adapterMonitor = AdapterMonitor.shared
         self.managerMonitor = ManagerMonitor.shared
         self.embellisherMonitor = EmbellisherMonitor.shared
@@ -50,6 +58,8 @@ class MonitorMonitor: OriginMonitor
         self.addItem(item: self.accessorMonitor)
         self.addItem(item: self.checkerMonitor)
         self.addItem(item: self.containerMonitor)
+        self.addItem(item: self.documentMonitor)
+        self.addItem(item: self.handlerMonitor)
         self.addItem(item: self.adapterMonitor)
         self.addItem(item: self.managerMonitor)
         self.addItem(item: self.embellisherMonitor)

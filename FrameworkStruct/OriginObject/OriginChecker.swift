@@ -28,7 +28,16 @@ protocol CheckerProtocol
  */
 class OriginChecker: NSObject
 {
-
+    //监控器，每一个校验器在创建的时候都要加入到监控器中
+    weak var monitor: CheckerMonitor!
+    
+    
+    override init()
+    {
+        self.monitor = CheckerMonitor.shared
+        super.init()
+        monitor.addItem(item: self)
+    }
 }
 
 

@@ -35,6 +35,7 @@ class OriginAccessor: NSObject
     //监控器，每一个存取器在创建的时候都要加入到监控器中
     weak var monitor: AccessorMonitor!
     
+    
     override init()
     {
         self.monitor = AccessorMonitor.shared

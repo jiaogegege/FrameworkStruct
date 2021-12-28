@@ -27,7 +27,16 @@ protocol EmbellisherProtocol
  */
 class OriginEmbellisher: NSObject
 {
+    //监控器，每一个修饰器在创建的时候都要加入到监控器中
+    weak var monitor: EmbellisherMonitor!
     
+    
+    override init()
+    {
+        self.monitor = EmbellisherMonitor.shared
+        super.init()
+        monitor.addItem(item: self)
+    }
 }
 
 

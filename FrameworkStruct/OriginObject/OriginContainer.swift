@@ -67,16 +67,22 @@ class OriginContainer: NSObject
 {
     //MARK: 属性
     
+    //监控器，每一个数据容器在创建的时候都要加入到监控器中
+    weak var monitor: ContainerMonitor!
+    
     //数据容器；key是数据对象的key，value是具体的数据模型
     fileprivate var container: Dictionary<AnyHashable, Any> = Dictionary()
     
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
     
+    
     //MARK: 方法
     override init()
     {
-        
+        self.monitor = ContainerMonitor.shared
+        super.init()
+        monitor.addItem(item: self)
     }
     
     //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）

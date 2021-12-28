@@ -206,6 +206,9 @@
 		EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015927624B4C001B7223 /* RedTheme.plist */; };
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
+		EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A97277B4AD900676268 /* DocumentMonitor.swift */; };
+		EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9B277B4BEE00676268 /* OriginHandler.swift */; };
+		EAF85A9F277B4D7500676268 /* HandlerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -600,6 +603,11 @@
 		EADB015927624B4C001B7223 /* RedTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedTheme.plist; sourceTree = "<group>"; };
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
 		EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
+		EAF85A97277B4AD900676268 /* DocumentMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMonitor.swift; sourceTree = "<group>"; };
+		EAF85A9B277B4BEE00676268 /* OriginHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginHandler.swift; sourceTree = "<group>"; };
+		EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerMonitor.swift; sourceTree = "<group>"; };
+		EAF85AA4277B4F0100676268 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAF85AA5277B4FA300676268 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -686,6 +694,8 @@
 				EA922563276B1BDB00192E2E /* AccessorMonitor.swift */,
 				EA92256C276B27E100192E2E /* CheckerMonitor.swift */,
 				EA922561276B1BCF00192E2E /* ContainerMonitor.swift */,
+				EAF85A97277B4AD900676268 /* DocumentMonitor.swift */,
+				EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */,
 				EA922565276B1BF200192E2E /* AdapterMonitor.swift */,
 				EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */,
 				EA92256E276B282500192E2E /* EmbellisherMonitor.swift */,
@@ -1159,12 +1169,13 @@
 			children = (
 				EADB009E27623C76001B7223 /* README.md */,
 				EA922559276AD64300192E2E /* OriginTool */,
-				EADB00A327623C76001B7223 /* OriginMonitor.swift */,
 				EADB00A227623C76001B7223 /* OriginModel.swift */,
+				EADB00A327623C76001B7223 /* OriginMonitor.swift */,
 				EADB00A427623C76001B7223 /* OriginAccessor.swift */,
 				EADB00A127623C76001B7223 /* OriginChecker.swift */,
 				EADB009F27623C76001B7223 /* OriginContainer.swift */,
 				EADB009C27623C76001B7223 /* OriginDocument.swift */,
+				EAF85A9B277B4BEE00676268 /* OriginHandler.swift */,
 				EADB009B27623C76001B7223 /* OriginAdapter.swift */,
 				EADB00A527623C76001B7223 /* OriginManager.swift */,
 				EADB00A627623C76001B7223 /* OriginEmbellisher.swift */,
@@ -1183,8 +1194,10 @@
 				EA922583276B42D200192E2E /* BusinessManager */,
 				EAAA4E80276F3E2F00C45712 /* ComponentManager */,
 				EAAA4E8D276F57AA00C45712 /* Adapter */,
-				EAAA4E93276F657D00C45712 /* DataChecker */,
+				EAF85AA3277B4EA000676268 /* Handler */,
+				EAF85AA2277B4E9600676268 /* Document */,
 				EADB011427624233001B7223 /* DataContainer */,
+				EAAA4E93276F657D00C45712 /* DataChecker */,
 				EADB010C27624213001B7223 /* DataAccessor */,
 				EADB012D27624328001B7223 /* ThemePackage */,
 			);
@@ -1349,6 +1362,22 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		EAF85AA2277B4E9600676268 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				EAF85AA4277B4F0100676268 /* README.md */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		EAF85AA3277B4EA000676268 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				EAF85AA5277B4FA300676268 /* README.md */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1510,6 +1539,7 @@
 				EAC8A87227625D490088293F /* UIImageView+WebCache.m in Sources */,
 				EAC8A84C27625D490088293F /* SDImageIOAnimatedCoder.m in Sources */,
 				EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */,
+				EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */,
 				EAC8A75227625B450088293F /* AFSecurityPolicy.m in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
 				EA92257C276B3E7C00192E2E /* SVProgressAnimatedView.m in Sources */,
@@ -1562,6 +1592,7 @@
 				EADB00B027623C76001B7223 /* OriginAccessor.swift in Sources */,
 				EA92257D276B3E7C00192E2E /* SVProgressHUD.m in Sources */,
 				EAC8A85527625D490088293F /* SDImageLoader.m in Sources */,
+				EAF85A9F277B4D7500676268 /* HandlerMonitor.swift in Sources */,
 				EA1AE494277819E600D028F9 /* ConstraintMakerRelatable.swift in Sources */,
 				EAC8A87127625D490088293F /* NSData+ImageContentType.m in Sources */,
 				EAC8A87827625D490088293F /* SDWebImageDefine.m in Sources */,
@@ -1579,6 +1610,7 @@
 				EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */,
 				EADB00A827623C76001B7223 /* OriginDocument.swift in Sources */,
 				EAC8A86F27625D490088293F /* SDWebImageTransition.m in Sources */,
+				EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */,
 				EAC8A86327625D490088293F /* NSButton+WebCache.m in Sources */,
 				EAC8A76E27625BA70088293F /* NSObject+MJCoding.m in Sources */,
 				EAC8A84E27625D490088293F /* SDAnimatedImage.m in Sources */,

@@ -27,7 +27,16 @@ protocol DocumentProtocol
  */
 class OriginDocument: NSObject
 {
-
+    //监控器，每一个文档对象在创建的时候都要加入到监控器中
+    weak var monitor: DocumentMonitor!
+    
+    
+    override init()
+    {
+        self.monitor = DocumentMonitor.shared
+        super.init()
+        monitor.addItem(item: self)
+    }
 }
 
 

@@ -30,6 +30,7 @@ class OriginWorker: NSObject
     //监控器，每一个管理器在创建的时候都要加入到监控器中
     weak var monitor: WorkerMonitor!
     
+    
     override init()
     {
         self.monitor = WorkerMonitor.shared
