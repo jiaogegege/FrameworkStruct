@@ -27,4 +27,11 @@ extension UIImage
     @objc static var iBackClose: UIImage? = UIImage(named: "common_back_close")
     
     
+    
+    //对于某些全屏的图片有iPhone8和 iPhoneX的尺寸区别，对于iPhoneX的图片，添加后缀`_bang`
+    static func bangImage(name: String) -> UIImage?
+    {
+        return UIImage(named: name + String.bangSuffix)
+    }
+    
 }

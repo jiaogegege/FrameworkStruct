@@ -157,6 +157,9 @@
 		EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A84127625D490088293F /* SDDisplayLink.m */; };
 		EAC8A88827625D490088293F /* SDAsyncBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A84327625D490088293F /* SDAsyncBlockOperation.m */; };
 		EAC8A88927625D490088293F /* SDAssociatedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A84427625D490088293F /* SDAssociatedObject.m */; };
+		EACAD4E9277D82C800FBE2DA /* NumberConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4E8277D82C800FBE2DA /* NumberConst.swift */; };
+		EACAD4ED277DA5E400FBE2DA /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EC277DA5E400FBE2DA /* DeviceConst.swift */; };
+		EACAD4EF277DAFC000FBE2DA /* DateTimeConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EE277DAFC000FBE2DA /* DateTimeConst.swift */; };
 		EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007A27623B59001B7223 /* AppDelegate.swift */; };
 		EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007C27623B59001B7223 /* SceneDelegate.swift */; };
 		EADB007F27623B59001B7223 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007E27623B59001B7223 /* ViewController.swift */; };
@@ -528,6 +531,9 @@
 		EAC8A84227625D490088293F /* SDImageAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageAssetManager.h; sourceTree = "<group>"; };
 		EAC8A84327625D490088293F /* SDAsyncBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAsyncBlockOperation.m; sourceTree = "<group>"; };
 		EAC8A84427625D490088293F /* SDAssociatedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAssociatedObject.m; sourceTree = "<group>"; };
+		EACAD4E8277D82C800FBE2DA /* NumberConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberConst.swift; sourceTree = "<group>"; };
+		EACAD4EC277DA5E400FBE2DA /* DeviceConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConst.swift; sourceTree = "<group>"; };
+		EACAD4EE277DAFC000FBE2DA /* DateTimeConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeConst.swift; sourceTree = "<group>"; };
 		EADB007727623B59001B7223 /* FrameworkStruct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameworkStruct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADB007A27623B59001B7223 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EADB007C27623B59001B7223 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1148,7 +1154,10 @@
 			isa = PBXGroup;
 			children = (
 				EADB00E42762410D001B7223 /* MacroConst.swift */,
+				EACAD4EC277DA5E400FBE2DA /* DeviceConst.swift */,
 				EADB00E22762410D001B7223 /* StringConst.swift */,
+				EACAD4EE277DAFC000FBE2DA /* DateTimeConst.swift */,
+				EACAD4E8277D82C800FBE2DA /* NumberConst.swift */,
 				EADB00E32762410D001B7223 /* ColorConst.swift */,
 				EADB00E12762410C001B7223 /* ImageConst.swift */,
 			);
@@ -1531,6 +1540,7 @@
 				EA1AE491277819E600D028F9 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
+				EACAD4ED277DA5E400FBE2DA /* DeviceConst.swift in Sources */,
 				EAC8A87027625D490088293F /* SDImageTransformer.m in Sources */,
 				EAC8A87D27625D490088293F /* UIButton+WebCache.m in Sources */,
 				EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */,
@@ -1548,7 +1558,9 @@
 				EAC8A85C27625D490088293F /* SDMemoryCache.m in Sources */,
 				EAC8A88327625D490088293F /* SDWeakProxy.m in Sources */,
 				EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */,
+				EACAD4EF277DAFC000FBE2DA /* DateTimeConst.swift in Sources */,
 				EAC8A84A27625D490088293F /* SDWebImageDownloaderDecryptor.m in Sources */,
+				EACAD4E9277D82C800FBE2DA /* NumberConst.swift in Sources */,
 				EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */,
 				EA1AE477277819E600D028F9 /* ConstraintInsets.swift in Sources */,
 				EA1AE470277819E600D028F9 /* ConstraintMultiplierTarget.swift in Sources */,

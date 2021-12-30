@@ -14,23 +14,30 @@ import Foundation
 /**
  * 通用字符串建议以`s`开头，表示`string`，方便区分
  */
-//项目名称
-let sProjectName = "FrameworkStruct"
 
-//APPID
-let sAppId = "1476239189"
-
-
-
-
-
+//MARK: 正则表达式
+//判断用户名的正则表达式，2-10位汉字+字母
+let sUserNameRegex = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
+//国内手机号的正则表达式
+let sCellPhoneRegex = "^1\\d{10}$"
+//一种密码的正则，8-12位大小写字母、数字、@#_
+let sPasswordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
 
 
-
-
-
-
-
+//MARK: 对String的扩展，包括一些实用方法和常量定义
+extension String
+{
+    //iPhoneX资源文件后缀
+    static let bangSuffix = "_bang"
+    
+    
+    //获取对应的iPhoneX下的文件名
+    func bangString() -> String
+    {
+        return self + String.bangSuffix
+    }
+    
+}
 
 //MARK: 项目中文案定义，国际化文案
 extension String
@@ -46,11 +53,9 @@ extension String
     //模态显示
     static var sModalShow = localized(originStr: "modalShow")
     //约束测试
-    static var constraintTest = localized(originStr: "constraintTest")
+    static var sConstraintTest = localized(originStr: "constraintTest")
     
-    
-    
-    
+
     //便利方法
     static func localized(originStr: String) -> String
     {
@@ -58,9 +63,3 @@ extension String
     }
     
 }
-
-//MARK: Storyboard文件名定义
-//主界面
-let sMainSB = "Main"
-//启动界面
-let slaunchSB = "LaunchScreen"

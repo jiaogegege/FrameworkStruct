@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.constraintTest]
+    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.sConstraintTest]
 
     override func viewDidLoad() {
         super.viewDidLoad()
