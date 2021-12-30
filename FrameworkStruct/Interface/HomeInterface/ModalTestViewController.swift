@@ -14,7 +14,7 @@ class ModalTestViewController: BasicViewController {
     
     static func getViewController() -> ModalTestViewController
     {
-        let board = UIStoryboard(name: sMainSB, bundle: nil)
+        let board = UIStoryboard(name: kMainSB, bundle: nil)
         return board.instantiateViewController(withIdentifier: "ModalTestViewController") as! ModalTestViewController
     }
     

@@ -19,15 +19,15 @@ extension UIColor
      * 常量颜色建议以`c`开头，表示`color`，方便区分
      */
     //主题色红色
-    @objc static var cMainRed = UIColor.red
+    @objc static var cRed = UIColor.red
     //accentcolor
     @objc static var cAccent = UIColor(named: "AccentColor")
     //黑色333333
-    @objc static var cBlack333333 = UIColor.colorFromHex(value: 0x333333)
+    @objc static var cBlack_3 = UIColor.colorFromHex(value: 0x333333)
     //f4f4f4
-    @objc static var cGrayf4f4f4 = UIColor.colorFromHex(value: 0xf4f4f4)
+    @objc static var cGray_f4 = UIColor.colorFromHex(value: 0xf4f4f4)
     //0xff709b
-    @objc static var cPinkff709b = UIColor.colorFromHex(value: 0xff709b)
+    @objc static var cPink_ff709b = UIColor.colorFromHex(value: 0xff709b)
     
     
     

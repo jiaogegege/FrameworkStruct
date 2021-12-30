@@ -172,9 +172,9 @@ class BasicViewController: UIViewController
         case .white:
             self.view.backgroundColor = .white
         case .lightGray:
-            self.view.backgroundColor = .cGrayf4f4f4
+            self.view.backgroundColor = .cGray_f4
         case .pink:
-            self.view.backgroundColor = .cPinkff709b
+            self.view.backgroundColor = .cPink_ff709b
         case .none:
             break
         }
@@ -268,7 +268,7 @@ class BasicViewController: UIViewController
     //设置导航标题颜色
     fileprivate func setNavTitleColor()
     {
-        let attrDic = [NSAttributedString.Key.foregroundColor: UIColor.cBlack333333]
+        let attrDic = [NSAttributedString.Key.foregroundColor: UIColor.cBlack_3]
         if #available(iOS 15.0, *)
         {
             self.navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = attrDic

@@ -15,15 +15,6 @@ import Foundation
  * 通用字符串建议以`s`开头，表示`string`，方便区分
  */
 
-//MARK: 正则表达式
-//判断用户名的正则表达式，2-10位汉字+字母
-let sUserNameRegex = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
-//国内手机号的正则表达式
-let sCellPhoneRegex = "^1\\d{10}$"
-//一种密码的正则，8-12位大小写字母、数字、@#_
-let sPasswordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
-
-
 //MARK: 对String的扩展，包括一些实用方法和常量定义
 extension String
 {

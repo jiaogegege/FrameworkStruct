@@ -55,9 +55,16 @@ let kAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 //MARK: Storyboard文件名定义
 //主界面
-let sMainSB = "Main"
+let kMainSB = "Main"
 //启动界面
-let slaunchSB = "LaunchScreen"
+let kLaunchSB = "LaunchScreen"
 
 
+//MARK: 正则表达式
+//判断用户名的正则表达式，2-10位汉字+字母
+let userNameRegex = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
+//国内手机号的正则表达式
+let cellPhoneRegex = "^1\\d{10}$"
+//一种密码的正则，8-12位大小写字母、数字、@#_
+let passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
 
