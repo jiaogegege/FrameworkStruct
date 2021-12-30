@@ -39,16 +39,24 @@ let kBangGapToNormalHeight: CGFloat = kStatusHeight - 20.0
 let kiPhoneXWidth: CGFloat = 414.0
 let kiPhone8Width: CGFloat = 375.0
 
+//根据基础UI的宽度计算缩放后的宽度
+//参数1:需要适配的宽度值；参数2:作为比较基准的屏幕宽度
+func fitWidth(val: CGFloat ,base: CGFloat) -> CGFloat
+{
+    let value = val * (kScreenWidth / base)
+    return value
+}
+
 //适配iPhone8设计图尺寸
 func fit8(_ val: CGFloat) -> CGFloat
 {
-    return Utility.fitWidth(val: val, base: kiPhone8Width)
+    return fitWidth(val: val, base: kiPhone8Width)
 }
 
 //适配iPhoneX设计图尺寸
 func fitX(_ val: CGFloat) -> CGFloat
 {
-    return Utility.fitWidth(val: val, base: kiPhoneXWidth)
+    return fitWidth(val: val, base: kiPhoneXWidth)
 }
 
 //判断是否横屏

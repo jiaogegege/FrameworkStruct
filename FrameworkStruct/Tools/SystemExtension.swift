@@ -8,7 +8,7 @@
 /**
  * 主要对各种系统组件进行扩展
  */
-import UIKit
+import Foundation
 
 /**
  * String
@@ -29,7 +29,26 @@ extension String
         return size.height
     }
     
+    //计算文本高度
+    func calcHeight(font: UIFont, size: CGSize) -> CGFloat
+    {
+        var height = 0.0
+        let rect = (self as NSString).boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
+        height = rect.height
+        return height
+    }
+    
+    //计算文本宽度
+    func calcWidth(font: UIFont, size: CGSize) -> CGFloat
+    {
+        var width = 0.0
+        let rect = (self as NSString).boundingRect(with: size, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font: font], context: nil)
+        width = rect.width
+        return width
+    }
+    
 }
+
 
 /**
  * Array

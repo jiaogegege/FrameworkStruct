@@ -72,14 +72,6 @@ class Utility: NSObject
         return typeName.components(separatedBy: ".").last!
     }
     
-    //根据基础UI的宽度计算缩放后的宽度
-    //参数1:需要适配的宽度值；参数2:作为比较基准的屏幕宽度
-    static func fitWidth(val: CGFloat ,base: CGFloat) -> CGFloat
-    {
-        let value = val * (kScreenWidth / base)
-        return value
-    }
-    
     // iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
     static func adjustsScrollViewInsetNever(controller: UIViewController, scrollView: UIScrollView)
     {
@@ -92,7 +84,6 @@ class Utility: NSObject
             controller.automaticallyAdjustsScrollViewInsets = false
         }
     }
-
     
     
     
