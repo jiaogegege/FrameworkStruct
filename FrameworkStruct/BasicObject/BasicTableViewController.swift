@@ -285,13 +285,13 @@ class BasicTableViewController: UITableViewController
     func addNotification()
     {
         //添加主题通知
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: NSNotification.Name(FSNotification.changeTheme.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: FSNotification.changeTheme.name, object: nil)
     }
 
     //处理主题通知的方法
     @objc fileprivate func themeDidChange(notify: Notification)
     {
-        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey()] as! ThemeProtocol
+        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
         self.themeConfigUI(theme: self.theme)
     }
 

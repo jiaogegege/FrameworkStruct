@@ -95,7 +95,7 @@ extension ThemeManager: ContainerServices
             {
                 self.currentTheme = (value as! CustomTheme)
                 //发出切换主题的通知
-                NotificationCenter.default.post(name: NSNotification.Name(FSNotification.changeTheme.rawValue), object: nil, userInfo: [FSNotification.changeTheme.paramKey(): self.currentTheme!])
+                NotificationCenter.default.post(name: FSNotification.changeTheme.name, object: nil, userInfo: [FSNotification.changeTheme.paramKey: self.currentTheme!])
             }
         }
     }

@@ -13,11 +13,38 @@ import Foundation
 import UIKit
 
 
+//MARK: 自定义通知
+enum FSNotification: String
+{
+    //切换主题的通知
+    case changeTheme
+    
+    
+    //计算属性，获得通知字符串的名字，格式：项目名缩写+具体通知名称+通知后缀
+    var name: Notification.Name {
+        return Notification.Name(rawValue: "FS" + self.rawValue + "Notification")
+    }
+
+    //计算属性，如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
+    //返回的参数key就是类型的名字，可以是结构体类型/类名/协议名
+    var paramKey: String {
+        switch self
+        {
+            case .changeTheme:
+                return "ThemeProtocol"   //返回`ThemeProtocol`协议对象
+            
+        }
+    }
+    
+}
+
+
 /**
  * 宏定义和常量定义建议以`k`开头，表示常量，方便区分
  * 和常量配合使用的函数
  */
-//屏幕长宽
+
+//MARK: 屏幕尺寸相关定义
 let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 
@@ -50,25 +77,27 @@ func fitX(_ val: CGFloat) -> CGFloat
     return Utility.fitWidth(val: val, base: kiPhoneXWidth)
 }
 
-
-//MARK: 自定义通知
-enum FSNotification: String
+//判断机型：iPhone4/iPhone5/iPhone8/iPhone8p/iPhoneX
+func isIphone4() -> Bool
 {
-    //切换主题的通知
-    case changeTheme = "changeTheme"
-    
-    
-    //如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
-    func paramKey() -> String
-    {
-        switch self
-        {
-            case .changeTheme:
-                return "themeKey"   //后跟`ThemeProtocol`对象
-        
-        }
-    }
-    
+    return kScreenHeight <= 480.0 + 0.1
 }
+
+func isIphone5() -> Bool
+{
+    return kScreenHeight <= 568.0 + 0.1
+}
+
+func isIphone8() -> Bool
+{
+    return kScreenHeight <= 667.0 + 0.1
+}
+
+
+
+
+
+
+
 
 
