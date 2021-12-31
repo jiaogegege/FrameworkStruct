@@ -51,6 +51,7 @@
 		EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */; };
 		EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */; };
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
+		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
@@ -259,6 +260,9 @@
 		EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintTestViewController.swift; sourceTree = "<group>"; };
 		EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTopSelectBar.swift; sourceTree = "<group>"; };
 		EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxAccessor.swift; sourceTree = "<group>"; };
+		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
@@ -670,6 +674,16 @@
 				EA1AE46F277819E600D028F9 /* ConstraintMakerRelatable.swift */,
 			);
 			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		EA5D10A4277ED4FB004FCE4C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */,
+				EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */,
+				EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		EA77951D276C389200D9707F /* Worker */ = {
@@ -1238,6 +1252,7 @@
 			children = (
 				EA1AE44A277819E600D028F9 /* SnapKit */,
 				EA922570276B3E7C00192E2E /* SVProgressHUD */,
+				EA5D10A4277ED4FB004FCE4C /* MBProgressHUD */,
 				EAC8A77827625D480088293F /* SDWebImage */,
 				EAC8A75527625BA70088293F /* MJExtension */,
 				EAC8A73E27625B450088293F /* AFNetworking */,
@@ -1488,6 +1503,7 @@
 				EADB00D927624012001B7223 /* BasicDefine.swift in Sources */,
 				EA1AE474277819E600D028F9 /* ConstraintAttributes.swift in Sources */,
 				EADB00F7276241D4001B7223 /* GCWaterfallFlowLayout.m in Sources */,
+				EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */,
 				EAC8A85127625D490088293F /* SDImageAWebPCoder.m in Sources */,
 				EA922562276B1BCF00192E2E /* ContainerMonitor.swift in Sources */,
 				EADB013B2762433C001B7223 /* ThemeConst.swift in Sources */,

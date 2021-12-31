@@ -85,7 +85,25 @@ class Utility: NSObject
         }
     }
     
-    
+    //获取window对象
+    static func getWindow() -> UIWindow
+    {
+        if let window = AppDelegate.shared().window
+        {
+            return window
+        }
+        else
+        {
+            if #available(iOS 13.0, *)
+            {
+                if let window = SceneDelegate.currentWindow()
+                {
+                    return window
+                }
+            }
+        }
+        return UIApplication.shared.keyWindow ?? UIWindow()
+    }
     
     
     

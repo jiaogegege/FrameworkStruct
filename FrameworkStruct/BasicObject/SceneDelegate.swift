@@ -10,6 +10,20 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    //获取当前激活的UIScene
+    static func currentWindow() -> UIWindow?
+    {
+        for windowScene: UIWindowScene in (UIApplication.shared.connectedScenes as? Set<UIWindowScene>)!
+        {
+            if windowScene.activationState == .foregroundActive
+            {
+                return windowScene.windows.first
+            }
+        }
+        
+        return nil
+    }
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

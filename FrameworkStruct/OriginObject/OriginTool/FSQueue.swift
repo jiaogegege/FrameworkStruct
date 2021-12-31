@@ -10,7 +10,8 @@
  */
 import UIKit
 
-class FSQueue<T: Equatable>
+//对元素类型没有要求，可以存储任何类型
+class FSQueue<T: Any>
 {
     //默认队列容器
     fileprivate var queue = [T]()

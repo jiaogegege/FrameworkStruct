@@ -8,9 +8,24 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
     //MARK: 属性
-    var monitor = MonitorMonitor.shared
+    
+    //如果有SceneDelegate，那么这个属性为nil
+    var window: UIWindow?
+    
+    //根监控器，可以从这个对象获取到所有的监控器对象
+    var rootMonitor = MonitorMonitor.shared
+    
+    
+    //MARK: 方法
+    
+    //获取单例对象
+    static func shared() -> AppDelegate
+    {
+        return UIApplication.shared.delegate! as! AppDelegate
+    }
     
     //初始化应用程序数据
     func initData()
