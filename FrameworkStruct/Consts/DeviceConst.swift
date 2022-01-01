@@ -36,8 +36,8 @@ let kBangGapToNormalHeight: CGFloat = kStatusHeight - 20.0
 
 
 //iPhone屏幕宽度，iphonex和iphone8，这两个值根据设计图选择，一般设计图都是以iPhone8和iPhoneX的尺寸为主
-let kiPhoneXWidth: CGFloat = 414.0
 let kiPhone8Width: CGFloat = 375.0
+let kiPhoneXWidth: CGFloat = 414.0
 
 //根据基础UI的宽度计算缩放后的宽度
 //参数1:需要适配的宽度值；参数2:作为比较基准的屏幕宽度

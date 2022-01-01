@@ -35,23 +35,24 @@ extension String
 extension String
 {
     //瀑布流
-    static var sWaterfall = localized(originStr: "waterfall")
+    static var sWaterfall = localized("waterfall")
     //确定
-    static var sConfirm = localized(originStr: "confirm")
+    static var sConfirm = localized("confirm")
     //取消
-    static var sCancel = localized(originStr: "cancel")
+    static var sCancel = localized("cancel")
     //主题选择
-    static var sThemeSelect = localized(originStr: "themeSelect")
+    static var sThemeSelect = localized("themeSelect")
     //模态显示
-    static var sModalShow = localized(originStr: "modalShow")
+    static var sModalShow = localized("modalShow")
     //约束测试
-    static var sConstraintTest = localized(originStr: "constraintTest")
+    static var sConstraintTest = localized("constraintTest")
     
 
     //便利方法
-    static func localized(originStr: String) -> String
+    static func localized(_ originStr: String) -> String
     {
         return NSLocalizedString(originStr, comment: originStr)
+//        return NSLocalizedString(originStr, tableName: "Localizable", bundle: Bundle.main, value: originStr, comment: originStr)
     }
     
 }

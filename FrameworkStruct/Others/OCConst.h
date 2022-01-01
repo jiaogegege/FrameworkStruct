@@ -5,6 +5,9 @@
 //  Created by 蒋雪姣 on 2022/1/1.
 //
 
+/**
+ * 项目中OC定义的常量和宏
+ */
 #ifndef OCConst_h
 #define OCConst_h
 

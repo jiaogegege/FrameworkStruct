@@ -39,6 +39,13 @@ enum FSNotification: String
 }
 
 
+//MARK: Storyboard文件名定义
+//主界面
+let kMainSB = "Main"
+//启动界面
+let kLaunchSB = "LaunchScreen"
+
+
 /**
  * 宏定义和常量定义建议以`k`开头，表示常量，方便区分
  * 和常量配合使用的函数
@@ -53,17 +60,10 @@ let kAppId = "1476239189"
 let kAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 
-//MARK: Storyboard文件名定义
-//主界面
-let kMainSB = "Main"
-//启动界面
-let kLaunchSB = "LaunchScreen"
-
-
 //MARK: 正则表达式
 //判断用户名的正则表达式，2-10位汉字+字母
 let userNameRegex = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
-//国内手机号的正则表达式
+//国内手机号的正则表达式，以`1`开头的11位数字
 let cellPhoneRegex = "^1\\d{10}$"
 //一种密码的正则，8-12位大小写字母、数字、@#_
 let passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
