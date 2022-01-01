@@ -6,9 +6,10 @@
 //
 
 /**
- * toast管理器
+ * Toast管理器
  * 使用SVProgressHUD、MBProgressHUD或其他Toast组件
  * 默认，同时只能显示一个HUD，当一个HUD消失之后再显示另一个HUD，如果同时有多个HUD要显示，那么剩余的HUD放入队列中，直到前一个HUD消失
+ * 也提供了直接显示HUD的方法，将会占据队列中HUD的位置直接插入到显示队列中，等其显示完毕在显示队列中的其他HUD
  */
 import UIKit
 
@@ -80,15 +81,6 @@ class ToastManager: OriginManager
     override func mutableCopy() -> Any
     {
         return self
-    }
-    
-    //添加SV通知
-    fileprivate func addNotification()
-    {
-        NotificationCenter.default.addObserver(self, selector: #selector(svWillAppear(notify:)), name: NSNotification.Name.SVProgressHUDWillAppear, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(svDidAppear(notify:)), name: NSNotification.Name.SVProgressHUDDidAppear, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(svWillDisappear(notify:)), name: NSNotification.Name.SVProgressHUDWillDisappear, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(svDidDisappear(notify:)), name: NSNotification.Name.SVProgressHUDDidDisappear, object: nil)
     }
     
     //返回一个闭包，将要显示的hud参数都配置好，并不决定是否要显示这个hud，交给调用的方法处理
@@ -191,7 +183,7 @@ class ToastManager: OriginManager
     
     //析构方法，理论上永远不会执行
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        self.removeNotification()
     }
     
 }
@@ -201,10 +193,25 @@ class ToastManager: OriginManager
  * SV有通知和`completion`
  * MB有`delegate`和`completionBlock`
  */
-extension ToastManager: MBProgressHUDDelegate
+extension ToastManager: NotifyDelegateProtocol, MBProgressHUDDelegate
 {
+    //添加SV通知
+    fileprivate func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(svWillAppear(notify:)), name: NSNotification.Name.SVProgressHUDWillAppear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svDidAppear(notify:)), name: NSNotification.Name.SVProgressHUDDidAppear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svWillDisappear(notify:)), name: NSNotification.Name.SVProgressHUDWillDisappear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svDidDisappear(notify:)), name: NSNotification.Name.SVProgressHUDDidDisappear, object: nil)
+    }
+    
+    //删除通知
+    fileprivate func removeNotification()
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MBProgressHUD消失后清理一些资源
-    func hudWasHidden(_ hud: MBProgressHUD)
+    internal func hudWasHidden(_ hud: MBProgressHUD)
     {
         hud.delegate = nil
         hud.completionBlock = nil
@@ -220,7 +227,7 @@ extension ToastManager: MBProgressHUDDelegate
     }
     
     //SV将要显示
-    @objc func svWillAppear(notify: Notification)
+    @objc fileprivate func svWillAppear(notify: Notification)
     {
         if let userInfo = notify.userInfo
         {
@@ -231,7 +238,7 @@ extension ToastManager: MBProgressHUDDelegate
     }
     
     //SV已经显示
-    @objc func svDidAppear(notify: Notification)
+    @objc fileprivate func svDidAppear(notify: Notification)
     {
         if let userInfo = notify.userInfo
         {
@@ -240,7 +247,7 @@ extension ToastManager: MBProgressHUDDelegate
     }
     
     //SV将要消失
-    @objc func svWillDisappear(notify: Notification)
+    @objc fileprivate func svWillDisappear(notify: Notification)
     {
         if let userInfo = notify.userInfo
         {
@@ -249,7 +256,7 @@ extension ToastManager: MBProgressHUDDelegate
     }
     
     //SV已经消失
-    @objc func svDidDisappear(notify: Notification)
+    @objc fileprivate func svDidDisappear(notify: Notification)
     {
         if let userInfo = notify.userInfo
         {
@@ -293,27 +300,7 @@ extension ToastManager: ExternalInterface
     {
         self.wantShow(hideDelay: self.longDistanceFuture)
     }
-    
-    //让一个HUD手动消失
-    func hideHUD()
-    {
-        if self.hudType == .mbHud
-        {
-            if let hud = self.tmpMBHUD
-            {
-                hud.hide(animated: true)
-            }
-            else
-            {
-                MBProgressHUD.hide(for: Utility.getWindow(), animated: true)
-            }
-        }
-        else
-        {
-            SVProgressHUD.dismiss()
-        }
-    }
-    
+
     /**
      * 显示一个hud，会生成一个闭包放到队列中，然后按顺序显示
      * - Parameters:
@@ -374,6 +361,26 @@ extension ToastManager: ExternalInterface
         self.show(closure)
     }
     
+    //让一个HUD手动消失
+    func hideHUD()
+    {
+        if self.hudType == .mbHud
+        {
+            if let hud = self.tmpMBHUD
+            {
+                hud.hide(animated: true)
+            }
+            else
+            {
+                MBProgressHUD.hide(for: Utility.getWindow(), animated: true)
+            }
+        }
+        else
+        {
+            SVProgressHUD.dismiss()
+        }
+    }
+    
 }
 
 /**
@@ -382,7 +389,7 @@ extension ToastManager: ExternalInterface
 extension ToastManager: InternalType
 {
     //状态key
-    enum TMStatusKey: StatusKeyType {
+    enum TMStatusKey: SMKeyType {
         case isShowing  //是否在显示HUD:true/false
     }
     
@@ -415,7 +422,7 @@ extension ToastManager: InternalType
         case indefiniteRing     //无限转圈圆环，仅SV有
     }
     
-    //回调的类型
+    //完成回调的类型
     typealias completionCallback = () -> Void
     
 }

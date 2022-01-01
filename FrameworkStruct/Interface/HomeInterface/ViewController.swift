@@ -20,25 +20,9 @@ class ViewController: UIViewController {
     //设置界面
     func configUI()
     {
-//        ToastManager.shared.style = .light
-//        ToastManager.shared.contentColor = UIColor.black
-        ToastManager.shared.hudType = .svHud
-        ToastManager.shared.wantShowText("1")
-        ToastManager.shared.wantShowText("2")
-        ToastManager.shared.wantShowText("3")
-        ToastManager.shared.directShow(text: "直接显示", detail: nil, animate: true, hideDelay: 3, completion: nil)
-        ToastManager.shared.wantShowText("4")
-        ToastManager.shared.wantShowText("5")
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            ToastManager.shared.hideHUD()
-//        }
-//        ToastManager.shared.wantShow(text: "圣诞快乐风景是动手动脚", detail: nil, animate: true, hideDelay: 2) {
-//            print("上岛咖啡加上点开链接")
-//        }
+        
     }
 
-    
-    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource

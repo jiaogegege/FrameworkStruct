@@ -28,7 +28,8 @@ extension UIColor
     @objc static var cGray_f4 = UIColor.colorFromHex(value: 0xf4f4f4)
     //0xff709b
     @objc static var cPink_ff709b = UIColor.colorFromHex(value: 0xff709b)
-    
+    //"D6D6D9"
+    @objc static var cGray_D6D6D9 = UIColor.colorWithHex(colorStr: "D6D6D9")
     
 
     

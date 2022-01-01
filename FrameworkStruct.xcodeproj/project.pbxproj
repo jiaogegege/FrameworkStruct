@@ -70,6 +70,12 @@
 		EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */; };
 		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
 		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
+		EA9A4A7D2780307E00170BB3 /* CKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A7B2780307E00170BB3 /* CKAlertView.m */; };
+		EA9A4A812780308700170BB3 /* CKActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A802780308700170BB3 /* CKActionSheet.m */; };
+		EA9A4A872780309E00170BB3 /* CKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A832780309D00170BB3 /* CKTextField.m */; };
+		EA9A4A882780309E00170BB3 /* CKTextField+ChangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A862780309E00170BB3 /* CKTextField+ChangeBlock.m */; };
+		EA9A4A8C278030A800170BB3 /* CountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A8A278030A700170BB3 /* CountDownButton.m */; };
+		EA9A4A92278032D800170BB3 /* UIButton+ButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
@@ -292,6 +298,20 @@
 		EA92257A276B3E7C00192E2E /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
 		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
+		EA9A4A7B2780307E00170BB3 /* CKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKAlertView.m; sourceTree = "<group>"; };
+		EA9A4A7C2780307E00170BB3 /* CKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKAlertView.h; sourceTree = "<group>"; };
+		EA9A4A7F2780308700170BB3 /* CKActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKActionSheet.h; sourceTree = "<group>"; };
+		EA9A4A802780308700170BB3 /* CKActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKActionSheet.m; sourceTree = "<group>"; };
+		EA9A4A832780309D00170BB3 /* CKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTextField.m; sourceTree = "<group>"; };
+		EA9A4A842780309E00170BB3 /* CKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTextField.h; sourceTree = "<group>"; };
+		EA9A4A852780309E00170BB3 /* CKTextField+ChangeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKTextField+ChangeBlock.h"; sourceTree = "<group>"; };
+		EA9A4A862780309E00170BB3 /* CKTextField+ChangeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKTextField+ChangeBlock.m"; sourceTree = "<group>"; };
+		EA9A4A8A278030A700170BB3 /* CountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownButton.m; sourceTree = "<group>"; };
+		EA9A4A8B278030A700170BB3 /* CountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownButton.h; sourceTree = "<group>"; };
+		EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ButtonBlock.m"; sourceTree = "<group>"; };
+		EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ButtonBlock.h"; sourceTree = "<group>"; };
+		EA9A4A982780349500170BB3 /* OCConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCConst.h; sourceTree = "<group>"; };
+		EA9A4A992780350500170BB3 /* OCHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCHeader.h; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E83276F3EC900C45712 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -1243,6 +1263,18 @@
 			children = (
 				EADB014B276243FC001B7223 /* README.md */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
+				EA9A4A7C2780307E00170BB3 /* CKAlertView.h */,
+				EA9A4A7B2780307E00170BB3 /* CKAlertView.m */,
+				EA9A4A7F2780308700170BB3 /* CKActionSheet.h */,
+				EA9A4A802780308700170BB3 /* CKActionSheet.m */,
+				EA9A4A842780309E00170BB3 /* CKTextField.h */,
+				EA9A4A832780309D00170BB3 /* CKTextField.m */,
+				EA9A4A852780309E00170BB3 /* CKTextField+ChangeBlock.h */,
+				EA9A4A862780309E00170BB3 /* CKTextField+ChangeBlock.m */,
+				EA9A4A8B278030A700170BB3 /* CountDownButton.h */,
+				EA9A4A8A278030A700170BB3 /* CountDownButton.m */,
+				EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */,
+				EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -1284,6 +1316,8 @@
 			isa = PBXGroup;
 			children = (
 				EADB008827623B5A001B7223 /* Info.plist */,
+				EA9A4A982780349500170BB3 /* OCConst.h */,
+				EA9A4A992780350500170BB3 /* OCHeader.h */,
 				EADB00CF27624011001B7223 /* FrameworkStruct-Bridging-Header.h */,
 			);
 			path = Others;
@@ -1494,6 +1528,7 @@
 				EAC8A86B27625D490088293F /* SDImageFrame.m in Sources */,
 				EAC8A88927625D490088293F /* SDAssociatedObject.m in Sources */,
 				EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */,
+				EA9A4A872780309E00170BB3 /* CKTextField.m in Sources */,
 				EAC8A87627625D490088293F /* SDImageCacheConfig.m in Sources */,
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,
 				EAC8A85D27625D490088293F /* SDWebImageCompat.m in Sources */,
@@ -1527,6 +1562,7 @@
 				EADB01102762422D001B7223 /* PlistAccessor.swift in Sources */,
 				EAC8A84527625D490088293F /* SDImageHEICCoder.m in Sources */,
 				EAC8A87C27625D490088293F /* UIImage+Metadata.m in Sources */,
+				EA9A4A92278032D800170BB3 /* UIButton+ButtonBlock.m in Sources */,
 				EA922585276B439700192E2E /* ControllerManager.swift in Sources */,
 				EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */,
 				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,
@@ -1615,6 +1651,7 @@
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,
 				EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */,
 				EA92256D276B27E100192E2E /* CheckerMonitor.swift in Sources */,
+				EA9A4A882780309E00170BB3 /* CKTextField+ChangeBlock.m in Sources */,
 				EADB012B2762430B001B7223 /* SMVector.m in Sources */,
 				EA92256F276B282500192E2E /* EmbellisherMonitor.swift in Sources */,
 				EADB00B027623C76001B7223 /* OriginAccessor.swift in Sources */,
@@ -1626,6 +1663,7 @@
 				EAC8A87827625D490088293F /* SDWebImageDefine.m in Sources */,
 				EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */,
 				EAC8A76D27625BA70088293F /* MJProperty.m in Sources */,
+				EA9A4A7D2780307E00170BB3 /* CKAlertView.m in Sources */,
 				EADB00A927623C76001B7223 /* OriginProtocol.swift in Sources */,
 				EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */,
 				EA1AE48B277819E600D028F9 /* ConstraintView+Extensions.swift in Sources */,
@@ -1655,9 +1693,11 @@
 				EA1AE482277819E600D028F9 /* ConstraintLayoutGuide.swift in Sources */,
 				EAC8A85227625D490088293F /* SDAnimatedImagePlayer.m in Sources */,
 				EAC8A76B27625BA70088293F /* MJPropertyType.m in Sources */,
+				EA9A4A8C278030A800170BB3 /* CountDownButton.m in Sources */,
 				EAC8A77327625BA70088293F /* MJPropertyKey.m in Sources */,
 				EAC8A88827625D490088293F /* SDAsyncBlockOperation.m in Sources */,
 				EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */,
+				EA9A4A812780308700170BB3 /* CKActionSheet.m in Sources */,
 				EAC8A85427625D490088293F /* SDWebImageDownloader.m in Sources */,
 				EADB00DB27624012001B7223 /* BasicTableViewController.swift in Sources */,
 				EAC8A84B27625D490088293F /* SDWebImageManager.m in Sources */,

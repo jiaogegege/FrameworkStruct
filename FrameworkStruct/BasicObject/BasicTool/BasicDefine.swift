@@ -38,6 +38,14 @@ protocol InternalType {
     
 }
 
+/**
+ * 这个空协议规定实现代理和通知代理的方法
+ * 类型的这个extension中实现了各种组件的代理方法和通知中心回调方法
+ */
+protocol NotifyDelegateProtocol {
+    
+}
+
 
 //MARK: 基础常量定义
 //VC返回按钮样式

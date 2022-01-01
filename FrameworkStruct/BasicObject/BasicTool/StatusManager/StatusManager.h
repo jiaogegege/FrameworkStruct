@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 
 //建议使用该类型作为状态管理器的key
-typedef NSString * StatusKeyType;
+typedef NSString * SMKeyType;
 
 NS_ASSUME_NONNULL_BEGIN
 
