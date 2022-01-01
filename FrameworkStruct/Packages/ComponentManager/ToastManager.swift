@@ -15,22 +15,59 @@ import UIKit
 class ToastManager: OriginManager
 {
     //MARK: 属性
-    //单例对象
-    static let shared = ToastManager()
-    
     //hud显示队列
     //存储hud，对hud进行统一管理，所有hud先进入这个队列，然后按顺序显示，当显示完一个之后，再显示另一个，直到队列被清空
     //实际存储的是操作闭包，当一个闭包执行时显示HUD，当HUD消失后，执行下一个闭包
     fileprivate let hudQueue: FSQueue<(() -> Void)> = FSQueue()
     
+    //单例对象
+    static let shared = ToastManager()
+    
+    //临时保存正在显示的MB实例
+    fileprivate weak var tmpMBHUD: MBProgressHUD? = nil
+    
     //HUD类型，目前支持`SVProgressHUD、MBProgressHUD`
-    fileprivate var hudType: TMHudType = .mbHud
+    var hudType: TMHudType = .mbHud
+    
+    /**
+     * HUD显示属性配置
+     * 对于MB和SV，可配置属性有一些不同，这里列出共同可配置项，不可配置的项使用对应HUD的默认配置
+     * 如果想要指定特定的HUD并配置属性，可以直接调用`custom`方法并传入闭包
+     */
+    //显示风格，默认黑底白字
+    var style:TMShowStyle = .dark
+    
+    //内容区域是否有模糊效果，默认有(仅SV有效)
+    var blur: Bool = true
+    
+    //内容文本的字体，使用对应组件默认字体即可
+//    var font: UIFont = UIFont.systemFont(ofSize: 16)
+    
+    //内容颜色，包括文本和动画，默认白色，这个值和style对比
+    var contentColor: UIColor = .white
+    
+    //背景颜色，默认透明黑色，这个值和style对应
+    var backgroundColor: UIColor = UIColor(white: 0, alpha: 0.8)
+    
+    //转圈的风格，默认系统菊花
+    var animateType: TMAnimationType = .activityIndicator
+    
+    //显示HUD时是否能操作后面的UI，默认不能操作
+    var interaction: Bool = false
+    
+    //显示的最小时长
+    var minTimeInterval: TimeInterval = 1.5
+    
+    //一个很久的时间
+    let longDistanceFuture: TimeInterval = 999999999
+    
     
     //MARK: 方法
     //私有化init方法
     private override init()
     {
         super.init()
+        self.addNotification()
     }
     
     //重写复制方法
@@ -45,16 +82,310 @@ class ToastManager: OriginManager
         return self
     }
     
-    //析构方法
+    //添加SV通知
+    fileprivate func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(svWillAppear(notify:)), name: NSNotification.Name.SVProgressHUDWillAppear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svDidAppear(notify:)), name: NSNotification.Name.SVProgressHUDDidAppear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svWillDisappear(notify:)), name: NSNotification.Name.SVProgressHUDWillDisappear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svDidDisappear(notify:)), name: NSNotification.Name.SVProgressHUDDidDisappear, object: nil)
+    }
+    
+    //返回一个闭包，将要显示的hud参数都配置好，并不决定是否要显示这个hud，交给调用的方法处理
+    fileprivate func createHudClosure(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 1.5, completion: completionCallback? = nil) -> () -> Void
+    {
+         let closure = {[weak self] in
+            if self?.hudType == .mbHud
+            {
+                let hud = MBProgressHUD.showAdded(to: Utility.getWindow(), animated: true)
+                self?.tmpMBHUD = hud
+                hud.delegate = self
+                hud.label.textColor = self?.contentColor
+                hud.label.text = text
+                hud.detailsLabel.textColor = self?.contentColor
+                hud.detailsLabel.text = detail
+                hud.bezelView.style = self?.style == .dark ? .solidColor : .blur
+                hud.bezelView.backgroundColor = self?.backgroundColor
+                hud.removeFromSuperViewOnHide = true
+                hud.contentColor = self?.contentColor
+                hud.mode = animate ? .indeterminate : .text
+                if let inter = self?.interaction
+                {
+                    hud.isUserInteractionEnabled = !inter
+                }
+                if let callback = completion
+                {
+                    hud.completionBlock = callback
+                }
+                hud.hide(animated: true, afterDelay: (hideDelay < self!.minTimeInterval ? self!.minTimeInterval : hideDelay))
+            }
+            else
+            {
+                SVProgressHUD.setDefaultStyle(self?.style == .dark ? .dark : .light)
+                SVProgressHUD.setMinimumDismissTimeInterval(self!.minTimeInterval)
+                SVProgressHUD.setMaximumDismissTimeInterval(hideDelay + self!.minTimeInterval)
+                if self?.blur == false
+                {
+                    SVProgressHUD.setDefaultStyle(.custom)
+                    SVProgressHUD.setForegroundColor(self!.contentColor)
+                    SVProgressHUD.setBackgroundColor(self!.backgroundColor)
+                }
+                SVProgressHUD.setDefaultAnimationType(self?.animateType == .activityIndicator ? .native : .flat)
+                if let inter = self?.interaction
+                {
+                    SVProgressHUD.setDefaultMaskType(inter == false ? .clear : .none)
+                }
+                if animate
+                {
+                    SVProgressHUD.show(withStatus: text)
+                }
+                else
+                {
+                    //只显示文字的前提是注释了`SVProgressHUD.m`的422行
+                    //因此，如果只显示文字，建议使用MB
+                    SVProgressHUD.showInfo(withStatus: text)
+                }
+                SVProgressHUD.dismiss(withDelay: (hideDelay < self!.minTimeInterval ? self!.minTimeInterval : hideDelay), completion: completion)
+            }
+        }
+        return closure
+    }
+    
+    //显示HUD
+    //如果传入参数，那么直接执行那个闭包
+    //如果参数为空，那么从队列中取出闭包并执行
+    fileprivate func show(_ closure: (()-> Void)? = nil)
+    {
+        if let clo = closure
+        {
+            clo()
+            //显示hud后将状态设置为正在显示
+            stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+        }
+        else
+        {
+            //如果当前不在显示hud，那么可以显示下一个hud
+            if let isShowing = stMgr.status(forKey: TMStatusKey.isShowing) as? Bool
+            {
+                if !isShowing
+                {
+                    if let closure = self.hudQueue.pop()
+                    {
+                        closure()
+                        //显示hud后将状态设置为正在显示
+                        stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+                    }
+                }
+            }
+            else    //还没有显示过，那么可以显示
+            {
+                if let closure = self.hudQueue.pop()
+                {
+                    closure()
+                    //显示hud后将状态设置为正在显示
+                    stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+                }
+            }
+        }
+    }
+    
+    //析构方法，理论上永远不会执行
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
 }
 
-//内部类型
-extension ToastManager
+/**
+ * HUD通知和代理方法
+ * SV有通知和`completion`
+ * MB有`delegate`和`completionBlock`
+ */
+extension ToastManager: MBProgressHUDDelegate
 {
+    //MBProgressHUD消失后清理一些资源
+    func hudWasHidden(_ hud: MBProgressHUD)
+    {
+        hud.delegate = nil
+        hud.completionBlock = nil
+        if hud.isEqual(self.tmpMBHUD)
+        {
+            self.tmpMBHUD = nil
+            //状态设置为不在显示hud
+            stMgr.setStatus(false, forKey: TMStatusKey.isShowing)
+        }
+        
+        //尝试显示下一个闭包，如果有的话
+        self.show()
+    }
+    
+    //SV将要显示
+    @objc func svWillAppear(notify: Notification)
+    {
+        if let userInfo = notify.userInfo
+        {
+            print(userInfo[SVProgressHUDStatusUserInfoKey] as Any)
+        }
+        //状态设置为正在显示hud
+        stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+    }
+    
+    //SV已经显示
+    @objc func svDidAppear(notify: Notification)
+    {
+        if let userInfo = notify.userInfo
+        {
+            print(userInfo[SVProgressHUDStatusUserInfoKey] as Any)
+        }
+    }
+    
+    //SV将要消失
+    @objc func svWillDisappear(notify: Notification)
+    {
+        if let userInfo = notify.userInfo
+        {
+            print(userInfo[SVProgressHUDStatusUserInfoKey] as Any)
+        }
+    }
+    
+    //SV已经消失
+    @objc func svDidDisappear(notify: Notification)
+    {
+        if let userInfo = notify.userInfo
+        {
+            print(userInfo[SVProgressHUDStatusUserInfoKey] as Any)
+        }
+        //状态设置为不在显示hud
+        stMgr.setStatus(false, forKey: TMStatusKey.isShowing)
+        
+        //尝试显示下一个闭包，如果有的话
+        self.show()
+    }
+    
+}
+
+/**
+ * 外部接口方法
+ * 当外部程序要使用该类的功能时，调用这里的方法
+ */
+extension ToastManager: ExternalInterface
+{
+    //只显示一个文本，一段时间后消失
+    func wantShowText(_ text: String)
+    {
+        self.wantShow(text: text)
+    }
+    
+    //只显示一个文本，一段时间后消失，并执行一个回调
+    func wantShowText(text: String, completion: @escaping completionCallback)
+    {
+        self.wantShow(text: text, completion: completion)
+    }
+    
+    //只显示一个文本，设置一段时间后消失，并执行一个回调
+    func wantShowText(text:String, hideDelay: TimeInterval, completion: @escaping completionCallback)
+    {
+        self.wantShow(text: text, hideDelay: hideDelay, completion: completion)
+    }
+    
+    //只显示一个动画，不消失
+    func wantShowAnimate()
+    {
+        self.wantShow(hideDelay: self.longDistanceFuture)
+    }
+    
+    //让一个HUD手动消失
+    func hideHUD()
+    {
+        if self.hudType == .mbHud
+        {
+            if let hud = self.tmpMBHUD
+            {
+                hud.hide(animated: true)
+            }
+            else
+            {
+                MBProgressHUD.hide(for: Utility.getWindow(), animated: true)
+            }
+        }
+        else
+        {
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    /**
+     * 显示一个hud，会生成一个闭包放到队列中，然后按顺序显示
+     * - Parameters:
+     *  - text: 主要文本，默认空字符串
+     *  - detail:详细文本(仅MB，SV忽略)，默认空字符串
+     *  - animate:是否有转圈动画
+     *  - hideDelay:延迟多少秒后消失，最小1.5
+     *  - mode:显示模式，默认串行
+     *  - completion:HUD消失之后执行的回调
+     */
+    func wantShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 1.5, mode: TMShowMode = .serial, completion: completionCallback? = nil)
+    {
+        let closure = self.createHudClosure(text: text, detail: detail, animate: animate, hideDelay: hideDelay, completion: completion)
+        if mode == .serial  //串行，进入队列
+        {
+            self.hudQueue.push(item: closure)
+            //尝试执行一次显示HUD
+            self.show()
+        }
+        else    //并行，直接执行
+        {
+            self.show(closure)
+        }
+    }
+    
+    /**
+     * 直接显示一个HUD，不放入队列中
+     * 建议少用，当直接显示hud时会阻碍队列中其他hud的显示，直到该hud消失
+     * 如果一定要直接显示，建议使用MB，因为SV都是静态方法，无法获取实例，多个hud之间会产生干扰
+     * - Parameters:
+     *  - text: 主要文本，默认空字符串
+     *  - detail:详细文本(仅MB，SV忽略)，默认空字符串
+     *  - animate:是否有转圈动画
+     *  - hideDelay:延迟多少秒后消失，最小1.5
+     *  - completion:HUD消失之后执行的回调
+     */
+    func directShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay: TimeInterval = 1.5, completion: completionCallback? = nil)
+    {
+        self.wantShow(text: text, detail: detail, animate: animate, hideDelay: hideDelay, mode: .concurrent, completion: completion)
+    }
+    
+    /**
+     * 显示自定义HUD，放入队列中
+     * 外部程序可以在参数闭包中自定义一个MB或者SV，设置好各项参数并显示
+     * 所有自定义代码都会放入闭包队列中，然后尝试执行
+     */
+    func wantShowCustom(closure: @escaping (() -> Void))
+    {
+        self.hudQueue.push(item: closure)
+        self.show()
+    }
+    
+    /**
+     * 直接显示一个自定义HUD，不进入队列
+     */
+    func directShowCustom(closure: @escaping (() -> Void))
+    {
+        self.show(closure)
+    }
+    
+}
+
+/**
+ * 内部类型
+ */
+extension ToastManager: InternalType
+{
+    //状态key
+    enum TMStatusKey: StatusKeyType {
+        case isShowing  //是否在显示HUD:true/false
+    }
+    
     //使用HUD的类型
     enum TMHudType
     {
@@ -62,37 +393,29 @@ extension ToastManager
         case svHud  //SVProgressHUD
     }
     
-    //显示方式，并行或者串行
-    //如果不明确指定显示方式，那么使用串行，如果设置并行，只在那一次设置的时候有效
+    //显示模式，并行或者串行
+    //如果不明确指定显示模式，那么使用串行，如果设置并行，只在那一次设置的时候有效
     enum TMShowMode
     {
-        case serial //串行，同时只能显示一个hud，默认方式，并且推荐使用该方式
-        case concurrent //并行，同时可显示多个hud，不推荐，多个hud同时显示会造成混乱和不可预见的情况
+        case serial //串行，同时只能显示一个hud，默认模式，并且推荐使用该方式
+        case concurrent //并行，同时可显示多个hud，不推荐，多个hud同时显示会造成干扰和不可预见的情况
     }
     
-}
-//[SVProgressHUD setErrorImage:[UIImage imageNamed:@""]];
-//[SVProgressHUD setSuccessImage:[UIImage imageNamed:@""]];
-//[SVProgressHUD setMinimumDismissTimeInterval:1.5f];
-//[SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];
-//[SVProgressHUD setForegroundColor:[[UIColor whiteColor] colorWithAlphaComponent:.8f]]; //字体颜色
-//[SVProgressHUD setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:.8f]];   //背景颜色
-
-//HUD通知方法
-extension ToastManager
-{
-    
-}
-
-//外部接口方法
-extension ToastManager
-{
-    //显示一个hud，会生成一个闭包放到队列中，然后按顺序显示
-    func wantShowHud()
+    //显示风格，白底黑字或者黑底白字
+    enum TMShowStyle
     {
-        let closure = {[weak self]() in
-            
-        }
+        case dark   //黑底白字
+        case light  //白底黑字
     }
+    
+    //转圈的风格
+    enum TMAnimationType
+    {
+        case activityIndicator  //系统自带菊花
+        case indefiniteRing     //无限转圈圆环，仅SV有
+    }
+    
+    //回调的类型
+    typealias completionCallback = () -> Void
     
 }

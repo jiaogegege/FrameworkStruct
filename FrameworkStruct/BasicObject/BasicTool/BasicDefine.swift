@@ -12,8 +12,29 @@
 import Foundation
 import UIKit
 
+//MARK: 协议定义
+
+/**
+ * 基础协议
+ */
 protocol BasicProtocol
 {
+    
+}
+
+/**
+ * 外部接口方法协议
+ * 这是个空协议，只是为了表示实现这个协议的extension中的方法是给外部程序调用的
+ */
+protocol ExternalInterface {
+    
+}
+
+/**
+ * 这个空协议规定内部类型
+ * 如果一个类型要定义内部类型，那么在extension中实现这个空协议
+ */
+protocol InternalType {
     
 }
 

@@ -32,7 +32,7 @@ extension String
     //计算文本高度
     func calcHeight(font: UIFont, size: CGSize) -> CGFloat
     {
-        var height = 0.0
+        var height:CGFloat = 0.0
         let rect = (self as NSString).boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [NSAttributedString.Key.font: font], context: nil)
         height = rect.height
         return height
@@ -41,7 +41,7 @@ extension String
     //计算文本宽度
     func calcWidth(font: UIFont, size: CGSize) -> CGFloat
     {
-        var width = 0.0
+        var width:CGFloat = 0.0
         let rect = (self as NSString).boundingRect(with: size, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font: font], context: nil)
         width = rect.width
         return width

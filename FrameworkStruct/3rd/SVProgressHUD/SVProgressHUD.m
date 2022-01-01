@@ -419,7 +419,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
         NSURL *url = [bundle URLForResource:@"SVProgressHUD" withExtension:@"bundle"];
         NSBundle *imageBundle = [NSBundle bundleWithURL:url];
         
-        _infoImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"info" ofType:@"png"]];
+//        _infoImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"info" ofType:@"png"]];
         _successImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"success" ofType:@"png"]];
         _errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
 
@@ -646,12 +646,33 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     return (self.statusLabel.text ? @{SVProgressHUDStatusUserInfoKey : self.statusLabel.text} : nil);
 }
 
+- (UIWindow *)getKeyWindow
+{
+    UIWindow *keyWindow = nil;
+    if (@available(iOS 13.0, *)){
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if ([windowScene isKindOfClass:UIWindowScene.class]) {
+                for (UIWindow *window in windowScene.windows) {
+                    if (window.isKeyWindow) {
+                        keyWindow = window;
+                        break;
+                    }
+                }
+            }
+        }
+    }else {
+        keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    }
+    
+    return keyWindow;
+}
+
 - (void)positionHUD:(NSNotification*)notification {
     CGFloat keyboardHeight = 0.0f;
     double animationDuration = 0.0;
 
 #if !defined(SV_APP_EXTENSIONS) && TARGET_OS_IOS
-    self.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
+    self.frame = [UIApplication sharedApplication].keyWindow.bounds;
     UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
 #elif !defined(SV_APP_EXTENSIONS) && !TARGET_OS_IOS
     self.frame= [UIApplication sharedApplication].keyWindow.bounds;

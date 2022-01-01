@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    //获取当前激活的UIScene
+    //获取当前UIWindow
     static func currentWindow() -> UIWindow?
     {
         for windowScene: UIWindowScene in (UIApplication.shared.connectedScenes as? Set<UIWindowScene>)!

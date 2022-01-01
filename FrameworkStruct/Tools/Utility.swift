@@ -92,17 +92,22 @@ class Utility: NSObject
         {
             return window
         }
-        else
+        if #available(iOS 13.0, *)
         {
-            if #available(iOS 13.0, *)
+            if let window = SceneDelegate.currentWindow()
             {
-                if let window = SceneDelegate.currentWindow()
-                {
-                    return window
-                }
+                return window
             }
         }
-        return UIApplication.shared.keyWindow ?? UIWindow()
+        if let kw = UIApplication.shared.keyWindow
+        {
+            return kw
+        }
+        if let w = UIApplication.shared.windows.first
+        {
+            return w
+        }
+        return UIWindow()
     }
     
     

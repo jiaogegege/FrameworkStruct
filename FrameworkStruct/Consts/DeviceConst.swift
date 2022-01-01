@@ -80,46 +80,46 @@ func isIphone() -> Bool
 //判断机型：iPhone4/iPhone5/iPhone8/iPhone8p/iPhoneX及以上
 func isIphone4() -> Bool
 {
-    return doubleEqual(kScreenHeight, kiPhone4Height)
+    return doubleEqual(Double(kScreenHeight), kiPhone4Height)
 }
 
 func isIphone5() -> Bool
 {
-    return doubleEqual(kScreenHeight, kiPhone5Height)
+    return doubleEqual(Double(kScreenHeight), kiPhone5Height)
 }
 
 func isIphone8() -> Bool
 {
-    return doubleEqual(kScreenHeight, kiPhone8Height)
+    return doubleEqual(Double(kScreenHeight), kiPhone8Height)
 }
 
 func isIphone8P() -> Bool
 {
-    return doubleEqual(kScreenHeight, kiPhone8pHeight)
+    return doubleEqual(Double(kScreenHeight), kiPhone8pHeight)
 }
 
 //判断条件：屏幕高度等于812或者大于812
 func isIphoneXOrMore() -> Bool
 {
-    return doubleEqual(kScreenHeight, kiPhoneXHeight) || kScreenHeight >= kiPhoneXHeight
+    return Double(kScreenHeight) >= kiPhoneXHeight
 }
 
 //屏幕小于iPhoneX
 func smallerThanIphoneX() -> Bool
 {
-    return kScreenHeight < kiPhoneXHeight
+    return Double(kScreenHeight) < kiPhoneXHeight
 }
 
 //屏幕小于iPhone8P
 func smallerThanIphone8P() -> Bool
 {
-    return kScreenHeight < kiPhone8pHeight
+    return Double(kScreenHeight) < kiPhone8pHeight
 }
 
 //屏幕小于iPhone8
 func smallerThanIphone8() -> Bool
 {
-    return kScreenHeight < kiPhone8Height
+    return Double(kScreenHeight) < kiPhone8Height
 }
  
 
