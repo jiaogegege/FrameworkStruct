@@ -193,7 +193,7 @@ class ToastManager: OriginManager
  * SV有通知和`completion`
  * MB有`delegate`和`completionBlock`
  */
-extension ToastManager: NotifyDelegateProtocol, MBProgressHUDDelegate
+extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
 {
     //添加SV通知
     fileprivate func addNotification()
