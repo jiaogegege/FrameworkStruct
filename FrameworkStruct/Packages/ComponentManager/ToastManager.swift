@@ -16,13 +16,13 @@ import UIKit
 class ToastManager: OriginManager
 {
     //MARK: 属性
+    //单例对象
+    static let shared = ToastManager()
+    
     //hud显示队列
     //存储hud，对hud进行统一管理，所有hud先进入这个队列，然后按顺序显示，当显示完一个之后，再显示另一个，直到队列被清空
     //实际存储的是操作闭包，当一个闭包执行时显示HUD，当HUD消失后，执行下一个闭包
     fileprivate let hudQueue: FSQueue<(() -> Void)> = FSQueue()
-    
-    //单例对象
-    static let shared = ToastManager()
     
     //临时保存正在显示的MB实例
     fileprivate weak var tmpMBHUD: MBProgressHUD? = nil
@@ -83,8 +83,27 @@ class ToastManager: OriginManager
         return self
     }
     
+    //添加SV通知
+    fileprivate func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(svWillAppear(notify:)), name: NSNotification.Name.SVProgressHUDWillAppear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svDidAppear(notify:)), name: NSNotification.Name.SVProgressHUDDidAppear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svWillDisappear(notify:)), name: NSNotification.Name.SVProgressHUDWillDisappear, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(svDidDisappear(notify:)), name: NSNotification.Name.SVProgressHUDDidDisappear, object: nil)
+    }
+    
+    //删除通知
+    fileprivate func removeNotification()
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //返回一个闭包，将要显示的hud参数都配置好，并不决定是否要显示这个hud，交给调用的方法处理
-    fileprivate func createHudClosure(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 1.5, completion: completionCallback? = nil) -> () -> Void
+    fileprivate func createHudClosure(text: String? = nil,
+                                      detail: String? = nil,
+                                      animate: Bool = true,
+                                      hideDelay:TimeInterval = 1.5,
+                                      completion: completionCallback? = nil) -> () -> Void
     {
          let closure = {[weak self] in
             if self?.hudType == .mbHud
@@ -195,23 +214,8 @@ class ToastManager: OriginManager
  */
 extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
 {
-    //添加SV通知
-    fileprivate func addNotification()
-    {
-        NotificationCenter.default.addObserver(self, selector: #selector(svWillAppear(notify:)), name: NSNotification.Name.SVProgressHUDWillAppear, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(svDidAppear(notify:)), name: NSNotification.Name.SVProgressHUDDidAppear, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(svWillDisappear(notify:)), name: NSNotification.Name.SVProgressHUDWillDisappear, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(svDidDisappear(notify:)), name: NSNotification.Name.SVProgressHUDDidDisappear, object: nil)
-    }
-    
-    //删除通知
-    fileprivate func removeNotification()
-    {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     //MBProgressHUD消失后清理一些资源
-    internal func hudWasHidden(_ hud: MBProgressHUD)
+    func hudWasHidden(_ hud: MBProgressHUD)
     {
         hud.delegate = nil
         hud.completionBlock = nil
