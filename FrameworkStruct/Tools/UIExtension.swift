@@ -39,7 +39,7 @@ extension UIView
     /**
      * 切圆角
      * - Parameters:
-     *  - conrners
+     *  - conrners 需要切圆角的角
      *  - radius 圆角弧度
      */
     func addCorner(conrners: UIRectCorner , radius: CGFloat)

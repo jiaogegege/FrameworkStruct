@@ -53,6 +53,9 @@
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
+		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
+		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
+		EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CBB278830A200DD2310 /* WeakArray.m */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
 		EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */; };
@@ -164,9 +167,9 @@
 		EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A84127625D490088293F /* SDDisplayLink.m */; };
 		EAC8A88827625D490088293F /* SDAsyncBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A84327625D490088293F /* SDAsyncBlockOperation.m */; };
 		EAC8A88927625D490088293F /* SDAssociatedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A84427625D490088293F /* SDAssociatedObject.m */; };
-		EACAD4E9277D82C800FBE2DA /* NumberConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4E8277D82C800FBE2DA /* NumberConst.swift */; };
-		EACAD4ED277DA5E400FBE2DA /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EC277DA5E400FBE2DA /* DeviceConst.swift */; };
-		EACAD4EF277DAFC000FBE2DA /* DateTimeConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EE277DAFC000FBE2DA /* DateTimeConst.swift */; };
+		EACAD4E9277D82C800FBE2DA /* NumberTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4E8277D82C800FBE2DA /* NumberTool.swift */; };
+		EACAD4ED277DA5E400FBE2DA /* DeviceTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */; };
+		EACAD4EF277DAFC000FBE2DA /* TimeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */; };
 		EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007A27623B59001B7223 /* AppDelegate.swift */; };
 		EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007C27623B59001B7223 /* SceneDelegate.swift */; };
 		EADB007F27623B59001B7223 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007E27623B59001B7223 /* ViewController.swift */; };
@@ -275,6 +278,13 @@
 		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
 		EA779524276C70AD00D9707F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		EA779526276C70DD00D9707F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		EA7A7CB227882F4700DD2310 /* WeakDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakDictionary.h; sourceTree = "<group>"; };
+		EA7A7CB327882F4700DD2310 /* WeakDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakDictionary.m; sourceTree = "<group>"; };
+		EA7A7CB627882FF600DD2310 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA7A7CB72788305200DD2310 /* WeakSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakSet.h; sourceTree = "<group>"; };
+		EA7A7CB82788305200DD2310 /* WeakSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakSet.m; sourceTree = "<group>"; };
+		EA7A7CBA278830A200DD2310 /* WeakArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakArray.h; sourceTree = "<group>"; };
+		EA7A7CBB278830A200DD2310 /* WeakArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakArray.m; sourceTree = "<group>"; };
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
 		EA92255D276AE48700192E2E /* FSVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSVector.swift; sourceTree = "<group>"; };
@@ -556,9 +566,9 @@
 		EAC8A84227625D490088293F /* SDImageAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageAssetManager.h; sourceTree = "<group>"; };
 		EAC8A84327625D490088293F /* SDAsyncBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAsyncBlockOperation.m; sourceTree = "<group>"; };
 		EAC8A84427625D490088293F /* SDAssociatedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAssociatedObject.m; sourceTree = "<group>"; };
-		EACAD4E8277D82C800FBE2DA /* NumberConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberConst.swift; sourceTree = "<group>"; };
-		EACAD4EC277DA5E400FBE2DA /* DeviceConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConst.swift; sourceTree = "<group>"; };
-		EACAD4EE277DAFC000FBE2DA /* DateTimeConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeConst.swift; sourceTree = "<group>"; };
+		EACAD4E8277D82C800FBE2DA /* NumberTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTool.swift; sourceTree = "<group>"; };
+		EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTool.swift; sourceTree = "<group>"; };
+		EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTool.swift; sourceTree = "<group>"; };
 		EADB007727623B59001B7223 /* FrameworkStruct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameworkStruct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADB007A27623B59001B7223 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EADB007C27623B59001B7223 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -726,6 +736,20 @@
 				EADB0125276242FD001B7223 /* StatusManager */,
 			);
 			path = BasicTool;
+			sourceTree = "<group>";
+		};
+		EA7A7CB527882FB100DD2310 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EA7A7CB627882FF600DD2310 /* README.md */,
+				EA7A7CBA278830A200DD2310 /* WeakArray.h */,
+				EA7A7CBB278830A200DD2310 /* WeakArray.m */,
+				EA7A7CB72788305200DD2310 /* WeakSet.h */,
+				EA7A7CB82788305200DD2310 /* WeakSet.m */,
+				EA7A7CB227882F4700DD2310 /* WeakDictionary.h */,
+				EA7A7CB327882F4700DD2310 /* WeakDictionary.m */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		EA922558276AD54D00192E2E /* Monitor */ = {
@@ -1144,6 +1168,7 @@
 				EADB009627623C34001B7223 /* OriginObject */,
 				EADB009327623C1E001B7223 /* BasicObject */,
 				EADB009727623C3B001B7223 /* Packages */,
+				EA7A7CB527882FB100DD2310 /* Components */,
 				EADB009827623C42001B7223 /* Tools */,
 				EADB009427623C25001B7223 /* Consts */,
 				EADB009127623C06001B7223 /* Resources */,
@@ -1191,10 +1216,7 @@
 			isa = PBXGroup;
 			children = (
 				EADB00E42762410D001B7223 /* MacroConst.swift */,
-				EACAD4EC277DA5E400FBE2DA /* DeviceConst.swift */,
 				EADB00E22762410D001B7223 /* StringConst.swift */,
-				EACAD4EE277DAFC000FBE2DA /* DateTimeConst.swift */,
-				EACAD4E8277D82C800FBE2DA /* NumberConst.swift */,
 				EADB00E32762410D001B7223 /* ColorConst.swift */,
 				EADB00E12762410C001B7223 /* ImageConst.swift */,
 			);
@@ -1255,6 +1277,9 @@
 			children = (
 				EADB0147276243D3001B7223 /* README.md */,
 				EADB0146276243D3001B7223 /* Utility.swift */,
+				EACAD4E8277D82C800FBE2DA /* NumberTool.swift */,
+				EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */,
+				EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */,
 				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
 				EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */,
 			);
@@ -1319,8 +1344,8 @@
 			isa = PBXGroup;
 			children = (
 				EADB008827623B5A001B7223 /* Info.plist */,
-				EA9A4A982780349500170BB3 /* OCConst.h */,
 				EA9A4A992780350500170BB3 /* OCHeader.h */,
+				EA9A4A982780349500170BB3 /* OCConst.h */,
 				EADB00CF27624011001B7223 /* FrameworkStruct-Bridging-Header.h */,
 			);
 			path = Others;
@@ -1524,11 +1549,13 @@
 				EA1AE481277819E600D028F9 /* ConstraintView.swift in Sources */,
 				EA1AE47E277819E600D028F9 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
+				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,
 				EAC8A88127625D490088293F /* SDImageAssetManager.m in Sources */,
 				EAC8A88627625D490088293F /* NSBezierPath+SDRoundedCorners.m in Sources */,
 				EADB014427624391001B7223 /* UserManager.swift in Sources */,
 				EADB00AD27623C76001B7223 /* OriginChecker.swift in Sources */,
 				EAC8A86B27625D490088293F /* SDImageFrame.m in Sources */,
+				EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */,
 				EAC8A88927625D490088293F /* SDAssociatedObject.m in Sources */,
 				EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */,
 				EA9A4A872780309E00170BB3 /* CKTextField.m in Sources */,
@@ -1595,7 +1622,7 @@
 				EA1AE491277819E600D028F9 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
-				EACAD4ED277DA5E400FBE2DA /* DeviceConst.swift in Sources */,
+				EACAD4ED277DA5E400FBE2DA /* DeviceTool.swift in Sources */,
 				EAC8A87027625D490088293F /* SDImageTransformer.m in Sources */,
 				EAC8A87D27625D490088293F /* UIButton+WebCache.m in Sources */,
 				EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */,
@@ -1613,9 +1640,9 @@
 				EAC8A85C27625D490088293F /* SDMemoryCache.m in Sources */,
 				EAC8A88327625D490088293F /* SDWeakProxy.m in Sources */,
 				EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */,
-				EACAD4EF277DAFC000FBE2DA /* DateTimeConst.swift in Sources */,
+				EACAD4EF277DAFC000FBE2DA /* TimeTool.swift in Sources */,
 				EAC8A84A27625D490088293F /* SDWebImageDownloaderDecryptor.m in Sources */,
-				EACAD4E9277D82C800FBE2DA /* NumberConst.swift in Sources */,
+				EACAD4E9277D82C800FBE2DA /* NumberTool.swift in Sources */,
 				EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */,
 				EA1AE477277819E600D028F9 /* ConstraintInsets.swift in Sources */,
 				EA1AE470277819E600D028F9 /* ConstraintMultiplierTarget.swift in Sources */,
@@ -1649,6 +1676,7 @@
 				EAC8A84D27625D490088293F /* UIImageView+HighlightedWebCache.m in Sources */,
 				EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */,
 				EA1AE472277819E600D028F9 /* ConstraintMakerPrioritizable.swift in Sources */,
+				EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */,
 				EAC8A88427625D490088293F /* SDInternalMacros.m in Sources */,
 				EAC8A86527625D490088293F /* SDDiskCache.m in Sources */,
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,

@@ -13,6 +13,7 @@
 
 //弱引用宏定义
 #define WS __weak typeof(self) weakSelf = self;
+#define WO(obj) __weak typeof(obj) weakObj = obj;
 
 //获取系统版本
 #define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]

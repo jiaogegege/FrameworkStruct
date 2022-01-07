@@ -22,3 +22,6 @@
 #import "CKTextField+ChangeBlock.h"
 #import "CountDownButton.h"
 #import "UIButton+ButtonBlock.h"
+#import "WeakArray.h"
+#import "WeakSet.h"
+#import "WeakDictionary.h"

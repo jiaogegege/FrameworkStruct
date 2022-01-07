@@ -67,7 +67,8 @@ extension Array
     }
     
     //让Array支持contains方法
-    func contains<T>(item: T) -> Bool where T : Equatable {
+    func contains<T>(item: T) -> Bool where T: Equatable
+    {
         return self.filter({$0 as? T == item}).count > 0
     }
     
@@ -94,36 +95,44 @@ extension Dictionary
 
 
 /**
- * NSPointArray
+ * NSPointerArray
  */
 extension NSPointerArray
 {
-    func addObject(_ object: AnyObject?) {
+    //向弱引用数组添加对象
+    func addObject(_ object: AnyObject?)
+    {
         guard let strongObject = object else { return }
         let pointer = Unmanaged.passUnretained(strongObject).toOpaque()
         addPointer(pointer)
     }
  
-    func insertObject(_ object: AnyObject?, at index: Int) {
+    //向弱引用数组的index位置插入对象
+    func insertObject(_ object: AnyObject?, at index: Int)
+    {
         guard index < count, let strongObject = object else { return }
- 
         let pointer = Unmanaged.passUnretained(strongObject).toOpaque()
         insertPointer(pointer, at: index)
     }
  
-    func replaceObject(at index: Int, withObject object: AnyObject?) {
+    //替换弱引用数组index位置的对象
+    func replaceObject(at index: Int, withObject object: AnyObject?)
+    {
         guard index < count, let strongObject = object else { return }
- 
         let pointer = Unmanaged.passUnretained(strongObject).toOpaque()
         replacePointer(at: index, withPointer: pointer)
     }
  
-    func object(at index: Int) -> AnyObject? {
+    //获取弱引用数组index位置的对象
+    func object(at index: Int) -> AnyObject?
+    {
         guard index < count, let pointer = self.pointer(at: index) else { return nil }
         return Unmanaged<AnyObject>.fromOpaque(pointer).takeUnretainedValue()
     }
  
-    func removeObject(at index: Int) {
+    //删除弱引用数组index位置的对象
+    func removeObject(at index: Int)
+    {
         guard index < count else { return }
         removePointer(at: index)
     }

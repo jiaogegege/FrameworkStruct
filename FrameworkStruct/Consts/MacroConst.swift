@@ -13,6 +13,20 @@ import Foundation
 import UIKit
 
 
+/**
+ * 宏定义和常量定义建议以`k`开头，表示常量，方便区分
+ * 和常量配合使用的函数
+ */
+//项目名称
+let kProjectName = "FrameworkStruct"
+
+//APPID
+let kAppId = "1476239189"
+
+//appstore下载地址
+let kAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
+
+
 //MARK: 自定义通知
 enum FSNotification: String
 {
@@ -44,20 +58,6 @@ enum FSNotification: String
 let kMainSB = "Main"
 //启动界面
 let kLaunchSB = "LaunchScreen"
-
-
-/**
- * 宏定义和常量定义建议以`k`开头，表示常量，方便区分
- * 和常量配合使用的函数
- */
-//项目名称
-let kProjectName = "FrameworkStruct"
-
-//APPID
-let kAppId = "1476239189"
-
-//appstore下载地址
-let kAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 
 //MARK: 正则表达式

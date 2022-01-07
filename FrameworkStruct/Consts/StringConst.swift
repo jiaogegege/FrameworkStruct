@@ -51,8 +51,8 @@ extension String
     //便利方法
     static func localized(_ originStr: String) -> String
     {
-        return NSLocalizedString(originStr, comment: originStr)
 //        return NSLocalizedString(originStr, tableName: "Localizable", bundle: Bundle.main, value: originStr, comment: originStr)
+        return NSLocalizedString(originStr, comment: originStr)
     }
     
 }

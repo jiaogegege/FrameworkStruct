@@ -1,12 +1,12 @@
 //
-//  NumberConst.swift
+//  NumberTool.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2021/12/30.
 //
 
 /**
- * 定义各种数字相关的常量和计算方法
+ * 定义各种数字计算、转换相关的工具方法
  */
 import Foundation
 

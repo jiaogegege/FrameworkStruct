@@ -13,10 +13,4 @@
 #import "FrameworkStruct-Swift.h"
 
 
-
-
-
-
-
-
 #endif /* OCHeader_h */

@@ -10,7 +10,9 @@ import UIKit
 class BasicTableViewController: UITableViewController
 {
     //MARK: 属性
-    //获取当前主题
+    //状态管理器
+    var stMgr: StatusManager = StatusManager(capacity: 5)
+    //当前主题
     var theme = ThemeManager.shared.getCurrentTheme()
     
     //返回按钮样式
@@ -74,6 +76,23 @@ class BasicTableViewController: UITableViewController
         self.addNotification()
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+    }
+    
+    //在这里可以对UI的布局进行更新和修改
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        self.layoutUI()
+    }
+    
     //创建界面，一般用来创建界面组件
     //如果子类覆写这个方法，需要调用父类方法
     func createUI()
@@ -94,16 +113,17 @@ class BasicTableViewController: UITableViewController
         self.setNavTitleColor()
     }
     
-    //配置界面，用来设置界面组件，比如frame，约束，颜色等
+    //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等
     //如果子类覆写这个方法，需要调用父类方法
     func configUI()
     {
-        self.themeConfigUI(theme: self.theme)
+        self.themeUpdateUI(theme: self.theme)
     }
     
-    //更新界面，一般是更新界面上的一些数据
+    //更新UI组件的布局，比如frame、约束等
+    //这个方法可能被多次执行，所以不要在这里创建任何对象
     //如果子类覆写这个方法，需要调用父类方法
-    func updateUI()
+    func layoutUI()
     {
         
     }
@@ -111,6 +131,14 @@ class BasicTableViewController: UITableViewController
     //初始化控制器数据，比如一些状态和变量
     //如果子类覆写这个方法，需要调用父类方法
     func initData()
+    {
+        
+    }
+    
+    //更新界面，一般是更新界面上的一些数据
+    //如果子类覆写这个方法，需要调用父类方法
+    //可以手动调用这个方法
+    func updateUI()
     {
         
     }
@@ -142,6 +170,7 @@ class BasicTableViewController: UITableViewController
     }
     
     //返回按钮事件
+    //子类可以覆写这个方法
     @objc func backAction(sender: UIBarButtonItem)
     {
         self.navigationController?.popViewController(animated: true)
@@ -278,8 +307,6 @@ class BasicTableViewController: UITableViewController
         }
     }
     
-    
-    //MARK: 通知处理
     //添加通知
     //如果子类覆写这个方法，需要调用父类方法
     func addNotification()
@@ -288,16 +315,9 @@ class BasicTableViewController: UITableViewController
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: FSNotification.changeTheme.name, object: nil)
     }
 
-    //处理主题通知的方法
-    @objc fileprivate func themeDidChange(notify: Notification)
-    {
-        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
-        self.themeConfigUI(theme: self.theme)
-    }
-
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
-    func themeConfigUI(theme: ThemeProtocol)
+    func themeUpdateUI(theme: ThemeProtocol)
     {
         //留给子类实现
     }
@@ -305,17 +325,24 @@ class BasicTableViewController: UITableViewController
 
     //析构方法，清理一些资源
     deinit {
-        print(TimeEmbellisher.getCurrentTimeString() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
         NotificationCenter.default.removeObserver(self)
+        
+        print(getCurrentTimeString() + ": " + Utility.getObjClassName(obj: self) + " dealloc")
     }
     
 }
 
-/**
- * 侧滑返回功能
- */
-extension BasicTableViewController: UIGestureRecognizerDelegate
+//代理和通知方法
+extension BasicTableViewController:DelegateProtocol, UIGestureRecognizerDelegate
 {
+    //处理主题通知的方法
+    @objc fileprivate func themeDidChange(notify: Notification)
+    {
+        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
+        self.themeUpdateUI(theme: self.theme)
+    }
+
+    //侧滑返回功能
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let count = self.navigationController?.viewControllers.count, count <= 1
         {

@@ -57,9 +57,9 @@ class ThemeSelectViewController: BasicViewController
     }
 
     //切换主题更新UI
-    override func themeConfigUI(theme: ThemeProtocol)
+    override func themeUpdateUI(theme: ThemeProtocol)
     {
-        super.themeConfigUI(theme: theme)
+        super.themeUpdateUI(theme: theme)
         label.backgroundColor = theme.mainColor
         label.textColor = theme.mainTitleColor
         button.setTitleColor(theme.mainColor, for: .normal)
