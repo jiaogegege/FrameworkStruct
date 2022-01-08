@@ -62,7 +62,7 @@
     return [_mapTable dictionaryRepresentation];
 }
 
-@synthesize count = _count;
+//@synthesize count = _count;
 - (NSUInteger)count {
 
     return _mapTable.count;

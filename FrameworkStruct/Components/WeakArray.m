@@ -53,11 +53,11 @@
 }
 
 - (void)compact {
-
+    [_pointerArray addPointer:NULL];
     [_pointerArray compact];
 }
 
-@synthesize count = _count;
+//@synthesize count = _count;
 - (NSUInteger)count {
 
     return _pointerArray.count;
@@ -68,7 +68,7 @@
     return [NSString stringWithFormat:@"%@", _pointerArray.allObjects];
 }
 
-@synthesize allObjects = _allObjects;
+//@synthesize allObjects = _allObjects;
 - (NSArray *)allObjects {
 
     return _pointerArray.allObjects;

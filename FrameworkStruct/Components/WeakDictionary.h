@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  元素个数
  */
-@property (readonly) NSUInteger count;
+@property (nonatomic, readonly) NSUInteger count;
 
 /**
  *  获取对象

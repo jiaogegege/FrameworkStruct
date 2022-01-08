@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeakArray : NSObject
 
-@property (readonly, copy)NSArray *allObjects;
-@property (readonly)NSUInteger count;
+@property (nonatomic, readonly, copy)NSArray *allObjects;
+@property (nonatomic, readonly)NSUInteger count;
 
 - (id)objectAtIndex:(NSUInteger)index;
 - (void)addObject:(id)object;

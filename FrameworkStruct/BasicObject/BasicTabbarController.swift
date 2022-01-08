@@ -7,14 +7,21 @@
 
 import UIKit
 
-class BasicTabbarController: UITabBarController {
+class BasicTabbarController: UITabBarController
+{
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //创建完成后添加到管理器中
+        ControllerManager.shared.pushController(controller: self)
     }
     
-
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        ControllerManager.shared.showController(controller: self)
+    }
 
 }

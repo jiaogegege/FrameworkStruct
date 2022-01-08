@@ -57,25 +57,25 @@
     return [_hashTable containsObject:anObject];
 }
 
-@synthesize count = _count;
+//@synthesize count = _count;
 - (NSUInteger)count {
 
     return _hashTable.count;
 }
 
-@synthesize allObjects = _allObjects;
+//@synthesize allObjects = _allObjects;
 - (NSArray *)allObjects {
 
     return [_hashTable allObjects];
 }
 
-@synthesize anyObject = _anyObject;
+//@synthesize anyObject = _anyObject;
 - (id)anyObject {
 
     return [_hashTable anyObject];
 }
 
-@synthesize setRepresentation = _setRepresentation;
+//@synthesize setRepresentation = _setRepresentation;
 - (NSSet *)setRepresentation {
 
     return [_hashTable setRepresentation];

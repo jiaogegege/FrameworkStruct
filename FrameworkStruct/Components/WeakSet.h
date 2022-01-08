@@ -14,12 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  元素个数
  */
-@property (readonly)NSUInteger count;
+@property (nonatomic, readonly)NSUInteger count;
 
 /**
  *  所有对象
  */
-@property (readonly, copy)NSArray *allObjects;
+@property (nonatomic, readonly, copy)NSArray *allObjects;
 
 /**
  *  获取一个对象
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  获取集合
  */
-@property (readonly, copy)NSSet *setRepresentation;
+@property (nonatomic, readonly, copy)NSSet *setRepresentation;
 
 - (id)member:(id)object;
 - (NSEnumerator *)objectEnumerator;

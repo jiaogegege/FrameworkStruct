@@ -74,11 +74,15 @@ class BasicViewController: UIViewController
         self.initData()
         self.updateUI()
         self.addNotification()
+        
+        //创建完成后添加到管理器中
+        ControllerManager.shared.pushController(controller: self)
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        ControllerManager.shared.showController(controller: self)
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -87,6 +91,7 @@ class BasicViewController: UIViewController
     }
     
     //在这里可以对UI的布局进行更新和修改
+    //如果子类覆写这个方法，需要调用父类方法
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
@@ -141,6 +146,13 @@ class BasicViewController: UIViewController
     func updateUI()
     {
         
+    }
+    
+    //主题更新UI
+    //如果子类覆写这个方法，需要调用父类方法
+    func themeUpdateUI(theme: ThemeProtocol)
+    {
+        //留给子类实现
     }
     
     //设置返回按钮样式
@@ -312,14 +324,7 @@ class BasicViewController: UIViewController
     func addNotification()
     {
         //添加主题通知
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange(notify:)), name: FSNotification.changeTheme.name, object: nil)
-    }
-
-    //主题更新UI
-    //如果子类覆写这个方法，需要调用父类方法
-    func themeUpdateUI(theme: ThemeProtocol)
-    {
-        //留给子类实现
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification(notify:)), name: FSNotification.changeTheme.name, object: nil)
     }
     
 
@@ -332,18 +337,20 @@ class BasicViewController: UIViewController
     
 }
 
+
 //代理和通知方法
 extension BasicViewController:DelegateProtocol, UIGestureRecognizerDelegate
 {
     //处理主题通知的方法
-    @objc fileprivate func themeDidChange(notify: Notification)
+    @objc fileprivate func themeDidChangeNotification(notify: Notification)
     {
         self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
         self.themeUpdateUI(theme: self.theme)
     }
 
     //侧滑返回功能
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool
+    {
         if let count = self.navigationController?.viewControllers.count, count <= 1
         {
             return false
