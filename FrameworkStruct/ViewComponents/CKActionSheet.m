@@ -1,9 +1,9 @@
 //
 //  CKActionSheet.m
-//  PostpartumRehabilitation
+//  FrameworkStruct
 //
-//  Created by user on 2018/5/9.
-//  Copyright © 2018年 dyimedical. All rights reserved.
+//  Created by 蒋旭蛟 on 2018/5/9.
+//  Copyright © 2018年 蒋雪姣. All rights reserved.
 //
 
 #import "CKActionSheet.h"
@@ -40,6 +40,7 @@ static NSMapTable *identifierKeyMap;
         return nil;
     }
     CKActionSheet *actionSheet = [CKActionSheet alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [actionSheet setIdentifier:key];
     for (UIAlertAction *action in actionArray)  //修改颜色样式
     {
         [action setValue:tintColor forKey:@"titleTextColor"];
@@ -56,6 +57,12 @@ static NSMapTable *identifierKeyMap;
         [vc presentViewController:actionSheet animated:YES completion:nil];
     }
     return actionSheet;
+}
+
+//设置identifier
+-(void)setIdentifier:(NSString *)identifier
+{
+    _identifierKey = identifier;
 }
 
 -(void)dealloc

@@ -82,6 +82,8 @@
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
+		EAB91A62278AB77B00A35FA3 /* CKPhotoSelectSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A61278AB77B00A35FA3 /* CKPhotoSelectSheet.m */; };
+		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -331,6 +333,9 @@
 		EAAA4E8E276F57BB00C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAB91A60278AB77A00A35FA3 /* CKPhotoSelectSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKPhotoSelectSheet.h; sourceTree = "<group>"; };
+		EAB91A61278AB77B00A35FA3 /* CKPhotoSelectSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKPhotoSelectSheet.m; sourceTree = "<group>"; };
+		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -821,6 +826,7 @@
 				EAAA4E82276F3E7800C45712 /* README.md */,
 				EA922584276B439700192E2E /* ControllerManager.swift */,
 				EAAA4E83276F3EC900C45712 /* AlertManager.swift */,
+				EAB91A64278B047C00A35FA3 /* DialogManager.swift */,
 				EAAA4E87276F3EF600C45712 /* ToastManager.swift */,
 				EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */,
 				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
@@ -1295,6 +1301,8 @@
 				EA9A4A7B2780307E00170BB3 /* CKAlertView.m */,
 				EA9A4A7F2780308700170BB3 /* CKActionSheet.h */,
 				EA9A4A802780308700170BB3 /* CKActionSheet.m */,
+				EAB91A60278AB77A00A35FA3 /* CKPhotoSelectSheet.h */,
+				EAB91A61278AB77B00A35FA3 /* CKPhotoSelectSheet.m */,
 				EA9A4A842780309E00170BB3 /* CKTextField.h */,
 				EA9A4A832780309D00170BB3 /* CKTextField.m */,
 				EA9A4A852780309E00170BB3 /* CKTextField+ChangeBlock.h */,
@@ -1617,6 +1625,7 @@
 				EAC8A76C27625BA70088293F /* NSObject+MJKeyValue.m in Sources */,
 				EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */,
 				EA1AE484277819E600D028F9 /* Typealiases.swift in Sources */,
+				EAB91A62278AB77B00A35FA3 /* CKPhotoSelectSheet.m in Sources */,
 				EA1AE492277819E600D028F9 /* ConstraintDirectionalInsets.swift in Sources */,
 				EADB00AB27623C76001B7223 /* OriginContainer.swift in Sources */,
 				EA1AE491277819E600D028F9 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
@@ -1669,6 +1678,7 @@
 				EAC8A77227625BA70088293F /* NSString+MJExtension.m in Sources */,
 				EA1AE478277819E600D028F9 /* ConstraintMakerFinalizable.swift in Sources */,
 				EAC8A77427625BA70088293F /* MJFoundation.m in Sources */,
+				EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */,
 				EAC8A87527625D490088293F /* UIImage+MemoryCacheCost.m in Sources */,
 				EAC8A85F27625D490088293F /* SDWebImageDownloaderResponseModifier.m in Sources */,
 				EA1AE480277819E600D028F9 /* UILayoutSupport+Extensions.swift in Sources */,

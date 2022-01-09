@@ -1,9 +1,9 @@
 //
 //  CountDownButton.m
-//  PostpartumRehabilitation
+//  FrameworkStruct
 //
-//  Created by user on 2018/5/11.
-//  Copyright © 2018年 dyimedical. All rights reserved.
+//  Created by 蒋旭蛟 on 2018/5/11.
+//  Copyright © 2018年 蒋雪姣. All rights reserved.
 //
 
 #import "CountDownButton.h"
