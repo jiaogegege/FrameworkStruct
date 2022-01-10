@@ -31,8 +31,9 @@ static NSMapTable *identifierKeyMap;
 }
 
 //工厂方法，创建弹窗
-+(CKAlertView *)alertViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message identifierKey:(NSString *)key cancelTitle:(nullable NSString *)cancelTitle cancelBlock:(void (^ __nullable)(UIAlertAction *action))cancel confirmTitle:(nullable NSString *)confirmTitle confirmBlock:(void (^ __nullable)(UIAlertAction *action))confirm inViewController:(UIViewController *)vc;
++(CKAlertView *)alertViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message identifierKey:(NSString *)key tintColor: (UIColor *)color cancelTitle:(nullable NSString *)cancelTitle cancelBlock:(void (^ __nullable)(UIAlertAction *action))cancel confirmTitle:(nullable NSString *)confirmTitle confirmBlock:(void (^ __nullable)(UIAlertAction *action))confirm inViewController:(UIViewController *)vc;
 {
+    WS
     if (!identifierKeyMap)      //如果没有那么创建
     {
         identifierKeyMap = [NSMapTable  mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSMapTableWeakMemory];
@@ -60,17 +61,16 @@ static NSMapTable *identifierKeyMap;
     if (cancelTitle)     //如果cancel回调有值，那么创建取消按钮
     {
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleDefault handler:cancel];
-        [cancelAction setValue:UIColor.cAccent forKey:@"titleTextColor"];
+        [cancelAction setValue:color forKey:@"titleTextColor"];
         [alertView addAction:cancelAction];
     }
     if (confirmTitle)        //如果confirm回调有值，那么创建确定按钮
     {
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmTitle style:UIAlertActionStyleDefault handler:confirm];
-        [confirmAction setValue:UIColor.cAccent forKey:@"titleTextColor"];
+        [confirmAction setValue:color forKey:@"titleTextColor"];
         [alertView addAction:confirmAction];
     }
     //设置自身到字典中
-    WS
     [identifierKeyMap setObject:weakSelf forKey:key];
     if (vc)
     {
@@ -80,9 +80,9 @@ static NSMapTable *identifierKeyMap;
 }
 
 //工厂方法，创建弹窗，文字对齐
-+(CKAlertView *)alertViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message messageAlign:(NSTextAlignment)align identifierKey:(NSString *)key cancelTitle:(nullable NSString *)cancelTitle cancelBlock:(void (^ __nullable)(UIAlertAction *action))cancel confirmTitle:(nullable NSString *)confirmTitle confirmBlock:(void (^ __nullable)(UIAlertAction *action))confirm inViewController:(UIViewController *)vc
++(CKAlertView *)alertViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message messageAlign:(NSTextAlignment)align identifierKey:(NSString *)key tintColor: (UIColor *)color cancelTitle:(nullable NSString *)cancelTitle cancelBlock:(void (^ __nullable)(UIAlertAction *action))cancel confirmTitle:(nullable NSString *)confirmTitle confirmBlock:(void (^ __nullable)(UIAlertAction *action))confirm inViewController:(UIViewController *)vc
 {
-    CKAlertView *alertView = [CKAlertView alertViewWithTitle:title message:message identifierKey:key cancelTitle:cancelTitle cancelBlock:cancel confirmTitle:confirmTitle confirmBlock:confirm inViewController:vc];
+    CKAlertView *alertView = [CKAlertView alertViewWithTitle:title message:message identifierKey:key tintColor:color cancelTitle:cancelTitle cancelBlock:cancel confirmTitle:confirmTitle confirmBlock:confirm inViewController:vc];
     UIView *subView1 = alertView.view.subviews[0];
     UIView *subView2 = subView1.subviews[0];
     UIView *subView3 = subView2.subviews[0];

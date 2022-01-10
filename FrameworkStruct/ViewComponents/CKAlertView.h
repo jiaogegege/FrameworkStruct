@@ -22,6 +22,7 @@
 +(CKAlertView *)alertViewWithTitle:( NSString *)title
                            message:( NSString *)message
                      identifierKey:(NSString *)key
+                         tintColor: (UIColor *)color
                        cancelTitle:( NSString *)cancelTitle
                        cancelBlock:(void (^)(UIAlertAction *action))cancel
                       confirmTitle:( NSString *)confirmTitle
@@ -33,6 +34,7 @@
                            message:( NSString *)message
                       messageAlign:(NSTextAlignment)align
                      identifierKey:(NSString *)key
+                         tintColor: (UIColor *)color
                        cancelTitle:( NSString *)cancelTitle
                        cancelBlock:(void (^)(UIAlertAction *action))cancel
                       confirmTitle:( NSString *)confirmTitle
