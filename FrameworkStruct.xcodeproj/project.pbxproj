@@ -52,6 +52,7 @@
 		EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */; };
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
+		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
@@ -275,6 +276,7 @@
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 				EA92255A276AD66200192E2E /* README.md */,
 				EADB009D27623C76001B7223 /* OriginProtocol.swift */,
 				EA92255B276ADE2200192E2E /* FSQueue.swift */,
+				EA6CF268278D85AE003A1E43 /* FSStack.swift */,
 				EA92255D276AE48700192E2E /* FSVector.swift */,
 			);
 			path = OriginTool;
@@ -1558,6 +1561,7 @@
 				EA1AE47E277819E600D028F9 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
 				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,
+				EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */,
 				EAC8A88127625D490088293F /* SDImageAssetManager.m in Sources */,
 				EAC8A88627625D490088293F /* NSBezierPath+SDRoundedCorners.m in Sources */,
 				EADB014427624391001B7223 /* UserManager.swift in Sources */,

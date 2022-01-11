@@ -21,7 +21,7 @@ protocol AlertManagerProtocol
     //当某些弹框的优先级更高，需要优先显示时，会隐藏当前正在显示的弹框，这个方法告诉弹框做一些处理工作，隐藏后等待时间再次显示
     func hide()
     
-    //移除弹框
+    //移除弹框前，让弹框清理一些资源
     func dismiss()
     
 }
@@ -31,6 +31,12 @@ class AlertManager: OriginManager
     //MARK: 属性
     //单例对象
     static let shared = AlertManager()
+    
+    //待显示的控制器队列
+    let queue: FSQueue<UIViewController> = FSQueue()
+    
+    //本来显示但是被强制隐藏的控制器栈，当正在显示的弹框消失后，需要优先显示这里的弹框
+    let stack: FSStack<UIViewController> = FSStack()
     
     
     //MARK: 方法
@@ -50,6 +56,18 @@ class AlertManager: OriginManager
     override func mutableCopy() -> Any
     {
         return self
+    }
+    
+}
+
+
+//接口方法
+extension AlertManager: ExternalInterface
+{
+    //想要显示一个控制器，传入一个UIAlertController或UIViewController
+    func wantPresent(vc: UIViewController)
+    {
+        
     }
     
 }
