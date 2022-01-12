@@ -20,7 +20,7 @@ class FSStack<T: Any>
 extension FSStack
 {
     //在栈顶推入一个元素
-    func push(item: T?)
+    func push(_ item: T?)
     {
         if let it = item
         {

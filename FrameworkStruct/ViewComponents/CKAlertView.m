@@ -9,7 +9,7 @@
 #import "CKAlertView.h"
 #import "OCHeader.h"
 
-@interface CKAlertView ()
+@interface CKAlertView ()<AlertManagerProtocol>
 {
     
 }
@@ -19,6 +19,8 @@
 static NSMapTable *identifierKeyMap;
 
 @implementation CKAlertView
+
+@synthesize dismissCallback;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,15 +90,14 @@ static NSMapTable *identifierKeyMap;
     UIView *subView3 = subView2.subviews[0];
     UIView *subView4 = subView3.subviews[0];
     UIView *subView5 = subView4.subviews[0];
-//    UILabel *title = subView5.subviews[0];
     UILabel *messageLabel = nil;
-    if (IOS_VERSION >= 12.0)
+    for (UIView *v in subView5.subviews)
     {
-        messageLabel = subView5.subviews[2];
-    }
-    else
-    {
-        messageLabel = subView5.subviews[1];
+        if ([v isKindOfClass:[UILabel class]])
+        {
+            messageLabel = (UILabel *)v;
+            break;
+        }
     }
     messageLabel.textAlignment = align;
     return alertView;

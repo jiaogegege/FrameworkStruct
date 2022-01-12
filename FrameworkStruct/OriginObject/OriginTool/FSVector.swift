@@ -24,7 +24,7 @@ class FSVector<T: Equatable>
 extension FSVector
 {
     ///在头部添加一个元素
-    func pushFront(item: T?)
+    func pushFront(_ item: T?)
     {
         if let it = item
         {
@@ -33,7 +33,7 @@ extension FSVector
     }
 
     ///在尾部添加一个元素
-    func pushBack(item: T?)
+    func pushBack(_ item: T?)
     {
         if let it = item
         {
@@ -68,7 +68,7 @@ extension FSVector
     }
 
     ///返回index的元素，元素还在容器中
-    func itemAt(index: Int) -> T?
+    func itemAt(_ index: Int) -> T?
     {
         if !self.isEmpty() && index < self.count()
         {
@@ -128,7 +128,7 @@ extension FSVector
         {
             if self.vector.contains(item: item)
             {
-                let index = self.indexOf(item: item)
+                let index = self.indexOf(item)
                 if index >= 0
                 {
                     self.vector.remove(at: index)
@@ -140,7 +140,7 @@ extension FSVector
     }
 
     ///弹出index的某个元素，元素不在容器中，如果index的元素不存在，返回nil
-    func popAt(index: Int) -> T?
+    func popAt(_ index: Int) -> T?
     {
         if !self.isEmpty() && index < self.count()
         {
@@ -178,7 +178,7 @@ extension FSVector
     }
 
     ///获得元素在容器中的index，不存在返回-1
-    func indexOf(item: T) -> Int
+    func indexOf(_ item: T) -> Int
     {
         if !self.isEmpty()
         {

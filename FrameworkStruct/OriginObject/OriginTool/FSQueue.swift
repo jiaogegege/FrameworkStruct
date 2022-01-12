@@ -21,7 +21,7 @@ class FSQueue<T: Any>
 extension FSQueue
 {
     //追加一个元素到容器尾部
-    func push(item: T?)
+    func push(_ item: T?)
     {
         if let it = item
         {

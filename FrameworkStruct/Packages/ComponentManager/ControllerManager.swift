@@ -36,6 +36,36 @@ class ControllerManager: OriginManager
     //当前控制器，一般是UIViewController，显示在最顶层
     weak var currentVC: UIViewController? = nil
     
+    //计算属性，rootViewController
+    var rootVC: UIViewController {
+        get {
+            return Utility.getWindow().rootViewController!
+        }
+    }
+    
+    //计算属性，任何一个控制器，主要用来present另一个控制器
+    //优先返回`currentVC`，然后返回`currentNavVC`，然后返回`tabbarVC`,然后返回`rootVC`
+    var topVC: UIViewController {
+        get {
+            if let vc = self.currentVC
+            {
+                return vc
+            }
+            else if let vc = self.currentNavVC
+            {
+                return vc
+            }
+            else if let vc = self.tabbarVC
+            {
+                return vc
+            }
+            else
+            {
+                return self.rootVC
+            }
+        }
+    }
+    
     
     //MARK: 方法
     //私有化init方法

@@ -27,7 +27,7 @@ let kAppId = "1476239189"
 let kAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 
-//MARK: 自定义通知
+//MARK: 全局通用自定义通知
 enum FSNotification: String
 {
     //切换主题的通知

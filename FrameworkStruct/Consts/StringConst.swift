@@ -23,6 +23,10 @@ extension String
     static let bangSuffix = "_bang"
     
     
+    //MARK: 工程中通用错误信息文案
+    
+    
+    
     //获取对应的iPhoneX下的文件名
     func bangString() -> String
     {

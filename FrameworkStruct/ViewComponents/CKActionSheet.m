@@ -7,9 +7,9 @@
 //
 
 #import "CKActionSheet.h"
+#import "OCHeader.h"
 
-
-@interface CKActionSheet ()
+@interface CKActionSheet ()<AlertManagerProtocol>
 
 @end
 
@@ -17,6 +17,8 @@
 static NSMapTable *identifierKeyMap;
 
 @implementation CKActionSheet
+
+@synthesize dismissCallback;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

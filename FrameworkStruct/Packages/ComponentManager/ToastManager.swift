@@ -320,7 +320,7 @@ extension ToastManager: ExternalInterface
         let closure = self.createHudClosure(text: text, detail: detail, animate: animate, hideDelay: hideDelay, completion: completion)
         if mode == .serial  //串行，进入队列
         {
-            self.hudQueue.push(item: closure)
+            self.hudQueue.push(closure)
             //尝试执行一次显示HUD
             self.show()
         }
@@ -353,7 +353,7 @@ extension ToastManager: ExternalInterface
      */
     func wantShowCustom(closure: @escaping (() -> Void))
     {
-        self.hudQueue.push(item: closure)
+        self.hudQueue.push(closure)
         self.show()
     }
     

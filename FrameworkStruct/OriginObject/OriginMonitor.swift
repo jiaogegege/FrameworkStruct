@@ -65,7 +65,7 @@ extension OriginMonitor: MonitorProtocol
     }
     
     func isItemExist(item: NSObject) -> Bool {
-        let index = self.container.indexOf(item: item)
+        let index = self.container.indexOf(item)
         if index >= 0
         {
             return true
@@ -74,7 +74,7 @@ extension OriginMonitor: MonitorProtocol
     }
     
     func addItem(item: NSObject) {
-        self.container.pushBack(item: item)
+        self.container.pushBack(item)
     }
     
     func deleteItem(item: NSObject) {
