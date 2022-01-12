@@ -16,7 +16,6 @@
 #import "MJExtension.h"
 #import "SVProgressHUD.h"
 #import "MBProgressHUD.h"
-#import "CKAlertView.h"
 #import "CKActionSheet.h"
 #import "CKTextField.h"
 #import "CKTextField+ChangeBlock.h"

@@ -53,12 +53,12 @@
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
-		EA6D7F7F278ED37B00D73386 /* CKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F7E278ED37B00D73386 /* CKAlertView.m */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
 		EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CBB278830A200DD2310 /* WeakArray.m */; };
+		EA84848D278F132E000E7FC2 /* FSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA84848C278F132E000E7FC2 /* FSActionSheet.swift */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
 		EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */; };
@@ -278,8 +278,6 @@
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
-		EA6D7F7D278ED37B00D73386 /* CKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKAlertView.h; path = ../../../../../Desktop/CKAlertView.h; sourceTree = "<group>"; };
-		EA6D7F7E278ED37B00D73386 /* CKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CKAlertView.m; path = ../../../../../Desktop/CKAlertView.m; sourceTree = "<group>"; };
 		EA6D7F80278ED3C400D73386 /* FSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSAlertView.swift; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -293,6 +291,7 @@
 		EA7A7CB82788305200DD2310 /* WeakSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakSet.m; sourceTree = "<group>"; };
 		EA7A7CBA278830A200DD2310 /* WeakArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakArray.h; sourceTree = "<group>"; };
 		EA7A7CBB278830A200DD2310 /* WeakArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakArray.m; sourceTree = "<group>"; };
+		EA84848C278F132E000E7FC2 /* FSActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSActionSheet.swift; sourceTree = "<group>"; };
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
 		EA92255D276AE48700192E2E /* FSVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSVector.swift; sourceTree = "<group>"; };
@@ -1303,8 +1302,7 @@
 				EADB014B276243FC001B7223 /* README.md */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
-				EA6D7F7D278ED37B00D73386 /* CKAlertView.h */,
-				EA6D7F7E278ED37B00D73386 /* CKAlertView.m */,
+				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
 				EA9A4A7F2780308700170BB3 /* CKActionSheet.h */,
 				EA9A4A802780308700170BB3 /* CKActionSheet.m */,
 				EAB91A60278AB77A00A35FA3 /* CKPhotoSelectSheet.h */,
@@ -1630,7 +1628,6 @@
 				EADB00E52762410D001B7223 /* ImageConst.swift in Sources */,
 				EADB00D827624012001B7223 /* NSObject+PropertyListing.m in Sources */,
 				EAC8A76C27625BA70088293F /* NSObject+MJKeyValue.m in Sources */,
-				EA6D7F7F278ED37B00D73386 /* CKAlertView.m in Sources */,
 				EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */,
 				EA1AE484277819E600D028F9 /* Typealiases.swift in Sources */,
 				EAB91A62278AB77B00A35FA3 /* CKPhotoSelectSheet.m in Sources */,
@@ -1649,6 +1646,7 @@
 				EAC8A87227625D490088293F /* UIImageView+WebCache.m in Sources */,
 				EAC8A84C27625D490088293F /* SDImageIOAnimatedCoder.m in Sources */,
 				EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */,
+				EA84848D278F132E000E7FC2 /* FSActionSheet.swift in Sources */,
 				EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */,
 				EAC8A75227625B450088293F /* AFSecurityPolicy.m in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,

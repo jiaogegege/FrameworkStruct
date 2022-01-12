@@ -5,12 +5,19 @@
 //  Created by  蒋 雪姣 on 2022/1/12.
 //
 
+/**
+ * 系统弹框
+ */
 import UIKit
 
-class FSAlertView: UIAlertController {
+class FSAlertView: UIAlertController, AlertManagerProtocol
+{
     //MARK: 属性
-    //静态变量，记录已经创建的CKAlertView对象
+    //静态变量，记录已经创建的FSAlertView对象
     static let identifierKeyMap = WeakDictionary.init()
+    
+    //遵循alertmanager协议，提供属性
+    var dismissCallback: (() -> Void)?
     
     //唯一标志符
     fileprivate(set) var identifierKey: String? = nil
@@ -23,7 +30,14 @@ class FSAlertView: UIAlertController {
         // Do any additional setup after loading the view.
     }
     
-
+    deinit {
+        if let callback = self.dismissCallback
+        {
+            callback()
+        }
+        print("FSAlertView: dealloc")
+    }
+    
 }
 
 
@@ -105,7 +119,16 @@ extension FSAlertView: ExternalInterface
     //消失掉所有的弹框
     static func dismissAllAlert(completion:(() -> Void)?)
     {
-        
+        let keys = self.identifierKeyMap.keyEnumerator()
+        for key in keys
+        {
+            let alertView = identifierKeyMap.object(forKey: key) as! FSAlertView
+            alertView.presentingViewController?.dismiss(animated: false, completion: nil)
+        }
+        if let comp = completion
+        {
+            comp()
+        }
     }
     
 }

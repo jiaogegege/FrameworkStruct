@@ -20,11 +20,7 @@ class ViewController: UIViewController {
     //设置界面
     func configUI()
     {
-        AlertManager.shared.wantPresentAlert(title: "1")
-        AlertManager.shared.wantPresentAlert(title: "2")
-        AlertManager.shared.wantPresentAlert(title: "3")
-        AlertManager.shared.wantPresentAlert(title: "4")
-        AlertManager.shared.wantPresentAlert(title: "15")
+        
     }
 
 }

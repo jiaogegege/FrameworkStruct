@@ -16,7 +16,7 @@ import UIKit
 @objc protocol AlertManagerProtocol
 {
     //alert消失后，执行这个回调通知管理器
-    var dismissCallback: ((_ alert: UIViewController) -> Void) {get set}
+    var dismissCallback: (() -> Void)? {get set}
     
 }
 
@@ -175,51 +175,14 @@ class AlertManager: OriginManager
         return false
     }
     
-}
-
-
-//接口方法
-extension AlertManager: ExternalInterface
-{
-    //想要显示一个控制器，传入一个UIAlertController或UIViewController，并且遵循协议
-    //优先级默认
-    func wantPresent<T: UIViewController>(vc: T, priority: AMAlertPriority = .defalut) where T: AlertManagerProtocol
-    {
-        //给vc添加一个消失的回调
-        vc.dismissCallback = {[weak self](alert) in
-            self?.showingAlert = nil
-            self?.stMgr.setStatus(false, forKey: AMStatusKey.isShowing)
-            //消失后尝试显示一个alert
-            self?.present()
-        }
-        if priority == .high
-        {
-            //如果是高优先级，直接显示
-            self.present(vc)
-        }
-        else
-        {
-            self.queue.push(vc) //先添加到队列中
-            self.present()  //尝试显示一个alert
-        }
-    }
-    
-    /**
-     * 想要显示一个CKAlertView
-     * - parameters:
-     *  - title:大标题
-     *  - message:具体内容
-     *  - messageAlign:对齐方式
-     *  - leftTitle:左边按钮标题，默认·取消·，传nil则不创建按钮
-     *  - rightTitle:右边按钮标题，默认·确定·，传nil则不创建按钮
-     */
-    func wantPresentAlert(title: String? = nil,
-                          message: String? = nil,
-                          messageAlign: NSTextAlignment = .center,
-                          leftTitle: String? = String.sCancel,
-                          leftBlock: (() -> Void)? = nil,
-                          rightTitle: String? = String.sConfirm,
-                          rightBlock: (() -> Void)? = nil)
+    //创建一个alert
+    fileprivate func createAlert(title: String? = nil,
+                                 message: String? = nil,
+                                 messageAlign: NSTextAlignment = .center,
+                                 leftTitle: String? = String.sCancel,
+                                 leftBlock: ((UIAlertAction) -> Void)? = nil,
+                                 rightTitle: String? = String.sConfirm,
+                                 rightBlock: ((UIAlertAction) -> Void)? = nil) -> FSAlertView?
     {
         var ident = ""
         if let ti = title
@@ -238,28 +201,119 @@ extension AlertManager: ExternalInterface
         {
             ident += rt
         }
-        let alert = CKAlertView(title: title, message: message, messageAlign: messageAlign, identifierKey: ident, tintColor: UIColor.cAccent!, cancelTitle: leftTitle, cancel: { action in
-            if let block = leftBlock
-            {
-                block()
-            }
-        }, confirmTitle: rightTitle, confirmBlock: { action in
-            if let block = rightBlock
-            {
-                block()
-            }
-        }, in: nil) as! AlertManagerProtocol
-        self.wantPresent(vc: alert)
+        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, identifierKey: ident, tintColor: UIColor.cThemeColor, cancelTitle: leftTitle, cancelBlock: leftBlock, confirmTitle: rightTitle, confirmBlock: rightBlock, inViewController: nil)
+        return alert
     }
     
-    //想要显示一个照片选择弹框
-    func wantPresentPhotoSelect()
+}
+
+
+//接口方法
+extension AlertManager: ExternalInterface
+{
+    //想要显示一个控制器，传入一个UIAlertController或UIViewController，并且遵循协议
+    //优先级默认
+    func wantPresent<T: UIViewController>(vc: T, priority: AMAlertPriority = .defalut) where T: AlertManagerProtocol
     {
-        
+        //给vc添加一个消失的回调
+        vc.dismissCallback = {[weak self]() in
+            self?.showingAlert = nil
+            self?.stMgr.setStatus(false, forKey: AMStatusKey.isShowing)
+            //消失后尝试显示一个alert
+            self?.present()
+        }
+        if priority == .high
+        {
+            //如果是高优先级，直接显示
+            self.present(vc)
+        }
+        else
+        {
+            self.queue.push(vc) //先添加到队列中
+            self.present()  //尝试显示一个alert
+        }
+    }
+    
+    /**
+     * 想要显示一个FSAlertView
+     * - parameters:
+     *  - title:大标题
+     *  - message:具体内容
+     *  - messageAlign:对齐方式
+     *  - leftTitle:左边按钮标题，默认·取消·，传nil则不创建按钮
+     *  - rightTitle:右边按钮标题，默认·确定·，传nil则不创建按钮
+     */
+    func wantPresentAlert(title: String? = nil,
+                          message: String? = nil,
+                          messageAlign: NSTextAlignment = .center,
+                          leftTitle: String? = String.sCancel,
+                          leftBlock: (() -> Void)? = nil,
+                          rightTitle: String? = String.sConfirm,
+                          rightBlock: (() -> Void)? = nil)
+    {
+        //设置取消和确认的回调，有可能为nil
+        let cancelBlock: ((UIAlertAction) -> Void)? = leftBlock != nil ? {(action) in
+            if let cancel = leftBlock
+            {
+                cancel()
+            }
+        } : nil
+        let confirmBlock: ((UIAlertAction) -> Void)? = rightBlock != nil ? {(action) in
+            if let confirm = rightBlock
+            {
+                confirm()
+            }
+        } : nil
+        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: cancelBlock, rightTitle: rightTitle, rightBlock: confirmBlock)
+        {
+            self.wantPresent(vc: alert)
+        }
+    }
+    
+    /**
+     * 直接显示一个FSAlertView
+     * - parameters:
+     *  - title:大标题
+     *  - message:具体内容
+     *  - messageAlign:对齐方式
+     *  - leftTitle:左边按钮标题，默认·取消·，传nil则不创建按钮
+     *  - rightTitle:右边按钮标题，默认·确定·，传nil则不创建按钮
+     */
+    func directPresentAlert(title: String? = nil,
+                            message: String? = nil,
+                            messageAlign: NSTextAlignment = .center,
+                            leftTitle: String? = String.sCancel,
+                            leftBlock: (() -> Void)? = nil,
+                            rightTitle: String? = String.sConfirm,
+                            rightBlock: (() -> Void)? = nil)
+    {
+        //设置取消和确认的回调，有可能为nil
+        let cancelBlock: ((UIAlertAction) -> Void)? = leftBlock != nil ? {(action) in
+            if let cancel = leftBlock
+            {
+                cancel()
+            }
+        } : nil
+        let confirmBlock: ((UIAlertAction) -> Void)? = rightBlock != nil ? {(action) in
+            if let confirm = rightBlock
+            {
+                confirm()
+            }
+        } : nil
+        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: cancelBlock, rightTitle: rightTitle, rightBlock: confirmBlock)
+        {
+            self.wantPresent(vc: alert, priority: .high)
+        }
     }
     
     //想要显示一个CKActionSheet
     func wantPresentSheet()
+    {
+        
+    }
+    
+    //想要显示一个照片选择弹框
+    func wantPresentPhotoSelect()
     {
         
     }

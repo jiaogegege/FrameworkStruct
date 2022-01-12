@@ -13,7 +13,7 @@
 
 @end
 
-///静态变量，记录已经创建的CKAlertView对象
+///静态变量，记录已经创建的CKActionSheet对象
 static NSMapTable *identifierKeyMap;
 
 @implementation CKActionSheet
