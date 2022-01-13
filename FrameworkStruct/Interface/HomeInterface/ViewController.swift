@@ -7,18 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BasicViewController {
     
     let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.sConstraintTest]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.configUI()
     }
     
     //设置界面
-    func configUI()
+    override func configUI()
     {
         
     }

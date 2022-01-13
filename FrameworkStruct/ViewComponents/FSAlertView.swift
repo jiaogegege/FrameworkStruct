@@ -44,7 +44,8 @@ class FSAlertView: UIAlertController, AlertManagerProtocol
 //接口方法
 extension FSAlertView: ExternalInterface
 {
-    static func alertView(title: String? = nil,
+    //创建一个alertview
+    class func alertView(title: String? = nil,
                           message: String? = nil,
                           messageAlign: NSTextAlignment = .center,
                           identifierKey: String,

@@ -18,6 +18,7 @@ let kSecondsInDay: TimeInterval = 86400
 
 //一年的秒数，非闰年
 let kSecondsInYear: TimeInterval = 31536000
+
 //一年的秒数，闰年
 let kSecondsInLeapYear: TimeInterval = kSecondsInYear + kSecondsInDay
 

@@ -14,17 +14,17 @@ import UIKit
 
 
 /**
- * 宏定义和常量定义建议以`k`开头，表示常量，方便区分
+ * 宏定义和常量定义建议以`g`开头，表示全局常量，方便区分
  * 和常量配合使用的函数
  */
 //项目名称
-let kProjectName = "FrameworkStruct"
+let gProjectName = "FrameworkStruct"
 
 //APPID
-let kAppId = "1476239189"
+let gAppId = "1476239189"
 
 //appstore下载地址
-let kAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
+let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 
 //MARK: 全局通用自定义通知
@@ -55,16 +55,24 @@ enum FSNotification: String
 
 //MARK: Storyboard文件名定义
 //主界面
-let kMainSB = "Main"
+let gMainSB = "Main"
 //启动界面
-let kLaunchSB = "LaunchScreen"
+let gLaunchSB = "LaunchScreen"
 
 
 //MARK: 正则表达式
 //判断用户名的正则表达式，2-10位汉字+字母
 let userNameRegex = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
+
 //国内手机号的正则表达式，以`1`开头的11位数字
 let cellPhoneRegex = "^1\\d{10}$"
+
 //一种密码的正则，8-12位大小写字母、数字、@#_
 let passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
+
+//整数的字符串，至少一个数字
+let integerRegex = "^\\d+$"
+
+//浮点数的字符串，小数点前有0个或多个数字，小数点后有1个或多个数字
+let floatRegex = "^\\d*\\.\\d+$"
 

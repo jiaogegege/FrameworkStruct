@@ -1286,10 +1286,10 @@
 			isa = PBXGroup;
 			children = (
 				EADB0147276243D3001B7223 /* README.md */,
-				EADB0146276243D3001B7223 /* Utility.swift */,
 				EACAD4E8277D82C800FBE2DA /* NumberTool.swift */,
 				EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */,
 				EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */,
+				EADB0146276243D3001B7223 /* Utility.swift */,
 				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
 				EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */,
 			);

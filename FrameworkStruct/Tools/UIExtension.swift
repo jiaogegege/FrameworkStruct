@@ -11,6 +11,16 @@
 import UIKit
 
 /**
+ * 扩展存储属性的key
+ */
+struct UIExtensionPropertyKey
+{
+    //按钮点击后无法再次点击的时间间隔
+    static var buttonDisableIntervalKey: String = "btnDisableIntervalKey"
+    
+}
+
+/**
  * UIViewController
  */
 extension UIViewController
@@ -49,6 +59,52 @@ extension UIView
         maskLayer.frame = self.bounds
         maskLayer.path = maskPath.cgPath
         self.layer.mask = maskLayer
+    }
+    
+}
+
+
+/**
+ * UIButton
+ */
+extension UIButton
+{
+    //设置button点击后在一定时间内不可再次点击，默认0
+    var disableInterval: TimeInterval {
+        set {
+            objc_setAssociatedObject(self, &UIExtensionPropertyKey.buttonDisableIntervalKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+        get {
+            if let interval = objc_getAssociatedObject(self, &UIExtensionPropertyKey.buttonDisableIntervalKey) as? TimeInterval {
+                return interval
+            }
+            return 0.0
+        }
+    }
+    
+    //手动设置button不可再次点击，不可点击的时长取参数和属性之间的较大值
+    func clickDisable(interval: TimeInterval = 0.0)
+    {
+        self.isEnabled = false
+        let intv = maxBetween(one: interval, other: self.disableInterval)
+        DispatchQueue.main.asyncAfter(deadline: .now() + intv) {
+            self.isEnabled = true
+        }
+    }
+    
+    //重写button方法，拦截响应事件并执行不可点击的时间间隔
+    open override func sendAction(_ action: UIAction) {
+        if #available(iOS 14.0, *) {
+            super.sendAction(action)
+        } else {
+            // Fallback on earlier versions
+        }
+        self.clickDisable()
+    }
+    
+    open override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
+        super.sendAction(action, to: target, for: event)
+        self.clickDisable()
     }
     
 }

@@ -11,8 +11,13 @@
 import Foundation
 
 //MARK: 屏幕尺寸相关定义
-let kScreenWidth = UIScreen.main.bounds.size.width
-let kScreenHeight = UIScreen.main.bounds.size.height
+//屏幕宽高，写成计算属性是因为，在ipad或有些项目中，可以分屏、转屏
+var kScreenWidth: CGFloat {
+    return UIScreen.main.bounds.size.width
+}
+var kScreenHeight: CGFloat {
+    return UIScreen.main.bounds.size.height
+}
 
 //iPhone屏幕高度
 let kiPhone4Height = 480.0

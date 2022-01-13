@@ -27,7 +27,7 @@ class ThemeSelectViewController: BasicViewController
     
     static func getViewController() -> ThemeSelectViewController
     {
-        let board = UIStoryboard(name: kMainSB, bundle: nil)
+        let board = UIStoryboard(name: gMainSB, bundle: nil)
         return board.instantiateViewController(withIdentifier: "ThemeSelectViewController") as! ThemeSelectViewController
     }
 

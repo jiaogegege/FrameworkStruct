@@ -17,7 +17,7 @@ class Utility: NSObject
     //跳转到app store评分
     static func gotoAppStoreComment()
     {
-        let urlStr = "itms-apps://itunes.apple.com/app/id\(kAppId)?action=write-review"
+        let urlStr = "itms-apps://itunes.apple.com/app/id\(gAppId)?action=write-review"
         UIApplication.shared.open(URL.init(string: urlStr)!, options: [:], completionHandler: nil)
     }
     
