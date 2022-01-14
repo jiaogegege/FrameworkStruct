@@ -27,13 +27,13 @@ class AlertManager: OriginManager
     static let shared = AlertManager()
     
     //待显示的控制器队列
-    fileprivate let queue: FSQueue<UIViewController> = FSQueue()
+    fileprivate let queue: FSQueue<UIViewController & AlertManagerProtocol> = FSQueue()
     
     //本来显示但是被强制隐藏的控制器栈，当正在显示的弹框消失后，需要优先显示这里的弹框
-    fileprivate let stack: FSStack<UIViewController> = FSStack()
+    fileprivate let stack: FSStack<UIViewController & AlertManagerProtocol> = FSStack()
     
     //当前正在显示的alert
-    weak var showingAlert: UIViewController? = nil
+    weak var showingAlert: (UIViewController & AlertManagerProtocol)? = nil
     
     
     //MARK: 方法
@@ -58,7 +58,7 @@ class AlertManager: OriginManager
     //present控制器
     //如果传入参数，那么隐藏正在显示的控制器，并直接显示参数中的控制器
     //如果参数为空，那么从队列中取出控制器并显示
-    fileprivate func present(_ alertVC: UIViewController? = nil)
+    fileprivate func present(_ alertVC: (UIViewController & AlertManagerProtocol)? = nil)
     {
         let topVC = ControllerManager.shared.topVC
         if let vc = alertVC //如果传入了参数，那么优先显示参数的alert
@@ -132,7 +132,7 @@ class AlertManager: OriginManager
     //备份正在显示的alert
     //备份有两种情况：1.主动present一个VC；2.有优先级更高的alert要显示
     //参数1:要隐藏的alert，参数2:隐藏成功后的操作
-    fileprivate func backup(alert: UIViewController, completion: (() -> Void)? = nil)
+    fileprivate func backup(alert: (UIViewController & AlertManagerProtocol), completion: (() -> Void)? = nil)
     {
         //先保存一下
         self.stack.push(alert)
@@ -393,23 +393,23 @@ extension AlertManager: ExternalInterface
     {
         //先取消队列和堆栈中的
         //队列
-        var vc = self.queue.pop() as? AlertManagerProtocol
+        var vc = self.queue.pop()
         while vc != nil
         {
             vc?.dismissCallback = nil
             //获取下一个
-            vc = self.queue.pop() as? AlertManagerProtocol
+            vc = self.queue.pop()
         }
         //堆栈
-        vc = self.stack.pop() as? AlertManagerProtocol
+        vc = self.stack.pop()
         while vc != nil
         {
             vc?.dismissCallback = nil
             //获取下一个
-            vc = self.stack.pop() as? AlertManagerProtocol
+            vc = self.stack.pop()
         }
         //取消当前正在显示的
-        if let vc = self.showingAlert as? AlertManagerProtocol
+        if let vc = self.showingAlert
         {
             vc.dismissCallback = nil
         }
