@@ -1,15 +1,15 @@
 //
-//  CKTextField+ChangeBlock.m
+//  FSTextField+ChangeBlock.m
 //  FrameworkStruct
 //
 //  Created by 蒋旭蛟 on 2018/5/11.
 //  Copyright © 2018年 蒋雪姣. All rights reserved.
 //
 
-#import "CKTextField+ChangeBlock.h"
+#import "FSTextField+ChangeBlock.h"
 #import <objc/runtime.h>
 
-@implementation CKTextField (ChangeBlock)
+@implementation FSTextField (ChangeBlock)
 
 static char blockKey;
 
@@ -22,7 +22,7 @@ static char blockKey;
 }
 
 ///监听textField事件
--(void)textFieldTextChange:(CKTextField *)textField
+-(void)textFieldTextChange:(FSTextField *)textField
 {
     TextFieldActionBlock block = objc_getAssociatedObject(textField, &blockKey);
     if (block)

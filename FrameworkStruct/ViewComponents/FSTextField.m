@@ -1,24 +1,24 @@
 //
-//  CKTextField.m
+//  FSTextField.m
 //  FrameworkStruct
 //
 //  Created by 蒋旭蛟 on 2018/5/11.
 //  Copyright © 2018年 蒋雪姣. All rights reserved.
 //
 
-#import "CKTextField.h"
+#import "FSTextField.h"
 
 
-@interface CKTextField()<UITextFieldDelegate>
+@interface FSTextField()<UITextFieldDelegate>
 
 @end
 
-@implementation CKTextField
+@implementation FSTextField
 
     ///工厂方法
-+(CKTextField *)textFieldWithFrame:(CGRect)frame withIdentifier:(NSString *)identifier
++(FSTextField *)textFieldWithFrame:(CGRect)frame withIdentifier:(NSString *)identifier
 {
-    CKTextField *textField = [[CKTextField alloc] initWithFrame:frame];
+    FSTextField *textField = [[FSTextField alloc] initWithFrame:frame];
     textField.identifier = identifier;
     return textField;
 }

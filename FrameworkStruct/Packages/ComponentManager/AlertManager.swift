@@ -27,13 +27,13 @@ class AlertManager: OriginManager
     static let shared = AlertManager()
     
     //待显示的控制器队列
-    fileprivate let queue: FSQueue<UIViewController & AlertManagerProtocol> = FSQueue()
+    fileprivate let queue: FSQueue<AMAlertType> = FSQueue()
     
     //本来显示但是被强制隐藏的控制器栈，当正在显示的弹框消失后，需要优先显示这里的弹框
-    fileprivate let stack: FSStack<UIViewController & AlertManagerProtocol> = FSStack()
+    fileprivate let stack: FSStack<AMAlertType> = FSStack()
     
     //当前正在显示的alert
-    weak var showingAlert: (UIViewController & AlertManagerProtocol)? = nil
+    weak var showingAlert: AMAlertType? = nil
     
     
     //MARK: 方法
@@ -58,7 +58,7 @@ class AlertManager: OriginManager
     //present控制器
     //如果传入参数，那么隐藏正在显示的控制器，并直接显示参数中的控制器
     //如果参数为空，那么从队列中取出控制器并显示
-    fileprivate func present(_ alertVC: (UIViewController & AlertManagerProtocol)? = nil)
+    fileprivate func present(_ alertVC: AMAlertType? = nil)
     {
         let topVC = ControllerManager.shared.topVC
         if let vc = alertVC //如果传入了参数，那么优先显示参数的alert
@@ -132,7 +132,7 @@ class AlertManager: OriginManager
     //备份正在显示的alert
     //备份有两种情况：1.主动present一个VC；2.有优先级更高的alert要显示
     //参数1:要隐藏的alert，参数2:隐藏成功后的操作
-    fileprivate func backup(alert: (UIViewController & AlertManagerProtocol), completion: (() -> Void)? = nil)
+    fileprivate func backup(alert: AMAlertType, completion: (() -> Void)? = nil)
     {
         //先保存一下
         self.stack.push(alert)
@@ -259,7 +259,7 @@ extension AlertManager: ExternalInterface
 {
     //想要显示一个控制器，传入一个UIAlertController或UIViewController，并且遵循协议
     //优先级默认
-    func wantPresent<T: UIViewController>(vc: T, priority: AMAlertPriority = .defalut) where T: AlertManagerProtocol
+    func wantPresent(vc: AMAlertType, priority: AMAlertPriority = .defalut)
     {
         //给vc添加一个消失的回调
         vc.dismissCallback = {[weak self]() in
@@ -377,13 +377,13 @@ extension AlertManager: ExternalInterface
     }
     
     //想要present一个自定义控制器，传入一个遵循`AlertManagerProtocol`协议的UIViewController
-    func wantPresentCustom<T: UIViewController>(vc: T) where T: AlertManagerProtocol
+    func wantPresentCustom(vc: AMAlertType)
     {
         self.wantPresent(vc: vc)
     }
     
     //直接present一个自定义控制器，传入一个遵循`AlertManagerProtocol`协议的UIViewController
-    func directPresentCustom<T: UIViewController>(vc: T) where T: AlertManagerProtocol
+    func directPresentCustom(vc: AMAlertType)
     {
         self.wantPresent(vc: vc, priority: .high)
     }
@@ -427,6 +427,9 @@ extension AlertManager: ExternalInterface
 //内部类型
 extension AlertManager: InternalType
 {
+    //可以被AlertManager管理的类型
+    typealias AMAlertType = UIViewController & AlertManagerProtocol
+    
     //状态key
     enum AMStatusKey: SMKeyType
     {

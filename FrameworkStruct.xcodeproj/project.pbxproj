@@ -76,15 +76,17 @@
 		EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */; };
 		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
 		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
-		EA9A4A812780308700170BB3 /* CKActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A802780308700170BB3 /* CKActionSheet.m */; };
-		EA9A4A872780309E00170BB3 /* CKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A832780309D00170BB3 /* CKTextField.m */; };
-		EA9A4A882780309E00170BB3 /* CKTextField+ChangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A862780309E00170BB3 /* CKTextField+ChangeBlock.m */; };
+		EA9A4A872780309E00170BB3 /* FSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A832780309D00170BB3 /* FSTextField.m */; };
+		EA9A4A882780309E00170BB3 /* FSTextField+ChangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A862780309E00170BB3 /* FSTextField+ChangeBlock.m */; };
 		EA9A4A8C278030A800170BB3 /* CountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A8A278030A700170BB3 /* CountDownButton.m */; };
 		EA9A4A92278032D800170BB3 /* UIButton+ButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */; };
+		EA9F1CBA27914D230086E78C /* WarmPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9F1CB427914D230086E78C /* WarmPromptView.xib */; };
+		EA9F1CBB27914D230086E78C /* WarmPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CB527914D230086E78C /* WarmPromptView.m */; };
+		EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CBD279153BA0086E78C /* FSDialog.swift */; };
+		EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
-		EAB91A62278AB77B00A35FA3 /* CKPhotoSelectSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A61278AB77B00A35FA3 /* CKPhotoSelectSheet.m */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
@@ -316,18 +318,22 @@
 		EA92257A276B3E7C00192E2E /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
 		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
-		EA9A4A7F2780308700170BB3 /* CKActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKActionSheet.h; sourceTree = "<group>"; };
-		EA9A4A802780308700170BB3 /* CKActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKActionSheet.m; sourceTree = "<group>"; };
-		EA9A4A832780309D00170BB3 /* CKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTextField.m; sourceTree = "<group>"; };
-		EA9A4A842780309E00170BB3 /* CKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTextField.h; sourceTree = "<group>"; };
-		EA9A4A852780309E00170BB3 /* CKTextField+ChangeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKTextField+ChangeBlock.h"; sourceTree = "<group>"; };
-		EA9A4A862780309E00170BB3 /* CKTextField+ChangeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKTextField+ChangeBlock.m"; sourceTree = "<group>"; };
+		EA9A4A832780309D00170BB3 /* FSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTextField.m; sourceTree = "<group>"; };
+		EA9A4A842780309E00170BB3 /* FSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTextField.h; sourceTree = "<group>"; };
+		EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FSTextField+ChangeBlock.h"; sourceTree = "<group>"; };
+		EA9A4A862780309E00170BB3 /* FSTextField+ChangeBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FSTextField+ChangeBlock.m"; sourceTree = "<group>"; };
 		EA9A4A8A278030A700170BB3 /* CountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownButton.m; sourceTree = "<group>"; };
 		EA9A4A8B278030A700170BB3 /* CountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownButton.h; sourceTree = "<group>"; };
 		EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ButtonBlock.m"; sourceTree = "<group>"; };
 		EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ButtonBlock.h"; sourceTree = "<group>"; };
 		EA9A4A982780349500170BB3 /* OCConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCConst.h; sourceTree = "<group>"; };
 		EA9A4A992780350500170BB3 /* OCHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCHeader.h; sourceTree = "<group>"; };
+		EA9F1CB427914D230086E78C /* WarmPromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarmPromptView.xib; sourceTree = "<group>"; };
+		EA9F1CB527914D230086E78C /* WarmPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarmPromptView.m; sourceTree = "<group>"; };
+		EA9F1CB827914D230086E78C /* WarmPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarmPromptView.h; sourceTree = "<group>"; };
+		EA9F1CBD279153BA0086E78C /* FSDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSDialog.swift; sourceTree = "<group>"; };
+		EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameSet.m"; sourceTree = "<group>"; };
+		EA9F1CC127916B3C0086E78C /* UIView+FrameSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameSet.h"; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E83276F3EC900C45712 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -336,8 +342,6 @@
 		EAAA4E8E276F57BB00C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		EAB91A60278AB77A00A35FA3 /* CKPhotoSelectSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKPhotoSelectSheet.h; sourceTree = "<group>"; };
-		EAB91A61278AB77B00A35FA3 /* CKPhotoSelectSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKPhotoSelectSheet.m; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
@@ -824,6 +828,15 @@
 			path = BusinessManager;
 			sourceTree = "<group>";
 		};
+		EA9F1CBF27916B3C0086E78C /* UIView+FrameSet */ = {
+			isa = PBXGroup;
+			children = (
+				EA9F1CC127916B3C0086E78C /* UIView+FrameSet.h */,
+				EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */,
+			);
+			path = "UIView+FrameSet";
+			sourceTree = "<group>";
+		};
 		EAAA4E80276F3E2F00C45712 /* ComponentManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1303,18 +1316,18 @@
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
 				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
-				EA9A4A7F2780308700170BB3 /* CKActionSheet.h */,
-				EA9A4A802780308700170BB3 /* CKActionSheet.m */,
-				EAB91A60278AB77A00A35FA3 /* CKPhotoSelectSheet.h */,
-				EAB91A61278AB77B00A35FA3 /* CKPhotoSelectSheet.m */,
-				EA9A4A842780309E00170BB3 /* CKTextField.h */,
-				EA9A4A832780309D00170BB3 /* CKTextField.m */,
-				EA9A4A852780309E00170BB3 /* CKTextField+ChangeBlock.h */,
-				EA9A4A862780309E00170BB3 /* CKTextField+ChangeBlock.m */,
+				EA9F1CBD279153BA0086E78C /* FSDialog.swift */,
+				EA9A4A842780309E00170BB3 /* FSTextField.h */,
+				EA9A4A832780309D00170BB3 /* FSTextField.m */,
+				EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */,
+				EA9A4A862780309E00170BB3 /* FSTextField+ChangeBlock.m */,
 				EA9A4A8B278030A700170BB3 /* CountDownButton.h */,
 				EA9A4A8A278030A700170BB3 /* CountDownButton.m */,
 				EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */,
 				EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */,
+				EA9F1CB827914D230086E78C /* WarmPromptView.h */,
+				EA9F1CB527914D230086E78C /* WarmPromptView.m */,
+				EA9F1CB427914D230086E78C /* WarmPromptView.xib */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -1322,6 +1335,7 @@
 		EADB009A27623C4C001B7223 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				EA9F1CBF27916B3C0086E78C /* UIView+FrameSet */,
 				EA1AE44A277819E600D028F9 /* SnapKit */,
 				EA922570276B3E7C00192E2E /* SVProgressHUD */,
 				EA5D10A4277ED4FB004FCE4C /* MBProgressHUD */,
@@ -1540,6 +1554,7 @@
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
+				EA9F1CBA27914D230086E78C /* WarmPromptView.xib in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
@@ -1571,7 +1586,8 @@
 				EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */,
 				EAC8A88927625D490088293F /* SDAssociatedObject.m in Sources */,
 				EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */,
-				EA9A4A872780309E00170BB3 /* CKTextField.m in Sources */,
+				EA9A4A872780309E00170BB3 /* FSTextField.m in Sources */,
+				EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */,
 				EAC8A87627625D490088293F /* SDImageCacheConfig.m in Sources */,
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,
 				EAC8A85D27625D490088293F /* SDWebImageCompat.m in Sources */,
@@ -1630,7 +1646,6 @@
 				EAC8A76C27625BA70088293F /* NSObject+MJKeyValue.m in Sources */,
 				EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */,
 				EA1AE484277819E600D028F9 /* Typealiases.swift in Sources */,
-				EAB91A62278AB77B00A35FA3 /* CKPhotoSelectSheet.m in Sources */,
 				EA1AE492277819E600D028F9 /* ConstraintDirectionalInsets.swift in Sources */,
 				EADB00AB27623C76001B7223 /* OriginContainer.swift in Sources */,
 				EA1AE491277819E600D028F9 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
@@ -1641,6 +1656,7 @@
 				EAC8A87D27625D490088293F /* UIButton+WebCache.m in Sources */,
 				EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */,
 				EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */,
+				EA9F1CBB27914D230086E78C /* WarmPromptView.m in Sources */,
 				EADB012A2762430B001B7223 /* StatusManager.m in Sources */,
 				EA1AE485277819E600D028F9 /* ConstraintConstantTarget.swift in Sources */,
 				EAC8A87227625D490088293F /* UIImageView+WebCache.m in Sources */,
@@ -1699,7 +1715,7 @@
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,
 				EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */,
 				EA92256D276B27E100192E2E /* CheckerMonitor.swift in Sources */,
-				EA9A4A882780309E00170BB3 /* CKTextField+ChangeBlock.m in Sources */,
+				EA9A4A882780309E00170BB3 /* FSTextField+ChangeBlock.m in Sources */,
 				EADB012B2762430B001B7223 /* SMVector.m in Sources */,
 				EA92256F276B282500192E2E /* EmbellisherMonitor.swift in Sources */,
 				EADB00B027623C76001B7223 /* OriginAccessor.swift in Sources */,
@@ -1713,6 +1729,7 @@
 				EAC8A76D27625BA70088293F /* MJProperty.m in Sources */,
 				EADB00A927623C76001B7223 /* OriginProtocol.swift in Sources */,
 				EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */,
+				EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */,
 				EA1AE48B277819E600D028F9 /* ConstraintView+Extensions.swift in Sources */,
 				EAC8A85027625D490088293F /* UIImage+ForceDecode.m in Sources */,
 				EA1AE476277819E600D028F9 /* ConstraintPriorityTarget.swift in Sources */,
@@ -1744,7 +1761,6 @@
 				EAC8A77327625BA70088293F /* MJPropertyKey.m in Sources */,
 				EAC8A88827625D490088293F /* SDAsyncBlockOperation.m in Sources */,
 				EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */,
-				EA9A4A812780308700170BB3 /* CKActionSheet.m in Sources */,
 				EAC8A85427625D490088293F /* SDWebImageDownloader.m in Sources */,
 				EADB00DB27624012001B7223 /* BasicTableViewController.swift in Sources */,
 				EAC8A84B27625D490088293F /* SDWebImageManager.m in Sources */,

@@ -87,7 +87,7 @@ class Utility: NSObject
     }
     
     //获取window对象
-    static func getWindow() -> UIWindow
+    @objc static func getWindow() -> UIWindow
     {
         if let window = AppDelegate.shared().window
         {
