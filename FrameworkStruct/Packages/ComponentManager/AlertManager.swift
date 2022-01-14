@@ -180,9 +180,9 @@ class AlertManager: OriginManager
                                  message: String? = nil,
                                  messageAlign: NSTextAlignment = .center,
                                  leftTitle: String? = String.sCancel,
-                                 leftBlock: ((UIAlertAction) -> Void)? = nil,
+                                 leftBlock: (() -> Void)? = nil,
                                  rightTitle: String? = String.sConfirm,
-                                 rightBlock: ((UIAlertAction) -> Void)? = nil) -> FSAlertView?
+                                 rightBlock: (() -> Void)? = nil) -> FSAlertView?
     {
         var ident = ""
         if let ti = title
@@ -201,8 +201,54 @@ class AlertManager: OriginManager
         {
             ident += rt
         }
-        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, identifierKey: ident, tintColor: UIColor.cThemeColor, cancelTitle: leftTitle, cancelBlock: leftBlock, confirmTitle: rightTitle, confirmBlock: rightBlock, inViewController: nil)
+        //设置取消和确认的回调，有可能为nil
+        let cancelBlock: ((UIAlertAction) -> Void)? = leftBlock != nil ? {(action) in
+            if let cancel = leftBlock
+            {
+                cancel()
+            }
+        } : nil
+        let confirmBlock: ((UIAlertAction) -> Void)? = rightBlock != nil ? {(action) in
+            if let confirm = rightBlock
+            {
+                confirm()
+            }
+        } : nil
+        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, identifierKey: ident, tintColor: UIColor.cMainThemeColor, cancelTitle: leftTitle, cancelBlock: cancelBlock, confirmTitle: rightTitle, confirmBlock: confirmBlock, inViewController: nil)
         return alert
+    }
+    
+    //创建一个actionsheet
+    fileprivate func createActionSheet(title: String? = nil, message: String? = nil, blockArray: Array<[FSActionSheet.ASItemName: (() -> Void)]>, cancelBlock: (() -> Void)? = nil) -> FSActionSheet?
+    {
+        var ident = ""
+        if let ti = title
+        {
+            ident += ti
+        }
+        if let me = message
+        {
+            ident += me
+        }
+        
+        var actionArray = Array<[FSActionSheet.ASItemName: ((UIAlertAction) -> Void)]>()
+        for block in blockArray
+        {
+            ident += block.keys.first ?? ""
+            //设置每一个条目的回调
+            actionArray.append([block.keys.first!: {(action: UIAlertAction) in
+                let closure = block.values.first!
+                closure()
+            }])
+        }
+        let cancelAction: ((UIAlertAction) -> Void)? = cancelBlock != nil ? {(action: UIAlertAction) in
+            if let cancel = cancelBlock
+            {
+                cancel()
+            }
+        } : nil
+        let actionSheet = FSActionSheet.actionSheet(title: title, message: message, actionArray: actionArray, cancelAction: cancelAction, identifierKey: ident, tintColor: UIColor.cMainThemeColor, inViewController: nil)
+        return actionSheet
     }
     
 }
@@ -251,20 +297,7 @@ extension AlertManager: ExternalInterface
                           rightTitle: String? = String.sConfirm,
                           rightBlock: (() -> Void)? = nil)
     {
-        //设置取消和确认的回调，有可能为nil
-        let cancelBlock: ((UIAlertAction) -> Void)? = leftBlock != nil ? {(action) in
-            if let cancel = leftBlock
-            {
-                cancel()
-            }
-        } : nil
-        let confirmBlock: ((UIAlertAction) -> Void)? = rightBlock != nil ? {(action) in
-            if let confirm = rightBlock
-            {
-                confirm()
-            }
-        } : nil
-        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: cancelBlock, rightTitle: rightTitle, rightBlock: confirmBlock)
+        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
         {
             self.wantPresent(vc: alert)
         }
@@ -287,35 +320,105 @@ extension AlertManager: ExternalInterface
                             rightTitle: String? = String.sConfirm,
                             rightBlock: (() -> Void)? = nil)
     {
-        //设置取消和确认的回调，有可能为nil
-        let cancelBlock: ((UIAlertAction) -> Void)? = leftBlock != nil ? {(action) in
-            if let cancel = leftBlock
-            {
-                cancel()
-            }
-        } : nil
-        let confirmBlock: ((UIAlertAction) -> Void)? = rightBlock != nil ? {(action) in
-            if let confirm = rightBlock
-            {
-                confirm()
-            }
-        } : nil
-        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: cancelBlock, rightTitle: rightTitle, rightBlock: confirmBlock)
+        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
         {
             self.wantPresent(vc: alert, priority: .high)
         }
     }
     
-    //想要显示一个CKActionSheet
-    func wantPresentSheet()
+    /**
+     * 想要显示一个FSActionSheet
+     * - parameters:
+     *  - title:大标题
+     *  - message：详细说明
+     *  - blockArray：每一个条目的回调列表，每一个元素是一个字典，字典只包含一个键值对，key是条目要显示的文本，value是点击条目执行的回调
+     *  - cancelBlock:取消按钮的回调，如果为nil，则不创建取消按钮
+     */
+    func wantPresentSheet(title: String? = nil,
+                          message: String? = nil,
+                          blockArray: Array<[FSActionSheet.ASItemName: (() -> Void)]>,
+                          cancelBlock: (() -> Void)? = nil)
     {
-        
+        if let actionSheet = self.createActionSheet(title: title, message: message, blockArray: blockArray, cancelBlock: cancelBlock)
+        {
+            self.wantPresent(vc: actionSheet)
+        }
+    }
+    
+    /**
+     * 直接显示一个FSActionSheet
+     * - parameters:
+     *  - title:大标题
+     *  - message：详细说明
+     *  - blockArray：每一个条目的回调列表，每一个元素是一个字典，字典只包含一个键值对，key是条目要显示的文本，value是点击条目执行的回调
+     *  - cancelBlock:取消按钮的回调，如果为nil，则不创建取消按钮
+     */
+    func directPresentSheet(title: String? = nil,
+                          message: String? = nil,
+                          blockArray: Array<[FSActionSheet.ASItemName: (() -> Void)]>,
+                          cancelBlock: (() -> Void)? = nil)
+    {
+        if let actionSheet = self.createActionSheet(title: title, message: message, blockArray: blockArray, cancelBlock: cancelBlock)
+        {
+            self.wantPresent(vc: actionSheet, priority: .high)
+        }
     }
     
     //想要显示一个照片选择弹框
-    func wantPresentPhotoSelect()
+    func wantPresentPhotoSheet(photoBlock: @escaping () -> Void, cameraBlock: @escaping () -> Void, cancelBlock:(() -> Void)? = nil)
     {
-        
+        //组装照片和相机的回调
+        let photoItem = [String.sSelectFromPhotoLibiary: photoBlock]
+        let cameraItem = [String.sTakePhotoWithCamera: cameraBlock]
+        if let sheet = self.createActionSheet(title: nil, message: nil, blockArray: [photoItem, cameraItem], cancelBlock: cancelBlock)
+        {
+            self.wantPresent(vc: sheet)
+        }
+    }
+    
+    //想要present一个自定义控制器，传入一个遵循`AlertManagerProtocol`协议的UIViewController
+    func wantPresentCustom<T: UIViewController>(vc: T) where T: AlertManagerProtocol
+    {
+        self.wantPresent(vc: vc)
+    }
+    
+    //直接present一个自定义控制器，传入一个遵循`AlertManagerProtocol`协议的UIViewController
+    func directPresentCustom<T: UIViewController>(vc: T) where T: AlertManagerProtocol
+    {
+        self.wantPresent(vc: vc, priority: .high)
+    }
+    
+    //取消所有弹框，包括当前正在显示的
+    func dismissAll()
+    {
+        //先取消队列和堆栈中的
+        //队列
+        var vc = self.queue.pop() as? AlertManagerProtocol
+        while vc != nil
+        {
+            vc?.dismissCallback = nil
+            //获取下一个
+            vc = self.queue.pop() as? AlertManagerProtocol
+        }
+        //堆栈
+        vc = self.stack.pop() as? AlertManagerProtocol
+        while vc != nil
+        {
+            vc?.dismissCallback = nil
+            //获取下一个
+            vc = self.stack.pop() as? AlertManagerProtocol
+        }
+        //取消当前正在显示的
+        if let vc = self.showingAlert as? AlertManagerProtocol
+        {
+            vc.dismissCallback = nil
+        }
+        if let vc = self.showingAlert
+        {
+            vc.presentingViewController?.dismiss(animated: false, completion: nil)
+            self.showingAlert = nil
+            self.stMgr.setStatus(false, forKey: AMStatusKey.isShowing)
+        }
     }
     
 }

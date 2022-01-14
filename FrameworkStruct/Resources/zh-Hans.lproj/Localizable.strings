@@ -17,3 +17,5 @@ waterfall = "瀑布流";
 themeSelect = "主题选择";
 modalShow = "模态显示";
 constraintTest = "约束测试";
+selectFromPhotoLibiary = "从手机相册选择";
+takePhotoWithCamera = "拍照";

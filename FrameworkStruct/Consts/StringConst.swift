@@ -50,6 +50,11 @@ extension String
     static var sModalShow = localized("modalShow")
     //约束测试
     static var sConstraintTest = localized("constraintTest")
+    //从相册选择
+    static var sSelectFromPhotoLibiary = localized("selectFromPhotoLibiary")
+    //拍照
+    static var sTakePhotoWithCamera = localized("takePhotoWithCamera")
+
     
 
     //便利方法

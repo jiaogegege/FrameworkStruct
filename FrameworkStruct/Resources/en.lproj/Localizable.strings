@@ -17,3 +17,5 @@ waterfall = "Waterfall";
 themeSelect = "ThemeSelect";
 modalShow = "ModalShow";
 constraintTest = "ConstraintTest";
+selectFromPhotoLibiary = "SelectFromPhotoLibiary";
+takePhotoWithCamera = "TakePhotoWithCamera";

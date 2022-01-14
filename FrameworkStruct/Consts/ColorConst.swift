@@ -18,7 +18,7 @@ extension UIColor
      * 常量颜色建议以`c`开头，表示`color`，方便区分
      */
     //主题色
-    @objc static var cThemeColor = ThemeManager.shared.getCurrentTheme().mainColor
+    @objc static var cMainThemeColor = ThemeManager.shared.getCurrentTheme().mainColor
     //红色
     @objc static var cRed = UIColor.red
     //accentcolor

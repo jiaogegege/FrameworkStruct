@@ -111,9 +111,33 @@ class Utility: NSObject
         return UIWindow()
     }
     
+    //判断字符串是否是有效字符串，无效字符串：nil、null、<null>、<nil>、""、"(null)"、NSNull
+    static func isValidString(_ str: String?) -> Bool
+    {
+        guard let s = str?.trim() else {
+            return false
+        }
+        
+        if s == "" || s == "(null)" || s == "<null>" || s == "nil" || s == "<nil>" || (s as NSString).isKind(of: NSNull.self) || s.count <= 0
+        {
+            return false
+        }
+        return true
+    }
     
-    
-    
+    //判断是否有效对象，无效对象：nil，NSNull
+    static func isValidObject(_ obj: AnyObject?) -> Bool
+    {
+        guard let o = obj else {
+            return false
+        }
+        
+        if o.isKind(of: NSNull.self)
+        {
+            return false
+        }
+        return true
+    }
     
     
     

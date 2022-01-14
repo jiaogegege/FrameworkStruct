@@ -77,6 +77,7 @@ extension FSAlertView: ExternalInterface
             attrMessage.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], range: NSMakeRange(0, me.count))
             alertView.setValue(attrMessage, forKey: "attributedMessage")
         }
+        //设置回调
         if let cancel = cancelBlock //如果cancel回调有值，那么创建取消按钮
         {
             let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancel)

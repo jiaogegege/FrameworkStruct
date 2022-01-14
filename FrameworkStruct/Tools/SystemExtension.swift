@@ -15,6 +15,12 @@ import Foundation
  */
 extension String
 {
+    //去除字符串头尾空格和换行
+    func trim() -> String
+    {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
     //计算字符串尺寸大小
     func sizeWith(font: UIFont, maxWidth: CGFloat) -> CGSize
     {

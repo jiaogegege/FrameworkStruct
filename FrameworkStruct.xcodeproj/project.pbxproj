@@ -829,9 +829,9 @@
 			children = (
 				EAAA4E82276F3E7800C45712 /* README.md */,
 				EA922584276B439700192E2E /* ControllerManager.swift */,
+				EAAA4E87276F3EF600C45712 /* ToastManager.swift */,
 				EAAA4E83276F3EC900C45712 /* AlertManager.swift */,
 				EAB91A64278B047C00A35FA3 /* DialogManager.swift */,
-				EAAA4E87276F3EF600C45712 /* ToastManager.swift */,
 				EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */,
 				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
 			);
