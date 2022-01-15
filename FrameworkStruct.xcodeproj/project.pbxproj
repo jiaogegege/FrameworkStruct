@@ -64,6 +64,7 @@
 		EA75BB3A2792AA7C00910B4C /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB342792AA7B00910B4C /* FMResultSet.m */; };
 		EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EA75BB462792AB9B00910B4C /* libsqlite3.tbd */; };
 		EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EA75BB482792ABA100910B4C /* libz.tbd */; };
+		EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA75BB4B2792B1E200910B4C /* db_table.sql */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
@@ -307,6 +308,7 @@
 		EA75BB342792AA7B00910B4C /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		EA75BB462792AB9B00910B4C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		EA75BB482792ABA100910B4C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		EA75BB4B2792B1E200910B4C /* db_table.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = db_table.sql; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
@@ -774,6 +776,14 @@
 				EA75BB342792AA7B00910B4C /* FMResultSet.m */,
 			);
 			path = fmdb;
+			sourceTree = "<group>";
+		};
+		EA75BB4A2792B10D00910B4C /* DatabaseFile */ = {
+			isa = PBXGroup;
+			children = (
+				EA75BB4B2792B1E200910B4C /* db_table.sql */,
+			);
+			path = DatabaseFile;
 			sourceTree = "<group>";
 		};
 		EA77951D276C389200D9707F /* Worker */ = {
@@ -1512,6 +1522,7 @@
 				EADB014F2762450E001B7223 /* README.md */,
 				EA75BB272792A88400910B4C /* DatabaseConst.swift */,
 				EA75BB252792A80900910B4C /* DatabaseAccessor.swift */,
+				EA75BB4A2792B10D00910B4C /* DatabaseFile */,
 			);
 			path = DatabaseAccessor;
 			sourceTree = "<group>";
@@ -1608,6 +1619,7 @@
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
 				EA9F1CBA27914D230086E78C /* WarmPromptView.xib in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
+				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
