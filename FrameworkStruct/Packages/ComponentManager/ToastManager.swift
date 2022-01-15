@@ -25,7 +25,7 @@ class ToastManager: OriginManager
     fileprivate let hudQueue: FSQueue<(() -> Void)> = FSQueue()
     
     //临时保存正在显示的MB实例
-    fileprivate weak var tmpMBHUD: MBProgressHUD? = nil
+    fileprivate(set) weak var tmpMBHUD: MBProgressHUD? = nil
     
     //HUD类型，目前支持`SVProgressHUD、MBProgressHUD`
     var hudType: TMHudType = .mbHud
@@ -297,6 +297,12 @@ extension ToastManager: ExternalInterface
     func wantShowText(text:String, hideDelay: TimeInterval, completion: @escaping CompletionCallback)
     {
         self.wantShow(text: text, animate: false, hideDelay: hideDelay, completion: completion)
+    }
+    
+    //显示一个带动画的文字，不消失
+    func wantShowTextAnimate(_ text: String)
+    {
+        self.wantShow(text: text, hideDelay: self.longDistanceFuture)
     }
     
     //只显示一个动画，不消失

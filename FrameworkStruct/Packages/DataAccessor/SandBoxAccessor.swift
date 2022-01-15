@@ -63,4 +63,10 @@ class SandBoxAccessor: OriginAccessor
         return NSTemporaryDirectory()
     }
     
+    //返回数据源相关信息
+    override func accessorDataSourceInfo() -> Dictionary<String, String> {
+        let infoDict = ["type": "sandbox"]
+        return infoDict
+    }
+    
 }

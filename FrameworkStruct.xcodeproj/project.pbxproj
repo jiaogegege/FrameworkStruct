@@ -55,6 +55,15 @@
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
 		EA75BB1F2792646C00910B4C /* TeenagerModeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */; };
+		EA75BB262792A80900910B4C /* DatabaseAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB252792A80900910B4C /* DatabaseAccessor.swift */; };
+		EA75BB282792A88400910B4C /* DatabaseConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB272792A88400910B4C /* DatabaseConst.swift */; };
+		EA75BB362792AA7C00910B4C /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB2B2792AA7B00910B4C /* FMDatabaseQueue.m */; };
+		EA75BB372792AA7C00910B4C /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB2E2792AA7B00910B4C /* FMDatabaseAdditions.m */; };
+		EA75BB382792AA7C00910B4C /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB2F2792AA7B00910B4C /* FMDatabase.m */; };
+		EA75BB392792AA7C00910B4C /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB332792AA7B00910B4C /* FMDatabasePool.m */; };
+		EA75BB3A2792AA7C00910B4C /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB342792AA7B00910B4C /* FMResultSet.m */; };
+		EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EA75BB462792AB9B00910B4C /* libsqlite3.tbd */; };
+		EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EA75BB482792ABA100910B4C /* libz.tbd */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
@@ -283,6 +292,21 @@
 		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
 		EA6D7F80278ED3C400D73386 /* FSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSAlertView.swift; sourceTree = "<group>"; };
 		EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeenagerModeDialog.swift; sourceTree = "<group>"; };
+		EA75BB252792A80900910B4C /* DatabaseAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseAccessor.swift; sourceTree = "<group>"; };
+		EA75BB272792A88400910B4C /* DatabaseConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConst.swift; sourceTree = "<group>"; };
+		EA75BB2A2792AA7B00910B4C /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		EA75BB2B2792AA7B00910B4C /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		EA75BB2C2792AA7B00910B4C /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		EA75BB2D2792AA7B00910B4C /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		EA75BB2E2792AA7B00910B4C /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		EA75BB2F2792AA7B00910B4C /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		EA75BB302792AA7B00910B4C /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		EA75BB312792AA7B00910B4C /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		EA75BB322792AA7B00910B4C /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		EA75BB332792AA7B00910B4C /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		EA75BB342792AA7B00910B4C /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		EA75BB462792AB9B00910B4C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		EA75BB482792ABA100910B4C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
@@ -671,6 +695,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
+				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
 				EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -730,6 +756,24 @@
 				EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		EA75BB292792AA7B00910B4C /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				EA75BB2A2792AA7B00910B4C /* FMDatabase.h */,
+				EA75BB2B2792AA7B00910B4C /* FMDatabaseQueue.m */,
+				EA75BB2C2792AA7B00910B4C /* FMResultSet.h */,
+				EA75BB2D2792AA7B00910B4C /* FMDatabasePool.h */,
+				EA75BB2E2792AA7B00910B4C /* FMDatabaseAdditions.m */,
+				EA75BB2F2792AA7B00910B4C /* FMDatabase.m */,
+				EA75BB302792AA7B00910B4C /* FMDatabaseQueue.h */,
+				EA75BB312792AA7B00910B4C /* FMDB.h */,
+				EA75BB322792AA7B00910B4C /* FMDatabaseAdditions.h */,
+				EA75BB332792AA7B00910B4C /* FMDatabasePool.m */,
+				EA75BB342792AA7B00910B4C /* FMResultSet.m */,
+			);
+			path = fmdb;
 			sourceTree = "<group>";
 		};
 		EA77951D276C389200D9707F /* Worker */ = {
@@ -816,6 +860,8 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA75BB482792ABA100910B4C /* libz.tbd */,
+				EA75BB462792AB9B00910B4C /* libsqlite3.tbd */,
 				EA922581276B3EAA00192E2E /* QuartzCore.framework */,
 			);
 			name = Frameworks;
@@ -1273,6 +1319,7 @@
 				EADB00A527623C76001B7223 /* OriginManager.swift */,
 				EADB00A627623C76001B7223 /* OriginEmbellisher.swift */,
 				EADB00A027623C76001B7223 /* OriginWorker.swift */,
+				EA922558276AD54D00192E2E /* Monitor */,
 			);
 			path = OriginObject;
 			sourceTree = "<group>";
@@ -1281,7 +1328,6 @@
 			isa = PBXGroup;
 			children = (
 				EADB00FF27624201001B7223 /* README.md */,
-				EA922558276AD54D00192E2E /* Monitor */,
 				EA77951D276C389200D9707F /* Worker */,
 				EADB0119276242C7001B7223 /* Embellisher */,
 				EA922583276B42D200192E2E /* BusinessManager */,
@@ -1338,6 +1384,7 @@
 		EADB009A27623C4C001B7223 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				EA75BB292792AA7B00910B4C /* fmdb */,
 				EA9F1CBF27916B3C0086E78C /* UIView+FrameSet */,
 				EA1AE44A277819E600D028F9 /* SnapKit */,
 				EA922570276B3E7C00192E2E /* SVProgressHUD */,
@@ -1463,6 +1510,8 @@
 			isa = PBXGroup;
 			children = (
 				EADB014F2762450E001B7223 /* README.md */,
+				EA75BB272792A88400910B4C /* DatabaseConst.swift */,
+				EA75BB252792A80900910B4C /* DatabaseAccessor.swift */,
 			);
 			path = DatabaseAccessor;
 			sourceTree = "<group>";
@@ -1574,10 +1623,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EADB00DD27624012001B7223 /* BasicNavigationController.swift in Sources */,
+				EA75BB362792AA7C00910B4C /* FMDatabaseQueue.m in Sources */,
 				EAC8A87927625D490088293F /* SDWebImageOptionsProcessor.m in Sources */,
 				EA92255E276AE48700192E2E /* FSVector.swift in Sources */,
 				EA1AE481277819E600D028F9 /* ConstraintView.swift in Sources */,
 				EA1AE47E277819E600D028F9 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
+				EA75BB262792A80900910B4C /* DatabaseAccessor.swift in Sources */,
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
 				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,
 				EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */,
@@ -1610,7 +1661,9 @@
 				EAC8A87B27625D490088293F /* UIView+WebCache.m in Sources */,
 				EAC8A85827625D490088293F /* SDGraphicsImageRenderer.m in Sources */,
 				EA1AE47B277819E600D028F9 /* ConstraintPriority.swift in Sources */,
+				EA75BB382792AA7C00910B4C /* FMDatabase.m in Sources */,
 				EAC8A86627625D490088293F /* SDAnimatedImageRep.m in Sources */,
+				EA75BB282792A88400910B4C /* DatabaseConst.swift in Sources */,
 				EAC8A76F27625BA70088293F /* MJExtensionConst.m in Sources */,
 				EA922566276B1BF200192E2E /* AdapterMonitor.swift in Sources */,
 				EA1AE47A277819E600D028F9 /* ConstraintMakerExtendable.swift in Sources */,
@@ -1647,8 +1700,10 @@
 				EA1AE489277819E600D028F9 /* ConstraintRelation.swift in Sources */,
 				EADB00E52762410D001B7223 /* ImageConst.swift in Sources */,
 				EADB00D827624012001B7223 /* NSObject+PropertyListing.m in Sources */,
+				EA75BB3A2792AA7C00910B4C /* FMResultSet.m in Sources */,
 				EAC8A76C27625BA70088293F /* NSObject+MJKeyValue.m in Sources */,
 				EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */,
+				EA75BB372792AA7C00910B4C /* FMDatabaseAdditions.m in Sources */,
 				EA1AE484277819E600D028F9 /* Typealiases.swift in Sources */,
 				EA1AE492277819E600D028F9 /* ConstraintDirectionalInsets.swift in Sources */,
 				EADB00AB27623C76001B7223 /* OriginContainer.swift in Sources */,
@@ -1768,6 +1823,7 @@
 				EAC8A85427625D490088293F /* SDWebImageDownloader.m in Sources */,
 				EADB00DB27624012001B7223 /* BasicTableViewController.swift in Sources */,
 				EAC8A84B27625D490088293F /* SDWebImageManager.m in Sources */,
+				EA75BB392792AA7C00910B4C /* FMDatabasePool.m in Sources */,
 				EAC8A86827625D490088293F /* SDWebImageDownloaderConfig.m in Sources */,
 				EAC8A85727625D490088293F /* SDWebImageIndicator.m in Sources */,
 				EAC8A86427625D490088293F /* SDImageIOCoder.m in Sources */,
