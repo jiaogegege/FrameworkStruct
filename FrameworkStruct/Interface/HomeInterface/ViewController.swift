@@ -19,7 +19,13 @@ class ViewController: BasicViewController {
     //设置界面
     override func configUI()
     {
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DialogManager.shared.wantShowTeenMode {
+                AlertManager.shared.wantPresentAlert(message: "进入青少年模式", rightBlock: {})
+            } confirm: {
+                ToastManager.shared.wantShowText("我知道了")
+            }
+        }
     }
 
 }

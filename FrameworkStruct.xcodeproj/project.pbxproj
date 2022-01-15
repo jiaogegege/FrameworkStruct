@@ -54,6 +54,7 @@
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
+		EA75BB1F2792646C00910B4C /* TeenagerModeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */; };
 		EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA779521276C68AF00D9707F /* ModalTestViewController.swift */; };
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
@@ -281,6 +282,7 @@
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
 		EA6D7F80278ED3C400D73386 /* FSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSAlertView.swift; sourceTree = "<group>"; };
+		EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeenagerModeDialog.swift; sourceTree = "<group>"; };
 		EA77951F276C39A800D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779520276C5BC500D9707F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA779521276C68AF00D9707F /* ModalTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTestViewController.swift; sourceTree = "<group>"; };
@@ -1317,6 +1319,7 @@
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
 				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
 				EA9F1CBD279153BA0086E78C /* FSDialog.swift */,
+				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA9A4A842780309E00170BB3 /* FSTextField.h */,
 				EA9A4A832780309D00170BB3 /* FSTextField.m */,
 				EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */,
@@ -1620,6 +1623,7 @@
 				EA1AE47C277819E600D028F9 /* ConstraintInsetTarget.swift in Sources */,
 				EADB01102762422D001B7223 /* PlistAccessor.swift in Sources */,
 				EAC8A84527625D490088293F /* SDImageHEICCoder.m in Sources */,
+				EA75BB1F2792646C00910B4C /* TeenagerModeDialog.swift in Sources */,
 				EAC8A87C27625D490088293F /* UIImage+Metadata.m in Sources */,
 				EA9A4A92278032D800170BB3 /* UIButton+ButtonBlock.m in Sources */,
 				EA922585276B439700192E2E /* ControllerManager.swift in Sources */,

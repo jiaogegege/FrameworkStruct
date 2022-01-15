@@ -19,3 +19,6 @@ modalShow = "ModalShow";
 constraintTest = "ConstraintTest";
 selectFromPhotoLibiary = "SelectFromPhotoLibiary";
 takePhotoWithCamera = "TakePhotoWithCamera";
+teenagerProtectContent = "In order to protect the healthy growth of minors, the framework structure specially launches a youth mode, which cannot be used normally. Please ask the guardian to actively select and set the guardian password.";
+setTeenagerMode = "Enter Teenager Mode";
+iKnown = "I known";

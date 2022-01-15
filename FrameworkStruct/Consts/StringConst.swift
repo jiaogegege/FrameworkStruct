@@ -39,22 +39,27 @@ extension String
 extension String
 {
     //瀑布流
-    static var sWaterfall = localized("waterfall")
+    static let sWaterfall = localized("waterfall")
     //确定
-    static var sConfirm = localized("confirm")
+    static let sConfirm = localized("confirm")
     //取消
-    static var sCancel = localized("cancel")
+    static let sCancel = localized("cancel")
     //主题选择
-    static var sThemeSelect = localized("themeSelect")
+    static let sThemeSelect = localized("themeSelect")
     //模态显示
-    static var sModalShow = localized("modalShow")
+    static let sModalShow = localized("modalShow")
     //约束测试
-    static var sConstraintTest = localized("constraintTest")
+    static let sConstraintTest = localized("constraintTest")
     //从相册选择
-    static var sSelectFromPhotoLibiary = localized("selectFromPhotoLibiary")
+    static let sSelectFromPhotoLibiary = localized("selectFromPhotoLibiary")
     //拍照
-    static var sTakePhotoWithCamera = localized("takePhotoWithCamera")
-
+    static let sTakePhotoWithCamera = localized("takePhotoWithCamera")
+    //青少年模式弹窗内容
+    static let sTeenagerProtectContent = localized("teenagerProtectContent")
+    //进入青少年模式文字
+    static let sEnterTeenMode = localized("setTeenagerMode")
+    //我知道了
+    static let sIKnown = localized("iKnown")
     
 
     //便利方法

@@ -103,7 +103,7 @@ class ToastManager: OriginManager
                                       detail: String? = nil,
                                       animate: Bool = true,
                                       hideDelay:TimeInterval = 1.5,
-                                      completion: completionCallback? = nil) -> () -> Void
+                                      completion: CompletionCallback? = nil) -> () -> Void
     {
          let closure = {[weak self] in
             if self?.hudType == .mbHud
@@ -284,19 +284,19 @@ extension ToastManager: ExternalInterface
     //只显示一个文本，一段时间后消失
     func wantShowText(_ text: String)
     {
-        self.wantShow(text: text)
+        self.wantShow(text: text, animate: false)
     }
     
     //只显示一个文本，一段时间后消失，并执行一个回调
-    func wantShowText(text: String, completion: @escaping completionCallback)
+    func wantShowText(text: String, completion: @escaping CompletionCallback)
     {
-        self.wantShow(text: text, completion: completion)
+        self.wantShow(text: text, animate: false, completion: completion)
     }
     
     //只显示一个文本，设置一段时间后消失，并执行一个回调
-    func wantShowText(text:String, hideDelay: TimeInterval, completion: @escaping completionCallback)
+    func wantShowText(text:String, hideDelay: TimeInterval, completion: @escaping CompletionCallback)
     {
-        self.wantShow(text: text, hideDelay: hideDelay, completion: completion)
+        self.wantShow(text: text, animate: false, hideDelay: hideDelay, completion: completion)
     }
     
     //只显示一个动画，不消失
@@ -315,7 +315,7 @@ extension ToastManager: ExternalInterface
      *  - mode:显示模式，默认串行
      *  - completion:HUD消失之后执行的回调
      */
-    func wantShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 1.5, mode: TMShowMode = .serial, completion: completionCallback? = nil)
+    func wantShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 1.5, mode: TMShowMode = .serial, completion: CompletionCallback? = nil)
     {
         let closure = self.createHudClosure(text: text, detail: detail, animate: animate, hideDelay: hideDelay, completion: completion)
         if mode == .serial  //串行，进入队列
@@ -341,7 +341,7 @@ extension ToastManager: ExternalInterface
      *  - hideDelay:延迟多少秒后消失，最小1.5
      *  - completion:HUD消失之后执行的回调
      */
-    func directShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay: TimeInterval = 1.5, completion: completionCallback? = nil)
+    func directShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay: TimeInterval = 1.5, completion: CompletionCallback? = nil)
     {
         self.wantShow(text: text, detail: detail, animate: animate, hideDelay: hideDelay, mode: .concurrent, completion: completion)
     }
@@ -427,6 +427,6 @@ extension ToastManager: InternalType
     }
     
     //完成回调的类型
-    typealias completionCallback = () -> Void
+    typealias CompletionCallback = () -> Void
     
 }

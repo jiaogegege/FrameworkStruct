@@ -27,6 +27,8 @@ class FSDialog: UIView, DialogManagerProtocol
     }
     //show时的动画时长
     var animateInterval: TimeInterval = 0.25
+    //主题色
+    var themeColor: UIColor = ThemeManager.shared.getCurrentTheme().mainColor
     
     //UI组件
     var bgView: UIView! //背景蒙层，一般是半透明
@@ -39,6 +41,7 @@ class FSDialog: UIView, DialogManagerProtocol
         super.init(frame: CGRect(x: 0.0, y: 0.0, width: kScreenWidth, height: kScreenHeight))
         self.createView()
         self.configView()
+        self.initData()
     }
     
     //这里会创建bgView和containerView
@@ -48,7 +51,7 @@ class FSDialog: UIView, DialogManagerProtocol
         self.bgView = UIView()
         self.addSubview(bgView)
         
-        self.containerView = UIView()   //这里不设置frame，因为要子类确定
+        self.containerView = UIView()
         self.addSubview(containerView)
     }
     
@@ -58,8 +61,13 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         bgView.frame = self.bounds
         bgView.backgroundColor = self.bgColor
-//        containerView.frame = CGRect(x: 100, y: 200, width: 300, height: 400)   //test
-        containerView.backgroundColor = UIColor.white
+    }
+    
+    //初始化数据
+    //子类可以覆写该方法，并且要调用父类方法
+    func initData()
+    {
+        
     }
     
     required init?(coder: NSCoder) {
@@ -72,8 +80,6 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         self.isHidden = true
         self.bgView.alpha = 0.0
-//        self.containerView.y = 1000 //test
-        
     }
     
     //显示动画
@@ -84,7 +90,7 @@ class FSDialog: UIView, DialogManagerProtocol
         weak var weakSelf = self
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
             weakSelf?.bgView.alpha = 1.0
-//            weakSelf?.containerView.y = 10.0 //test
+            weakSelf?.containerView.alpha = 1.0
         } completion: { finished in
             completion()
         }
@@ -97,7 +103,7 @@ class FSDialog: UIView, DialogManagerProtocol
         weak var weakSelf = self
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
             weakSelf?.bgView.alpha = 0.0
-//            weakSelf?.containerView.y = 1000.0  //test
+            weakSelf?.containerView.alpha = 0.0
         } completion: { finished in
             completion()
         }
@@ -110,7 +116,7 @@ class FSDialog: UIView, DialogManagerProtocol
         weak var weakSelf = self
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
             weakSelf?.bgView.alpha = 0.0
-//            weakSelf?.containerView.y = 1000.0  //test
+            weakSelf?.containerView.alpha = 0.0
         } completion: { finished in
             completion()
         }

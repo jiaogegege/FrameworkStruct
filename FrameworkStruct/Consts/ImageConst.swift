@@ -25,7 +25,8 @@ extension UIImage
     @objc static var iBackDark: UIImage? = UIImage(named: "common_back_dark")
     @objc static var iBackLight: UIImage? = UIImage(named: "common_back_light")
     @objc static var iBackClose: UIImage? = UIImage(named: "common_back_close")
-    
+    //青少年模式弹窗头图
+    @objc static var iTeenagerProtect = UIImage(named: "teenager_protect")
     
     
     //对于某些全屏的图片有iPhone8和iPhoneX的尺寸区别，对于iPhoneX的图片，添加后缀`_bang`

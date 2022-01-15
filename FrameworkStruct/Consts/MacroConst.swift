@@ -27,6 +27,11 @@ let gAppId = "1476239189"
 let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 
+//MARK: 闭包类型定义
+//参数和返回值都为空的闭包
+typealias VoidClosure = (() -> Void)
+
+
 //MARK: 全局通用自定义通知
 enum FSNotification: String
 {
