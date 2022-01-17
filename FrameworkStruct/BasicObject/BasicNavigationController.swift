@@ -9,7 +9,11 @@ import UIKit
 
 class BasicNavigationController: UINavigationController
 {
-
+    //返回顶层控制器状态栏颜色
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.topViewController!.preferredStatusBarStyle
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

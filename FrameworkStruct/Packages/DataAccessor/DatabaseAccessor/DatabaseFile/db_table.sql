@@ -7,7 +7,7 @@ CREATE TABLE `app_user` (
 `user_phone` varchar(100) DEFAULT NULL,
 `user_password` varchar(255) DEFAULT NULL,
 `birth_date` datetime DEFAULT NULL,
-`head_pic` varchar(50) DEFAULT NULL,
+`head_pic` varchar(512) DEFAULT NULL,
 `delete_flag` tinyint(4) DEFAULT '0',
 `update_date` datetime DEFAULT NULL,
 `create_date` datetime DEFAULT NULL

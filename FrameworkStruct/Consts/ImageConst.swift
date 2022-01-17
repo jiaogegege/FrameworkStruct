@@ -27,6 +27,8 @@ extension UIImage
     @objc static var iBackClose: UIImage? = UIImage(named: "common_back_close")
     //青少年模式弹窗头图
     @objc static var iTeenagerProtect = UIImage(named: "teenager_protect")
+    //miku系列图片
+    @objc static let iMiku_0 = UIImage(named: "miku_0")
     
     
     //对于某些全屏的图片有iPhone8和iPhoneX的尺寸区别，对于iPhoneX的图片，添加后缀`_bang`
