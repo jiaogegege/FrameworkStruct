@@ -12,11 +12,12 @@ import UIKit
 
 /**
  * 扩展存储属性的key
+ * 用于给系统组件动态添加存储属性
  */
-struct UIExtensionPropertyKey
+struct UIExtensionStoragePropertyKey
 {
     //按钮点击后无法再次点击的时间间隔
-    static var buttonDisableIntervalKey: String = "btnDisableIntervalKey"
+    static var buttonDisableIntervalKey: String = "buttonDisableIntervalKey"
     
 }
 
@@ -72,10 +73,10 @@ extension UIButton
     //设置button点击后在一定时间内不可再次点击，默认0
     var disableInterval: TimeInterval {
         set {
-            objc_setAssociatedObject(self, &UIExtensionPropertyKey.buttonDisableIntervalKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+            objc_setAssociatedObject(self, &UIExtensionStoragePropertyKey.buttonDisableIntervalKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
         get {
-            if let interval = objc_getAssociatedObject(self, &UIExtensionPropertyKey.buttonDisableIntervalKey) as? TimeInterval {
+            if let interval = objc_getAssociatedObject(self, &UIExtensionStoragePropertyKey.buttonDisableIntervalKey) as? TimeInterval {
                 return interval
             }
             return 0.0

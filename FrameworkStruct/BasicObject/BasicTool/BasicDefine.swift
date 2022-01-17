@@ -55,6 +55,11 @@ protocol DelegateProtocol {
 }
 
 
+//MARK: 闭包类型定义
+//参数和返回值都为空的闭包
+typealias VoidClosure = (() -> Void)
+
+
 //MARK: 基础常量定义
 
 //状态栏内容颜色定义

@@ -30,8 +30,7 @@ let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 //MARK: 全局通用自定义通知
 enum FSNotification: String
 {
-    //切换主题的通知
-    case changeTheme
+    case changeTheme    //切换主题的通知
     
     
     //计算属性，获得通知字符串的名字，格式：项目名缩写+具体通知名称+通知后缀
@@ -51,6 +50,9 @@ enum FSNotification: String
     }
     
 }
+
+
+//MARK: 工程中通用错误信息
 
 
 //MARK: Storyboard文件名定义
@@ -77,6 +79,3 @@ let integerRegex = "^\\d+$"
 let floatRegex = "^\\d*\\.\\d+$"
 
 
-//MARK: 闭包类型定义
-//参数和返回值都为空的闭包
-typealias VoidClosure = (() -> Void)

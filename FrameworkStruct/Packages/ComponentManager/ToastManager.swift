@@ -22,7 +22,7 @@ class ToastManager: OriginManager
     //hud显示队列
     //存储hud，对hud进行统一管理，所有hud先进入这个队列，然后按顺序显示，当显示完一个之后，再显示另一个，直到队列被清空
     //实际存储的是操作闭包，当一个闭包执行时显示HUD，当HUD消失后，执行下一个闭包
-    fileprivate let hudQueue: FSQueue<(() -> Void)> = FSQueue()
+    fileprivate let hudQueue: FSQueue<VoidClosure> = FSQueue()
     
     //临时保存正在显示的MB实例
     fileprivate(set) weak var tmpMBHUD: MBProgressHUD? = nil
@@ -103,7 +103,7 @@ class ToastManager: OriginManager
                                       detail: String? = nil,
                                       animate: Bool = true,
                                       hideDelay:TimeInterval = 1.5,
-                                      completion: CompletionCallback? = nil) -> () -> Void
+                                      completion: CompletionCallback? = nil) -> VoidClosure
     {
          let closure = {[weak self] in
             if self?.hudType == .mbHud
@@ -357,7 +357,7 @@ extension ToastManager: ExternalInterface
      * 外部程序可以在参数闭包中自定义一个MB或者SV，设置好各项参数并显示
      * 所有自定义代码都会放入闭包队列中，然后尝试执行
      */
-    func wantShowCustom(closure: @escaping (() -> Void))
+    func wantShowCustom(closure: @escaping VoidClosure)
     {
         self.hudQueue.push(closure)
         self.show()
@@ -366,7 +366,7 @@ extension ToastManager: ExternalInterface
     /**
      * 直接显示一个自定义HUD，不进入队列
      */
-    func directShowCustom(closure: @escaping (() -> Void))
+    func directShowCustom(closure: @escaping VoidClosure)
     {
         self.show(closure)
     }
@@ -433,6 +433,6 @@ extension ToastManager: InternalType
     }
     
     //完成回调的类型
-    typealias CompletionCallback = () -> Void
+    typealias CompletionCallback = VoidClosure
     
 }

@@ -15,9 +15,9 @@ class FSDialog: UIView, DialogManagerProtocol
 {
     //MARK: 属性
     //遵循DialogManagerProtocol协议，提供属性
-    var showCallback: (() -> Void)?
-    var hideCallback: (() -> Void)?
-    var dismissCallback: (() -> Void)?
+    var showCallback: VoidClosure?
+    var hideCallback: VoidClosure?
+    var dismissCallback: VoidClosure?
     
     //背景颜色，默认黑色50%透明度
     var bgColor: UIColor = UIColor(white: 0, alpha: 0.5) {
@@ -84,7 +84,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //显示动画
     //子类可以覆写这个方法，根据具体需要调用父类方法
-    func showAnimation(completion: @escaping (() -> Void))
+    func showAnimation(completion: @escaping VoidClosure)
     {
         self.isHidden = false
         weak var weakSelf = self
@@ -98,7 +98,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //隐藏动画
     //子类可以覆写这个方法，根据具体需要调用父类方法
-    func hideAnimation(completion: @escaping (() -> Void))
+    func hideAnimation(completion: @escaping VoidClosure)
     {
         weak var weakSelf = self
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
@@ -111,7 +111,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //消失动画
     //子类可以覆写这个方法，根据具体需要调用父类方法
-    func dismissAnimation(completion: @escaping (() -> Void))
+    func dismissAnimation(completion: @escaping VoidClosure)
     {
         weak var weakSelf = self
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
