@@ -85,8 +85,8 @@ enum VCBackgroundStyle
     case gradientDark   //一种深色的渐变色，创建一个渐变图层
     case bgImage(img: UIImage?, alpha: CGFloat)   //背景是图片，绑定一个图片文件名参数，和透明度参数
     
-    //返回颜色或者渐变图层或者图像图层或者nil
-    //nil/UIColor/CALayer
+    //返回颜色或者渐变图层或者图像图层
+    //UIColor/CALayer
     func getContent() -> Any
     {
         switch self {
