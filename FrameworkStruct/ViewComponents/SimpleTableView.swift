@@ -36,9 +36,9 @@ class SimpleTableView: UIView
     //每一行的颜色，只能统一设置，暂不支持单独定制每一个单元格颜色
     var rowColor: UIColor = .clear
     //奇数行的颜色，从1开始
-    var oddRowColor: UIColor = .white
+    var oddRowColor: UIColor = .cGray_f4
     //偶数行颜色，从2开始
-    var evenRowColor: UIColor = .cGray_f4
+    var evenRowColor: UIColor = .white
     //奇偶行是否分色显示，默认不分色显示，如果设置为true，将忽略`rowColor`，使用`oddRowColor`和`evenRowColor`
     var isOddEvenIsolate: Bool = false
     
@@ -82,10 +82,10 @@ class SimpleTableView: UIView
     var dataArray: Array<Array<String>>? = nil
     
     //每一行的view数组
-    var rowArray: Array<UIView> = []
+    fileprivate var rowArray: Array<UIView> = []
     
-    //表格总高度
-    var totalHeight: CGFloat = 0.0
+    //表格总高度，每一行row的高度会将这个值累加
+    fileprivate var totalHeight: CGFloat = 0.0
     
     //UI组件
     var bgView: UIView!     //背景视图，上面不放任何内容，主要用于调节背景的显示，比如颜色，图片等
@@ -122,7 +122,7 @@ class SimpleTableView: UIView
     
     //获取row的背景色
     //index从1开始，数组的index从0开始，传入时需要转换
-    fileprivate func rowColor(rowNum: Int) -> UIColor
+    fileprivate func getRowColor(rowNum: Int) -> UIColor
     {
         if self.isOddEvenIsolate    //奇偶分色显示
         {
@@ -198,11 +198,12 @@ class SimpleTableView: UIView
      *
      * - Parameters:
      *  - strArray: 行数组，元素是字符串
+     *  - rowIndex: 这一行在整个表格中的index，从1开始
      *  - isLast: 是否最后一行，用来绘制底部边框
      *
      * - returns: 表格的一行
      */
-    fileprivate func createRow(strArray: Array<String>, isLast: Bool) -> UIView
+    fileprivate func createRow(strArray: Array<String>, rowIndex: Int, isLast: Bool) -> UIView
     {
         //先准备数据
         //左右空白
@@ -227,8 +228,8 @@ class SimpleTableView: UIView
         //创建文本标签
         let contentView = UIView()
         //x/y都设置为0，当返回view之后，会再进行设置，这里主要确定宽高
-        contentView.frame = CGRect(x: 0, y: 0, width: self.width, height: maxRowHeight)
-        contentView.backgroundColor = self.rowColor
+        contentView.frame = CGRect(x: 0, y: self.totalHeight, width: self.width, height: maxRowHeight)
+        contentView.backgroundColor = self.getRowColor(rowNum: rowIndex)
         //一行当前的实际内容宽度，用于创建label时确定位置
         var x: CGFloat = contentLeftRight
         for (index, attrStr) in attrStrArr.enumerated()
@@ -267,6 +268,7 @@ class SimpleTableView: UIView
     deinit {
         print("SimpleTableView: dealloc")
     }
+    
 }
 
 
@@ -274,7 +276,7 @@ class SimpleTableView: UIView
 extension SimpleTableView: ExternalInterface
 {
     ///计算前几行的高度，如果实际行数小于指定行数，那么返回实际高度；如果参数小于1，那么最小取1行
-    ///返回值：实际返回的高度，实际返回的行数
+    ///返回值：实际返回的高度，实际计算的行数
     func getTopRowHeight(rowCount: Int) -> (CGFloat, Int)
     {
         //限制区间 1-array.count
@@ -285,7 +287,7 @@ extension SimpleTableView: ExternalInterface
         {
             height += self.rowArray[i].height
         }
-        if count < totalRowCount    //如果不是最后一行，要加上上边框的宽度
+        if count < totalRowCount    //如果不是最后一行，要加上下一行的上边框的宽度
         {
             height += borderWidth
         }
@@ -297,6 +299,11 @@ extension SimpleTableView: ExternalInterface
         self.rowArray.count
     }
     
+    ///表格总高度，计算属性
+    var tableTotalHeight: CGFloat {
+        self.totalHeight
+    }
+    
     ///传入数据后更新view
     override func updateView()
     {
@@ -306,13 +313,7 @@ extension SimpleTableView: ExternalInterface
             {
                 if arr.count > 0    //排除空行
                 {
-                    let view = self.createRow(strArray: arr, isLast: index >= daArray.count - 1)
-                    //对row的显示属性进行设置，背景色，frame等
-                    view.y = self.totalHeight
-                    if isOddEvenIsolate //支持奇偶行变色
-                    {
-                        view.backgroundColor = isOdd(index) ? self.oddRowColor : self.evenRowColor
-                    }
+                    let view = self.createRow(strArray: arr, rowIndex: index + 1, isLast: index >= daArray.count - 1)
                     self.containerView.addSubview(view)
                     self.rowArray.append(view)
                     

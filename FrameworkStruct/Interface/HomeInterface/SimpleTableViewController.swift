@@ -39,14 +39,17 @@ class SimpleTableViewController: BasicViewController
     override func createUI() {
         super.createUI()
         self.backgroundStyle = .lightGray
+        self.navTitleColor = self.theme.mainColor
         self.table = SimpleTableView.init(frame: CGRect(x: 0, y: 0, width: self.containerView.width, height: containerView.height))
         self.containerView.addSubview(self.table)
     }
     
     override func configUI() {
+        super.configUI()
         table.dataArray = self.dataArray
-        table.configView()
+        table.isOddEvenIsolate = true
         table.updateView()
+        
         let totalRow = table.totalRowCount
         //获取前3行高度
         let top3Height: CGFloat = table.getTopRowHeight(rowCount: 3).0
@@ -54,10 +57,11 @@ class SimpleTableViewController: BasicViewController
         self.containerViewHeight.constant = top3Height + 10 * 2
     }
 
-    //展开收起
+    //展开
     @IBAction func expandBtnAction(_ sender: UIButton) {
-        let totalHeight = table.getTopRowHeight(rowCount: table.totalRowCount).0
+        let totalHeight = table.tableTotalHeight
         self.containerViewHeight.constant = totalHeight + 10 * 2
         self.expandBtn.isHidden = true
     }
+    
 }

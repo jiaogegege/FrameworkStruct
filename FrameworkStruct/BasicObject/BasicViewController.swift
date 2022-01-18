@@ -44,7 +44,7 @@ class BasicViewController: UIViewController
     }
     
     //导航栏背景色
-    var navBackgroundColor: UIColor? = nil {
+    var navBackgroundColor: UIColor = .white {
         didSet {
             setNavBackgroundColor()
         }
@@ -97,6 +97,7 @@ class BasicViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        self.basicConfig()
         ControllerManager.shared.showController(controller: self)
     }
     
@@ -118,22 +119,7 @@ class BasicViewController: UIViewController
     //初始化时执行一次
     func createUI()
     {
-        //返回按钮样式
-        self.setBackStyle()
-        //侧滑返回
-        self.setLeftSlideBack()
-        //背景色
-        self.setBackgroundColor()
-        //导航栏透明
-        self.setNavAlpha()
-        //导航栏背景色
-        self.setNavBackgroundColor()
-        //隐藏导航栏底部横线
-        self.setHiddenNavBottomLine()
-        //导航标题颜色
-        self.setNavTitleColor()
-        //状态栏内容颜色
-        self.setStatusBarStyle()
+        
     }
     
     //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等
@@ -176,6 +162,27 @@ class BasicViewController: UIViewController
     func themeUpdateUI(theme: ThemeProtocol)
     {
         //留给子类实现
+    }
+    
+    //基础设置，设置这个控制器的基础属性
+    func basicConfig()
+    {
+        //返回按钮样式
+        self.setBackStyle()
+        //侧滑返回
+        self.setLeftSlideBack()
+        //背景色
+        self.setBackgroundColor()
+        //导航栏透明
+        self.setNavAlpha()
+        //导航栏背景色
+        self.setNavBackgroundColor()
+        //隐藏导航栏底部横线
+        self.setHiddenNavBottomLine()
+        //导航标题颜色
+        self.setNavTitleColor()
+        //状态栏内容颜色
+        self.setStatusBarStyle()
     }
     
     //设置返回按钮样式
@@ -302,7 +309,7 @@ class BasicViewController: UIViewController
             }
             else
             {
-                self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//                self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
                 self.navigationController?.navigationBar.shadowImage = UIImage()
             }
         }
@@ -316,7 +323,7 @@ class BasicViewController: UIViewController
             }
             else
             {
-                self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+//                self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
                 self.navigationController?.navigationBar.shadowImage = nil
             }
         }
