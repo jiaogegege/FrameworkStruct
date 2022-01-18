@@ -264,6 +264,9 @@ class SimpleTableView: UIView
         return contentView
     }
     
+    deinit {
+        print("SimpleTableView: dealloc")
+    }
 }
 
 
