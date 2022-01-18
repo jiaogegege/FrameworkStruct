@@ -271,7 +271,8 @@ class SimpleTableView: UIView
 extension SimpleTableView: ExternalInterface
 {
     ///计算前几行的高度，如果实际行数小于指定行数，那么返回实际高度；如果参数小于1，那么最小取1行
-    func getTopRowHeight(rowCount: Int) -> CGFloat
+    ///返回值：实际返回的高度，实际返回的行数
+    func getTopRowHeight(rowCount: Int) -> (CGFloat, Int)
     {
         //限制区间 1-array.count
         let count = limitInterval(rowCount, min: 1, max: self.rowArray.count)
@@ -285,7 +286,7 @@ extension SimpleTableView: ExternalInterface
         {
             height += borderWidth
         }
-        return height
+        return (height, count)
     }
     
     ///计算属性，返回一共的行数

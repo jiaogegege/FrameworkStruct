@@ -49,14 +49,14 @@ class SimpleTableViewController: BasicViewController
         table.updateView()
         let totalRow = table.totalRowCount
         //获取前3行高度
-        let top3Height: CGFloat = table.getTopRowHeight(rowCount: 3)
+        let top3Height: CGFloat = table.getTopRowHeight(rowCount: 3).0
         self.expandBtn.isHidden = totalRow > 3 ? false : true
         self.containerViewHeight.constant = top3Height + 10 * 2
     }
 
     //展开收起
     @IBAction func expandBtnAction(_ sender: UIButton) {
-        let totalHeight = table.getTopRowHeight(rowCount: table.totalRowCount)
+        let totalHeight = table.getTopRowHeight(rowCount: table.totalRowCount).0
         self.containerViewHeight.constant = totalHeight + 10 * 2
         self.expandBtn.isHidden = true
     }
