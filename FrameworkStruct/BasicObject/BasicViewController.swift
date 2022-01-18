@@ -69,6 +69,9 @@ class BasicViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        
         self.createUI()
         self.configUI()
         self.initData()
@@ -100,6 +103,7 @@ class BasicViewController: UIViewController
     
     //创建界面，一般用来创建界面组件
     //如果子类覆写这个方法，需要调用父类方法
+    //初始化时执行一次
     func createUI()
     {
         //返回按钮样式
@@ -120,6 +124,7 @@ class BasicViewController: UIViewController
     
     //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等
     //如果子类覆写这个方法，需要调用父类方法
+    //初始化时执行一次
     func configUI()
     {
         self.themeUpdateUI(theme: self.theme)
@@ -128,6 +133,7 @@ class BasicViewController: UIViewController
     //更新UI组件的布局，比如frame、约束等
     //这个方法可能被多次执行，所以不要在这里创建任何对象
     //如果子类覆写这个方法，需要调用父类方法
+    //会多次执行
     func layoutUI()
     {
         
@@ -135,6 +141,7 @@ class BasicViewController: UIViewController
     
     //初始化控制器数据，比如一些状态和变量
     //如果子类覆写这个方法，需要调用父类方法
+    //初始化时执行一次
     func initData()
     {
         
@@ -142,6 +149,7 @@ class BasicViewController: UIViewController
     
     //更新界面，一般是更新界面上的一些数据
     //如果子类覆写这个方法，需要调用父类方法
+    //初始化时执行一次
     //可以手动调用这个方法
     func updateUI()
     {
@@ -150,6 +158,7 @@ class BasicViewController: UIViewController
     
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
+    //初始化时执行一次，主题变化时执行
     func themeUpdateUI(theme: ThemeProtocol)
     {
         //留给子类实现

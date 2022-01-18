@@ -21,30 +21,6 @@ class Utility: NSObject
         UIApplication.shared.open(URL.init(string: urlStr)!, options: [:], completionHandler: nil)
     }
     
-    //获得沙盒文件夹路径
-    static func getHomePath() -> String
-    {
-        return SandBoxAccessor.getHomeDirectory()
-    }
-    
-    //获得Documents文件夹路径
-    static func getDocumentPath() -> String
-    {
-        return SandBoxAccessor.getDocumentDirectory()
-    }
-    
-    //获得Library路径
-    static func getLibraryPath() -> String
-    {
-        return SandBoxAccessor.getLibraryDirectory()
-    }
-    
-    //获取 Temp 的路径
-    static func getTempPath() -> String
-    {
-        return SandBoxAccessor.getTempDirectory()
-    }
-    
     //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
     static func getCopy(origin: Any?) -> Any
     {
@@ -139,7 +115,7 @@ class Utility: NSObject
         return true
     }
     
-    
+
     
     
     

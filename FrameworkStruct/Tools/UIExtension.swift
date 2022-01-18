@@ -20,7 +20,7 @@ struct UIExtensionPropertyKey
     
 }
 
-/**
+/**@@objc @objc objc 
  * UIViewController
  */
 extension UIViewController
@@ -59,6 +59,24 @@ extension UIView
         maskLayer.frame = self.bounds
         maskLayer.path = maskPath.cgPath
         self.layer.mask = maskLayer
+    }
+    
+    //创建view，用于子类实现
+    @objc func createView()
+    {
+        
+    }
+    
+    //配置view，用于子类实现
+    @objc func configView()
+    {
+        
+    }
+    
+    //更新view上的数据，用于子类实现
+    @objc func updateView()
+    {
+        
     }
     
 }

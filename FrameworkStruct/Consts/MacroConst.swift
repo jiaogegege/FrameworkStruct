@@ -53,6 +53,12 @@ enum FSNotification: String
 }
 
 
+//MARK: 文件路径定义
+//数据库文件路径
+let gDatabaseDir = "db"     //数据库相关文件存放目录
+let gDatabaseFile = "database.db"   //数据库文件名
+
+
 //MARK: Storyboard文件名定义
 //主界面
 let gMainSB = "Main"

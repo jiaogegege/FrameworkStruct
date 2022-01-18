@@ -14,11 +14,12 @@
 confirm = "Confirm";
 cancel = "Cancel";
 waterfall = "Waterfall";
-themeSelect = "ThemeSelect";
-modalShow = "ModalShow";
-constraintTest = "ConstraintTest";
-selectFromPhotoLibiary = "SelectFromPhotoLibiary";
-takePhotoWithCamera = "TakePhotoWithCamera";
+themeSelect = "Theme Select";
+modalShow = "Modal Show";
+constraintTest = "Constraint Test";
+selectFromPhotoLibiary = "Select From Photo Libiary";
+takePhotoWithCamera = "Take Photo With Camera";
 teenagerProtectContent = "In order to protect the healthy growth of minors, the framework structure specially launches a youth mode, which cannot be used normally. Please ask the guardian to actively select and set the guardian password.";
 setTeenagerMode = "Enter Teenager Mode";
 iKnown = "I known";
+drawTable = "Draw Table";

@@ -20,7 +20,7 @@ class DemoTopSelectBar: UIView
     var animated: Bool = true
     
     //MARK: 方法
-    func createView()
+    override func createView()
     {
         self.backgroundColor = .white
         

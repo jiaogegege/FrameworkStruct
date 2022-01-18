@@ -53,6 +53,15 @@ extension String
         return width
     }
     
+    //带有行间距和字体的属性字符串
+    func attrString(font: UIFont, lineSpace: CGFloat) -> NSAttributedString
+    {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineSpacing = lineSpace
+        let attrStr = NSAttributedString.init(string: self, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: paragraph])
+        return attrStr
+    }
+    
 }
 
 

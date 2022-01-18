@@ -22,3 +22,4 @@ takePhotoWithCamera = "拍照";
 teenagerProtectContent = "为了呵护未成年人健康成长，框架结构特别推出青少年模式，该模式下部分功能无法正常使用。请监护人主动选择，并设置监护密码。";
 setTeenagerMode = "进入青少年模式";
 iKnown = "我知道了";
+drawTable = "绘制表格";

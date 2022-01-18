@@ -46,7 +46,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //这里会创建bgView和containerView
     //子类可以覆写这个方法，并且要调用父类方法
-    func createView()
+    override func createView()
     {
         self.bgView = UIView()
         self.addSubview(bgView)
@@ -57,7 +57,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //配置view
     //子类可以覆写该方法，并且要调用父类方法
-    func configView()
+    override func configView()
     {
         bgView.frame = self.bounds
         bgView.backgroundColor = self.bgColor

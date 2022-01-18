@@ -60,6 +60,8 @@ extension String
     static let sEnterTeenMode = localized("setTeenagerMode")
     //我知道了
     static let sIKnown = localized("iKnown")
+    //绘制表格
+    static let sDrawTable = localized("drawTable")
     
 
     //便利方法

@@ -24,14 +24,19 @@ extension UIColor
     //accentcolor
     @objc static var cAccent = UIColor(named: "AccentColor")
     //黑色333333
-    @objc static var cBlack_3 = UIColor.colorFromHex(value: 0x333333)
+    @objc static let cBlack_3 = UIColor.colorFromHex(value: 0x333333)
+    //黑色666666
+    @objc static let cBlack_6 = UIColor.colorFromHex(value: 0x666666)
+    //黑色999999
+    @objc static let cBlack_9 = UIColor.colorFromHex(value: 0x999999)
     //f4f4f4
-    @objc static var cGray_f4 = UIColor.colorFromHex(value: 0xf4f4f4)
+    @objc static let cGray_f4 = UIColor.colorFromHex(value: 0xf4f4f4)
     //0xff709b
-    @objc static var cPink_ff709b = UIColor.colorFromHex(value: 0xff709b)
+    @objc static let cPink_ff709b = UIColor.colorFromHex(value: 0xff709b)
     //"D6D6D9"
     @objc static var cGray_D6D6D9 = UIColor.colorWithHex(colorStr: "D6D6D9")
-    
+    //E7E7E7
+    @objc static let cGray_E7E7E7 = UIColor.colorFromHex(value: 0xE7E7E7)
 
     
 }

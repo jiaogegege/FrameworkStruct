@@ -15,6 +15,9 @@ class SandBoxAccessor: OriginAccessor
     //单例
     static let shared = SandBoxAccessor()
     
+    //文件管理器
+    lazy var fileMgr: FileManager = FileManager.default
+    
     //私有化初始化方法
     private override init()
     {
@@ -29,6 +32,87 @@ class SandBoxAccessor: OriginAccessor
     override func mutableCopy() -> Any
     {
         return self // SandBoxAccessor.shared
+    }
+    
+    
+    //返回数据源相关信息
+    override func accessorDataSourceInfo() -> Dictionary<String, String> {
+        let infoDict = ["type": "sandbox"]
+        return infoDict
+    }
+    
+}
+
+
+//接口方法
+extension SandBoxAccessor: ExternalInterface
+{
+    //创建一个目录
+    func createDir(path: String) -> Bool
+    {
+        //先判断是否存在
+        if isExist(path: path)
+        {
+            return true //存在直接返回true
+        }
+        else
+        {
+            do {
+                try fileMgr.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                return true
+            } catch {
+                print("create dir error: \(error.localizedDescription)")
+                return false
+            }
+        }
+    }
+    
+    //创建一个文件
+    func createFile(path: String) -> Bool
+    {
+        //先判断是否存在
+        if isExist(path: path)
+        {
+            return true //存在直接返回true
+        }
+        else
+        {
+            return fileMgr.createFile(atPath: path, contents: nil, attributes: nil)
+        }
+    }
+    
+    //删除某个目录或文件
+    func deletePath(_ path: String)
+    {
+        do {
+            try self.fileMgr.removeItem(atPath: path)
+        } catch {
+            print("delete path error: \(error.localizedDescription)")
+        }
+    }
+    
+    //判断某个文件或目录是否存在
+    func isExist(path: String) -> Bool
+    {
+        var ret = false
+        ret = self.fileMgr.fileExists(atPath: path)
+        return ret
+    }
+    
+    //判断某个路径是否是目录
+    func isDir(path: String) -> Bool
+    {
+        var ret = ObjCBool.init(false)
+        self.fileMgr.fileExists(atPath: path, isDirectory: &ret)
+        return ret.boolValue
+    }
+    
+    //判断某个路径是否是文件
+    func isFile(path: String) -> Bool
+    {
+        var ret = ObjCBool.init(false)
+        self.fileMgr.fileExists(atPath: path, isDirectory: &ret)
+        return !ret.boolValue   //结果取反，ret为true是目录
     }
     
     //获得沙盒文件夹路径
@@ -63,10 +147,11 @@ class SandBoxAccessor: OriginAccessor
         return NSTemporaryDirectory()
     }
     
-    //返回数据源相关信息
-    override func accessorDataSourceInfo() -> Dictionary<String, String> {
-        let infoDict = ["type": "sandbox"]
-        return infoDict
+    //获取数据库文件路径
+    static func getDatabasePath() -> String
+    {
+        let dbPath = ((SandBoxAccessor.getDocumentDirectory() as NSString).appendingPathComponent(gDatabaseDir) as NSString).appendingPathComponent(gDatabaseFile)
+        return dbPath
     }
     
 }

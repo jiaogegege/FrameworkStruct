@@ -7,22 +7,29 @@
 
 import UIKit
 
-class ViewController: BasicViewController {
+class ViewController: BasicViewController
+{
+    @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.sConstraintTest]
+    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.sConstraintTest, String.sDrawTable]
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+            super.viewDidLoad()
+        }
         // Do any additional setup after loading the view.
     }
     
     override func createUI() {
+        super.createUI()
         self.backStyle = .none
+        self.title = "功能选择"
     }
     
     //设置界面
     override func configUI()
     {
+        super.configUI()
         
     }
 
@@ -46,7 +53,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
             let jcolVC = JCollectionViewController.init()
             self.navigationController?.pushViewController(jcolVC, animated: true)
         }
-        else if indexPath.row == 1
+        else if indexPath.row == 1  //主题选择
         {
             let themeVC = ThemeSelectViewController.getViewController()
             self.navigationController?.pushViewController(themeVC, animated: true)
@@ -62,6 +69,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         {
             let vc = ConstraintTestViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else if indexPath.row == 4  //绘制表格
+        {
+            let vc = SimpleTableViewController.getViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
     }
     

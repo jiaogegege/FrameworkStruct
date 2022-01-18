@@ -22,6 +22,10 @@ class DatabaseAccessor: OriginAccessor
     private override init()
     {
         super.init()
+        //数据库文件路径
+        let dbPath = SandBoxAccessor.getDatabasePath()
+        self.database = FMDatabase(path: dbPath)    //创建或获取数据库，如果数据库文件不存在，则自动创建
+        
     }
     
     override func copy() -> Any

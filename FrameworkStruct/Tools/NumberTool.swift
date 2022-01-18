@@ -116,3 +116,23 @@ func isNumber(str: String) -> Bool
 {
     return isInteger(str: str) || isFloat(str: str)
 }
+
+//判断一个数字是否是偶数
+func isEven(_ num: Int) -> Bool
+{
+    if num % 2 == 0
+    {
+        return true
+    }
+    return false
+}
+
+//判断一个数字是否是奇数
+func isOdd(_ num: Int) -> Bool
+{
+    if num % 2 == 0
+    {
+        return false
+    }
+    return true
+}
