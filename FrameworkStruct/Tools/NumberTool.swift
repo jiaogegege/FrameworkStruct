@@ -10,31 +10,31 @@
  */
 import Foundation
 
-//两个Double数字是否相等，比较它们差值的误差小于系统定义的最小误差
+///两个Double数字是否相等，比较它们差值的误差小于系统定义的最小误差
 func doubleEqual(_ a: Double, _ b: Double) -> Bool
 {
     return fabs(a - b) < Double.ulpOfOne
 }
 
-//两个Float数字是否相等，比较它们差值的误差小于系统定义的最小误差
+///两个Float数字是否相等，比较它们差值的误差小于系统定义的最小误差
 func floatEqual(_ a: Float, _ b: Float) -> Bool
 {
     return fabsf(a - b) < Float.ulpOfOne
 }
 
-//求两个数值中的最大值
+///求两个数值中的最大值
 func maxBetween<T: Comparable>(one: T, other: T) -> T
 {
     return one >= other ? one : other
 }
 
-//求两个数值中的最小值
+///求两个数值中的最小值
 func minBetween<T: Comparable>(one: T, other: T) -> T
 {
     return one <= other ? one : other
 }
 
-//限制一个数值的取值在最大最小区间（包含），默认只能取0-1之间的数
+///限制一个数值的取值在最大最小区间（包含）
 func limitInterval<T: Comparable>(_ value: T, min: T, max: T) -> T
 {
     //先判断最大最小值，防止传错
@@ -53,13 +53,13 @@ func limitInterval<T: Comparable>(_ value: T, min: T, max: T) -> T
     return val
 }
 
-//限制一个数值在0.0和1.0之间
+///限制一个数值在0.0和1.0之间
 func limitIntervalInOne(_ value: Double) -> Double
 {
     return limitInterval(value, min: 0.0, max: 1.0)
 }
 
-//限制一个数值的最小值
+///限制一个数值的最小值
 func limitMin<T: Comparable>(_ value: T, min: T) -> T
 {
     var val = value
@@ -70,7 +70,7 @@ func limitMin<T: Comparable>(_ value: T, min: T) -> T
     return val
 }
 
-//限制一个数值的最大值
+///限制一个数值的最大值
 func limitMax<T: Comparable>(_ value: T, max: T) -> T
 {
     var val = value
@@ -81,7 +81,7 @@ func limitMax<T: Comparable>(_ value: T, max: T) -> T
     return val
 }
 
-//判断一个字符串是否整数
+///判断一个字符串是否整数
 func isInteger(str: String) -> Bool
 {
     var ret = false
@@ -96,7 +96,7 @@ func isInteger(str: String) -> Bool
     return ret
 }
 
-//判断一个字符串是否是浮点数
+///判断一个字符串是否是浮点数
 func isFloat(str: String) -> Bool
 {
     var ret = false
@@ -111,13 +111,13 @@ func isFloat(str: String) -> Bool
     return ret
 }
 
-//判断一个字符串是否是数字，包括整数和浮点数
+///判断一个字符串是否是数字，包括整数和浮点数
 func isNumber(str: String) -> Bool
 {
     return isInteger(str: str) || isFloat(str: str)
 }
 
-//判断一个数字是否是偶数
+///判断一个数字是否是偶数
 func isEven(_ num: Int) -> Bool
 {
     if num % 2 == 0
@@ -127,7 +127,7 @@ func isEven(_ num: Int) -> Bool
     return false
 }
 
-//判断一个数字是否是奇数
+///判断一个数字是否是奇数
 func isOdd(_ num: Int) -> Bool
 {
     if num % 2 == 0

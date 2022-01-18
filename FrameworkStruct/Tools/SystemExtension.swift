@@ -53,13 +53,28 @@ extension String
         return width
     }
     
-    //带有行间距和字体的属性字符串
-    func attrString(font: UIFont, lineSpace: CGFloat) -> NSAttributedString
+    //带有行间距、颜色和字体的属性字符串
+    func attrString(font: UIFont, color: UIColor = .black, lineSpace: CGFloat) -> NSAttributedString
     {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = lineSpace
-        let attrStr = NSAttributedString.init(string: self, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: paragraph])
+        let attrStr = NSAttributedString.init(string: self, attributes: [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.paragraphStyle: paragraph])
         return attrStr
+    }
+    
+}
+
+
+/**
+ * NSAttributedString
+ */
+extension NSAttributedString
+{
+    //计算属性字符串的位置大小，请保证设置了属性字体
+    func calcSize(originSize: CGSize) -> CGSize
+    {
+        let rect = self.boundingRect(with: originSize, options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil)
+        return rect.size
     }
     
 }

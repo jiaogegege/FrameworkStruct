@@ -14,6 +14,7 @@ class SimpleTableViewController: BasicViewController
 {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var expandBtn: UIButton!
     var table: SimpleTableView!
     
     var dataArray = [["上市时间", "2021-03"],
@@ -37,16 +38,26 @@ class SimpleTableViewController: BasicViewController
     
     override func createUI() {
         super.createUI()
-
+        self.backgroundStyle = .lightGray
         self.table = SimpleTableView.init(frame: CGRect(x: 0, y: 0, width: self.containerView.width, height: containerView.height))
         self.containerView.addSubview(self.table)
     }
     
     override func configUI() {
-        self.table.bgColor = .yellow
         table.dataArray = self.dataArray
         table.configView()
         table.updateView()
+        let totalRow = table.totalRowCount
+        //获取前3行高度
+        let top3Height: CGFloat = table.getTopRowHeight(rowCount: 3)
+        self.expandBtn.isHidden = totalRow > 3 ? false : true
+        self.containerViewHeight.constant = top3Height + 10 * 2
     }
 
+    //展开收起
+    @IBAction func expandBtnAction(_ sender: UIButton) {
+        let totalHeight = table.getTopRowHeight(rowCount: table.totalRowCount)
+        self.containerViewHeight.constant = totalHeight + 10 * 2
+        self.expandBtn.isHidden = true
+    }
 }

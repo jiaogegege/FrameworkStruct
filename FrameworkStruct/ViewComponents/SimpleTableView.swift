@@ -134,15 +134,75 @@ class SimpleTableView: UIView
         }
     }
     
+    //获取字符串的属性字符串，带有行距和字体
+    fileprivate func getAttrStrArray(strArr: Array<String>) -> Array<NSAttributedString>
+    {
+        var attrArray = [NSAttributedString]()
+        for (index, str) in strArr.enumerated()
+        {
+            //如果是第一列，字体取`rowHeadFont`，如果行只有一列，字体取`groupFont`，其他列字体取`contentFont`
+            var font = self.contentFont
+            var textColor = self.contentColor
+            if index == 0  //第一列
+            {
+                font = self.rowHeadFont
+                textColor = self.rowHeadColor
+            }
+            if strArr.count == 1    //一行只有一个元素
+            {
+                font = self.groupFont
+                textColor = self.groupTitleColor
+            }
+            attrArray.append(str.attrString(font: font, color: textColor, lineSpace: self.lineSpace))
+        }
+        return attrArray
+    }
+    
+    //计算属性字符串的最大高度
+    fileprivate func getMaxHeight(attrStrArray: Array<NSAttributedString>) -> CGFloat
+    {
+        //准备常量
+        //左右空白
+        let leftRightPadding: CGFloat = 2.0 * contentLeftRight
+        //其他列宽度，如果有多列，那么剩余宽度平分，如果只有一列，那么宽度为0
+        let columnWidth: CGFloat = attrStrArray.count == 1 ? 0.0 : (self.width - self.width * rowHeadRatio) / CGFloat((attrStrArray.count - 1))
+        //其他列内容宽度
+        let columnContentWidth: CGFloat = columnWidth - leftRightPadding
+        
+        var maxHeight: CGFloat = 0.0
+        for (index, attrStr) in attrStrArray.enumerated()
+        {
+            var contentWidth: CGFloat = columnContentWidth
+            if index == 0  //第一列
+            {
+                contentWidth = self.width * rowHeadRatio - leftRightPadding
+            }
+            if attrStrArray.count == 1  //一行只有一个元素
+            {
+                contentWidth = self.width - leftRightPadding
+            }
+            let height = attrStr.calcSize(originSize: CGSize(width: contentWidth, height: CGFloat.greatestFiniteMagnitude)).height
+            //判断是否最大高度
+            if height > maxHeight
+            {
+                maxHeight = height
+            }
+        }
+        return maxHeight
+    }
+    
     /**
      * 创建表格的每一行
      * 确认每一行的元素个数
      * 绘制每一行的left top right表格边框
      *
-     * - Parameters：行数组，元素是字符串
+     * - Parameters:
+     *  - strArray: 行数组，元素是字符串
+     *  - isLast: 是否最后一行，用来绘制底部边框
+     *
      * - returns: 表格的一行
      */
-    fileprivate func createRow(strArray: Array<String>) -> UIView
+    fileprivate func createRow(strArray: Array<String>, isLast: Bool) -> UIView
     {
         //先准备数据
         //左右空白
@@ -157,10 +217,49 @@ class SimpleTableView: UIView
         let columnWidth: CGFloat = strArray.count == 1 ? 0.0 : (self.width - rowHeadWidth) / CGFloat((strArray.count - 1))
         //其他列内容宽度
         let columnContentWidth: CGFloat = columnWidth - leftRightPadding
+        //获取属性字符串列表
+        let attrStrArr = self.getAttrStrArray(strArr: strArray)
+        //计算属性字符串的最大高度
+        let maxContentHeight = self.getMaxHeight(attrStrArray: attrStrArr)
+        //计算最大行高
+        let maxRowHeight = maxContentHeight + topBottomPadding
         
-        
+        //创建文本标签
         let contentView = UIView()
+        //x/y都设置为0，当返回view之后，会再进行设置，这里主要确定宽高
+        contentView.frame = CGRect(x: 0, y: 0, width: self.width, height: maxRowHeight)
+        contentView.backgroundColor = self.rowColor
+        //一行当前的实际内容宽度，用于创建label时确定位置
+        var x: CGFloat = contentLeftRight
+        for (index, attrStr) in attrStrArr.enumerated()
+        {
+            let label = UILabel(frame: CGRect(x: x, y: contentTopBottom, width: (index == 0 ? rowHeadContentWidth : columnContentWidth), height: maxContentHeight))
+            label.numberOfLines = 0
+            label.attributedText = attrStr
+            contentView.addSubview(label)
+            //每一个label添加自身的左边框
+            let leftBorder = UIView(frame: CGRect(x: x - contentLeftRight, y: 0.0, width: borderWidth, height: maxRowHeight))
+            leftBorder.backgroundColor = self.borderColor
+            contentView.addSubview(leftBorder)
+            
+            x += label.width + leftRightPadding //加上标签宽度和左右两个空白
+        }
+        //添加上边框
+        let topBorder = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.width, height: borderWidth))
+        topBorder.backgroundColor = borderColor
+        contentView.addSubview(topBorder)
+        //添加右边框
+        let rightBorder = UIView(frame: CGRect(x: self.width - borderWidth, y: 0.0, width: borderWidth, height: maxRowHeight))
+        rightBorder.backgroundColor = borderColor
+        contentView.addSubview(rightBorder)
         
+        //如果是最后一行，添加底边框
+        if isLast
+        {
+            let bottomBorder = UIView(frame: CGRect(x: 0.0, y: maxRowHeight - borderWidth, width: self.width, height: borderWidth))
+            bottomBorder.backgroundColor = borderColor
+            contentView.addSubview(bottomBorder)
+        }
         
         return contentView
     }
@@ -171,26 +270,45 @@ class SimpleTableView: UIView
 //接口方法
 extension SimpleTableView: ExternalInterface
 {
-    //计算属性，表格最小显示高度
-    var minDisplayHeight: CGFloat {
+    ///计算前几行的高度，如果实际行数小于指定行数，那么返回实际高度；如果参数小于1，那么最小取1行
+    func getTopRowHeight(rowCount: Int) -> CGFloat
+    {
+        //限制区间 1-array.count
+        let count = limitInterval(rowCount, min: 1, max: self.rowArray.count)
+        //累加前 count 行的高度
         var height: CGFloat = 0.0
-        for view in rowArray
+        for i in 0..<count
         {
-            height += view.height
+            height += self.rowArray[i].height
+        }
+        if count < totalRowCount    //如果不是最后一行，要加上上边框的宽度
+        {
+            height += borderWidth
         }
         return height
     }
     
-    //传入数据后更新view
+    ///计算属性，返回一共的行数
+    var totalRowCount: Int {
+        self.rowArray.count
+    }
+    
+    ///传入数据后更新view
     override func updateView()
     {
         if let daArray = self.dataArray
         {
-            for arr in daArray
+            for (index, arr) in daArray.enumerated()
             {
                 if arr.count > 0    //排除空行
                 {
-                    let view = self.createRow(strArray: arr)
+                    let view = self.createRow(strArray: arr, isLast: index >= daArray.count - 1)
+                    //对row的显示属性进行设置，背景色，frame等
+                    view.y = self.totalHeight
+                    if isOddEvenIsolate //支持奇偶行变色
+                    {
+                        view.backgroundColor = isOdd(index) ? self.oddRowColor : self.evenRowColor
+                    }
                     self.containerView.addSubview(view)
                     self.rowArray.append(view)
                     
@@ -198,6 +316,8 @@ extension SimpleTableView: ExternalInterface
                 }
             }
             //table创建完成后，更新self高度
+            self.containerView.height = totalHeight
+            self.bgView.height = totalHeight
             self.height = totalHeight
         }
     }

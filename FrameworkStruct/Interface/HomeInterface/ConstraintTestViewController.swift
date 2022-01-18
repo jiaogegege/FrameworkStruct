@@ -19,6 +19,7 @@ class ConstraintTestViewController: BasicViewController {
         super.createUI()
         self.backgroundStyle = .gradientDark
         self.statusBarStyle = .light
+        self.navAlpha = true
         self.navTitleColor = .white
         self.backStyle = .light
         
