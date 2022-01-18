@@ -55,14 +55,30 @@ protocol DelegateProtocol {
 }
 
 
+//MARK: 闭包类型定义
+//参数和返回值都为空的闭包
+typealias VoidClosure = (() -> Void)
+
+
 //MARK: 基础常量定义
+
+//状态栏内容颜色定义
+enum VCStatusBarStyle {
+    case dark   //深色
+    case light  //浅色
+}
+
 //VC返回按钮样式
 enum VCBackStyle
 {
-    case dark, light, close, none
+    case dark   //深色返回按钮
+    case light  //浅色返回按钮
+    case close  //关闭按钮
+    case none   //不显示返回按钮
+    
 }
 
-//VC背景色样式
+//VC背景色样式，定义成枚举而非颜色常量的原因是，有可能背景是渐变色或者图像，可以在枚举中进行扩展
 enum VCBackgroundStyle
 {
     case none   //什么都不做
@@ -70,6 +86,42 @@ enum VCBackgroundStyle
     case white  //0xffffff
     case lightGray  //0xf4f4f4
     case pink   //0xff709b
-    case clear
+    case clear  //透明背景
+    case gradientDark   //一种深色的渐变色，创建一个渐变图层
+    case bgImage(img: UIImage?, alpha: CGFloat)   //背景是图片，绑定一个图片文件名参数，和透明度参数
+    
+    //返回颜色或者渐变图层或者图像图层
+    //UIColor/CALayer
+    func getContent() -> Any
+    {
+        switch self {
+        case .none:
+            return UIColor.white    //暂时none返回白色背景
+        case .black:
+            return UIColor.black
+        case .white:
+            return UIColor.white
+        case .lightGray:
+            return UIColor.cGray_f4
+        case .pink:
+            return UIColor.cPink_ff709b
+        case .clear:
+            return UIColor.clear
+        case .gradientDark:
+            let la = CAGradientLayer()
+            la.frame = Utility.getWindow().bounds
+            la.zPosition = -1
+            la.colors = [UIColor.cGray_5B5B7E.cgColor, UIColor.cBlack_2C2C3D.cgColor]
+            return la
+        case .bgImage(let img, let alpha):
+            let la = CALayer()
+            let cgImg = img?.cgImage
+            la.frame = Utility.getWindow().bounds
+            la.zPosition = -1
+            la.contents = cgImg
+            la.opacity = Float(alpha)
+            return la
+        }
+    }
     
 }

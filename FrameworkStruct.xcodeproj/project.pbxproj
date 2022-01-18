@@ -1510,13 +1510,13 @@
 			isa = PBXGroup;
 			children = (
 				EADB01312762433C001B7223 /* README.md */,
-				EADB01322762433C001B7223 /* ThemeConst.swift */,
 				EADB01342762433C001B7223 /* ThemeProtocol.swift */,
+				EADB012F2762433C001B7223 /* ThemeManager.swift */,
+				EADB01352762433C001B7223 /* CustomTheme.swift */,
 				EADB01362762433C001B7223 /* ThemeModel.h */,
 				EADB01302762433C001B7223 /* ThemeModel.m */,
-				EADB01352762433C001B7223 /* CustomTheme.swift */,
 				EADB012E2762433C001B7223 /* ThemeContainer.swift */,
-				EADB012F2762433C001B7223 /* ThemeManager.swift */,
+				EADB01322762433C001B7223 /* ThemeConst.swift */,
 				EADB015727624B39001B7223 /* Resource */,
 			);
 			path = ThemePackage;

@@ -17,7 +17,7 @@ class FSAlertView: UIAlertController, AlertManagerProtocol
     static let identifierKeyMap = WeakDictionary.init()
     
     //遵循alertmanager协议，提供属性
-    var dismissCallback: (() -> Void)?
+    var dismissCallback: VoidClosure?
     
     //唯一标志符
     fileprivate(set) var identifierKey: String? = nil
@@ -119,7 +119,7 @@ extension FSAlertView: ExternalInterface
     }
     
     //消失掉所有的弹框
-    static func dismissAllAlert(completion:(() -> Void)?)
+    static func dismissAllAlert(completion:VoidClosure?)
     {
         let keys = self.identifierKeyMap.keyEnumerator()
         for key in keys

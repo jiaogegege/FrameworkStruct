@@ -14,13 +14,13 @@ import UIKit
 @objc protocol DialogManagerProtocol
 {
     //显示后执行这个回调
-    var showCallback: (() -> Void)? {get set}
+    var showCallback: VoidClosure? {get set}
     
     //隐藏后，执行这个回调通知管理器
-    var hideCallback: (() -> Void)? {get set}
+    var hideCallback: VoidClosure? {get set}
     
     //消失后，执行这个回调通知管理器
-    var dismissCallback: (() -> Void)? {get set}
+    var dismissCallback: VoidClosure? {get set}
     
     //要显示的弹框需要实现该方法，当管理器将要显示弹窗时，会调用这个方法，弹窗可根据实际情况进行显示的操作；hostView一般是UIWindow
     func show(hostView: UIView)

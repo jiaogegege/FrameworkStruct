@@ -139,7 +139,7 @@ class TeenagerModeDialog: FSDialog
     }
     
     //显示时的动画效果
-    override func showAnimation(completion: @escaping (() -> Void)) {
+    override func showAnimation(completion: @escaping VoidClosure) {
         super.showAnimation(completion: completion)
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
             self.containerView.snp.updateConstraints { make in

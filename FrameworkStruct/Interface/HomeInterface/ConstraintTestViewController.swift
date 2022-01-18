@@ -17,7 +17,10 @@ class ConstraintTestViewController: BasicViewController {
     
     override func createUI() {
         super.createUI()
-        self.backgroundStyle = .white
+        self.backgroundStyle = .gradientDark
+        self.statusBarStyle = .light
+        self.navTitleColor = .white
+        self.backStyle = .light
         
         let topLine = UIView()
         topLine.backgroundColor = .red

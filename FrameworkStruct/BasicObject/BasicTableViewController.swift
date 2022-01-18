@@ -58,9 +58,21 @@ class BasicTableViewController: UITableViewController
     }
     
     //设置标题颜色
-    var navTitleColor: UIColor? = nil {
+    var navTitleColor: UIColor = .black {
         didSet {
             setNavTitleColor()
+        }
+    }
+    
+    //设置状态栏内容颜色
+    var statusBarStyle: VCStatusBarStyle = .dark {
+        didSet {
+            setStatusBarStyle()
+        }
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        get {
+            return self.statusBarStyle == .dark ? .default : .lightContent
         }
     }
     
@@ -120,6 +132,8 @@ class BasicTableViewController: UITableViewController
         self.setHiddenNavBottomLine()
         //导航标题颜色
         self.setNavTitleColor()
+        //状态栏内容颜色
+        self.setStatusBarStyle()
     }
     
     //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等
@@ -211,20 +225,15 @@ class BasicTableViewController: UITableViewController
     //设置背景色
     fileprivate func setBackgroundColor()
     {
-        switch self.backgroundStyle
+        let bgContent = self.backgroundStyle.getContent()
+        if let color = bgContent as? UIColor
         {
-        case .clear:
-            self.view.backgroundColor = .clear
-        case .black:
-            self.view.backgroundColor = .black
-        case .white:
-            self.view.backgroundColor = .white
-        case .lightGray:
-            self.view.backgroundColor = .cGray_f4
-        case .pink:
-            self.view.backgroundColor = .cPink_ff709b
-        case .none:
-            break
+            self.view.backgroundColor = color
+        }
+        else if let la = bgContent as? CALayer
+        {
+            self.view.backgroundColor = .white  //如果背景是图片，那么背景色设置成白色
+            self.view.layer.addSublayer(la)
         }
     }
     
@@ -316,7 +325,7 @@ class BasicTableViewController: UITableViewController
     //设置导航标题颜色
     fileprivate func setNavTitleColor()
     {
-        let attrDic = [NSAttributedString.Key.foregroundColor: UIColor.cBlack_3]
+        let attrDic = [NSAttributedString.Key.foregroundColor: self.navTitleColor]
         if #available(iOS 15.0, *)
         {
             self.navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = attrDic
@@ -326,6 +335,12 @@ class BasicTableViewController: UITableViewController
         {
             self.navigationController?.navigationBar.titleTextAttributes = attrDic
         }
+    }
+    
+    //设置状态栏内容颜色
+    fileprivate func setStatusBarStyle()
+    {
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     //添加通知
