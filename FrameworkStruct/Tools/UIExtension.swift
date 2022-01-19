@@ -16,17 +16,18 @@ import UIKit
  */
 struct UIExtensionStoragePropertyKey
 {
-    //按钮点击后无法再次点击的时间间隔
+    ///按钮点击后无法再次点击的时间间隔
     static var buttonDisableIntervalKey: String = "buttonDisableIntervalKey"
     
 }
+
 
 /**@@objc @objc objc 
  * UIViewController
  */
 extension UIViewController
 {
-    // iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
+    /// iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
     func adjustsScrollViewInsetNever(scrollView: UIScrollView)
     {
         if #available(iOS 11.0, *)
@@ -62,19 +63,19 @@ extension UIView
         self.layer.mask = maskLayer
     }
     
-    //创建view，用于子类实现
+    ///创建view，用于子类实现
     @objc func createView()
     {
         
     }
     
-    //配置view，用于子类实现
+    ///配置view，用于子类实现
     @objc func configView()
     {
         
     }
     
-    //更新view上的数据，用于子类实现
+    ///更新view上的数据，用于子类实现
     @objc func updateView()
     {
         
@@ -88,7 +89,7 @@ extension UIView
  */
 extension UIButton
 {
-    //设置button点击后在一定时间内不可再次点击，默认0
+    ///设置button点击后在一定时间内不可再次点击，默认0
     var disableInterval: TimeInterval {
         set {
             objc_setAssociatedObject(self, &UIExtensionStoragePropertyKey.buttonDisableIntervalKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -101,7 +102,7 @@ extension UIButton
         }
     }
     
-    //手动设置button不可再次点击，不可点击的时长取参数和属性之间的较大值
+    ///手动设置button不可再次点击，不可点击的时长取参数和属性之间的较大值
     func clickDisable(interval: TimeInterval = 0.0)
     {
         self.isEnabled = false
@@ -111,7 +112,7 @@ extension UIButton
         }
     }
     
-    //重写button方法，拦截响应事件并执行不可点击的时间间隔
+    ///重写button方法，拦截响应事件并执行不可点击的时间间隔
     open override func sendAction(_ action: UIAction) {
         if #available(iOS 14.0, *) {
             super.sendAction(action)
@@ -121,6 +122,7 @@ extension UIButton
         self.clickDisable()
     }
     
+    ///重写button方法，拦截响应事件并执行不可点击的时间间隔
     open override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
         super.sendAction(action, to: target, for: event)
         self.clickDisable()
@@ -130,12 +132,30 @@ extension UIButton
 
 
 /**
+ * UITableView
+ */
+extension UITableView
+{
+    ///在此处刷新tableview可禁用动画效果，包括自动估高的抖动
+    class func refreshWithoutAnimation(tableView: UITableView, _ action: VoidClosure)
+    {
+        UIView.performWithoutAnimation {
+            tableView.beginUpdates()
+            //在此处刷新tableview可禁用动画效果，包括自动估高的抖动
+            action()
+            tableView.endUpdates()
+        }
+    }
+}
+
+
+/**
  * UIColor
  */
 extension UIColor
 {
-    //16进制颜色字符串转UIColor
-    //colorStr:支持“#123456”、 “0X123456”、 “123456”三种格式
+    ///16进制颜色字符串转UIColor
+    ///colorStr:支持“#123456”、 “0X123456”、 “123456”三种格式
     static func colorWithHex(colorStr: String , alpha: CGFloat = 1) -> UIColor
     {
         //删除字符串中的空格
@@ -177,7 +197,7 @@ extension UIColor
         return UIColor.colorWithRGBA(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: alpha)
     }
     
-    //16进制颜色转换成UIColor
+    ///16进制颜色转换成UIColor
     static func colorFromHex(value : Int , alpha : CGFloat = 1) -> UIColor
     {
         let red = CGFloat((value & 0xFF0000) >> 16) / 255.0
@@ -186,7 +206,7 @@ extension UIColor
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    //红绿蓝255值转换成UIColor，RGBA都有默认值，默认纯白色
+    ///红绿蓝255值转换成UIColor，RGBA都有默认值，默认纯白色
     static func colorWithRGBA(red: CGFloat = 255.0, green: CGFloat = 255.0, blue: CGFloat = 255.0, alpha: CGFloat = 1.0) -> UIColor
     {
         return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)

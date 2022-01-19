@@ -2,11 +2,14 @@
 #import <unistd.h>
 #import <objc/runtime.h>
 
-#if FMDB_SQLITE_STANDALONE
-#import <sqlite3/sqlite3.h>
-#else
-#import <sqlite3.h>
-#endif
+#import "OCConst.h"
+#import "../SQLCipher/sqlite3.h"
+
+//#if FMDB_SQLITE_STANDALONE
+//#import <sqlite3/sqlite3.h>
+//#else
+//#import <sqlite3.h>
+//#endif
 
 // MARK: - FMDatabase Private Extension
 
@@ -195,6 +198,12 @@ NS_ASSUME_NONNULL_END
         NSLog(@"error opening!: %d", err);
         return NO;
     }
+
+    //数据库open后设置加密key
+#ifdef DATABASE_ENCRYPTION
+    [self setKey:DATABASE_ENCRYPTION_KEY];
+#else
+#endif
     
     if (_maxBusyRetryTimeInterval > 0.0) {
         // set the handler

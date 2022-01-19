@@ -17,20 +17,20 @@ class ViewController: BasicViewController
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             super.viewDidLoad()
         }
-        // Do any additional setup after loading the view.
+        self.backStyle = .none
+        self.title = "功能选择"
     }
     
     override func createUI() {
         super.createUI()
-        self.backStyle = .none
-        self.title = "功能选择"
+        
     }
     
     //设置界面
     override func configUI()
     {
         super.configUI()
-        
+
     }
 
 }

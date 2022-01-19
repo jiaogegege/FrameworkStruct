@@ -53,6 +53,12 @@
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
 		EA283F5627953F1D001A2710 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA283F5527953F1D001A2710 /* SimpleTableViewController.swift */; };
 		EA283F582795465A001A2710 /* SimpleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA283F572795465A001A2710 /* SimpleTableView.swift */; };
+		EA3337C82797ABC600612DC3 /* SandBoxConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3337C72797ABC600612DC3 /* SandBoxConst.swift */; };
+		EA3337D62797DA8800612DC3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3337D52797DA8800612DC3 /* SystemConfiguration.framework */; };
+		EA3337DD2797E6AA00612DC3 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EA3337D82797E6AA00612DC3 /* LICENSE */; };
+		EA3337DE2797E6AA00612DC3 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3337D92797E6AA00612DC3 /* sqlite3.c */; };
+		EA3337DF2797E6AA00612DC3 /* README in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DA2797E6AA00612DC3 /* README */; };
+		EA3337E02797E6AA00612DC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DB2797E6AA00612DC3 /* README.md */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
@@ -291,6 +297,13 @@
 		EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxAccessor.swift; sourceTree = "<group>"; };
 		EA283F5527953F1D001A2710 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
 		EA283F572795465A001A2710 /* SimpleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableView.swift; sourceTree = "<group>"; };
+		EA3337C72797ABC600612DC3 /* SandBoxConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxConst.swift; sourceTree = "<group>"; };
+		EA3337D52797DA8800612DC3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EA3337D82797E6AA00612DC3 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EA3337D92797E6AA00612DC3 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		EA3337DA2797E6AA00612DC3 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		EA3337DB2797E6AA00612DC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA3337DC2797E6AA00612DC3 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -703,6 +716,7 @@
 			files = (
 				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
 				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
+				EA3337D62797DA8800612DC3 /* SystemConfiguration.framework in Frameworks */,
 				EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -752,6 +766,27 @@
 				EA1AE46F277819E600D028F9 /* ConstraintMakerRelatable.swift */,
 			);
 			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		EA3337C62797AB7D00612DC3 /* SandBoxAccessor */ = {
+			isa = PBXGroup;
+			children = (
+				EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */,
+				EA3337C72797ABC600612DC3 /* SandBoxConst.swift */,
+			);
+			path = SandBoxAccessor;
+			sourceTree = "<group>";
+		};
+		EA3337D72797E6AA00612DC3 /* SQLCipher */ = {
+			isa = PBXGroup;
+			children = (
+				EA3337D82797E6AA00612DC3 /* LICENSE */,
+				EA3337DC2797E6AA00612DC3 /* sqlite3.h */,
+				EA3337D92797E6AA00612DC3 /* sqlite3.c */,
+				EA3337DA2797E6AA00612DC3 /* README */,
+				EA3337DB2797E6AA00612DC3 /* README.md */,
+			);
+			path = SQLCipher;
 			sourceTree = "<group>";
 		};
 		EA5D10A4277ED4FB004FCE4C /* MBProgressHUD */ = {
@@ -874,6 +909,7 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA3337D52797DA8800612DC3 /* SystemConfiguration.framework */,
 				EA75BB482792ABA100910B4C /* libz.tbd */,
 				EA75BB462792AB9B00910B4C /* libsqlite3.tbd */,
 				EA922581276B3EAA00192E2E /* QuartzCore.framework */,
@@ -1247,11 +1283,11 @@
 		EADB007927623B59001B7223 /* FrameworkStruct */ = {
 			isa = PBXGroup;
 			children = (
+				EADB009627623C34001B7223 /* OriginObject */,
+				EADB009327623C1E001B7223 /* BasicObject */,
 				EADB009527623C2D001B7223 /* Interface */,
 				EADB009927623C48001B7223 /* ViewComponents */,
 				EADB009227623C15001B7223 /* Storyboard */,
-				EADB009627623C34001B7223 /* OriginObject */,
-				EADB009327623C1E001B7223 /* BasicObject */,
 				EADB009727623C3B001B7223 /* Packages */,
 				EA7A7CB527882FB100DD2310 /* Components */,
 				EADB009827623C42001B7223 /* Tools */,
@@ -1399,6 +1435,7 @@
 		EADB009A27623C4C001B7223 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				EA3337D72797E6AA00612DC3 /* SQLCipher */,
 				EA75BB292792AA7B00910B4C /* fmdb */,
 				EA9F1CBF27916B3C0086E78C /* UIView+FrameSet */,
 				EA1AE44A277819E600D028F9 /* SnapKit */,
@@ -1462,8 +1499,8 @@
 			children = (
 				EADB010F2762422D001B7223 /* README.md */,
 				EADB010E2762422D001B7223 /* PlistAccessor.swift */,
-				EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */,
 				EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */,
+				EA3337C62797AB7D00612DC3 /* SandBoxAccessor */,
 				EADB014E276244F2001B7223 /* DatabaseAccessor */,
 			);
 			path = DataAccessor;
@@ -1620,14 +1657,17 @@
 			files = (
 				EADB008727623B5A001B7223 /* LaunchScreen.storyboard in Resources */,
 				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
+				EA3337DD2797E6AA00612DC3 /* LICENSE in Resources */,
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
+				EA3337DF2797E6AA00612DC3 /* README in Resources */,
 				EA9F1CBA27914D230086E78C /* WarmPromptView.xib in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
+				EA3337E02797E6AA00612DC3 /* README.md in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
 				EADB00BA27623EA3001B7223 /* InfoPlist.strings in Resources */,
 			);
@@ -1677,6 +1717,7 @@
 				EA1AE48C277819E600D028F9 /* ConstraintItem.swift in Sources */,
 				EADB01372762433C001B7223 /* ThemeContainer.swift in Sources */,
 				EAC8A87B27625D490088293F /* UIView+WebCache.m in Sources */,
+				EA3337DE2797E6AA00612DC3 /* sqlite3.c in Sources */,
 				EAC8A85827625D490088293F /* SDGraphicsImageRenderer.m in Sources */,
 				EA1AE47B277819E600D028F9 /* ConstraintPriority.swift in Sources */,
 				EA75BB382792AA7C00910B4C /* FMDatabase.m in Sources */,
@@ -1850,6 +1891,7 @@
 				EA1AE483277819E600D028F9 /* ConstraintLayoutSupport.swift in Sources */,
 				EA1AE488277819E600D028F9 /* ConstraintMaker.swift in Sources */,
 				EADB00AE27623C76001B7223 /* OriginModel.swift in Sources */,
+				EA3337C82797ABC600612DC3 /* SandBoxConst.swift in Sources */,
 				EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */,
 				EAC8A87E27625D490088293F /* SDWebImageDownloaderRequestModifier.m in Sources */,
 				EADB011D276242D1001B7223 /* TimeEmbellisher.swift in Sources */,
@@ -1941,10 +1983,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1959,11 +2003,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
@@ -2005,10 +2053,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2017,10 +2067,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
@@ -2032,43 +2086,79 @@
 		EADB008C27623B5A001B7223 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83B9QXX2U6;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_CFLAGS = (
+					"-DSQLITE_HAS_CODEC",
+					"-DSQLITE_TEMP_STORE=2",
+					"-DSQLITE_THREADSAFE",
+					"-DSQLCIPHER_CRYPTO_CC",
+					"-DSQLITE_THREADSAFE",
+					"-DSQLITE_TEMP_STORE=2",
+					"-DSQLITE_HAS_CODEC",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				WARNING_CFLAGS = "-Wdeprecated-declarations";
 			};
 			name = Debug;
 		};
 		EADB008D27623B5A001B7223 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83B9QXX2U6;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_CFLAGS = (
+					"-DSQLITE_HAS_CODEC",
+					"-DSQLITE_TEMP_STORE=2",
+					"-DSQLITE_THREADSAFE",
+					"-DSQLCIPHER_CRYPTO_CC",
+					"-DSQLITE_THREADSAFE",
+					"-DSQLITE_TEMP_STORE=2",
+					"-DSQLITE_HAS_CODEC",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				WARNING_CFLAGS = "-Wdeprecated-declarations";
 			};
 			name = Release;
 		};

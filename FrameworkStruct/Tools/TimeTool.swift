@@ -10,21 +10,21 @@
  */
 import Foundation
 
-//一小时的秒数
-let kSecondsInHour: TimeInterval = 3600
+///一小时的秒数
+let tSecondsInHour: TimeInterval = 3600
 
-//一天的秒数
-let kSecondsInDay: TimeInterval = 86400
+///一天的秒数
+let tSecondsInDay: TimeInterval = 86400
 
-//一年的秒数，非闰年
-let kSecondsInYear: TimeInterval = 31536000
+///一年的秒数，非闰年
+let tSecondsInYear: TimeInterval = 31536000
 
-//一年的秒数，闰年
-let kSecondsInLeapYear: TimeInterval = kSecondsInYear + kSecondsInDay
+///一年的秒数，闰年
+let tSecondsInLeapYear: TimeInterval = tSecondsInYear + tSecondsInDay
 
 
-//日期字符串格式
-enum DTStringFormat: String
+///日期字符串格式
+enum TimeStringFormat: String
 {
     case slashYearMonthDayHourMinSecSSS = "YYYY/MM/dd HH:mm:ss.SSS"
     case slashYearMonthDayHourMinSec = "YYYY/MM/dd HH:mm:ss"
@@ -35,16 +35,16 @@ enum DTStringFormat: String
     
 }
 
-//获取系统当前时间，OTC时间
+///获取系统当前时间，OTC时间
 func getCurrentTimeString() -> String
 {
     let formatter = DateFormatter()
-    formatter.dateFormat = DTStringFormat.slashYearMonthDayHourMinSecSSS.rawValue
+    formatter.dateFormat = TimeStringFormat.slashYearMonthDayHourMinSecSSS.rawValue
     // GMT时间 转字符串，直接是系统当前时间
     return formatter.string(from: Date())
 }
 
-//获取系统当前时间距离1970年秒数，OTC时间
+///获取系统当前时间距离1970年秒数，OTC时间
 func getCurrentTimeInterval() -> TimeInterval
 {
     let date = Date()
