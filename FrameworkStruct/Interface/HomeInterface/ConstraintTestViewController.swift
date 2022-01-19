@@ -12,17 +12,17 @@ class ConstraintTestViewController: BasicViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-    
-    override func createUI() {
-        super.createUI()
+        self.backStyle = .light
         self.backgroundStyle = .gradientDark
         self.statusBarStyle = .light
         self.navAlpha = true
         self.navTitleColor = .white
-        self.backStyle = .light
         
+    }
+    
+    override func createUI() {
+        super.createUI()
+
         let topLine = UIView()
         topLine.backgroundColor = .red
         self.view.addSubview(topLine)

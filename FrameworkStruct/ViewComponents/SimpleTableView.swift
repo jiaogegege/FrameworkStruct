@@ -88,8 +88,8 @@ class SimpleTableView: UIView
     fileprivate var totalHeight: CGFloat = 0.0
     
     //UI组件
-    var bgView: UIView!     //背景视图，上面不放任何内容，主要用于调节背景的显示，比如颜色，图片等
-    var containerView: UIView!  //内容视图，所有内容放在这里，透明色
+    fileprivate var bgView: UIView!     //背景视图，上面不放任何内容，主要用于调节背景的显示，比如颜色，图片等
+    fileprivate var containerView: UIView!  //内容视图，所有内容放在这里，透明色
     
     
     //MARK: 方法

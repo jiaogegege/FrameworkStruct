@@ -39,7 +39,8 @@ class SimpleTableViewController: BasicViewController
     override func createUI() {
         super.createUI()
         self.backgroundStyle = .lightGray
-        self.navTitleColor = self.theme.mainColor
+        self.navTitleColor = .green
+        self.navBackgroundColor = .red
         self.table = SimpleTableView.init(frame: CGRect(x: 0, y: 0, width: self.containerView.width, height: containerView.height))
         self.containerView.addSubview(self.table)
     }
