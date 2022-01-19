@@ -8,21 +8,23 @@
 /**
  * 定义全局通用的接口
  *
- * - important:
- *
- * - warning:
- *
- * - attention:
- *
- * - note:
- *
- * - version:
- *
  * - parameters:
+ *  - <#参数1: #>
  *
  * - returns:
+ *  - <#返回值#>
  *
- * - throws:
+ * - throws: <#异常说明#>
+ *
+ * - important: <#重要信息#>
+ *
+ * - warning: <#警告信息#>
+ *
+ * - attention: <#注意事项#>
+ *
+ * - note: <#提示信息#>
+ *
+ * - version: <#版本信息#>
  *
  */
 import Foundation

@@ -1563,8 +1563,8 @@
 			isa = PBXGroup;
 			children = (
 				EADB014F2762450E001B7223 /* README.md */,
-				EA75BB272792A88400910B4C /* DatabaseConst.swift */,
 				EA75BB252792A80900910B4C /* DatabaseAccessor.swift */,
+				EA75BB272792A88400910B4C /* DatabaseConst.swift */,
 				EA75BB4A2792B10D00910B4C /* DatabaseFile */,
 			);
 			path = DatabaseAccessor;
