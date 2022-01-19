@@ -52,14 +52,14 @@ enum FSNotification: String
 }
 
 
-//MARK: 工程中通用错误信息
+//MARK: 项目中通用错误信息
 
 
 //MARK: Storyboard文件名定义
-//主界面
-let gMainSB = "Main"
 //启动界面
 let gLaunchSB = "LaunchScreen"
+//主界面
+let gMainSB = "Main"
 
 
 //MARK: 正则表达式

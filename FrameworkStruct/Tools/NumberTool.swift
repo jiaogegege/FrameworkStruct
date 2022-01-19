@@ -22,6 +22,20 @@ func floatEqual(_ a: Float, _ b: Float) -> Bool
     return fabsf(a - b) < Float.ulpOfOne
 }
 
+///判断某个数字是否在一个区间范围内(包含)
+func numberInInterval<T: Comparable>(_ val: T, lhs: T, rhs: T) -> Bool
+{
+    //计算最小最大范围
+    let min = minBetween(one: lhs, other: rhs)
+    let max = maxBetween(one: lhs, other: rhs)
+    //大于等于最小值，小于等于最大值
+    if val >= min && val <= max
+    {
+        return true
+    }
+    return false
+}
+
 ///求两个数值中的最大值
 func maxBetween<T: Comparable>(one: T, other: T) -> T
 {
