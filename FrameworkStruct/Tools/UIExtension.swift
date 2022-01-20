@@ -145,13 +145,19 @@ extension UIButton
         } else {
             // Fallback on earlier versions
         }
-        self.clickDisable()
+        if self.disableInterval > 0.0
+        {
+            self.clickDisable()
+        }
     }
     
     ///重写button方法，拦截响应事件并执行不可点击的时间间隔
     open override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
         super.sendAction(action, to: target, for: event)
-        self.clickDisable()
+        if self.disableInterval > 0.0
+        {
+            self.clickDisable()
+        }
     }
     
 }
@@ -220,11 +226,11 @@ extension UITableView: InternalType
         var positionCount: Int {
             switch self {
             case .sectionTag(let section):  //如果不是-1，那么section占据1位，如果是-1，那么不占位置
-                return section >= -1 ? 1 : 0
+                return section > -1 ? 1 : 0
             case .rowTag(let row):
-                return row >= -1 ? 1 : 0
+                return row > -1 ? 1 : 0
             case .indexPathTag(let section, let row):
-                return (section >= -1 && row >= -1) ? 1 : 0
+                return (section > -1 && row > -1) ? 1 : 0
             }
         }
 

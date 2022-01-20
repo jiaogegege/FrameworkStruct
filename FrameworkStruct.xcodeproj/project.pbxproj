@@ -1784,6 +1784,7 @@
 				EADB00E22762410D001B7223 /* StringConst.swift */,
 				EADB00E32762410D001B7223 /* ColorConst.swift */,
 				EADB00E12762410C001B7223 /* ImageConst.swift */,
+				EA9A4A982780349500170BB3 /* OCConst.h */,
 			);
 			path = Consts;
 			sourceTree = "<group>";
@@ -1918,7 +1919,6 @@
 			children = (
 				EADB008827623B5A001B7223 /* Info.plist */,
 				EA9A4A992780350500170BB3 /* OCHeader.h */,
-				EA9A4A982780349500170BB3 /* OCConst.h */,
 				EADB00CF27624011001B7223 /* FrameworkStruct-Bridging-Header.h */,
 			);
 			path = Others;
