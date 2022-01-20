@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.sWaterfall, String.sThemeSelect, String.sModalShow, String.sConstraintTest, String.sDrawTable]
+    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow]
 
     override func viewDidLoad() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
@@ -47,7 +47,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         if indexPath.row == 0
         {
             let jcolVC = JCollectionViewController.init()
@@ -75,6 +76,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
             let vc = SimpleTableViewController.getViewController()
             self.navigationController?.pushViewController(vc, animated: true)
             
+        }
+        else if indexPath.row == 5  //阴影测试
+        {
+            let vc = ShadowTestViewController.getViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

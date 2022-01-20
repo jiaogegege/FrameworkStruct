@@ -24,4 +24,6 @@
 #import "WeakSet.h"
 #import "WeakDictionary.h"
 #import "UIView+FrameSet.h"
+#import "UIView+Cate.h"
 #import "FMDB.h"
+#import "TABAnimated.h"

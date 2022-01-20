@@ -11,15 +11,28 @@
  * 英文
  */
 
-confirm = "Confirm";
-cancel = "Cancel";
+/**
+ * 控制器标题
+ */
 waterfall = "Waterfall";
 themeSelect = "Theme Select";
 modalShow = "Modal Show";
 constraintTest = "Constraint Test";
+drawTable = "Draw Table";
+layerShadow = "Layer Shadow";
+
+/**
+ * 界面提示和按钮文案
+ */
+confirm = "Confirm";
+cancel = "Cancel";
+iKnown = "I known";
 selectFromPhotoLibiary = "Select From Photo Libiary";
 takePhotoWithCamera = "Take Photo With Camera";
+
+/**
+ * 长文案
+ */
 teenagerProtectContent = "In order to protect the healthy growth of minors, the framework structure specially launches a youth mode, which cannot be used normally. Please ask the guardian to actively select and set the guardian password.";
 setTeenagerMode = "Enter Teenager Mode";
-iKnown = "I known";
-drawTable = "Draw Table";
+

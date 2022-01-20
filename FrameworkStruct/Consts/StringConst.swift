@@ -34,29 +34,31 @@ extension String
 extension String
 {
     //瀑布流
-    static let sWaterfall = localized("waterfall")
+    static let waterfall = localized("waterfall")
     //确定
-    static let sConfirm = localized("confirm")
+    static let confirm = localized("confirm")
     //取消
-    static let sCancel = localized("cancel")
+    static let cancel = localized("cancel")
     //主题选择
-    static let sThemeSelect = localized("themeSelect")
+    static let themeSelect = localized("themeSelect")
     //模态显示
-    static let sModalShow = localized("modalShow")
+    static let modalShow = localized("modalShow")
     //约束测试
-    static let sConstraintTest = localized("constraintTest")
+    static let constraintTest = localized("constraintTest")
     //从相册选择
-    static let sSelectFromPhotoLibiary = localized("selectFromPhotoLibiary")
+    static let selectFromPhotoLibiary = localized("selectFromPhotoLibiary")
     //拍照
-    static let sTakePhotoWithCamera = localized("takePhotoWithCamera")
+    static let takePhotoWithCamera = localized("takePhotoWithCamera")
     //青少年模式弹窗内容
-    static let sTeenagerProtectContent = localized("teenagerProtectContent")
+    static let teenagerProtectContent = localized("teenagerProtectContent")
     //进入青少年模式文字
-    static let sEnterTeenMode = localized("setTeenagerMode")
+    static let enterTeenMode = localized("setTeenagerMode")
     //我知道了
-    static let sIKnown = localized("iKnown")
+    static let iKnown = localized("iKnown")
     //绘制表格
-    static let sDrawTable = localized("drawTable")
+    static let drawTable = localized("drawTable")
+    //图层阴影
+    static let layerShadow = localized("layerShadow")
     
 
     //便利方法

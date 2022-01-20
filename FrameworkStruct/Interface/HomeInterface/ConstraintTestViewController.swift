@@ -45,7 +45,7 @@ class ConstraintTestViewController: BasicViewController {
     
     override func configUI() {
         super.configUI()
-        self.title = String.sConstraintTest
+        self.title = String.constraintTest
         
     }
 

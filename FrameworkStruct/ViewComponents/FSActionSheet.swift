@@ -70,7 +70,7 @@ extension FSActionSheet: ExternalInterface
         //添加取消按钮
         if let cancel = cancelAction
         {
-            let cancelAct = UIAlertAction(title: String.sCancel, style: .cancel, handler: cancel)
+            let cancelAct = UIAlertAction(title: String.cancel, style: .cancel, handler: cancel)
 //            cancelAct.setValue(tintColor, forKey: "titleTextColor")
             actionSheet.addAction(cancelAct)
         }

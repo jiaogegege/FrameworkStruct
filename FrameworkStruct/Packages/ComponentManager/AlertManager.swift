@@ -179,9 +179,9 @@ class AlertManager: OriginManager
     fileprivate func createAlert(title: String? = nil,
                                  message: String? = nil,
                                  messageAlign: NSTextAlignment = .center,
-                                 leftTitle: String? = String.sCancel,
+                                 leftTitle: String? = String.cancel,
                                  leftBlock: VoidClosure? = nil,
-                                 rightTitle: String? = String.sConfirm,
+                                 rightTitle: String? = String.confirm,
                                  rightBlock: VoidClosure? = nil) -> FSAlertView?
     {
         var ident = ""
@@ -292,9 +292,9 @@ extension AlertManager: ExternalInterface
     func wantPresentAlert(title: String? = nil,
                           message: String? = nil,
                           messageAlign: NSTextAlignment = .center,
-                          leftTitle: String? = String.sCancel,
+                          leftTitle: String? = String.cancel,
                           leftBlock: VoidClosure? = nil,
-                          rightTitle: String? = String.sConfirm,
+                          rightTitle: String? = String.confirm,
                           rightBlock: VoidClosure? = nil)
     {
         if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
@@ -315,9 +315,9 @@ extension AlertManager: ExternalInterface
     func directPresentAlert(title: String? = nil,
                             message: String? = nil,
                             messageAlign: NSTextAlignment = .center,
-                            leftTitle: String? = String.sCancel,
+                            leftTitle: String? = String.cancel,
                             leftBlock: VoidClosure? = nil,
-                            rightTitle: String? = String.sConfirm,
+                            rightTitle: String? = String.confirm,
                             rightBlock: VoidClosure? = nil)
     {
         if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
@@ -368,8 +368,8 @@ extension AlertManager: ExternalInterface
     func wantPresentPhotoSheet(photoBlock: @escaping VoidClosure, cameraBlock: @escaping VoidClosure, cancelBlock:VoidClosure? = nil)
     {
         //组装照片和相机的回调
-        let photoItem = [String.sSelectFromPhotoLibiary: photoBlock]
-        let cameraItem = [String.sTakePhotoWithCamera: cameraBlock]
+        let photoItem = [String.selectFromPhotoLibiary: photoBlock]
+        let cameraItem = [String.takePhotoWithCamera: cameraBlock]
         if let sheet = self.createActionSheet(title: nil, message: nil, blockArray: [photoItem, cameraItem], cancelBlock: cancelBlock)
         {
             self.wantPresent(vc: sheet)

@@ -50,9 +50,9 @@ extension FSAlertView: ExternalInterface
                           messageAlign: NSTextAlignment = .center,
                           identifierKey: String,
                           tintColor: UIColor,
-                          cancelTitle: String? = String.sCancel,
+                          cancelTitle: String? = String.cancel,
                           cancelBlock:((UIAlertAction) -> Void)? = nil,
-                          confirmTitle: String? = String.sConfirm,
+                          confirmTitle: String? = String.confirm,
                           confirmBlock:((UIAlertAction) -> Void)? = nil,
                           inViewController: UIViewController? = nil) -> FSAlertView?
     {

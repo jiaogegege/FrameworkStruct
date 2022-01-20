@@ -65,7 +65,7 @@ class TeenagerModeDialog: FSDialog
         }
         
         //内容说明
-        contentLabel.text = String.sTeenagerProtectContent
+        contentLabel.text = String.teenagerProtectContent
         contentLabel.textColor = ThemeManager.shared.getCurrentTheme().contentTextColor
         contentLabel.font = UIFont.systemFont(ofSize: fit8(14))
         contentLabel.textAlignment = .center
@@ -77,7 +77,7 @@ class TeenagerModeDialog: FSDialog
         }
         
         //选择模式按钮
-        goBtn.setTitle(String.sEnterTeenMode + " >", for: .normal)
+        goBtn.setTitle(String.enterTeenMode + " >", for: .normal)
         goBtn.titleLabel?.font = UIFont.systemFont(ofSize: fit8(15))
         goBtn.setTitleColor(.systemBlue, for: .normal)
         goBtn.addTarget(self, action: #selector(gotoTeenAction(sender:)), for: .touchUpInside)
@@ -97,7 +97,7 @@ class TeenagerModeDialog: FSDialog
         }
         
         //我知道了按钮
-        confirmBtn.setTitle(.sIKnown, for: .normal)
+        confirmBtn.setTitle(.iKnown, for: .normal)
         confirmBtn.titleLabel?.font = UIFont.systemFont(ofSize: fitX(20))
         confirmBtn.setTitleColor(self.themeColor, for: .normal)
         confirmBtn.addTarget(self, action: #selector(iKnownAction(sender:)), for: .touchUpInside)
