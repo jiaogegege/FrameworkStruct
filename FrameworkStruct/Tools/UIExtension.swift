@@ -202,7 +202,7 @@ extension UITableView
 ///UITableView内部类型
 extension UITableView: InternalType
 {
-    ///UITableView的section、row标记
+    ///UITableView的section、row的位置标记
     ///用来替代indexPath的section和row的数字写法，改成枚举绑定数字，绑定的值就是那一行在tableview中的位置
     ///绑定的值由业务逻辑决定，需要使用者手动绑定；如果指定的那一行不存在，那么绑定值为-1或其他负数
     enum IndexPathTag
