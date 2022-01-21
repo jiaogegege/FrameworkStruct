@@ -10,6 +10,7 @@
  */
 import UIKit
 
+//MARK: 扩展存储属性的key
 /**
  * 扩展存储属性的key
  * 用于给系统组件动态添加存储属性
@@ -21,7 +22,7 @@ struct UIExtensionStoragePropertyKey
     
 }
 
-
+//MARK: UIViewController
 /**
  * UIViewController
  */
@@ -43,6 +44,7 @@ extension UIViewController
 }
 
 
+//MARK: UIView
 /**
  * UIView
  */
@@ -110,6 +112,7 @@ extension UIView
 }
 
 
+//MARK: UIButton
 /**
  * UIButton
  */
@@ -163,6 +166,7 @@ extension UIButton
 }
 
 
+//MARK: UITableView
 /**
  * UITableView
  */
@@ -201,7 +205,7 @@ extension UITableView: InternalType
     ///UITableView的section、row标记
     ///用来替代indexPath的section和row的数字写法，改成枚举绑定数字，绑定的值就是那一行在tableview中的位置
     ///绑定的值由业务逻辑决定，需要使用者手动绑定；如果指定的那一行不存在，那么绑定值为-1或其他负数
-    enum UITableViewIndexPathTag
+    enum IndexPathTag
     {
         case sectionTag(Int)    //绑定section标记
         case rowTag(Int)    //绑定row标记
@@ -233,12 +237,22 @@ extension UITableView: InternalType
                 return (section > -1 && row > -1) ? 1 : 0
             }
         }
+        
+        ///传入一个枚举类型数组，返回应该显示的section或者row的总数
+        ///参数:`itemArray`：总是同一种类型的，比如都是`sectionTag`
+        static func totalCount(itemArray: Array<IndexPathTag>) -> Int
+        {
+            return itemArray.reduce(0) { count, indexPath in
+                count + indexPath.positionCount
+            }
+        }
 
     }
     
 }
 
 
+//MARK: UIColor
 /**
  * UIColor
  */
@@ -311,6 +325,7 @@ extension UIColor
 }
 
 
+//MARK: UIImage
 /**
  * UIImage
  */

@@ -21,6 +21,7 @@ class ViewController: BasicViewController
         self.title = "功能选择"
     }
     
+    //创建界面
     override func createUI() {
         super.createUI()
         
@@ -31,6 +32,16 @@ class ViewController: BasicViewController
     {
         super.configUI()
 
+    }
+    
+    //初始化数据
+    override func initData() {
+        
+    }
+    
+    //更新界面
+    override func updateUI() {
+        
     }
 
 }
