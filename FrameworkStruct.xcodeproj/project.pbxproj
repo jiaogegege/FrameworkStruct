@@ -151,8 +151,6 @@
 		EA9A4A882780309E00170BB3 /* FSTextField+ChangeBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A862780309E00170BB3 /* FSTextField+ChangeBlock.m */; };
 		EA9A4A8C278030A800170BB3 /* CountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A8A278030A700170BB3 /* CountDownButton.m */; };
 		EA9A4A92278032D800170BB3 /* UIButton+ButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */; };
-		EA9F1CBA27914D230086E78C /* WarmPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9F1CB427914D230086E78C /* WarmPromptView.xib */; };
-		EA9F1CBB27914D230086E78C /* WarmPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CB527914D230086E78C /* WarmPromptView.m */; };
 		EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CBD279153BA0086E78C /* FSDialog.swift */; };
 		EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
@@ -542,9 +540,6 @@
 		EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ButtonBlock.h"; sourceTree = "<group>"; };
 		EA9A4A982780349500170BB3 /* OCConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCConst.h; sourceTree = "<group>"; };
 		EA9A4A992780350500170BB3 /* OCHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCHeader.h; sourceTree = "<group>"; };
-		EA9F1CB427914D230086E78C /* WarmPromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarmPromptView.xib; sourceTree = "<group>"; };
-		EA9F1CB527914D230086E78C /* WarmPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarmPromptView.m; sourceTree = "<group>"; };
-		EA9F1CB827914D230086E78C /* WarmPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarmPromptView.h; sourceTree = "<group>"; };
 		EA9F1CBD279153BA0086E78C /* FSDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSDialog.swift; sourceTree = "<group>"; };
 		EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameSet.m"; sourceTree = "<group>"; };
 		EA9F1CC127916B3C0086E78C /* UIView+FrameSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameSet.h"; sourceTree = "<group>"; };
@@ -1857,10 +1852,10 @@
 			children = (
 				EADB014B276243FC001B7223 /* README.md */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
-				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
-				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
 				EA9F1CBD279153BA0086E78C /* FSDialog.swift */,
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
+				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
+				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
 				EA283F572795465A001A2710 /* SimpleTableView.swift */,
 				EA9A4A842780309E00170BB3 /* FSTextField.h */,
 				EA9A4A832780309D00170BB3 /* FSTextField.m */,
@@ -1870,9 +1865,6 @@
 				EA9A4A8A278030A700170BB3 /* CountDownButton.m */,
 				EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */,
 				EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */,
-				EA9F1CB827914D230086E78C /* WarmPromptView.h */,
-				EA9F1CB527914D230086E78C /* WarmPromptView.m */,
-				EA9F1CB427914D230086E78C /* WarmPromptView.xib */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -2108,7 +2100,6 @@
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
-				EA9F1CBA27914D230086E78C /* WarmPromptView.xib in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
@@ -2248,7 +2239,6 @@
 				EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */,
 				EA99374C27994F6100480147 /* UITableView+TABControlAnimation.m in Sources */,
 				EA99372E27994F6100480147 /* TABAnimatedDarkModeImpl.m in Sources */,
-				EA9F1CBB27914D230086E78C /* WarmPromptView.m in Sources */,
 				EADB012A2762430B001B7223 /* StatusManager.m in Sources */,
 				EA1AE485277819E600D028F9 /* ConstraintConstantTarget.swift in Sources */,
 				EAC8A87227625D490088293F /* UIImageView+WebCache.m in Sources */,
