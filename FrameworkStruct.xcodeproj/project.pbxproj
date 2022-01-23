@@ -77,6 +77,7 @@
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
 		EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CBB278830A200DD2310 /* WeakArray.m */; };
+		EA83FFF6279D9833000F6473 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA83FFF5279D9833000F6473 /* CoreGraphics.framework */; };
 		EA84848D278F132E000E7FC2 /* FSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA84848C278F132E000E7FC2 /* FSActionSheet.swift */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
@@ -388,6 +389,7 @@
 		EA7A7CB82788305200DD2310 /* WeakSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakSet.m; sourceTree = "<group>"; };
 		EA7A7CBA278830A200DD2310 /* WeakArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakArray.h; sourceTree = "<group>"; };
 		EA7A7CBB278830A200DD2310 /* WeakArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakArray.m; sourceTree = "<group>"; };
+		EA83FFF5279D9833000F6473 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EA84848C278F132E000E7FC2 /* FSActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSActionSheet.swift; sourceTree = "<group>"; };
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
 				EA3337D62797DA8800612DC3 /* SystemConfiguration.framework in Frameworks */,
 				EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */,
+				EA83FFF6279D9833000F6473 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,11 +947,11 @@
 		EA3337D72797E6AA00612DC3 /* SQLCipher */ = {
 			isa = PBXGroup;
 			children = (
-				EA3337D82797E6AA00612DC3 /* LICENSE */,
-				EA3337DC2797E6AA00612DC3 /* sqlite3.h */,
-				EA3337D92797E6AA00612DC3 /* sqlite3.c */,
 				EA3337DA2797E6AA00612DC3 /* README */,
 				EA3337DB2797E6AA00612DC3 /* README.md */,
+				EA3337DC2797E6AA00612DC3 /* sqlite3.h */,
+				EA3337D92797E6AA00612DC3 /* sqlite3.c */,
+				EA3337D82797E6AA00612DC3 /* LICENSE */,
 			);
 			path = SQLCipher;
 			sourceTree = "<group>";
@@ -1073,6 +1076,7 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA83FFF5279D9833000F6473 /* CoreGraphics.framework */,
 				EA3337D52797DA8800612DC3 /* SystemConfiguration.framework */,
 				EA75BB482792ABA100910B4C /* libz.tbd */,
 				EA75BB462792AB9B00910B4C /* libsqlite3.tbd */,
@@ -1417,20 +1421,20 @@
 		EAC8A73E27625B450088293F /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				EAC8A73F27625B450088293F /* AFSecurityPolicy.h */,
-				EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */,
-				EAC8A74127625B450088293F /* AFURLSessionManager.h */,
-				EAC8A74227625B450088293F /* AFURLRequestSerialization.h */,
-				EAC8A74327625B450088293F /* AFURLResponseSerialization.m */,
-				EAC8A74427625B450088293F /* AFHTTPSessionManager.m */,
-				EAC8A74527625B450088293F /* AFURLResponseSerialization.h */,
-				EAC8A74627625B450088293F /* AFURLSessionManager.m */,
-				EAC8A74727625B450088293F /* AFURLRequestSerialization.m */,
 				EAC8A74827625B450088293F /* AFNetworking.h */,
-				EAC8A74927625B450088293F /* AFNetworkReachabilityManager.m */,
-				EAC8A74A27625B450088293F /* AFSecurityPolicy.m */,
 				EAC8A74B27625B450088293F /* AFCompatibilityMacros.h */,
+				EAC8A73F27625B450088293F /* AFSecurityPolicy.h */,
+				EAC8A74A27625B450088293F /* AFSecurityPolicy.m */,
+				EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */,
+				EAC8A74927625B450088293F /* AFNetworkReachabilityManager.m */,
+				EAC8A74127625B450088293F /* AFURLSessionManager.h */,
+				EAC8A74627625B450088293F /* AFURLSessionManager.m */,
+				EAC8A74227625B450088293F /* AFURLRequestSerialization.h */,
+				EAC8A74727625B450088293F /* AFURLRequestSerialization.m */,
+				EAC8A74427625B450088293F /* AFHTTPSessionManager.m */,
 				EAC8A74C27625B450088293F /* AFHTTPSessionManager.h */,
+				EAC8A74527625B450088293F /* AFURLResponseSerialization.h */,
+				EAC8A74327625B450088293F /* AFURLResponseSerialization.m */,
 			);
 			path = AFNetworking;
 			sourceTree = "<group>";
@@ -2580,7 +2584,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83B9QXX2U6;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
@@ -2599,7 +2603,7 @@
 					"-DSQLITE_TEMP_STORE=2",
 					"-DSQLITE_HAS_CODEC",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
@@ -2620,7 +2624,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83B9QXX2U6;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
@@ -2639,7 +2643,7 @@
 					"-DSQLITE_TEMP_STORE=2",
 					"-DSQLITE_HAS_CODEC",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";

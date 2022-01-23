@@ -10,11 +10,7 @@ import UIKit
 class BasicTableViewController: UITableViewController
 {
     //MARK: 属性
-    //状态管理器，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: 5)
-    //当前主题，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var theme = ThemeManager.shared.getCurrentTheme()
-    
+    /******************** 外部接口属性 Section Begin *******************/
     /**
      * 请按照声明顺序设置以下属性
      */
@@ -79,6 +75,14 @@ class BasicTableViewController: UITableViewController
             return self.statusBarStyle == .dark ? .default : .lightContent
         }
     }
+    /******************** 外部接口属性 Section End *******************/
+    
+    /******************** 内部属性 Section Begin *******************/
+    //状态管理器，只能在本类中修改，外部和子类仅访问
+    fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
+    //当前主题，只能在本类中修改，外部和子类仅访问
+    fileprivate(set) var theme = ThemeManager.shared.getCurrentTheme()
+    /******************** 内部属性 Section End *******************/
     
     
     //MARK: 方法
@@ -158,23 +162,19 @@ class BasicTableViewController: UITableViewController
     //设置返回按钮样式
     fileprivate func setBackStyle()
     {
-        switch self.backStyle
-        {
-        case .dark:
-            let backItem = UIBarButtonItem(image: UIImage.iBackDark?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction(sender:)))
-            let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            spaceItem.width = -10
-            self.navigationItem.leftBarButtonItems = [backItem]
-        case .light:
-            let backItem = UIBarButtonItem(image: UIImage.iBackLight?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction(sender:)))
-            let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            spaceItem.width = -10
-            self.navigationItem.leftBarButtonItems = [backItem]
-        case .close:
-            let backItem = UIBarButtonItem(image: UIImage.iBackClose?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction(sender:)))
-            let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            spaceItem.width = -10
-            self.navigationItem.leftBarButtonItems = [backItem]
+        switch backStyle {
+        case .dark, .light, .close:
+            if let image = backStyle.getImage() //如果有图片，那么创建返回按钮
+            {
+                let backItem = UIBarButtonItem(image: image.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction(sender:)))
+                let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+                spaceItem.width = -10
+                self.navigationItem.leftBarButtonItems = [backItem]
+            }
+            else    //如果没有返回图片，那么使用系统自带返回按钮
+            {
+                self.navigationItem.hidesBackButton = false
+            }
         case .none:
             self.navigationItem.hidesBackButton = true
             self.navigationItem.leftBarButtonItems = []
@@ -256,7 +256,7 @@ class BasicTableViewController: UITableViewController
         else
         {
             self.navigationController?.navigationBar.barTintColor = self.navBackgroundColor
-            self.navigationController?.navigationBar.tintColor = self.navBackgroundColor
+//            self.navigationController?.navigationBar.tintColor = self.navBackgroundColor  //这一行会修改导航栏上的系统按钮颜色，比如返回按钮
         }
     }
     
@@ -304,6 +304,7 @@ class BasicTableViewController: UITableViewController
         else
         {
             self.navigationController?.navigationBar.titleTextAttributes = attrDic
+//            self.navigationController?.navigationBar.tintColor = self.navTitleColor   //这一行会修改导航栏上的系统按钮颜色，比如返回按钮
         }
     }
     
@@ -315,7 +316,6 @@ class BasicTableViewController: UITableViewController
     
     
     //MARK: 可被子类覆写的方法
-    
     //返回按钮事件
     //子类可以覆写这个方法
     @objc func backAction(sender: UIBarButtonItem)
