@@ -62,6 +62,9 @@ typealias VoidClosure = (() -> Void)
 
 //MARK: 基础常量定义
 
+///控制器的状态管理器最大步数，可在程序运行过程中改变，那么会影响改变之后创建的控制器的状态管理器步数
+var vcStatusStep: Int = 5
+
 //状态栏内容颜色定义
 enum VCStatusBarStyle {
     case dark   //深色
@@ -76,6 +79,21 @@ enum VCBackStyle
     case close  //关闭按钮
     case none   //不显示返回按钮
     
+    ///获得图片，如果是none则返回nil
+    func getImage() -> UIImage?
+    {
+        switch self {
+        case .dark:
+            return UIImage.iBackDark
+        case .light:
+            return UIImage.iBackLight
+        case .close:
+            return UIImage.iBackClose
+        case .none:
+            return nil
+        }
+    }
+    
 }
 
 //VC背景色样式，定义成枚举而非颜色常量的原因是，有可能背景是渐变色或者图像，可以在枚举中进行扩展
@@ -88,7 +106,7 @@ enum VCBackgroundStyle
     case pink   //0xff709b
     case clear  //透明背景
     case gradientDark   //一种深色的渐变色，创建一个渐变图层
-    case bgImage(img: UIImage?, alpha: CGFloat)   //背景是图片，绑定一个图片文件名参数，和透明度参数
+    case bgImage(img: UIImage?, alpha: Float)   //背景是图片，绑定一个图片文件名参数，和透明度参数
     
     //返回颜色或者渐变图层或者图像图层
     //UIColor/CALayer
@@ -119,7 +137,7 @@ enum VCBackgroundStyle
             la.frame = Utility.getWindow().bounds
             la.zPosition = -1
             la.contents = cgImg
-            la.opacity = Float(alpha)
+            la.opacity = alpha
             return la
         }
     }
