@@ -34,6 +34,9 @@ class ShadowTestViewController: BasicViewController {
         greenView.setLayerShadow(offset: CGSize(width: -5, height: 5))
         view.addSubview(greenView)
 
+        let view1 = UIView(frame: CGRect(x: 100, y: 550, width: 100, height: 100))
+        view1.addRadiusAndShadow(cornerSide: .bottom, bgColor: .cAccent!, shadowOffset: CGSize(width: 5, height: 5))
+        view.addSubview(view1)
     }
 
 }

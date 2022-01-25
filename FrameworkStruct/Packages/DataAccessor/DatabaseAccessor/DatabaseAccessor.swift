@@ -14,7 +14,9 @@ class DatabaseAccessor: OriginAccessor
     static let shared = DatabaseAccessor()
     
     //数据库对象
-    var database: FMDatabase!
+    fileprivate var database: FMDatabase!
+    //数据库操作队列
+    fileprivate var dbQueue: FMDatabaseQueue!
     
     
     //MARK: 方法
@@ -24,7 +26,13 @@ class DatabaseAccessor: OriginAccessor
         super.init()
         //数据库文件路径
         let dbPath = SandBoxAccessor.getDatabasePath()
-        self.database = FMDatabase(path: dbPath)    //创建或获取数据库，如果数据库文件不存在，则自动创建
+        //判断数据库文件是否存在
+        let isDbExist = SandBoxAccessor.shared.isExist(path: dbPath)
+        
+        //创建或获取数据库，如果数据库文件不存在，则自动创建
+        self.database = FMDatabase(path: dbPath)
+        //创建数据库操作队列
+        self.dbQueue = FMDatabaseQueue(path: dbPath)
         
     }
     

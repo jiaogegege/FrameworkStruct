@@ -91,6 +91,52 @@ extension UIView
         self.layer.shadowPath = path.cgPath
     }
     
+    /**
+     * 给一个透明view添加圆角和阴影
+     * 参数：self：要添加圆角和阴影的view；cornerSide：圆角在哪一边上；needShadow：是否要添加阴影
+     * 做法：基本做法是在self上添加一个和自身等大的带4边圆角的view，然后盖住对面边的圆角；阴影也是添加在等大的view上
+     */
+    func addRadiusAndShadow(cornerSide: UIViewCornerSide = .all, bgColor: UIColor = .white, cornerRadius: CGFloat = 10.0, needShadow: Bool = true, shadowColor: UIColor = .black, shadowOffset: CGSize = .zero, shadowOpacity: Float = 0.5, shadowRadius: CGFloat = 5.0)
+    {
+        self.backgroundColor = .clear
+        let cornerView = UIView()
+        cornerView.backgroundColor = bgColor
+        cornerView.layer.cornerRadius = cornerRadius
+        if needShadow   //添加阴影
+        {
+            cornerView.setLayerShadow(color: shadowColor, offset: shadowOffset, opacity: shadowOpacity, radius: shadowRadius)
+        }
+        self.addSubview(cornerView)
+        cornerView.snp.makeConstraints { make in
+            make.left.top.right.bottom.equalToSuperview()
+        }
+        let coverView = UIView()
+        coverView.backgroundColor = cornerSide == .all ? .clear : bgColor
+        self.addSubview(coverView)
+        coverView.snp.makeConstraints { make in
+            switch cornerSide {
+            case .left:    //放右边
+                make.right.equalToSuperview()
+                make.width.equalTo(cornerRadius)
+                make.top.bottom.equalToSuperview()
+            case .top:    //放下边
+                make.left.right.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.height.equalTo(cornerRadius)
+            case .right:    //放左边
+                make.top.bottom.equalToSuperview()
+                make.left.equalToSuperview()
+                make.width.equalTo(cornerRadius)
+            case .bottom:   //放上边
+                make.left.right.equalToSuperview()
+                make.top.equalToSuperview()
+                make.height.equalTo(cornerRadius)
+            case .all:  //如果是全部，那么不需要coverView
+                make.left.top.right.bottom.equalToSuperview()
+            }
+        }
+    }
+    
     ///创建view，用于子类实现
     @objc func createView()
     {
@@ -107,6 +153,16 @@ extension UIView
     @objc func updateView()
     {
         
+    }
+    
+}
+
+//UIView内部类型
+extension UIView: InternalType
+{
+    //圆角边的位置：left/top/right/bottom/all
+    enum UIViewCornerSide {
+    case left, top, right, bottom, all
     }
     
 }
