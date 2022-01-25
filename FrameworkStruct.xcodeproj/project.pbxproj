@@ -969,17 +969,17 @@
 		EA75BB292792AA7B00910B4C /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
+				EA75BB312792AA7B00910B4C /* FMDB.h */,
 				EA75BB2A2792AA7B00910B4C /* FMDatabase.h */,
-				EA75BB2B2792AA7B00910B4C /* FMDatabaseQueue.m */,
-				EA75BB2C2792AA7B00910B4C /* FMResultSet.h */,
-				EA75BB2D2792AA7B00910B4C /* FMDatabasePool.h */,
-				EA75BB2E2792AA7B00910B4C /* FMDatabaseAdditions.m */,
 				EA75BB2F2792AA7B00910B4C /* FMDatabase.m */,
 				EA75BB302792AA7B00910B4C /* FMDatabaseQueue.h */,
-				EA75BB312792AA7B00910B4C /* FMDB.h */,
-				EA75BB322792AA7B00910B4C /* FMDatabaseAdditions.h */,
-				EA75BB332792AA7B00910B4C /* FMDatabasePool.m */,
+				EA75BB2B2792AA7B00910B4C /* FMDatabaseQueue.m */,
+				EA75BB2C2792AA7B00910B4C /* FMResultSet.h */,
 				EA75BB342792AA7B00910B4C /* FMResultSet.m */,
+				EA75BB2D2792AA7B00910B4C /* FMDatabasePool.h */,
+				EA75BB332792AA7B00910B4C /* FMDatabasePool.m */,
+				EA75BB322792AA7B00910B4C /* FMDatabaseAdditions.h */,
+				EA75BB2E2792AA7B00910B4C /* FMDatabaseAdditions.m */,
 			);
 			path = fmdb;
 			sourceTree = "<group>";

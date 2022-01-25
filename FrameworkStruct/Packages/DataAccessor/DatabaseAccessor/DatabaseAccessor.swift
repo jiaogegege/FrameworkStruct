@@ -5,6 +5,19 @@
 //  Created by  蒋 雪姣 on 2022/1/15.
 //
 
+/**
+ * 数据库存取器
+ *
+ * 概述：对SQLite数据库进行存取和相关资源的管理，使用FMDatabaseQueue进行数据库操作，线程安全，支持数据库迁移和升级
+ *
+ * - Parameters:
+ *  - <#参数1#>: <#说明#>
+ *
+ * - Returns: <#说明#>
+ *
+ * 注意事项：<#说明#>
+ *
+ */
 import UIKit
 
 class DatabaseAccessor: OriginAccessor
@@ -12,10 +25,8 @@ class DatabaseAccessor: OriginAccessor
     //MARK: 属性
     //单例
     static let shared = DatabaseAccessor()
-    
-    //数据库对象
-    fileprivate var database: FMDatabase!
-    //数据库操作队列
+
+    //数据库操作队列对象
     fileprivate var dbQueue: FMDatabaseQueue!
     
     
@@ -29,9 +40,7 @@ class DatabaseAccessor: OriginAccessor
         //判断数据库文件是否存在
         let isDbExist = SandBoxAccessor.shared.isExist(path: dbPath)
         
-        //创建或获取数据库，如果数据库文件不存在，则自动创建
-        self.database = FMDatabase(path: dbPath)
-        //创建数据库操作队列
+        //创建数据库操作队列对象
         self.dbQueue = FMDatabaseQueue(path: dbPath)
         
     }
