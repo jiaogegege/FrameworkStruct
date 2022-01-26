@@ -120,14 +120,14 @@ extension SandBoxAccessor: ExternalInterface
     
     
     /******************** 文件夹路径访问 Section Begin *******************/
-    //获得沙盒文件夹路径
+    ///获得沙盒文件夹路径
     static func getHomeDirectory() -> String
     {
         let homePath = NSHomeDirectory()
         return homePath
     }
     
-    //获得Documents文件夹路径
+    ///获得Documents文件夹路径
     static func getDocumentDirectory() -> String
     {
         // 检索指定路径
@@ -138,7 +138,7 @@ extension SandBoxAccessor: ExternalInterface
         return docPath!
     }
     
-    //获得Library路径
+    ///获得Library路径
     static func getLibraryDirectory() -> String
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
@@ -146,17 +146,25 @@ extension SandBoxAccessor: ExternalInterface
         return libPath!
     }
     
-    //获取 Temp 的路径
+    ///获取 Temp 的路径
     static func getTempDirectory() -> String
     {
         return NSTemporaryDirectory()
     }
     
-    //获取数据库文件路径
+    ///获取数据库文件路径
     static func getDatabasePath() -> String
     {
         let dbPath = ((SandBoxAccessor.getDocumentDirectory() as NSString).appendingPathComponent(sdDatabaseDir) as NSString).appendingPathComponent(sdDatabaseFile)
         return dbPath
+    }
+    
+    ///获取数据库表结构sql文件路径，参数包含扩展名，如果不包含扩展名，默认用`sql`
+    static func getSQLFilePath(fileName: String) -> String?
+    {
+        let fileComponent = fileName.components(separatedBy: ".")
+        let sqlPath = Bundle.main.path(forResource: fileComponent.first, ofType: (fileComponent.count >= 2 ? fileComponent.last : "sql"))
+        return sqlPath
     }
     
     /******************** 文件夹路径访问 Section End *******************/

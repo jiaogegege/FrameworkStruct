@@ -39,7 +39,7 @@ class ControllerManager: OriginManager
     //计算属性，rootViewController
     var rootVC: UIViewController {
         get {
-            return Utility.getWindow().rootViewController!
+            return getWindow().rootViewController!
         }
     }
     

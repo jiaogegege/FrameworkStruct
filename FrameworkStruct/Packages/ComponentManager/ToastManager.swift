@@ -108,7 +108,7 @@ class ToastManager: OriginManager
          let closure = {[weak self] in
             if self?.hudType == .mbHud
             {
-                let hud = MBProgressHUD.showAdded(to: Utility.getWindow(), animated: true)
+                let hud = MBProgressHUD.showAdded(to: getWindow(), animated: true)
                 self?.tmpMBHUD = hud
                 hud.delegate = self
                 hud.label.textColor = self?.contentColor
@@ -382,7 +382,7 @@ extension ToastManager: ExternalInterface
             }
             else
             {
-                MBProgressHUD.hide(for: Utility.getWindow(), animated: true)
+                MBProgressHUD.hide(for: getWindow(), animated: true)
             }
         }
         else

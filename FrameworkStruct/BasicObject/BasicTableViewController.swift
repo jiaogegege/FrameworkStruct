@@ -387,7 +387,7 @@ class BasicTableViewController: UITableViewController
     deinit {
         NotificationCenter.default.removeObserver(self)
         
-        print(getCurrentTimeString() + ": " + Utility.getObjClassName(self) + " dealloc")
+        print(getCurrentTimeString() + ": " + getObjClassName(self) + " dealloc")
     }
     
 }

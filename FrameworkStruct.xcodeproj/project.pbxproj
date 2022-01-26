@@ -2604,6 +2604,7 @@
 					"-DSQLITE_HAS_CODEC",
 				);
 				OTHER_LDFLAGS = "";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
