@@ -150,3 +150,15 @@ func isOdd(_ num: Int) -> Bool
     }
     return true
 }
+
+///判断字符串是否都是数字组成（不包括小数）
+///过滤掉所有10进制数字，剩下为空字符串则原字符串都是数字
+func isIntegerString(str: String) -> Bool
+{
+    let originStr = str.trimmingCharacters(in: CharacterSet.decimalDigits)
+    if originStr.count > 0
+    {
+        return false
+    }
+    return true
+}

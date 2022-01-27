@@ -30,7 +30,7 @@ import UIKit
 class SimpleTableView: UIView
 {
     //MARK: 属性
-    /******************** 属性设置 Section Begin *******************/
+    /*************************************** 属性设置 Section Begin **************************************/
     //整个view的背景色
     var bgColor: UIColor = .white
     
@@ -71,9 +71,9 @@ class SimpleTableView: UIView
     var contentLeftRight: CGFloat = fitX(20.0)
     //内容距离表格上下的最小边距，如果内容没有填满空间，那么居中，如果空间不能放下内容，那么换行
     var contentTopBottom: CGFloat = fitX(14.0)
-    /******************** 属性设置 Section End *******************/
+    /*************************************** 属性设置 Section End **************************************/
     
-    /******************** 外部接口属性 Section Begin *******************/
+    /*************************************** 外部接口属性 Section Begin **************************************/
     /**
      * 数据说明
      * 数据源是一个数组，数组的每一个元素也是一个数组，称为行数组，代表了表格的每一行；行数组元素是字符串，代表了一行中要显示的单元格内容
@@ -83,7 +83,7 @@ class SimpleTableView: UIView
      * 表格会根据数据从上到下一行行创建，所以请保证输入数据的顺序是正确的
      */
     var dataArray: Array<Array<String>>? = nil
-    /******************** 外部接口属性 Section End *******************/
+    /*************************************** 外部接口属性 Section End **************************************/
     
     //每一行的view数组
     fileprivate var rowArray: Array<UIView> = []
@@ -266,6 +266,9 @@ class SimpleTableView: UIView
             contentView.addSubview(bottomBorder)
         }
         
+        //创建一行后，总高度增加
+        totalHeight += contentView.height
+        
         return contentView
     }
     
@@ -320,8 +323,6 @@ extension SimpleTableView: ExternalInterface
                     let view = self.createRow(strArray: arr, rowIndex: index + 1, isLast: index >= daArray.count - 1)
                     self.containerView.addSubview(view)
                     self.rowArray.append(view)
-                    
-                    totalHeight += view.height
                 }
             }
             //table创建完成后，更新self高度

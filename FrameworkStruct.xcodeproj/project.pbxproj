@@ -59,6 +59,7 @@
 		EA3337DE2797E6AA00612DC3 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3337D92797E6AA00612DC3 /* sqlite3.c */; };
 		EA3337DF2797E6AA00612DC3 /* README in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DA2797E6AA00612DC3 /* README */; };
 		EA3337E02797E6AA00612DC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DB2797E6AA00612DC3 /* README.md */; };
+		EA3A051C27A2714E00A96DE2 /* EncryptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
@@ -355,6 +356,7 @@
 		EA3337DA2797E6AA00612DC3 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		EA3337DB2797E6AA00612DC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3337DC2797E6AA00612DC3 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptManager.swift; sourceTree = "<group>"; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -1090,6 +1092,7 @@
 			children = (
 				EAAA4E81276F3E4900C45712 /* README.md */,
 				EADB014227624391001B7223 /* UserManager.swift */,
+				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
 			);
 			path = BusinessManager;
 			sourceTree = "<group>";
@@ -2330,6 +2333,7 @@
 				EA99372F27994F6100480147 /* TABBinAnimationImpl.m in Sources */,
 				EAC8A85027625D490088293F /* UIImage+ForceDecode.m in Sources */,
 				EA1AE476277819E600D028F9 /* ConstraintPriorityTarget.swift in Sources */,
+				EA3A051C27A2714E00A96DE2 /* EncryptManager.swift in Sources */,
 				EAC8A75027625B450088293F /* AFURLRequestSerialization.m in Sources */,
 				EA99374227994F6100480147 /* TABAnimatedChainManagerImpl.m in Sources */,
 				EAC8A77027625BA70088293F /* NSObject+MJProperty.m in Sources */,

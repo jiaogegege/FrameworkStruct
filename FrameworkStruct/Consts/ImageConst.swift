@@ -10,7 +10,7 @@
  */
 import Foundation
 
-extension UIImage
+extension UIImage: ConstantPropertyProtocol
 {
     //MARK: 资源图片常量
     

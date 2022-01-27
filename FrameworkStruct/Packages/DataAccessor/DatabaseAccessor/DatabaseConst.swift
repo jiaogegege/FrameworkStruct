@@ -18,5 +18,5 @@ enum DatabaseKey: DBKeyType
     
 }
 
-//初始数据库版本号，当数据库第一次创建并建立表之后，插入数据库版本号`1.0.0`
-let db_OriginVersion = "1.0.0"
+//初始数据库版本号，当数据库第一次创建并建立表之后，插入数据库版本号`1_0_0`
+let db_OriginVersion = "1_0_0"

@@ -50,3 +50,29 @@ func getCurrentTimeInterval() -> TimeInterval
     let date = Date()
     return date.timeIntervalSince1970
 }
+
+///判断某个时间有没有过期
+///参数：criticalTimeStr:如果传入了过期时间，那么和传入时间比较，如果没有传入过期时间，那么和当前时间比较
+///如果传入的时间都无法转换，那么返回true
+func isTimePasted(timeStr: String, criticalTimeStr: String?) -> Bool
+{
+    let formatter = DateFormatter()
+    formatter.dateFormat = TimeStringFormat.dashYearMonthDayHourMinSec.rawValue
+    let date = formatter.date(from: timeStr)    //要判断的时间
+    var criticalDate: Date?
+    if let critical = criticalTimeStr
+    {
+        criticalDate = formatter.date(from: critical)
+    }
+    else
+    {
+        criticalDate = Date()
+    }
+    if let dd = date, let cd = criticalDate
+    {
+        let timeInterval = dd.timeIntervalSince1970 - cd.timeIntervalSince1970
+        return timeInterval > 0 //如果大于0，那么没过期，否则过期
+    }
+    
+    return true
+}

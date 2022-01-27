@@ -47,6 +47,13 @@ protocol InternalType {
 }
 
 /**
+ * 这个空协议定义各种常量属性
+ */
+protocol ConstantPropertyProtocol {
+    
+}
+
+/**
  * 这个空协议规定实现代理和通知代理的方法
  * 类型的这个extension中实现了各种组件的代理方法和通知中心回调方法
  */

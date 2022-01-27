@@ -46,7 +46,7 @@ class DatabaseAccessor: OriginAccessor
         
         //如果打开不成功，那么打印错误信息
         guard self.dbQueue != nil else {
-            FSLog("创建数据库失败")
+            FSLog("")
             return
         }
         
@@ -56,10 +56,12 @@ class DatabaseAccessor: OriginAccessor
         if !isDbExist
         {
             self.createDbTable()
+            //创建成功后写入数据库版本号
+            
         }
         
         //查询数据库版本号，判断是否要更新数据库
-        
+        self.checkAndUpdateDbVersion()
     }
     
     override func copy() -> Any
@@ -80,7 +82,7 @@ class DatabaseAccessor: OriginAccessor
             //获取文件内容
             do {
                 var sqlContent = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
-                sqlContent = self.trimSqlString(originStr: sqlContent)
+                sqlContent = self.normalizeSqlString(originStr: sqlContent)
                 //分割sql语句
                 let sqlArr = sqlContent.components(separatedBy: ";")
                 //执行sql语句
@@ -108,8 +110,8 @@ class DatabaseAccessor: OriginAccessor
         }
     }
     
-    //处理sql字符串，去除换行和头尾空格
-    fileprivate func trimSqlString(originStr: String) -> String
+    //处理sql字符串，替换换行
+    fileprivate func normalizeSqlString(originStr: String) -> String
     {
         var str = originStr.replacingOccurrences(of: "\r\n", with: "\n")
         str = str.replacingOccurrences(of: "\\n", with: "\n")

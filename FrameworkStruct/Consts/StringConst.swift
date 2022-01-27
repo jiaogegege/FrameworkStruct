@@ -31,35 +31,46 @@ extension String
 }
 
 //MARK: 项目中文案定义，国际化文案
-extension String
+extension String: ConstantPropertyProtocol
 {
+    //MARK: 项目中各种标题
     //瀑布流
     static let waterfall = localized("waterfall")
-    //确定
-    static let confirm = localized("confirm")
-    //取消
-    static let cancel = localized("cancel")
     //主题选择
     static let themeSelect = localized("themeSelect")
     //模态显示
     static let modalShow = localized("modalShow")
     //约束测试
     static let constraintTest = localized("constraintTest")
-    //从相册选择
-    static let selectFromPhotoLibiary = localized("selectFromPhotoLibiary")
-    //拍照
-    static let takePhotoWithCamera = localized("takePhotoWithCamera")
-    //青少年模式弹窗内容
-    static let teenagerProtectContent = localized("teenagerProtectContent")
-    //进入青少年模式文字
-    static let enterTeenMode = localized("setTeenagerMode")
-    //我知道了
-    static let iKnown = localized("iKnown")
     //绘制表格
     static let drawTable = localized("drawTable")
     //图层阴影
     static let layerShadow = localized("layerShadow")
     
+    //MARK: 界面提示和按钮文案
+    //确定
+    static let confirm = localized("confirm")
+    //取消
+    static let cancel = localized("cancel")
+    //我知道了
+    static let iKnown = localized("iKnown")
+    //从相册选择
+    static let selectFromPhotoLibiary = localized("selectFromPhotoLibiary")
+    //拍照
+    static let takePhotoWithCamera = localized("takePhotoWithCamera")
+    
+    //MARK: Toast文案
+    //网络错误
+    static let networkError = localized("networkError")
+    
+    //MARK: 长文案
+    //青少年模式弹窗内容
+    static let teenagerProtectContent = localized("teenagerProtectContent")
+    //进入青少年模式文字
+    static let enterTeenMode = localized("setTeenagerMode")
+
+
+
 
     //便利方法
     static func localized(_ originStr: String) -> String

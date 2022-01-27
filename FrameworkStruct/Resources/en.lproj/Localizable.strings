@@ -12,7 +12,7 @@
  */
 
 /**
- * 控制器标题
+ * 项目中各种标题
  */
 waterfall = "Waterfall";
 themeSelect = "Theme Select";
@@ -29,6 +29,11 @@ cancel = "Cancel";
 iKnown = "I known";
 selectFromPhotoLibiary = "Select From Photo Libiary";
 takePhotoWithCamera = "Take Photo With Camera";
+
+/**
+ * Toast文案
+ */
+networkError = "Network Error";
 
 /**
  * 长文案

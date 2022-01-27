@@ -158,7 +158,7 @@ extension UIView
 }
 
 //UIView内部类型
-extension UIView: InternalType
+extension UIView
 {
     //圆角边的位置：left/top/right/bottom/all
     enum UIViewCornerSide {

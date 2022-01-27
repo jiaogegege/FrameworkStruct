@@ -11,7 +11,7 @@
  */
 import Foundation
 
-extension UIColor
+extension UIColor: ConstantPropertyProtocol
 {
     //MARK: 常量颜色值
     /**
