@@ -60,6 +60,7 @@
 		EA3337DF2797E6AA00612DC3 /* README in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DA2797E6AA00612DC3 /* README */; };
 		EA3337E02797E6AA00612DC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DB2797E6AA00612DC3 /* README.md */; };
 		EA3A051C27A2714E00A96DE2 /* EncryptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */; };
+		EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
@@ -357,6 +358,8 @@
 		EA3337DB2797E6AA00612DC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3337DC2797E6AA00612DC3 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptManager.swift; sourceTree = "<group>"; };
+		EA3A051D27A284C100A96DE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_1.sql; sourceTree = "<group>"; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -986,12 +989,14 @@
 			path = fmdb;
 			sourceTree = "<group>";
 		};
-		EA75BB4A2792B10D00910B4C /* DatabaseFile */ = {
+		EA75BB4A2792B10D00910B4C /* Migrations */ = {
 			isa = PBXGroup;
 			children = (
+				EA3A051D27A284C100A96DE2 /* README.md */,
 				EA75BB4B2792B1E200910B4C /* db_table.sql */,
+				EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */,
 			);
-			path = DatabaseFile;
+			path = Migrations;
 			sourceTree = "<group>";
 		};
 		EA77951D276C389200D9707F /* Worker */ = {
@@ -2010,7 +2015,7 @@
 				EADB014F2762450E001B7223 /* README.md */,
 				EA75BB252792A80900910B4C /* DatabaseAccessor.swift */,
 				EA75BB272792A88400910B4C /* DatabaseConst.swift */,
-				EA75BB4A2792B10D00910B4C /* DatabaseFile */,
+				EA75BB4A2792B10D00910B4C /* Migrations */,
 			);
 			path = DatabaseAccessor;
 			sourceTree = "<group>";
@@ -2111,6 +2116,7 @@
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
+				EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */,
 				EA3337E02797E6AA00612DC3 /* README.md in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
 				EADB00BA27623EA3001B7223 /* InfoPlist.strings in Resources */,

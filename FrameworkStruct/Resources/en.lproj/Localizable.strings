@@ -26,6 +26,8 @@ layerShadow = "Layer Shadow";
  */
 confirm = "Confirm";
 cancel = "Cancel";
+success = "Success";
+failure = "Failure";
 iKnown = "I known";
 selectFromPhotoLibiary = "Select From Photo Libiary";
 takePhotoWithCamera = "Take Photo With Camera";

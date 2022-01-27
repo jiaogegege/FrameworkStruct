@@ -48,7 +48,7 @@ extension EncryptManager: ExternalInterface
     ///生成一个32~36位随机字符串，用于生成各种随机id
     ///形如：F4709DFF-24CD-458F-AECB-C0082B87052A
     ///参数：lower：是否将字母转为小写格式；short：是否转为紧凑模式（去除字符串中间的`-`分隔符），使用紧凑模式将返回32位字符串，非紧凑模式返回36位
-    class func uuidString(lower: Bool = false, short: Bool = false) -> String
+    func uuidString(lower: Bool = true, short: Bool = true) -> String
     {
         let uuid_ref: CFUUID = CFUUIDCreate(nil)
         let uuid_string_ref: CFString = CFUUIDCreateString(nil, uuid_ref)

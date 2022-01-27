@@ -52,6 +52,10 @@ extension String: ConstantPropertyProtocol
     static let confirm = localized("confirm")
     //取消
     static let cancel = localized("cancel")
+    //成功
+    static let success = localized("success")
+    //失败
+    static let failure = localized("failure")
     //我知道了
     static let iKnown = localized("iKnown")
     //从相册选择

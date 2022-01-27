@@ -35,7 +35,7 @@ enum TimeStringFormat: String
     
 }
 
-///获取系统当前时间，OTC时间
+///获取系统当前时间，OTC时间，"YYYY/MM/dd HH:mm:ss.SSS"
 func getCurrentTimeString() -> String
 {
     let formatter = DateFormatter()

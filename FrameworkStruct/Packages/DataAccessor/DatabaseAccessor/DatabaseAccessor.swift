@@ -25,9 +25,16 @@ class DatabaseAccessor: OriginAccessor
     //MARK: 属性
     //单例
     static let shared = DatabaseAccessor()
+    
+    //加密管理器
+    var encryptMgr: EncryptManager = EncryptManager.shared
 
     //数据库操作队列对象
     fileprivate var dbQueue: FMDatabaseQueue?
+    //数据库对象，从`dbQueue`中获取
+    fileprivate weak var db: FMDatabase?
+    //锁
+    fileprivate var lock: NSRecursiveLock?
     
     
     //MARK: 方法
@@ -35,29 +42,35 @@ class DatabaseAccessor: OriginAccessor
     private override init()
     {
         super.init()
+        
         //数据库文件路径
         let dbPath = SandBoxAccessor.getDatabasePath()
         FSLog(dbPath)
+        
         //判断数据库文件是否存在
         let isDbExist = SandBoxAccessor.shared.isExist(path: dbPath)
         
         //创建数据库操作队列对象，如果返回nil，说明创建不成功，一般都会成功
         self.dbQueue = FMDatabaseQueue(path: dbPath)
+        self.db = self.dbQueue?.value(forKey: "_db") as? FMDatabase
         
         //如果打开不成功，那么打印错误信息
         guard self.dbQueue != nil else {
-            FSLog("")
+            FSLog("create db failure")
             return
         }
         
-        //如果打开成功，那么继续接下来的操作
+        //初始化锁
+        lock = NSRecursiveLock()
+        
+        /****** 如果打开成功，那么继续接下来的操作 ******/
         
         //如果不存在数据库文件，那么说明数据库还没创建过，那么创建数据库表
         if !isDbExist
         {
             self.createDbTable()
             //创建成功后写入数据库版本号
-            
+            self.insertOrUpdateDbVersion(db_OriginVersion)
         }
         
         //查询数据库版本号，判断是否要更新数据库
@@ -91,7 +104,7 @@ class DatabaseAccessor: OriginAccessor
                     let sql = str.trim()
                     if isValidString(sql)   //如果是有效字符串，那么执行sql语句
                     {
-                        self.update(sql: sql) { ret in
+                        self.updateInQueue(sql: sql) { ret in
                             if ret == false
                             {
                                 FSLog("create table error: " + sql)
@@ -123,7 +136,22 @@ class DatabaseAccessor: OriginAccessor
     //查询数据库版本号，并判断是否要更新版本
     fileprivate func checkAndUpdateDbVersion()
     {
+        for ver in db_updateVersionList
+        {
+            if self.needUpdate(ver)
+            {
+                
+            }
+        }
+    }
+    
+    //判断是否需要更新该版本
+    fileprivate func needUpdate(_ newVersion: String) -> Bool
+    {
+        //获取当前数据库版本号
+        let oldVersion = self.queryDbVersion()
         
+        return false
     }
     
     
@@ -140,8 +168,78 @@ class DatabaseAccessor: OriginAccessor
 extension DatabaseAccessor: ExternalInterface
 {
     /**************************************** 通用基础方法 Section Begin **************************************/
+    ///打开数据库，在程序生命周期内手动打开数据库，不会对数据库进行完整性校验和版本升级
+    func open()
+    {
+        if self.dbQueue == nil  //没有的时候才创建
+        {
+            //数据库文件路径
+            let dbPath = SandBoxAccessor.getDatabasePath()
+            FSLog(dbPath)
+            
+            //创建数据库操作队列对象，如果返回nil，说明创建不成功，一般都会成功
+            self.dbQueue = FMDatabaseQueue(path: dbPath)
+            self.db = self.dbQueue?.value(forKey: "_db") as? FMDatabase
+            
+            //初始化锁
+            lock = NSRecursiveLock()
+        }
+    }
+    
+    ///关闭数据库，在程序生命周期内手动关闭数据库
+    func close()
+    {
+        self.dbQueue?.close()
+        self.dbQueue = nil
+        self.db = nil
+        self.lock = nil
+    }
+    
     ///执行一条Update的sql语句
-    func update(sql: String, callback: ((_ ret: Bool) -> Void)?)
+    func update(sql: String) -> Bool
+    {
+        var ret = false
+        if dbQueue != nil, db != nil
+        {
+            lock?.lock()
+            do {
+                try db?.executeUpdate(sql, values: nil)
+                ret = true
+            } catch {
+                FSLog("db update error: " + error.localizedDescription)
+            }
+            lock?.unlock()
+        }
+        else
+        {
+            FSLog("db is closed")
+        }
+        return ret
+    }
+    
+    ///执行一条query的sql语句
+    func query(sql: String) -> FMResultSet?
+    {
+        var ret: FMResultSet? = nil
+        if dbQueue != nil, db != nil
+        {
+            lock?.lock()
+            do {
+                ret = try db?.executeQuery(sql, values: nil)
+            } catch {
+                FSLog("db query error: " + error.localizedDescription)
+            }
+            lock?.unlock()
+        }
+        else
+        {
+            FSLog("db is closed")
+        }
+        return ret
+    }
+    
+    ///执行一条Update的sql语句
+    func updateInQueue(sql: String, callback: ((_ ret: Bool) -> Void)?)
     {
         if let queue = self.dbQueue
         {
@@ -161,11 +259,15 @@ extension DatabaseAccessor: ExternalInterface
                 }
             }
         }
+        else
+        {
+            FSLog("db is closed")
+        }
     }
     
     ///执行一条query的sql语句
     ///如果发生了错误，那么回传false和nil
-    func query(sql: String, callback: ((_ ret: Bool, _ result: FMResultSet?) -> Void))
+    func queryInQueue(sql: String, callback: ((_ ret: Bool, _ result: FMResultSet) -> Void))
     {
         if let queue = self.dbQueue
         {
@@ -176,16 +278,20 @@ extension DatabaseAccessor: ExternalInterface
                 } catch {
                     FSLog("db query error: " + error.localizedDescription)
                     //如果发生异常，那么回传false
-                    callback(false, nil)
+                    callback(false, FMResultSet())
                 }
             }
+        }
+        else
+        {
+            FSLog("db is closed")
         }
     }
     
     ///在事务中执行多条update语句
     ///参数：sqls：要执行的sql语句数组；callback：回调，返回执行是否成功,如果不成功则回滚
     ///完整的sql语句在传入时就拼接好
-    func transactionUpdate(sqls: Array<String>, callback: ((_ ret: Bool) -> Void)?)
+    func transactionUpdateInQueue(sqls: Array<String>, callback: ((_ ret: Bool) -> Void)?)
     {
         if let queue = self.dbQueue
         {
@@ -211,13 +317,17 @@ extension DatabaseAccessor: ExternalInterface
                 }
             }
         }
+        else
+        {
+            FSLog("db is closed")
+        }
     }
     
     ///在事务中执行多条query语句
     ///参数：sqls：要执行的sql语句数组；callback：回调，返回查询是否成功和结果的数组
     ///完整的sql语句在传入时就拼接好
     ///一般不要这么用，最好还是单独执行一条语句，除非确实需要同时查询多个结果
-    func transactionQuery(sqls: Array<String>, callback: ((_ ret: Bool, _ results: Array<FMResultSet>) -> Void))
+    func transactionQueryInQueue(sqls: Array<String>, callback: ((_ ret: Bool, _ results: Array<FMResultSet>) -> Void))
     {
         if let queue = self.dbQueue
         {
@@ -239,14 +349,58 @@ extension DatabaseAccessor: ExternalInterface
                 }
             }
         }
+        else
+        {
+            FSLog("db is closed")
+        }
     }
     /**************************************** 通用基础方法 Section End **************************************/
     
     /**************************************** 查询和更新方法 Section Begin ***************************************/
-    //查询数据库版本号
-    func queryDbVersion()
+    
+    //插入数据库版本号
+    fileprivate func insertDbVersion(_ version: String)
     {
-        
+        //构建sql语句
+        let sql = String(format: "INSERT INTO app_config (id, config_key, config_value, update_date, create_date) VALUES ('%@', '%@', '%@', '%@', '%@')", encryptMgr.uuidString(), DatabaseKey.dbVersion.rawValue, version, getCurrentTimeString(), getCurrentTimeString())
+        FSLog("insert db version \(update(sql: sql) ? "success" : "failure")")
+    }
+    
+    //查询数据库版本号
+    func queryDbVersion() -> String?
+    {
+        //构建sql语句
+        let sql = String(format: "SELECT config_value FROM app_config WHERE config_key = '%@'", DatabaseKey.dbVersion.rawValue)
+        if let ret = query(sql: sql), ret.next()
+        {
+            if let version = ret.string(forColumn: "config_value")
+            {
+                return version
+            }
+        }
+        return nil
+    }
+    
+    //更新数据库版本号
+    fileprivate func updateDbVersion(_ version: String)
+    {
+        //构建sql语句
+        let sql = String(format: "UPDATE app_config SET config_value = '%@' WHERE config_key = '%@'", version, DatabaseKey.dbVersion.rawValue)
+        FSLog("update db version \(update(sql: sql) ? "success" : "failure")")
+    }
+    
+    //插入或更新数据库版本号
+    //因为数据库版本号只应该有一条记录，如果已经有了，那么更新
+    fileprivate func insertOrUpdateDbVersion(_ newVersion: String)
+    {
+        if self.queryDbVersion() != nil
+        {
+            self.updateDbVersion(newVersion)
+        }
+        else
+        {
+            self.insertDbVersion(newVersion)
+        }
     }
     
     
