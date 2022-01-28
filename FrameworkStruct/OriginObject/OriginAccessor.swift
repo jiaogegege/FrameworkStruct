@@ -35,6 +35,9 @@ class OriginAccessor: NSObject
     //监控器，每一个存取器在创建的时候都要加入到监控器中
     weak var monitor: AccessorMonitor!
     
+    //状态管理器
+    var stMgr: StatusManager = StatusManager(capacity: 10)
+    
     
     override init()
     {

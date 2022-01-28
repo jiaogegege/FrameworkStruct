@@ -36,9 +36,6 @@ class DatabaseAccessor: OriginAccessor
     //单例
     static let shared = DatabaseAccessor()
     
-    //状态管理器
-    var stMgr: StatusManager = StatusManager(capacity: 10)
-    
     //加密管理器
     var encryptMgr: EncryptManager = EncryptManager.shared
 
@@ -222,7 +219,7 @@ class DatabaseAccessor: OriginAccessor
     
     //返回数据源相关信息：type/tables(所有数据库表名)
     override func accessorDataSourceInfo() -> Dictionary<String, String> {
-        let infoDict = ["type": "database", "tables": self.queryAllTableName().joined(separator: ", ")]
+        let infoDict = ["type": "database: sqlite3", "tables": self.queryAllTableName().joined(separator: ", ")]
         return infoDict
     }
     
@@ -325,7 +322,7 @@ extension DatabaseAccessor: ExternalInterface
         }
         else
         {
-            FSLog("db is closed")
+            FSLog("update failed: db is closed")
         }
         return ret
     }
@@ -346,7 +343,7 @@ extension DatabaseAccessor: ExternalInterface
         }
         else
         {
-            FSLog("db is closed")
+            FSLog("query failed: db is closed")
         }
         return ret
     }
@@ -379,7 +376,7 @@ extension DatabaseAccessor: ExternalInterface
         }
         else
         {
-            FSLog("db is closed")
+            FSLog("update in queue failed: db is closed")
         }
     }
     
@@ -407,7 +404,7 @@ extension DatabaseAccessor: ExternalInterface
         }
         else
         {
-            FSLog("db is closed")
+            FSLog("query in queue failed: db is closed")
         }
     }
     
@@ -447,7 +444,7 @@ extension DatabaseAccessor: ExternalInterface
         }
         else
         {
-            FSLog("db is closed")
+            FSLog("transaction update in queue failed: db is closed")
         }
     }
     
@@ -484,7 +481,7 @@ extension DatabaseAccessor: ExternalInterface
         }
         else
         {
-            FSLog("db is closed")
+            FSLog("transaction query in queue failed: db is closed")
         }
     }
     /**************************************** 通用基础方法 Section End **************************************/
@@ -579,14 +576,7 @@ extension DatabaseAccessor: ExternalInterface
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
