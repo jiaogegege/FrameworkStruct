@@ -22,4 +22,4 @@ enum DatabaseKey: DBKeyType
 let db_OriginVersion = "1_0_0"
 
 //数据库更新版本号列表，和对应版本号的sql文件对应
-let db_updateVersionList = ["1_0_1"]
+let db_updateVersionList = ["1_0_1", "1_0_2"]

@@ -20,11 +20,24 @@
  */
 import UIKit
 
+/**
+ 数据库存取器代理协议，主要通知外部程序存取器的一些状态变化
+ */
+protocol DatabaseAccessorDelegate {
+    ///当前正在升级数据库
+    
+    ///数据库升级完毕
+    
+}
+
 class DatabaseAccessor: OriginAccessor
 {
     //MARK: 属性
     //单例
     static let shared = DatabaseAccessor()
+    
+    //状态管理器
+    var stMgr: StatusManager = StatusManager(capacity: 10)
     
     //加密管理器
     var encryptMgr: EncryptManager = EncryptManager.shared
@@ -43,8 +56,11 @@ class DatabaseAccessor: OriginAccessor
     {
         super.init()
         
+        //开始创建
+        stMgr.setStatus(WorkState.creating, forKey: DBAStatusKey.workState)
+        
         //数据库文件路径
-        let dbPath = SandBoxAccessor.getDatabasePath()
+        let dbPath = SandBoxAccessor.shared.getDatabasePath()
         FSLog(dbPath)
         
         //判断数据库文件是否存在
@@ -56,6 +72,8 @@ class DatabaseAccessor: OriginAccessor
         
         //如果打开不成功，那么打印错误信息
         guard self.dbQueue != nil else {
+            //创建失败
+            stMgr.setStatus(WorkState.failure, forKey: DBAStatusKey.workState)
             FSLog("create db failure")
             return
         }
@@ -69,12 +87,22 @@ class DatabaseAccessor: OriginAccessor
         if !isDbExist
         {
             self.createDbTable()
-            //创建成功后写入数据库版本号
-            self.insertOrUpdateDbVersion(db_OriginVersion)
         }
+        
+        //创建成功
+        stMgr.setStatus(WorkState.created, forKey: DBAStatusKey.workState)
         
         //查询数据库版本号，判断是否要更新数据库
         self.checkAndUpdateDbVersion()
+        
+        //如果操作完毕后，状态是`updated`，那么将状态设置为ready
+        if self.currentState != .failure
+        {
+            stMgr.setStatus(WorkState.ready, forKey: DBAStatusKey.workState)
+        }
+        
+//        FSLog("DatabaseAccessor: finish initialize")
+        /****************************数据库初始化完成**************************/
     }
     
     override func copy() -> Any
@@ -90,32 +118,12 @@ class DatabaseAccessor: OriginAccessor
     //创建数据库表
     fileprivate func createDbTable()
     {
-        if let path = SandBoxAccessor.getSQLFilePath(fileName: sdDatabaseOriginSQLFile)
+        if let path = SandBoxAccessor.shared.getSQLFilePath(fileName: sdDatabaseOriginSQLFile)
         {
-            //获取文件内容
-            do {
-                var sqlContent = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
-                sqlContent = self.normalizeSqlString(originStr: sqlContent)
-                //分割sql语句
-                let sqlArr = sqlContent.components(separatedBy: ";")
-                //执行sql语句
-                for str in sqlArr
-                {
-                    let sql = str.trim()
-                    if isValidString(sql)   //如果是有效字符串，那么执行sql语句
-                    {
-                        self.updateInQueue(sql: sql) { ret in
-                            if ret == false
-                            {
-                                FSLog("create table error: " + sql)
-                            }
-                        }
-                    }
-                }
-            }
-            catch {
-                FSLog(error.localizedDescription)
-            }
+            //获取sql文件并执行sql语句
+            self.executeSqlStatementFromFile(filePath: path)
+            //创建成功后写入数据库版本号
+            self.insertOrUpdateDbVersion(db_OriginVersion)
         }
         else
         {
@@ -123,7 +131,7 @@ class DatabaseAccessor: OriginAccessor
         }
     }
     
-    //处理sql字符串，替换换行
+    //规格化，处理sql字符串，替换换行
     fileprivate func normalizeSqlString(originStr: String) -> String
     {
         var str = originStr.replacingOccurrences(of: "\r\n", with: "\n")
@@ -133,32 +141,110 @@ class DatabaseAccessor: OriginAccessor
         return str
     }
     
+    //执行一个sql文件中的sql语句，主要用来修改数据库结构和内容，并非查询
+    fileprivate func executeSqlStatementFromFile(filePath: String)
+    {
+        //获取文件内容
+        do {
+            var sqlContent = try NSString(contentsOfFile: filePath, encoding: String.Encoding.utf8.rawValue) as String
+            sqlContent = self.normalizeSqlString(originStr: sqlContent)
+            //分割sql语句
+            let sqlArr = sqlContent.components(separatedBy: ";")
+            //执行sql语句
+            for str in sqlArr
+            {
+                let sql = str.trim()
+                if isValidString(sql)   //如果是有效字符串，那么执行sql语句
+                {
+                    if !self.update(sql: sql)
+                    {
+                        FSLog("execute sql error: " + sql)
+                    }
+                }
+            }
+        }
+        catch {
+            FSLog(error.localizedDescription)
+        }
+    }
+    
     //查询数据库版本号，并判断是否要更新版本
     fileprivate func checkAndUpdateDbVersion()
     {
+        //开始升级
+        stMgr.setStatus(WorkState.updating, forKey: DBAStatusKey.workState)
+        
         for ver in db_updateVersionList
         {
             if self.needUpdate(ver)
             {
-                
+                //获取对应版本号的sql文件
+                if let path = SandBoxAccessor.shared.getSQLFilePath(fileName: ver)
+                {
+                    //执行sql语句
+                    self.executeSqlStatementFromFile(filePath: path)
+                    //创建成功后写入数据库版本号
+                    self.updateDbVersion(ver)
+                }
+                else
+                {
+                    //升级失败
+                    stMgr.setStatus(WorkState.failure, forKey: DBAStatusKey.workState)
+                    FSLog("get sql file error")
+                    
+                    //如果某个版本升级失败则退出
+                    return
+                }
             }
         }
+        
+        //升级完毕
+        stMgr.setStatus(WorkState.updated, forKey: DBAStatusKey.workState)
     }
     
-    //判断是否需要更新该版本
+    //判断是否需要更新该版本，版本号形如：1_0_1
     fileprivate func needUpdate(_ newVersion: String) -> Bool
     {
         //获取当前数据库版本号
         let oldVersion = self.queryDbVersion()
+        //如果传入的版本号比当前版本号大，那么要更新
+        if let old = oldVersion
+        {
+            if old < newVersion
+            {
+                return true
+            }
+        }
         
         return false
     }
     
     
-    //返回数据源相关信息
+    //返回数据源相关信息：type/tables(所有数据库表名)
     override func accessorDataSourceInfo() -> Dictionary<String, String> {
-        let infoDict = ["type": "database"]
+        let infoDict = ["type": "database", "tables": self.queryAllTableName().joined(separator: ", ")]
         return infoDict
+    }
+    
+}
+
+
+//内部类型
+extension DatabaseAccessor: InternalType
+{
+    //数据库存取器状态key
+    enum DBAStatusKey: SMKeyType {
+        case workState  //工作状态
+    }
+    
+    //工作状态枚举
+    enum WorkState: Int {
+        case creating = 0   //正在创建数据库
+        case created    //创建数据库成功
+        case updating   //正在升级数据库
+        case updated    //升级数据库完毕
+        case ready      //就绪状态，此时可以读写数据
+        case failure    //数据库创建和升级失败，建议重启app或者删除重新安装
     }
     
 }
@@ -167,14 +253,41 @@ class DatabaseAccessor: OriginAccessor
 //接口方法
 extension DatabaseAccessor: ExternalInterface
 {
+    /**
+     sqlite_master  结构如下
+
+    SQLite Master Table Schema
+
+    -----------------------------------------------------------------
+
+    Name                       Description
+
+    -----------------------------------------------------------------
+
+    type          The object’s type (table, index, view, trigger)
+
+    name          The object’s name
+
+    tbl_name      The table the object is associated with
+
+    rootpage      The object’s root page index in the database (where it begins)
+
+    sql           The object’s SQL definition (DDL)
+     */
+    
     /**************************************** 通用基础方法 Section Begin **************************************/
+    ///获取存取器当前状态
+    var currentState: WorkState {
+        return stMgr.status(forKey: DBAStatusKey.workState) as! DatabaseAccessor.WorkState
+    }
+    
     ///打开数据库，在程序生命周期内手动打开数据库，不会对数据库进行完整性校验和版本升级
     func open()
     {
         if self.dbQueue == nil  //没有的时候才创建
         {
             //数据库文件路径
-            let dbPath = SandBoxAccessor.getDatabasePath()
+            let dbPath = SandBoxAccessor.shared.getDatabasePath()
             FSLog(dbPath)
             
             //创建数据库操作队列对象，如果返回nil，说明创建不成功，一般都会成功
@@ -241,6 +354,11 @@ extension DatabaseAccessor: ExternalInterface
     ///执行一条Update的sql语句
     func updateInQueue(sql: String, callback: ((_ ret: Bool) -> Void)?)
     {
+        guard currentState == .ready else {
+            FSLog("db is not ready")
+            return
+        }
+        
         if let queue = self.dbQueue
         {
             queue.inDatabase { db in
@@ -269,6 +387,11 @@ extension DatabaseAccessor: ExternalInterface
     ///如果发生了错误，那么回传false和nil
     func queryInQueue(sql: String, callback: ((_ ret: Bool, _ result: FMResultSet) -> Void))
     {
+        guard currentState == .ready else {
+            FSLog("db is not ready")
+            return
+        }
+        
         if let queue = self.dbQueue
         {
             queue.inDatabase { db in
@@ -293,6 +416,11 @@ extension DatabaseAccessor: ExternalInterface
     ///完整的sql语句在传入时就拼接好
     func transactionUpdateInQueue(sqls: Array<String>, callback: ((_ ret: Bool) -> Void)?)
     {
+        guard currentState == .ready else {
+            FSLog("db is not ready")
+            return
+        }
+        
         if let queue = self.dbQueue
         {
             queue.inTransaction { db, rollback in
@@ -329,6 +457,11 @@ extension DatabaseAccessor: ExternalInterface
     ///一般不要这么用，最好还是单独执行一条语句，除非确实需要同时查询多个结果
     func transactionQueryInQueue(sqls: Array<String>, callback: ((_ ret: Bool, _ results: Array<FMResultSet>) -> Void))
     {
+        guard currentState == .ready else {
+            FSLog("db is not ready")
+            return
+        }
+        
         if let queue = self.dbQueue
         {
             queue.inTransaction { db, rollback in
@@ -357,6 +490,23 @@ extension DatabaseAccessor: ExternalInterface
     /**************************************** 通用基础方法 Section End **************************************/
     
     /**************************************** 查询和更新方法 Section Begin ***************************************/
+    //查询数据库中所有表名
+    fileprivate func queryAllTableName() -> Array<String>
+    {
+        let sql = "SELECT name FROM sqlite_master WHERE type = 'table'"
+        var tableArray = [String]()
+        if let ret = query(sql: sql)
+        {
+            while ret.next()
+            {
+                if let tblName = ret.string(forColumn: "name")
+                {
+                    tableArray.append(tblName)
+                }
+            }
+        }
+        return tableArray
+    }
     
     //插入数据库版本号
     fileprivate func insertDbVersion(_ version: String)
@@ -403,7 +553,30 @@ extension DatabaseAccessor: ExternalInterface
         }
     }
     
-    
+    //MARK: 用户信息
+    //查询用户信息
+    func queryAllUserInfo(callback: ((Array<UserInfoModel>) -> Void))
+    {
+        let sql = "SELECT * FROM app_user"
+        queryInQueue(sql: sql) { ret, result in
+            if ret
+            {
+                var array: Array<UserInfoModel> = []
+                while result.next()
+                {
+                    let user = UserInfoModel()
+                    user.id = result.string(forColumn: "id")!
+                    user.userPhone = result.string(forColumn: "user_phone")!
+                    user.userPassword = result.string(forColumn: "user_password")!
+                    user.updateDate = result.string(forColumn: "update_date")!
+                    user.createDate = result.string(forColumn: "create_date")!
+                    array.append(user)
+                }
+                //执行回调
+                callback(array)
+            }
+        }
+    }
     
     
     

@@ -27,3 +27,4 @@
 #import "UIView+Cate.h"
 #import "FMDB.h"
 #import "TABAnimated.h"
+#import "UserInfoModel.h"

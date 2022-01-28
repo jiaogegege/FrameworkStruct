@@ -242,6 +242,7 @@ extension UITableView
     ///滚动到顶部
     func scrollToTop()
     {
+        self.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
         self.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
     }
     

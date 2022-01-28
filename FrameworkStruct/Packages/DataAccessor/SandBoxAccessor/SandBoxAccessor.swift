@@ -121,14 +121,14 @@ extension SandBoxAccessor: ExternalInterface
     
     /******************** 文件夹路径访问 Section Begin *******************/
     ///获得沙盒文件夹路径
-    static func getHomeDirectory() -> String
+    func getHomeDirectory() -> String
     {
         let homePath = NSHomeDirectory()
         return homePath
     }
     
     ///获得Documents文件夹路径
-    static func getDocumentDirectory() -> String
+    func getDocumentDirectory() -> String
     {
         // 检索指定路径
         // 第一个参数：指定的搜索路径
@@ -139,7 +139,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获得Library路径
-    static func getLibraryDirectory() -> String
+    func getLibraryDirectory() -> String
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let libPath = paths.last
@@ -147,20 +147,33 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取 Temp 的路径
-    static func getTempDirectory() -> String
+    func getTempDirectory() -> String
     {
         return NSTemporaryDirectory()
     }
     
-    ///获取数据库文件路径
-    static func getDatabasePath() -> String
+    ///获取一个Documents下的目录如果不存在则创建
+    func getDocumentDirWith(pathComponent: String) -> String
     {
-        let dbPath = ((SandBoxAccessor.getDocumentDirectory() as NSString).appendingPathComponent(sdDatabaseDir) as NSString).appendingPathComponent(sdDatabaseFile)
+        let dirPath = (self.getDocumentDirectory() as NSString).appendingPathComponent(pathComponent)
+        if !self.isExist(path: dirPath) //不存在则创建
+        {
+            let _ = self.createDir(path: dirPath)
+        }
+        return dirPath
+    }
+    
+    ///获取数据库文件路径
+    func getDatabasePath() -> String
+    {
+        let dbDirPath = self.getDocumentDirWith(pathComponent: sdDatabaseDir)
+        let dbPath = (dbDirPath as NSString).appendingPathComponent(sdDatabaseFile)
         return dbPath
     }
     
     ///获取数据库表结构sql文件路径，参数包含扩展名，如果不包含扩展名，默认用`sql`
-    static func getSQLFilePath(fileName: String) -> String?
+    ///文件名中不要包含`.`，因为用来区分扩展名
+    func getSQLFilePath(fileName: String) -> String?
     {
         let fileComponent = fileName.components(separatedBy: ".")
         let sqlPath = Bundle.main.path(forResource: fileComponent.first, ofType: (fileComponent.count >= 2 ? fileComponent.last : "sql"))

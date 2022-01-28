@@ -25,7 +25,7 @@
     if (self = [super init])
     {
         _dict = [NSMutableDictionary dictionary];
-        _maxCount = capacity;       //每一个状态的最大容量
+        _capacity = capacity;       //每一个状态的最大容量
     }
     return self;
 }
@@ -44,7 +44,7 @@
         }
         else    //没有保存过状态
         {
-            vec = [SMVector vectorWithCapacity:_maxCount];
+            vec = [SMVector vectorWithCapacity:_capacity];
             [vec push:obj];
             [_dict setObject:vec forKey:key];
         }

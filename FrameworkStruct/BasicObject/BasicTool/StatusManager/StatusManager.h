@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface StatusManager : NSObject
 
 ///最多可以保存的状态，初始化时确定
-@property(nonatomic, assign, readonly)NSInteger maxCount;
+@property(nonatomic, assign, readonly)NSInteger capacity;
 
 ///创建一个新的状态管理器，并初始化容量
 -(instancetype)initWithCapacity:(NSInteger)capacity;

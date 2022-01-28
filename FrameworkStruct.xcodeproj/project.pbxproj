@@ -61,6 +61,8 @@
 		EA3337E02797E6AA00612DC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DB2797E6AA00612DC3 /* README.md */; };
 		EA3A051C27A2714E00A96DE2 /* EncryptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */; };
 		EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */; };
+		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
+		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
@@ -360,6 +362,10 @@
 		EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptManager.swift; sourceTree = "<group>"; };
 		EA3A051D27A284C100A96DE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_1.sql; sourceTree = "<group>"; };
+		EA52493D27A3E44B002E3616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		EA52494127A3EDEB002E3616 /* 1_0_2.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_2.sql; sourceTree = "<group>"; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -961,6 +967,16 @@
 			path = SQLCipher;
 			sourceTree = "<group>";
 		};
+		EA52493C27A3E43B002E3616 /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				EA52493D27A3E44B002E3616 /* README.md */,
+				EA52493E27A3E4AD002E3616 /* UserInfoModel.h */,
+				EA52493F27A3E4AD002E3616 /* UserInfoModel.m */,
+			);
+			path = Datas;
+			sourceTree = "<group>";
+		};
 		EA5D10A4277ED4FB004FCE4C /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,6 +1011,7 @@
 				EA3A051D27A284C100A96DE2 /* README.md */,
 				EA75BB4B2792B1E200910B4C /* db_table.sql */,
 				EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */,
+				EA52494127A3EDEB002E3616 /* 1_0_2.sql */,
 			);
 			path = Migrations;
 			sourceTree = "<group>";
@@ -1840,6 +1857,7 @@
 				EADB011427624233001B7223 /* DataContainer */,
 				EAAA4E93276F657D00C45712 /* DataChecker */,
 				EADB010C27624213001B7223 /* DataAccessor */,
+				EA52493C27A3E43B002E3616 /* Datas */,
 				EADB012D27624328001B7223 /* ThemePackage */,
 			);
 			path = Packages;
@@ -2113,6 +2131,7 @@
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
+				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
@@ -2356,6 +2375,7 @@
 				EAC8A76E27625BA70088293F /* NSObject+MJCoding.m in Sources */,
 				EAC8A84E27625D490088293F /* SDAnimatedImage.m in Sources */,
 				EADB00EB2762416E001B7223 /* JCollectionViewController.swift in Sources */,
+				EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */,
 				EADB00E72762410D001B7223 /* ColorConst.swift in Sources */,
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
 				EA99371F27994F6100480147 /* TABAnimatedInjectionIIIHelper.m in Sources */,
