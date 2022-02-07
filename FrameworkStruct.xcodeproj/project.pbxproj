@@ -1415,8 +1415,8 @@
 				EAAA4E83276F3EC900C45712 /* AlertManager.swift */,
 				EAB91A64278B047C00A35FA3 /* DialogManager.swift */,
 				EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */,
-				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
 				EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */,
+				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
 			);
 			path = ComponentManager;
 			sourceTree = "<group>";
