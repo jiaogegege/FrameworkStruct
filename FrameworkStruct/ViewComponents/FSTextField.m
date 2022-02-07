@@ -27,6 +27,7 @@
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
     return CGRectMake(0, 0 , self.bounds.size.width, self.bounds.size.height);
 }
+
     // 这个函数是调整placeholder在placeholderLabel中绘制的位置以及范围
 - (void)drawPlaceholderInRect:(CGRect)rect {
     [super drawPlaceholderInRect:CGRectMake(0, 0 , self.bounds.size.width, self.bounds.size.height)];

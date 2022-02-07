@@ -162,6 +162,7 @@
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
+		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -565,6 +566,8 @@
 		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
+		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -1413,6 +1416,7 @@
 				EAB91A64278B047C00A35FA3 /* DialogManager.swift */,
 				EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */,
 				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
+				EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */,
 			);
 			path = ComponentManager;
 			sourceTree = "<group>";
@@ -1441,6 +1445,15 @@
 				EAAA4E94276F658400C45712 /* README.md */,
 			);
 			path = DataChecker;
+			sourceTree = "<group>";
+		};
+		EAC4E6CD27B0C24400654EE6 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				EAC4E6CE27B0C25C00654EE6 /* README.md */,
+				EA9F1CBD279153BA0086E78C /* FSDialog.swift */,
+			);
+			path = Basic;
 			sourceTree = "<group>";
 		};
 		EAC8A73E27625B450088293F /* AFNetworking */ = {
@@ -1857,8 +1870,8 @@
 				EADB011427624233001B7223 /* DataContainer */,
 				EAAA4E93276F657D00C45712 /* DataChecker */,
 				EADB010C27624213001B7223 /* DataAccessor */,
-				EA52493C27A3E43B002E3616 /* Datas */,
 				EADB012D27624328001B7223 /* ThemePackage */,
+				EA52493C27A3E43B002E3616 /* Datas */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -1880,9 +1893,9 @@
 		EADB009927623C48001B7223 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				EAC4E6CD27B0C24400654EE6 /* Basic */,
 				EADB014B276243FC001B7223 /* README.md */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
-				EA9F1CBD279153BA0086E78C /* FSDialog.swift */,
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
 				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
@@ -2242,6 +2255,7 @@
 				EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */,
 				EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */,
 				EAC8A86727625D490088293F /* UIImage+ExtendedCacheData.m in Sources */,
+				EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */,
 				EA1AE487277819E600D028F9 /* ConstraintMakerEditable.swift in Sources */,
 				EAC8A88227625D490088293F /* SDDeviceHelper.m in Sources */,
 				EAC8A86227625D490088293F /* SDImageCoderHelper.m in Sources */,

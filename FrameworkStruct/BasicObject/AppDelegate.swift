@@ -31,13 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func initData()
     {
         //初始化数据库
-        let dba = DatabaseAccessor.shared
-        dba.queryAllUserInfo { users in
-            for user in users
-            {
-                print("id:\(user.id), phone: \(user.userPhone), psd: \(user.userPassword)")
-            }
-        }
+        _ = DatabaseAccessor.shared
+        
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

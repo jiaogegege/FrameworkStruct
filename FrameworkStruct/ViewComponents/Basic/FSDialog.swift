@@ -25,13 +25,19 @@ class FSDialog: UIView, DialogManagerProtocol
             self.bgView.backgroundColor = newValue
         }
     }
+    
+    //显示消失的动画效果类型
+    //如果子类覆写了`showAnimation`等动画方法，其优先级高于该属性
+    var showType: FSDShowType = .gradient
+    
     //show时的动画时长
     var animateInterval: TimeInterval = 0.25
+    
     //主题色
     var themeColor: UIColor = ThemeManager.shared.getCurrentTheme().mainColor
     
     //UI组件
-    var bgView: UIView! //背景蒙层，一般是半透明
+    fileprivate var bgView: UIView! //背景蒙层，一般是半透明
     var containerView: UIView!  //放置内容部分的容器视图
     
 
@@ -39,9 +45,16 @@ class FSDialog: UIView, DialogManagerProtocol
     //初始化方法，参数随便传，大小永远是整个屏幕大
     override init(frame: CGRect = .zero) {
         super.init(frame: CGRect(x: 0.0, y: 0.0, width: kScreenWidth, height: kScreenHeight))
+        self.initData()
         self.createView()
         self.configView()
-        self.initData()
+    }
+    
+    //初始化数据
+    //子类可以覆写该方法，并且要调用父类方法
+    func initData()
+    {
+        
     }
     
     //这里会创建bgView和containerView
@@ -62,14 +75,7 @@ class FSDialog: UIView, DialogManagerProtocol
         bgView.frame = self.bounds
         bgView.backgroundColor = self.bgColor
     }
-    
-    //初始化数据
-    //子类可以覆写该方法，并且要调用父类方法
-    func initData()
-    {
-        
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -80,6 +86,14 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         self.isHidden = true
         self.bgView.alpha = 0.0
+        if showType == .gradient
+        {
+            self.containerView.alpha = 0.0
+        }
+        else if showType == .bounce
+        {
+            self.containerView.y = self.height
+        }
     }
     
     //显示动画
@@ -88,11 +102,23 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         self.isHidden = false
         weak var weakSelf = self
-        UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
-            weakSelf?.bgView.alpha = 1.0
-            weakSelf?.containerView.alpha = 1.0
-        } completion: { finished in
-            completion()
+        if showType == .gradient
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 1.0
+                weakSelf?.containerView.alpha = 1.0
+            } completion: { finished in
+                completion()
+            }
+        }
+        else if showType == .bounce
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 1.0
+                weakSelf?.containerView.y = weakSelf!.height - weakSelf!.containerView.height
+            } completion: { finished in
+                completion()
+            }
         }
     }
     
@@ -101,11 +127,24 @@ class FSDialog: UIView, DialogManagerProtocol
     func hideAnimation(completion: @escaping VoidClosure)
     {
         weak var weakSelf = self
-        UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
-            weakSelf?.bgView.alpha = 0.0
-            weakSelf?.containerView.alpha = 0.0
-        } completion: { finished in
-            completion()
+        if showType == .gradient
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 0.0
+                weakSelf?.containerView.alpha = 0.0
+            } completion: { finished in
+                completion()
+            }
+        }
+        else if showType == .bounce
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 0.0
+                weakSelf?.containerView.y = weakSelf!.height
+            } completion: { finished in
+                completion()
+            }
+
         }
     }
     
@@ -114,13 +153,24 @@ class FSDialog: UIView, DialogManagerProtocol
     func dismissAnimation(completion: @escaping VoidClosure)
     {
         weak var weakSelf = self
-        UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
-            weakSelf?.bgView.alpha = 0.0
-            weakSelf?.containerView.alpha = 0.0
-        } completion: { finished in
-            completion()
+        if showType == .gradient
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 0.0
+                weakSelf?.containerView.alpha = 0.0
+            } completion: { finished in
+                completion()
+            }
         }
-
+        else
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 0.0
+                weakSelf?.containerView.y = weakSelf!.height
+            } completion: { finished in
+                completion()
+            }
+        }
     }
     
     deinit {
@@ -129,6 +179,19 @@ class FSDialog: UIView, DialogManagerProtocol
             callback()
         }
         print("FSDialog: dealloc")
+    }
+    
+}
+
+
+//内部类型
+extension FSDialog: InternalType
+{
+    //显示类型，主要控制显示和消失的动画效果
+    //子类可以自定义动画效果，自定义动画效果优先级高于该属性
+    enum FSDShowType {
+        case gradient     //该类型一般用于显示在屏幕中间，做一个渐变的动画效果
+        case bounce     //该类型一般用于显示在屏幕底部，做一个向上弹的动画效果
     }
     
 }

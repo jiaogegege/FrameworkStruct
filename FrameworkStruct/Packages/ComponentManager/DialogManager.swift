@@ -214,7 +214,7 @@ extension DialogManager: ExternalInterface
         self.wantShow(vi: vi, priority: .high)
     }
     
-    //想要显示青少年模式弹窗
+    ///想要显示青少年模式弹窗
     func wantShowTeenMode(enter:@escaping VoidClosure, confirm:@escaping VoidClosure)
     {
         let v = TeenagerModeDialog(frame: .zero)

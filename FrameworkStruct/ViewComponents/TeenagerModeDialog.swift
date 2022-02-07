@@ -23,6 +23,9 @@ class TeenagerModeDialog: FSDialog
     var sepLine: UIView!    //分割线
     var confirmBtn: UIButton!   //我知道了按钮
     
+    
+    //MARK: 方法
+    
     //创建界面
     override func createView() {
         super.createView()
