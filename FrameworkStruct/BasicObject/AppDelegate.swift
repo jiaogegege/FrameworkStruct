@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func initData()
     {
         //初始化数据库
-        _ = DatabaseAccessor.shared
+//        _ = DatabaseAccessor.shared
         
     }
 

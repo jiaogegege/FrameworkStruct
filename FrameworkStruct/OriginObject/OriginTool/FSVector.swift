@@ -126,7 +126,7 @@ extension FSVector
     {
         if !self.isEmpty()
         {
-            if self.vector.contains(item: item)
+            if self.vector.contains(item)
             {
                 let index = self.indexOf(item)
                 if index >= 0
@@ -182,7 +182,7 @@ extension FSVector
     {
         if !self.isEmpty()
         {
-            if self.vector.contains(item: item)
+            if self.vector.contains(item)
             {
                 return self.vector.firstIndex(of: item) ?? -1
             }

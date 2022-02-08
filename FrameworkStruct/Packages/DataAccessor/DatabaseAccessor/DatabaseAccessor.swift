@@ -24,9 +24,8 @@ import UIKit
  数据库存取器代理协议，主要通知外部程序存取器的一些状态变化
  */
 protocol DatabaseAccessorDelegate {
-    ///当前正在升级数据库
-    
-    ///数据库升级完毕
+    ///数据库状态变化
+    func databaseAccessorStatusChanged(status: DatabaseAccessor.WorkState)
     
 }
 
@@ -308,6 +307,11 @@ extension DatabaseAccessor: ExternalInterface
     ///执行一条Update的sql语句
     func update(sql: String) -> Bool
     {
+        guard currentState != .failure else {
+            FSLog("db is failure")
+            return false
+        }
+        
         var ret = false
         if dbQueue != nil, db != nil
         {
@@ -330,6 +334,11 @@ extension DatabaseAccessor: ExternalInterface
     ///执行一条query的sql语句
     func query(sql: String) -> FMResultSet?
     {
+        guard currentState != .failure else {
+            FSLog("db is failure")
+            return nil
+        }
+        
         var ret: FMResultSet? = nil
         if dbQueue != nil, db != nil
         {
@@ -510,7 +519,7 @@ extension DatabaseAccessor: ExternalInterface
     {
         //构建sql语句
         let sql = String(format: "INSERT INTO app_config (id, config_key, config_value, update_date, create_date) VALUES ('%@', '%@', '%@', '%@', '%@')", encryptMgr.uuidString(), DatabaseKey.dbVersion.rawValue, version, getCurrentTimeString(), getCurrentTimeString())
-        FSLog("insert db version \(update(sql: sql) ? "success" : "failure")")
+        FSLog("insert db version: \(version) \(update(sql: sql) ? "success" : "failure")")
     }
     
     //查询数据库版本号
@@ -533,7 +542,7 @@ extension DatabaseAccessor: ExternalInterface
     {
         //构建sql语句
         let sql = String(format: "UPDATE app_config SET config_value = '%@' WHERE config_key = '%@'", version, DatabaseKey.dbVersion.rawValue)
-        FSLog("update db version \(update(sql: sql) ? "success" : "failure")")
+        FSLog("update db version: \(version) \(update(sql: sql) ? "success" : "failure")")
     }
     
     //插入或更新数据库版本号
