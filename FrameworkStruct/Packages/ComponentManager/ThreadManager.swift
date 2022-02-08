@@ -38,3 +38,38 @@ class ThreadManager: OriginManager
     }
     
 }
+
+
+//接口方法
+extension ThreadManager: ExternalInterface
+{
+    ///在线程中异步执行代码
+    func async(onMain: Bool = true, action: @escaping VoidClosure)
+    {
+        if onMain
+        {
+            DispatchQueue.main.async(execute: action)
+        }
+        else
+        {
+            DispatchQueue.global().async(execute: action)
+        }
+    }
+    
+    ///在线程中同步执行代码
+    ///注意：一般不会这么使用
+    func sync(onMain: Bool = true, action: @escaping VoidClosure)
+    {
+        if onMain
+        {
+            DispatchQueue.main.sync(execute: action)
+        }
+        else
+        {
+            DispatchQueue.global().sync(execute: action)
+        }
+    }
+    
+    ///
+    
+}
