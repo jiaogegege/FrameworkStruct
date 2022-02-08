@@ -27,6 +27,7 @@ extension NSObject
             return typeName
         }
     }
+    
 }
 
 
@@ -196,9 +197,15 @@ extension Array
     }
     
     ///让Array支持contains方法
-    func contains<T>(item: T) -> Bool where T: Equatable
+    func contains<T>(_ item: T) -> Bool where T: Equatable
     {
         return self.filter({$0 as? T == item}).count > 0
+    }
+    
+    ///删除某个元素
+    mutating func removeObject(_ obj: Element!) where Element: Equatable
+    {
+        self.removeAll(where: {$0 == obj})
     }
     
 }

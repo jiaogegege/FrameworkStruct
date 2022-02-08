@@ -100,4 +100,10 @@ extension TimerManager: ExternalInterface
         return timer
     }
     
+    ///固定倒计时方法
+    func countDown()
+    {
+        
+    }
+    
 }

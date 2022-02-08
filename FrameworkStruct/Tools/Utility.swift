@@ -40,6 +40,12 @@ func getCopy(origin: Any?) -> Any
     }
 }
 
+///获得类型的类名的字符串
+func getClassName(_ aClass: AnyClass) -> String
+{
+    return NSStringFromClass(aClass)
+}
+
 ///获得一个对象的类名
 func getObjClassName(_ obj: AnyObject) -> String
 {
