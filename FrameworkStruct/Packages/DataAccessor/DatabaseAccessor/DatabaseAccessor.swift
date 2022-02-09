@@ -150,7 +150,7 @@ class DatabaseAccessor: OriginAccessor
             for str in sqlArr
             {
                 let sql = str.trim()
-                if isValidString(sql)   //如果是有效字符串，那么执行sql语句
+                if g_isValidString(sql)   //如果是有效字符串，那么执行sql语句
                 {
                     if !self.update(sql: sql)
                     {

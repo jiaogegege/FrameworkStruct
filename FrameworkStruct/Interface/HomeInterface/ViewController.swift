@@ -36,11 +36,13 @@ class ViewController: BasicViewController
     
     //初始化数据
     override func initData() {
+        super.initData()
         
     }
     
     //更新界面
     override func updateUI() {
+        super.updateUI()
         
     }
 
