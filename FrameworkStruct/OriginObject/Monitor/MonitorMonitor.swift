@@ -76,4 +76,16 @@ class MonitorMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        self.accessorMonitor.originConfig()
+        self.checkerMonitor.originConfig()
+        self.containerMonitor.originConfig()
+        self.documentMonitor.originConfig()
+        self.handlerMonitor.originConfig()
+        self.adapterMonitor.originConfig()
+        self.managerMonitor.originConfig()
+        self.embellisherMonitor.originConfig()
+        self.workerMonitor.originConfig()
+    }
+    
 }

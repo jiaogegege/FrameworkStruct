@@ -43,3 +43,13 @@ networkError = "Network Error";
 teenagerProtectContent = "In order to protect the healthy growth of minors, the framework structure specially launches a youth mode, which cannot be used normally. Please ask the guardian to actively select and set the guardian password.";
 setTeenagerMode = "Enter Teenager Mode";
 
+/**
+ * 网络错误信息
+ */
+networkUnavailable = "Network Unavailable";
+networkOk = "Request Success";
+networkNotFound = "Not Found";
+networkBadRequest = "Bad Request";
+networkSystemError = "Server Error";
+networkNoService = "No Service";
+networkBadGetway = "Bad Getway";

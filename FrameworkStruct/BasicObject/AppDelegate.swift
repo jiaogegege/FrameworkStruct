@@ -30,9 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //初始化应用程序数据
     func initData()
     {
-        //初始化数据库
-//        _ = DatabaseAccessor.shared
-        
+        //初始化程序组件
+        MonitorMonitor.shared.originConfig()
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

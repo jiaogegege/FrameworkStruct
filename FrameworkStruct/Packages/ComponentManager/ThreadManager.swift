@@ -20,6 +20,7 @@ class ThreadManager: OriginManager
     //操作队列容器
     fileprivate var groupDict: Dictionary<String, DispatchGroup> = [:]
     fileprivate var groupQueueDict: Dictionary<String, DispatchQueue> = [:]
+    fileprivate var operationQueueDict: Dictionary<String, OperationQueue> = [:]
     
     
     //MARK: 方法
@@ -92,6 +93,7 @@ extension ThreadManager: ExternalInterface
             group = DispatchGroup()
             self.groupDict[groupQueueLabel.getLabel()] = group  //创建后保存
         }
+        
         let groupQueue: DispatchQueue
         if let gq = self.groupQueueDict[groupQueueLabel.getLabel()]
         {
@@ -120,7 +122,7 @@ extension ThreadManager: ExternalInterface
             group.enter()
             groupQueue.async {
                 op {
-                    group.leave()
+                    group.leave()   //执行finish的回调，需要op在内部执行
                 }
             }
         }
@@ -130,6 +132,115 @@ extension ThreadManager: ExternalInterface
             self.groupDict[groupQueueLabel.getLabel()] = nil
             self.groupQueueDict[groupQueueLabel.getLabel()] = nil
             completion()
+        }
+    }
+    
+    ///执行多个并发操作，每个操作都是同步的，内部无异步操作
+    ///identifier:指定这一组操作的id
+    ///ops:需要并发执行的操作
+    ///dependencyOps：这个数组中的操作依赖ops中的操作完成后再执行
+    ///onMain:是否在主线程执行
+    ///maxConcurrent:最大并发数，-1为不限制，1为串行，大于1时不会超过系统最大值，不要设置为0
+    ///completion:完成操作，如果还要添加额外的操作，那么不要设置这个值，等所有操作添加完了，调用`addCompletionToConcurrentQueue`来添加完成操作
+    ///
+    ///returns:返回队列，外部程序可以向队列中添加更多操作
+    func concurrentQueue(identifier: String,
+                         ops: Array<VoidClosure>,
+                         dependencyOps: Array<VoidClosure>? = nil,
+                         onMain: Bool = false,
+                         maxConcurrent: Int = -1,
+                         completion: VoidClosure? = nil) -> OperationQueue
+    {
+        let queue: OperationQueue
+        if onMain
+        {
+            queue = OperationQueue.main
+        }
+        else
+        {
+            queue = OperationQueue()
+        }
+        queue.maxConcurrentOperationCount = maxConcurrent
+        self.operationQueueDict[identifier] = queue //将队列添加到字典中
+        
+        //先处理依赖操作
+        var dependencyArray: Array<Operation> = []
+        if let deops = dependencyOps
+        {
+            for op in deops
+            {
+                let blockOp = BlockOperation {
+                    op()
+                }
+                dependencyArray.append(blockOp)
+            }
+        }
+        
+        //处理ops
+        for op in ops
+        {
+            let blockOp = BlockOperation {
+                op()
+            }
+            for deop in dependencyArray
+            {
+                //每一个deop都要添加依赖
+                deop.addDependency(blockOp)
+            }
+            queue.addOperation(blockOp)
+        }
+        
+        //添加依赖操作到队列
+        for deop in dependencyArray
+        {
+            queue.addOperation(deop)
+        }
+        
+        //添加完成操作，如果还添加其他操作，这个completion不会执行
+        if let comp = completion
+        {
+            weak var weakSelf = self
+            weak var weakQ = queue
+            queue.addBarrierBlock {
+                if weakQ!.operationCount <= 0
+                {
+                    weakSelf?.operationQueueDict[identifier] = nil
+                    comp()
+                }
+            }
+        }
+        
+        return queue
+    }
+    
+    ///向特定id的并发队列中添加操作
+    ///如果操作对象之间有复杂的依赖关系，或者需要配置大量属性，建议使用这个方法
+    func concurrentQueueAddOp(identifier: String, op: Operation)
+    {
+        //尝试获取队列，如果未获取到，那么重新创建
+        var queue = self.operationQueueDict[identifier]
+        if queue == nil
+        {
+            queue = self.concurrentQueue(identifier: identifier, ops: [])
+        }
+        queue?.addOperation(op)
+    }
+    
+    ///向特定id的并发队列添加完成操作，如果不存在该队列则什么都不做
+    ///如果调用了`addOpToConcurrentQueue`方法向队列中添加操作，如果需要监控所有操作完成的事件，那么一定要调用该方法
+    func concurrentQueueAddCompletion(identifier: String, completion: @escaping VoidClosure)
+    {
+        if let queue = self.operationQueueDict[identifier]
+        {
+            weak var weakSelf = self
+            weak var weakQ = queue
+            queue.addBarrierBlock {
+                if weakQ!.operationCount <= 0
+                {
+                    weakSelf?.operationQueueDict[identifier] = nil
+                    completion()
+                }
+            }
         }
     }
     

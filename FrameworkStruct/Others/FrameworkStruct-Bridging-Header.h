@@ -29,3 +29,4 @@
 #import "TABAnimated.h"
 #import "UserInfoModel.h"
 #import "UIButton+BAKit.h"
+#import "NSString+DES.h"

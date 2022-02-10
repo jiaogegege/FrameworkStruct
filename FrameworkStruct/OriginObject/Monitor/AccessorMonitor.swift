@@ -31,4 +31,11 @@ class AccessorMonitor: OriginMonitor
         return self
     }
     
+    ///添加需要初始化的组件
+    override func originConfig() {
+        super.originConfig()
+        //初始化数据库
+        _ = DatabaseAccessor.shared
+    }
+    
 }

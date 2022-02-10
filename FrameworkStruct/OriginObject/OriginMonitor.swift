@@ -35,6 +35,9 @@ protocol MonitorProtocol
     //获取一个元素
     //暂时不知道这个方法的作用，留作扩展
     func getItem() -> NSObject?
+    
+    //初始配置
+    func originConfig()
 }
 
 
@@ -85,7 +88,9 @@ extension OriginMonitor: MonitorProtocol
         return nil
     }
     
-    
+    @objc func originConfig() {
+        
+    }
 }
 
 

@@ -43,3 +43,13 @@ networkError = "网络错误";
 teenagerProtectContent = "为了呵护未成年人健康成长，框架结构特别推出青少年模式，该模式下部分功能无法正常使用。请监护人主动选择，并设置监护密码。";
 setTeenagerMode = "进入青少年模式";
 
+/**
+ * 网络错误信息
+ */
+networkUnavailable = "网络不可用";
+networkOk = "请求成功";
+networkNotFound = "资源未找到";
+networkBadRequest = "请求失败";
+networkSystemError = "服务器错误";
+networkNoService = "没有此服务";
+networkBadGetway = "服务器连接失败";

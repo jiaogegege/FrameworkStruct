@@ -20,6 +20,7 @@
 
 ///是否支持数据库加密
 //#define DATABASE_ENCRYPTION
+//数据库加密key
 #define DATABASE_ENCRYPTION_KEY @"DATABASE_ENCRYPTION_KEY_jxj_1989"
 
 

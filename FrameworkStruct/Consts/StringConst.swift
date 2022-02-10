@@ -72,6 +72,17 @@ extension String: ConstantPropertyProtocol
     static let teenagerProtectContent = localized("teenagerProtectContent")
     //进入青少年模式文字
     static let enterTeenMode = localized("setTeenagerMode")
+    
+    //MARK: 网络错误信息
+    static let networkUnavailable = localized("networkUnavailable")
+    static let networkOk = localized("networkOk")
+    static let networkNotFound = localized("networkNotFound")
+    static let networkBadRequest = localized("networkBadRequest")
+    static let networkSystemError = localized("networkSystemError")
+    static let networkNoService = localized("networkNoService")
+    static let networkBadGetway = localized("networkBadGetway")
+
+
 
 
 

@@ -2,12 +2,12 @@
 //  NetworkAdapter.swift
 //  FrameworkStruct
 //
-//  Created by  蒋 雪姣 on 2022/2/9.
+//  Created by  蒋 雪姣 on 2022/2/10.
 //
 
 /**
- * 网络适配器
- * 所有和网络请求相关的功能都在这里
+ 网络适配器
+ 此处定义所有的网络接口方法
  */
 import UIKit
 
@@ -16,6 +16,9 @@ class NetworkAdapter: OriginAdapter
     //MARK: 属性
     //单例
     static let shared = NetworkAdapter()
+    
+    //请求对象
+    fileprivate let request = NetworkRequest.shared
     
     
     //MARK: 方法
@@ -37,7 +40,7 @@ class NetworkAdapter: OriginAdapter
 
 }
 
-//接口方法
+//外部接口
 extension NetworkAdapter: ExternalInterface
 {
     

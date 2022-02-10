@@ -31,4 +31,9 @@ class AdapterMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        super.originConfig()
+        //初始化网络适配器
+        _ = NetworkAdapter.shared
+    }
 }

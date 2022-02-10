@@ -24,18 +24,44 @@ class ControllerManager: OriginManager
     
     //当前tabbarcontroller
     //一般只有一个
-    weak var tabbarVC: UITabBarController? = nil
+    fileprivate(set) weak var tabbarVC: UITabBarController? = nil
     
     //导航控制器弱引用数组
     //这里记录所有被创建的导航控制器，基本上每个tabbar元素都对应一个导航控制器
     let navArray: WeakArray = WeakArray.init()
     
     //当前导航控制器
-    weak var currentNavVC: UINavigationController? = nil
+    fileprivate(set) weak var currentNavVC: UINavigationController? = nil
     
     //当前控制器，一般是UIViewController，显示在最顶层
-    weak var currentVC: UIViewController? = nil
+    fileprivate(set) weak var currentVC: UIViewController? = nil
     
+    
+    //MARK: 方法
+    //私有化init方法
+    private override init()
+    {
+        super.init()
+    }
+    
+    //重写复制方法
+    override func copy() -> Any
+    {
+        return self
+    }
+        
+    //重写复制方法
+    override func mutableCopy() -> Any
+    {
+        return self
+    }
+    
+}
+
+
+//外部接口
+extension ControllerManager: ExternalInterface
+{
     //计算属性，rootViewController
     var rootVC: UIViewController {
         get {
@@ -66,32 +92,6 @@ class ControllerManager: OriginManager
         }
     }
     
-    
-    //MARK: 方法
-    //私有化init方法
-    private override init()
-    {
-        super.init()
-    }
-    
-    //重写复制方法
-    override func copy() -> Any
-    {
-        return self
-    }
-        
-    //重写复制方法
-    override func mutableCopy() -> Any
-    {
-        return self
-    }
-    
-}
-
-
-//外部接口
-extension ControllerManager: ExternalInterface
-{
     //当一个控制器被创建的时候，调用这个方法并传入self，记录
     //建议在viewDidLoad方法中调用
     func pushController(controller: UIViewController)
