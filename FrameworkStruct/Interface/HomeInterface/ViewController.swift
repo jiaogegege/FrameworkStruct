@@ -43,9 +43,7 @@ class ViewController: BasicViewController
     //更新界面
     override func updateUI() {
         super.updateUI()
-        TimerManager.shared.after(interval: 0.1) {
-            print(NetworkRequest.shared.networkAvailable)
-        }
+        
     }
 
 }

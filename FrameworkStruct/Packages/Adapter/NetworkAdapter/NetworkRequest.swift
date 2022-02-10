@@ -104,13 +104,26 @@ class NetworkRequest: OriginManager
     }
     
     ///创建请求对象
-    fileprivate func createRequest(timeoutInterval: TimeInterval = nt_requestTimeoutInterval) -> AFHTTPSessionManager
+    ///timeoutInterval：请求超时时间
+    fileprivate func createRequest(timeoutInterval: TimeInterval, requestHeaders: Dictionary<String, String>? = nil) -> AFHTTPSessionManager
     {
         let requestManager = AFHTTPSessionManager()
         //request
         let requestSerializer = AFJSONRequestSerializer()
         requestSerializer.timeoutInterval = timeoutInterval
-        requestSerializer.setValue(nt_requestContentType, forHTTPHeaderField: nt_requestHeaderContentType)
+        //设置默认请求头
+        for (key, value) in self.getDefaultRequestHeaders()
+        {
+            requestSerializer.setValue(value, forHTTPHeaderField: key)
+        }
+        //设置自定义请求头
+        if let headers = requestHeaders
+        {
+            for (key, value) in headers
+            {
+                requestSerializer.setValue(value, forHTTPHeaderField: key)
+            }
+        }
         requestManager.requestSerializer = requestSerializer
         //response
         let responseSerializer = AFJSONResponseSerializer()
@@ -118,6 +131,12 @@ class NetworkRequest: OriginManager
         requestManager.responseSerializer = responseSerializer
         
         return requestManager
+    }
+    
+    ///获取默认请求头
+    fileprivate func getDefaultRequestHeaders() -> Dictionary<String, String>
+    {
+        return [RequestHeaderKey.ContentType.rawValue: "application/json"]
     }
 
 }
@@ -142,9 +161,49 @@ extension NetworkRequest: ExternalInterface
         return self.networkStatus
     }
     
+    ///创建一个get请求
+    ///参数：
+    ///urlPath：接口地址，不包含host
+    ///params：参数
+    ///timeoutInterval：超时时间
+    ///headers：请求头
+    func get(urlPath: String, params: Dictionary<String, Any>, timeoutInterval: TimeInterval = nt_requestTimeoutInterval, headers: Dictionary<String, String>? = nil)
+    {
+        //创建请求对象
+        let manager = self.createRequest(timeoutInterval: timeoutInterval, requestHeaders: headers)
+        //加密参数
+        let desParams = self.encryptParamValues(params)
+        //组合url
+        let url = serverHostKey.getHost() + urlPath
+        //启动请求
+        manager.get(url, parameters: desParams, headers: nil, progress: nil) { (task, responseObject) in
+            let response = responseObject as! Dictionary<String, Any>
+            
+        } failure: { (task, error) in
+            
+        }
+
+    }
     
+    ///创建一个post请求
+    func post()
+    {
+        
+    }
     
+    ///创建一个put请求
+    func put()
+    {
+        
+    }
     
+    ///创建一个delete请求
+    func delete()
+    {
+        
+    }
+    
+    ///创建一个
     
     
 }
