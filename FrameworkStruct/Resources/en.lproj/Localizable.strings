@@ -44,12 +44,13 @@ teenagerProtectContent = "In order to protect the healthy growth of minors, the 
 setTeenagerMode = "Enter Teenager Mode";
 
 /**
- * 网络错误信息
+ * 网络状态信息
  */
 networkUnavailable = "Network Unavailable";
 networkOk = "Request Success";
 networkNotFound = "Not Found";
 networkBadRequest = "Bad Request";
+networkNeedAuth ="Need Authorization";
 networkSystemError = "Server Error";
 networkNoService = "No Service";
 networkBadGetway = "Bad Getway";

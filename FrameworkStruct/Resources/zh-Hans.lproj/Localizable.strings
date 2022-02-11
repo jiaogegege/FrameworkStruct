@@ -44,12 +44,13 @@ teenagerProtectContent = "为了呵护未成年人健康成长，框架结构特
 setTeenagerMode = "进入青少年模式";
 
 /**
- * 网络错误信息
+ * 网络状态信息
  */
 networkUnavailable = "网络不可用";
 networkOk = "请求成功";
 networkNotFound = "资源未找到";
 networkBadRequest = "请求失败";
+networkNeedAuth ="需要验证身份";
 networkSystemError = "服务器错误";
 networkNoService = "没有此服务";
 networkBadGetway = "服务器连接失败";

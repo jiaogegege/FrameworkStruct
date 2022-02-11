@@ -37,11 +37,46 @@ class NetworkAdapter: OriginAdapter
     {
         return self
     }
+    
+    ///获取默认参数
+    fileprivate func getDefaultParams() -> Dictionary<String, String>
+    {
+        return [nt_macAddress: g_getDeviceId(), nt_deviceType: "ios", nt_clientTime: String(format: "%lld", getCurrentTimeInterval() * 1000)]
+    }
 
 }
 
 //外部接口
 extension NetworkAdapter: ExternalInterface
 {
+    ///获取首页模块、活动、banner等数据
+    func getHomeData(success:@escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback)
+    {
+        request.get(urlPath: url_homeData, exact: false, params: getDefaultParams(), authorization: nil, timeoutInterval: nt_requestTimeoutInterval, headers: nil, progressCallback: nil) { response in
+            //解析数据为对象
+            let homeDataModel = HomeDataModel.mj_object(withKeyValues: response)
+            success(homeDataModel!)
+        } failure: { error in
+            failure(error)
+        }
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

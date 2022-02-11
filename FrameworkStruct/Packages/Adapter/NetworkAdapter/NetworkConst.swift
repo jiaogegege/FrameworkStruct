@@ -25,13 +25,13 @@ let nt_encryptDesKey = "Aipi3pWCzdo6tA2SL0gp3ajx"
 let nt_dataParamKey = "data"
 
 ///请求超时时间间隔
-let nt_requestTimeoutInterval: TimeInterval = 20.0
+let nt_requestTimeoutInterval: TimeInterval = 30.0
 
 ///可接受的返回数据类型
 let nt_acceptableContentType:Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
 
 ///request headers key
-enum RequestHeaderKey: String {
+enum HttpRequestHeaderKey: String {
     case Accept = "Accept"  //指定客户端能够接收的内容类型：Accept: text/plain, text/html
     case AcceptCharset = "Accept-Charset"   //浏览器可以接受的字符编码集：Accept-Charset: iso-8859-5
     case AcceptEncoding = "Accept-Encoding"     //指定浏览器可以支持的web服务器返回内容压缩编码类型：Accept-Encoding: compress, gzip
@@ -65,8 +65,8 @@ enum RequestHeaderKey: String {
     
 }
 
-///response header key
-enum ResponseHeaderKey: String {
+///response headers key
+enum HttpResponseHeaderKey: String {
     case AcceptRanges = "Accept-Ranges"     //表明服务器是否支持指定范围请求及哪种类型的分段请求：Accept-Ranges: bytes
     case Age = "Age"    //从原始服务器到代理缓存形成的估算时间（以秒计，非负）：Age: 12
     case Allow = "Allow"    //对某网络资源的有效的请求行为，不允许则返回405：Allow: GET, HEAD
@@ -95,15 +95,50 @@ enum ResponseHeaderKey: String {
     case Via = "Via"    //告知代理客户端响应是通过哪里发送的：Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
     case Warning = "Warning"    //警告实体可能存在的问题：Warning: 199 Miscellaneous warning
     case WWWAuthenticate = "WWW-Authenticate"   //表明客户端请求实体应该使用的授权方案：WWW-Authenticate: Basic
+    
 }
+
+//MIME type
+enum MIMEType: String {
+    case html = "text/html"
+    case plain = "text/plain"
+    case rtf = "application/rtf"
+    case gif = "image/gif"
+    case jpg = "image/jpeg"
+    case bmp = "image/bmp"
+    case tiff = "image/tiff"
+    case au = "audio/basic"
+    case wav = "audio/x-wav"
+    case mid = "audio/mid"
+    case midi = "audio/midi,audio/x-midi"
+    case ra = "audio/x-pn-realaudio"
+    case mpeg = "video/mpeg"
+    case avi = "video/x-msvideo"
+    case gz = "application/x-gzip"
+    case tar = "application/x-tar"
+}
+
+//请求成功和失败的回调
+typealias RequestSuccessCallback = (_ response: Any) -> Void
+typealias RequestFailureCallback = (_ error: NSError) -> Void
+
+//MARK: 部分参数名定义
+let nt_macAddress = "macAddress"    //mac地址
+let nt_deviceType = "deviceType"    //ios
+let nt_clientTime = "clientTime"    //客户端时间
+
+let nt_responseCodeKey = "errCode"  //返回的状态码key
+let nt_responseMsgKey = "errMsg"    //返回的状态信息key
+let nt_responseDataKey = "data"     //返回数据的key
 
 //MARK: 服务器环境定义
 ///服务器环境变量
-let serverHostKey: ServerHostType = .dev
+let nt_serverHost: ServerHostType = .dev
+
 enum ServerHostType {
     case dev    //开发环境
     case qa     //测试环境
-    case uat    //用户测试/预发布
+    case uat    //内测/预发布环境
     case pro    //生产环境
     
     //获取服务器环境的主机地址
@@ -111,37 +146,50 @@ enum ServerHostType {
     {
         switch self {
         case .dev:
-            return "http://47.111.83.232:8888/pp-rest"
+            return "http://192.168.50.54/"
         case .qa:
-            return "https://dayue.org.cn/pp-rest"
+//            return "http://218.4.182.210/"    //外网ip
+//            return "http://192.168.50.63/"    //内网ip
+            return "https://jszhaofeng.cn/"
         case .uat:
-            return "https://dayuemedical.com.cn/pp-rest"
+            return "https://www.awaitz.com/pre/"
         case .pro:
-            return "https://dayuemedical.com.cn/pp-rest"
+            return "https://www.awaitz.com/"
         }
     }
+    
 }
 
 //MARK: URL定义
-//登录接口
-let login_WithPhonePassword = "/user/loginWithPhone"
+//首页数据，包括首页模块、活动信息和banner等
+let url_homeData = "api/awaitz-mall/home/v1/homeData"
 
 
 
 
 
-//MARK: 错误信息定义
+//MARK: HTTP相关信息定义
+enum HttpMethodType: String {
+    case GET
+    case POST
+    case PUT
+    case PATCH
+    case HEAD
+    case DELETE
+}
+
 enum HttpStatusCode: Int
 {
-    case unavailable = 0
-    case ok = 200
+    case unavailable = 0    //网络不可用
+    case ok = 200           //正常
     
-    case notFound = 404
-    case badRequest = 400
+    case notFound = 404     //资源未找到
+    case badRequest = 400   //请求失败
+    case needAuth = 401     //需要验证身份
     
-    case systemError = 500
-    case noService = 501
-    case badGetway = 502
+    case systemError = 500  //服务器错误
+    case noService = 501    //没有此服务
+    case badGetway = 502    //服务器连接失败
     
     ///获取错误信息
     func getErrorDes() -> String
@@ -155,6 +203,8 @@ enum HttpStatusCode: Int
             return String.networkNotFound
         case .badRequest:
             return String.networkBadRequest
+        case .needAuth:
+            return String.networkNeedAuth
         case .systemError:
             return String.networkSystemError
         case .noService:

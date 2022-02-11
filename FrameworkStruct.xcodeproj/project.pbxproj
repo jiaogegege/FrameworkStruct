@@ -342,6 +342,7 @@
 		EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015827624B4C001B7223 /* BlueTheme.plist */; };
 		EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015927624B4C001B7223 /* RedTheme.plist */; };
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
+		EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0079327B63DEA008C71B4 /* HomeDataModel.m */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
 		EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A97277B4AD900676268 /* DocumentMonitor.swift */; };
@@ -972,6 +973,8 @@
 		EADB015827624B4C001B7223 /* BlueTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BlueTheme.plist; sourceTree = "<group>"; };
 		EADB015927624B4C001B7223 /* RedTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedTheme.plist; sourceTree = "<group>"; };
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
+		EAE0079227B63DEA008C71B4 /* HomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataModel.h; sourceTree = "<group>"; };
+		EAE0079327B63DEA008C71B4 /* HomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDataModel.m; sourceTree = "<group>"; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
 		EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 		EAF85A97277B4AD900676268 /* DocumentMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMonitor.swift; sourceTree = "<group>"; };
@@ -1135,6 +1138,8 @@
 				EA52493D27A3E44B002E3616 /* README.md */,
 				EA52493E27A3E4AD002E3616 /* UserInfoModel.h */,
 				EA52493F27A3E4AD002E3616 /* UserInfoModel.m */,
+				EAE0079227B63DEA008C71B4 /* HomeDataModel.h */,
+				EAE0079327B63DEA008C71B4 /* HomeDataModel.m */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -2357,6 +2362,7 @@
 				EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */,
 				EA9A4A872780309E00170BB3 /* FSTextField.m in Sources */,
 				EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */,
+				EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */,
 				EAC8A87627625D490088293F /* SDImageCacheConfig.m in Sources */,
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,
 				EAC8A85D27625D490088293F /* SDWebImageCompat.m in Sources */,

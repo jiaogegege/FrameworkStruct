@@ -27,6 +27,8 @@
 #import "UIView+Cate.h"
 #import "FMDB.h"
 #import "TABAnimated.h"
-#import "UserInfoModel.h"
 #import "UIButton+BAKit.h"
 #import "NSString+DES.h"
+
+#import "UserInfoModel.h"
+#import "HomeDataModel.h"

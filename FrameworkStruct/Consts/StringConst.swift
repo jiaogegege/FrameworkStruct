@@ -78,6 +78,7 @@ extension String: ConstantPropertyProtocol
     static let networkOk = localized("networkOk")
     static let networkNotFound = localized("networkNotFound")
     static let networkBadRequest = localized("networkBadRequest")
+    static let networkNeedAuth = localized("networkNeedAuth")
     static let networkSystemError = localized("networkSystemError")
     static let networkNoService = localized("networkNoService")
     static let networkBadGetway = localized("networkBadGetway")

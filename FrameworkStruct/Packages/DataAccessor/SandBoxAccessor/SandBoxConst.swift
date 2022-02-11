@@ -12,3 +12,6 @@ import Foundation
 let sdDatabaseDir = "db"     //数据库相关文件存放目录
 let sdDatabaseFile = "database.db"   //数据库文件名
 let sdDatabaseOriginSQLFile = "db_table.sql"    //创建数据库表结构文件名
+
+//下载临时目录
+let sdDownloadTempDir = "download_temp"

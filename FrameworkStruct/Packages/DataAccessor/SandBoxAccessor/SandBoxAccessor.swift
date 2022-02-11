@@ -146,10 +146,29 @@ extension SandBoxAccessor: ExternalInterface
         return libPath!
     }
     
+    ///获取cache路径
+    func getCacheDirectory() -> String
+    {
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let cachePath = paths.last
+        return cachePath!
+    }
+    
     ///获取 Temp 的路径
     func getTempDirectory() -> String
     {
         return NSTemporaryDirectory()
+    }
+    
+    ///获取一个Temp下的目录，不存在则创建
+    func getTempDirWith(pathComponent: String) -> String
+    {
+        let dirPath = (self.getTempDirectory() as NSString).appendingPathComponent(pathComponent)
+        if !self.isExist(path: dirPath) //不存在则创建
+        {
+            let _ = self.createDir(path: dirPath)
+        }
+        return dirPath
     }
     
     ///获取一个Documents下的目录如果不存在则创建
@@ -178,6 +197,13 @@ extension SandBoxAccessor: ExternalInterface
         let fileComponent = fileName.components(separatedBy: ".")
         let sqlPath = Bundle.main.path(forResource: fileComponent.first, ofType: (fileComponent.count >= 2 ? fileComponent.last : "sql"))
         return sqlPath
+    }
+    
+    ///获取临时下载文件保存目录
+    ///放在Temp文件夹下
+    func getTempDownloadDir() -> String
+    {
+        return self.getTempDirWith(pathComponent: sdDownloadTempDir)
     }
     
     /******************** 文件夹路径访问 Section End *******************/
