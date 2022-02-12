@@ -91,7 +91,7 @@ class NetworkRequest: OriginManager
                 let jsonData = try JSONSerialization.data(withJSONObject: params, options: .fragmentsAllowed)
                 let jsonStr = String.init(data: jsonData, encoding: .utf8)
                 let encryptStr = NSString.des(jsonStr, key: nt_encryptDesKey)
-                return [nt_dataParamKey: encryptStr as Any]    //返回加密参数
+                return [nt_paramDataKey: encryptStr as Any]    //返回加密参数
             } catch {
                 FSLog("encrypt error: \(error.localizedDescription)")
                 return params    //如果加密失败，返回原始参数
@@ -156,15 +156,7 @@ class NetworkRequest: OriginManager
         
         return requestManager
     }
-    
-    ///创建一个下载文件请求对象
-    fileprivate func createDownloadRequest(url: String) -> AFURLSessionManager
-    {
-        let config = URLSessionConfiguration.default
-        let manager = AFURLSessionManager.init(sessionConfiguration: config)
-        return manager
-    }
-    
+
     ///获取默认请求头，每个请求都会有，根据实际需要修改
     fileprivate func getDefaultRequestHeaders() -> Dictionary<String, String>
     {
@@ -187,12 +179,7 @@ extension NetworkRequest: ExternalInterface
             return false
         }
     }
-    
-    ///计算属性，当前网络状态
-    var networkState: AFNetworkReachabilityStatus {
-        return self.networkStatus
-    }
-    
+
     ///当前host地址
     var hostUrl: String {
         return nt_serverHost.getHost()
@@ -217,63 +204,7 @@ extension NetworkRequest: ExternalInterface
              success: @escaping RequestSuccessCallback,
              failure: @escaping RequestFailureCallback)
     {
-        //处理token和header
-        var customHeaders = Dictionary<String, String>()
-        if let auth = authorization {
-            customHeaders[HttpRequestHeaderKey.Authorization.rawValue] = auth
-        }
-        if let hds = headers {
-            customHeaders.merge(hds) { current, _ in
-                current
-            }
-        }
-        //创建请求对象
-        let manager = self.createRequest(timeoutInterval: timeoutInterval, requestHeaders: customHeaders)
-        //加密参数
-        var desParams = params  // 可能为nil
-        if let pas = params
-        {
-            desParams = self.encryptParamValues(pas)
-        }
-        //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
-        //启动请求
-        manager.get(url, parameters: desParams, headers: nil, progress: { downloadProgress in
-            //下载进度
-            FSLog("downloadProgress:\(downloadProgress.completedUnitCount)---\(downloadProgress.totalUnitCount)")
-            if let progress = progressCallback
-            {
-                progress(Float(downloadProgress.completedUnitCount) / Float(downloadProgress.totalUnitCount))
-            }
-        }) { (task, responseObject) in
-            //成功
-            //处理返回的数据，解密
-            let resDict = self.decryptParams(responseObject!)
-            //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
-            if responseCode == HttpStatusCode.ok.rawValue   //请求成功
-            {
-                success(resDict[nt_responseDataKey] as Any)
-            }
-            else    //请求失败，构造错误对象
-            {
-                let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
-                {
-                    errMsg = msg
-                }
-                else    //如果服务器没有给错误信息，那么尝试从本地获取
-                {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
-                }
-                let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
-                failure(error)
-            }
-        } failure: { (task, error) in
-            //失败
-            failure(error as NSError)
-        }
+        _ = self.dataTask(httpMethod: .GET, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: progressCallback, success: success, failure: failure)
     }
     
     ///创建一个post请求
@@ -295,63 +226,7 @@ extension NetworkRequest: ExternalInterface
               success: @escaping RequestSuccessCallback,
               failure: @escaping RequestFailureCallback)
     {
-        //处理token和header
-        var customHeaders = Dictionary<String, String>()
-        if let auth = authorization {
-            customHeaders[HttpRequestHeaderKey.Authorization.rawValue] = auth
-        }
-        if let hds = headers {
-            customHeaders.merge(hds) { current, _ in
-                current
-            }
-        }
-        //创建请求对象
-        let manager = self.createRequest(timeoutInterval: timeoutInterval, requestHeaders: customHeaders)
-        //加密参数
-        var desParams = params  // 可能为nil
-        if let pas = params
-        {
-            desParams = self.encryptParamValues(pas)
-        }
-        //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
-        //启动请求
-        manager.post(url, parameters: desParams, headers: nil) { uploadProgress in
-            //上传进度
-            FSLog("uploadProgress:\(uploadProgress.completedUnitCount)---\(uploadProgress.totalUnitCount)")
-            if let progress = progressCallback
-            {
-                progress(Float(uploadProgress.completedUnitCount) / Float(uploadProgress.totalUnitCount))
-            }
-        } success: { task, responseObject in
-            //成功
-            //处理返回的数据，解密
-            let resDict = self.decryptParams(responseObject!)
-            //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
-            if responseCode == HttpStatusCode.ok.rawValue   //请求成功
-            {
-                success(resDict[nt_responseDataKey] as Any)
-            }
-            else    //请求失败，构造错误对象
-            {
-                let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
-                {
-                    errMsg = msg
-                }
-                else    //如果服务器没有给错误信息，那么尝试从本地获取
-                {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
-                }
-                let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
-                failure(error)
-            }
-        } failure: { task, error in
-            //失败
-            failure(error as NSError)
-        }
+        _ = self.dataTask(httpMethod: .POST, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: progressCallback, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个put请求
@@ -371,56 +246,7 @@ extension NetworkRequest: ExternalInterface
              success: @escaping RequestSuccessCallback,
              failure: @escaping RequestFailureCallback)
     {
-        //处理token和header
-        var customHeaders = Dictionary<String, String>()
-        if let auth = authorization {
-            customHeaders[HttpRequestHeaderKey.Authorization.rawValue] = auth
-        }
-        if let hds = headers {
-            customHeaders.merge(hds) { current, _ in
-                current
-            }
-        }
-        //创建请求对象
-        let manager = self.createRequest(timeoutInterval: timeoutInterval, requestHeaders: customHeaders)
-        //加密参数
-        var desParams = params  // 可能为nil
-        if let pas = params
-        {
-            desParams = self.encryptParamValues(pas)
-        }
-        //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
-        //启动请求
-        manager.put(url, parameters: desParams, headers: nil) { task, responseObject in
-            //成功
-            //处理返回的数据，解密
-            let resDict = self.decryptParams(responseObject!)
-            //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
-            if responseCode == HttpStatusCode.ok.rawValue   //请求成功
-            {
-                success(resDict[nt_responseDataKey] as Any)
-            }
-            else    //请求失败，构造错误对象
-            {
-                let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
-                {
-                    errMsg = msg
-                }
-                else    //如果服务器没有给错误信息，那么尝试从本地获取
-                {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
-                }
-                let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
-                failure(error)
-            }
-        } failure: { task, error in
-            //失败
-            failure(error as NSError)
-        }
+        _ = self.dataTask(httpMethod: .PUT, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个delete请求
@@ -440,56 +266,7 @@ extension NetworkRequest: ExternalInterface
                 success: @escaping RequestSuccessCallback,
                 failure: @escaping RequestFailureCallback)
     {
-        //处理token和header
-        var customHeaders = Dictionary<String, String>()
-        if let auth = authorization {
-            customHeaders[HttpRequestHeaderKey.Authorization.rawValue] = auth
-        }
-        if let hds = headers {
-            customHeaders.merge(hds) { current, _ in
-                current
-            }
-        }
-        //创建请求对象
-        let manager = self.createRequest(timeoutInterval: timeoutInterval, requestHeaders: customHeaders)
-        //加密参数
-        var desParams = params  // 可能为nil
-        if let pas = params
-        {
-            desParams = self.encryptParamValues(pas)
-        }
-        //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
-        //启动请求
-        manager.delete(url, parameters: desParams, headers: nil) { task, responseObject in
-            //成功
-            //处理返回的数据，解密
-            let resDict = self.decryptParams(responseObject!)
-            //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
-            if responseCode == HttpStatusCode.ok.rawValue   //请求成功
-            {
-                success(resDict[nt_responseDataKey] as Any)
-            }
-            else    //请求失败，构造错误对象
-            {
-                let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
-                {
-                    errMsg = msg
-                }
-                else    //如果服务器没有给错误信息，那么尝试从本地获取
-                {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
-                }
-                let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
-                failure(error)
-            }
-        } failure: { task, error in
-            //失败
-            failure(error as NSError)
-        }
+        _ = self.dataTask(httpMethod: .DELETE, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个patch请求
@@ -510,56 +287,7 @@ extension NetworkRequest: ExternalInterface
                success: @escaping RequestSuccessCallback,
                failure: @escaping RequestFailureCallback)
     {
-        //处理token和header
-        var customHeaders = Dictionary<String, String>()
-        if let auth = authorization {
-            customHeaders[HttpRequestHeaderKey.Authorization.rawValue] = auth
-        }
-        if let hds = headers {
-            customHeaders.merge(hds) { current, _ in
-                current
-            }
-        }
-        //创建请求对象
-        let manager = self.createRequest(timeoutInterval: timeoutInterval, requestHeaders: customHeaders)
-        //加密参数
-        var desParams = params  // 可能为nil
-        if let pas = params
-        {
-            desParams = self.encryptParamValues(pas)
-        }
-        //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
-        //启动请求
-        manager.patch(url, parameters: desParams, headers: nil) { task, responseObject in
-            //成功
-            //处理返回的数据，解密
-            let resDict = self.decryptParams(responseObject!)
-            //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
-            if responseCode == HttpStatusCode.ok.rawValue   //请求成功
-            {
-                success(resDict[nt_responseDataKey] as Any)
-            }
-            else    //请求失败，构造错误对象
-            {
-                let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
-                {
-                    errMsg = msg
-                }
-                else    //如果服务器没有给错误信息，那么尝试从本地获取
-                {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
-                }
-                let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
-                failure(error)
-            }
-        } failure: { task, error in
-            //失败
-            failure(error as NSError)
-        }
+        _ = self.dataTask(httpMethod: .PATCH, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个数据请求
@@ -612,7 +340,7 @@ extension NetworkRequest: ExternalInterface
                 progress(Float(uploadProgress.completedUnitCount) / Float(uploadProgress.totalUnitCount))
             }
         } downloadProgress: { downloadProgress in
-            FSLog("uploadProgress:\(downloadProgress.completedUnitCount)---\(downloadProgress.totalUnitCount)")
+            FSLog("downloadProgress:\(downloadProgress.completedUnitCount)---\(downloadProgress.totalUnitCount)")
             if let progress = downloadProgressCallback
             {
                 progress(Float(downloadProgress.completedUnitCount) / Float(downloadProgress.totalUnitCount))
@@ -622,15 +350,15 @@ extension NetworkRequest: ExternalInterface
             //处理返回的数据，解密
             let resDict = self.decryptParams(responseObject!)
             //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
+            let responseCode = resDict[nt_response_codeKey] as! Int
             if responseCode == HttpStatusCode.ok.rawValue   //请求成功
             {
-                success(resDict[nt_responseDataKey] as Any)
+                success(resDict[nt_response_dataKey] as Any)
             }
             else    //请求失败，构造错误对象
             {
                 let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
+                if let msg = resDict[nt_response_msgKey] as? String
                 {
                     errMsg = msg
                 }
@@ -646,6 +374,7 @@ extension NetworkRequest: ExternalInterface
             //失败
             failure(error as NSError)
         }
+        task?.resume()
         return task
     }
     
@@ -664,7 +393,8 @@ extension NetworkRequest: ExternalInterface
                   failure: @escaping RequestFailureCallback) -> URLSessionDownloadTask
     {
         let url = exact ? urlPath : self.hostUrl + urlPath
-        let manager = self.createDownloadRequest(url: url)
+        let config = URLSessionConfiguration.default
+        let manager = AFURLSessionManager.init(sessionConfiguration: config)
         var request = URLRequest(url: URL(string: url)!)
         //构造headers
         if let auth = authorization {
@@ -771,15 +501,15 @@ extension NetworkRequest: ExternalInterface
             //处理返回的数据，解密
             let resDict = self.decryptParams(responseObject!)
             //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
+            let responseCode = resDict[nt_response_codeKey] as! Int
             if responseCode == HttpStatusCode.ok.rawValue   //请求成功
             {
-                success(resDict[nt_responseDataKey] as Any)     //具体返回的内容和服务器端约定
+                success(resDict[nt_response_dataKey] as Any)     //具体返回的内容和服务器端约定
             }
             else    //请求失败，构造错误对象
             {
                 let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
+                if let msg = resDict[nt_response_msgKey] as? String
                 {
                     errMsg = msg
                 }
@@ -792,45 +522,6 @@ extension NetworkRequest: ExternalInterface
                 failure(error)
             }
         } failure: { task, error in
-            failure(error as NSError)
-        }
-
-        
-        
-        manager.post(url, parameters: desParams, headers: nil) { uploadProgress in
-            //上传进度
-            FSLog("uploadProgress:\(uploadProgress.completedUnitCount)---\(uploadProgress.totalUnitCount)")
-            if let progress = progressCallback
-            {
-                progress(Float(uploadProgress.completedUnitCount) / Float(uploadProgress.totalUnitCount))
-            }
-        } success: { task, responseObject in
-            //成功
-            //处理返回的数据，解密
-            let resDict = self.decryptParams(responseObject!)
-            //判断请求是否成功
-            let responseCode = resDict[nt_responseCodeKey] as! Int
-            if responseCode == HttpStatusCode.ok.rawValue   //请求成功
-            {
-                success(resDict[nt_responseDataKey] as Any)
-            }
-            else    //请求失败，构造错误对象
-            {
-                let errMsg: String
-                if let msg = resDict[nt_responseMsgKey] as? String
-                {
-                    errMsg = msg
-                }
-                else    //如果服务器没有给错误信息，那么尝试从本地获取
-                {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
-                }
-                let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
-                failure(error)
-            }
-        } failure: { task, error in
-            //失败
             failure(error as NSError)
         }
     }

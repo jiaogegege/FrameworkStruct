@@ -7,11 +7,11 @@
 
 /**
  网络常量和url配置
- 变量以`n`开头，表示network
+ 变量以`nt`开头，表示network
  */
 import Foundation
 
-//MARK: 常量
+//MARK: 常量定义
 ///参数是否加密
 let nt_needEncryptParam = false
 
@@ -22,13 +22,94 @@ let nt_escapeParamKey = ["imgCode"]
 let nt_encryptDesKey = "Aipi3pWCzdo6tA2SL0gp3ajx"
 
 ///如果加密整个参数，那么最终返回的参数都放在key为`data`的字典中
-let nt_dataParamKey = "data"
+let nt_paramDataKey = "data"
 
 ///请求超时时间间隔
 let nt_requestTimeoutInterval: TimeInterval = 30.0
 
 ///可接受的返回数据类型
 let nt_acceptableContentType:Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
+
+//请求成功和失败的回调
+typealias RequestSuccessCallback = (_ response: Any) -> Void
+typealias RequestFailureCallback = (_ error: NSError) -> Void
+
+//MARK: 部分参数名定义
+let nt_request_macAddress = "macAddress"    //mac地址
+let nt_request_deviceType = "deviceType"    //ios
+let nt_request_clientTime = "clientTime"    //客户端时间
+
+let nt_response_codeKey = "errCode"  //返回的状态码key
+let nt_response_msgKey = "errMsg"    //返回的状态信息key
+let nt_response_dataKey = "data"     //返回数据的key
+
+//MARK: 服务器环境定义
+///服务器环境变量
+let nt_serverHost: ServerHostType = .dev
+
+enum ServerHostType {
+    case dev    //开发环境
+    case qa     //测试环境
+    case uat    //内测/预发布环境
+    case pro    //生产环境
+    
+    //获取服务器环境的主机地址
+    func getHost() -> String
+    {
+        switch self {
+        case .dev:
+            return "http://192.168.50.54/"
+        case .qa:
+//            return "http://218.4.182.210/"    //外网ip
+//            return "http://192.168.50.63/"    //内网ip
+            return "https://jszhaofeng.cn/"
+        case .uat:
+            return "https://www.awaitz.com/pre/"
+        case .pro:
+            return "https://www.awaitz.com/"
+        }
+    }
+    
+}
+
+//MARK: URL定义
+//首页数据，包括首页模块、活动信息和banner等
+let url_homeData = "api/awaitz-mall/home/v1/homeData"
+//使用手机号和验证码快速登录
+let url_quickLogin = "api/awaitz-mall/user/v1/sms/login"
+
+
+
+
+//MARK: HTTP相关信息定义
+//MIME type
+enum MIMEType: String {
+    case html = "text/html"
+    case plain = "text/plain"
+    case rtf = "application/rtf"
+    case gif = "image/gif"
+    case jpg = "image/jpeg"
+    case bmp = "image/bmp"
+    case tiff = "image/tiff"
+    case au = "audio/basic"
+    case wav = "audio/x-wav"
+    case mid = "audio/mid"
+    case midi = "audio/midi,audio/x-midi"
+    case ra = "audio/x-pn-realaudio"
+    case mpeg = "video/mpeg"
+    case avi = "video/x-msvideo"
+    case gz = "application/x-gzip"
+    case tar = "application/x-tar"
+}
+
+enum HttpMethodType: String {
+    case GET
+    case POST
+    case PUT
+    case PATCH
+    case HEAD
+    case DELETE
+}
 
 ///request headers key
 enum HttpRequestHeaderKey: String {
@@ -96,86 +177,6 @@ enum HttpResponseHeaderKey: String {
     case Warning = "Warning"    //警告实体可能存在的问题：Warning: 199 Miscellaneous warning
     case WWWAuthenticate = "WWW-Authenticate"   //表明客户端请求实体应该使用的授权方案：WWW-Authenticate: Basic
     
-}
-
-//MIME type
-enum MIMEType: String {
-    case html = "text/html"
-    case plain = "text/plain"
-    case rtf = "application/rtf"
-    case gif = "image/gif"
-    case jpg = "image/jpeg"
-    case bmp = "image/bmp"
-    case tiff = "image/tiff"
-    case au = "audio/basic"
-    case wav = "audio/x-wav"
-    case mid = "audio/mid"
-    case midi = "audio/midi,audio/x-midi"
-    case ra = "audio/x-pn-realaudio"
-    case mpeg = "video/mpeg"
-    case avi = "video/x-msvideo"
-    case gz = "application/x-gzip"
-    case tar = "application/x-tar"
-}
-
-//请求成功和失败的回调
-typealias RequestSuccessCallback = (_ response: Any) -> Void
-typealias RequestFailureCallback = (_ error: NSError) -> Void
-
-//MARK: 部分参数名定义
-let nt_macAddress = "macAddress"    //mac地址
-let nt_deviceType = "deviceType"    //ios
-let nt_clientTime = "clientTime"    //客户端时间
-
-let nt_responseCodeKey = "errCode"  //返回的状态码key
-let nt_responseMsgKey = "errMsg"    //返回的状态信息key
-let nt_responseDataKey = "data"     //返回数据的key
-
-//MARK: 服务器环境定义
-///服务器环境变量
-let nt_serverHost: ServerHostType = .dev
-
-enum ServerHostType {
-    case dev    //开发环境
-    case qa     //测试环境
-    case uat    //内测/预发布环境
-    case pro    //生产环境
-    
-    //获取服务器环境的主机地址
-    func getHost() -> String
-    {
-        switch self {
-        case .dev:
-            return "http://192.168.50.54/"
-        case .qa:
-//            return "http://218.4.182.210/"    //外网ip
-//            return "http://192.168.50.63/"    //内网ip
-            return "https://jszhaofeng.cn/"
-        case .uat:
-            return "https://www.awaitz.com/pre/"
-        case .pro:
-            return "https://www.awaitz.com/"
-        }
-    }
-    
-}
-
-//MARK: URL定义
-//首页数据，包括首页模块、活动信息和banner等
-let url_homeData = "api/awaitz-mall/home/v1/homeData"
-
-
-
-
-
-//MARK: HTTP相关信息定义
-enum HttpMethodType: String {
-    case GET
-    case POST
-    case PUT
-    case PATCH
-    case HEAD
-    case DELETE
 }
 
 enum HttpStatusCode: Int

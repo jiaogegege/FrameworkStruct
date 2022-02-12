@@ -154,14 +154,22 @@ func g_uuidString() -> String
 ///获取设备id，在app安装周期内保持不变
 func g_getDeviceId() -> String
 {
-    if let deviceId = UserDefaultsAccessor.shared.readString(key: UserDefaultsAccessor.UDAKeyType.deviceId.rawValue)
+    if let deviceId = UserDefaultsAccessor.shared.readString(key: UserDefaultsAccessor.UDAKeyType.deviceId)
     {
         return deviceId
     }
     else
     {
-        let deviceId = g_uuidString()
-        UserDefaultsAccessor.shared.write(key: UserDefaultsAccessor.UDAKeyType.deviceId.rawValue, value: deviceId)
+        let deviceId: String
+        if let devId = UIDevice.current.identifierForVendor?.uuidString
+        {
+            deviceId = devId.replacingOccurrences(of: "-", with: "_")
+        }
+        else    //如果系统未获取到，那么生成一个随机字符串，一般都会获取到
+        {
+            deviceId = g_uuidString()
+        }
+        UserDefaultsAccessor.shared.write(key: UserDefaultsAccessor.UDAKeyType.deviceId, value: deviceId)
         return deviceId
     }
 }

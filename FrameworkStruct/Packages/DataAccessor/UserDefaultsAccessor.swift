@@ -38,58 +38,58 @@ class UserDefaultsAccessor: OriginAccessor
     /**
      * 读取一个字段
      */
-    func read(key: String) -> Any?
+    func read(key: UDAKeyType) -> Any?
     {
-        return ud.object(forKey: key)
+        return ud.object(forKey: key.rawValue)
     }
     
     /**
      * 读取字符串
      */
-    func readString(key: String) -> String?
+    func readString(key: UDAKeyType) -> String?
     {
-        return ud.string(forKey: key)
+        return ud.string(forKey: key.rawValue)
     }
     
     /**
      * 读取整数
      */
-    func readInt(key: String) -> Int
+    func readInt(key: UDAKeyType) -> Int
     {
-        return ud.integer(forKey: key)
+        return ud.integer(forKey: key.rawValue)
     }
     
     /**
      * 读取浮点数
      */
-    func readDouble(key: String) -> Double
+    func readDouble(key: UDAKeyType) -> Double
     {
-        return ud.double(forKey: key)
+        return ud.double(forKey: key.rawValue)
     }
     
     /**
      * 读取布尔值
      */
-    func readBool(key: String) -> Bool
+    func readBool(key: UDAKeyType) -> Bool
     {
-        return ud.bool(forKey: key)
+        return ud.bool(forKey: key.rawValue)
     }
     
     /**
      * 写入一个字段
      */
-    func write(key: String, value: Any)
+    func write(key: UDAKeyType, value: Any)
     {
-        ud.set(value, forKey: key)
+        ud.set(value, forKey: key.rawValue)
         ud.synchronize()
     }
     
     /**
      * 删除一个字段
      */
-    func delete(key: String)
+    func delete(key: UDAKeyType)
     {
-        ud.removeObject(forKey: key)
+        ud.removeObject(forKey: key.rawValue)
     }
     
     
@@ -109,6 +109,6 @@ extension UserDefaultsAccessor: InternalType
     enum UDAKeyType: String
     {
         case deviceId   //设备唯一id，随机生成
-        
+        case currentTheme   //当前主题key
     }
 }
