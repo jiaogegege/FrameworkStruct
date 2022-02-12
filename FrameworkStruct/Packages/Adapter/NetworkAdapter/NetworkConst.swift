@@ -15,11 +15,11 @@ import Foundation
 ///参数是否加密
 let nt_needEncryptParam = false
 
-///不需要加密的参数key，在这个数组中的key不会被加密
-let nt_escapeParamKey = ["imgCode"]
-
 ///DES加密的密钥
 let nt_encryptDesKey = "Aipi3pWCzdo6tA2SL0gp3ajx"
+
+///不需要加密的参数key，在这个数组中的key不会被加密
+let nt_escapeParamKey = ["imgCode"]
 
 ///如果加密整个参数，那么最终返回的参数都放在key为`data`的字典中
 let nt_paramDataKey = "data"
@@ -76,7 +76,7 @@ enum ServerHostType {
 //首页数据，包括首页模块、活动信息和banner等
 let url_homeData = "api/awaitz-mall/home/v1/homeData"
 //使用手机号和验证码快速登录
-let url_quickLogin = "api/awaitz-mall/user/v1/sms/login"
+let url_loginWithPhoneAndSms = "api/awaitz-mall/user/v1/sms/login"
 
 
 
@@ -183,6 +183,8 @@ enum HttpStatusCode: Int
 {
     case unavailable = 0    //网络不可用
     
+    case dataParseError = 1    //数据解析错误，接口返回了数据，但是本地解析出错
+    
     case ok = 200           //正常
     case created = 201      //已创建。成功请求并创建了新的资源
     case accepted = 202     //已接受。已经接受请求，但未处理完成
@@ -204,6 +206,8 @@ enum HttpStatusCode: Int
         switch self {
         case .unavailable:
             return String.networkUnavailable
+        case .dataParseError:
+            return String.networkDataParseError
         case .ok:
             return String.networkOk
         case .created:

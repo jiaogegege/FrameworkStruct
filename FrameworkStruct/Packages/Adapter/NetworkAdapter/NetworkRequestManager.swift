@@ -1,21 +1,21 @@
 //
-//  NetworkRequest.swift
+//  NetworkRequestManager.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2022/2/9.
 //
 
 /**
- * 网络请求对象
+ * 网络请求对象管理器
  * 配置基础的网络请求对象，监控网络状态
  */
 import UIKit
 
-class NetworkRequest: OriginManager
+class NetworkRequestManager: OriginManager
 {
     //MARK: 属性
     //单例
-    static let shared = NetworkRequest()
+    static let shared = NetworkRequestManager()
     
     //网络状态监控对象
     fileprivate var networkReachabilityManager: AFNetworkReachabilityManager {
@@ -166,7 +166,7 @@ class NetworkRequest: OriginManager
 }
 
 //接口方法
-extension NetworkRequest: ExternalInterface
+extension NetworkRequestManager: ExternalInterface
 {
     ///计算属性，网络是否可用
     var networkAvailable: Bool {

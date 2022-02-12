@@ -77,6 +77,7 @@ extension String: ConstantPropertyProtocol
     
     //MARK: 网络错误信息
     static let networkUnavailable = localized("networkUnavailable")
+    static let networkDataParseError = localized("networkDataParseError")
     static let networkOk = localized("networkOk")
     static let networkCreated = localized("networkCreated")
     static let networkAccepted = localized("networkAccepted")

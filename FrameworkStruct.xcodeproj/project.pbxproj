@@ -52,7 +52,7 @@
 		EA11128327B3BE2C006D0B83 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11125E27B3BE2C006D0B83 /* ResponseSerialization.swift */; };
 		EA11128527B3BE2C006D0B83 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11126027B3BE2C006D0B83 /* SessionDelegate.swift */; };
 		EA11128A27B3BE7B006D0B83 /* UIButton+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = EA11128827B3BE7B006D0B83 /* UIButton+BAKit.m */; };
-		EA11128C27B3C47F006D0B83 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11128B27B3C47F006D0B83 /* NetworkRequest.swift */; };
+		EA11128C27B3C47F006D0B83 /* NetworkRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */; };
 		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
 		EA1AE470277819E600D028F9 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44B277819E600D028F9 /* ConstraintMultiplierTarget.swift */; };
 		EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44C277819E600D028F9 /* LayoutConstraintItem.swift */; };
@@ -601,7 +601,7 @@
 		EA11128727B3BE7B006D0B83 /* BAKit_ConfigurationDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAKit_ConfigurationDefine.h; sourceTree = "<group>"; };
 		EA11128827B3BE7B006D0B83 /* UIButton+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+BAKit.m"; sourceTree = "<group>"; };
 		EA11128927B3BE7B006D0B83 /* UIButton+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+BAKit.h"; sourceTree = "<group>"; };
-		EA11128B27B3C47F006D0B83 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestManager.swift; sourceTree = "<group>"; };
 		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		EA1AE44B277819E600D028F9 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		EA1AE44C277819E600D028F9 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
@@ -3286,7 +3286,7 @@
 			children = (
 				EADB0122276242EB001B7223 /* README.md */,
 				EA0E67B027B5062500A11C20 /* NetworkAdapter.swift */,
-				EA11128B27B3C47F006D0B83 /* NetworkRequest.swift */,
+				EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */,
 				EA0E67B227B5064400A11C20 /* NetworkConst.swift */,
 			);
 			path = NetworkAdapter;
@@ -3550,7 +3550,7 @@
 				EA1AE47D277819E600D028F9 /* ConstraintDirectionalInsetTarget.swift in Sources */,
 				EA1AE486277819E600D028F9 /* ConstraintOffsetTarget.swift in Sources */,
 				EA11127627B3BE2C006D0B83 /* URLRequest+Alamofire.swift in Sources */,
-				EA11128C27B3C47F006D0B83 /* NetworkRequest.swift in Sources */,
+				EA11128C27B3C47F006D0B83 /* NetworkRequestManager.swift in Sources */,
 				EA99373427994F6100480147 /* TABClassicAnimationImpl.m in Sources */,
 				EA3E8B0A27B77CEA006A2715 /* PathNode.swift in Sources */,
 				EA1AE47C277819E600D028F9 /* ConstraintInsetTarget.swift in Sources */,
