@@ -17,8 +17,6 @@ class AnimationManager: OriginManager
     //单例
     static let shared = AnimationManager()
 
-    //保存动画完成的回调
-    fileprivate var completionDict: Dictionary<String, VoidClosure> = [:]
     
     //MARK: 方法
     //私有化初始化方法
@@ -117,7 +115,12 @@ extension AnimationManager: ExternalInterface
         //保存完成的回调
         if let comp = completion
         {
-            self.completionDict[key] = comp
+            ani?.completionBlock = {(anim: POPAnimation!, finished: Bool) in
+                if finished
+                {
+                    comp()
+                }
+            }
         }
     }
     
@@ -162,7 +165,12 @@ extension AnimationManager: ExternalInterface
         //保存完成的回调
         if let comp = completion
         {
-            self.completionDict[key] = comp
+            ani?.completionBlock = {(anim: POPAnimation!, finished: Bool) in
+                if finished
+                {
+                    comp()
+                }
+            }
         }
     }
     
@@ -196,7 +204,12 @@ extension AnimationManager: ExternalInterface
         //保存完成的回调
         if let comp = completion
         {
-            self.completionDict[key] = comp
+            ani?.completionBlock = {(anim: POPAnimation!, finished: Bool) in
+                if finished
+                {
+                    comp()
+                }
+            }
         }
     }
     
@@ -215,11 +228,7 @@ extension AnimationManager: DelegateProtocol, POPAnimationDelegate
     }
     
     func pop_animationDidStop(_ anim: POPAnimation!, finished: Bool) {
-        if finished, let comp = self.completionDict[anim.name]
-        {
-            comp()
-            self.completionDict[anim.name] = nil    //完成后删除回调
-        }
+        
     }
     
     func pop_animationDidApply(_ anim: POPAnimation!) {
