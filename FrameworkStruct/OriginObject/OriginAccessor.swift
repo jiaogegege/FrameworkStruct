@@ -36,7 +36,7 @@ class OriginAccessor: NSObject
     weak var monitor: AccessorMonitor!
     
     //状态管理器
-    var stMgr: StatusManager = StatusManager(capacity: 10)
+    var stMgr: StatusManager = StatusManager(capacity: 5)
     
     
     override init()

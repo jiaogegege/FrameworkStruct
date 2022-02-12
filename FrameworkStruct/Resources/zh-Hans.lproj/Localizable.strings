@@ -20,6 +20,7 @@ modalShow = "模态显示";
 constraintTest = "约束测试";
 drawTable = "绘制表格";
 layerShadow = "图层阴影";
+animationDemo = "动画演示";
 
 /**
  * 界面提示和按钮文案
@@ -48,9 +49,14 @@ setTeenagerMode = "进入青少年模式";
  */
 networkUnavailable = "网络不可用";
 networkOk = "请求成功";
+networkCreated = "已创建";
+networkAccepted = "已接受";
 networkNotFound = "资源未找到";
 networkBadRequest = "请求失败";
-networkNeedAuth ="需要验证身份";
+networkNeedAuth = "需要验证身份";
+networkForbidden = "服务器拒绝执行此请求";
 networkSystemError = "服务器错误";
 networkNoService = "没有此服务";
 networkBadGetway = "服务器连接失败";
+networkServiceUnavailable = "服务器暂时的无法处理客户端的请求";
+networkTimeout = "请求超时";

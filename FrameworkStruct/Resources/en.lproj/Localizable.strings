@@ -20,6 +20,7 @@ modalShow = "Modal Show";
 constraintTest = "Constraint Test";
 drawTable = "Draw Table";
 layerShadow = "Layer Shadow";
+animationDemo = "Animation Demo";
 
 /**
  * 界面提示和按钮文案
@@ -48,9 +49,14 @@ setTeenagerMode = "Enter Teenager Mode";
  */
 networkUnavailable = "Network Unavailable";
 networkOk = "Request Success";
+networkCreated = "Created";
+networkAccepted = "Accepted";
 networkNotFound = "Not Found";
 networkBadRequest = "Bad Request";
-networkNeedAuth ="Need Authorization";
+networkNeedAuth = "Need Authorization";
+networkForbidden = "Forbidden";
 networkSystemError = "Server Error";
 networkNoService = "No Service";
 networkBadGetway = "Bad Getway";
+networkServiceUnavailable = "Service Unavailable";
+networkTimeout = "Request Timeout";

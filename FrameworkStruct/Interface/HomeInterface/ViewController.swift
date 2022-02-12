@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow]
+    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo]
 
     override func viewDidLoad() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
@@ -93,6 +93,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         else if indexPath.row == 5  //阴影测试
         {
             let vc = ShadowTestViewController.getViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else if indexPath.row == 6  //动画演示
+        {
+            let vc = AnimationDemoViewController.getViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

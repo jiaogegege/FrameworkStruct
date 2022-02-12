@@ -46,6 +46,8 @@ extension String: ConstantPropertyProtocol
     static let drawTable = localized("drawTable")
     //图层阴影
     static let layerShadow = localized("layerShadow")
+    //动画演示
+    static let animationDemo = localized("animationDemo")
     
     //MARK: 界面提示和按钮文案
     //确定
@@ -76,13 +78,17 @@ extension String: ConstantPropertyProtocol
     //MARK: 网络错误信息
     static let networkUnavailable = localized("networkUnavailable")
     static let networkOk = localized("networkOk")
+    static let networkCreated = localized("networkCreated")
+    static let networkAccepted = localized("networkAccepted")
     static let networkNotFound = localized("networkNotFound")
     static let networkBadRequest = localized("networkBadRequest")
     static let networkNeedAuth = localized("networkNeedAuth")
+    static let networkForbidden = localized("networkForbidden")
+    static let networkTimeout = localized("networkTimeout")
     static let networkSystemError = localized("networkSystemError")
     static let networkNoService = localized("networkNoService")
     static let networkBadGetway = localized("networkBadGetway")
-
+    static let networkServiceUnavailable = localized("networkServiceUnavailable")
 
 
 
