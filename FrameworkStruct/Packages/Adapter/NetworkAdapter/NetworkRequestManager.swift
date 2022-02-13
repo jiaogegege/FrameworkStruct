@@ -64,12 +64,12 @@ class NetworkRequestManager: OriginManager
                         if value is String
                         {
                             let val = value as! String
-                            parameters[key] = NSString.des(val, key:nt_encryptDesKey)
+                            parameters[key] = g_des(val, key:nt_encryptDesKey)
                         }
                         else    //如果value不是字符串，那么格式化成字符串
                         {
                             let val = String(format: "%@", value as! CVarArg)
-                            parameters[key] = NSString.des(val, key:nt_encryptDesKey)
+                            parameters[key] = g_des(val, key:nt_encryptDesKey)
                         }
                     }
                 }
@@ -90,7 +90,7 @@ class NetworkRequestManager: OriginManager
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: params, options: .fragmentsAllowed)
                 let jsonStr = String.init(data: jsonData, encoding: .utf8)
-                let encryptStr = NSString.des(jsonStr, key: nt_encryptDesKey)
+                let encryptStr = g_des(jsonStr!, key: nt_encryptDesKey)
                 return [nt_paramDataKey: encryptStr as Any]    //返回加密参数
             } catch {
                 FSLog("encrypt error: \(error.localizedDescription)")

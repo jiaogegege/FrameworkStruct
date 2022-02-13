@@ -37,6 +37,6 @@ protocol OriginProtocol
     /**
      * 返回类型的信息
      */
-    func desString() -> String
+    func typeDesc() -> String
     
 }

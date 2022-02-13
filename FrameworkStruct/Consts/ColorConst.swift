@@ -20,9 +20,9 @@ extension UIColor: ConstantPropertyProtocol
     //主题色
     @objc static var cMainThemeColor = ThemeManager.shared.getCurrentTheme().mainColor
     //红色
-    @objc static var cRed = UIColor.red
+    @objc static let cRed = UIColor.red
     //0xff709b
-    @objc static var cPink_ff709b = UIColor.colorFromHex(value: 0xff709b)
+    @objc static let cPink_ff709b = UIColor.colorFromHex(value: 0xff709b)
     //accentcolor
     @objc static var cAccent = UIColor(named: "AccentColor")
     //黑色333333

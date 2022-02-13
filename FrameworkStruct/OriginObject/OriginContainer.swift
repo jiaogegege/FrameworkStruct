@@ -195,7 +195,7 @@ extension OriginContainer: ContainerProtocol
  */
 extension OriginContainer: OriginProtocol
 {
-    func desString() -> String
+    func typeDesc() -> String
     {
         let typeStr = type(of: self)
         return typeStr.description()

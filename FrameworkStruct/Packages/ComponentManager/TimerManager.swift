@@ -120,7 +120,7 @@ extension TimerManager: ExternalInterface
         return timer
     }
     
-    ///固定倒计时方法
+    ///倒计时方法
     ///参数：
     ///interval：时间间隔，默认1s
     ///startTime:起始时间

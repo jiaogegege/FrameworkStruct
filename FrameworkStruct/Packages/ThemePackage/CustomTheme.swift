@@ -66,12 +66,8 @@ class CustomTheme: ThemeProtocol
         return UIImage(named: imgStr)
     }
     
-    
-    
-    
-    
-   
-    func desString() -> String
+   ///返回主题的名字
+    func descString() -> String
     {
         return self.theme.name
     }

@@ -68,7 +68,7 @@ extension OriginAccessor: AccessorProtocol
  */
 extension OriginAccessor: OriginProtocol
 {
-    func desString() -> String
+    func typeDesc() -> String
     {
         let typeStr = type(of: self)
         return typeStr.description()
