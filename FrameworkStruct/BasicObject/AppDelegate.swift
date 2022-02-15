@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //如果有SceneDelegate，那么这个属性为nil
     var window: UIWindow?
     
-    //根监控器，可以从这个对象获取到所有的监控器对象
+    //根监控器，可以从这个对象获取到所有的监控器对象，从各个监控器对象可以获取到它们管理的组件对象，理论上可以获取到程序运行过程中所有的组件对象
     var rootMonitor = MonitorMonitor.shared
     
     
