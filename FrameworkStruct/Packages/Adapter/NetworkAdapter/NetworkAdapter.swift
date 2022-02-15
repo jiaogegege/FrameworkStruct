@@ -44,7 +44,7 @@ class NetworkAdapter: OriginAdapter
         return [nt_request_macAddress: g_getDeviceId(), nt_request_deviceType: "ios", nt_request_clientTime: String(format: "%lld", getCurrentTimeInterval() * 1000)]
     }
     
-    //组合参数和默认参数
+    //组合自定义参数和默认参数
     fileprivate func combineParams(_ customParams: Dictionary<String, Any>) -> Dictionary<String, Any>
     {
         var params = Dictionary<String, Any>()
@@ -122,7 +122,7 @@ extension NetworkAdapter: ExternalInterface
             {
                 success(userInfo)
             }
-            else
+            else    //如果数据没有解析成功，那么执行失败的回调
             {
                 failure(self.parseDataError())
             }

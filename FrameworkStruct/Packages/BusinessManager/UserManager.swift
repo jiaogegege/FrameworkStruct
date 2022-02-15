@@ -41,17 +41,15 @@ class UserManager: OriginManager
 /**
  * 外部接口方法
  */
-extension UserManager
+extension UserManager: ExternalInterface
 {
-    //获得用户id
-    func getUserId() -> String
-    {
+    //当前登录的用户id
+    var currentUserId: String {
         return ""
     }
-    
-    //获得用户token
-    func getUserToken() -> String
-    {
+
+    //当前登录的用户token
+    var currentUserToken: String {
         return ""
     }
     
