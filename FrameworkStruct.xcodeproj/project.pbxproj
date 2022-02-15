@@ -3167,8 +3167,8 @@
 		EADB009927623C48001B7223 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				EAC4E6CD27B0C24400654EE6 /* Basic */,
 				EADB014B276243FC001B7223 /* README.md */,
+				EAC4E6CD27B0C24400654EE6 /* Basic */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,

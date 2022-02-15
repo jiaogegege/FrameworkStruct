@@ -239,6 +239,12 @@ NS_ASSUME_NONNULL_END
         return NO;
     }
     
+    //数据库open后设置加密key
+#ifdef DATABASE_ENCRYPTION
+    [self setKey:DATABASE_ENCRYPTION_KEY];
+#else
+#endif
+    
     if (_maxBusyRetryTimeInterval > 0.0) {
         // set the handler
         [self setMaxBusyRetryTimeInterval:_maxBusyRetryTimeInterval];
