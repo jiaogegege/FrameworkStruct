@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA008A1627B8EC2600F91ABD /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */; };
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
@@ -52,7 +53,7 @@
 		EA11128327B3BE2C006D0B83 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11125E27B3BE2C006D0B83 /* ResponseSerialization.swift */; };
 		EA11128527B3BE2C006D0B83 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11126027B3BE2C006D0B83 /* SessionDelegate.swift */; };
 		EA11128A27B3BE7B006D0B83 /* UIButton+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = EA11128827B3BE7B006D0B83 /* UIButton+BAKit.m */; };
-		EA11128C27B3C47F006D0B83 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11128B27B3C47F006D0B83 /* NetworkRequest.swift */; };
+		EA11128C27B3C47F006D0B83 /* NetworkRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */; };
 		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
 		EA1AE470277819E600D028F9 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44B277819E600D028F9 /* ConstraintMultiplierTarget.swift */; };
 		EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44C277819E600D028F9 /* LayoutConstraintItem.swift */; };
@@ -550,6 +551,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
@@ -601,7 +603,7 @@
 		EA11128727B3BE7B006D0B83 /* BAKit_ConfigurationDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAKit_ConfigurationDefine.h; sourceTree = "<group>"; };
 		EA11128827B3BE7B006D0B83 /* UIButton+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+BAKit.m"; sourceTree = "<group>"; };
 		EA11128927B3BE7B006D0B83 /* UIButton+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+BAKit.h"; sourceTree = "<group>"; };
-		EA11128B27B3C47F006D0B83 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestManager.swift; sourceTree = "<group>"; };
 		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
 		EA1AE44B277819E600D028F9 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		EA1AE44C277819E600D028F9 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
@@ -1434,7 +1436,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EA0E67A527B49F8B00A11C20 /* DES */ = {
+		EA0E67A527B49F8B00A11C20 /* NSString+DES */ = {
 			isa = PBXGroup;
 			children = (
 				EA0E67A927B49F8B00A11C20 /* NSString+DES.h */,
@@ -1445,7 +1447,7 @@
 				EA0E67AC27B49F8B00A11C20 /* NSData+DataToHexString.m */,
 				EA0E67AA27B49F8B00A11C20 /* GTMDefines.h */,
 			);
-			path = DES;
+			path = "NSString+DES";
 			sourceTree = "<group>";
 		};
 		EA11123B27B3BE2C006D0B83 /* Alamofire */ = {
@@ -2385,7 +2387,6 @@
 			children = (
 				EAAA4E81276F3E4900C45712 /* README.md */,
 				EADB014227624391001B7223 /* UserManager.swift */,
-				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
 			);
 			path = BusinessManager;
 			sourceTree = "<group>";
@@ -2684,8 +2685,9 @@
 				EAB91A64278B047C00A35FA3 /* DialogManager.swift */,
 				EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */,
 				EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */,
-				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
 				EA3E89B227B77B35006A2715 /* AnimationManager.swift */,
+				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
+				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
 			);
 			path = ComponentManager;
 			sourceTree = "<group>";
@@ -3187,9 +3189,8 @@
 			children = (
 				EA3E8BE527B782C3006A2715 /* pop */,
 				EA3E89B427B77CE8006A2715 /* lottie-ios */,
-				EA0E67A527B49F8B00A11C20 /* DES */,
+				EA0E67A527B49F8B00A11C20 /* NSString+DES */,
 				EA11128627B3BE7B006D0B83 /* BAButton */,
-				EA11123B27B3BE2C006D0B83 /* Alamofire */,
 				EA99369527994F6000480147 /* TABAnimated */,
 				EA3337D72797E6AA00612DC3 /* SQLCipher */,
 				EA75BB292792AA7B00910B4C /* fmdb */,
@@ -3200,6 +3201,7 @@
 				EAC8A77827625D480088293F /* SDWebImage */,
 				EAC8A75527625BA70088293F /* MJExtension */,
 				EAC8A73E27625B450088293F /* AFNetworking */,
+				EA11123B27B3BE2C006D0B83 /* Alamofire */,
 			);
 			path = 3rd;
 			sourceTree = "<group>";
@@ -3239,6 +3241,7 @@
 			children = (
 				EADB00B427623E38001B7223 /* Models */,
 				EADB00B527623E42001B7223 /* Views */,
+				EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */,
 				EADB007E27623B59001B7223 /* ViewController.swift */,
 				EADB00EA2762416E001B7223 /* JCollectionViewController.swift */,
 				EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */,
@@ -3286,7 +3289,7 @@
 			children = (
 				EADB0122276242EB001B7223 /* README.md */,
 				EA0E67B027B5062500A11C20 /* NetworkAdapter.swift */,
-				EA11128B27B3C47F006D0B83 /* NetworkRequest.swift */,
+				EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */,
 				EA0E67B227B5064400A11C20 /* NetworkConst.swift */,
 			);
 			path = NetworkAdapter;
@@ -3550,7 +3553,7 @@
 				EA1AE47D277819E600D028F9 /* ConstraintDirectionalInsetTarget.swift in Sources */,
 				EA1AE486277819E600D028F9 /* ConstraintOffsetTarget.swift in Sources */,
 				EA11127627B3BE2C006D0B83 /* URLRequest+Alamofire.swift in Sources */,
-				EA11128C27B3C47F006D0B83 /* NetworkRequest.swift in Sources */,
+				EA11128C27B3C47F006D0B83 /* NetworkRequestManager.swift in Sources */,
 				EA99373427994F6100480147 /* TABClassicAnimationImpl.m in Sources */,
 				EA3E8B0A27B77CEA006A2715 /* PathNode.swift in Sources */,
 				EA1AE47C277819E600D028F9 /* ConstraintInsetTarget.swift in Sources */,
@@ -3891,6 +3894,7 @@
 				EA3E8B0827B77CEA006A2715 /* ShapeRenderLayer.swift in Sources */,
 				EA11127727B3BE2C006D0B83 /* URLConvertible+URLRequestConvertible.swift in Sources */,
 				EA3E8B2D27B77CEA006A2715 /* Font.swift in Sources */,
+				EA008A1627B8EC2600F91ABD /* MainTabbarController.swift in Sources */,
 				EA11127127B3BE2C006D0B83 /* RedirectHandler.swift in Sources */,
 				EA9A4A8C278030A800170BB3 /* CountDownButton.m in Sources */,
 				EAC8A77327625BA70088293F /* MJPropertyKey.m in Sources */,

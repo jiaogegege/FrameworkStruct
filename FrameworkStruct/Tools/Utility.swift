@@ -144,6 +144,12 @@ func g_async(onMain: Bool = true, action: @escaping VoidClosure)
 {
     ThreadManager.shared.async(onMain: onMain, action: action)
 }
+
+///延时操作
+func g_after(interval: TimeInterval, onMain: Bool = true, action: @escaping VoidClosure)
+{
+    TimerManager.shared.after(interval: interval, onMain: onMain, action: action)
+}
     
 ///生成一个随机字符串
 func g_uuidString() -> String
@@ -174,3 +180,8 @@ func g_getDeviceId() -> String
     }
 }
 
+///des加密一个字符串
+func g_des(_ str: String, key: String) -> String
+{
+    return EncryptManager.shared.desString(originStr: str, desKey: key)
+}

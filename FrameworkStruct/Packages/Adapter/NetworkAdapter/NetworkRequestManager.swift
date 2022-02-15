@@ -1,21 +1,21 @@
 //
-//  NetworkRequest.swift
+//  NetworkRequestManager.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2022/2/9.
 //
 
 /**
- * 网络请求对象
+ * 网络请求对象管理器
  * 配置基础的网络请求对象，监控网络状态
  */
 import UIKit
 
-class NetworkRequest: OriginManager
+class NetworkRequestManager: OriginManager
 {
     //MARK: 属性
     //单例
-    static let shared = NetworkRequest()
+    static let shared = NetworkRequestManager()
     
     //网络状态监控对象
     fileprivate var networkReachabilityManager: AFNetworkReachabilityManager {
@@ -64,12 +64,12 @@ class NetworkRequest: OriginManager
                         if value is String
                         {
                             let val = value as! String
-                            parameters[key] = NSString.des(val, key:nt_encryptDesKey)
+                            parameters[key] = g_des(val, key:nt_encryptDesKey)
                         }
                         else    //如果value不是字符串，那么格式化成字符串
                         {
                             let val = String(format: "%@", value as! CVarArg)
-                            parameters[key] = NSString.des(val, key:nt_encryptDesKey)
+                            parameters[key] = g_des(val, key:nt_encryptDesKey)
                         }
                     }
                 }
@@ -90,7 +90,7 @@ class NetworkRequest: OriginManager
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: params, options: .fragmentsAllowed)
                 let jsonStr = String.init(data: jsonData, encoding: .utf8)
-                let encryptStr = NSString.des(jsonStr, key: nt_encryptDesKey)
+                let encryptStr = g_des(jsonStr!, key: nt_encryptDesKey)
                 return [nt_paramDataKey: encryptStr as Any]    //返回加密参数
             } catch {
                 FSLog("encrypt error: \(error.localizedDescription)")
@@ -166,7 +166,7 @@ class NetworkRequest: OriginManager
 }
 
 //接口方法
-extension NetworkRequest: ExternalInterface
+extension NetworkRequestManager: ExternalInterface
 {
     ///计算属性，网络是否可用
     var networkAvailable: Bool {

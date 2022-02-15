@@ -48,6 +48,7 @@ setTeenagerMode = "Enter Teenager Mode";
  * 网络状态信息
  */
 networkUnavailable = "Network Unavailable";
+networkDataParseError = "Data Parse Error";
 networkOk = "Request Success";
 networkCreated = "Created";
 networkAccepted = "Accepted";

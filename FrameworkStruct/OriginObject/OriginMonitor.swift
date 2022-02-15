@@ -102,7 +102,7 @@ extension OriginMonitor: MonitorProtocol
  */
 extension OriginMonitor: OriginProtocol
 {
-    func desString() -> String
+    func typeDesc() -> String
     {
         let typeStr = type(of: self)
         return typeStr.description()

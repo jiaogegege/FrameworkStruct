@@ -48,6 +48,7 @@ setTeenagerMode = "进入青少年模式";
  * 网络状态信息
  */
 networkUnavailable = "网络不可用";
+networkDataParseError = "数据解析错误";
 networkOk = "请求成功";
 networkCreated = "已创建";
 networkAccepted = "已接受";

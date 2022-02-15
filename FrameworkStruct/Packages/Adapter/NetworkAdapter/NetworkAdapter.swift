@@ -18,7 +18,7 @@ class NetworkAdapter: OriginAdapter
     static let shared = NetworkAdapter()
     
     //请求对象
-    fileprivate let request = NetworkRequest.shared
+    fileprivate let request = NetworkRequestManager.shared
     
     
     //MARK: 方法
@@ -55,6 +55,15 @@ class NetworkAdapter: OriginAdapter
             current
         }   //组合自定义参数
         return params
+    }
+    
+    //如果数据没有解析成功，那么生成错误信息
+    fileprivate func parseDataError() -> NSError
+    {
+        let errCode: HttpStatusCode = .dataParseError
+        let userInfo = [NSLocalizedDescriptionKey: errCode.getErrorDes()]
+        let error = NSError(domain: NSCocoaErrorDomain, code: errCode.rawValue, userInfo: userInfo)
+        return error
     }
 
 }
@@ -93,7 +102,12 @@ extension NetworkAdapter: ExternalInterface
      * 注意事项：
      *
      */
-    func requestQuickLogin(phone: String, token: String, verifyCode: String, verificationCode: String? = nil, success: @escaping ((UserInfoModel) -> Void), failure: @escaping RequestFailureCallback)
+    func loginWithPhoneAndSms(phone: String,
+                              token: String,
+                              verifyCode: String,
+                              verificationCode: String? = nil,
+                              success: @escaping ((UserInfoModel) -> Void),
+                              failure: @escaping RequestFailureCallback)
     {
         //处理参数
         var param = ["account": phone, "token": token, "verifyCode": verifyCode]
@@ -102,10 +116,16 @@ extension NetworkAdapter: ExternalInterface
             param["verificationCode"] = verCode
         }
         let params = self.combineParams(param)
-        request.post(urlPath: url_quickLogin, params: params) { response in
+        request.post(urlPath: url_loginWithPhoneAndSms, params: params) { response in
             //解析数据
-            let userInfo = UserInfoModel.mj_object(withKeyValues: response)
-            success(userInfo!)
+            if let userInfo = UserInfoModel.mj_object(withKeyValues: response)
+            {
+                success(userInfo)
+            }
+            else
+            {
+                failure(self.parseDataError())
+            }
         } failure: { error in
             failure(error)
         }
@@ -116,12 +136,18 @@ extension NetworkAdapter: ExternalInterface
     
     /**************************************** 首页数据 Section Begin ***************************************/
     ///获取首页模块、活动、banner等数据
-    func requestGetHomeData(success: @escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback)
+    func getHomeData(success: @escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback)
     {
         request.get(urlPath: url_homeData, exact: false, params: defaultParams(), authorization: nil, timeoutInterval: nt_requestTimeoutInterval, headers: nil, progressCallback: nil) { response in
             //解析数据为对象
-            let homeDataModel = HomeDataModel.mj_object(withKeyValues: response)
-            success(homeDataModel!)
+            if let homeDataModel = HomeDataModel.mj_object(withKeyValues: response)
+            {
+                success(homeDataModel)
+            }
+            else    //如果数据没有解析成功，那么执行失败的回调
+            {
+                failure(self.parseDataError())
+            }
         } failure: { error in
             failure(error)
         }

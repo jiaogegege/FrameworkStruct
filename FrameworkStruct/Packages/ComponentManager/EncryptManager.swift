@@ -64,7 +64,11 @@ extension EncryptManager: ExternalInterface
         return uuid
     }
     
-    
+    ///DES加密一个字符串
+    func desString(originStr: String, desKey: String) -> String
+    {
+        return NSString.des(originStr, key: desKey)
+    }
     
     
     

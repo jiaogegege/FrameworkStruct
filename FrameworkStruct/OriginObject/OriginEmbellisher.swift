@@ -58,7 +58,7 @@ extension OriginEmbellisher: EmbellisherProtocol
  */
 extension OriginEmbellisher: OriginProtocol
 {
-    func desString() -> String
+    func typeDesc() -> String
     {
         let typeStr = type(of: self)
         return typeStr.description()
