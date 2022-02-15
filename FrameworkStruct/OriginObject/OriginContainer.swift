@@ -37,7 +37,7 @@ protocol ContainerProtocol
     //提交所有数据，将所有数据写入本地数据源
     func commitAll()
     
-    //刷新某个数据，，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
+    //刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
     func refresh(key: AnyHashable)
     
     //刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
@@ -179,11 +179,15 @@ extension OriginContainer: ContainerProtocol
             for i in 0..<count
             {
                 let delegate = array?.object(at: i)
-                if let delegateOp = delegate as? ContainerServices
+                if let dele = delegate as? ContainerServices
                 {
-                    delegateOp.containerDidUpdateData(key: key, value: value)
+                    dele.containerDidUpdateData(key: key, value: value)
                 }
             }
+        }
+        else    //如果没有对象，那么删除这个key/value（节省内存空间）
+        {
+            self.delegates[key] = nil
         }
     }
     

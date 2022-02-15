@@ -17,4 +17,3 @@ import Foundation
 let sPinkThemeFileName = "PinkTheme.plist"
 let sRedThemeFileName = "RedTheme.plist"
 let sBlueThemeFileName = "BlueTheme.plist"
-

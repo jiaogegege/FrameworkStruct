@@ -27,8 +27,8 @@ enum TCGetKey: Int
 class ThemeContainer: OriginContainer
 {
     //MARK: 属性
-    var udAccessor = UserDefaultsAccessor.shared   //UserDefaulits存取器
-    var plAccessor = PlistAccessor.shared    //plist存取器
+    fileprivate var udAccessor = UserDefaultsAccessor.shared   //UserDefaulits存取器
+    fileprivate var plAccessor = PlistAccessor.shared    //plist存取器
     
 
     //MARK: 方法
@@ -82,13 +82,12 @@ class ThemeContainer: OriginContainer
         }
     }
     
-
 }
 
 /**
  * 提供给外部的交互接口
  */
-extension ThemeContainer
+extension ThemeContainer: ExternalInterface
 {
     //获取当前主题
     func getCurrentTheme() -> CustomTheme
@@ -130,6 +129,5 @@ extension ThemeContainer
             return self.get(key: TCGetKey.allTheme) as! [CustomTheme]
         }
     }
-    
     
 }
