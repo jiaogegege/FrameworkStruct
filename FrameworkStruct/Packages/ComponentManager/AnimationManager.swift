@@ -42,6 +42,7 @@ class AnimationManager: OriginManager
 //接口方法
 extension AnimationManager: ExternalInterface
 {
+    /**************************************** 通用动画方法 Section Begin ***************************************/
     /**
      lottie动画
      返回动画的view，view的frame或者约束由调用者设置
@@ -199,6 +200,12 @@ extension AnimationManager: ExternalInterface
             self.completionDict[key] = comp
         }
     }
+    /**************************************** 通用动画方法 Section End ***************************************/
+    
+    /**************************************** 特定动画方法 Section Begin ***************************************/
+    
+    
+    /**************************************** 特定动画方法 Section End ***************************************/
     
 }
 
