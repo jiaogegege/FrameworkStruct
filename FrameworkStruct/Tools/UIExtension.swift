@@ -107,6 +107,24 @@ extension UIViewController
  */
 extension UIView
 {
+    ///创建view，用于子类实现
+    @objc func createView()
+    {
+        
+    }
+    
+    ///配置view，用于子类实现
+    @objc func configView()
+    {
+        
+    }
+    
+    ///更新view上的数据，用于子类实现
+    @objc func updateView()
+    {
+        
+    }
+    
     /**
      * 切圆角
      * - Parameters:
@@ -192,24 +210,6 @@ extension UIView
                 make.left.top.right.bottom.equalToSuperview()
             }
         }
-    }
-    
-    ///创建view，用于子类实现
-    @objc func createView()
-    {
-        
-    }
-    
-    ///配置view，用于子类实现
-    @objc func configView()
-    {
-        
-    }
-    
-    ///更新view上的数据，用于子类实现
-    @objc func updateView()
-    {
-        
     }
     
 }
