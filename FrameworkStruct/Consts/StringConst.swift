@@ -34,6 +34,10 @@ extension String
 extension String: ConstantPropertyProtocol
 {
     //MARK: 项目中各种标题
+    //主页
+    static let homeVC = localized("homeVC")
+    //我的
+    static let mineVC = localized("mineVC")
     //瀑布流
     static let waterfall = localized("waterfall")
     //主题选择
@@ -68,13 +72,7 @@ extension String: ConstantPropertyProtocol
     //MARK: Toast文案
     //网络错误
     static let networkError = localized("networkError")
-    
-    //MARK: 长文案
-    //青少年模式弹窗内容
-    static let teenagerProtectContent = localized("teenagerProtectContent")
-    //进入青少年模式文字
-    static let enterTeenMode = localized("setTeenagerMode")
-    
+
     //MARK: 网络错误信息
     static let networkUnavailable = localized("networkUnavailable")
     static let networkDataParseError = localized("networkDataParseError")
@@ -90,7 +88,13 @@ extension String: ConstantPropertyProtocol
     static let networkNoService = localized("networkNoService")
     static let networkBadGetway = localized("networkBadGetway")
     static let networkServiceUnavailable = localized("networkServiceUnavailable")
-
+    
+    //MARK: 长文案
+    //青少年模式弹窗内容
+    static let teenagerProtectContent = localized("teenagerProtectContent")
+    //进入青少年模式文字
+    static let enterTeenMode = localized("setTeenagerMode")
+    
 
 
 

@@ -14,6 +14,8 @@
 /**
  * 项目中各种标题
  */
+homeVC = "主页";
+mineVC = "我的";
 waterfall = "瀑布流";
 themeSelect = "主题选择";
 modalShow = "模态显示";
@@ -39,12 +41,6 @@ takePhotoWithCamera = "拍照";
 networkError = "网络错误";
 
 /**
- * 长文案
- */
-teenagerProtectContent = "为了呵护未成年人健康成长，框架结构特别推出青少年模式，该模式下部分功能无法正常使用。请监护人主动选择，并设置监护密码。";
-setTeenagerMode = "进入青少年模式";
-
-/**
  * 网络状态信息
  */
 networkUnavailable = "网络不可用";
@@ -61,3 +57,9 @@ networkNoService = "没有此服务";
 networkBadGetway = "服务器连接失败";
 networkServiceUnavailable = "服务器暂时的无法处理客户端的请求";
 networkTimeout = "请求超时";
+
+/**
+ * 长文案
+ */
+teenagerProtectContent = "为了呵护未成年人健康成长，框架结构特别推出青少年模式，该模式下部分功能无法正常使用。请监护人主动选择，并设置监护密码。";
+setTeenagerMode = "进入青少年模式";

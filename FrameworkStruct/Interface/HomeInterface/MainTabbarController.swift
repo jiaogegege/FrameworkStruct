@@ -16,11 +16,18 @@ class MainTabbarController: BasicTabbarController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
     
-
+    override func createUI() {
+        //首页
+        let homeNav = HomeNavigationController.getViewController()
+        //我的
+        let mineNav = MineNavigationController.getViewController()
+        mineNav.configUI()  //界面未加载的时候，图标出不来，所以调用一下
+        
+        self.viewControllers = [homeNav, mineNav]
+    }
     
     
     

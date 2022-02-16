@@ -309,6 +309,10 @@
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6CF268278D85AE003A1E43 /* FSStack.swift */; };
 		EA6D7F81278ED3C400D73386 /* FSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D7F80278ED3C400D73386 /* FSAlertView.swift */; };
+		EA73A14B27BC8A3E00980C26 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */; };
+		EA73A14E27BC8E6900980C26 /* Mine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA73A15027BC8E6900980C26 /* Mine.storyboard */; };
+		EA73A15927BC8ED600980C26 /* MineNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA73A15827BC8ED600980C26 /* MineNavigationController.swift */; };
+		EA73A15B27BC900E00980C26 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA73A15A27BC900E00980C26 /* MineViewController.swift */; };
 		EA75BB1F2792646C00910B4C /* TeenagerModeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */; };
 		EA75BB262792A80900910B4C /* DatabaseAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB252792A80900910B4C /* DatabaseAccessor.swift */; };
 		EA75BB282792A88400910B4C /* DatabaseConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA75BB272792A88400910B4C /* DatabaseConst.swift */; };
@@ -902,6 +906,12 @@
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
 		EA6D7F80278ED3C400D73386 /* FSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSAlertView.swift; sourceTree = "<group>"; };
+		EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
+		EA73A14F27BC8E6900980C26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Mine.storyboard; sourceTree = "<group>"; };
+		EA73A15227BC8E6B00980C26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Mine.strings; sourceTree = "<group>"; };
+		EA73A15427BC8E6C00980C26 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Mine.strings"; sourceTree = "<group>"; };
+		EA73A15827BC8ED600980C26 /* MineNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineNavigationController.swift; sourceTree = "<group>"; };
+		EA73A15A27BC900E00980C26 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeenagerModeDialog.swift; sourceTree = "<group>"; };
 		EA75BB252792A80900910B4C /* DatabaseAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseAccessor.swift; sourceTree = "<group>"; };
 		EA75BB272792A88400910B4C /* DatabaseConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConst.swift; sourceTree = "<group>"; };
@@ -2261,6 +2271,31 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		EA73A15527BC8E9500980C26 /* MineInterface */ = {
+			isa = PBXGroup;
+			children = (
+				EA73A15627BC8EB300980C26 /* Models */,
+				EA73A15727BC8EB900980C26 /* Views */,
+				EA73A15827BC8ED600980C26 /* MineNavigationController.swift */,
+				EA73A15A27BC900E00980C26 /* MineViewController.swift */,
+			);
+			path = MineInterface;
+			sourceTree = "<group>";
+		};
+		EA73A15627BC8EB300980C26 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EA73A15727BC8EB900980C26 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		EA75BB292792AA7B00910B4C /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
@@ -3068,6 +3103,7 @@
 			isa = PBXGroup;
 			children = (
 				EADB008027623B59001B7223 /* Main.storyboard */,
+				EA73A15027BC8E6900980C26 /* Mine.storyboard */,
 				EADB008527623B5A001B7223 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
@@ -3105,6 +3141,7 @@
 			children = (
 				EADB00F1276241BA001B7223 /* README.md */,
 				EADB00ED27624176001B7223 /* HomeInterface */,
+				EA73A15527BC8E9500980C26 /* MineInterface */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -3244,6 +3281,7 @@
 				EADB00B427623E38001B7223 /* Models */,
 				EADB00B527623E42001B7223 /* Views */,
 				EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */,
+				EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */,
 				EADB007E27623B59001B7223 /* ViewController.swift */,
 				EADB00EA2762416E001B7223 /* JCollectionViewController.swift */,
 				EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */,
@@ -3439,6 +3477,7 @@
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
 				EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */,
 				EA3337E02797E6AA00612DC3 /* README.md in Resources */,
+				EA73A14E27BC8E6900980C26 /* Mine.storyboard in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
 				EADB00BA27623EA3001B7223 /* InfoPlist.strings in Resources */,
 			);
@@ -3654,6 +3693,7 @@
 				EA3E8AA927B77CEA006A2715 /* AnimationTime.swift in Sources */,
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
+				EA73A15927BC8ED600980C26 /* MineNavigationController.swift in Sources */,
 				EA99373827994F6100480147 /* TABBaseComponent+TABDropAnimation.m in Sources */,
 				EA3E8AA027B77CEA006A2715 /* CompatibleAnimationView.swift in Sources */,
 				EACAD4ED277DA5E400FBE2DA /* DeviceTool.swift in Sources */,
@@ -3789,6 +3829,7 @@
 				EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */,
 				EA3E8B3127B77CEA006A2715 /* Asset.swift in Sources */,
 				EAC8A88427625D490088293F /* SDInternalMacros.m in Sources */,
+				EA73A15B27BC900E00980C26 /* MineViewController.swift in Sources */,
 				EAC8A86527625D490088293F /* SDDiskCache.m in Sources */,
 				EA3E8C2927B782C4006A2715 /* POPPropertyAnimation.mm in Sources */,
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,
@@ -3923,6 +3964,7 @@
 				EAC8A85727625D490088293F /* SDWebImageIndicator.m in Sources */,
 				EA3E8B3F27B77CEA006A2715 /* CurveVertex.swift in Sources */,
 				EAC8A86427625D490088293F /* SDImageIOCoder.m in Sources */,
+				EA73A14B27BC8A3E00980C26 /* HomeNavigationController.swift in Sources */,
 				EA3E8B2927B77CEA006A2715 /* KeyframeData.swift in Sources */,
 				EA1AE483277819E600D028F9 /* ConstraintLayoutSupport.swift in Sources */,
 				EA1AE488277819E600D028F9 /* ConstraintMaker.swift in Sources */,
@@ -3974,6 +4016,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		EA73A15027BC8E6900980C26 /* Mine.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA73A14F27BC8E6900980C26 /* Base */,
+				EA73A15227BC8E6B00980C26 /* en */,
+				EA73A15427BC8E6C00980C26 /* zh-Hans */,
+			);
+			name = Mine.storyboard;
+			sourceTree = "<group>";
+		};
 		EADB008027623B59001B7223 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

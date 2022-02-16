@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func initData()
     {
         //初始化程序组件
-        MonitorMonitor.shared.originConfig()
+        rootMonitor.originConfig()
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

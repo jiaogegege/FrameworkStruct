@@ -60,6 +60,8 @@ enum FSNotification: String
 let gLaunchSB = "LaunchScreen"
 //主界面
 let gMainSB = "Main"
+//我的界面
+let gMineSB = "Mine"
 
 
 //MARK: 正则表达式

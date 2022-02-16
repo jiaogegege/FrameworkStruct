@@ -32,7 +32,10 @@ class ThemeSelectViewController: BasicViewController
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        g_after(interval: 0.001) {
+            super.viewDidLoad()
+            self.tableView.reloadData()
+        }
         
     }
     

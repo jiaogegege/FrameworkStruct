@@ -14,7 +14,7 @@ class ViewController: BasicViewController
     let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo]
 
     override func viewDidLoad() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+        g_after(interval: 0.001) {
             super.viewDidLoad()
         }
         self.backStyle = .none

@@ -326,7 +326,7 @@ class BasicViewController: UIViewController
     //创建界面，一般用来创建界面组件
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
-    func createUI()
+    override func createUI()
     {
         
     }
@@ -334,7 +334,7 @@ class BasicViewController: UIViewController
     //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
-    func configUI()
+    override func configUI()
     {
         //用主题更新UI元素，如果有的话
         self.themeUpdateUI(theme: self.theme)
@@ -344,7 +344,7 @@ class BasicViewController: UIViewController
     //这个方法可能被多次执行，所以不要在这里创建任何对象
     //如果子类覆写这个方法，需要调用父类方法
     //会多次执行
-    func layoutUI()
+    override func layoutUI()
     {
         
     }
@@ -352,7 +352,7 @@ class BasicViewController: UIViewController
     //初始化控制器数据，比如一些状态和变量
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
-    func initData()
+    override func initData()
     {
         
     }
@@ -361,7 +361,7 @@ class BasicViewController: UIViewController
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
     //可以手动调用这个方法
-    func updateUI()
+    override func updateUI()
     {
         
     }
@@ -369,14 +369,14 @@ class BasicViewController: UIViewController
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次，主题变化时执行
-    func themeUpdateUI(theme: ThemeProtocol)
+    override func themeUpdateUI(theme: ThemeProtocol)
     {
         //留给子类实现
     }
     
     //添加通知
     //如果子类覆写这个方法，需要调用父类方法
-    func addNotification()
+    override func addNotification()
     {
         //添加主题通知
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification(notify:)), name: FSNotification.changeTheme.name, object: nil)

@@ -14,6 +14,8 @@
 /**
  * 项目中各种标题
  */
+homeVC = "Home";
+mineVC = "Mine";
 waterfall = "Waterfall";
 themeSelect = "Theme Select";
 modalShow = "Modal Show";
@@ -39,12 +41,6 @@ takePhotoWithCamera = "Take Photo With Camera";
 networkError = "Network Error";
 
 /**
- * 长文案
- */
-teenagerProtectContent = "In order to protect the healthy growth of minors, the framework structure specially launches a youth mode, which cannot be used normally. Please ask the guardian to actively select and set the guardian password.";
-setTeenagerMode = "Enter Teenager Mode";
-
-/**
  * 网络状态信息
  */
 networkUnavailable = "Network Unavailable";
@@ -61,3 +57,9 @@ networkNoService = "No Service";
 networkBadGetway = "Bad Getway";
 networkServiceUnavailable = "Service Unavailable";
 networkTimeout = "Request Timeout";
+
+/**
+ * 长文案
+ */
+teenagerProtectContent = "In order to protect the healthy growth of minors, the framework structure specially launches a youth mode, which cannot be used normally. Please ask the guardian to actively select and set the guardian password.";
+setTeenagerMode = "Enter Teenager Mode";

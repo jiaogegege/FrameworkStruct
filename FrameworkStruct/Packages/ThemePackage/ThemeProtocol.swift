@@ -10,7 +10,7 @@
  */
 import Foundation
 
-protocol ThemeProtocol
+@objc protocol ThemeProtocol
 {
     //MARK: 颜色
     //主题名
