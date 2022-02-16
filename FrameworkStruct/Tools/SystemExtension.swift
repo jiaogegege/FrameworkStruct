@@ -10,6 +10,7 @@
  */
 import Foundation
 
+//MARK: NSObject
 /**
  * NSObject
  */
@@ -31,6 +32,7 @@ extension NSObject
 }
 
 
+//MARK: String
 /**
  * String
  */
@@ -165,6 +167,7 @@ extension String
 }
 
 
+//MARK: NSAttributedString
 /**
  * NSAttributedString
  */
@@ -180,6 +183,7 @@ extension NSAttributedString
 }
 
 
+//MARK: Array
 /**
  * Array
  */
@@ -211,6 +215,7 @@ extension Array
 }
 
 
+//MARK: Dictionary
 /**
  * Dictionary
  */
@@ -230,6 +235,7 @@ extension Dictionary
 }
 
 
+//MARK: NSPointerArray
 /**
  * NSPointerArray
  */

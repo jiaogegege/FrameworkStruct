@@ -249,7 +249,7 @@ extension UIButton
     {
         self.isEnabled = false
         let intv = maxBetween(one: interval, other: self.disableInterval)
-        DispatchQueue.main.asyncAfter(deadline: .now() + intv) {
+        g_after(interval: intv) {
             self.isEnabled = true
         }
     }

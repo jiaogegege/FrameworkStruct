@@ -2341,7 +2341,6 @@
 				EADB00D127624012001B7223 /* BasicDefine.swift */,
 				EADB00D227624012001B7223 /* NSObject+PropertyListing.h */,
 				EADB00D027624012001B7223 /* NSObject+PropertyListing.m */,
-				EADB0125276242FD001B7223 /* StatusManager */,
 			);
 			path = BasicTool;
 			sourceTree = "<group>";
@@ -2386,6 +2385,7 @@
 				EA92255B276ADE2200192E2E /* FSQueue.swift */,
 				EA6CF268278D85AE003A1E43 /* FSStack.swift */,
 				EA92255D276AE48700192E2E /* FSVector.swift */,
+				EADB0125276242FD001B7223 /* StatusManager */,
 			);
 			path = OriginTool;
 			sourceTree = "<group>";
@@ -3339,10 +3339,10 @@
 		EADB0125276242FD001B7223 /* StatusManager */ = {
 			isa = PBXGroup;
 			children = (
-				EADB01292762430B001B7223 /* SMVector.h */,
-				EADB01282762430B001B7223 /* SMVector.m */,
 				EADB01272762430B001B7223 /* StatusManager.h */,
 				EADB01262762430B001B7223 /* StatusManager.m */,
+				EADB01292762430B001B7223 /* SMVector.h */,
+				EADB01282762430B001B7223 /* SMVector.m */,
 			);
 			path = StatusManager;
 			sourceTree = "<group>";

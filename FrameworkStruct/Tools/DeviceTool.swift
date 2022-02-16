@@ -20,11 +20,11 @@ var kScreenHeight: CGFloat {
 }
 
 //iPhone屏幕高度
-let kiPhone4Height = 480.0
-let kiPhone5Height = 568.0
-let kiPhone8Height = 667.0
-let kiPhone8pHeight = 736.0
-let kiPhoneXHeight = 812.0
+let kiPhone4Height: CGFloat = 480.0
+let kiPhone5Height: CGFloat = 568.0
+let kiPhone8Height: CGFloat = 667.0
+let kiPhone8pHeight: CGFloat = 736.0
+let kiPhoneXHeight: CGFloat = 812.0
 
 //状态栏高度
 let kStatusHeight: CGFloat = kScreenHeight >= 812.0 ? 44.0 : 20.0
@@ -85,46 +85,46 @@ func isIphone() -> Bool
 //判断机型：iPhone4/iPhone5/iPhone8/iPhone8p/iPhoneX及以上
 func isIphone4() -> Bool
 {
-    return doubleEqual(Double(kScreenHeight), kiPhone4Height)
+    return doubleEqual(Double(kScreenHeight), Double(kiPhone4Height))
 }
 
 func isIphone5() -> Bool
 {
-    return doubleEqual(Double(kScreenHeight), kiPhone5Height)
+    return doubleEqual(Double(kScreenHeight), Double(kiPhone5Height))
 }
 
 func isIphone8() -> Bool
 {
-    return doubleEqual(Double(kScreenHeight), kiPhone8Height)
+    return doubleEqual(Double(kScreenHeight), Double(kiPhone8Height))
 }
 
 func isIphone8P() -> Bool
 {
-    return doubleEqual(Double(kScreenHeight), kiPhone8pHeight)
+    return doubleEqual(Double(kScreenHeight), Double(kiPhone8pHeight))
 }
 
 //判断条件：屏幕高度等于812或者大于812
 func isIphoneXOrMore() -> Bool
 {
-    return Double(kScreenHeight) >= kiPhoneXHeight
+    return kScreenHeight >= kiPhoneXHeight
 }
 
 //屏幕小于iPhoneX
 func smallerThanIphoneX() -> Bool
 {
-    return Double(kScreenHeight) < kiPhoneXHeight
+    return kScreenHeight < kiPhoneXHeight
 }
 
 //屏幕小于iPhone8P
 func smallerThanIphone8P() -> Bool
 {
-    return Double(kScreenHeight) < kiPhone8pHeight
+    return kScreenHeight < kiPhone8pHeight
 }
 
 //屏幕小于iPhone8
 func smallerThanIphone8() -> Bool
 {
-    return Double(kScreenHeight) < kiPhone8Height
+    return kScreenHeight < kiPhone8Height
 }
  
 
@@ -132,3 +132,15 @@ func smallerThanIphone8() -> Bool
 //iOS系统版本
 let kiOSVersion = (UIDevice.current.systemVersion as NSString).floatValue
 
+///是否可用某个版本的系统
+func sysAvailable(_ ver: Float) -> Bool
+{
+    if kiOSVersion >= ver
+    {
+        return true
+    }
+    else
+    {
+        return false
+    }
+}

@@ -8,7 +8,7 @@
 /**
  * 定义各种资源图片
  */
-import Foundation
+import UIKit
 
 extension UIImage: ConstantPropertyProtocol
 {

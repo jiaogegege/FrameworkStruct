@@ -67,7 +67,14 @@ func g_getClassName(_ aClass: AnyClass) -> String
 func g_getObjClassName(_ obj: AnyObject) -> String
 {
     let typeName = type(of: obj).description()
-    return typeName.components(separatedBy: ".").last!
+    if(typeName.contains("."))
+    {
+        return typeName.components(separatedBy: ".").last!
+    }
+    else
+    {
+        return typeName
+    }
 }
 
 /// iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
