@@ -305,10 +305,11 @@ extension ToastManager: ExternalInterface
         self.wantShow(text: text, hideDelay: self.longDistanceFuture)
     }
     
-    //只显示一个动画，不消失
-    func wantShowAnimate()
+    //只显示一个动画，不消失，一般用于请求接口的时候
+    //mode：是否可和其他HUD同时显示，默认不可以，如果想要立即显示这个HUD，可以先隐藏现有的hud再调用这个方法
+    func wantShowAnimate(mode: TMShowMode = .serial)
     {
-        self.wantShow(hideDelay: self.longDistanceFuture)
+        self.wantShow(hideDelay: self.longDistanceFuture, mode: mode)
     }
 
     /**

@@ -37,23 +37,30 @@ func g_gotoAppStoreComment()
 }
 
 ///返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
-func g_getCopy(origin: Any?) -> Any
+func g_getCopy(origin: Any?) -> Any?
 {
-    if let nsData = origin as? NSObject
+    if origin != nil
     {
-        return nsData.copy()
-    }
-    else if let array = origin as? Array<Any>
-    {
-        return array.copy()
-    }
-    else if let dic = origin as? Dictionary<AnyHashable, Any>
-    {
-        return dic.copy()
+        if let nsData = origin as? NSObject
+        {
+            return nsData.copy()
+        }
+        else if let array = origin as? Array<Any>
+        {
+            return array.copy()
+        }
+        else if let dic = origin as? Dictionary<AnyHashable, Any>
+        {
+            return dic.copy()
+        }
+        else
+        {
+            return origin as Any
+        }
     }
     else
     {
-        return origin as Any
+        return origin
     }
 }
 

@@ -195,7 +195,7 @@ extension Array
         var newArray = [Any]()
         for item in self
         {
-            newArray.append(g_getCopy(origin: item))
+            newArray.append(g_getCopy(origin: item)!)
         }
         return newArray
     }

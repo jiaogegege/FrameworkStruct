@@ -507,7 +507,7 @@
 		EADB008727623B5A001B7223 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EADB008527623B5A001B7223 /* LaunchScreen.storyboard */; };
 		EADB00A727623C76001B7223 /* OriginAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB009B27623C76001B7223 /* OriginAdapter.swift */; };
 		EADB00A827623C76001B7223 /* OriginDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB009C27623C76001B7223 /* OriginDocument.swift */; };
-		EADB00A927623C76001B7223 /* OriginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB009D27623C76001B7223 /* OriginProtocol.swift */; };
+		EADB00A927623C76001B7223 /* OriginDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB009D27623C76001B7223 /* OriginDefine.swift */; };
 		EADB00AB27623C76001B7223 /* OriginContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB009F27623C76001B7223 /* OriginContainer.swift */; };
 		EADB00AC27623C76001B7223 /* OriginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB00A027623C76001B7223 /* OriginWorker.swift */; };
 		EADB00AD27623C76001B7223 /* OriginChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB00A127623C76001B7223 /* OriginChecker.swift */; };
@@ -1357,7 +1357,7 @@
 		EADB008827623B5A001B7223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EADB009B27623C76001B7223 /* OriginAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginAdapter.swift; sourceTree = "<group>"; };
 		EADB009C27623C76001B7223 /* OriginDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginDocument.swift; sourceTree = "<group>"; };
-		EADB009D27623C76001B7223 /* OriginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginProtocol.swift; sourceTree = "<group>"; };
+		EADB009D27623C76001B7223 /* OriginDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginDefine.swift; sourceTree = "<group>"; };
 		EADB009E27623C76001B7223 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EADB009F27623C76001B7223 /* OriginContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginContainer.swift; sourceTree = "<group>"; };
 		EADB00A027623C76001B7223 /* OriginWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginWorker.swift; sourceTree = "<group>"; };
@@ -2381,7 +2381,7 @@
 			isa = PBXGroup;
 			children = (
 				EA92255A276AD66200192E2E /* README.md */,
-				EADB009D27623C76001B7223 /* OriginProtocol.swift */,
+				EADB009D27623C76001B7223 /* OriginDefine.swift */,
 				EA92255B276ADE2200192E2E /* FSQueue.swift */,
 				EA6CF268278D85AE003A1E43 /* FSStack.swift */,
 				EA92255D276AE48700192E2E /* FSVector.swift */,
@@ -3865,7 +3865,7 @@
 				EAC8A87827625D490088293F /* SDWebImageDefine.m in Sources */,
 				EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */,
 				EAC8A76D27625BA70088293F /* MJProperty.m in Sources */,
-				EADB00A927623C76001B7223 /* OriginProtocol.swift in Sources */,
+				EADB00A927623C76001B7223 /* OriginDefine.swift in Sources */,
 				EA3E8B2827B77CEA006A2715 /* KeyframeGroup.swift in Sources */,
 				EA3E8B1127B77CEA006A2715 /* Shape.swift in Sources */,
 				EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */,

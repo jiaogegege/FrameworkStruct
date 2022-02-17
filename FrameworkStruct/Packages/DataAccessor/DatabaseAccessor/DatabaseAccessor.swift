@@ -561,7 +561,7 @@ extension DatabaseAccessor: ExternalInterface
     
     //MARK: 用户信息
     //查询用户信息
-    func queryAllUserInfo(callback: ((Array<UserInfoModel>) -> Void))
+    func queryAllUserInfo(callback: ((Array<UserInfoModel>?) -> Void))
     {
         let sql = "SELECT * FROM app_user"
         queryInQueue(sql: sql) { ret, result in
@@ -580,6 +580,10 @@ extension DatabaseAccessor: ExternalInterface
                 }
                 //执行回调
                 callback(array)
+            }
+            else    //如果出错
+            {
+                callback(nil)
             }
         }
     }

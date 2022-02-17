@@ -6,16 +6,27 @@
 //
 
 /**
- * 集中的数据容器
+ * 集中的通用数据容器
  * 对于小规模的数据，可以将项目中使用的所有数据模型都放在这个容器中；对于大型项目，数据模型很多，可以根据模块划分创建多个数据容器，然后综合到这个集中的数据容器中，当然也可以独立访问，根据实际情况取舍
  */
 import UIKit
+
+///数据对象的key
+enum DCDataKey: String
+{
+    case allUserInfo   //所有用户信息
+    case currentUserInfo    //当前登录的用户信息
+    
+}
 
 class DatasContainer: OriginContainer
 {
     //MARK: 属性
     //单例
     static let shared = DatasContainer()
+    
+    //数据库存取器
+    fileprivate let dba = DatabaseAccessor.shared
     
     
     //MARK: 方法
@@ -37,8 +48,33 @@ class DatasContainer: OriginContainer
 
 }
 
-//接口方法
+//接口方法，提供具体的数据访问方法
 extension DatasContainer: ExternalInterface
 {
+    ///获取所有用户信息
+    func getAllUserInfo(completion: ((_ users: [UserInfoModel]?) -> Void))
+    {
+        if let data = self.get(key: DCDataKey.allUserInfo)
+        {
+            completion(data as? [UserInfoModel])
+        }
+        else    //如果容器中没有，那么从数据库中获取
+        {
+            dba.queryAllUserInfo { users in
+                //查询到后先保存到容器中
+                if let users = users {
+                    self.mutate(key: DCDataKey.allUserInfo, value: users)
+                }
+                completion(users)   //可能为nil
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }

@@ -62,11 +62,6 @@ protocol DelegateProtocol {
 }
 
 
-//MARK: 闭包类型定义
-//参数和返回值都为空的闭包
-typealias VoidClosure = (() -> Void)
-
-
 //MARK: 基础常量定义
 
 ///控制器的状态管理器最大步数，可在程序运行过程中改变，那么会影响改变之后创建的控制器的状态管理器步数

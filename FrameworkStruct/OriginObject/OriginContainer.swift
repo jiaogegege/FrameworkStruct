@@ -25,23 +25,43 @@ protocol ContainerServices {
  */
 protocol ContainerProtocol
 {
-    //获取数据
+    //同步获取数据，优先从容器中获取，如果没有则从数据源获取
     func get(key: AnyHashable) -> Any?
+    
+    //异步获取数据，优先从容器中获取，如果没有则从数据源获取
+    func get(key: AnyHashable, completion: ((_ data: Any?) -> Void))
         
-    //修改数据，数据保存在容器中
+    //同步修改数据，数据保存在容器中修改后通知所有订阅对象刷新数据
     func mutate(key: AnyHashable, value: Any)
     
-    //提交数据，将数据写入本地数据源
+    //同步提交数据，将数据写入本地数据源
     func commit(key: AnyHashable, value: Any)
     
-    //提交所有数据，将所有数据写入本地数据源
+    //异步提交数据，将数据写入本地数据源或远程数据源
+    //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
+    func commit(key: AnyHashable, value: Any, success: ((_ result: Any?) -> Void), failure: ErrorClosure)
+    
+    //同步提交所有数据，将所有数据写入本地数据源
     func commitAll()
     
-    //刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
-    func refresh(key: AnyHashable)
+    //异步提交所有数据，将所有数据写入本地数据源或远程数据源
+    //异步提交所有数据涉及到多个异步操作的同步通信，并且不一定所有数据都支持异步提交服务，慎重使用这个方法
+    //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
+    func commitAll(success: ((_ result: Any?) -> Void), failure: ErrorClosure)
     
-    //刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
-    func refreshAll()
+    //同步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据；同时返回这个数据
+    func refresh(key: AnyHashable) -> Any?
+    
+    //异步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据，同时返回这个数据
+    func refresh(key: AnyHashable, completion: ((_ data: Any?) -> Void))
+    
+    //同步刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据，同时返回所有刷新的数据，key就是数据的key
+    func refreshAll() -> Dictionary<AnyHashable, Any>?
+    
+    //异步刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
+    //异步刷新所有数据涉及到多个异步操作的同步通信，并且不一定所有数据都支持异步刷新服务，慎重使用这个方法
+    //参数：datas：所有获取到的数据对象
+    func refreshAll(completion: ((_ datas: Dictionary<AnyHashable, Any>?) -> Void))
     
     //清空某个数据，从容器中删除
     func clear(key: AnyHashable)
@@ -88,23 +108,30 @@ class OriginContainer: NSObject
     }
     
     //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
-    func getCopy(origin: Any?) -> Any
+    func getCopy(origin: Any?) -> Any?
     {
-        if let nsData = origin as? NSObject
+        if origin != nil
         {
-            return nsData.copy()
-        }
-        else if let array = origin as? Array<Any>
-        {
-            return array.copy()
-        }
-        else if let dic = origin as? Dictionary<AnyHashable, Any>
-        {
-            return dic.copy()
+            if let nsData = origin as? NSObject
+            {
+                return nsData.copy()
+            }
+            else if let array = origin as? Array<Any>
+            {
+                return array.copy()
+            }
+            else if let dic = origin as? Dictionary<AnyHashable, Any>
+            {
+                return dic.copy()
+            }
+            else
+            {
+                return origin as Any
+            }
         }
         else
         {
-            return origin as Any
+            return origin
         }
     }
     
@@ -117,14 +144,19 @@ class OriginContainer: NSObject
  */
 extension OriginContainer: ContainerProtocol
 {
-    func get(key: AnyHashable) -> Any? {
+    @objc func get(key: AnyHashable) -> Any? {
         let data = self.container[key]
         return self.getCopy(origin: data)
     }
     
-    func mutate(key: AnyHashable, value: Any) {
+    @objc func get(key: AnyHashable, completion: ((Any?) -> Void)) {
+        //子类实现和具体存取器的交互
+        //理论上优先从容器获取，如果没有则从具体的存取器获取
+    }
+    
+    @objc func mutate(key: AnyHashable, value: Any) {
         self.container[key] = self.getCopy(origin: value)
-        //提交数据的时候，要对所有数据源发出通知
+        //提交数据的时候，要对所有订阅对象发出通知
         self.dispatch(key: key, value: self.get(key: key) as Any)
     }
     
@@ -132,23 +164,41 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
+    @objc func commit(key: AnyHashable, value: Any, success: ((Any?) -> Void), failure: (NSError) -> Void) {
+        //子类实现和具体存取器的交互
+    }
+    
     @objc func commitAll() {
         //子类实现和具体存取器的交互
     }
     
-    @objc func refresh(key: AnyHashable) {
+    func commitAll(success: ((Any?) -> Void), failure: (NSError) -> Void) {
         //子类实现和具体存取器的交互
     }
     
-    @objc func refreshAll() {
+    @objc func refresh(key: AnyHashable) -> Any? {
+        //子类实现和具体存取器的交互
+        return nil
+    }
+    
+    @objc func refresh(key: AnyHashable, completion: ((Any?) -> Void)) {
         //子类实现和具体存取器的交互
     }
     
-    func clear(key: AnyHashable) {
+    @objc func refreshAll() -> Dictionary<AnyHashable, Any>? {
+        //子类实现和具体存取器的交互
+        return nil
+    }
+    
+    @objc func refreshAll(completion: ((Dictionary<AnyHashable, Any>?) -> Void)) {
+        //子类实现和具体存取器的交互
+    }
+    
+    @objc func clear(key: AnyHashable) {
         self.container.removeValue(forKey: key)
     }
     
-    func clearAll() {
+    @objc func clearAll() {
         self.container.removeAll()
     }
     

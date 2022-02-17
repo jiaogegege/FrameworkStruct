@@ -1,5 +1,5 @@
 //
-//  OriginProtocol.swift
+//  OriginDefine.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2021/11/5.
@@ -40,3 +40,11 @@ protocol OriginProtocol
     func typeDesc() -> String
     
 }
+
+
+//MARK: 闭包类型定义
+//参数和返回值都为空的闭包
+typealias VoidClosure = (() -> Void)
+
+//返回NSError的闭包
+typealias ErrorClosure = ((_ error: NSError) -> Void)

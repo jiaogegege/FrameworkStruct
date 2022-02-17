@@ -31,7 +31,7 @@ class ViewController: BasicViewController
     override func configUI()
     {
         super.configUI()
-
+        
     }
     
     //初始化数据
