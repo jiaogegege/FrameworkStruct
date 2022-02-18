@@ -906,6 +906,8 @@
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
 		EA6D7F80278ED3C400D73386 /* FSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSAlertView.swift; sourceTree = "<group>"; };
+		EA71970527BF79C000A7F3C0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA71970627BF79E900A7F3C0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		EA73A14F27BC8E6900980C26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Mine.storyboard; sourceTree = "<group>"; };
 		EA73A15227BC8E6B00980C26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Mine.strings; sourceTree = "<group>"; };
@@ -2285,6 +2287,7 @@
 		EA73A15627BC8EB300980C26 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EA71970527BF79C000A7F3C0 /* README.md */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2292,6 +2295,7 @@
 		EA73A15727BC8EB900980C26 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA71970627BF79E900A7F3C0 /* README.md */,
 			);
 			path = Views;
 			sourceTree = "<group>";
