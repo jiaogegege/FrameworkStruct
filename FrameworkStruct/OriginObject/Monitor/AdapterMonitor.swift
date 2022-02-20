@@ -35,5 +35,7 @@ class AdapterMonitor: OriginMonitor
         super.originConfig()
         //初始化网络适配器
         _ = NetworkAdapter.shared
+        //初始化推送通知适配器
+        _ = NotificationAdapter.shared
     }
 }

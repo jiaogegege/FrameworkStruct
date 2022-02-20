@@ -55,6 +55,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    //注册远程推送成功
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        FSLog("remote notification token: \(deviceToken)")
+        //获取到token后可以注册到自建服务器或者第三方服务
+        NotificationAdapter.shared.registerForRemoteNotificationWithToken(deviceToken)
+    }
+    
+    //注册远程推送失败
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        //注册远程推送失败，做一些处理
+        FSLog("register remote notification error: \(error.localizedDescription)")
+        NotificationAdapter.shared.registerForRemoteNotificationFail(error)
+    }
+    
 }
 

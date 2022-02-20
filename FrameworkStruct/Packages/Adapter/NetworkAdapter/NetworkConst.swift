@@ -201,7 +201,7 @@ enum HttpStatusCode: Int
     case serviceUnavailable = 503   //服务器暂时的无法处理客户端的请求
     
     ///获取错误信息
-    func getErrorDes() -> String
+    func getErrorDesc() -> String
     {
         switch self {
         case .unavailable:

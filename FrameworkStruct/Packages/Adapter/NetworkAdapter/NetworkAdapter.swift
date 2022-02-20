@@ -61,7 +61,7 @@ class NetworkAdapter: OriginAdapter
     fileprivate func parseDataError() -> NSError
     {
         let errCode: HttpStatusCode = .dataParseError
-        let userInfo = [NSLocalizedDescriptionKey: errCode.getErrorDes()]
+        let userInfo = [NSLocalizedDescriptionKey: errCode.getErrorDesc()]
         let error = NSError(domain: NSCocoaErrorDomain, code: errCode.rawValue, userInfo: userInfo)
         return error
     }
@@ -115,8 +115,7 @@ extension NetworkAdapter: ExternalInterface
         {
             param["verificationCode"] = verCode
         }
-        let params = self.combineParams(param)
-        request.post(urlPath: url_loginWithPhoneAndSms, params: params) { response in
+        request.post(urlPath: url_loginWithPhoneAndSms, params: combineParams(param)) { response in
             //解析数据
             if let userInfo = UserInfoModel.mj_object(withKeyValues: response)
             {

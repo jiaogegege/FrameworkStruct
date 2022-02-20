@@ -35,7 +35,7 @@ enum FSNotification: String
     
     //计算属性，获得通知字符串的名字，格式：项目名缩写+具体通知名称+通知后缀
     var name: Notification.Name {
-        return Notification.Name(rawValue: "FS" + self.rawValue + "Notification")
+        return Notification.Name(rawValue: "FS" + "_" + self.rawValue + "_" + "Notification")
     }
 
     //计算属性，如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
@@ -81,3 +81,30 @@ let integerRegex = "^\\d+$"
 let floatRegex = "^\\d*\\.\\d+$"
 
 
+/**************************************** 枚举选项示例 Section Begin ****************************************/
+///枚举选项定义
+struct Sports: OptionSet
+{
+    let rawValue: UInt
+    
+    static let running = Sports(rawValue: 1) //里面的数字是自己定义的，但不能随意定义，必须是2的非负整数次方
+    static let cycling = Sports(rawValue: 2)
+    static let swimming = Sports(rawValue: 4)
+    static let fencing = Sports(rawValue: 8)
+    static let shooting = Sports(rawValue: 32)
+    static let horseJumping = Sports(rawValue: 512)
+}
+//使用
+//func test()
+//{
+//    let triathlon: Sports = [.swimming,.fencing]
+//    if triathlon.contains(.shooting) {
+//        print("包含shooting")
+//    } else {
+//        print("no包含shooting")
+//    }
+//    if triathlon.contains(.swimming) {
+//        print("包含")
+//    }
+//}
+/**************************************** 枚举选项示例 Section End ****************************************/

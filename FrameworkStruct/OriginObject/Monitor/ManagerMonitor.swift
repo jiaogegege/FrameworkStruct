@@ -31,4 +31,9 @@ class ManagerMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        super.originConfig()
+        //初始化应用程序管理器
+        _ = ApplicationManager.shared
+    }
 }

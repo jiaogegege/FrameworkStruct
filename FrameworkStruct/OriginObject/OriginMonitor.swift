@@ -92,7 +92,7 @@ extension OriginMonitor: MonitorProtocol
     }
     
     @objc func originConfig() {
-        
+        //子类实现具体功能
     }
 }
 

@@ -364,7 +364,7 @@ extension NetworkRequestManager: ExternalInterface
                 }
                 else    //如果服务器没有给错误信息，那么尝试从本地获取
                 {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
+                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDesc() ?? String.networkError
                 }
                 let userInfo = [NSLocalizedDescriptionKey: errMsg]
                 let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
@@ -515,7 +515,7 @@ extension NetworkRequestManager: ExternalInterface
                 }
                 else    //如果服务器没有给错误信息，那么尝试从本地获取
                 {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDes() ?? String.networkError
+                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDesc() ?? String.networkError
                 }
                 let userInfo = [NSLocalizedDescriptionKey: errMsg]
                 let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)

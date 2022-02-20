@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EA008A1627B8EC2600F91ABD /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */; };
+		EA00C86F27C213550034C95B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00C86E27C213550034C95B /* NotificationManager.swift */; };
+		EA00C87627C239760034C95B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA00C87827C239760034C95B /* InfoPlist.strings */; };
+		EA00C87F27C272D60034C95B /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00C87E27C272D60034C95B /* ApplicationManager.swift */; };
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
@@ -331,6 +334,9 @@
 		EA7F3E0F27BB798200C3E33F /* DatasContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */; };
 		EA83FFF6279D9833000F6473 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA83FFF5279D9833000F6473 /* CoreGraphics.framework */; };
 		EA84848D278F132E000E7FC2 /* FSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA84848C278F132E000E7FC2 /* FSActionSheet.swift */; };
+		EA91D17B27C2027500DD1BE1 /* NotificationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */; };
+		EA91D17F27C202E800DD1BE1 /* CalendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */; };
+		EA91D18227C2034200DD1BE1 /* BluetoothAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D18127C2034200DD1BE1 /* BluetoothAdapter.swift */; };
 		EA92255C276ADE2200192E2E /* FSQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255B276ADE2200192E2E /* FSQueue.swift */; };
 		EA92255E276AE48700192E2E /* FSVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255D276AE48700192E2E /* FSVector.swift */; };
 		EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA92255F276B1BBB00192E2E /* ManagerMonitor.swift */; };
@@ -516,7 +522,6 @@
 		EADB00B027623C76001B7223 /* OriginAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB00A427623C76001B7223 /* OriginAccessor.swift */; };
 		EADB00B127623C76001B7223 /* OriginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB00A527623C76001B7223 /* OriginManager.swift */; };
 		EADB00B227623C76001B7223 /* OriginEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB00A627623C76001B7223 /* OriginEmbellisher.swift */; };
-		EADB00BA27623EA3001B7223 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EADB00BC27623EA3001B7223 /* InfoPlist.strings */; };
 		EADB00C527623F29001B7223 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EADB00C727623F29001B7223 /* Localizable.strings */; };
 		EADB00D827624012001B7223 /* NSObject+PropertyListing.m in Sources */ = {isa = PBXBuildFile; fileRef = EADB00D027624012001B7223 /* NSObject+PropertyListing.m */; };
 		EADB00D927624012001B7223 /* BasicDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB00D127624012001B7223 /* BasicDefine.swift */; };
@@ -557,6 +562,10 @@
 
 /* Begin PBXFileReference section */
 		EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
+		EA00C86E27C213550034C95B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		EA00C87727C239760034C95B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA00C87A27C239780034C95B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		EA00C87E27C272D60034C95B /* ApplicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
 		EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
@@ -946,6 +955,9 @@
 		EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasContainer.swift; sourceTree = "<group>"; };
 		EA83FFF5279D9833000F6473 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EA84848C278F132E000E7FC2 /* FSActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSActionSheet.swift; sourceTree = "<group>"; };
+		EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAdapter.swift; sourceTree = "<group>"; };
+		EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAdapter.swift; sourceTree = "<group>"; };
+		EA91D18127C2034200DD1BE1 /* BluetoothAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAdapter.swift; sourceTree = "<group>"; };
 		EA92255A276AD66200192E2E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA92255B276ADE2200192E2E /* FSQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSQueue.swift; sourceTree = "<group>"; };
 		EA92255D276AE48700192E2E /* FSVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSVector.swift; sourceTree = "<group>"; };
@@ -1369,9 +1381,7 @@
 		EADB00A427623C76001B7223 /* OriginAccessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginAccessor.swift; sourceTree = "<group>"; };
 		EADB00A527623C76001B7223 /* OriginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginManager.swift; sourceTree = "<group>"; };
 		EADB00A627623C76001B7223 /* OriginEmbellisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OriginEmbellisher.swift; sourceTree = "<group>"; };
-		EADB00BB27623EA3001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EADB00BF27623EF0001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		EADB00C027623EF0001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EADB00C627623F29001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EADB00C927623F2A001B7223 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EADB00CC27623F39001B7223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -2428,6 +2438,7 @@
 			children = (
 				EAAA4E81276F3E4900C45712 /* README.md */,
 				EADB014227624391001B7223 /* UserManager.swift */,
+				EA00C86E27C213550034C95B /* NotificationManager.swift */,
 			);
 			path = BusinessManager;
 			sourceTree = "<group>";
@@ -2720,6 +2731,7 @@
 			isa = PBXGroup;
 			children = (
 				EAAA4E82276F3E7800C45712 /* README.md */,
+				EA00C87E27C272D60034C95B /* ApplicationManager.swift */,
 				EA922584276B439700192E2E /* ControllerManager.swift */,
 				EAAA4E87276F3EF600C45712 /* ToastManager.swift */,
 				EAAA4E83276F3EC900C45712 /* AlertManager.swift */,
@@ -2738,17 +2750,20 @@
 			children = (
 				EAAA4E8E276F57BB00C45712 /* README.md */,
 				EADB0121276242E2001B7223 /* NetworkAdapter */,
-				EAAA4E91276F64E000C45712 /* BlueToothAdapter */,
+				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
+				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
+				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
 		};
-		EAAA4E91276F64E000C45712 /* BlueToothAdapter */ = {
+		EAAA4E91276F64E000C45712 /* BluetoothAdapter */ = {
 			isa = PBXGroup;
 			children = (
 				EAAA4E92276F64F200C45712 /* README.md */,
+				EA91D18127C2034200DD1BE1 /* BluetoothAdapter.swift */,
 			);
-			path = BlueToothAdapter;
+			path = BluetoothAdapter;
 			sourceTree = "<group>";
 		};
 		EAAA4E93276F657D00C45712 /* DataChecker */ = {
@@ -3097,7 +3112,7 @@
 			children = (
 				EA3E8C3427B784B6006A2715 /* lottie */,
 				EADB008327623B5A001B7223 /* Assets.xcassets */,
-				EADB00BC27623EA3001B7223 /* InfoPlist.strings */,
+				EA00C87827C239760034C95B /* InfoPlist.strings */,
 				EADB00C727623F29001B7223 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -3185,8 +3200,8 @@
 				EADB011427624233001B7223 /* DataContainer */,
 				EAAA4E93276F657D00C45712 /* DataChecker */,
 				EADB010C27624213001B7223 /* DataAccessor */,
-				EADB012D27624328001B7223 /* ThemePackage */,
 				EA52493C27A3E43B002E3616 /* Datas */,
+				EADB012D27624328001B7223 /* ThemePackage */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -3464,6 +3479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EADB008727623B5A001B7223 /* LaunchScreen.storyboard in Resources */,
+				EA00C87627C239760034C95B /* InfoPlist.strings in Resources */,
 				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
 				EA3337DD2797E6AA00612DC3 /* LICENSE in Resources */,
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
@@ -3483,7 +3499,6 @@
 				EA3337E02797E6AA00612DC3 /* README.md in Resources */,
 				EA73A14E27BC8E6900980C26 /* Mine.storyboard in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
-				EADB00BA27623EA3001B7223 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3513,6 +3528,7 @@
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
 				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,
 				EA6CF269278D85AE003A1E43 /* FSStack.swift in Sources */,
+				EA91D17B27C2027500DD1BE1 /* NotificationAdapter.swift in Sources */,
 				EA99372D27994F6100480147 /* TABSentryView.m in Sources */,
 				EA3E8AAF27B77CEA006A2715 /* LRUAnimationCache.swift in Sources */,
 				EAC8A88127625D490088293F /* SDImageAssetManager.m in Sources */,
@@ -3555,6 +3571,7 @@
 				EADB00F7276241D4001B7223 /* GCWaterfallFlowLayout.m in Sources */,
 				EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */,
 				EA3E8AD827B77CEA006A2715 /* VisibilityAnimation.swift in Sources */,
+				EA91D18227C2034200DD1BE1 /* BluetoothAdapter.swift in Sources */,
 				EA99374627994F6100480147 /* TABViewAnimated.m in Sources */,
 				EAC8A85127625D490088293F /* SDImageAWebPCoder.m in Sources */,
 				EA922562276B1BCF00192E2E /* ContainerMonitor.swift in Sources */,
@@ -3588,6 +3605,7 @@
 				EA11126127B3BE2C006D0B83 /* MultipartFormData.swift in Sources */,
 				EA922566276B1BF200192E2E /* AdapterMonitor.swift in Sources */,
 				EA1AE47A277819E600D028F9 /* ConstraintMakerExtendable.swift in Sources */,
+				EA91D17F27C202E800DD1BE1 /* CalendarAdapter.swift in Sources */,
 				EAC8A85A27625D490088293F /* SDImageCodersManager.m in Sources */,
 				EA3E8B0527B77CEA006A2715 /* SingleValueProvider.swift in Sources */,
 				EAC8A86C27625D490088293F /* SDWebImageDownloaderOperation.m in Sources */,
@@ -3698,6 +3716,7 @@
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
 				EA73A15927BC8ED600980C26 /* MineNavigationController.swift in Sources */,
+				EA00C87F27C272D60034C95B /* ApplicationManager.swift in Sources */,
 				EA99373827994F6100480147 /* TABBaseComponent+TABDropAnimation.m in Sources */,
 				EA3E8AA027B77CEA006A2715 /* CompatibleAnimationView.swift in Sources */,
 				EACAD4ED277DA5E400FBE2DA /* DeviceTool.swift in Sources */,
@@ -3825,6 +3844,7 @@
 				EAC8A84627625D490088293F /* NSImage+Compatibility.m in Sources */,
 				EA3E8B3B27B77CEA006A2715 /* BezierPath.swift in Sources */,
 				EA11126327B3BE2C006D0B83 /* NetworkReachabilityManager.swift in Sources */,
+				EA00C86F27C213550034C95B /* NotificationManager.swift in Sources */,
 				EAC8A84D27625D490088293F /* UIImageView+HighlightedWebCache.m in Sources */,
 				EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */,
 				EA1AE472277819E600D028F9 /* ConstraintMakerPrioritizable.swift in Sources */,
@@ -4020,6 +4040,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		EA00C87827C239760034C95B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA00C87727C239760034C95B /* en */,
+				EA00C87A27C239780034C95B /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		EA73A15027BC8E6900980C26 /* Mine.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4048,15 +4077,6 @@
 				EADB00CC27623F39001B7223 /* en */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		EADB00BC27623EA3001B7223 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EADB00BB27623EA3001B7223 /* en */,
-				EADB00C027623EF0001B7223 /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		EADB00C727623F29001B7223 /* Localizable.strings */ = {

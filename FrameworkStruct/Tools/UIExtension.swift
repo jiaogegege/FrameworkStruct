@@ -366,6 +366,30 @@ extension UITableView: InternalType
 }
 
 
+//MARK: UICollectionView
+/**
+ * UITableView
+ */
+extension UICollectionView
+{
+    ///滚动到顶部
+    func scrollToTop()
+    {
+        self.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
+        self.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+    }
+    
+    ///滚动到底部
+    func scrollToBottom()
+    {
+        let section = self.numberOfSections - 1
+        let row = self.numberOfItems(inSection: section) - 1
+        self.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
+    }
+    
+}
+
+
 //MARK: UIColor
 /**
  * UIColor
