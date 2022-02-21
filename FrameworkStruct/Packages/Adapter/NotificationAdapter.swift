@@ -299,8 +299,8 @@ extension NotificationAdapter: InternalType
     ///提示音类型
     enum NASoundType {
         case `default`  //系统默认提示音
-        case custom(String)   //自定义普通提示音，name：音频名
-        case critical(String? = nil)   //重要信息提示音，name为nil则返回系统默认
+        case custom(NASoundName)   //自定义普通提示音，name：音频名
+        case critical(NASoundName? = nil)   //重要信息提示音，name为nil则返回系统默认
         
         ///返回提示音
         func getSound() -> UNNotificationSound
@@ -309,11 +309,11 @@ extension NotificationAdapter: InternalType
             case .default:
                 return UNNotificationSound.default
             case .custom(let name):
-                return UNNotificationSound(named: UNNotificationSoundName(name))
+                return UNNotificationSound(named: UNNotificationSoundName(name.rawValue))
             case .critical(let name):
                 if let name = name
                 {
-                    return UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(name))
+                    return UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(name.rawValue))
                 }
                 else
                 {
