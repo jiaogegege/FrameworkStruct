@@ -11,6 +11,13 @@
 		EA00C86F27C213550034C95B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00C86E27C213550034C95B /* NotificationManager.swift */; };
 		EA00C87627C239760034C95B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA00C87827C239760034C95B /* InfoPlist.strings */; };
 		EA00C87F27C272D60034C95B /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00C87E27C272D60034C95B /* ApplicationManager.swift */; };
+		EA00C89227C339CA0034C95B /* sound_竖琴铃声.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C88E27C339C90034C95B /* sound_竖琴铃声.caf */; };
+		EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C88F27C339C90034C95B /* sound_蛐蛐叫.caf */; };
+		EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89027C339C90034C95B /* sound_搞怪.caf */; };
+		EA00C89527C339CA0034C95B /* sound_烟花长爆.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89127C339CA0034C95B /* sound_烟花长爆.caf */; };
+		EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA00C89927C379810034C95B /* CoreLocation.framework */; };
+		EA00C89C27C379930034C95B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA00C89B27C379920034C95B /* MobileCoreServices.framework */; };
+		EA00C8A527C39A6E0034C95B /* miku_1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA00C8A427C39A6E0034C95B /* miku_1.jpeg */; };
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
@@ -566,6 +573,15 @@
 		EA00C87727C239760034C95B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EA00C87A27C239780034C95B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EA00C87E27C272D60034C95B /* ApplicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationManager.swift; sourceTree = "<group>"; };
+		EA00C88E27C339C90034C95B /* sound_竖琴铃声.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_竖琴铃声.caf"; sourceTree = "<group>"; };
+		EA00C88F27C339C90034C95B /* sound_蛐蛐叫.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_蛐蛐叫.caf"; sourceTree = "<group>"; };
+		EA00C89027C339C90034C95B /* sound_搞怪.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_搞怪.caf"; sourceTree = "<group>"; };
+		EA00C89127C339CA0034C95B /* sound_烟花长爆.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sound_烟花长爆.caf"; sourceTree = "<group>"; };
+		EA00C89727C33A1E0034C95B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA00C89927C379810034C95B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EA00C89B27C379920034C95B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		EA00C89F27C39A330034C95B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA00C8A427C39A6E0034C95B /* miku_1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = miku_1.jpeg; sourceTree = "<group>"; };
 		EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
@@ -1449,6 +1465,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */,
+				EA00C89C27C379930034C95B /* MobileCoreServices.framework in Frameworks */,
 				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
 				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
 				EA3337D62797DA8800612DC3 /* SystemConfiguration.framework in Frameworks */,
@@ -1460,6 +1478,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA00C88227C336A50034C95B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				EA00C89727C33A1E0034C95B /* README.md */,
+				EA00C89027C339C90034C95B /* sound_搞怪.caf */,
+				EA00C88F27C339C90034C95B /* sound_蛐蛐叫.caf */,
+				EA00C88E27C339C90034C95B /* sound_竖琴铃声.caf */,
+				EA00C89127C339CA0034C95B /* sound_烟花长爆.caf */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		EA00C89E27C39A180034C95B /* BigImages */ = {
+			isa = PBXGroup;
+			children = (
+				EA00C89F27C39A330034C95B /* README.md */,
+				EA00C8A427C39A6E0034C95B /* miku_1.jpeg */,
+			);
+			path = BigImages;
+			sourceTree = "<group>";
+		};
 		EA0E67A527B49F8B00A11C20 /* NSString+DES */ = {
 			isa = PBXGroup;
 			children = (
@@ -2252,13 +2291,13 @@
 			path = WebCore;
 			sourceTree = "<group>";
 		};
-		EA3E8C3427B784B6006A2715 /* lottie */ = {
+		EA3E8C3427B784B6006A2715 /* lotties */ = {
 			isa = PBXGroup;
 			children = (
 				EA3E8C3727B784E1006A2715 /* README.md */,
 				EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */,
 			);
-			path = lottie;
+			path = lotties;
 			sourceTree = "<group>";
 		};
 		EA52493C27A3E43B002E3616 /* Datas */ = {
@@ -2424,6 +2463,8 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA00C89B27C379920034C95B /* MobileCoreServices.framework */,
+				EA00C89927C379810034C95B /* CoreLocation.framework */,
 				EA83FFF5279D9833000F6473 /* CoreGraphics.framework */,
 				EA3337D52797DA8800612DC3 /* SystemConfiguration.framework */,
 				EA75BB482792ABA100910B4C /* libz.tbd */,
@@ -3110,7 +3151,9 @@
 		EADB009127623C06001B7223 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EA3E8C3427B784B6006A2715 /* lottie */,
+				EA00C89E27C39A180034C95B /* BigImages */,
+				EA00C88227C336A50034C95B /* Sounds */,
+				EA3E8C3427B784B6006A2715 /* lotties */,
 				EADB008327623B5A001B7223 /* Assets.xcassets */,
 				EA00C87827C239760034C95B /* InfoPlist.strings */,
 				EADB00C727623F29001B7223 /* Localizable.strings */,
@@ -3481,6 +3524,7 @@
 				EADB008727623B5A001B7223 /* LaunchScreen.storyboard in Resources */,
 				EA00C87627C239760034C95B /* InfoPlist.strings in Resources */,
 				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
+				EA00C89227C339CA0034C95B /* sound_竖琴铃声.caf in Resources */,
 				EA3337DD2797E6AA00612DC3 /* LICENSE in Resources */,
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
@@ -3489,14 +3533,18 @@
 				EA3E8C2627B782C4006A2715 /* pop-tvos-Info.plist in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
+				EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */,
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
+				EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EA3E8C2027B782C4006A2715 /* pop-ios-Info.plist in Resources */,
+				EA00C89527C339CA0034C95B /* sound_烟花长爆.caf in Resources */,
 				EA3E8C3627B784C7006A2715 /* BLE_img_gear.json in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
 				EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */,
 				EA3337E02797E6AA00612DC3 /* README.md in Resources */,
+				EA00C8A527C39A6E0034C95B /* miku_1.jpeg in Resources */,
 				EA73A14E27BC8E6900980C26 /* Mine.storyboard in Resources */,
 				EADB008227623B59001B7223 /* Main.storyboard in Resources */,
 			);

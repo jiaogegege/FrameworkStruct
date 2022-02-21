@@ -133,7 +133,7 @@ func smallerThanIphone8() -> Bool
 let kiOSVersion = (UIDevice.current.systemVersion as NSString).floatValue
 
 ///是否可用某个版本的系统
-func sysAvailable(_ ver: Float) -> Bool
+func iOSAvailable(_ ver: Float) -> Bool
 {
     if kiOSVersion >= ver
     {

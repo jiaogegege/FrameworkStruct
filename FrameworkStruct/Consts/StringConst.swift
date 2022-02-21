@@ -68,6 +68,12 @@ extension String: ConstantPropertyProtocol
     static let selectFromPhotoLibiary = localized("selectFromPhotoLibiary")
     //拍照
     static let takePhotoWithCamera = localized("takePhotoWithCamera")
+    //新消息
+    static let newMsg = localized("newMsg")
+    //发送
+    static let send = localized("send")
+    //输入消息
+    static let inputMessage = localized("inputMessage")
     
     //MARK: Toast文案
     //网络错误

@@ -138,6 +138,17 @@ extension SandBoxAccessor: ExternalInterface
         return docPath!
     }
     
+    ///获取一个Documents下的目录如果不存在则创建
+    func getDocumentDirWith(pathComponent: String) -> String
+    {
+        let dirPath = (self.getDocumentDirectory() as NSString).appendingPathComponent(pathComponent)
+        if !self.isExist(path: dirPath) //不存在则创建
+        {
+            let _ = self.createDir(path: dirPath)
+        }
+        return dirPath
+    }
+    
     ///获得Library路径
     func getLibraryDirectory() -> String
     {
@@ -146,12 +157,34 @@ extension SandBoxAccessor: ExternalInterface
         return libPath!
     }
     
+    ///获取一个Library下的目录如果不存在则创建
+    func getLibraryDirWith(pathComponent: String) -> String
+    {
+        let dirPath = (self.getLibraryDirectory() as NSString).appendingPathComponent(pathComponent)
+        if !self.isExist(path: dirPath) //不存在则创建
+        {
+            let _ = self.createDir(path: dirPath)
+        }
+        return dirPath
+    }
+    
     ///获取cache路径
     func getCacheDirectory() -> String
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let cachePath = paths.last
         return cachePath!
+    }
+    
+    ///获取一个cache下的目录如果不存在则创建
+    func getCacheDirWith(pathComponent: String) -> String
+    {
+        let dirPath = (self.getCacheDirectory() as NSString).appendingPathComponent(pathComponent)
+        if !self.isExist(path: dirPath) //不存在则创建
+        {
+            let _ = self.createDir(path: dirPath)
+        }
+        return dirPath
     }
     
     ///获取 Temp 的路径
@@ -170,18 +203,7 @@ extension SandBoxAccessor: ExternalInterface
         }
         return dirPath
     }
-    
-    ///获取一个Documents下的目录如果不存在则创建
-    func getDocumentDirWith(pathComponent: String) -> String
-    {
-        let dirPath = (self.getDocumentDirectory() as NSString).appendingPathComponent(pathComponent)
-        if !self.isExist(path: dirPath) //不存在则创建
-        {
-            let _ = self.createDir(path: dirPath)
-        }
-        return dirPath
-    }
-    
+
     ///获取数据库文件路径
     func getDatabasePath() -> String
     {
@@ -204,6 +226,12 @@ extension SandBoxAccessor: ExternalInterface
     func getTempDownloadDir() -> String
     {
         return self.getTempDirWith(pathComponent: sdDownloadTempDir)
+    }
+    
+    ///获取沙盒音频文件目录
+    func getSoundsDir() -> String
+    {
+        return self.getLibraryDirWith(pathComponent: sdSoundsDir)
     }
     
     /******************** 文件夹路径访问 Section End *******************/

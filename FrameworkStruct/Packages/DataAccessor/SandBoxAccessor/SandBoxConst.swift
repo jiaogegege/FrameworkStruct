@@ -15,3 +15,6 @@ let sdDatabaseOriginSQLFile = "db_table.sql"    //创建数据库表结构文件
 
 //下载临时目录
 let sdDownloadTempDir = "download_temp"
+
+//沙盒中音频文件目录
+let sdSoundsDir = "Sounds"

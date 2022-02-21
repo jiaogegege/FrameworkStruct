@@ -34,6 +34,9 @@ failure = "Failure";
 iKnown = "I known";
 selectFromPhotoLibiary = "Select From Photo Libiary";
 takePhotoWithCamera = "Take Photo With Camera";
+newMsg = "New Message";
+send = "Send";
+inputMessage = "Input Message";
 
 /**
  * Toast文案

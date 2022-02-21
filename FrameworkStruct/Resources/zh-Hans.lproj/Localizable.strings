@@ -34,6 +34,9 @@ failure = "失败";
 iKnown = "我知道了";
 selectFromPhotoLibiary = "从手机相册选择";
 takePhotoWithCamera = "拍照";
+newMsg = "新消息";
+send = "发送";
+inputMessage = "请输入消息";
 
 /**
  * Toast文案
