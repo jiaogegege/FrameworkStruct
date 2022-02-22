@@ -105,6 +105,8 @@
 		EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */; };
 		EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */; };
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
+		EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865227C4ADBF00B63C8E /* AudioConst.swift */; };
+		EA20865727C4B16900B63C8E /* VideoConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865627C4B16900B63C8E /* VideoConst.swift */; };
 		EA283F5627953F1D001A2710 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA283F5527953F1D001A2710 /* SimpleTableViewController.swift */; };
 		EA283F582795465A001A2710 /* SimpleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA283F572795465A001A2710 /* SimpleTableView.swift */; };
 		EA3337C82797ABC600612DC3 /* SandBoxConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3337C72797ABC600612DC3 /* SandBoxConst.swift */; };
@@ -675,6 +677,8 @@
 		EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintTestViewController.swift; sourceTree = "<group>"; };
 		EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTopSelectBar.swift; sourceTree = "<group>"; };
 		EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxAccessor.swift; sourceTree = "<group>"; };
+		EA20865227C4ADBF00B63C8E /* AudioConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioConst.swift; sourceTree = "<group>"; };
+		EA20865627C4B16900B63C8E /* VideoConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConst.swift; sourceTree = "<group>"; };
 		EA283F5527953F1D001A2710 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
 		EA283F572795465A001A2710 /* SimpleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableView.swift; sourceTree = "<group>"; };
 		EA3337C72797ABC600612DC3 /* SandBoxConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxConst.swift; sourceTree = "<group>"; };
@@ -3193,6 +3197,8 @@
 				EADB00E22762410D001B7223 /* StringConst.swift */,
 				EADB00E32762410D001B7223 /* ColorConst.swift */,
 				EADB00E12762410C001B7223 /* ImageConst.swift */,
+				EA20865227C4ADBF00B63C8E /* AudioConst.swift */,
+				EA20865627C4B16900B63C8E /* VideoConst.swift */,
 				EA9A4A982780349500170BB3 /* OCConst.h */,
 			);
 			path = Consts;
@@ -3801,6 +3807,7 @@
 				EA3E8B0227B77CEA006A2715 /* KeypathSearchable.swift in Sources */,
 				EA3E8B2327B77CEA006A2715 /* Transform.swift in Sources */,
 				EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */,
+				EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */,
 				EA3E8AFD27B77CEA006A2715 /* GradientStrokeNode.swift in Sources */,
 				EA3E8B1A27B77CEA006A2715 /* Star.swift in Sources */,
 				EA3E8AC327B77CEA006A2715 /* ShapeLayer.swift in Sources */,
@@ -3812,6 +3819,7 @@
 				EA3E8AFF27B77CEA006A2715 /* NodeProperty.swift in Sources */,
 				EA3E8AB427B77CEA006A2715 /* ColorValueProvider.swift in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
+				EA20865727C4B16900B63C8E /* VideoConst.swift in Sources */,
 				EA92257C276B3E7C00192E2E /* SVProgressAnimatedView.m in Sources */,
 				EAC8A85327625D490088293F /* UIImage+Transform.m in Sources */,
 				EA3E8B3527B77CEA006A2715 /* CGFloatExtensions.swift in Sources */,

@@ -9,6 +9,8 @@
  * 系统推送通知适配器
  * 1. 本地推送
  * 2. 远程推送
+ * 3. 推送action、category定制
+ * 4. 自定义推送UI，未开发...
  */
 import UIKit
 import UserNotifications
@@ -112,7 +114,7 @@ class NotificationAdapter: OriginAdapter
     //Apple 引入了可以交互的通知，这是通过将一簇 action 放到一个 category 中，将这个 category 进行注册，最后在发送通知时将通知的 category 设置为要使用的 category 来实现的
     fileprivate func registerNotificationCategory()
     {
-        notificationCenter.setNotificationCategories([NAActionCategory.replyMsg.getCatetory(), NAActionCategory.confirmCancel.getCatetory()])
+        notificationCenter.setNotificationCategories([NAActionCategoryType.replyMsg.getCatetory(), NAActionCategoryType.confirmCancel.getCatetory()])
     }
     
     //注册远程推送
@@ -155,7 +157,7 @@ class NotificationAdapter: OriginAdapter
         let categoryIdentifier = content.categoryIdentifier     //action类别id
         //根据action category做一些操作
         switch categoryIdentifier {
-        case NAActionCategory.replyMsg.getId(): //回复消息
+        case NAActionCategoryType.replyMsg.getId(): //回复消息
             //获取通知中的消息
             if response.isKind(of: UNTextInputNotificationResponse.self)
             {
@@ -166,7 +168,7 @@ class NotificationAdapter: OriginAdapter
                     delegate.notificationAdapterDidReplyMessage(notification: notification, text: text)
                 }
             }
-        case NAActionCategory.confirmCancel.getId():    //确定取消
+        case NAActionCategoryType.confirmCancel.getId():    //确定取消
             if actionIdentifier == NAActionType.confirm.getId() //点击确定
             {
                 if let delegate = delegate
@@ -299,8 +301,8 @@ extension NotificationAdapter: InternalType
     ///提示音类型
     enum NASoundType {
         case `default`  //系统默认提示音
-        case custom(NASoundName)   //自定义普通提示音，name：音频名
-        case critical(NASoundName? = nil)   //重要信息提示音，name为nil则返回系统默认
+        case custom(UNNotificationSoundName.SoundName)   //自定义普通提示音，name：音频名
+        case critical(UNNotificationSoundName.SoundName? = nil)   //重要信息提示音，name为nil则返回系统默认
         
         ///返回提示音
         func getSound() -> UNNotificationSound
@@ -322,15 +324,7 @@ extension NotificationAdapter: InternalType
             }
         }
     }
-    
-    ///可选自定义提示音，根据实际项目需求修改
-    enum NASoundName: String {
-        case sound_搞怪 = "sound_搞怪.caf"
-        case sound_蛐蛐叫 = "sound_蛐蛐叫.caf"
-        case sound_竖琴铃声 = "sound_竖琴铃声.caf"
-        case sound_烟花长爆 = "sound_烟花长爆.caf"
-    }
-    
+
     ///附件类型
     enum NAAttachmentType {
         case local(String)  //本地bundle文件
@@ -374,6 +368,7 @@ extension NotificationAdapter: InternalType
     }
     
     ///通知action所有类型，根据实际需求定义
+    ///有可能某一个action出现在多个category中，所以判断的时候要先判断category在判断action
     enum NAActionType {
         case input(String, String, String)  //有一个输入框和一个按钮，参数：title/placeholder/inputBtnTitle
         case button(String)     //有一个普通按钮，参数：buttonTitle
@@ -413,7 +408,7 @@ extension NotificationAdapter: InternalType
     
     ///通知action category分组
     ///具体的分组要根据实际需求设计，每一个分组只能针对某一个特定的功能，不能一个分组对应多个功能，比如：`replyMsg`只能用作回复消息，而不能又用来输入备忘录，如果要输入备忘录，应该新建一个分组
-    enum NAActionCategory {
+    enum NAActionCategoryType {
         case replyMsg   //回复消息
         case confirmCancel  //确定取消
         
@@ -440,7 +435,6 @@ extension NotificationAdapter: InternalType
                 let cancel = NAActionType.cancel.getAction(options: [.authenticationRequired, .foreground])
                 return UNNotificationCategory(identifier: self.getId(), actions: [confirm, cancel], intentIdentifiers: [], options: [.customDismissAction, .allowInCarPlay, .hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle])
             }
-            
         }
     }
     
@@ -499,6 +493,7 @@ extension NotificationAdapter: ExternalInterface
     ///attachmentOptions:UNNotificationAttachmentOptionsTypeHintKey（附件类型:kUTTypeJPEG，默认从扩展名推测）/UNNotificationAttachmentOptionsThumbnailHiddenKey（是否隐藏附件缩略图，默认NO）/UNNotificationAttachmentOptionsThumbnailClippingRectKey（附件剪切rect,rect范围0-1）/UNNotificationAttachmentOptionsThumbnailTimeKey（动图或视频预览帧或秒数）
     ///launchImageName：点击通知启动图(本地图片)
     ///trigger:通知触发方式
+    ///identifier:目前identifier是一个随机字符串，如果需要记录相关信息，那么根据需求定义并记录
     ///completion:添加通知完成的操作
     func createLocalNotification(title: String, subtitle: String? = nil, body: String,
                                  sound: NASoundType = .default,
@@ -506,9 +501,10 @@ extension NotificationAdapter: ExternalInterface
                                  audioName: NAAttachmentType? = nil,
                                  videoName: NAAttachmentType? = nil,
                                  attachmentOptions: Dictionary<String, Any>? = nil,
-                                 category: NAActionCategory? = nil,
+                                 category: NAActionCategoryType? = nil,
                                  launchImageName: String? = nil,
                                  trigger: NATriggerType,
+                                 identifier: String = g_uuidString(),
                                  completion: ((_ error: Error?) -> Void)? = nil)
     {
         let content = UNMutableNotificationContent()
@@ -561,7 +557,7 @@ extension NotificationAdapter: ExternalInterface
         //触发方式
         let trigger = trigger.getTrigger()
         //通知请求
-        let request = UNNotificationRequest(identifier: g_uuidString(), content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         notificationCenter.add(request) { (error) in
             if let error = error
             {
