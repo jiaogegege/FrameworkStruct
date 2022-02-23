@@ -10,11 +10,20 @@
  */
 import Foundation
 
+///一分钟的秒数
+let tSecondsInMinute: TimeInterval = 60
+
 ///一小时的秒数
 let tSecondsInHour: TimeInterval = 3600
 
 ///一天的秒数
 let tSecondsInDay: TimeInterval = 86400
+
+///一周的秒数
+let tSecondsInWeek: TimeInterval = 604800
+
+///30天的秒数
+let tSecondsIn30Days: TimeInterval = 2592000
 
 ///一年的秒数，非闰年
 let tSecondsInYear: TimeInterval = 31536000
@@ -75,4 +84,16 @@ func isTimePasted(timeStr: String, criticalTimeStr: String?) -> Bool
     }
     
     return true
+}
+
+///在某个时间基础上增加一定秒数
+func dateByAdd(interal: TimeInterval, baseDate: Date) -> Date
+{
+    return baseDate.addingTimeInterval(interal)
+}
+
+///当前时间往后一定时间
+func nowAfter(_ interval: TimeInterval) -> Date
+{
+    return dateByAdd(interal: interval, baseDate: Date())
 }

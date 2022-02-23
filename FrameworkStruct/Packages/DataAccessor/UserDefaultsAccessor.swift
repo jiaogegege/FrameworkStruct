@@ -52,6 +52,14 @@ class UserDefaultsAccessor: OriginAccessor
     }
     
     /**
+     * 读取字符串数组
+     */
+    func readStringArray(key: UDAKeyType) -> [String]?
+    {
+        return ud.stringArray(forKey: key.rawValue)
+    }
+    
+    /**
      * 读取整数
      */
     func readInt(key: UDAKeyType) -> Int
@@ -110,5 +118,6 @@ extension UserDefaultsAccessor: InternalType
     {
         case deviceId   //设备唯一id，随机生成
         case currentTheme   //当前主题key
+        case calendarTitleList   //本地创建的自定义日历标题数组
     }
 }

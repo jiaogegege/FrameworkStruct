@@ -16,7 +16,6 @@
 		EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89027C339C90034C95B /* sound_搞怪.caf */; };
 		EA00C89527C339CA0034C95B /* sound_烟花长爆.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89127C339CA0034C95B /* sound_烟花长爆.caf */; };
 		EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA00C89927C379810034C95B /* CoreLocation.framework */; };
-		EA00C89C27C379930034C95B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA00C89B27C379920034C95B /* MobileCoreServices.framework */; };
 		EA00C8A527C39A6E0034C95B /* miku_1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA00C8A427C39A6E0034C95B /* miku_1.jpeg */; };
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
@@ -107,6 +106,11 @@
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
 		EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865227C4ADBF00B63C8E /* AudioConst.swift */; };
 		EA20865727C4B16900B63C8E /* VideoConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865627C4B16900B63C8E /* VideoConst.swift */; };
+		EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20865927C5276700B63C8E /* EventKit.framework */; };
+		EA20865C27C5276700B63C8E /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20865A27C5276700B63C8E /* EventKitUI.framework */; };
+		EA20866427C527C600B63C8E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20865E27C5277100B63C8E /* UserNotifications.framework */; };
+		EA20866527C527C600B63C8E /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20865D27C5277100B63C8E /* UserNotificationsUI.framework */; };
+		EA20866927C534F700B63C8E /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20866827C534F700B63C8E /* CoreServices.framework */; };
 		EA283F5627953F1D001A2710 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA283F5527953F1D001A2710 /* SimpleTableViewController.swift */; };
 		EA283F582795465A001A2710 /* SimpleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA283F572795465A001A2710 /* SimpleTableView.swift */; };
 		EA3337C82797ABC600612DC3 /* SandBoxConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3337C72797ABC600612DC3 /* SandBoxConst.swift */; };
@@ -679,6 +683,11 @@
 		EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxAccessor.swift; sourceTree = "<group>"; };
 		EA20865227C4ADBF00B63C8E /* AudioConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioConst.swift; sourceTree = "<group>"; };
 		EA20865627C4B16900B63C8E /* VideoConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConst.swift; sourceTree = "<group>"; };
+		EA20865927C5276700B63C8E /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		EA20865A27C5276700B63C8E /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		EA20865D27C5277100B63C8E /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		EA20865E27C5277100B63C8E /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		EA20866827C534F700B63C8E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		EA283F5527953F1D001A2710 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
 		EA283F572795465A001A2710 /* SimpleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableView.swift; sourceTree = "<group>"; };
 		EA3337C72797ABC600612DC3 /* SandBoxConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxConst.swift; sourceTree = "<group>"; };
@@ -1469,8 +1478,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA20866427C527C600B63C8E /* UserNotifications.framework in Frameworks */,
+				EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */,
+				EA20865C27C5276700B63C8E /* EventKitUI.framework in Frameworks */,
 				EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */,
-				EA00C89C27C379930034C95B /* MobileCoreServices.framework in Frameworks */,
+				EA20866527C527C600B63C8E /* UserNotificationsUI.framework in Frameworks */,
+				EA20866927C534F700B63C8E /* CoreServices.framework in Frameworks */,
 				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
 				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
 				EA3337D62797DA8800612DC3 /* SystemConfiguration.framework in Frameworks */,
@@ -2467,6 +2480,11 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA20866827C534F700B63C8E /* CoreServices.framework */,
+				EA20865E27C5277100B63C8E /* UserNotifications.framework */,
+				EA20865D27C5277100B63C8E /* UserNotificationsUI.framework */,
+				EA20865927C5276700B63C8E /* EventKit.framework */,
+				EA20865A27C5276700B63C8E /* EventKitUI.framework */,
 				EA00C89B27C379920034C95B /* MobileCoreServices.framework */,
 				EA00C89927C379810034C95B /* CoreLocation.framework */,
 				EA83FFF5279D9833000F6473 /* CoreGraphics.framework */,

@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -45,6 +47,8 @@
 	<string>框架结构想要访问您的相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>框架结构想要访问您的相册</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>框架结构想要访问您的提醒事项</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

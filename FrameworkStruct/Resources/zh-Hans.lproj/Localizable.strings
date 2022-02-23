@@ -12,6 +12,11 @@
  */
 
 /**
+ * 全局配置信息
+ */
+appName = "框架结构";
+
+/**
  * 项目中各种标题
  */
 homeVC = "主页";
@@ -41,7 +46,15 @@ inputMessage = "请输入消息";
 /**
  * Toast文案
  */
+
+/**
+ * 通用错误信息
+ */
+unknownError = "未知错误";
 networkError = "网络错误";
+withoutAccessToPush = "未开启推送权限";
+withoutCalendar = "未开启日历权限";
+withoutReminder = "未开启提醒事项权限";
 
 /**
  * 网络状态信息

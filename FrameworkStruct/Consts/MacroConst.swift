@@ -23,6 +23,15 @@ let gProjectName = "FrameworkStruct"
 //APPID
 let gAppId = "1476239189"
 
+//App名称
+let gAppName: String = Bundle.main.infoDictionary!["CFBundleDisplayName"] as! String
+
+//app版本
+let gAppVersion: String = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+
+//app build版本
+let gAppBuild: String = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+
 //appstore下载地址
 let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
@@ -49,6 +58,39 @@ enum FSNotification: String
         }
     }
     
+}
+
+
+//MARK: 全局通用错误和异常信息定义
+enum FSError: Int, Error {
+    case unknownError = -1                   //未知错误，如果没有其他任何匹配的错误，那么使用这个
+    
+    case networkError = 10001                //网络错误
+    case noPushError = 10002                 //没有推送权限
+    case noCalendarError = 10003             //没有日历权限
+    case noReminderError = 10004             //没有提醒事项权限
+    
+    //获取错误文案
+    var desc: String {
+        switch self {
+        case .unknownError:
+            return String.unknownError
+        case .networkError:
+            return String.networkError
+        case .noPushError:
+            return String.withoutAccessToPush
+        case .noCalendarError:
+            return String.withoutCalendar
+        case .noReminderError:
+            return String.withoutReminder
+        }
+    }
+    
+    //获取NSError对象
+    func getError() -> NSError
+    {
+        return NSError(domain: NSCocoaErrorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: self.desc, NSLocalizedFailureReasonErrorKey: self.desc])
+    }
 }
 
 

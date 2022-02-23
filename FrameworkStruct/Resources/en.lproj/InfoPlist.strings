@@ -12,6 +12,7 @@
  */
 
 //app桌面显示名称
+CFBundleName = "FrameworkStruct";
 CFBundleDisplayName = "FrameworkStruct";
 
 NSCameraUsageDescription = "FrameworkStruct want to access your camera";
@@ -20,6 +21,7 @@ NSPhotoLibraryAddUsageDescription = "FrameworkStruct want to access your photo l
 NSPhotoLibraryUsageDescription = "FrameworkStruct want to access your photo library";
 NSMicrophoneUsageDescription = "FrameworkStruct want to access your microphone";
 NSCalendarsUsageDescription = "FrameworkStruct want to access your calendar";
+NSRemindersUsageDescription = "FrameworkStruct want to access your reminder";
 NSBluetoothPeripheralUsageDescription = "FrameworkStruct need bluetooth to connect devices";
 NSBluetoothAlwaysUsageDescription = "FrameworkStruct need bluetooth to connect devices";
 NSLocationAlwaysUsageDescription = "FrameworkStruct want to access your location information";

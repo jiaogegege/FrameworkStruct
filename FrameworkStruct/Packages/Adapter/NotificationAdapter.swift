@@ -95,7 +95,7 @@ class NotificationAdapter: OriginAdapter
             }
             if isGranted
             {
-                self?.registerNotificationCategory()
+                NAActionCategoryType.registerNotificationCategory(center: self!.notificationCenter)
                 self?.registerForRemoteNotification()
             }
             
@@ -108,13 +108,6 @@ class NotificationAdapter: OriginAdapter
                 }
             }
         }
-    }
-    
-    //注册通知类别
-    //Apple 引入了可以交互的通知，这是通过将一簇 action 放到一个 category 中，将这个 category 进行注册，最后在发送通知时将通知的 category 设置为要使用的 category 来实现的
-    fileprivate func registerNotificationCategory()
-    {
-        notificationCenter.setNotificationCategories([NAActionCategoryType.replyMsg.getCatetory(), NAActionCategoryType.confirmCancel.getCatetory()])
     }
     
     //注册远程推送
@@ -299,7 +292,8 @@ extension NotificationAdapter: DelegateProtocol, UNUserNotificationCenterDelegat
 extension NotificationAdapter: InternalType
 {
     ///提示音类型
-    enum NASoundType {
+    enum NASoundType
+    {
         case `default`  //系统默认提示音
         case custom(UNNotificationSoundName.SoundName)   //自定义普通提示音，name：音频名
         case critical(UNNotificationSoundName.SoundName? = nil)   //重要信息提示音，name为nil则返回系统默认
@@ -326,7 +320,8 @@ extension NotificationAdapter: InternalType
     }
 
     ///附件类型
-    enum NAAttachmentType {
+    enum NAAttachmentType
+    {
         case local(String)  //本地bundle文件
         case remote(String) //网络资源
         
@@ -367,9 +362,35 @@ extension NotificationAdapter: InternalType
         }
     }
     
+    ///通知触发方式
+    enum NATriggerType
+    {
+        case after(TimeInterval, Bool)    //延时触发，是否重复
+        case date(DateComponents, Bool)             //固定日期触发，DateComponents根据需要定制，比如每小时重复(minute/second)、每天重复(hour/minute)、每周重复(weakday/hour)、每月重复(month/day)等；是否重复
+        case location(Double, Double, Double, Bool, Bool, Bool)   //进入或离开某个区域触发，参数：latitude(纬度)/longitude(经度)/radius(半径)/进入区域是否提醒/离开区域是否提醒，是否重复
+        
+        ///获取触发器
+        func getTrigger() -> UNNotificationTrigger
+        {
+            switch self {
+            case .after(let inter, let repeats):
+                return UNTimeIntervalNotificationTrigger(timeInterval: inter, repeats: repeats)
+            case .date(let da, let repeats):
+                return UNCalendarNotificationTrigger(dateMatching: da, repeats: repeats)
+            case .location(let latitude, let longitude, let radius, let enter, let exit, let repeats):
+                let center = CLLocationCoordinate2DMake(latitude, longitude)
+                let region = CLCircularRegion(center: center, radius: radius, identifier: "FS_location_\(latitude)_\(longitude)_\(radius)")
+                region.notifyOnEntry = enter
+                region.notifyOnExit = exit
+                return UNLocationNotificationTrigger(region: region, repeats: repeats)
+            }
+        }
+    }
+    
     ///通知action所有类型，根据实际需求定义
     ///有可能某一个action出现在多个category中，所以判断的时候要先判断category在判断action
-    enum NAActionType {
+    enum NAActionType
+    {
         case input(String, String, String)  //有一个输入框和一个按钮，参数：title/placeholder/inputBtnTitle
         case button(String)     //有一个普通按钮，参数：buttonTitle
         case confirm        //确定按钮，参数：buttonConfirm
@@ -408,7 +429,8 @@ extension NotificationAdapter: InternalType
     
     ///通知action category分组
     ///具体的分组要根据实际需求设计，每一个分组只能针对某一个特定的功能，不能一个分组对应多个功能，比如：`replyMsg`只能用作回复消息，而不能又用来输入备忘录，如果要输入备忘录，应该新建一个分组
-    enum NAActionCategoryType {
+    enum NAActionCategoryType
+    {
         case replyMsg   //回复消息
         case confirmCancel  //确定取消
         
@@ -436,29 +458,13 @@ extension NotificationAdapter: InternalType
                 return UNNotificationCategory(identifier: self.getId(), actions: [confirm, cancel], intentIdentifiers: [], options: [.customDismissAction, .allowInCarPlay, .hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle])
             }
         }
-    }
-    
-    ///通知触发方式
-    enum NATriggerType {
-        case after(TimeInterval, Bool)    //延时触发，是否重复
-        case date(DateComponents, Bool)             //固定日期触发，DateComponents根据需要定制，比如每小时重复(minute/second)、每天重复(hour/minute)、每周重复(weakday/hour)、每月重复(month/day)等；是否重复
-        case location(Double, Double, Double, Bool, Bool, Bool)   //进入或离开某个区域触发，参数：latitude(纬度)/longitude(经度)/radius(半径)/进入区域是否提醒/离开区域是否提醒，是否重复
         
-        ///获取触发器
-        func getTrigger() -> UNNotificationTrigger
+        
+        //注册通知类别，新增category的枚举类型后，需要在这里注册
+        //Apple 引入了可以交互的通知，这是通过将一簇 action 放到一个 category 中，将这个 category 进行注册，最后在发送通知时将通知的 category 设置为要使用的 category 来实现的
+        static func registerNotificationCategory(center: UNUserNotificationCenter)
         {
-            switch self {
-            case .after(let inter, let repeats):
-                return UNTimeIntervalNotificationTrigger(timeInterval: inter, repeats: repeats)
-            case .date(let da, let repeats):
-                return UNCalendarNotificationTrigger(dateMatching: da, repeats: repeats)
-            case .location(let latitude, let longitude, let radius, let enter, let exit, let repeats):
-                let center = CLLocationCoordinate2DMake(latitude, longitude)
-                let region = CLCircularRegion(center: center, radius: radius, identifier: "FS_location_\(latitude)_\(longitude)_\(radius)")
-                region.notifyOnEntry = enter
-                region.notifyOnExit = exit
-                return UNLocationNotificationTrigger(region: region, repeats: repeats)
-            }
+            center.setNotificationCategories([NAActionCategoryType.replyMsg.getCatetory(), NAActionCategoryType.confirmCancel.getCatetory()])
         }
     }
     
@@ -507,6 +513,18 @@ extension NotificationAdapter: ExternalInterface
                                  identifier: String = g_uuidString(),
                                  completion: ((_ error: Error?) -> Void)? = nil)
     {
+        //判断是否可以使用推送
+        guard canPush else {
+            let err = FSError.noPushError
+//            FSLog("push notification: \(err.localizedDescription)")
+            if let comp = completion
+            {
+                
+                comp(err)
+            }
+            return
+        }
+        
         let content = UNMutableNotificationContent()
         //标题
         content.title = NSString.localizedUserNotificationString(forKey: title, arguments: nil)

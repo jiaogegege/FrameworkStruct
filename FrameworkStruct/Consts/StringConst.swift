@@ -22,6 +22,13 @@ extension String
     //iPhoneX资源文件后缀
     static let bangSuffix = "_bang"
     
+    //"iCloud"
+    static let icloud = "iCloud"
+    
+    
+    
+    
+    
     //获取对应的iPhoneX下的文件名
     func bangString() -> String
     {
@@ -34,6 +41,8 @@ extension String
 extension String: ConstantPropertyProtocol
 {
     //MARK: 项目中各种标题
+    //app名称
+    static let appName = localized("appName")
     //主页
     static let homeVC = localized("homeVC")
     //我的
@@ -76,8 +85,18 @@ extension String: ConstantPropertyProtocol
     static let inputMessage = localized("inputMessage")
     
     //MARK: Toast文案
+    
+    //MARK: 通用错误信息
+    //未知错误
+    static let unknownError = localized("unknownError")
     //网络错误
     static let networkError = localized("networkError")
+    //没有推送权限
+    static let withoutAccessToPush = localized("withoutAccessToPush")
+    //没有日历权限
+    static let withoutCalendar = localized("withoutCalendar")
+    //没有提醒事项权限
+    static let withoutReminder = localized("withoutReminder")
 
     //MARK: 网络错误信息
     static let networkUnavailable = localized("networkUnavailable")

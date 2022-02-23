@@ -12,6 +12,11 @@
  */
 
 /**
+ * 全局配置信息
+ */
+appName = "FrameworkStruct";
+
+/**
  * 项目中各种标题
  */
 homeVC = "Home";
@@ -41,7 +46,15 @@ inputMessage = "Input Message";
 /**
  * Toast文案
  */
+
+/**
+ * 通用错误信息
+ */
+unknownError = "Unknown Error";
 networkError = "Network Error";
+withoutAccessToPush = "Without Access To Push";
+withoutCalendar = "Without Access To Calendar";
+withoutReminder = "Without Access To Reminder";
 
 /**
  * 网络状态信息

@@ -179,26 +179,27 @@ enum HttpResponseHeaderKey: String {
     
 }
 
+///接口返回的状态码，包括http标准状态码和自定义状态码
 enum HttpStatusCode: Int
 {
-    case unavailable = 0    //网络不可用
+    case unavailable = 0                    //网络不可用
     
-    case dataParseError = 1    //数据解析错误，接口返回了数据，但是本地解析出错
+    case dataParseError = 1                 //数据解析错误，接口返回了数据，但是本地解析出错
     
-    case ok = 200           //正常
-    case created = 201      //已创建。成功请求并创建了新的资源
-    case accepted = 202     //已接受。已经接受请求，但未处理完成
+    case ok = 200                           //正常
+    case created = 201                      //已创建。成功请求并创建了新的资源
+    case accepted = 202                     //已接受。已经接受请求，但未处理完成
     
-    case notFound = 404     //资源未找到
-    case badRequest = 400   //请求失败
-    case needAuth = 401     //需要验证身份
-    case forbidden = 403    //服务器理解请求客户端的请求，但是拒绝执行此请求
-    case timeout = 408      //服务器等待客户端发送的请求时间过长，超时
+    case notFound = 404                     //资源未找到
+    case badRequest = 400                   //请求失败
+    case needAuth = 401                     //需要验证身份
+    case forbidden = 403                    //服务器理解请求客户端的请求，但是拒绝执行此请求
+    case timeout = 408                      //服务器等待客户端发送的请求时间过长，超时
     
-    case systemError = 500  //服务器错误
-    case noService = 501    //没有此服务
-    case badGetway = 502    //服务器连接失败
-    case serviceUnavailable = 503   //服务器暂时的无法处理客户端的请求
+    case systemError = 500                  //服务器错误
+    case noService = 501                    //没有此服务
+    case badGetway = 502                    //服务器连接失败
+    case serviceUnavailable = 503           //服务器暂时的无法处理客户端的请求
     
     ///获取错误信息
     func getErrorDesc() -> String

@@ -181,7 +181,7 @@ func g_getDeviceId() -> String
     else
     {
         let deviceId: String
-        if let devId = UIDevice.current.identifierForVendor?.uuidString
+        if let devId = kDeviceIdentifier
         {
             deviceId = devId.replacingOccurrences(of: "-", with: "_")
         }
