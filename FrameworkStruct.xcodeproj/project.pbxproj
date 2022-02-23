@@ -571,6 +571,7 @@
 		EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A97277B4AD900676268 /* DocumentMonitor.swift */; };
 		EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9B277B4BEE00676268 /* OriginHandler.swift */; };
 		EAF85A9F277B4D7500676268 /* HandlerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */; };
+		EAFA821227C6845800CA1598 /* WebAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFA821127C6845800CA1598 /* WebAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1471,6 +1472,7 @@
 		EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerMonitor.swift; sourceTree = "<group>"; };
 		EAF85AA4277B4F0100676268 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAF85AA5277B4FA300676268 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAFA821127C6845800CA1598 /* WebAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2816,6 +2818,7 @@
 				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
+				EAFA821127C6845800CA1598 /* WebAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -4087,6 +4090,7 @@
 				EA3E8B2527B77CEA006A2715 /* Marker.swift in Sources */,
 				EA99371B27994F6100480147 /* TABAnimatedCacheModel.m in Sources */,
 				EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */,
+				EAFA821227C6845800CA1598 /* WebAdapter.swift in Sources */,
 				EA11126827B3BE2C006D0B83 /* Concurrency.swift in Sources */,
 				EA3E8AC627B77CEA006A2715 /* BaseAnimationLayer.swift in Sources */,
 				EA3E8C2B27B782C4006A2715 /* POPGeometry.mm in Sources */,
