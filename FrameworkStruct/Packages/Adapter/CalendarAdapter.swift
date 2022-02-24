@@ -212,7 +212,7 @@ extension CalendarAdapter: InternalType
                 {
                     dateCom.setValue(mo + 1, for: .month)
                 }
-                return cal.date(from: dateCom) ?? nowAfter(Double(duration) * tSecondsIn30Days)
+                return cal.date(from: dateCom) ?? nowAfter(Double(duration) * tSecondsInMonth_30)
             case .year(let duration):
                 return nowAfter(Double(duration) * tSecondsInYear)
             }

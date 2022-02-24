@@ -22,14 +22,20 @@ let tSecondsInDay: TimeInterval = 86400
 ///一周的秒数
 let tSecondsInWeek: TimeInterval = 604800
 
+///28天的秒数
+let tSecondsInMonth_28: TimeInterval = 2419200
+///29天的秒数
+let tSecondsInMonth_29: TimeInterval = 2505600
 ///30天的秒数
-let tSecondsIn30Days: TimeInterval = 2592000
+let tSecondsInMonth_30: TimeInterval = 2592000
+///31天的秒数
+let tSecondsInMonth_31: TimeInterval = 2678400
 
 ///一年的秒数，非闰年
 let tSecondsInYear: TimeInterval = 31536000
 
 ///一年的秒数，闰年
-let tSecondsInLeapYear: TimeInterval = tSecondsInYear + tSecondsInDay
+let tSecondsInLeapYear: TimeInterval = 31622400
 
 
 ///日期字符串格式

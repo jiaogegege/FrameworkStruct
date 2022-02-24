@@ -15,6 +15,7 @@
 import UIKit
 import UserNotifications
 import UserNotificationsUI
+import CoreLocation
 
 
 ///推送通知适配器代理方法
