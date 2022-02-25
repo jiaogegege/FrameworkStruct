@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo]
+    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction]
 
     override func viewDidLoad() {
         g_after(interval: 0.001) {
@@ -98,6 +98,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         else if indexPath.row == 6  //动画演示
         {
             let vc = AnimationDemoViewController.getViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else if indexPath.row == 7  //h5交互
+        {
+            let vc = TestWebViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

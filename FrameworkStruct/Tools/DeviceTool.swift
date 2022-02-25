@@ -128,6 +128,9 @@ var kScreenHeight: CGFloat {
     return UIScreen.main.bounds.size.height
 }
 
+//全屏大小尺寸
+let kFullScreenRect: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
+
 //iPhone屏幕高度
 let kiPhone4Height: CGFloat = 480.0
 let kiPhone5Height: CGFloat = 568.0
@@ -136,11 +139,20 @@ let kiPhone8pHeight: CGFloat = 736.0
 let kiPhoneXHeight: CGFloat = 812.0
 
 //状态栏高度
-let kStatusHeight: CGFloat = kScreenHeight >= 812.0 ? 44.0 : 20.0
+var kStatusHeight: CGFloat {
+    if #available(iOS 13.0, *)
+    {
+        return g_getWindow().windowScene?.statusBarManager?.statusBarFrame.size.height ?? (kScreenHeight >= 812.0 ? 44.0 : 20.0)
+    }
+    else
+    {
+        return UIApplication.shared.statusBarFrame.size.height
+    }
+}
 //包含导航栏的安全高度
-let kTopHeight: CGFloat = kScreenHeight >= 812.0 ? 88.0 : 64.0
+let kSafeTopHeight: CGFloat = kStatusHeight + 44.0
 //底部安全高度
-let kBottomHeight: CGFloat = kScreenHeight >= 812.0 ? 34.0 : 0.0
+let kSafeBottomHeight: CGFloat = kScreenHeight >= 812.0 ? 34.0 : 0.0
 //适配iPhoneX横屏时，左边刘海高度
 let kLandscapeLeft: CGFloat = kScreenWidth >= 812.0 ? 34.0 : 0.0
 //适配iPhoneX横屏时，底部白条高度

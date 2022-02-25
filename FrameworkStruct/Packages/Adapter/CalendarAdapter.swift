@@ -258,7 +258,7 @@ extension CalendarAdapter: InternalType
     ///给事件添加闹钟的类型
     enum CAEventAlarmType {
         case absolute(Date)     //添加一个绝对时间
-        case relative(TimeInterval)     //添加一个相对时间
+        case relative(TimeInterval)     //添加一个相对时间，负数为提前
         
         case preFiveMinute      //提前5分钟提醒的闹钟
         case preOneMinute       //提前1分钟提醒

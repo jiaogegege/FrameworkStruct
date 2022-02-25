@@ -28,7 +28,7 @@ class ConstraintTestViewController: BasicViewController {
         self.view.addSubview(topLine)
         topLine.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(kTopHeight)
+            make.top.equalTo(kSafeTopHeight)
             make.height.equalTo(30)
         }
         

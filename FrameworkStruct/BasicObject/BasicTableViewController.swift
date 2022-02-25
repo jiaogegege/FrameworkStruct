@@ -57,6 +57,13 @@ class BasicTableViewController: UITableViewController
         }
     }
     
+    ///是否隐藏导航栏
+    var hideNavBar: Bool = false {
+        didSet {
+            setHideNavigationBar()
+        }
+    }
+    
     ///设置标题颜色
     var navTitleColor: UIColor = .black {
         didSet {
@@ -290,6 +297,12 @@ class BasicTableViewController: UITableViewController
                 self.navigationController?.navigationBar.shadowImage = nil
             }
         }
+    }
+    
+    //是否隐藏导航栏
+    fileprivate func setHideNavigationBar()
+    {
+        self.navigationController?.navigationBar.isHidden = self.hideNavBar
     }
     
     //设置导航标题颜色

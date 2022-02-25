@@ -61,6 +61,8 @@ extension String: ConstantPropertyProtocol
     static let layerShadow = localized("layerShadow")
     //动画演示
     static let animationDemo = localized("animationDemo")
+    //H5交互
+    static let webInteraction = localized("webInteraction")
     
     //MARK: 界面提示和按钮文案
     //确定

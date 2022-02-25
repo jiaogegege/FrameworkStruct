@@ -323,7 +323,7 @@ extension NotificationAdapter: InternalType
     ///附件类型
     enum NAAttachmentType
     {
-        case local(String)  //本地bundle文件
+        case local(String)  //本地文件
         case remote(String) //网络资源
         
         //获取url

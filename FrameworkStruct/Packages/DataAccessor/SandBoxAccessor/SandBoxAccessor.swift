@@ -203,6 +203,25 @@ extension SandBoxAccessor: ExternalInterface
         }
         return dirPath
     }
+    
+    ///获取一个bundle中指定文件名的文件路径
+    ///fileName:文件名，建议带扩展名
+    ///ext：扩展名，优先使用这个参数；如果为nil，那么尝试从fileName中获取；如果获取不到，那么为nil
+    func getBundleFilePath(_ fileName: String, ext: String? = nil) -> String?
+    {
+        let fileComponent = fileName.components(separatedBy: ".")
+        let name = fileComponent.first
+        var extName: String? = nil
+        if let ext = ext {  //优先从参数获取
+            extName = ext
+        }
+        if extName == nil   //如果没有传入ext，那么尝试从fileName获取
+        {
+            extName = fileComponent.count >= 2 ? fileComponent.last : nil
+        }
+        let path = Bundle.main.path(forResource: name, ofType: extName)
+        return path
+    }
 
     ///获取数据库文件路径
     func getDatabasePath() -> String
@@ -216,9 +235,7 @@ extension SandBoxAccessor: ExternalInterface
     ///文件名中不要包含`.`，因为用来区分扩展名
     func getSQLFilePath(fileName: String) -> String?
     {
-        let fileComponent = fileName.components(separatedBy: ".")
-        let sqlPath = Bundle.main.path(forResource: fileComponent.first, ofType: (fileComponent.count >= 2 ? fileComponent.last : "sql"))
-        return sqlPath
+        return self.getBundleFilePath(fileName, ext: FileExtName.sql.rawValue)
     }
     
     ///获取临时下载文件保存目录
@@ -233,7 +250,7 @@ extension SandBoxAccessor: ExternalInterface
     {
         return self.getLibraryDirWith(pathComponent: sdSoundsDir)
     }
-    
+
     /******************** 文件夹路径访问 Section End *******************/
     
 }

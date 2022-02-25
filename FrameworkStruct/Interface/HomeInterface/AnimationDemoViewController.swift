@@ -29,7 +29,7 @@ class AnimationDemoViewController: BasicViewController {
             print("完成")
         }
         v.backgroundColor = .yellow
-        v.frame = CGRect(x: 10, y: kTopHeight, width: 100, height: 100)
+        v.frame = CGRect(x: 10, y: kSafeTopHeight, width: 100, height: 100)
         self.view.addSubview(v)
         AnimationManager.shared.popBasic(propertyName: kPOPViewCenter, toValue: CGPoint(x: 300, y: 300), duration: 1, isLoop: true, repeatCount: 2, autoReverse: true, host: v) {
             FSLog("POP动画完成")

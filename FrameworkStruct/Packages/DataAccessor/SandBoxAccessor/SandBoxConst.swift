@@ -18,3 +18,24 @@ let sdDownloadTempDir = "download_temp"
 
 //沙盒中音频文件目录
 let sdSoundsDir = "Sounds"
+
+//文件扩展名列表，根据需要新增
+enum FileExtName: String {
+    case txt
+    case rtf
+    case md
+    case sql
+    case html
+    case css
+    case js
+    
+    case mp3
+    case mp4
+    case mkv
+    
+    case jpg
+    case jpeg
+    case png
+    case gif
+    
+}

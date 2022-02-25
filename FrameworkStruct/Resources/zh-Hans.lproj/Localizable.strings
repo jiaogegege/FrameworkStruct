@@ -28,6 +28,7 @@ constraintTest = "约束测试";
 drawTable = "绘制表格";
 layerShadow = "图层阴影";
 animationDemo = "动画演示";
+webInteraction = "H5交互";
 
 /**
  * 界面提示和按钮文案

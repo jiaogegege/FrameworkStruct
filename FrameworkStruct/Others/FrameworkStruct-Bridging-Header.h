@@ -41,6 +41,7 @@
 #import "MPITextKit.h"
 #import "BCCKeychain.h"
 #import "WebViewJavascriptBridge.h"
+#import "WKWebViewJavascriptBridge.h"
 
 
 //数据模型
