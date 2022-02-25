@@ -24,8 +24,13 @@ class BasicWebViewController: BasicViewController
     //是否显示加载进度条
     var showProgress: Bool = true
     
+    //默认handlers
+    fileprivate(set) lazy var defaultHandlers: [WebContentHandler] = {
+        return WebHandlerNative.defaultHandlers(hostVC: self)
+    }()
+    
     //要添加的handler，根据不同的页面添加不同的handler，有一些默认的handler一定会添加，比如go/back等
-    var handlers: [WebContentHandler]?
+    var neededHandlers: [WebContentHandler]?
     
     /**************************************** 外部属性 Section End ***************************************/
     
@@ -35,7 +40,7 @@ class BasicWebViewController: BasicViewController
     fileprivate var progressBar: UIProgressView!
     
     //js交互对象
-    fileprivate var jsBridge: WKWebViewJavascriptBridge!
+    fileprivate(set) var jsBridge: WKWebViewJavascriptBridge!
     
 
     //MARK: 方法
@@ -53,7 +58,7 @@ class BasicWebViewController: BasicViewController
         webView.addObserver(self, forKeyPath: WVObserveKey.webViewProgress.rawValue, options: [.old, .new], context: nil)
         self.view.addSubview(webView)
         //进度条
-        self.progressBar = UIProgressView(frame: CGRect(x: 0, y: kSafeTopHeight, width: kScreenWidth, height: 2.0))
+        self.progressBar = UIProgressView(frame: CGRect(x: 0, y: (self.hideNavBar ? 0.0 : kSafeTopHeight), width: kScreenWidth, height: 2.0))
         progressBar.progressTintColor = theme.mainColor
         progressBar.trackTintColor = .clear
         progressBar.progress = 0.0
@@ -79,45 +84,35 @@ class BasicWebViewController: BasicViewController
     {
         self.jsBridge = WKWebViewJavascriptBridge(for: self.webView)
         jsBridge.setWebViewDelegate(self)
-        self.addDefaultHandler()
-        
-        
-        
-        
-        
-        jsBridge.registerHandler(WebHandlerNative.ocAlert.rawValue) { data, responseCallback in
-            AlertManager.shared.wantPresentAlert(title: "提示", message: "js调用了原生弹框", rightTitle: "确定") {
-                
-            }
-        }
-        
-        jsBridge.registerHandler(WebHandlerNative.getUserIdFromObjC.rawValue) { data, responseCallback in
-            print(data as Any)
-            if let res = responseCallback
-            {
-                res("sl是冷酷的见风使舵风景")
-            }
-        }
-        g_after(interval: 2) {
-            self.jsBridge.callHandler("openWebviewBridgeArticle")
-        }
-        g_after(interval: 3) {
-            self.jsBridge.callHandler("getUserInfos", data: nil) { data in
-                print(data as Any)
-            }
-        }
-    }
-    
-    //添加默认handler
-    fileprivate func addDefaultHandler()
-    {
-        let handlers = [WebHandlerNative.go(self).getHandler(),
-                        WebHandlerNative.back(self).getHandler(),
-                        WebHandlerNative.alert.getHandler(),
-                        WebHandlerNative.alertConfirmCancel.getHandler()]
-        for handler in handlers {
+        //添加默认handlers
+        for handler in defaultHandlers {
             jsBridge.registerHandler(handler.name, handler: handler.handler)
         }
+        
+        
+        
+        
+//        jsBridge.registerHandler(WebHandlerNative.ocAlert.rawValue) { data, responseCallback in
+//            AlertManager.shared.wantPresentAlert(title: "提示", message: "js调用了原生弹框", rightTitle: "确定") {
+//
+//            }
+//        }
+//
+//        jsBridge.registerHandler(WebHandlerNative.getUserIdFromObjC.rawValue) { data, responseCallback in
+//            print(data as Any)
+//            if let res = responseCallback
+//            {
+//                res("sl是冷酷的见风使舵风景")
+//            }
+//        }
+//        g_after(interval: 2) {
+//            self.jsBridge.callHandler("openWebviewBridgeArticle")
+//        }
+//        g_after(interval: 3) {
+//            self.jsBridge.callHandler("getUserInfos", data: nil) { data in
+//                print(data as Any)
+//            }
+//        }
     }
     
     //监听进度
@@ -183,8 +178,17 @@ class BasicWebViewController: BasicViewController
     fileprivate func cleanUp()
     {
         //清理js句柄
-        jsBridge.removeHandler(WebHandlerNative.ocAlert.rawValue)
-        jsBridge.removeHandler(WebHandlerNative.getUserIdFromObjC.rawValue)
+        for handler in defaultHandlers
+        {
+            jsBridge.removeHandler(handler.name)
+        }
+        if let handlers = neededHandlers
+        {
+            for handler in handlers
+            {
+                jsBridge.removeHandler(handler.name)
+            }
+        }
         webView.removeObserver(self, forKeyPath: WVObserveKey.webViewProgress.rawValue)
         //清理缓存
         self.deleteWebCache()
@@ -285,11 +289,23 @@ extension BasicWebViewController: InternalType
         {
             switch self {
             case .remote(let string):
-                return URL(string: string)
+                return URL(string: string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             case .local(let string):
-                return URL(fileURLWithPath: string)
+                return URL(fileURLWithPath: string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             }
         }
+    }
+    
+}
+
+
+//接口方法
+extension BasicWebViewController: ExternalInterface
+{
+    ///注册被加载的H5页面需要的handler
+    func registerNeededHandler(handlerNames: [String]? = nil)
+    {
+        
     }
     
 }
