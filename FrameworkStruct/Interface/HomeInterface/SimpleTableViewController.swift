@@ -17,6 +17,9 @@ class SimpleTableViewController: BasicViewController
     @IBOutlet weak var expandBtn: UIButton!
     var table: SimpleTableView!
     
+    //标题
+    var titleStr: String?
+    
     var dataArray = [["上市时间", "2021-03"],
                      ["认证型号", "V10 Digital Slim Fluffy"],
                      ["产品净重", "纤巧软绒滚筒*1，电动床褥吸头*1，缝隙软毛宽嘴两用吸头*1，缝隙清洁吸头*1，底部转换头*1，缝隙清洁吸头*1，底部转换头*1，缝隙清洁吸头*1，底部转换头*1"],
@@ -33,7 +36,10 @@ class SimpleTableViewController: BasicViewController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let ti = titleStr
+        {
+            self.title = ti
+        }
     }
     
     override func createUI() {

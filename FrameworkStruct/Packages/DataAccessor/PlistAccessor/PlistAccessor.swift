@@ -47,7 +47,7 @@ class PlistAccessor: OriginAccessor
     }
     
     /**
-     * 读取一个plist文件
+     * 读取一个自定义资源包的plist文件
      * - parameters:
      *  - fileName:文件名，包括后缀，也可以没有后缀
      *  - identifier:资源包id，如果是cocospods中的资源包，需要传入名字，比如："org.cocoapods.AFNetworking"

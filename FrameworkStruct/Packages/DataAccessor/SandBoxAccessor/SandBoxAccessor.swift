@@ -47,7 +47,7 @@ class SandBoxAccessor: OriginAccessor
 //接口方法
 extension SandBoxAccessor: ExternalInterface
 {
-    /******************** 文件和目录操作 Section Begin *******************/
+    /**************************************** 文件和目录操作 Section Begin ****************************************/
     //创建一个目录
     func createDir(path: String) -> Bool
     {
@@ -116,10 +116,10 @@ extension SandBoxAccessor: ExternalInterface
         return !ret.boolValue   //结果取反，ret为true是目录
     }
     
-    /******************** 文件和目录操作 Section End *******************/
+    /**************************************** 文件和目录操作 Section End ****************************************/
     
     
-    /******************** 文件夹路径访问 Section Begin *******************/
+    /**************************************** 文件夹路径访问 Section Begin ****************************************/
     ///获得沙盒文件夹路径
     func getHomeDirectory() -> String
     {
@@ -251,6 +251,6 @@ extension SandBoxAccessor: ExternalInterface
         return self.getLibraryDirWith(pathComponent: sdSoundsDir)
     }
 
-    /******************** 文件夹路径访问 Section End *******************/
+    /**************************************** 文件夹路径访问 Section End ****************************************/
     
 }

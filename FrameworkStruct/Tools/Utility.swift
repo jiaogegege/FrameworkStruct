@@ -174,7 +174,7 @@ func g_uuidString() -> String
 ///获取设备id，在app安装周期内保持不变
 func g_getDeviceId() -> String
 {
-    if let deviceId = UserDefaultsAccessor.shared.readString(key: UserDefaultsAccessor.UDAKeyType.deviceId)
+    if let deviceId = UserDefaultsAccessor.shared.readString(key: UDAKeyType.deviceId)
     {
         return deviceId
     }
@@ -189,7 +189,7 @@ func g_getDeviceId() -> String
         {
             deviceId = g_uuidString()
         }
-        UserDefaultsAccessor.shared.write(key: UserDefaultsAccessor.UDAKeyType.deviceId, value: deviceId)
+        UserDefaultsAccessor.shared.write(key: UDAKeyType.deviceId, value: deviceId)
         return deviceId
     }
 }

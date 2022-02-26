@@ -533,6 +533,8 @@
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
+		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
+		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
 		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
@@ -1458,6 +1460,8 @@
 		EAAA4E8E276F57BB00C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
+		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
 		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
@@ -3501,6 +3505,24 @@
 			path = DataChecker;
 			sourceTree = "<group>";
 		};
+		EAB32C3E27CA71EA000108EA /* UserDefaultsAccessor */ = {
+			isa = PBXGroup;
+			children = (
+				EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */,
+				EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */,
+			);
+			path = UserDefaultsAccessor;
+			sourceTree = "<group>";
+		};
+		EAB32C4227CA7405000108EA /* PlistAccessor */ = {
+			isa = PBXGroup;
+			children = (
+				EADB010E2762422D001B7223 /* PlistAccessor.swift */,
+				EAB32C4327CA7418000108EA /* PlistConst.swift */,
+			);
+			path = PlistAccessor;
+			sourceTree = "<group>";
+		};
 		EAC4E6CD27B0C24400654EE6 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -4060,8 +4082,8 @@
 			isa = PBXGroup;
 			children = (
 				EADB010F2762422D001B7223 /* README.md */,
-				EADB010E2762422D001B7223 /* PlistAccessor.swift */,
-				EADB0154276245D3001B7223 /* UserDefaultsAccessor.swift */,
+				EAB32C4227CA7405000108EA /* PlistAccessor */,
+				EAB32C3E27CA71EA000108EA /* UserDefaultsAccessor */,
 				EA3337C62797AB7D00612DC3 /* SandBoxAccessor */,
 				EADB014E276244F2001B7223 /* DatabaseAccessor */,
 			);
@@ -4507,6 +4529,7 @@
 				EAC8A87027625D490088293F /* SDImageTransformer.m in Sources */,
 				EA3E8ADC27B77CEA006A2715 /* NullCompositionLayer.swift in Sources */,
 				EA3E8ACF27B77CEA006A2715 /* CombinedShapeAnimation.swift in Sources */,
+				EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */,
 				EA9A757327C7211500A11FC8 /* TYTextStorageParser.m in Sources */,
 				EAC8A87D27625D490088293F /* UIButton+WebCache.m in Sources */,
 				EA11127027B3BE2C006D0B83 /* AFError.swift in Sources */,
@@ -4703,6 +4726,7 @@
 				EA9A756D27C7210200A11FC8 /* TYTextStorage.m in Sources */,
 				EA3E8AD927B77CEA006A2715 /* LayerProperty.swift in Sources */,
 				EAC8A85527625D490088293F /* SDImageLoader.m in Sources */,
+				EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */,
 				EA0E67AE27B49F8B00A11C20 /* GTMBase64.m in Sources */,
 				EAF85A9F277B4D7500676268 /* HandlerMonitor.swift in Sources */,
 				EA3E8ABC27B77CEA006A2715 /* LayerModel+makeAnimationLayer.swift in Sources */,

@@ -42,7 +42,7 @@ class ThemeContainer: OriginContainer
     //初始化当前主题，尝试获取当前主题，如果没有，那么选择默认主题
     fileprivate func initCurrentTheme()
     {
-        if let current = udAccessor.readString(key: UserDefaultsAccessor.UDAKeyType.currentTheme)
+        if let current = udAccessor.readString(key: UDAKeyType.currentTheme)
         {
             let themeDict = plAccessor.read(fileName: current)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
@@ -55,7 +55,7 @@ class ThemeContainer: OriginContainer
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
             self.mutate(key: TCGetKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
             //保存当前主题标识
-            self.udAccessor.write(key: UserDefaultsAccessor.UDAKeyType.currentTheme, value: sPinkThemeFileName)
+            self.udAccessor.write(key: UDAKeyType.currentTheme, value: sPinkThemeFileName)
         }
     }
     
@@ -77,7 +77,7 @@ class ThemeContainer: OriginContainer
         {
             if k == TCGetKey.currentTheme
             {
-                udAccessor.write(key: UserDefaultsAccessor.UDAKeyType.currentTheme, value: value)
+                udAccessor.write(key: UDAKeyType.currentTheme, value: value)
             }
         }
     }

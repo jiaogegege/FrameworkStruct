@@ -16,7 +16,6 @@ struct WebContentHandler {
     var name: String                //方法名
     var data: Any?                  //传输的数据
     var handler: WVJBHandler?       //处理闭包
-    var webHandler: WVJBResponseCallback?   //h5回调
 }
 
 /**
@@ -42,6 +41,9 @@ enum WebHandlerNative {
     static let backName = "back"
     case back(BasicWebViewController)                 //返回上一个界面，参数：pop的界面，一般是self（WebViewController）
     
+    static let pushName = "push"
+    case push(BasicWebViewController)           //H5页面想要push一个本地界面，H5需要传一个页面的标志符和相关参数
+    
     static let alertName = "alert"
     case alert                                  //弹出一个弹框，带一个确定按钮
     
@@ -64,6 +66,7 @@ enum WebHandlerNative {
                 WebHandlerNative.getAppName.getHandler(),
                 WebHandlerNative.go(hostVC).getHandler(),
                 WebHandlerNative.back(hostVC).getHandler(),
+                WebHandlerNative.push(hostVC).getHandler(),
                 WebHandlerNative.alert.getHandler(),
                 WebHandlerNative.alertConfirmCancel.getHandler()]
     }
@@ -145,6 +148,15 @@ enum WebHandlerNative {
                 vc?.navigationController?.popViewController(animated: true)
             }
             return handler
+        case .push(let vc):
+            let handler = WebContentHandler(name: WebHandlerNative.pushName, data: nil) {[weak vc] (data, responseCallback) in
+                //获取对应的页面相关参数
+                if let params = data as? Dictionary<String, Any>
+                {
+                    WebPushNativeVC.gotoVC(params: params, hostVC: vc)
+                }
+            }
+            return handler
         case .alert:
             let handler = WebContentHandler(name: WebHandlerNative.alertName, data: nil) { data, responseCallback in
                 if let data = data
@@ -199,3 +211,23 @@ enum WebHandlerH5Name: String {
  */
 typealias JavascriptExpression = String
 let js_getTitle: JavascriptExpression = "document.title"
+
+
+//MARK: H5想要push的本地界面的标志符，根据实际需求定义
+enum WebPushNativeVC: Int {
+    case simpleTableVC = 1001                      //进入简单表格界面
+    
+    //跳转界面
+    static func gotoVC(params: Dictionary<String, Any>, hostVC: BasicWebViewController?)
+    {
+        let type = WebPushNativeVC(rawValue: params["type"] as! Int)
+        switch type {
+        case .simpleTableVC:
+            let vc = SimpleTableViewController.getViewController()
+            vc.titleStr = params["titleStr"] as? String
+            hostVC?.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+    }
+}
