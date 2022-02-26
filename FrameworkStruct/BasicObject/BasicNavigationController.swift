@@ -78,7 +78,7 @@ class BasicNavigationController: UINavigationController
     deinit {
         NotificationCenter.default.removeObserver(self)
         
-        print(getCurrentTimeString() + ": " + g_getObjClassName(self) + " dealloc")
+        FSLog(getCurrentTimeString() + ": " + g_getObjClassName(self) + " dealloc")
     }
 
 }

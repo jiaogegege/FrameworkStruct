@@ -18,29 +18,40 @@ class BasicWebViewController: BasicViewController
     //资源类型和url字符串
     var url: WVResourceType?
     
-    //标题
+    //标题，将作为导航栏标题使用，如果不传，默认使用网页的title
     var titleStr: String?
     
     //是否显示加载进度条
     var showProgress: Bool = true
     
-    //默认handlers
-    fileprivate(set) lazy var defaultHandlers: [WebContentHandler] = {
-        return WebHandlerNative.defaultHandlers(hostVC: self)
-    }()
+    //特定H5页面要添加的handlers，根据不同的页面添加不同的handlers
+    var neededHandlers: [WebContentHandler]? {
+        didSet {
+            if let neededHandlers = neededHandlers {
+                for handler in neededHandlers {
+                    jsBridge.registerHandler(handler.name, handler: handler.handler)
+                }
+            }
+        }
+    }
     
-    //要添加的handler，根据不同的页面添加不同的handler，有一些默认的handler一定会添加，比如go/back等
-    var neededHandlers: [WebContentHandler]?
+    //特定H5页面支持navtive调用的js handlers
+    var supportHandlers: [String]?
     
     /**************************************** 外部属性 Section End ***************************************/
     
+    //默认handlers，每个页面都会添加，有一些默认的handlers一定会添加，比如go/back等
+    fileprivate lazy var defaultHandlers: [WebContentHandler] = {
+        return WebHandlerNative.defaultHandlers(hostVC: self)
+    }()
+
     //webview
-    fileprivate(set) var webView: WKWebView!
+    fileprivate var webView: WKWebView!
     //进度条
     fileprivate var progressBar: UIProgressView!
     
     //js交互对象
-    fileprivate(set) var jsBridge: WKWebViewJavascriptBridge!
+    fileprivate var jsBridge: WKWebViewJavascriptBridge!
     
 
     //MARK: 方法
@@ -49,19 +60,18 @@ class BasicWebViewController: BasicViewController
         self.loadRequest()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        WebAdapter.shared.showWebVC(self)
+    }
+    
     override func createUI() {
         super.createUI()
         //webview
         self.webView = WKWebView(frame: kFullScreenRect, configuration: WKWebViewConfiguration())
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
-        webView.addObserver(self, forKeyPath: WVObserveKey.webViewProgress.rawValue, options: [.old, .new], context: nil)
         self.view.addSubview(webView)
         //进度条
-        self.progressBar = UIProgressView(frame: CGRect(x: 0, y: (self.hideNavBar ? 0.0 : kSafeTopHeight), width: kScreenWidth, height: 2.0))
-        progressBar.progressTintColor = theme.mainColor
-        progressBar.trackTintColor = .clear
-        progressBar.progress = 0.0
+        self.progressBar = UIProgressView(frame: CGRect(x: 0, y: (self.hideNavBar ? kStatusHeight : kSafeTopHeight), width: kScreenWidth, height: 2.0))
         self.view.addSubview(progressBar)
     }
     
@@ -70,7 +80,16 @@ class BasicWebViewController: BasicViewController
         if let titleStr = titleStr {
             self.title = titleStr
         }
-        
+        //webview
+        webView.frame = kFullScreenRect
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.addObserver(self, forKeyPath: WVObserveKey.webViewProgress.rawValue, options: [.old, .new], context: nil)
+        //进度条
+        progressBar.frame = CGRect(x: 0, y: (self.hideNavBar ? kStatusHeight : kSafeTopHeight), width: kScreenWidth, height: 2.0)
+        progressBar.progressTintColor = theme.mainColor
+        progressBar.trackTintColor = .clear
+        progressBar.progress = 0.0
     }
     
     override func initData() {
@@ -88,31 +107,6 @@ class BasicWebViewController: BasicViewController
         for handler in defaultHandlers {
             jsBridge.registerHandler(handler.name, handler: handler.handler)
         }
-        
-        
-        
-        
-//        jsBridge.registerHandler(WebHandlerNative.ocAlert.rawValue) { data, responseCallback in
-//            AlertManager.shared.wantPresentAlert(title: "提示", message: "js调用了原生弹框", rightTitle: "确定") {
-//
-//            }
-//        }
-//
-//        jsBridge.registerHandler(WebHandlerNative.getUserIdFromObjC.rawValue) { data, responseCallback in
-//            print(data as Any)
-//            if let res = responseCallback
-//            {
-//                res("sl是冷酷的见风使舵风景")
-//            }
-//        }
-//        g_after(interval: 2) {
-//            self.jsBridge.callHandler("openWebviewBridgeArticle")
-//        }
-//        g_after(interval: 3) {
-//            self.jsBridge.callHandler("getUserInfos", data: nil) { data in
-//                print(data as Any)
-//            }
-//        }
     }
     
     //监听进度
@@ -302,10 +296,21 @@ extension BasicWebViewController: InternalType
 //接口方法
 extension BasicWebViewController: ExternalInterface
 {
-    ///注册被加载的H5页面需要的handler
-    func registerNeededHandler(handlerNames: [String]? = nil)
+    ///重新加载页面
+    func reload()
     {
-        
+        self.loadRequest()
+    }
+    
+    ///调用js方法
+    func callWebHandler(_ handler: WebContentHandler)
+    {
+        jsBridge.callHandler(handler.name, data: handler.data) { data in
+            if let hnd = handler.webHandler
+            {
+                hnd(data)
+            }
+        }
     }
     
 }

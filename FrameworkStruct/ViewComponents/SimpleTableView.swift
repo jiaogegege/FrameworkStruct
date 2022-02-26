@@ -273,7 +273,7 @@ class SimpleTableView: UIView
     }
     
     deinit {
-        print("SimpleTableView: dealloc")
+        FSLog("SimpleTableView: dealloc")
     }
     
 }

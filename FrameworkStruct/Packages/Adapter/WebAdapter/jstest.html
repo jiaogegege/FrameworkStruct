@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
   <head>
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
+    <title>JS交互测试</title>
     <style type='text/css'>
       html { font-family:Helvetica; color:#222; }
       h1 { color:steelblue; font-size:24px; margin-top:24px; }
@@ -45,11 +47,15 @@
          }
        }
        /* Initialize your app here */
+       /** 告诉app需要哪些方法 */
+       bridge.callHandler('neededHandlers', ['getUserId'])
+       bridge.callHandler('supportHandlers', ['getUrl'])
       
        /*我们在这注册一个js调用OC的方法，不带参数，且不用ObjC端反馈结果给JS：打开本demo对应的博文*/
-       bridge.registerHandler('openWebviewBridgeArticle', function() {
-          log("openWebviewBridgeArticle was called with by ObjC")
-          alert("打开了一个")
+       bridge.registerHandler('getUrl', function(data, responseCallback) {
+          log("getUrl was called with by ObjC")
+          alert('JS给OC传递了本页面的url')
+          responseCallback(window.location.href)
        })
        /*JS给ObjC提供公开的API，在ObjC端可以手动调用JS的这个API。接收ObjC传过来的参数，且可以回调ObjC*/
        bridge.registerHandler('getUserInfos', function(data, responseCallback) {
@@ -58,23 +64,21 @@
        })
                                   
        /*JS给ObjC提供公开的API，ObjC端通过注册，就可以在JS端调用此API时，得到回调。ObjC端可以在处理完成后，反馈给JS，这样写就是在载入页面完成时就先调用*/
-       bridge.callHandler('getUserIdFromObjC', '时间的圣诞快乐减肥是亮点收到',function(responseData) {
+       bridge.callHandler('getUserId', function(responseData) {
          log("JS call ObjC's getUserIdFromObjC function, and js received response:", responseData)
        })
  
        document.getElementById('blogId').onclick = function (e) {
-         log('js call objc: getBlogNameFromObjC')
-         bridge.callHandler('getBlogNameFromObjC', {'blogURL': 'http://www.henishuo.com'}, function(response) {
-                          log('JS got response', response)
-                          })
+         bridge.callHandler('getAppName', {'blogURL': 'http://www.henishuo.com'}, function(response) {
+             log('JS got response', response)
+         })
        }
      })
 
       /*JS调用OC弹框*/
-      function ocAlert()
-      {
-        WebViewJavascriptBridge.callHandler('ocAlert',function() {
-            console.log("JS 调用了 OC 注册的 ocAlert 方法");
+      function ocAlert() {
+        WebViewJavascriptBridge.callHandler('alert', 'JS 调用了 OC 注册的 alert 方法', function() {
+            console.log("JS 调用了 OC 注册的 alert 方法");
         })
       }
       

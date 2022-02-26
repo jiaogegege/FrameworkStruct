@@ -11,9 +11,14 @@ class TestWebViewController: BasicWebViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
+    override func createUI() {
+        super.createUI()
+        
+    }
+
     override func initData() {
         super.initData()
         self.url = .local(SandBoxAccessor.shared.getBundleFilePath("jstest", ext: "html") ?? "")

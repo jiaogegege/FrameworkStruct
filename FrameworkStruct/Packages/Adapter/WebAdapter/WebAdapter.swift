@@ -16,6 +16,12 @@ class WebAdapter: OriginAdapter
     //单例
     static let shared = WebAdapter()
     
+    //所有活跃的BasicWebViewController数组
+    fileprivate var webVCArray: WeakArray = WeakArray.init()
+    
+    //当前显示的webvc
+    fileprivate(set) weak var currentWebVC: BasicWebViewController?
+    
     
     //MARK: 方法
     //私有化初始化方法
@@ -34,4 +40,50 @@ class WebAdapter: OriginAdapter
         return self
     }
 
+}
+
+
+//接口方法
+extension WebAdapter: ExternalInterface
+{
+    ///创建一个webviewcontroller
+    func createWebVC(url: String, remote: Bool = true, title: String? = nil, showProgress: Bool = true) -> BasicWebViewController
+    {
+        let vc = BasicWebViewController()
+        vc.url = remote ? .remote(url) : .local(url)
+        if let title = title {
+            vc.titleStr = title
+        }
+        //加入弱引用数组
+        self.webVCArray.add(vc)
+        vc.showProgress = showProgress
+        return vc
+    }
+    
+    ///在弱引用数组中添加一个vc
+    func showWebVC(_ vc: BasicWebViewController)
+    {
+        self.currentWebVC = vc
+    }
+    
+    ///获取当前页面的url
+    func getCurrentUrl(completion: @escaping ((String?) -> Void))
+    {
+        if let cur = currentWebVC
+        {
+            if let supports = cur.supportHandlers
+            {
+                if supports.contains(WebHandlerH5.getUrlName)
+                {
+                    cur.callWebHandler(WebContentHandler(name: WebHandlerH5.getUrlName, data: nil, handler: nil, webHandler: { data in
+                        if let url = data as? String
+                        {
+                            completion(url)
+                        }
+                    }))
+                }
+            }
+        }
+    }
+    
 }

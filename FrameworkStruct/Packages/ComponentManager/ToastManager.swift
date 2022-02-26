@@ -322,7 +322,7 @@ extension ToastManager: ExternalInterface
      *  - mode:显示模式，默认串行
      *  - completion:HUD消失之后执行的回调
      */
-    func wantShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 1.5, mode: TMShowMode = .serial, completion: CompletionCallback? = nil)
+    func wantShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay:TimeInterval = 2.0, mode: TMShowMode = .serial, completion: CompletionCallback? = nil)
     {
         let closure = self.createHudClosure(text: text, detail: detail, animate: animate, hideDelay: hideDelay, completion: completion)
         if mode == .serial  //串行，进入队列

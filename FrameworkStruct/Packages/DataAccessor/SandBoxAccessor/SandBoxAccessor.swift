@@ -62,7 +62,7 @@ extension SandBoxAccessor: ExternalInterface
                 try fileMgr.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                 return true
             } catch {
-                print("create dir error: \(error.localizedDescription)")
+                FSLog("create dir error: \(error.localizedDescription)")
                 return false
             }
         }
@@ -88,7 +88,7 @@ extension SandBoxAccessor: ExternalInterface
         do {
             try self.fileMgr.removeItem(atPath: path)
         } catch {
-            print("delete path error: \(error.localizedDescription)")
+            FSLog("delete path error: \(error.localizedDescription)")
         }
     }
     

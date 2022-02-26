@@ -34,7 +34,7 @@ class FSActionSheet: UIAlertController, AlertManagerProtocol
         {
             callback()
         }
-        print("FSActionSheet: dealloc")
+        FSLog("FSActionSheet: dealloc")
     }
 
 }

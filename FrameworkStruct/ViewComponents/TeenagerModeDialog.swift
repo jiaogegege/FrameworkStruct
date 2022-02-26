@@ -114,7 +114,7 @@ class TeenagerModeDialog: FSDialog
     //进入青少年模式
     @objc func gotoTeenAction(sender: UIButton)
     {
-        print("进入青少年模式")
+        FSLog("进入青少年模式")
         if let cb = self.enterTeenModeCallback
         {
             cb()
@@ -124,7 +124,7 @@ class TeenagerModeDialog: FSDialog
     //我知道了按钮
     @objc func iKnownAction(sender: UIButton)
     {
-        print("我知道了")
+        FSLog("我知道了")
         if let cb = self.confirmCallback
         {
             cb()

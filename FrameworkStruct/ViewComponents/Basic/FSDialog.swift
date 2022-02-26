@@ -178,7 +178,7 @@ class FSDialog: UIView, DialogManagerProtocol
         {
             callback()
         }
-        print("FSDialog: dealloc")
+        FSLog("FSDialog: dealloc")
     }
     
 }

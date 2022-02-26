@@ -105,7 +105,7 @@ func isInteger(str: String) -> Bool
         ret = result != nil ? true : false
     }
     catch {
-        print("regex error:str -> \(error)")
+        FSLog("regex error:str -> \(error)")
     }
     return ret
 }
@@ -120,7 +120,7 @@ func isFloat(str: String) -> Bool
         ret = result != nil ? true : false
     }
     catch {
-        print("regex error:str -> \(error)")
+        FSLog("regex error:str -> \(error)")
     }
     return ret
 }

@@ -35,7 +35,7 @@ class FSAlertView: UIAlertController, AlertManagerProtocol
         {
             callback()
         }
-        print("FSAlertView: dealloc")
+//        FSLog("FSAlertView: dealloc")
     }
     
 }

@@ -26,7 +26,7 @@ class AnimationDemoViewController: BasicViewController {
     override func configUI() {
         super.configUI()
         let v = AnimationManager.shared.lottie(name: "BLE_img_gear", loopMode: .loop) {
-            print("完成")
+            FSLog("完成")
         }
         v.backgroundColor = .yellow
         v.frame = CGRect(x: 10, y: kSafeTopHeight, width: 100, height: 100)
