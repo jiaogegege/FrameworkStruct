@@ -302,13 +302,29 @@ extension BasicWebViewController: ExternalInterface
         self.loadRequest()
     }
     
-    ///调用js方法
-    func callWebHandler(_ handler: WebContentHandler)
+    ///能否在这个页面上执行某个H5 handler
+    func canCallWebHandler(_ handlerName: String) -> Bool
     {
-        jsBridge.callHandler(handler.name, data: handler.data) { data in
-            if let hnd = handler.webHandler
+        if let supports = self.supportHandlers
+        {
+            if supports.contains(handlerName)
             {
-                hnd(data)
+                return true
+            }
+        }
+        return false
+    }
+    
+    ///调用js方法
+    func callWebHandler(name: String, param: Any?, completion: ((Any?) -> Void)?)
+    {
+        if self.canCallWebHandler(name)
+        {
+            jsBridge.callHandler(name, data: param) { (responseData) in
+                if let comp = completion
+                {
+                    comp(responseData)
+                }
             }
         }
     }

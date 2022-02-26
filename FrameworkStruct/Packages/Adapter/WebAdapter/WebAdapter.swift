@@ -66,22 +66,13 @@ extension WebAdapter: ExternalInterface
         self.currentWebVC = vc
     }
     
-    ///获取当前页面的url
-    func getCurrentUrl(completion: @escaping ((String?) -> Void))
+    ///获取当前页面的url，completion可能不会执行，所以调用该方法的对象要做一些回调未执行的处理
+    func getCurrentPageUrl(completion: @escaping ((String?) -> Void))
     {
         if let cur = currentWebVC
         {
-            if let supports = cur.supportHandlers
-            {
-                if supports.contains(WebHandlerH5.getUrlName)
-                {
-                    cur.callWebHandler(WebContentHandler(name: WebHandlerH5.getUrlName, data: nil, handler: nil, webHandler: { data in
-                        if let url = data as? String
-                        {
-                            completion(url)
-                        }
-                    }))
-                }
+            cur.callWebHandler(name: WebHandlerH5Name.getUrl.rawValue, param: nil) { (responseData) in
+                completion(responseData as? String)
             }
         }
     }

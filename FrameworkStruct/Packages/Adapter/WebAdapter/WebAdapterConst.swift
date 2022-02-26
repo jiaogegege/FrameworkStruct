@@ -186,39 +186,9 @@ enum WebHandlerNative {
     }
 }
 
-//js交互h5 handler
-enum WebHandlerH5 {
-    static let noneName = "none"
-    case none                                       //空
-    
-    static let getUrlName = "getUrl"
-    case getUrl(BasicWebViewController)             //获取页面url字符串
-    
-    //从字符串获取枚举类型
-    static func getHandlerType(from name: String, hostVC: BasicWebViewController) -> WebHandlerH5
-    {
-        switch name {
-        case getUrlName:
-            return WebHandlerH5.getUrl(hostVC)
-        default:
-            return WebHandlerH5.none
-        }
-    }
-    
-    //获取handler对象
-    func getHandler() -> WebContentHandler
-    {
-        switch self {
-        case .none:
-            return WebContentHandler(name: WebHandlerH5.noneName, data: nil, handler: nil, webHandler: nil)
-        case .getUrl(let vc):
-            let handler = WebContentHandler(name: WebHandlerH5.getUrlName, data: nil, handler: nil) {[weak vc] data in
-                //获取到url后的操作
-                vc?.reload()
-            }
-            return handler
-        }
-    }
+//js交互h5 handler名称
+enum WebHandlerH5Name: String {
+    case getUrl                         //获取页面url地址字符串
     
 }
 
