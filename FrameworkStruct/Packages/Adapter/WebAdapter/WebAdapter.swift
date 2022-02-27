@@ -47,9 +47,10 @@ class WebAdapter: OriginAdapter
 extension WebAdapter: ExternalInterface
 {
     ///创建一个webviewcontroller
-    func createWebVC(url: String, remote: Bool = true, title: String? = nil, showProgress: Bool = true) -> BasicWebViewController
+    func createWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true) -> BasicWebViewController
     {
         let vc = BasicWebViewController()
+        vc.hideNavBar = hideNavBar
         vc.url = remote ? .remote(url) : .local(url)
         if let title = title {
             vc.titleStr = title

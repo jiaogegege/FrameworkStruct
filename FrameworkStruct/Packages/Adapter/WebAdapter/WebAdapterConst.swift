@@ -33,19 +33,22 @@ enum WebHandlerNative {
     case supportHandlers(BasicWebViewController)                        //H5页面支持调用的方法
     
     static let getAppNameName = "getAppName"
-    case getAppName                             //获得应用名称
+    case getAppName                                                     //获得应用名称
     
     static let goName = "go"
-    case go(BasicWebViewController)                   //进入一个新的H5界面，参数：push的界面，一般是WebViewController
+    case go(BasicWebViewController)                                     //进入一个新的H5界面，参数：push的界面，一般是WebViewController
     
     static let backName = "back"
-    case back(BasicWebViewController)                 //返回上一个界面，参数：pop的界面，一般是self（WebViewController）
+    case back(BasicWebViewController)                                   //返回上一个界面，参数：pop的界面，一般是self（WebViewController）
     
     static let pushName = "push"
-    case push(BasicWebViewController)           //H5页面想要push一个本地界面，H5需要传一个页面的标志符和相关参数
+    case push(BasicWebViewController)                                   //H5页面想要push一个本地界面，H5需要传一个页面的标志符和相关参数
+    
+    static let hideNavBarName = "hideNavBar"
+    case hideNavBar(BasicWebViewController)                             //隐藏webVC导航栏，传参数：1:隐藏，0:显示
     
     static let alertName = "alert"
-    case alert                                  //弹出一个弹框，带一个确定按钮
+    case alert                                                          //弹出一个弹框，带一个确定按钮
     
     static let alertConfirmCancelName = "alertConfirmCancel"
     case alertConfirmCancel                     //弹出一个弹框，带确定和取消按钮，并将用户的选择结果返回给js
@@ -67,6 +70,7 @@ enum WebHandlerNative {
                 WebHandlerNative.go(hostVC).getHandler(),
                 WebHandlerNative.back(hostVC).getHandler(),
                 WebHandlerNative.push(hostVC).getHandler(),
+                WebHandlerNative.hideNavBar(hostVC).getHandler(),
                 WebHandlerNative.alert.getHandler(),
                 WebHandlerNative.alertConfirmCancel.getHandler()]
     }
@@ -85,6 +89,10 @@ enum WebHandlerNative {
             return WebHandlerNative.go(hostVC)
         case backName:
             return WebHandlerNative.back(hostVC)
+        case pushName:
+            return WebHandlerNative.push(hostVC)
+        case hideNavBarName:
+            return WebHandlerNative.hideNavBar(hostVC)
         case alertName:
             return WebHandlerNative.alert
         case alertConfirmCancelName:
@@ -138,8 +146,7 @@ enum WebHandlerNative {
             return handler
         case .go(let vc):
             let handler = WebContentHandler(name: WebHandlerNative.goName, data: nil) {[weak vc] data, responseCallback in
-                let webVC = BasicWebViewController()
-                webVC.url = .remote(data as! String)
+                let webVC = WebAdapter.shared.createWebVC(url: data as? String ?? "", remote: true, title: nil, hideNavBar: false, showProgress: true)
                 vc?.navigationController?.pushViewController(webVC, animated: true)
             }
             return handler
@@ -154,6 +161,14 @@ enum WebHandlerNative {
                 if let params = data as? Dictionary<String, Any>
                 {
                     WebPushNativeVC.gotoVC(params: params, hostVC: vc)
+                }
+            }
+            return handler
+        case .hideNavBar(let vc):
+            let handler = WebContentHandler(name: WebHandlerNative.hideNavBarName, data: nil) { (data, responseCallback) in
+                if let hide = data as? Int
+                {
+                    vc.hideNavBar = hide == 1 ? true : false
                 }
             }
             return handler
@@ -198,6 +213,7 @@ enum WebHandlerNative {
     }
 }
 
+
 //js交互h5 handler名称
 enum WebHandlerH5Name: String {
     case getUrl                         //获取页面url地址字符串
@@ -205,22 +221,16 @@ enum WebHandlerH5Name: String {
 }
 
 
-//MARK: Javascript代码片段
-/**
- * Javascript片段
- */
-typealias JavascriptExpression = String
-let js_getTitle: JavascriptExpression = "document.title"
-
 
 //MARK: H5想要push的本地界面的标志符，根据实际需求定义
 enum WebPushNativeVC: Int {
-    case simpleTableVC = 1001                      //进入简单表格界面
+    case none = 1000                                //未指定界面
+    case simpleTableVC = 1001                       //进入简单表格界面
     
     //跳转界面
     static func gotoVC(params: Dictionary<String, Any>, hostVC: BasicWebViewController?)
     {
-        let type = WebPushNativeVC(rawValue: params["type"] as! Int)
+        let type = WebPushNativeVC(rawValue: (params["type"] as? Int ?? WebPushNativeVC.none.rawValue))
         switch type {
         case .simpleTableVC:
             let vc = SimpleTableViewController.getViewController()
@@ -231,3 +241,11 @@ enum WebPushNativeVC: Int {
         }
     }
 }
+
+
+//MARK: Javascript代码片段
+/**
+ * Javascript片段
+ */
+typealias JavascriptExpression = String
+let js_getTitle: JavascriptExpression = "document.title"
