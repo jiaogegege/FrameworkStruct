@@ -83,6 +83,10 @@ var kDeviceModelName: String {
     case "iPhone13,2":   return "iPhone 12"
     case "iPhone13,3":   return "iPhone 12 Pro"
     case "iPhone13,4":   return "iPhone 12 Pro Max"
+    case "iPhone14,4":   return "iPhone 13 mini"
+    case "iPhone14,5":   return "iPhone 13"
+    case "iPhone14,2":   return "iPhone 13 Pro"
+    case "iPhone14,3":   return "iPhone 13 Pro Max"
 
     case "iPad1,1":   return "iPad"
     case "iPad1,2":   return "iPad 3G"
@@ -107,6 +111,9 @@ var kDeviceModelName: String {
     case "iPad8,9", "iPad8,10":  return "iPad Pro 11 2nd"
     case "iPad8,11", "iPad8,12":  return "iPad Pro 12.9 4th"
     case "iPad11,1":  return "iPad Mini 5"
+    case "iPad11,3", "iPad11,4":  return "iPad Air 3"
+    case "iPad11,6", "iPad11,7":  return "iPad 8"
+    case "iPad13,1", "iPad13,2":  return "iPad Air 4"
         
     case "AppleTV2,1":  return "Apple TV 2"
     case "AppleTV3,1","AppleTV3,2":  return "Apple TV 3"

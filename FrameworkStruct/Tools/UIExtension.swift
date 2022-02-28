@@ -525,4 +525,20 @@ extension UIImage
         return newImage ?? self //如果压缩不成功，那么返回原始图片
     }
     
+    ///拉伸图片，重复图片中心1*1像素，一般用于内容单纯的小图拉伸为大图填满某个区域
+    ///参数：size：指定被拉伸区域距离左边和顶部的距离，单位px
+    func stretch(size: CGSize = .zero) -> UIImage
+    {
+        if size == .zero    //拉伸中间1px
+        {
+            return self.stretchableImage(withLeftCapWidth: Int(self.size.width * 0.5), topCapHeight: Int(self.size.height * 0.5))
+        }
+        else    //左边和顶部距离根据参数指定
+        {
+            let left: Int = Int(size.width)
+            let top: Int = Int(size.height)
+            return self.stretchableImage(withLeftCapWidth: left, topCapHeight: top)
+        }
+    }
+    
 }

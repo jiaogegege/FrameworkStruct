@@ -36,6 +36,15 @@ let gAppBuild: String = Bundle.main.infoDictionary!["CFBundleVersion"] as! Strin
 let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
 
 
+//MARK: Storyboard文件名定义
+//启动界面
+let gLaunchSB = "LaunchScreen"
+//主界面
+let gMainSB = "Main"
+//我的界面
+let gMineSB = "Mine"
+
+
 //MARK: 全局通用自定义通知
 enum FSNotification: String
 {
@@ -92,18 +101,6 @@ enum FSError: Int, Error {
         return NSError(domain: NSCocoaErrorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: self.desc, NSLocalizedFailureReasonErrorKey: self.desc])
     }
 }
-
-
-//MARK: 项目中通用错误信息
-
-
-//MARK: Storyboard文件名定义
-//启动界面
-let gLaunchSB = "LaunchScreen"
-//主界面
-let gMainSB = "Main"
-//我的界面
-let gMineSB = "Mine"
 
 
 //MARK: 正则表达式
