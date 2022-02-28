@@ -77,6 +77,7 @@ class MonitorMonitor: OriginMonitor
     }
     
     override func originConfig() {
+        super.originConfig()
         self.accessorMonitor.originConfig()
         self.checkerMonitor.originConfig()
         self.containerMonitor.originConfig()

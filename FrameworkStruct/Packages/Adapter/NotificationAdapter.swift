@@ -18,7 +18,7 @@ import UserNotificationsUI
 import CoreLocation
 
 
-///推送通知适配器代理方法
+///推送通知适配器代理方法，根据实际需求设计
 protocol NotificationAdapterDelegate
 {
     ///申请权限结果
@@ -517,7 +517,7 @@ extension NotificationAdapter: ExternalInterface
         //判断是否可以使用推送
         guard canPush else {
             let err = FSError.noPushError
-//            FSLog("push notification: \(err.localizedDescription)")
+//            FSLog("push notification error: \(err.localizedDescription)")
             if let comp = completion
             {
                 

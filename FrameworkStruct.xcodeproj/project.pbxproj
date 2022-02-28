@@ -809,6 +809,7 @@
 		EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptManager.swift; sourceTree = "<group>"; };
 		EA3A051D27A284C100A96DE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_1.sql; sourceTree = "<group>"; };
+		EA3A343827CCA97D00C29568 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3E89B027B77945006A2715 /* RegisterLoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLoginWorker.swift; sourceTree = "<group>"; };
 		EA3E89B227B77B35006A2715 /* AnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManager.swift; sourceTree = "<group>"; };
 		EA3E89B727B77CE8006A2715 /* BundleImageProvider.macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleImageProvider.macOS.swift; sourceTree = "<group>"; };
@@ -3823,6 +3824,7 @@
 		EADB006E27623B59001B7223 = {
 			isa = PBXGroup;
 			children = (
+				EA3A343827CCA97D00C29568 /* README.md */,
 				EADB007927623B59001B7223 /* FrameworkStruct */,
 				EADB007827623B59001B7223 /* Products */,
 				EA922580276B3EAA00192E2E /* Frameworks */,
