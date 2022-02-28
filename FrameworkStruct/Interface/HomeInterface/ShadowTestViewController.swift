@@ -9,10 +9,8 @@ import UIKit
 
 class ShadowTestViewController: BasicViewController {
     
-    static func getViewController() -> ShadowTestViewController
-    {
-        let board = UIStoryboard(name: gMainSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "ShadowTestViewController") as! ShadowTestViewController
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
     }
 
     override func viewDidLoad() {

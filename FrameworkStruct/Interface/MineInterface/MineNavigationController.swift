@@ -9,10 +9,8 @@ import UIKit
 
 class MineNavigationController: BasicNavigationController {
     
-    static func getViewController() -> MineNavigationController
-    {
-        let board = UIStoryboard(name: gMineSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "MineNavigationController") as! MineNavigationController
+    override class func getViewController() -> Self {
+        getVC(from: gMineSB)
     }
 
     override func viewDidLoad() {

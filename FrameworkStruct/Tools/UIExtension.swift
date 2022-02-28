@@ -28,6 +28,20 @@ struct UIExtensionStoragePropertyKey
  */
 extension UIViewController
 {
+    ///通用获取vc的方法
+    @objc class func getViewController() -> Self
+    {
+        return Self.init()
+    }
+    
+    ///从storyboard获得一个VC
+    ///参数：storyboard：storyboard名字
+    @objc class func getVC(from storyboard: String) -> Self
+    {
+        let board = UIStoryboard(name: storyboard, bundle: nil)
+        return board.instantiateViewController(withIdentifier: g_getClassName(Self.self)) as! Self
+    }
+    
     //创建界面，一般用来创建界面组件，该方法应该只执行一次，多次执行会导致重复创建
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次

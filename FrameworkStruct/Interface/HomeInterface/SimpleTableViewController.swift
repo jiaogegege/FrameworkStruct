@@ -27,10 +27,8 @@ class SimpleTableViewController: BasicViewController
                      ["额定电压", "220V"],
                      ["额定功率", "380W", "110W"]]
     
-    static func getViewController() -> SimpleTableViewController
-    {
-        let board = UIStoryboard(name: gMainSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "SimpleTableViewController") as! SimpleTableViewController
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
     }
 
     override func viewDidLoad() {

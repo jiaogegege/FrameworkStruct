@@ -9,10 +9,8 @@ import UIKit
 
 class HomeNavigationController: BasicNavigationController {
     
-    static func getViewController() -> HomeNavigationController
-    {
-        let board = UIStoryboard(name: gMainSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "HomeNavigationController") as! HomeNavigationController
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
     }
 
     override func viewDidLoad() {

@@ -25,10 +25,8 @@ class ThemeSelectViewController: BasicViewController
     var themeArray: [ThemeProtocol]? = nil    //主题列表
     
     
-    static func getViewController() -> ThemeSelectViewController
-    {
-        let board = UIStoryboard(name: gMainSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "ThemeSelectViewController") as! ThemeSelectViewController
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
     }
 
     override func viewDidLoad() {

@@ -165,10 +165,10 @@ enum WebHandlerNative {
             }
             return handler
         case .hideNavBar(let vc):
-            let handler = WebContentHandler(name: WebHandlerNative.hideNavBarName, data: nil) { (data, responseCallback) in
+            let handler = WebContentHandler(name: WebHandlerNative.hideNavBarName, data: nil) {[weak vc] (data, responseCallback) in
                 if let hide = data as? Int
                 {
-                    vc.hideNavBar = hide == 1 ? true : false
+                    vc?.hideNavBar = hide == 1 ? true : false
                 }
             }
             return handler

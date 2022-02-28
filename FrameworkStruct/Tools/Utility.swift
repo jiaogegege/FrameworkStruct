@@ -67,7 +67,7 @@ func g_getCopy(origin: Any?) -> Any?
 ///获得类型的类名的字符串
 func g_getClassName(_ aClass: AnyClass) -> String
 {
-    return NSStringFromClass(aClass)
+    return NSStringFromClass(aClass).components(separatedBy: ".").last!
 }
 
 ///获得一个对象的类名

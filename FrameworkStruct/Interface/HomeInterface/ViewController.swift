@@ -12,6 +12,10 @@ class ViewController: BasicViewController
     @IBOutlet weak var tableView: UITableView!
     
     let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction]
+    
+    override class func getViewController() -> Self {
+        return getVC(from: gMainSB)
+    }
 
     override func viewDidLoad() {
         g_after(interval: 0.001) {
@@ -62,9 +66,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if indexPath.row == 0
+        if indexPath.row == 0       //瀑布流
         {
-            let jcolVC = JCollectionViewController.init()
+            let jcolVC = JCollectionViewController.getViewController()
             self.navigationController?.pushViewController(jcolVC, animated: true)
         }
         else if indexPath.row == 1  //主题选择
@@ -79,9 +83,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
 //            vc.isModalInPresentation = true
             self.present(vc, animated: true, completion: nil)
         }
-        else if indexPath.row == 3
+        else if indexPath.row == 3  //约束测试
         {
-            let vc = ConstraintTestViewController()
+            let vc = ConstraintTestViewController.getViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 4  //绘制表格
@@ -102,7 +106,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         }
         else if indexPath.row == 7  //h5交互
         {
-            let vc = TestWebViewController()
+            let vc = TestWebViewController.getViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

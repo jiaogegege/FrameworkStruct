@@ -13,6 +13,9 @@ import UIKit
 
 class MainTabbarController: BasicTabbarController
 {
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

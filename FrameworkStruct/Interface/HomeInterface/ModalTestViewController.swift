@@ -12,10 +12,8 @@ import UIKit
 
 class ModalTestViewController: BasicViewController {
     
-    static func getViewController() -> ModalTestViewController
-    {
-        let board = UIStoryboard(name: gMainSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "ModalTestViewController") as! ModalTestViewController
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
     }
     
     override func viewDidLoad() {

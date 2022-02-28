@@ -12,10 +12,8 @@ import UIKit
 
 class AnimationDemoViewController: BasicViewController {
     
-    static func getViewController() -> AnimationDemoViewController
-    {
-        let board = UIStoryboard(name: gMainSB, bundle: nil)
-        return board.instantiateViewController(withIdentifier: "AnimationDemoViewController") as! AnimationDemoViewController
+    override class func getViewController() -> Self {
+        getVC(from: gMainSB)
     }
 
     override func viewDidLoad() {

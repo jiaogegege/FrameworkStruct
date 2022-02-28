@@ -9,6 +9,10 @@ import UIKit
 
 class MineViewController: BasicViewController {
 
+    override class func getViewController() -> Self {
+        getVC(from: gMineSB)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
