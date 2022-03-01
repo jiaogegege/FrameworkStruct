@@ -21,16 +21,32 @@ extension UIImage: ConstantPropertyProtocol
     @objc static var iAppIcon:UIImage? = UIImage(named: "AppIcon")
     
     //tabbar图标
-    static let iHomeNormal = UIImage(named: "home_normal")
-    static let iHomeSelected = UIImage(named: "home_selected")
-    static let iMineNormal = UIImage(named: "mine_normal")
-    static let iMineSelected = UIImage(named: "mine_selected")
+    static var iHomeNormal: UIImage? {
+        UIImage(named: "home_normal")
+    }
+    static var iHomeSelected: UIImage? {
+        UIImage(named: "home_selected")
+    }
+    static var iMineNormal: UIImage? {
+        UIImage(named: "mine_normal")
+    }
+    static var iMineSelected: UIImage? {
+        UIImage(named: "mine_selected")
+    }
     //返回按钮图片
-    @objc static var iBackDark: UIImage? = UIImage(named: "common_back_dark")
-    @objc static var iBackLight: UIImage? = UIImage(named: "common_back_light")
-    @objc static var iBackClose: UIImage? = UIImage(named: "common_back_close")
+    @objc static var iBackDark: UIImage? {
+        UIImage(named: "common_back_dark")
+    }
+    @objc static var iBackLight: UIImage? {
+        UIImage(named: "common_back_light")
+    }
+    @objc static var iBackClose: UIImage? {
+        UIImage(named: "common_back_close")
+    }
     //cell向右箭头
-    @objc static var iRightArrow: UIImage? = UIImage(named: "right_arrow")
+    @objc static var iRightArrow: UIImage? {
+        UIImage(named: "right_arrow")
+    }
     
     //青少年模式弹窗头图
     @objc static var iTeenagerProtect = UIImage(named: "teenager_protect")

@@ -10,7 +10,7 @@ import UIKit
 class BasicTableViewController: UITableViewController
 {
     //MARK: 属性
-    /******************** 外部接口属性 Section Begin *******************/
+    /**************************************** 外部接口属性 Section Begin ***************************************/
     /**
      * 请按照声明顺序设置以下属性
      */
@@ -82,14 +82,16 @@ class BasicTableViewController: UITableViewController
             return self.statusBarStyle == .dark ? .default : .lightContent
         }
     }
-    /******************** 外部接口属性 Section End *******************/
+    /**************************************** 外部接口属性 Section End ***************************************/
     
-    /******************** 内部属性 Section Begin *******************/
+    /**************************************** 内部属性 Section Begin ***************************************/
     //状态管理器，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
+    
     //当前主题，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var theme = ThemeManager.shared.getCurrentTheme()
-    /******************** 内部属性 Section End *******************/
+    
+    /**************************************** 内部属性 Section End ***************************************/
     
     
     //MARK: 方法
@@ -97,7 +99,10 @@ class BasicTableViewController: UITableViewController
     {
         super.viewDidLoad()
         
-        //先设置UI的基础样式
+        //先设置自定义样式
+        self.customConfig()
+        
+        //再设置UI的基础样式
         self.basicConfig()
         
         //立即设置约束，保证获取的frame是正确的
@@ -138,32 +143,6 @@ class BasicTableViewController: UITableViewController
         
         //更新UI布局
         self.layoutUI()
-    }
-    
-    //基础设置，设置这个控制器的基础属性
-    fileprivate func basicConfig()
-    {
-        //返回按钮样式
-        self.setBackStyle()
-        //侧滑返回
-        self.setLeftSlideBack()
-        //背景色
-        self.setBackgroundColor()
-    }
-    
-    //设置导航栏和状态栏样式
-    fileprivate func basicNavConfig()
-    {
-        //导航栏背景色
-        self.setNavBackgroundColor()
-        //导航栏透明
-        self.setNavAlpha()
-        //隐藏导航栏底部横线
-        self.setHiddenNavBottomLine()
-        //导航标题颜色
-        self.setNavTitleColor()
-        //状态栏内容颜色
-        self.setStatusBarStyle()
     }
     
     //设置返回按钮样式
@@ -327,6 +306,32 @@ class BasicTableViewController: UITableViewController
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
+    //基础设置，设置这个控制器的基础属性
+    fileprivate func basicConfig()
+    {
+        //返回按钮样式
+        self.setBackStyle()
+        //侧滑返回
+        self.setLeftSlideBack()
+        //背景色
+        self.setBackgroundColor()
+    }
+    
+    //设置导航栏和状态栏样式
+    fileprivate func basicNavConfig()
+    {
+        //导航栏背景色
+        self.setNavBackgroundColor()
+        //导航栏透明
+        self.setNavAlpha()
+        //隐藏导航栏底部横线
+        self.setHiddenNavBottomLine()
+        //导航标题颜色
+        self.setNavTitleColor()
+        //状态栏内容颜色
+        self.setStatusBarStyle()
+    }
+    
     
     //MARK: 可被子类覆写的方法
     //返回按钮事件
@@ -334,6 +339,14 @@ class BasicTableViewController: UITableViewController
     @objc func backAction(sender: UIBarButtonItem)
     {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    //这个方法专门开放给子类用于设置基础属性，基础属性就是返回按钮、侧滑返回、背景、导航栏、状态栏的设置
+    //初始化时执行一次，并且在所有UI初始化方法之前
+    //该方法对应于`basicConfig`和`basicNavConfig`
+    func customConfig()
+    {
+        //留给子类实现
     }
     
     //创建界面，一般用来创建界面组件

@@ -11,18 +11,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    //获取当前UIWindow
-    static func currentWindow() -> UIWindow?
+    //获取单例对象，如果UIWindowScene对象还未初始化，那么返回nil
+    static func shared() -> SceneDelegate?
     {
         for windowScene: UIWindowScene in (UIApplication.shared.connectedScenes as? Set<UIWindowScene>)!
         {
             if windowScene.activationState == .foregroundActive
             {
-                return windowScene.windows.first
+                return windowScene.delegate as? SceneDelegate
+            }
+        }
+        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.delegate as? SceneDelegate
+    }
+    
+    //获取当前windowScene
+    var currentWindowScene: UIWindowScene? {
+        for windowScene: UIWindowScene in (UIApplication.shared.connectedScenes as? Set<UIWindowScene>)!
+        {
+            if windowScene.activationState == .foregroundActive
+            {
+                return windowScene
+            }
+        }
+        return UIApplication.shared.connectedScenes.first as? UIWindowScene
+    }
+    
+    //获取当前UIWindow
+    var currentWindow: UIWindow? {
+        if let currentWindowScene = currentWindowScene {
+            for window in currentWindowScene.windows
+            {
+                if window.isKeyWindow
+                {
+                    return window
+                }
             }
         }
         
-        return nil
+        return self.currentWindowScene?.windows.first
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

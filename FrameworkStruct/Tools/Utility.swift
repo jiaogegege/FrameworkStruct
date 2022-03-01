@@ -106,7 +106,7 @@ func g_getWindow() -> UIWindow
     }
     if #available(iOS 13.0, *)
     {
-        if let window = SceneDelegate.currentWindow()
+        if let window = SceneDelegate.shared()?.currentWindow
         {
             return window
         }
@@ -122,7 +122,8 @@ func g_getWindow() -> UIWindow
     {
         return w
     }
-    return UIWindow()
+    
+    return UIWindow()   //永远不应该执行这一步
 }
 
 ///判断字符串是否是有效字符串，无效字符串：nil、null、<null>、<nil>、""、"(null)"、NSNull

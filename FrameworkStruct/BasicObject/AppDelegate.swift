@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     var window: UIWindow?
     
     //根监控器，可以从这个对象获取到所有的监控器对象，从各个监控器对象可以获取到它们管理的组件对象，理论上可以获取到程序运行过程中所有的组件对象
-    var rootMonitor = MonitorMonitor.shared
+    lazy var rootMonitor = MonitorMonitor.shared
     
     
     //MARK: 方法
@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
     //注册远程推送成功
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        FSLog("remote notification token: \(deviceToken)")
+//        FSLog("remote notification token: \(deviceToken)")
         //获取到token后可以注册到自建服务器或者第三方服务
         NotificationAdapter.shared.registerForRemoteNotificationWithToken(deviceToken)
     }
@@ -68,6 +68,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         FSLog("register remote notification error: \(error.localizedDescription)")
         NotificationAdapter.shared.registerForRemoteNotificationFail(error)
     }
+    
+    //如果需要自定义设置屏幕旋转，那么释放这段代码
+//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+//        if ApplicationManager.shared.isForceSetlandscape
+//        {
+//            //横屏
+//            return .landscapeRight
+//        }
+//        else    //竖屏
+//        {
+//            return .portrait
+//        }
+//    }
     
 }
 

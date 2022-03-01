@@ -28,13 +28,9 @@ let kSystemName:String = UIDevice.current.systemName
 //操作系统版本
 let kSystemVersion: String = UIDevice.current.systemVersion
 
-//电池电量：0-1
-var kDeviceBattery: Float {
-    return UIDevice.current.batteryLevel
-}
-
 //获取设备型号
-var kDeviceModelName: String {
+var kDeviceModelName: String
+{
     var systemInfo = utsname()
     uname(&systemInfo)
     let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -190,12 +186,6 @@ func fit8(_ val: CGFloat) -> CGFloat
 func fitX(_ val: CGFloat) -> CGFloat
 {
     return fitWidth(val: val, base: kiPhoneXWidth)
-}
-
-//判断是否横屏
-func isLandscape() -> Bool
-{
-    return UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight
 }
 
 //判断是否iPad

@@ -17,7 +17,7 @@ class JCollectionViewController: BasicViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.title = String.waterfall
         let flowLayout = GCWaterfallFlowLayout.init()
         flowLayout.delegate = self
 //        flowLayout.sectionHeadersPinToVisibleBounds = true

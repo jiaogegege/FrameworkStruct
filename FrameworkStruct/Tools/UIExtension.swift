@@ -418,7 +418,7 @@ extension UIColor
     
     ///16进制颜色字符串转UIColor
     ///colorStr:支持“#123456”、 “0X123456”、 “123456”三种格式
-    static func colorWithHex(colorStr: String , alpha: CGFloat = 1) -> UIColor
+    class func colorWithHex(colorStr: String , alpha: CGFloat = 1) -> UIColor
     {
         //删除字符串中的空格
         var cString = colorStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -460,7 +460,7 @@ extension UIColor
     }
     
     ///16进制颜色转换成UIColor
-    static func colorFromHex(value : Int , alpha : CGFloat = 1) -> UIColor
+    class func colorFromHex(value : Int , alpha : CGFloat = 1) -> UIColor
     {
         let red = CGFloat((value & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((value & 0xFF00) >> 8) / 255.0
@@ -469,9 +469,40 @@ extension UIColor
     }
     
     ///红绿蓝255值转换成UIColor，RGBA都有默认值，默认纯白色
-    static func colorWithRGBA(red: CGFloat = 255.0, green: CGFloat = 255.0, blue: CGFloat = 255.0, alpha: CGFloat = 1.0) -> UIColor
+    class func colorWithRGBA(red: CGFloat = 255.0, green: CGFloat = 255.0, blue: CGFloat = 255.0, alpha: CGFloat = 1.0) -> UIColor
     {
         return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)
+    }
+    
+    ///暗黑模式支持
+    ///reverse:是否反转暗黑主题，如果为false，那么颜色跟随暗黑，如果是true，那么颜色反转
+    ///keepBright：在黑暗模式下，如果计算出的颜色是暗色，是否保持亮色，一般用于标题等醒目元素
+    func switchDarkMode(reverse: Bool = false, keepBright: Bool = false) -> UIColor
+    {
+        return UIColor.init { trait in
+            if trait.userInterfaceStyle == .dark    //暗黑模式，返回一个设计好的颜色值，这个值根据UI设计和具体的颜色变化
+            {
+                let light = UIColor.white
+                let dark = UIColor.black
+                //获取颜色的明度
+                let brightness = UnsafeMutablePointer<CGFloat>.allocate(capacity: 0)
+                self.getHue(nil, saturation: nil, brightness: brightness, alpha: nil)
+                if brightness.pointee > 0.5 //如果颜色的明度高于0.5，那么设置为一种黑色
+                {
+                    brightness.deallocate()
+                    return reverse ? light : (keepBright ? light : dark)
+                }
+                else    //如果颜色明度低于0.5，那么设置为一种白色
+                {
+                    brightness.deallocate()
+                    return reverse ? dark : light
+                }
+            }
+            else    //浅色模式，返回自身颜色值
+            {
+                return self
+            }
+        }
     }
     
 }

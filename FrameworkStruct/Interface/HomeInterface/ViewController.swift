@@ -21,32 +21,21 @@ class ViewController: BasicViewController
         g_after(interval: 0.001) {
             super.viewDidLoad()
         }
+    }
+    
+    override func basicConfig() {
         self.backStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.title = "功能选择"
+        self.navBackgroundColor = self.theme.mainColor
     }
     
     //创建界面
     override func createUI() {
         super.createUI()
-        
-    }
-    
-    //设置界面
-    override func configUI()
-    {
-        super.configUI()
-        
-    }
-    
-    //初始化数据
-    override func initData() {
-        super.initData()
-        
-    }
-    
-    //更新界面
-    override func updateUI() {
-        super.updateUI()
         
     }
 
@@ -68,17 +57,20 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
     {
         if indexPath.row == 0       //瀑布流
         {
-            let jcolVC = JCollectionViewController.getViewController()
-            self.navigationController?.pushViewController(jcolVC, animated: true)
+            let vc = JCollectionViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 1  //主题选择
         {
-            let themeVC = ThemeSelectViewController.getViewController()
-            self.navigationController?.pushViewController(themeVC, animated: true)
+            let vc = ThemeSelectViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 2
         {
             let vc = ModalTestViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
             vc.modalPresentationStyle = .pageSheet
 //            vc.isModalInPresentation = true
             self.present(vc, animated: true, completion: nil)
@@ -86,27 +78,32 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         else if indexPath.row == 3  //约束测试
         {
             let vc = ConstraintTestViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 4  //绘制表格
         {
             let vc = SimpleTableViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
         else if indexPath.row == 5  //阴影测试
         {
             let vc = ShadowTestViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 6  //动画演示
         {
             let vc = AnimationDemoViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 7  //h5交互
         {
             let vc = TestWebViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

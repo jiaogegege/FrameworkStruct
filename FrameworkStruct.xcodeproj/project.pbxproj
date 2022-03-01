@@ -1058,6 +1058,7 @@
 		EA66061627C86E0E000B20A6 /* WebAdapterConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAdapterConst.swift; sourceTree = "<group>"; };
 		EA6CF268278D85AE003A1E43 /* FSStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSStack.swift; sourceTree = "<group>"; };
 		EA6D7F80278ED3C400D73386 /* FSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSAlertView.swift; sourceTree = "<group>"; };
+		EA6EB00E27CDF25E005B90B4 /* FrameworkStruct.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FrameworkStruct.entitlements; sourceTree = "<group>"; };
 		EA71970527BF79C000A7F3C0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA71970627BF79E900A7F3C0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
@@ -3842,6 +3843,7 @@
 		EADB007927623B59001B7223 /* FrameworkStruct */ = {
 			isa = PBXGroup;
 			children = (
+				EA6EB00E27CDF25E005B90B4 /* FrameworkStruct.entitlements */,
 				EADB009627623C34001B7223 /* OriginObject */,
 				EADB009327623C1E001B7223 /* BasicObject */,
 				EADB009527623C2D001B7223 /* Interface */,
@@ -5114,8 +5116,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 83B9QXX2U6;
+				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = M3DF85K738;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -5137,8 +5140,9 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinfeng.crowdfunding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = crowdfunding_developer;
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -5155,8 +5159,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 83B9QXX2U6;
+				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = M3DF85K738;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -5177,8 +5182,9 @@
 					"-DSQLITE_HAS_CODEC",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jxj.FrameworkStruct;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinfeng.crowdfunding;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = crowdfunding_developer;
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

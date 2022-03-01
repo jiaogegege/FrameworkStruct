@@ -500,7 +500,7 @@
 	static NSCalendar *gregorian;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	});
     
     NSDateComponents *components = [[NSDateComponents alloc] init];

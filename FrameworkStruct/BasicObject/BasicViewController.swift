@@ -10,7 +10,7 @@ import UIKit
 class BasicViewController: UIViewController
 {
     //MARK: 属性
-    /******************** 外部接口属性 Section Begin *******************/
+    /**************************************** 外部接口属性 Section Begin ***************************************/
     /**
      * 请按照声明顺序设置以下属性
      */
@@ -64,7 +64,7 @@ class BasicViewController: UIViewController
         }
     }
     
-    ///设置标题颜色
+    ///设置导航栏标题颜色
     var navTitleColor: UIColor = .black {
         didSet {
             setNavTitleColor()
@@ -82,22 +82,24 @@ class BasicViewController: UIViewController
             return self.statusBarStyle == .dark ? .default : .lightContent
         }
     }
-    /******************** 外部接口属性 Section End *******************/
+    /**************************************** 外部接口属性 Section End ***************************************/
     
-    /******************** 内部属性 Section Begin *******************/
+    /**************************************** 内部属性 Section Begin ***************************************/
     //状态管理器，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
+    
     //当前主题，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var theme = ThemeManager.shared.getCurrentTheme()
-    /******************** 内部属性 Section End *******************/
+    
+    /**************************************** 内部属性 Section End ***************************************/
     
     
     //MARK: 方法
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        //先设置UI的基础样式
+
+        //设置UI的基础样式
         self.basicConfig()
         
         //立即设置约束，保证获取的frame是正确的
@@ -138,32 +140,6 @@ class BasicViewController: UIViewController
         
         //更新UI布局
         self.layoutUI()
-    }
-    
-    //基础设置，设置这个控制器的基础属性
-    fileprivate func basicConfig()
-    {
-        //返回按钮样式
-        self.setBackStyle()
-        //侧滑返回
-        self.setLeftSlideBack()
-        //背景色
-        self.setBackgroundColor()
-    }
-    
-    //设置导航栏和状态栏样式
-    fileprivate func basicNavConfig()
-    {
-        //导航栏背景色
-        self.setNavBackgroundColor()
-        //导航栏透明
-        self.setNavAlpha()
-        //隐藏导航栏底部横线
-        self.setHiddenNavBottomLine()
-        //导航标题颜色
-        self.setNavTitleColor()
-        //状态栏内容颜色
-        self.setStatusBarStyle()
     }
     
     //设置返回按钮样式
@@ -257,12 +233,12 @@ class BasicViewController: UIViewController
     {
         if #available(iOS 15.0, *)
         {
-            self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = self.navBackgroundColor
-            self.navigationController?.navigationBar.standardAppearance.backgroundColor = self.navBackgroundColor
+            self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
+            self.navigationController?.navigationBar.standardAppearance.backgroundColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
         }
         else
         {
-            self.navigationController?.navigationBar.barTintColor = self.navBackgroundColor
+            self.navigationController?.navigationBar.barTintColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
 //            self.navigationController?.navigationBar.tintColor = self.navBackgroundColor  //这一行会修改导航栏上的系统按钮颜色，比如返回按钮
         }
     }
@@ -308,7 +284,7 @@ class BasicViewController: UIViewController
     //设置导航标题颜色
     fileprivate func setNavTitleColor()
     {
-        let attrDic = [NSAttributedString.Key.foregroundColor: self.navTitleColor]
+        let attrDic = [NSAttributedString.Key.foregroundColor: self.overrideUserInterfaceStyle == .unspecified ? self.navTitleColor.switchDarkMode(keepBright: true) : self.navTitleColor]
         if #available(iOS 15.0, *)
         {
             self.navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = attrDic
@@ -334,6 +310,38 @@ class BasicViewController: UIViewController
     @objc func backAction(sender: UIBarButtonItem)
     {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    //基础设置，设置这个控制器的基础属性
+    func basicConfig()
+    {
+        //返回按钮样式
+        self.setBackStyle()
+        //侧滑返回
+        self.setLeftSlideBack()
+        //背景色
+        self.setBackgroundColor()
+    }
+    
+    //设置导航栏和状态栏样式
+    func basicNavConfig()
+    {
+        //导航栏背景色
+        self.setNavBackgroundColor()
+        //导航栏透明
+        self.setNavAlpha()
+        //隐藏导航栏底部横线
+        self.setHiddenNavBottomLine()
+        //导航标题颜色
+        self.setNavTitleColor()
+        //状态栏内容颜色
+        self.setStatusBarStyle()
+        
+        //如果导航栏没有设置透明，那么设置背景色
+        if self.navAlpha == false
+        {
+            self.setNavBackgroundColor()
+        }
     }
     
     //创建界面，一般用来创建界面组件
@@ -377,6 +385,22 @@ class BasicViewController: UIViewController
     override func updateUI()
     {
         
+    }
+    
+    //暗黑模式适配
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        //如果子类设置了只使用某一种模式，那么不需要更新主题
+        if self.overrideUserInterfaceStyle == .unspecified
+        {
+            super.traitCollectionDidChange(previousTraitCollection)
+            let trait = UITraitCollection.current
+            //当主题模式变化的时候，设置基础属性
+            setBackStyle()
+            setBackgroundColor()
+            setNavBackgroundColor()
+            setNavTitleColor()
+            self.statusBarStyle = trait.userInterfaceStyle == .dark ? .light : .dark
+        }
     }
     
     //主题更新UI

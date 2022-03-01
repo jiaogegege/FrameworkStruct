@@ -112,19 +112,20 @@ enum VCBackgroundStyle
     
     //返回颜色或者渐变图层或者图像图层
     //UIColor/CALayer
+    //UIColor支持暗黑模式，如果是浅色的背景色，那么设置为一种黑色，深色的则返回深色
     func getContent() -> Any
     {
         switch self {
         case .none:
-            return UIColor.white    //暂时none返回白色背景
+            return UIColor.white.switchDarkMode()    //暂时none返回白色背景
         case .black:
             return UIColor.black
         case .white:
-            return UIColor.white
+            return UIColor.white.switchDarkMode()
         case .lightGray:
-            return UIColor.cGray_f4
+            return UIColor.cGray_f4.switchDarkMode()
         case .pink:
-            return UIColor.cPink_ff709b
+            return UIColor.cPink_ff709b.switchDarkMode()
         case .clear:
             return UIColor.clear
         case .gradientDark:
