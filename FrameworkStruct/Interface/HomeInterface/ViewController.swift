@@ -30,7 +30,9 @@ class ViewController: BasicViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "功能选择"
+        self.statusBarStyle = .light
         self.navBackgroundColor = self.theme.mainColor
+        self.navTitleColor = .white
     }
     
     //创建界面

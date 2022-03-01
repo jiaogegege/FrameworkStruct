@@ -64,7 +64,7 @@ class BasicTableViewController: UITableViewController
         }
     }
     
-    ///设置标题颜色
+    ///设置导航栏标题颜色
     var navTitleColor: UIColor = .black {
         didSet {
             setNavTitleColor()
@@ -79,6 +79,11 @@ class BasicTableViewController: UITableViewController
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
+            //如果是黑暗模式，永远返回light
+            if UITraitCollection.current.userInterfaceStyle == .dark
+            {
+                return .lightContent
+            }
             return self.statusBarStyle == .dark ? .default : .lightContent
         }
     }
@@ -98,11 +103,8 @@ class BasicTableViewController: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        //先设置自定义样式
-        self.customConfig()
-        
-        //再设置UI的基础样式
+
+        //设置UI的基础样式
         self.basicConfig()
         
         //立即设置约束，保证获取的frame是正确的
@@ -236,12 +238,12 @@ class BasicTableViewController: UITableViewController
     {
         if #available(iOS 15.0, *)
         {
-            self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = self.navBackgroundColor
-            self.navigationController?.navigationBar.standardAppearance.backgroundColor = self.navBackgroundColor
+            self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
+            self.navigationController?.navigationBar.standardAppearance.backgroundColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
         }
         else
         {
-            self.navigationController?.navigationBar.barTintColor = self.navBackgroundColor
+            self.navigationController?.navigationBar.barTintColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
 //            self.navigationController?.navigationBar.tintColor = self.navBackgroundColor  //这一行会修改导航栏上的系统按钮颜色，比如返回按钮
         }
     }
@@ -287,7 +289,7 @@ class BasicTableViewController: UITableViewController
     //设置导航标题颜色
     fileprivate func setNavTitleColor()
     {
-        let attrDic = [NSAttributedString.Key.foregroundColor: self.navTitleColor]
+        let attrDic = [NSAttributedString.Key.foregroundColor: self.overrideUserInterfaceStyle == .unspecified ? self.navTitleColor.switchDarkMode(keepBright: true) : self.navTitleColor]
         if #available(iOS 15.0, *)
         {
             self.navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = attrDic
@@ -306,8 +308,17 @@ class BasicTableViewController: UITableViewController
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
+    
+    //MARK: 可被子类覆写的方法
+    //返回按钮事件
+    //子类可以覆写这个方法
+    @objc func backAction(sender: UIBarButtonItem)
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //基础设置，设置这个控制器的基础属性
-    fileprivate func basicConfig()
+    func basicConfig()
     {
         //返回按钮样式
         self.setBackStyle()
@@ -318,7 +329,7 @@ class BasicTableViewController: UITableViewController
     }
     
     //设置导航栏和状态栏样式
-    fileprivate func basicNavConfig()
+    func basicNavConfig()
     {
         //导航栏背景色
         self.setNavBackgroundColor()
@@ -330,23 +341,12 @@ class BasicTableViewController: UITableViewController
         self.setNavTitleColor()
         //状态栏内容颜色
         self.setStatusBarStyle()
-    }
-    
-    
-    //MARK: 可被子类覆写的方法
-    //返回按钮事件
-    //子类可以覆写这个方法
-    @objc func backAction(sender: UIBarButtonItem)
-    {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    //这个方法专门开放给子类用于设置基础属性，基础属性就是返回按钮、侧滑返回、背景、导航栏、状态栏的设置
-    //初始化时执行一次，并且在所有UI初始化方法之前
-    //该方法对应于`basicConfig`和`basicNavConfig`
-    func customConfig()
-    {
-        //留给子类实现
+        
+        //如果导航栏没有设置透明，那么设置背景色
+        if self.navAlpha == false
+        {
+            self.setNavBackgroundColor()
+        }
     }
     
     //创建界面，一般用来创建界面组件
@@ -390,6 +390,21 @@ class BasicTableViewController: UITableViewController
     override func updateUI()
     {
         
+    }
+    
+    //暗黑模式适配
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        //如果子类设置了只使用某一种模式，那么不需要更新主题
+        if self.overrideUserInterfaceStyle == .unspecified
+        {
+            super.traitCollectionDidChange(previousTraitCollection)
+            //当主题模式变化的时候，设置基础属性
+            setBackStyle()
+            setBackgroundColor()
+            setNavBackgroundColor()
+            setNavTitleColor()
+            setStatusBarStyle()
+        }
     }
     
     //主题更新UI

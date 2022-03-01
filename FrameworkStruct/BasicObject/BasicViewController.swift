@@ -79,6 +79,11 @@ class BasicViewController: UIViewController
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
+            //如果是黑暗模式，永远返回light
+            if UITraitCollection.current.userInterfaceStyle == .dark
+            {
+                return .lightContent
+            }
             return self.statusBarStyle == .dark ? .default : .lightContent
         }
     }
@@ -393,13 +398,12 @@ class BasicViewController: UIViewController
         if self.overrideUserInterfaceStyle == .unspecified
         {
             super.traitCollectionDidChange(previousTraitCollection)
-            let trait = UITraitCollection.current
             //当主题模式变化的时候，设置基础属性
             setBackStyle()
             setBackgroundColor()
             setNavBackgroundColor()
             setNavTitleColor()
-            self.statusBarStyle = trait.userInterfaceStyle == .dark ? .light : .dark
+            setStatusBarStyle()
         }
     }
     
