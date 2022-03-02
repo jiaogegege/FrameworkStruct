@@ -47,6 +47,14 @@ class CustomTheme: ThemeProtocol
     var hintTextColor: UIColor {
         return UIColor.colorWithHex(colorStr: theme.hintTextColor)
     }
+    //背景色
+    var backgroundColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.backgroundColor)
+    }
+    //内容背景色
+    var contentBackgroundColor: UIColor {
+        return UIColor.colorWithHex(colorStr: theme.contentBackgroundColor)
+    }
     //主字体
     var mainFont: UIFont {
         return UIFont.init(name: theme.mainFont, size: CGFloat(theme.mainFontSize.floatValue)) ?? UIFont.systemFont(ofSize: CGFloat(theme.mainFontSize.floatValue))

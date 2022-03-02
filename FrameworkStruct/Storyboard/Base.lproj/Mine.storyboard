@@ -12,7 +12,6 @@
         <!--我的-->
         <scene sceneID="zuy-Ui-duz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pxx-0x-aed" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MineNavigationController" title="我的" id="sit-bE-l9Q" customClass="MineNavigationController" customModule="FrameworkStruct" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bcX-2W-U2Z">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -22,6 +21,7 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="sd5-mS-ID5"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pxx-0x-aed" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-641" y="106"/>
         </scene>
@@ -32,8 +32,23 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-EW-d00">
+                                <rect key="frame" x="172" y="108" width="70" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="nof-FC-UyS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0bv-EW-d00" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="ePJ-44-7aK"/>
+                            <constraint firstItem="0bv-EW-d00" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="jp3-xG-4NW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gEV-bw-uuR"/>
                 </viewController>

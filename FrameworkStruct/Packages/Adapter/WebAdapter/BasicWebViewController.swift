@@ -85,19 +85,15 @@ class BasicWebViewController: BasicViewController
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.addObserver(self, forKeyPath: WVObserveKey.webViewProgress.rawValue, options: [.old, .new], context: nil)
+        //加载js bridge列表
+        self.configJsBridge()
         //进度条
         progressBar.frame = CGRect(x: 0, y: (self.hideNavBar ? kStatusHeight : kSafeTopHeight), width: kScreenWidth, height: 2.0)
         progressBar.progressTintColor = theme.mainColor
         progressBar.trackTintColor = .clear
         progressBar.progress = 0.0
     }
-    
-    override func initData() {
-        super.initData()
-        //加载js bridge列表
-        self.configJsBridge()
-    }
-    
+
     //配置js交互handler
     fileprivate func configJsBridge()
     {

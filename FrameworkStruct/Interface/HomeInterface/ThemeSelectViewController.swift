@@ -30,11 +30,8 @@ class ThemeSelectViewController: BasicViewController
     }
 
     override func viewDidLoad() {
-        g_after(interval: 0.001) {
-            super.viewDidLoad()
-            self.tableView.reloadData()
-        }
-        
+        super.viewDidLoad()
+        self.tableView.reloadData()
     }
     
     override func createUI()
@@ -71,12 +68,7 @@ class ThemeSelectViewController: BasicViewController
         progress.progressTintColor = theme.mainColor
     }
     
-    
-    
-    
-    
 
-    
 }
 
 //MARK: tableView代理

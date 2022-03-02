@@ -3,25 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>id</key>
-	<string>3</string>
+	<string>0</string>
 	<key>fileName</key>
-	<string>BlueTheme.plist</string>
+	<string>DarkTheme.plist</string>
 	<key>name</key>
-	<string>blue_theme</string>
+	<string>dark_theme</string>
 	<key>mainColor</key>
-	<string>007fff</string>
-	<key>mainTitleColor</key>
-	<string>333333</string>
-	<key>subTitleColor</key>
-	<string>666666</string>
-	<key>contentTextColor</key>
-	<string>999999</string>
-	<key>hintTextColor</key>
-	<string>999999</string>
-	<key>backgroundColor</key>
-	<string>fafafa</string>
-	<key>contentBackgroundColor</key>
 	<string>ffffff</string>
+	<key>mainTitleColor</key>
+	<string>ffffff</string>
+	<key>subTitleColor</key>
+	<string>fafafa</string>
+	<key>contentTextColor</key>
+	<string>f1f1f1</string>
+	<key>hintTextColor</key>
+	<string>f1f1f1</string>
+	<key>backgroundColor</key>
+	<string>000000</string>
+	<key>contentBackgroundColor</key>
+	<string>1c1c1c</string>
 	<key>mainFont</key>
 	<string>PingFangSC-Medium</string>
 	<key>secondaryFont</key>

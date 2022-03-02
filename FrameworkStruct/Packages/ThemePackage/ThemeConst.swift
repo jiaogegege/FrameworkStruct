@@ -17,3 +17,7 @@ import Foundation
 let sPinkThemeFileName = "PinkTheme.plist"
 let sRedThemeFileName = "RedTheme.plist"
 let sBlueThemeFileName = "BlueTheme.plist"
+let sDarkThemeFileName = "DarkTheme.plist"
+
+///所有主题数组
+let allThemeNameArray: [String] = [sPinkThemeFileName, sRedThemeFileName, sBlueThemeFileName, sDarkThemeFileName]

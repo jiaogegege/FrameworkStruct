@@ -14,7 +14,7 @@ class BasicTabbarController: UITabBarController
     //状态管理器，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
     //当前主题，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var theme = ThemeManager.shared.getCurrentTheme()
+    fileprivate(set) var theme = ThemeManager.shared.getCurrentOrDark()
     /******************** 内部属性 Section End *******************/
     
 
@@ -61,6 +61,18 @@ class BasicTabbarController: UITabBarController
         self.tabBar.tintColor = theme.mainColor
     }
     
+    //暗黑模式适配
+    //子类覆写这个方法的时候，要先调用父类方法，如果设置`followDarkMode`为false，则无需覆写这个方法
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        //如果子类设置了只使用某一种模式，那么不需要更新主题
+        if self.overrideUserInterfaceStyle == .unspecified
+        {
+            super.traitCollectionDidChange(previousTraitCollection)
+            //当系统暗黑模式变化的时候，设置基础属性
+            self.themeDidChangeNotification(notify: nil)
+        }
+    }
+    
     //添加通知
     //如果子类覆写这个方法，需要调用父类方法
     override func addNotification()
@@ -83,9 +95,10 @@ class BasicTabbarController: UITabBarController
 extension BasicTabbarController:DelegateProtocol
 {
     //处理主题通知的方法
-    @objc fileprivate func themeDidChangeNotification(notify: Notification)
+    @objc fileprivate func themeDidChangeNotification(notify: Notification?)
     {
-        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
+//        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
+        self.theme = ThemeManager.shared.getCurrentOrDark()     //切换主题的时候支持暗黑模式
         self.themeUpdateUI(theme: self.theme)
     }
 

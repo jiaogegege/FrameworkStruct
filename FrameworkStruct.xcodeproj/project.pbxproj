@@ -370,6 +370,7 @@
 		EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EA922579276B3E7C00192E2E /* SVProgressHUD.bundle */; };
 		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
 		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
+		EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA98982027CF1AF300C63950 /* DarkTheme.plist */; };
 		EA9936922799074B00480147 /* UIView+Cate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9936902799074B00480147 /* UIView+Cate.m */; };
 		EA99369427992F4900480147 /* ShadowTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA99369327992F4900480147 /* ShadowTestViewController.swift */; };
 		EA99371B27994F6100480147 /* TABAnimatedCacheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA99369827994F6000480147 /* TABAnimatedCacheModel.m */; };
@@ -1126,6 +1127,7 @@
 		EA92257A276B3E7C00192E2E /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
 		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
+		EA98982027CF1AF300C63950 /* DarkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DarkTheme.plist; sourceTree = "<group>"; };
 		EA9936902799074B00480147 /* UIView+Cate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Cate.m"; sourceTree = "<group>"; };
 		EA9936912799074B00480147 /* UIView+Cate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Cate.h"; sourceTree = "<group>"; };
 		EA99369327992F4900480147 /* ShadowTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTestViewController.swift; sourceTree = "<group>"; };
@@ -4168,6 +4170,7 @@
 				EADB015A27624B4D001B7223 /* PinkTheme.plist */,
 				EADB015927624B4C001B7223 /* RedTheme.plist */,
 				EADB015827624B4C001B7223 /* BlueTheme.plist */,
+				EA98982027CF1AF300C63950 /* DarkTheme.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -4263,6 +4266,7 @@
 				EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */,
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */,
+				EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EA3E8C2027B782C4006A2715 /* pop-ios-Info.plist in Resources */,

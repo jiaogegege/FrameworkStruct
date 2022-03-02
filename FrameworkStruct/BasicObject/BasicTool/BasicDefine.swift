@@ -76,29 +76,30 @@ enum VCStatusBarStyle {
 //VC返回按钮样式
 enum VCBackStyle
 {
+    case none   //不显示返回按钮
     case dark   //深色返回按钮
     case light  //浅色返回按钮
     case close  //关闭按钮
-    case none   //不显示返回按钮
     
     ///获得图片，如果是none则返回nil
     func getImage() -> UIImage?
     {
         switch self {
+        case .none:
+            return nil
         case .dark:
             return UIImage.iBackDark
         case .light:
             return UIImage.iBackLight
         case .close:
             return UIImage.iBackClose
-        case .none:
-            return nil
         }
     }
     
 }
 
 //VC背景色样式，定义成枚举而非颜色常量的原因是，有可能背景是渐变色或者图像，可以在枚举中进行扩展
+//这里的例子仅作参考，实际根据需求设计，如果有主题系统，背景设置为`none`跟随主题变化
 enum VCBackgroundStyle
 {
     case none   //什么都不做
@@ -117,15 +118,15 @@ enum VCBackgroundStyle
     {
         switch self {
         case .none:
-            return UIColor.white.switchDarkMode()    //暂时none返回白色背景
+            return ThemeManager.shared.getCurrentOrDark().backgroundColor    //返回主题背景色
         case .black:
             return UIColor.black
         case .white:
-            return UIColor.white.switchDarkMode()
+            return UIColor.white
         case .lightGray:
-            return UIColor.cGray_f4.switchDarkMode()
+            return UIColor.cGray_f4
         case .pink:
-            return UIColor.cPink_ff709b.switchDarkMode()
+            return UIColor.cPink_ff709b
         case .clear:
             return UIColor.clear
         case .gradientDark:

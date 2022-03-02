@@ -14,6 +14,13 @@ class BasicTableViewController: UITableViewController
     /**
      * 请按照声明顺序设置以下属性
      */
+    ///主题是否跟随系统暗黑模式变化，默认取全局设置
+    var followDarkMode: Bool = ThemeManager.shared.isFollowDarkMode {
+        didSet {
+            setFollowDarkMode()
+        }
+    }
+    
     ///返回按钮样式
     var backStyle: VCBackStyle = .dark {
         didSet {
@@ -80,11 +87,11 @@ class BasicTableViewController: UITableViewController
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
             //如果是黑暗模式，永远返回light
-            if UITraitCollection.current.userInterfaceStyle == .dark
+            if UITraitCollection.current.userInterfaceStyle == .dark && self.followDarkMode
             {
                 return .lightContent
             }
-            return self.statusBarStyle == .dark ? .default : .lightContent
+            return self.statusBarStyle == .dark ? .darkContent : .lightContent
         }
     }
     /**************************************** 外部接口属性 Section End ***************************************/
@@ -94,7 +101,7 @@ class BasicTableViewController: UITableViewController
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
     
     //当前主题，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var theme = ThemeManager.shared.getCurrentTheme()
+    fileprivate(set) var theme = ThemeManager.shared.getCurrentOrDark()
     
     /**************************************** 内部属性 Section End ***************************************/
     
@@ -103,18 +110,23 @@ class BasicTableViewController: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        //初始化数据
+        self.initData()
+        
+        //设置自定义样式
+        self.customConfig()
 
         //设置UI的基础样式
         self.basicConfig()
         
         //立即设置约束，保证获取的frame是正确的
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+//        self.view.setNeedsLayout()
+//        self.view.layoutIfNeeded()
         
-        //创建UI/配置UI/初始化数据/更新界面/添加通知
+        //创建UI/配置UI/更新界面/添加通知
         self.createUI()
         self.configUI()
-        self.initData()
         self.updateUI()
         self.addNotification()
         
@@ -145,6 +157,19 @@ class BasicTableViewController: UITableViewController
         
         //更新UI布局
         self.layoutUI()
+    }
+    
+    //设置是否跟随系统暗黑模式
+    fileprivate func setFollowDarkMode()
+    {
+        if self.followDarkMode  //如果跟随暗黑模式
+        {
+            self.theme = ThemeManager.shared.getCurrentOrDark()
+        }
+        else
+        {
+            self.theme = ThemeManager.shared.getCurrentTheme()
+        }
     }
     
     //设置返回按钮样式
@@ -190,7 +215,7 @@ class BasicTableViewController: UITableViewController
         }
         else if let la = bgContent as? CALayer
         {
-            self.view.backgroundColor = .white  //如果背景是图片，那么背景色设置成白色
+            self.view.backgroundColor = theme.backgroundColor  //如果背景是图片，那么背景色设置成主题背景
             self.view.layer.addSublayer(la)
         }
     }
@@ -203,9 +228,11 @@ class BasicTableViewController: UITableViewController
             if #available(iOS 15.0, *)
             {
                 let barAppearance = UINavigationBarAppearance()
-                barAppearance.backgroundColor = UIColor.clear
-                barAppearance.backgroundEffect = nil;
-                barAppearance.shadowColor = nil;
+                barAppearance.backgroundColor = nil
+                barAppearance.backgroundImage = nil
+                barAppearance.backgroundEffect = nil
+                barAppearance.shadowColor = nil
+                barAppearance.shadowImage = nil
                 self.navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
                 self.navigationController?.navigationBar.standardAppearance = barAppearance
             }
@@ -214,14 +241,17 @@ class BasicTableViewController: UITableViewController
                 self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
                 self.navigationController?.navigationBar.shadowImage = UIImage()
             }
+            self.navigationController?.navigationBar.isTranslucent = true
         }
         else
         {
             if #available(iOS 15.0, *)
             {
+                //根据各种条件判断最终的颜色
+                let color = useDarkMode() ? self.navBackgroundColor.switchDarkMode(keepDark: true) : self.navBackgroundColor
                 let barAppearance = UINavigationBarAppearance()
-                barAppearance.backgroundColor = self.navBackgroundColor
-                barAppearance.shadowColor = self.navBackgroundColor
+                barAppearance.backgroundColor = color
+                barAppearance.shadowColor = color
                 self.navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
                 self.navigationController?.navigationBar.standardAppearance = barAppearance
             }
@@ -236,15 +266,17 @@ class BasicTableViewController: UITableViewController
     //设置导航栏背景色
     fileprivate func setNavBackgroundColor()
     {
+        //根据各种条件判断最终的颜色
+        let color = useDarkMode() ? self.navBackgroundColor.switchDarkMode(keepDark: true) : self.navBackgroundColor
         if #available(iOS 15.0, *)
         {
-            self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
-            self.navigationController?.navigationBar.standardAppearance.backgroundColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
+            self.navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = color
+            self.navigationController?.navigationBar.standardAppearance.backgroundColor = color
         }
         else
         {
-            self.navigationController?.navigationBar.barTintColor = self.overrideUserInterfaceStyle == .unspecified ? self.navBackgroundColor.switchDarkMode() : self.navBackgroundColor
-//            self.navigationController?.navigationBar.tintColor = self.navBackgroundColor  //这一行会修改导航栏上的系统按钮颜色，比如返回按钮
+            self.navigationController?.navigationBar.barTintColor = color
+//            self.navigationController?.navigationBar.tintColor = color  //这一行会修改导航栏上的系统按钮颜色，比如返回按钮
         }
     }
     
@@ -289,7 +321,9 @@ class BasicTableViewController: UITableViewController
     //设置导航标题颜色
     fileprivate func setNavTitleColor()
     {
-        let attrDic = [NSAttributedString.Key.foregroundColor: self.overrideUserInterfaceStyle == .unspecified ? self.navTitleColor.switchDarkMode(keepBright: true) : self.navTitleColor]
+        //根据各种条件判断最终的颜色
+        let color = useDarkMode() ? self.navTitleColor.switchDarkMode(keepBright: true) : self.navTitleColor
+        let attrDic = [NSAttributedString.Key.foregroundColor: color]
         if #available(iOS 15.0, *)
         {
             self.navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = attrDic
@@ -308,6 +342,15 @@ class BasicTableViewController: UITableViewController
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
+    //是否使用暗黑主题
+    func useDarkMode() -> Bool
+    {
+        if self.followDarkMode == true && UITraitCollection.current.userInterfaceStyle == .dark
+        {
+            return true
+        }
+        return false
+    }
     
     //MARK: 可被子类覆写的方法
     //返回按钮事件
@@ -317,9 +360,26 @@ class BasicTableViewController: UITableViewController
         self.navigationController?.popViewController(animated: true)
     }
     
+    //初始化控制器数据，比如一些状态和变量，这个方法在所有方法之前调用，如果有任何基础变量和数据要设置，那么子类在这个方法中设置
+    //如果子类覆写这个方法，需要在最后调用父类方法
+    //初始化时执行一次
+    override func initData()
+    {
+        
+    }
+    
+    //自定义设置，提供给子类使用，该方法会在`basicConfig`和`basicNavConfig`之前调用
+    func customConfig()
+    {
+        
+    }
+    
     //基础设置，设置这个控制器的基础属性
+    //不建议覆写这个方法
     func basicConfig()
     {
+        //导航栏透明
+        self.setNavAlpha()
         //返回按钮样式
         self.setBackStyle()
         //侧滑返回
@@ -329,10 +389,9 @@ class BasicTableViewController: UITableViewController
     }
     
     //设置导航栏和状态栏样式
+    //不建议覆写这个方法
     func basicNavConfig()
     {
-        //导航栏背景色
-        self.setNavBackgroundColor()
         //导航栏透明
         self.setNavAlpha()
         //隐藏导航栏底部横线
@@ -350,7 +409,7 @@ class BasicTableViewController: UITableViewController
     }
     
     //创建界面，一般用来创建界面组件
-    //如果子类覆写这个方法，需要调用父类方法
+    //如果子类覆写这个方法，需要在最前调用父类方法
     //初始化时执行一次
     override func createUI()
     {
@@ -358,7 +417,7 @@ class BasicTableViewController: UITableViewController
     }
     
     //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等
-    //如果子类覆写这个方法，需要调用父类方法
+    //如果子类覆写这个方法，需要在最后调用父类方法
     //初始化时执行一次
     override func configUI()
     {
@@ -369,16 +428,8 @@ class BasicTableViewController: UITableViewController
     //更新UI组件的布局，比如frame、约束等
     //这个方法可能被多次执行，所以不要在这里创建任何对象
     //如果子类覆写这个方法，需要调用父类方法
-    //会多次执行
+    //页面布局变化的时候会多次执行
     override func layoutUI()
-    {
-        
-    }
-    
-    //初始化控制器数据，比如一些状态和变量
-    //如果子类覆写这个方法，需要调用父类方法
-    //初始化时执行一次
-    override func initData()
     {
         
     }
@@ -386,33 +437,36 @@ class BasicTableViewController: UITableViewController
     //更新界面，一般是更新界面上的一些数据
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
-    //可以手动调用这个方法
+    //可以手动调用这个方法，比如数据更新的时候
     override func updateUI()
     {
         
     }
-    
-    //暗黑模式适配
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        //如果子类设置了只使用某一种模式，那么不需要更新主题
-        if self.overrideUserInterfaceStyle == .unspecified
-        {
-            super.traitCollectionDidChange(previousTraitCollection)
-            //当主题模式变化的时候，设置基础属性
-            setBackStyle()
-            setBackgroundColor()
-            setNavBackgroundColor()
-            setNavTitleColor()
-            setStatusBarStyle()
-        }
-    }
-    
+
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次，主题变化时执行
     override func themeUpdateUI(theme: ThemeProtocol)
     {
         //留给子类实现
+    }
+    
+    //暗黑模式适配
+    //子类覆写这个方法的时候，要先调用父类方法，如果设置`followDarkMode`为false，则无需覆写这个方法
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        //如果子类设置了只使用某一种模式，那么不需要更新主题
+        if self.overrideUserInterfaceStyle == .unspecified
+        {
+            super.traitCollectionDidChange(previousTraitCollection)
+            //当系统暗黑模式变化的时候，设置基础属性
+            setFollowDarkMode()
+            setBackStyle()
+            setBackgroundColor()
+            setNavBackgroundColor()
+            setNavTitleColor()
+            setStatusBarStyle()
+            self.themeUpdateUI(theme: theme)
+        }
     }
     
     //添加通知
@@ -440,7 +494,8 @@ extension BasicTableViewController:DelegateProtocol, UIGestureRecognizerDelegate
     //处理主题通知的方法
     @objc fileprivate func themeDidChangeNotification(notify: Notification)
     {
-        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
+//        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
+        setFollowDarkMode()     //切换主题的时候支持暗黑模式
         self.themeUpdateUI(theme: self.theme)
     }
 

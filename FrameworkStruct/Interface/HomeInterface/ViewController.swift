@@ -18,18 +18,16 @@ class ViewController: BasicViewController
     }
 
     override func viewDidLoad() {
-        g_after(interval: 0.001) {
             super.viewDidLoad()
-        }
     }
     
-    override func basicConfig() {
+    override func customConfig() {
+        self.title = "功能选择"
         self.backStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "功能选择"
         self.statusBarStyle = .light
         self.navBackgroundColor = self.theme.mainColor
         self.navTitleColor = .white
@@ -39,6 +37,11 @@ class ViewController: BasicViewController
     override func createUI() {
         super.createUI()
         
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.navBackgroundColor = self.theme.mainColor
     }
 
 }

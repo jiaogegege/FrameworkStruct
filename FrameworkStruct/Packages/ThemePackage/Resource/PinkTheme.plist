@@ -18,6 +18,10 @@
 	<string>999999</string>
 	<key>hintTextColor</key>
 	<string>999999</string>
+	<key>backgroundColor</key>
+	<string>fafafa</string>
+	<key>contentBackgroundColor</key>
+	<string>ffffff</string>
 	<key>mainFont</key>
 	<string>PingFangSC-Medium</string>
 	<key>secondaryFont</key>

@@ -42,6 +42,14 @@ extension UIViewController
         return board.instantiateViewController(withIdentifier: g_getClassName(Self.self)) as! Self
     }
     
+    //初始化控制器数据，比如一些状态和变量
+    //如果子类覆写这个方法，需要调用父类方法
+    //初始化时执行一次
+    @objc func initData()
+    {
+        
+    }
+    
     //创建界面，一般用来创建界面组件，该方法应该只执行一次，多次执行会导致重复创建
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
@@ -66,15 +74,7 @@ extension UIViewController
     {
         
     }
-    
-    //初始化控制器数据，比如一些状态和变量
-    //如果子类覆写这个方法，需要调用父类方法
-    //初始化时执行一次
-    @objc func initData()
-    {
-        
-    }
-    
+
     //更新界面，一般是更新界面上的一些数据
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
@@ -475,32 +475,50 @@ extension UIColor
     }
     
     ///暗黑模式支持
-    ///reverse:是否反转暗黑主题，如果为false，那么颜色跟随暗黑，如果是true，那么颜色反转
     ///keepBright：在黑暗模式下，如果计算出的颜色是暗色，是否保持亮色，一般用于标题等醒目元素
-    func switchDarkMode(reverse: Bool = false, keepBright: Bool = false) -> UIColor
+    ///keepDark:在黑暗模式下，如果计算出的颜色是亮色，是否保持暗色，一般用于背景等不醒目元素
+    ///level：颜色级别，更深的黑色或浅一点的黑色；更亮的白色或暗一点的白色
+    func switchDarkMode(keepBright: Bool = false, keepDark: Bool = false, level: DarkModeLevel = .deepen) -> UIColor
     {
         return UIColor.init { trait in
             if trait.userInterfaceStyle == .dark    //暗黑模式，返回一个设计好的颜色值，这个值根据UI设计和具体的颜色变化
             {
-                let light = UIColor.white
-                let dark = UIColor.black
+                let light = level.getColor(dark: false)
+                let dark = level.getColor(dark: true)
                 //获取颜色的明度
                 let brightness = UnsafeMutablePointer<CGFloat>.allocate(capacity: 0)
                 self.getHue(nil, saturation: nil, brightness: brightness, alpha: nil)
                 if brightness.pointee > 0.5 //如果颜色的明度高于0.5，那么设置为一种黑色
                 {
                     brightness.deallocate()
-                    return reverse ? light : (keepBright ? light : dark)
+                    return keepBright ? light : dark
                 }
                 else    //如果颜色明度低于0.5，那么设置为一种白色
                 {
                     brightness.deallocate()
-                    return reverse ? dark : light
+                    return keepDark ? dark : light
                 }
             }
             else    //浅色模式，返回自身颜色值
             {
                 return self
+            }
+        }
+    }
+    
+    //暗黑模式级别
+    enum DarkModeLevel {
+        case deepen                     //最底层的黑色或最顶层的白色
+        case reduce                     //比最底层的黑色亮一点或比最顶层的白色暗一点
+        
+        //获取颜色，dark：是否是黑色，否则就是白色
+        func getColor(dark: Bool) -> UIColor
+        {
+            switch self {
+            case .deepen:
+                return dark ? ThemeManager.shared.getDarkTheme().backgroundColor : ThemeManager.shared.getDarkTheme().mainTitleColor
+            case .reduce:
+                return dark ? ThemeManager.shared.getDarkTheme().contentBackgroundColor : ThemeManager.shared.getDarkTheme().subTitleColor
             }
         }
     }

@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *subTitleColor;
 @property(nonatomic, copy)NSString *contentTextColor;
 @property(nonatomic, copy)NSString *hintTextColor;
+@property(nonatomic, copy)NSString *backgroundColor;
+@property(nonatomic, copy)NSString *contentBackgroundColor;
 @property(nonatomic, copy)NSString *mainFont;
 @property(nonatomic, copy)NSString *secondaryFont;
 @property(nonatomic, copy)NSString *hintFont;

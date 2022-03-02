@@ -9,6 +9,7 @@
  * 主题协议，定义主题中有的内容，比如颜色，图片，字体等
  */
 import Foundation
+import UIKit
 
 @objc protocol ThemeProtocol
 {
@@ -30,6 +31,12 @@ import Foundation
     
     //提示文本颜色
     var hintTextColor: UIColor {get}
+    
+    //背景色
+    var backgroundColor: UIColor {get}
+    
+    //内容区域背景色
+    var contentBackgroundColor: UIColor {get}
     
     //MARK: 字体
     //主要字体

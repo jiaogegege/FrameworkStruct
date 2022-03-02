@@ -17,7 +17,8 @@ import UIKit
 enum TCGetKey: Int
 {
     case currentTheme = 1000   //当前主题
-    case allTheme = 1001   //所有主题列表
+    case darkTheme = 1001       //暗黑主题
+    case allTheme = 1002   //所有主题列表
 }
 
 
@@ -37,6 +38,7 @@ class ThemeContainer: OriginContainer
     {
         super.init()
         self.initCurrentTheme()
+        self.initDarkTheme()
     }
     
     //初始化当前主题，尝试获取当前主题，如果没有，那么选择默认主题
@@ -57,6 +59,14 @@ class ThemeContainer: OriginContainer
             //保存当前主题标识
             self.udAccessor.write(key: UDAKeyType.currentTheme, value: sPinkThemeFileName)
         }
+    }
+    
+    //初始化暗黑主题，默认只有一种
+    fileprivate func initDarkTheme()
+    {
+        let themeDict = plAccessor.read(fileName: sDarkThemeFileName)
+        let darkThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
+        self.mutate(key: TCGetKey.darkTheme, value: CustomTheme.init(theme: darkThemeModel!))
     }
     
     //初始化一个主题对象
@@ -103,6 +113,13 @@ extension ThemeContainer: ExternalInterface
         self.commit(key: TCGetKey.currentTheme, value: newTheme.theme.fileName)
     }
     
+    //获取暗黑主题
+    func getDarkTheme() -> CustomTheme
+    {
+        let theme = self.get(key: TCGetKey.darkTheme) as! CustomTheme
+        return theme
+    }
+    
     //获取所有主题列表
     func getAllTheme() -> [CustomTheme]
     {
@@ -113,7 +130,7 @@ extension ThemeContainer: ExternalInterface
         }
         else
         {
-            let themeConfigArr = [sPinkThemeFileName, sRedThemeFileName, sBlueThemeFileName]
+            let themeConfigArr = allThemeNameArray
             var themeArray = [CustomTheme]()
             //遍历配置文件，创建主题对象
             for item in themeConfigArr

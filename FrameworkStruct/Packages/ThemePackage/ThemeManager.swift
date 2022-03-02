@@ -15,18 +15,31 @@ class ThemeManager: OriginManager
     //MARK: 属性
     //单例对象
     static let shared = ThemeManager()
+    
+    //userdefaults
+    fileprivate var ud: UserDefaultsAccessor = UserDefaultsAccessor.shared
+    
     //主题容器
     fileprivate var themeContainer: ThemeContainer = ThemeContainer()
+    
     //当前主题，主要用于缓存，防止多次从容器中读取
     fileprivate var currentTheme: CustomTheme? = nil
+    
+    //暗黑主题
+    fileprivate var darkTheme: CustomTheme!
     
     //MARK: 方法
     //私有化init方法
     private override init()
     {
         super.init()
+        //读取一些状态
+        self.stMgr.setStatus(ud.readBool(key: .followDarkMode), forKey: TMStatusKey.followDarkMode)
+        
         //订阅当前主题更新服务
         self.themeContainer.subscribe(key: TCGetKey.currentTheme, delegate: self)
+        //获取暗黑主题
+        self.darkTheme = self.themeContainer.getDarkTheme()
     }
     
     //重写复制方法
@@ -44,12 +57,58 @@ class ThemeManager: OriginManager
     
 }
 
+
 /**
- * 对外接口
+ * 订阅主题容器服务
  */
-extension ThemeManager
+extension ThemeManager: DelegateProtocol, ContainerServices
 {
+    func containerDidUpdateData(key: AnyHashable, value: Any)
+    {
+        if let k = key as? TCGetKey
+        {
+            //切换当前主题的服务
+            if k == TCGetKey.currentTheme
+            {
+                self.currentTheme = (value as! CustomTheme)
+                //发出切换主题的通知
+                NotificationCenter.default.post(name: FSNotification.changeTheme.name, object: nil, userInfo: [FSNotification.changeTheme.paramKey: self.currentTheme!])
+            }
+        }
+    }
+    
+}
+
+
+//内部类型
+extension ThemeManager: InternalType
+{
+    //状态类型
+    enum TMStatusKey: SMKeyType {
+        case followDarkMode             //是否跟随系统暗黑模式
+    }
+    
+}
+
+
+//外部接口
+extension ThemeManager: ExternalInterface
+{
+    ///获取当前主题或者暗黑主题，如果设置了跟随系统暗黑模式，那么在暗黑模式下返回暗黑主题
+    func getCurrentOrDark() -> ThemeProtocol
+    {
+        if self.isFollowDarkMode && UITraitCollection.current.userInterfaceStyle == .dark
+        {
+            return self.getDarkTheme()
+        }
+        else
+        {
+            return self.getCurrentTheme()
+        }
+    }
+    
     //当前主题对象
+    //follow:是否跟随系统暗黑模式变化
     func getCurrentTheme() -> ThemeProtocol
     {
         if let curTheme = self.currentTheme
@@ -61,6 +120,12 @@ extension ThemeManager
             self.currentTheme = self.themeContainer.getCurrentTheme()
             return self.currentTheme!
         }
+    }
+    
+    //暗黑主题
+    func getDarkTheme() -> ThemeProtocol
+    {
+        return self.darkTheme
     }
     
     //所有主题对象
@@ -79,25 +144,17 @@ extension ThemeManager
         }
     }
     
-}
-
-/**
- * 订阅主题容器服务
- */
-extension ThemeManager: ContainerServices
-{
-    func containerDidUpdateData(key: AnyHashable, value: Any)
+    ///设置是否跟随系统暗黑模式
+    func setFollowDarkMode(follow: Bool)
     {
-        if let k = key as? TCGetKey
-        {
-            //切换当前主题的服务
-            if k == TCGetKey.currentTheme
-            {
-                self.currentTheme = (value as! CustomTheme)
-                //发出切换主题的通知
-                NotificationCenter.default.post(name: FSNotification.changeTheme.name, object: nil, userInfo: [FSNotification.changeTheme.paramKey: self.currentTheme!])
-            }
-        }
+        self.stMgr.setStatus(follow, forKey: TMStatusKey.followDarkMode)
+        //更新到本地
+        ud.write(key: .followDarkMode, value: follow)
+    }
+    
+    ///判断是否跟随暗黑模式
+    var isFollowDarkMode: Bool {
+        return stMgr.status(forKey: TMStatusKey.followDarkMode) as! Bool
     }
     
 }

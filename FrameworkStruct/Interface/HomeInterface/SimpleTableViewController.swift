@@ -12,6 +12,7 @@ import UIKit
 
 class SimpleTableViewController: BasicViewController
 {
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var expandBtn: UIButton!
@@ -40,8 +41,7 @@ class SimpleTableViewController: BasicViewController
         }
     }
     
-    override func basicConfig() {
-        super.basicConfig()
+    override func customConfig() {
         self.backgroundStyle = .lightGray
         self.navTitleColor = .green
         self.navBackgroundColor = .red

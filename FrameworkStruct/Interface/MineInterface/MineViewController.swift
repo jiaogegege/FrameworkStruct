@@ -18,6 +18,10 @@ class MineViewController: BasicViewController {
 
     }
     
+    override func customConfig() {
+        self.backStyle = .none
+    }
+    
     override func configUI() {
         self.backStyle = .none
         self.navBackgroundColor = self.theme.mainColor
