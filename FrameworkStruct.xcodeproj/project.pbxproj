@@ -371,6 +371,7 @@
 		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
 		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
 		EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA98982027CF1AF300C63950 /* DarkTheme.plist */; };
+		EA98982327CF68CB00C63950 /* DatasConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98982227CF68CB00C63950 /* DatasConst.swift */; };
 		EA9936922799074B00480147 /* UIView+Cate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9936902799074B00480147 /* UIView+Cate.m */; };
 		EA99369427992F4900480147 /* ShadowTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA99369327992F4900480147 /* ShadowTestViewController.swift */; };
 		EA99371B27994F6100480147 /* TABAnimatedCacheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA99369827994F6000480147 /* TABAnimatedCacheModel.m */; };
@@ -1128,6 +1129,7 @@
 		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
 		EA98982027CF1AF300C63950 /* DarkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DarkTheme.plist; sourceTree = "<group>"; };
+		EA98982227CF68CB00C63950 /* DatasConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasConst.swift; sourceTree = "<group>"; };
 		EA9936902799074B00480147 /* UIView+Cate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Cate.m"; sourceTree = "<group>"; };
 		EA9936912799074B00480147 /* UIView+Cate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Cate.h"; sourceTree = "<group>"; };
 		EA99369327992F4900480147 /* ShadowTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTestViewController.swift; sourceTree = "<group>"; };
@@ -4101,6 +4103,7 @@
 			children = (
 				EADB011527624246001B7223 /* README.md */,
 				EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */,
+				EA98982227CF68CB00C63950 /* DatasConst.swift */,
 			);
 			path = DataContainer;
 			sourceTree = "<group>";
@@ -4754,6 +4757,7 @@
 				EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */,
 				EA9A78D527C756C900A11FC8 /* MPITextKitContext.m in Sources */,
 				EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */,
+				EA98982327CF68CB00C63950 /* DatasConst.swift in Sources */,
 				EA1AE48B277819E600D028F9 /* ConstraintView+Extensions.swift in Sources */,
 				EA99372F27994F6100480147 /* TABBinAnimationImpl.m in Sources */,
 				EA3E8ACD27B77CEA006A2715 /* CAAnimation+TimingConfiguration.swift in Sources */,
