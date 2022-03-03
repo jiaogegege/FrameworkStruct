@@ -39,7 +39,7 @@ class SystemSettingViewController: BasicTableViewController {
     
     override func configUI() {
         super.configUI()
-        self.darkModeSwitch.onTintColor = theme.mainColor
+        self.darkModeSwitch.onTintColor = themeMgr.getCurrentTheme().mainColor
     }
     
     //各种设置项的初始状态
@@ -51,6 +51,10 @@ class SystemSettingViewController: BasicTableViewController {
     //设置是否跟随系统暗黑模式
     @IBAction func darkModeSwitchAction(_ sender: UISwitch) {
         themeMgr.setFollowDarkMode(follow: sender.isOn)
+    }
+    
+    override func themeUpdateUI(theme: ThemeProtocol) {
+        self.navBackgroundColor = self.theme.mainColor
     }
 
 }
