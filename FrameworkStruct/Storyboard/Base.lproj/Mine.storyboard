@@ -56,6 +56,63 @@
             </objects>
             <point key="canvasLocation" x="139" y="107"/>
         </scene>
+        <!--系统设置-->
+        <scene sceneID="rLQ-dq-SI0">
+            <objects>
+                <tableViewController storyboardIdentifier="SystemSettingViewController" title="系统设置" id="Fob-5p-TUs" customClass="SystemSettingViewController" customModule="FrameworkStruct" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="cDk-eO-ui2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="TmK-8z-NCC">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="eDb-Wk-dhr">
+                                        <rect key="frame" x="0.0" y="18" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eDb-Wk-dhr" id="Sli-xb-Gl8">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暗黑模式(跟随系统)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2x-gT-MCG">
+                                                    <rect key="frame" x="20" y="14.5" width="151" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="圣诞快乐飞机上的风景" translatesAutoresizingMaskIntoConstraints="NO" id="ygk-5h-gt6">
+                                                    <rect key="frame" x="343" y="9.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="darkModeSwitchAction:" destination="Fob-5p-TUs" eventType="valueChanged" id="0TX-Eh-oSg"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Q2x-gT-MCG" firstAttribute="leading" secondItem="Sli-xb-Gl8" secondAttribute="leadingMargin" id="6w4-vY-qq5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ygk-5h-gt6" secondAttribute="trailing" constant="2" id="Egq-OM-RVu"/>
+                                                <constraint firstItem="Q2x-gT-MCG" firstAttribute="centerY" secondItem="Sli-xb-Gl8" secondAttribute="centerY" id="HfC-Aa-7qg"/>
+                                                <constraint firstItem="ygk-5h-gt6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q2x-gT-MCG" secondAttribute="trailing" constant="1" id="rUp-tw-9Ws"/>
+                                                <constraint firstItem="ygk-5h-gt6" firstAttribute="centerY" secondItem="Sli-xb-Gl8" secondAttribute="centerY" id="ycl-OE-vn8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Fob-5p-TUs" id="w8f-jk-EWx"/>
+                            <outlet property="delegate" destination="Fob-5p-TUs" id="9KJ-P3-vfC"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="darkModeLabel" destination="Q2x-gT-MCG" id="a48-4Z-zkm"/>
+                        <outlet property="darkModeSwitch" destination="ygk-5h-gt6" id="dWj-DS-ETD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BPp-rl-Fs2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="813" y="106"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

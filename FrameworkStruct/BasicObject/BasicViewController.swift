@@ -14,8 +14,8 @@ class BasicViewController: UIViewController
     /**
      * 请按照声明顺序设置以下属性
      */
-    ///主题是否跟随系统暗黑模式变化，默认取全局设置
-    var followDarkMode: Bool = ThemeManager.shared.isFollowDarkMode {
+    ///主题是否跟随系统暗黑模式变化，默认true，该属性只能子类修改，且只建议修改一次
+    var followDarkMode: Bool = true {
         didSet {
             setFollowDarkMode()
         }
@@ -86,8 +86,8 @@ class BasicViewController: UIViewController
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         get {
-            //如果是黑暗模式，永远返回light
-            if UITraitCollection.current.userInterfaceStyle == .dark && self.followDarkMode
+            //如果跟随系统黑暗模式并且当前是暗黑模式，永远返回light
+            if self.followDarkMode && UITraitCollection.current.userInterfaceStyle == .dark
             {
                 return .lightContent
             }
@@ -101,7 +101,7 @@ class BasicViewController: UIViewController
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
     
     //当前主题，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var theme = ThemeManager.shared.getCurrentOrDark()
+    fileprivate(set) lazy var theme = ThemeManager.shared.getCurrentOrDark()
     
     /**************************************** 内部属性 Section End ***************************************/
     
@@ -166,8 +166,9 @@ class BasicViewController: UIViewController
         {
             self.theme = ThemeManager.shared.getCurrentOrDark()
         }
-        else
+        else    //如果不跟随系统，那么设置为light
         {
+            self.overrideUserInterfaceStyle = .light
             self.theme = ThemeManager.shared.getCurrentTheme()
         }
     }
@@ -176,7 +177,7 @@ class BasicViewController: UIViewController
     fileprivate func setBackStyle()
     {
         switch backStyle {
-        case .dark, .light, .close:
+        case .dark, .darkAlways, .light, .close:
             if let image = backStyle.getImage() //如果有图片，那么创建返回按钮
             {
                 let backItem = UIBarButtonItem(image: image.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction(sender:)))
@@ -378,6 +379,7 @@ class BasicViewController: UIViewController
     //不建议覆写这个方法
     func basicConfig()
     {
+        setFollowDarkMode()
         //导航栏透明
         self.setNavAlpha()
         //返回按钮样式
@@ -442,10 +444,18 @@ class BasicViewController: UIViewController
     {
         
     }
+    
+    //添加通知
+    //如果子类覆写这个方法，需要调用父类方法
+    override func addNotification()
+    {
+        //添加主题通知
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification(notify:)), name: FSNotification.changeTheme.name, object: nil)
+    }
 
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
-    //初始化时执行一次，主题变化时执行
+    //初始化时执行一次，主题变化时执行，包括暗黑模式
     override func themeUpdateUI(theme: ThemeProtocol)
     {
         //留给子类实现
@@ -455,7 +465,7 @@ class BasicViewController: UIViewController
     //子类覆写这个方法的时候，要先调用父类方法，如果设置`followDarkMode`为false，则无需覆写这个方法
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         //如果子类设置了只使用某一种模式，那么不需要更新主题
-        if self.overrideUserInterfaceStyle == .unspecified
+        if self.followDarkMode == true
         {
             super.traitCollectionDidChange(previousTraitCollection)
             //当系统暗黑模式变化的时候，设置基础属性
@@ -465,16 +475,8 @@ class BasicViewController: UIViewController
             setNavBackgroundColor()
             setNavTitleColor()
             setStatusBarStyle()
-            self.themeUpdateUI(theme: theme)
+            themeUpdateUI(theme: theme)
         }
-    }
-    
-    //添加通知
-    //如果子类覆写这个方法，需要调用父类方法
-    override func addNotification()
-    {
-        //添加主题通知
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification(notify:)), name: FSNotification.changeTheme.name, object: nil)
     }
     
 
@@ -496,7 +498,7 @@ extension BasicViewController:DelegateProtocol, UIGestureRecognizerDelegate
     {
 //        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
         setFollowDarkMode()     //切换主题的时候支持暗黑模式
-        self.themeUpdateUI(theme: self.theme)
+        themeUpdateUI(theme: self.theme)
     }
 
     //侧滑返回功能

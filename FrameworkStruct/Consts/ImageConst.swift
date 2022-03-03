@@ -33,7 +33,6 @@ extension UIImage: ConstantPropertyProtocol
     static var iMineSelected: UIImage? {
         UIImage(named: "mine_selected")
     }
-    
     //返回按钮图片
     @objc static var iBackDark: UIImage? {
         UIImage(named: "common_back_dark")
@@ -50,6 +49,10 @@ extension UIImage: ConstantPropertyProtocol
     //cell向右箭头
     @objc static var iRightArrow: UIImage? {
         UIImage(named: "right_arrow")
+    }
+    //系统设置图标
+    @objc static var iSysSettingIcon: UIImage? {
+        UIImage(named: "sys_setting")
     }
     
     //青少年模式弹窗头图

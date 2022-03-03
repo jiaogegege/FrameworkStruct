@@ -20,18 +20,36 @@ class MineViewController: BasicViewController {
     
     override func customConfig() {
         self.backStyle = .none
-    }
-    
-    override func configUI() {
-        self.backStyle = .none
         self.navBackgroundColor = self.theme.mainColor
         self.title = String.mineVC
         self.statusBarStyle = .light
         self.navTitleColor = .white
     }
     
+    override func createUI() {
+        super.createUI()
+        let settingBtn = UIButton(type: .custom)
+        settingBtn.setImage(UIImage.iSysSettingIcon, for: .normal)
+        settingBtn.addTarget(self, action: #selector(gotoSysSettingAction(sender:)), for: .touchUpInside)
+        let rightItem = UIBarButtonItem(customView: settingBtn)
+        self.navigationItem.rightBarButtonItems = [rightItem]
+    }
+    
+    override func configUI() {
+        super.configUI()
+
+    }
+    
     override func themeUpdateUI(theme: ThemeProtocol) {
         self.navBackgroundColor = self.theme.mainColor
+    }
+    
+    //进入系统设置
+    @objc func gotoSysSettingAction(sender: UIButton)
+    {
+        let vc = SystemSettingViewController.getViewController()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

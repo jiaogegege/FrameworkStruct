@@ -322,6 +322,8 @@
 		EA3E8C3627B784C7006A2715 /* BLE_img_gear.json in Resources */ = {isa = PBXBuildFile; fileRef = EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */; };
 		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
+		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
+		EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA66061127C86C11000B20A6 /* TestWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA66061027C86C11000B20A6 /* TestWebViewController.swift */; };
 		EA66061527C86DEE000B20A6 /* BasicWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA66061427C86DEE000B20A6 /* BasicWebViewController.swift */; };
@@ -1051,6 +1053,8 @@
 		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		EA52494127A3EDEB002E3616 /* 1_0_2.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_2.sql; sourceTree = "<group>"; };
+		EA5780A827D0A6C900C819E6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingViewController.swift; sourceTree = "<group>"; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -2680,6 +2684,7 @@
 				EA73A15727BC8EB900980C26 /* Views */,
 				EA73A15827BC8ED600980C26 /* MineNavigationController.swift */,
 				EA73A15A27BC900E00980C26 /* MineViewController.swift */,
+				EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */,
 			);
 			path = MineInterface;
 			sourceTree = "<group>";
@@ -2837,6 +2842,7 @@
 				EAAA4E81276F3E4900C45712 /* README.md */,
 				EADB014227624391001B7223 /* UserManager.swift */,
 				EA00C86E27C213550034C95B /* NotificationManager.swift */,
+				EA5780A827D0A6C900C819E6 /* SettingsManager.swift */,
 			);
 			path = BusinessManager;
 			sourceTree = "<group>";
@@ -4354,6 +4360,7 @@
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,
 				EA9A78F027C75DA900A11FC8 /* WebViewJavascriptBridge.m in Sources */,
 				EAC8A85D27625D490088293F /* SDWebImageCompat.m in Sources */,
+				EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */,
 				EAC8A84827625D490088293F /* SDImageCoder.m in Sources */,
 				EAC8A86027625D490088293F /* SDWebImageError.m in Sources */,
 				EA99373927994F6100480147 /* TABComponentLayerDropSerializationImpl.m in Sources */,
@@ -4723,6 +4730,7 @@
 				EA3E8A9A27B77CEA006A2715 /* LottieConfiguration.swift in Sources */,
 				EA3E8C2327B782C4006A2715 /* POPCustomAnimation.mm in Sources */,
 				EA99373527994F6100480147 /* TABComponentLayer+TABClassicAnimation.m in Sources */,
+				EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */,
 				EA92256D276B27E100192E2E /* CheckerMonitor.swift in Sources */,
 				EA3E8B3927B77CEA006A2715 /* DataExtension.swift in Sources */,
 				EA9A4A882780309E00170BB3 /* FSTextField+ChangeBlock.m in Sources */,

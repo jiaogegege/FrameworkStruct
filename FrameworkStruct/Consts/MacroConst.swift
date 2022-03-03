@@ -49,7 +49,6 @@ let gMineSB = "Mine"
 enum FSNotification: String
 {
     case changeTheme                            //切换主题的通知
-    case changeFollowDarkMode                   //切换是否跟随系统暗黑模式的通知
     
     
     //计算属性，获得通知字符串的名字，格式：项目名缩写+具体通知名称+通知后缀
@@ -63,8 +62,6 @@ enum FSNotification: String
         switch self {
         case .changeTheme:
             return "ThemeProtocol"      //返回`ThemeProtocol`协议对象名字
-        case .changeFollowDarkMode:
-            return "Bool"               //返回`Bool`类型名字
         }
     }
     

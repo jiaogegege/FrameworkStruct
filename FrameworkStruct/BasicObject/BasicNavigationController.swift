@@ -10,18 +10,26 @@ import UIKit
 class BasicNavigationController: UINavigationController
 {
     //MARK: 属性
-    /******************** 内部属性 Section Begin *******************/
+    ///主题是否跟随系统暗黑模式变化，默认true，该属性只能子类修改，且只建议修改一次
+    var followDarkMode: Bool = true {
+        didSet {
+            setFollowDarkMode()
+        }
+    }
+    
     //状态管理器，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
+    
     //当前主题，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var theme = ThemeManager.shared.getCurrentOrDark()
-    /******************** 内部属性 Section End *******************/
+    fileprivate(set) lazy var theme = ThemeManager.shared.getCurrentOrDark()
     
 
     //MARK: 方法
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        basicConfig()
         
         createUI()
         configUI()
@@ -46,6 +54,26 @@ class BasicNavigationController: UINavigationController
         return self.topViewController!.preferredStatusBarStyle
     }
     
+    //设置是否跟随系统暗黑模式
+    fileprivate func setFollowDarkMode()
+    {
+        if self.followDarkMode  //如果跟随暗黑模式
+        {
+            self.theme = ThemeManager.shared.getCurrentOrDark()
+        }
+        else    //如果不跟随系统，那么设置为light
+        {
+            self.overrideUserInterfaceStyle = .light
+            self.theme = ThemeManager.shared.getCurrentTheme()
+        }
+    }
+    
+    //基础设置，设置这个控制器的基础属性
+    fileprivate func basicConfig()
+    {
+        setFollowDarkMode()
+    }
+    
     //创建界面
     override func createUI()
     {
@@ -58,9 +86,17 @@ class BasicNavigationController: UINavigationController
         self.themeUpdateUI(theme: theme)
     }
     
+    //添加通知
+    //如果子类覆写这个方法，需要调用父类方法
+    override func addNotification()
+    {
+        //添加主题通知
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification(notify:)), name: FSNotification.changeTheme.name, object: nil)
+    }
+    
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
-    //初始化时执行一次，主题变化时执行
+    //初始化时执行一次，主题变化时执行，包括暗黑模式
     override func themeUpdateUI(theme: ThemeProtocol)
     {
         
@@ -70,21 +106,21 @@ class BasicNavigationController: UINavigationController
     //子类覆写这个方法的时候，要先调用父类方法，如果设置`followDarkMode`为false，则无需覆写这个方法
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         //如果子类设置了只使用某一种模式，那么不需要更新主题
+        if self.followDarkMode == true
+        {
+            super.traitCollectionDidChange(previousTraitCollection)
+            
+        }
+        
         if self.overrideUserInterfaceStyle == .unspecified
         {
             super.traitCollectionDidChange(previousTraitCollection)
             //当系统暗黑模式变化的时候，设置基础属性
-            self.themeDidChangeNotification(notify: nil)
+            setFollowDarkMode()
+            themeUpdateUI(theme: theme)
         }
     }
-    
-    //添加通知
-    //如果子类覆写这个方法，需要调用父类方法
-    override func addNotification()
-    {
-        //添加主题通知
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification(notify:)), name: FSNotification.changeTheme.name, object: nil)
-    }
+
     
     //析构方法，清理一些资源
     deinit {
@@ -103,8 +139,8 @@ extension BasicNavigationController:DelegateProtocol
     @objc fileprivate func themeDidChangeNotification(notify: Notification?)
     {
 //        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
-        self.theme = ThemeManager.shared.getCurrentOrDark()     //切换主题的时候支持暗黑模式
-        self.themeUpdateUI(theme: self.theme)
+        setFollowDarkMode()     //切换主题的时候支持暗黑模式
+        themeUpdateUI(theme: self.theme)
     }
 
 }
