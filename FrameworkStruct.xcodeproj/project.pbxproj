@@ -4176,10 +4176,10 @@
 		EADB015727624B39001B7223 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EA98982027CF1AF300C63950 /* DarkTheme.plist */,
 				EADB015A27624B4D001B7223 /* PinkTheme.plist */,
 				EADB015927624B4C001B7223 /* RedTheme.plist */,
 				EADB015827624B4C001B7223 /* BlueTheme.plist */,
-				EA98982027CF1AF300C63950 /* DarkTheme.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";

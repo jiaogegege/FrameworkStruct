@@ -87,7 +87,8 @@ extension UIViewController
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次，主题变化时执行
-    @objc func themeUpdateUI(theme: ThemeProtocol)
+    //参数：theme：新的主题对象；isDark：是否暗黑主题
+    @objc func themeUpdateUI(theme: ThemeProtocol, isDark: Bool = false)
     {
         
     }

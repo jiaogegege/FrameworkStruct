@@ -456,7 +456,7 @@ class BasicViewController: UIViewController
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次，主题变化时执行，包括暗黑模式
-    override func themeUpdateUI(theme: ThemeProtocol)
+    override func themeUpdateUI(theme: ThemeProtocol, isDark: Bool = false)
     {
         //留给子类实现
     }
@@ -475,7 +475,7 @@ class BasicViewController: UIViewController
             setNavBackgroundColor()
             setNavTitleColor()
             setStatusBarStyle()
-            themeUpdateUI(theme: theme)
+            themeUpdateUI(theme: theme, isDark: ThemeManager.shared.isDarkTheme(theme))
         }
     }
     
@@ -498,7 +498,7 @@ extension BasicViewController:DelegateProtocol, UIGestureRecognizerDelegate
     {
 //        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
         setFollowDarkMode()     //切换主题的时候支持暗黑模式
-        themeUpdateUI(theme: self.theme)
+        themeUpdateUI(theme: self.theme, isDark: ThemeManager.shared.isDarkTheme(theme))
     }
 
     //侧滑返回功能

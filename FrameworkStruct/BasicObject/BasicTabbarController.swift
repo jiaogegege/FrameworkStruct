@@ -92,7 +92,7 @@ class BasicTabbarController: UITabBarController
     //主题更新UI
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次，主题变化时执行，包括暗黑模式
-    override func themeUpdateUI(theme: ThemeProtocol)
+    override func themeUpdateUI(theme: ThemeProtocol, isDark: Bool = false)
     {
         self.tabBar.tintColor = theme.mainColor
     }
@@ -103,16 +103,10 @@ class BasicTabbarController: UITabBarController
         //如果子类设置了只使用某一种模式，那么不需要更新主题
         if self.followDarkMode == true
         {
-            super.traitCollectionDidChange(previousTraitCollection)
-            
-        }
-        
-        if self.overrideUserInterfaceStyle == .unspecified
-        {
-            super.traitCollectionDidChange(previousTraitCollection)
             //当系统暗黑模式变化的时候，设置基础属性
+            super.traitCollectionDidChange(previousTraitCollection)
             setFollowDarkMode()
-            themeUpdateUI(theme: theme)
+            themeUpdateUI(theme: theme, isDark: ThemeManager.shared.isDarkTheme(theme))
         }
     }
 
@@ -135,7 +129,7 @@ extension BasicTabbarController:DelegateProtocol
     {
 //        self.theme = notify.userInfo![FSNotification.changeTheme.paramKey] as! ThemeProtocol
         setFollowDarkMode()     //切换主题的时候支持暗黑模式
-        themeUpdateUI(theme: self.theme)
+        themeUpdateUI(theme: theme, isDark: ThemeManager.shared.isDarkTheme(theme))
     }
 
 }

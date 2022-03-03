@@ -40,7 +40,7 @@ class MineViewController: BasicViewController {
 
     }
     
-    override func themeUpdateUI(theme: ThemeProtocol) {
+    override func themeUpdateUI(theme: ThemeProtocol, isDark: Bool = false) {
         self.navBackgroundColor = self.theme.mainColor
     }
     

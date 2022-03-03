@@ -80,5 +80,15 @@ class CustomTheme: ThemeProtocol
         return self.theme.name
     }
     
+    ///是否暗黑主题
+    func isDarkTheme() -> Bool
+    {
+        if self.theme.id == sDarkThemeId
+        {
+            return true
+        }
+        return false
+    }
+    
 
 }

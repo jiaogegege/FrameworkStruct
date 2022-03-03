@@ -161,4 +161,14 @@ extension ThemeManager: ExternalInterface
         return stMgr.status(forKey: TMStatusKey.followDarkMode) as! Bool
     }
     
+    ///判断主题是否是暗黑主题
+    func isDarkTheme(_ theme: ThemeProtocol) -> Bool
+    {
+        if let th = theme as? CustomTheme
+        {
+            return th.isDarkTheme()
+        }
+        return false
+    }
+    
 }
