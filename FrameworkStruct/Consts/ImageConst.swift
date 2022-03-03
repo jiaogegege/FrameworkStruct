@@ -18,7 +18,7 @@ extension UIImage: ConstantPropertyProtocol
      * 常量图片建议以`i`开头，表示`image`，方便区分
      */
     //app图标
-    @objc static var iAppIcon:UIImage? = UIImage(named: "AppIcon")
+    @objc static let iAppIcon:UIImage? = UIImage(named: "AppIcon")
     
     //tabbar图标
     static var iHomeNormal: UIImage? {
@@ -33,9 +33,13 @@ extension UIImage: ConstantPropertyProtocol
     static var iMineSelected: UIImage? {
         UIImage(named: "mine_selected")
     }
+    
     //返回按钮图片
     @objc static var iBackDark: UIImage? {
         UIImage(named: "common_back_dark")
+    }
+    @objc static var iBackDarkAlways: UIImage? {
+        UIImage(named: "common_back_dark_always")
     }
     @objc static var iBackLight: UIImage? {
         UIImage(named: "common_back_light")

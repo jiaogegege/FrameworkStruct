@@ -48,7 +48,8 @@ let gMineSB = "Mine"
 //MARK: 全局通用自定义通知
 enum FSNotification: String
 {
-    case changeTheme    //切换主题的通知
+    case changeTheme                            //切换主题的通知
+    case changeFollowDarkMode                   //切换是否跟随系统暗黑模式的通知
     
     
     //计算属性，获得通知字符串的名字，格式：项目名缩写+具体通知名称+通知后缀
@@ -59,11 +60,11 @@ enum FSNotification: String
     //计算属性，如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
     //返回的参数key就是类型的名字，可以是结构体名/类名/协议名
     var paramKey: String {
-        switch self
-        {
-            case .changeTheme:
-                return "ThemeProtocol"   //返回`ThemeProtocol`协议对象名字
-            
+        switch self {
+        case .changeTheme:
+            return "ThemeProtocol"      //返回`ThemeProtocol`协议对象名字
+        case .changeFollowDarkMode:
+            return "Bool"               //返回`Bool`类型名字
         }
     }
     

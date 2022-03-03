@@ -34,6 +34,17 @@ class ThemeSelectViewController: BasicViewController
         self.tableView.reloadData()
     }
     
+    override func customConfig() {
+        self.followDarkMode = false
+        self.backStyle = .darkAlways
+    }
+    
+    override func initData()
+    {
+        super.initData()
+        self.themeArray = themeMgr.allTheme
+    }
+    
     override func createUI()
     {
         super.createUI()
@@ -42,12 +53,7 @@ class ThemeSelectViewController: BasicViewController
     
     override func configUI() {
         super.configUI()
-    }
-    
-    override func initData()
-    {
-        super.initData()
-        self.themeArray = themeMgr.allTheme
+        self.view.backgroundColor = .white
     }
     
     override func updateUI() {

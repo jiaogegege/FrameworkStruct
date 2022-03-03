@@ -65,7 +65,7 @@ protocol DelegateProtocol {
 //MARK: 基础常量定义
 
 ///控制器的状态管理器最大步数，可在程序运行过程中改变，那么会影响改变之后创建的控制器的状态管理器步数
-var vcStatusStep: Int = 5
+let vcStatusStep: Int = 5
 
 //状态栏内容颜色定义
 enum VCStatusBarStyle {
@@ -76,10 +76,11 @@ enum VCStatusBarStyle {
 //VC返回按钮样式
 enum VCBackStyle
 {
-    case none   //不显示返回按钮
-    case dark   //深色返回按钮
-    case light  //浅色返回按钮
-    case close  //关闭按钮
+    case none                   //不显示返回按钮
+    case dark                   //深色返回按钮，暗黑模式下白色
+    case darkAlways             //深色返回按钮，暗黑模式下也是深色
+    case light                  //浅色返回按钮
+    case close                  //关闭按钮
     
     ///获得图片，如果是none则返回nil
     func getImage() -> UIImage?
@@ -89,13 +90,14 @@ enum VCBackStyle
             return nil
         case .dark:
             return UIImage.iBackDark
+        case .darkAlways:
+            return UIImage.iBackDarkAlways
         case .light:
             return UIImage.iBackLight
         case .close:
             return UIImage.iBackClose
         }
     }
-    
 }
 
 //VC背景色样式，定义成枚举而非颜色常量的原因是，有可能背景是渐变色或者图像，可以在枚举中进行扩展

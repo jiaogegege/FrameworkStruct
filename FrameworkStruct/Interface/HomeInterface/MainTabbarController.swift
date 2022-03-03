@@ -23,6 +23,7 @@ class MainTabbarController: BasicTabbarController
     }
     
     override func createUI() {
+        super.createUI()
         //首页
         let homeNav = HomeNavigationController.getViewController()
         //我的
