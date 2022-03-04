@@ -627,7 +627,7 @@ extension DatabaseAccessor: ExternalInterface
     }
     
     //MARK: 用户信息
-    //查询用户信息
+    ///查询用户信息
     func queryAllUsersInfo(callback: ((Array<UserInfoModel>?) -> Void))
     {
         let sql = "SELECT * FROM app_user"
@@ -651,6 +651,18 @@ extension DatabaseAccessor: ExternalInterface
             else    //如果出错
             {
                 callback(nil)
+            }
+        }
+    }
+    
+    ///更新一个用户信息
+    ///参数：user：用户信息；callback：回调，更新是否成功
+    func updateUserInfo(user: UserInfoModel, callback: ((Bool) -> Void)?)
+    {
+        let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, getCurrentTimeString(), user.id)
+        updateInQueue(sql: sql) { ret in
+            if let callback = callback {
+                callback(ret)
             }
         }
     }
