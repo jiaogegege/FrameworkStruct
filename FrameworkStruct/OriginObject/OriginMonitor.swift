@@ -24,17 +24,20 @@ protocol MonitorProtocol
     func allItems() -> [NSObject]
     
     //某个元素是否存在监控器中
-    func isItemExist(item: NSObject) -> Bool
+    func isItemExist(_ item: NSObject) -> Bool
     
     //添加一个元素
-    func addItem(item: NSObject)
+    func addItem(_ item: NSObject)
     
     //删除一个元素
-    func deleteItem(item: NSObject)
+    func deleteItem(_ item: NSObject)
     
     //获取一个元素
     //暂时不知道这个方法的作用，留作扩展
     func getItem() -> NSObject?
+    
+    //查看所有元素信息，返回元素类型信息的数组
+    func getAllItemsInfo() -> [String]
     
     //初始配置
     func originConfig()
@@ -51,7 +54,7 @@ class OriginMonitor: NSObject
     fileprivate var container: FSVector = FSVector<NSObject>()
     
     //状态管理器，建议有复杂变化的状态都通过状态管理器管理
-    let stMgr: StatusManager = StatusManager(capacity: 5)
+    let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
 
 }
 
@@ -70,7 +73,7 @@ extension OriginMonitor: MonitorProtocol
         return self.container.allItems()
     }
     
-    func isItemExist(item: NSObject) -> Bool {
+    func isItemExist(_ item: NSObject) -> Bool {
         let index = self.container.indexOf(item)
         if index >= 0
         {
@@ -79,11 +82,11 @@ extension OriginMonitor: MonitorProtocol
         return false
     }
     
-    func addItem(item: NSObject) {
+    func addItem(_ item: NSObject) {
         self.container.pushBack(item)
     }
     
-    func deleteItem(item: NSObject) {
+    func deleteItem(_ item: NSObject) {
         _ = self.container.pop(item: item)
     }
     
@@ -91,9 +94,20 @@ extension OriginMonitor: MonitorProtocol
         return nil
     }
     
+    func getAllItemsInfo() -> [String] {
+        var infos = [String]()
+        let arr = container.allItems()
+        for item in arr
+        {
+            infos.append(item.description)
+        }
+        return infos
+    }
+    
     @objc func originConfig() {
         //子类实现具体功能
     }
+    
 }
 
 

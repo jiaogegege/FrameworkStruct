@@ -46,13 +46,13 @@ extension DatasContainer: ExternalInterface
     ///获取所有用户信息
     func getAllUserInfo(completion: ((_ users: [UserInfoModel]?) -> Void))
     {
-        if let data = self.get(key: DCDataKey.allUserInfo)
+        if let users = self.get(key: DCDataKey.allUserInfo)
         {
-            completion(data as? [UserInfoModel])
+            completion(users as? [UserInfoModel])
         }
         else    //如果容器中没有，那么从数据库中获取
         {
-            dba.queryAllUserInfo { users in
+            dba.queryAllUsersInfo { users in
                 //查询到后先保存到容器中
                 if let users = users {
                     self.mutate(key: DCDataKey.allUserInfo, value: users)

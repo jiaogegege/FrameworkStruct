@@ -87,7 +87,7 @@ class OriginContainer: NSObject
 {
     //MARK: 属性
     //状态管理器，建议有复杂变化的状态都通过状态管理器管理
-    let stMgr: StatusManager = StatusManager(capacity: 5)
+    let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个数据容器在创建的时候都要加入到监控器中
     weak var monitor: ContainerMonitor!
@@ -104,7 +104,7 @@ class OriginContainer: NSObject
     {
         self.monitor = ContainerMonitor.shared
         super.init()
-        monitor.addItem(item: self)
+        monitor.addItem(self)
     }
     
     //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）

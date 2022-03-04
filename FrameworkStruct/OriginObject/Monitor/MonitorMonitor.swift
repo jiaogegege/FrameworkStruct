@@ -55,15 +55,15 @@ class MonitorMonitor: OriginMonitor
         self.embellisherMonitor = EmbellisherMonitor.shared
         self.workerMonitor = WorkerMonitor.shared
         super.init()
-        self.addItem(item: self.accessorMonitor)
-        self.addItem(item: self.checkerMonitor)
-        self.addItem(item: self.containerMonitor)
-        self.addItem(item: self.documentMonitor)
-        self.addItem(item: self.handlerMonitor)
-        self.addItem(item: self.adapterMonitor)
-        self.addItem(item: self.managerMonitor)
-        self.addItem(item: self.embellisherMonitor)
-        self.addItem(item: self.workerMonitor)
+        self.addItem(self.accessorMonitor)
+        self.addItem(self.checkerMonitor)
+        self.addItem(self.containerMonitor)
+        self.addItem(self.documentMonitor)
+        self.addItem(self.handlerMonitor)
+        self.addItem(self.adapterMonitor)
+        self.addItem(self.managerMonitor)
+        self.addItem(self.embellisherMonitor)
+        self.addItem(self.workerMonitor)
     }
     
     override func copy() -> Any
@@ -76,6 +76,7 @@ class MonitorMonitor: OriginMonitor
         return self
     }
     
+    ///最初的配置，需要外部调用
     override func originConfig() {
         super.originConfig()
         self.accessorMonitor.originConfig()

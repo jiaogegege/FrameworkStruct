@@ -31,4 +31,8 @@ class CheckerMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        super.originConfig()
+    }
+    
 }

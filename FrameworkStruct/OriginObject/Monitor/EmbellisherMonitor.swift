@@ -31,4 +31,8 @@ class EmbellisherMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        super.originConfig()
+    }
+    
 }

@@ -28,7 +28,7 @@ protocol AdapterProtocol
 class OriginAdapter: NSObject
 {
     //状态管理器，建议有复杂变化的状态都通过状态管理器管理
-    let stMgr: StatusManager = StatusManager(capacity: 5)
+    let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个适配器在创建的时候都要加入到监控器中
     weak var monitor: AdapterMonitor!
@@ -38,7 +38,7 @@ class OriginAdapter: NSObject
     {
         self.monitor = AdapterMonitor.shared
         super.init()
-        monitor.addItem(item: self)
+        monitor.addItem(self)
     }
 }
 

@@ -40,7 +40,7 @@ class ThemeManager: OriginManager
         g_getWindow().overrideUserInterfaceStyle = isFollowDarkMode ? .unspecified : .light
         
         //订阅当前主题更新服务
-        self.themeContainer.subscribe(key: TCGetKey.currentTheme, delegate: self)
+        self.themeContainer.subscribe(key: TCDataKey.currentTheme, delegate: self)
 
         //获取暗黑主题
         self.darkTheme = self.themeContainer.getDarkTheme()
@@ -68,10 +68,10 @@ extension ThemeManager: DelegateProtocol, ContainerServices
 {
     func containerDidUpdateData(key: AnyHashable, value: Any)
     {
-        if let k = key as? TCGetKey
+        if let k = key as? TCDataKey
         {
             //切换当前主题的服务
-            if k == TCGetKey.currentTheme
+            if k == TCDataKey.currentTheme
             {
                 self.currentTheme = (value as! CustomTheme)
                 //发出切换主题的通知
@@ -150,7 +150,9 @@ extension ThemeManager: ExternalInterface
     ///设置是否跟随系统暗黑模式
     func setFollowDarkMode(follow: Bool)
     {
+        //修改状态
         self.stMgr.setStatus(follow, forKey: TMStatusKey.followDarkMode)
+        //设置全局窗口样式
         g_getWindow().overrideUserInterfaceStyle = follow ? .unspecified : .light
         //更新到本地
         ud.write(key: .followDarkMode, value: follow)

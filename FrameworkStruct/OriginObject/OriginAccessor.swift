@@ -36,14 +36,14 @@ class OriginAccessor: NSObject
     weak var monitor: AccessorMonitor!
     
     //状态管理器
-    var stMgr: StatusManager = StatusManager(capacity: 5)
+    var stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     
     override init()
     {
         self.monitor = AccessorMonitor.shared
         super.init()
-        monitor.addItem(item: self)
+        monitor.addItem(self)
     }
 }
 

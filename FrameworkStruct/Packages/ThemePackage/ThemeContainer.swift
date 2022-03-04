@@ -13,8 +13,8 @@
  */
 import UIKit
 
-//主题容器提供的可获取的数据key
-enum TCGetKey: Int
+//主题容器提供的存储的数据key
+enum TCDataKey: Int
 {
     case currentTheme = 1000   //当前主题
     case darkTheme = 1001       //暗黑主题
@@ -48,14 +48,14 @@ class ThemeContainer: OriginContainer
         {
             let themeDict = plAccessor.read(fileName: current)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
-            self.mutate(key: TCGetKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
+            self.mutate(key: TCDataKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
         }
         else
         {
             //默认选择粉红色主题
             let themeDict = plAccessor.read(fileName: sPinkThemeFileName)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
-            self.mutate(key: TCGetKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
+            self.mutate(key: TCDataKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
             //保存当前主题标识
             self.udAccessor.write(key: UDAKeyType.currentTheme, value: sPinkThemeFileName)
         }
@@ -66,7 +66,7 @@ class ThemeContainer: OriginContainer
     {
         let themeDict = plAccessor.read(fileName: sDarkThemeFileName)
         let darkThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
-        self.mutate(key: TCGetKey.darkTheme, value: CustomTheme.init(theme: darkThemeModel!))
+        self.mutate(key: TCDataKey.darkTheme, value: CustomTheme.init(theme: darkThemeModel!))
     }
     
     //初始化一个主题对象
@@ -83,9 +83,9 @@ class ThemeContainer: OriginContainer
     //保存当前主题到UserDefaults
     override func commit(key: AnyHashable, value: Any)
     {
-        if let k = key as? TCGetKey
+        if let k = key as? TCDataKey
         {
-            if k == TCGetKey.currentTheme
+            if k == TCDataKey.currentTheme
             {
                 udAccessor.write(key: UDAKeyType.currentTheme, value: value)
             }
@@ -102,28 +102,28 @@ extension ThemeContainer: ExternalInterface
     //获取当前主题
     func getCurrentTheme() -> CustomTheme
     {
-        let theme = self.get(key: TCGetKey.currentTheme) as! CustomTheme
+        let theme = self.get(key: TCDataKey.currentTheme) as! CustomTheme
         return theme
     }
     
     //设置新的当前主题
     func setCurrentTheme(newTheme: CustomTheme)
     {
-        self.mutate(key: TCGetKey.currentTheme, value: newTheme)
-        self.commit(key: TCGetKey.currentTheme, value: newTheme.theme.fileName)
+        self.mutate(key: TCDataKey.currentTheme, value: newTheme)
+        self.commit(key: TCDataKey.currentTheme, value: newTheme.theme.fileName)
     }
     
     //获取暗黑主题
     func getDarkTheme() -> CustomTheme
     {
-        let theme = self.get(key: TCGetKey.darkTheme) as! CustomTheme
+        let theme = self.get(key: TCDataKey.darkTheme) as! CustomTheme
         return theme
     }
     
     //获取所有主题列表
     func getAllTheme() -> [CustomTheme]
     {
-        let themeArr = self.get(key: TCGetKey.allTheme)
+        let themeArr = self.get(key: TCDataKey.allTheme)
         if let themeArray = themeArr as? [CustomTheme], themeArray.count > 0
         {
             return themeArray
@@ -141,9 +141,9 @@ extension ThemeContainer: ExternalInterface
                 }
             }
             //添加到数据容器
-            self.mutate(key: TCGetKey.allTheme, value: themeArray)
+            self.mutate(key: TCDataKey.allTheme, value: themeArray)
             //返回容器中的数组数据
-            return self.get(key: TCGetKey.allTheme) as! [CustomTheme]
+            return self.get(key: TCDataKey.allTheme) as! [CustomTheme]
         }
     }
     

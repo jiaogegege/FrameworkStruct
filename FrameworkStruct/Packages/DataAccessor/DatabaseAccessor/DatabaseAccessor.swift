@@ -10,14 +10,30 @@
  *
  * 概述：对SQLite数据库进行存取和相关资源的管理，使用FMDatabaseQueue进行数据库操作，线程安全，支持数据库迁移和升级
  *
- * - Parameters:
- *  - <#参数1#>: <#说明#>
- *
- * - Returns: <#说明#>
- *
- * 注意事项：<#说明#>
- *
  */
+
+/**
+ sqlite_master  结构如下
+
+SQLite Master Table Schema
+
+-----------------------------------------------------------------
+
+Name                       Description
+
+-----------------------------------------------------------------
+
+type          The object’s type (table, index, view, trigger)
+
+name          The object’s name
+
+tbl_name      The table the object is associated with
+
+rootpage      The object’s root page index in the database (where it begins)
+
+sql           The object’s SQL definition (DDL)
+ */
+
 import UIKit
 
 /**
@@ -52,7 +68,7 @@ class DatabaseAccessor: OriginAccessor
     {
         super.init()
         
-        //开始创建
+        /*********** 开始创建数据库 *************/
         stMgr.setStatus(WorkState.creating, forKey: DBAStatusKey.workState)
         
         //数据库文件路径
@@ -66,7 +82,7 @@ class DatabaseAccessor: OriginAccessor
         self.dbQueue = FMDatabaseQueue(path: dbPath)
         self.db = self.dbQueue?.value(forKey: "_db") as? FMDatabase
         
-        //如果打开不成功，那么打印错误信息
+        /************* 如果数据库打开不成功，那么打印错误信息 **************/
         guard self.dbQueue != nil else {
             //创建失败
             stMgr.setStatus(WorkState.failure, forKey: DBAStatusKey.workState)
@@ -77,15 +93,15 @@ class DatabaseAccessor: OriginAccessor
         //初始化锁
         lock = NSRecursiveLock()
         
-        /****** 如果打开成功，那么继续接下来的操作 ******/
+        /************** 如果数据库打开成功，那么继续接下来的操作 **************/
         
-        //如果不存在数据库文件，那么说明数据库还没创建过，那么创建数据库表
+        //如果不存在数据库文件，那么说明数据库还没创建过或者被删除了，那么创建数据库表
         if !isDbExist
         {
             self.createDbTable()
         }
         
-        //创建成功
+        /************** 数据库创建并打开成功 ******************/
         stMgr.setStatus(WorkState.created, forKey: DBAStatusKey.workState)
         
         //查询数据库版本号，判断是否要更新数据库
@@ -249,28 +265,6 @@ extension DatabaseAccessor: InternalType
 //接口方法
 extension DatabaseAccessor: ExternalInterface
 {
-    /**
-     sqlite_master  结构如下
-
-    SQLite Master Table Schema
-
-    -----------------------------------------------------------------
-
-    Name                       Description
-
-    -----------------------------------------------------------------
-
-    type          The object’s type (table, index, view, trigger)
-
-    name          The object’s name
-
-    tbl_name      The table the object is associated with
-
-    rootpage      The object’s root page index in the database (where it begins)
-
-    sql           The object’s SQL definition (DDL)
-     */
-    
     /**************************************** 通用基础方法 Section Begin **************************************/
     ///获取存取器当前状态
     var currentState: WorkState {
@@ -355,6 +349,79 @@ extension DatabaseAccessor: ExternalInterface
             FSLog("query failed: db is closed")
         }
         return ret
+    }
+    
+    ///在事务中执行多条sql语句
+    ///参数：sqls：要执行多sql语句数组
+    ///返回值：是否执行成功，如果不成功则会滚
+    func transactionUpdate(sqls: Array<String>) -> Bool
+    {
+        guard currentState != .ready else {
+            FSLog("db is failure")
+            return false
+        }
+        
+        var ret = false
+        if dbQueue != nil, db != nil
+        {
+            lock?.lock()
+            db?.beginTransaction()
+            do {
+                for sql in sqls
+                {
+                    try db?.executeUpdate(sql, values: nil)
+                }
+                //全部执行完毕后设置为true
+                ret = true
+            } catch {
+                FSLog("db update error: " + error.localizedDescription)
+                db?.rollback()
+            }
+            db?.commit()
+            lock?.unlock()
+        }
+        else
+        {
+            FSLog("transaction update failed: db is closed")
+        }
+        return ret
+    }
+    
+    ///执行一条query的sql语句
+    func transactionQuery(sqls: Array<String>) -> Array<FMResultSet>?
+    {
+        guard currentState != .ready else {
+            FSLog("db is failure")
+            return nil
+        }
+        
+        var rets: [FMResultSet]? = nil
+        if dbQueue != nil, db != nil
+        {
+            lock?.lock()
+            db?.beginTransaction()
+            do {
+                rets = []
+                for sql in sqls
+                {
+                    let ret = try db?.executeQuery(sql, values: nil)
+                    if let ret = ret
+                    {
+                        rets?.append(ret)
+                    }
+                }
+            } catch {
+                FSLog("db query error: " + error.localizedDescription)
+                db?.rollback()
+            }
+            db?.commit()
+            lock?.unlock()
+        }
+        else
+        {
+            FSLog("transaction query failed: db is closed")
+        }
+        return rets
     }
     
     ///执行一条Update的sql语句
@@ -561,7 +628,7 @@ extension DatabaseAccessor: ExternalInterface
     
     //MARK: 用户信息
     //查询用户信息
-    func queryAllUserInfo(callback: ((Array<UserInfoModel>?) -> Void))
+    func queryAllUsersInfo(callback: ((Array<UserInfoModel>?) -> Void))
     {
         let sql = "SELECT * FROM app_user"
         queryInQueue(sql: sql) { ret, result in

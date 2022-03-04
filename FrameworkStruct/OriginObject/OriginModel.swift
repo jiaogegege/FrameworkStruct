@@ -8,7 +8,7 @@
 /**
  * 最初的数据模型
  *
- * - note：此处只是作为规范的定义，实际工程中可能会使用第三方框架，比如MJExtension，JSONModel等，根据实际情况使用
+ * - note：此处只是作为规范定义的示例，实际工程中可能会使用第三方框架，比如MJExtension，JSONModel等，根据实际情况使用
  *
  */
 import Foundation

@@ -31,4 +31,8 @@ class ContainerMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        super.originConfig()
+    }
+    
 }

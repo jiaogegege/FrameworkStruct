@@ -31,4 +31,8 @@ class HandlerMonitor: OriginMonitor
         return self
     }
     
+    override func originConfig() {
+        super.originConfig()
+    }
+    
 }

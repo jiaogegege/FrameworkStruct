@@ -36,4 +36,5 @@ class ManagerMonitor: OriginMonitor
         //初始化应用程序管理器
         _ = ApplicationManager.shared
     }
+    
 }

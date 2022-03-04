@@ -29,6 +29,7 @@
  */
 import Foundation
 
+//MARK: Origin协议定义
 protocol OriginProtocol
 {
     //任何实现该协议的类型
@@ -40,6 +41,11 @@ protocol OriginProtocol
     func typeDesc() -> String
     
 }
+
+
+//MARK: 常量定义
+///Origin对象状态管理器步数定义
+let originStatusStep: Int = 10
 
 
 //MARK: 闭包类型定义
