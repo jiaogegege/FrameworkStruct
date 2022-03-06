@@ -742,6 +742,7 @@ extension DatabaseAccessor: ExternalInterface
     func queryAllUsersInfo(multithread: Bool = false, callback: @escaping ((Array<UserInfoModel>?) -> Void))
     {
         let sql = "SELECT * FROM app_user"
+        
         performQuery(inQueue: multithread, sqls: [sql]) { (ret, results) in
             if ret, let result = results.first
             {
@@ -771,6 +772,7 @@ extension DatabaseAccessor: ExternalInterface
     func updateUserInfo(multithread: Bool = false , user: UserInfoModel, callback: ((Bool) -> Void)?)
     {
         let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, getCurrentTimeString(), user.id)
+        
         performUpdate(inQueue: multithread, sqls: [sql]) { (ret) in
             if let callback = callback {
                 callback(ret)
