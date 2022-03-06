@@ -298,6 +298,81 @@ extension DatabaseAccessor: ExternalInterface
         self.lock = nil
     }
     
+    //MARK: 增删改查适配方法
+    ///执行更新方法
+    ///参数：
+    ///inQueue：是否在多线程环境下执行，不可在回调中嵌套执行sql语句；
+    ///sqls：要执行的sql语句，如果只有一条，也打包成数组传过来；
+    ///callback：回调方法，返回执行结果
+    func performUpdate(inQueue: Bool, sqls: [String], callback: @escaping ((_ ret: Bool) -> Void))
+    {
+        if inQueue  //在队列中执行
+        {
+            if sqls.count == 1  //只有1条sql语句
+            {
+                self.updateInQueue(sql: sqls.first!) { (ret) in
+                    callback(ret)
+                }
+            }
+            else    //事务执行
+            {
+                self.transactionUpdateInQueue(sqls: sqls) { (ret) in
+                    callback(ret)
+                }
+            }
+        }
+        else    //在单线程中执行
+        {
+            if sqls.count == 1  //只有一条sql语句
+            {
+                let ret = self.update(sql: sqls.first!)
+                callback(ret)
+            }
+            else    //事务执行
+            {
+                let ret = self.transactionUpdate(sqls: sqls)
+                callback(ret)
+            }
+        }
+    }
+    
+    ///执行更新方法
+    ///参数：
+    ///inQueue：是否在多线程环境下执行，不可在回调中嵌套执行sql语句；
+    ///sqls：要执行的sql语句，如果只有一条，也打包成数组传过来；
+    ///callback：回调方法，返回执行结果
+    func performQuery(inQueue: Bool, sqls: [String], callback: @escaping ((_ ret: Bool, _ results: Array<FMResultSet>) -> Void))
+    {
+        if inQueue  //在队列中执行
+        {
+            if sqls.count == 1  //只有1条sql语句
+            {
+                self.queryInQueue(sql: sqls.first!) { (ret, result) in
+                    callback(ret, result != nil ? [result!] : [])
+                }
+            }
+            else    //事务执行
+            {
+                self.transactionQueryInQueue(sqls: sqls) { (ret, results) in
+                    callback(ret, results)
+                }
+            }
+        }
+        else    //在单线程中执行
+        {
+            if sqls.count == 1  //只有一条sql语句
+            {
+                let ret = self.query(sql: sqls.first!)
+                callback(ret.0, ret.1 != nil ? [ret.1!] : [])
+            }
+            else    //事务执行
+            {
+                let ret = self.transactionQuery(sqls: sqls)
+                callback(ret.0, ret.1)
+            }
+        }
+    }
+    
     ///执行一条Update的sql语句
     func update(sql: String) -> Bool
     {
@@ -326,21 +401,24 @@ extension DatabaseAccessor: ExternalInterface
     }
     
     ///执行一条query的sql语句
-    func query(sql: String) -> FMResultSet?
+    func query(sql: String) -> (Bool, FMResultSet?)
     {
         guard currentState != .failure else {
             FSLog("db is failure")
-            return nil
+            return (false, nil)
         }
         
-        var ret: FMResultSet? = nil
+        var ret: Bool = true
+        var result: FMResultSet? = nil
         if dbQueue != nil, db != nil
         {
             lock?.lock()
             do {
-                ret = try db?.executeQuery(sql, values: nil)
+                result = try db?.executeQuery(sql, values: nil)
             } catch {
                 FSLog("db query error: " + error.localizedDescription)
+                //发生错误则设置为false
+                ret = false
             }
             lock?.unlock()
         }
@@ -348,7 +426,7 @@ extension DatabaseAccessor: ExternalInterface
         {
             FSLog("query failed: db is closed")
         }
-        return ret
+        return (ret, result)
     }
     
     ///在事务中执行多条sql语句
@@ -361,7 +439,7 @@ extension DatabaseAccessor: ExternalInterface
             return false
         }
         
-        var ret = false
+        var ret = true
         if dbQueue != nil, db != nil
         {
             lock?.lock()
@@ -371,10 +449,10 @@ extension DatabaseAccessor: ExternalInterface
                 {
                     try db?.executeUpdate(sql, values: nil)
                 }
-                //全部执行完毕后设置为true
-                ret = true
             } catch {
                 FSLog("db update error: " + error.localizedDescription)
+                //如果发生错误，设置为false
+                ret = false
                 db?.rollback()
             }
             db?.commit()
@@ -387,31 +465,34 @@ extension DatabaseAccessor: ExternalInterface
         return ret
     }
     
-    ///执行一条query的sql语句
-    func transactionQuery(sqls: Array<String>) -> Array<FMResultSet>?
+    ///在事务中执行多条sql语句
+    ///参数：sqls：要执行多sql语句数组
+    ///返回值：查询结果数组，如果不成功则会滚
+    func transactionQuery(sqls: Array<String>) -> (Bool, Array<FMResultSet>)
     {
         guard currentState != .ready else {
             FSLog("db is failure")
-            return nil
+            return (false, [])
         }
         
-        var rets: [FMResultSet]? = nil
+        var ret: Bool = true
+        var results: [FMResultSet] = []
         if dbQueue != nil, db != nil
         {
             lock?.lock()
             db?.beginTransaction()
             do {
-                rets = []
                 for sql in sqls
                 {
                     let ret = try db?.executeQuery(sql, values: nil)
                     if let ret = ret
                     {
-                        rets?.append(ret)
+                        results.append(ret)
                     }
                 }
             } catch {
                 FSLog("db query error: " + error.localizedDescription)
+                ret = false
                 db?.rollback()
             }
             db?.commit()
@@ -421,14 +502,18 @@ extension DatabaseAccessor: ExternalInterface
         {
             FSLog("transaction query failed: db is closed")
         }
-        return rets
+        return (ret, results)
     }
     
-    ///执行一条Update的sql语句
+    ///在队列中执行一条Update的sql语句
     func updateInQueue(sql: String, callback: ((_ ret: Bool) -> Void)?)
     {
         guard currentState == .ready else {
             FSLog("db is not ready")
+            if let cb = callback
+            {
+                cb(false)
+            }
             return
         }
         
@@ -453,15 +538,20 @@ extension DatabaseAccessor: ExternalInterface
         else
         {
             FSLog("update in queue failed: db is closed")
+            if let cb = callback
+            {
+                cb(false)
+            }
         }
     }
     
-    ///执行一条query的sql语句
+    ///在队列中执行一条query的sql语句
     ///如果发生了错误，那么回传false和nil
-    func queryInQueue(sql: String, callback: ((_ ret: Bool, _ result: FMResultSet) -> Void))
+    func queryInQueue(sql: String, callback: ((_ ret: Bool, _ result: FMResultSet?) -> Void))
     {
         guard currentState == .ready else {
             FSLog("db is not ready")
+            callback(false, nil)
             return
         }
         
@@ -470,17 +560,19 @@ extension DatabaseAccessor: ExternalInterface
             queue.inDatabase { db in
                 do {
                     let ret = try db.executeQuery(sql, values: nil)
+                    //查询完毕后回传结果
                     callback(true, ret)
                 } catch {
                     FSLog("db query error: " + error.localizedDescription)
                     //如果发生异常，那么回传false
-                    callback(false, FMResultSet())
+                    callback(false, nil)
                 }
             }
         }
         else
         {
             FSLog("query in queue failed: db is closed")
+            callback(false, nil)
         }
     }
     
@@ -491,6 +583,10 @@ extension DatabaseAccessor: ExternalInterface
     {
         guard currentState == .ready else {
             FSLog("db is not ready")
+            if let cb = callback
+            {
+                cb(false)
+            }
             return
         }
         
@@ -521,6 +617,10 @@ extension DatabaseAccessor: ExternalInterface
         else
         {
             FSLog("transaction update in queue failed: db is closed")
+            if let cb = callback
+            {
+                cb(false)
+            }
         }
     }
     
@@ -532,6 +632,7 @@ extension DatabaseAccessor: ExternalInterface
     {
         guard currentState == .ready else {
             FSLog("db is not ready")
+            callback(false, [])
             return
         }
         
@@ -558,21 +659,24 @@ extension DatabaseAccessor: ExternalInterface
         else
         {
             FSLog("transaction query in queue failed: db is closed")
+            callback(false, [])
         }
     }
     /**************************************** 通用基础方法 Section End **************************************/
     
-    /**************************************** 查询和更新方法 Section Begin ***************************************/
+    //MARK: 具体的数据增删改查方法
+    /**************************************** 存取器内部查询更新方法 Section Begin ***************************************/
     //查询数据库中所有表名
     fileprivate func queryAllTableName() -> Array<String>
     {
         let sql = "SELECT name FROM sqlite_master WHERE type = 'table'"
         var tableArray = [String]()
-        if let ret = query(sql: sql)
+        let ret = query(sql: sql)
+        if ret.0 == true, let result = ret.1
         {
-            while ret.next()
+            while result.next()
             {
-                if let tblName = ret.string(forColumn: "name")
+                if let tblName = result.string(forColumn: "name")
                 {
                     tableArray.append(tblName)
                 }
@@ -594,11 +698,15 @@ extension DatabaseAccessor: ExternalInterface
     {
         //构建sql语句
         let sql = String(format: "SELECT config_value FROM app_config WHERE config_key = '%@'", DatabaseKey.dbVersion.rawValue)
-        if let ret = query(sql: sql), ret.next()
+        let ret = query(sql: sql)
+        if ret.0 == true, let result = ret.1
         {
-            if let version = ret.string(forColumn: "config_value")
+            if result.next()
             {
-                return version
+                if let version = result.string(forColumn: "config_value")
+                {
+                    return version
+                }
             }
         }
         return nil
@@ -625,14 +733,17 @@ extension DatabaseAccessor: ExternalInterface
             self.insertDbVersion(newVersion)
         }
     }
+    /**************************************** 存取器内部查询更新方法 Section End ****************************************/
     
+    /**************************************** 业务数据增删改查方法 Section Begin ****************************************/
     //MARK: 用户信息
     ///查询用户信息
-    func queryAllUsersInfo(callback: ((Array<UserInfoModel>?) -> Void))
+    ///multithread:如果在多线程环境下执行，那么传true
+    func queryAllUsersInfo(multithread: Bool = false, callback: @escaping ((Array<UserInfoModel>?) -> Void))
     {
         let sql = "SELECT * FROM app_user"
-        queryInQueue(sql: sql) { ret, result in
-            if ret
+        performQuery(inQueue: multithread, sqls: [sql]) { (ret, results) in
+            if ret, let result = results.first
             {
                 var array: Array<UserInfoModel> = []
                 while result.next()
@@ -648,7 +759,7 @@ extension DatabaseAccessor: ExternalInterface
                 //执行回调
                 callback(array)
             }
-            else    //如果出错
+            else
             {
                 callback(nil)
             }
@@ -656,11 +767,11 @@ extension DatabaseAccessor: ExternalInterface
     }
     
     ///更新一个用户信息
-    ///参数：user：用户信息；callback：回调，更新是否成功
-    func updateUserInfo(user: UserInfoModel, callback: ((Bool) -> Void)?)
+    ///参数：multithread：是否在多线程环境下执行；user：用户信息；callback：回调，更新是否成功
+    func updateUserInfo(multithread: Bool = false , user: UserInfoModel, callback: ((Bool) -> Void)?)
     {
         let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, getCurrentTimeString(), user.id)
-        updateInQueue(sql: sql) { ret in
+        performUpdate(inQueue: multithread, sqls: [sql]) { (ret) in
             if let callback = callback {
                 callback(ret)
             }
@@ -673,6 +784,6 @@ extension DatabaseAccessor: ExternalInterface
     
     
     
-    /**************************************** 查询和更新方法 Section End ***************************************/
+    /**************************************** 业务数据增删改查方法 Section End ***************************************/
     
 }
