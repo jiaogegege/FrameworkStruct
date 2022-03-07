@@ -14,17 +14,18 @@ import Foundation
 /**
  * 工作者定义的通用接口，如果有通用的功能需要子类实现，那么定义在此处
  * 可以作为类型使用
+ * 工作者子类中的所有接口方法在调用的时候都要判断是否可以工作，避免出现意外情况
  */
 protocol WorkerProtocol
 {
     ///工作者当前工作状态
-    func currentWorkState() -> OriginWorker.WorkState
+    var currentWorkState: OriginWorker.WorkState { get }
     
     ///是否可以工作，当处于ready和working状态时返回true
     var canWork: Bool { get }
     
-    ///开始工作，调用worker的任何方法都要先调用这个方法，表示工作者开始工作
-    func startWork()
+    ///开始工作，调用worker的任何方法都要先调用这个方法，表示工作者开始工作，如果状态不对，可能抛出一个错误
+    func startWork() throws
     
     ///结束工作，每一个工作者在完成工作之后，都需要被调用这个方法，用来清理资源，释放内存，当调用完这个方法后，该工作者处于不可工作状态，不应该再调用其任何方法
     ///具体在哪里调用这个方法根据业务需求确定应该由外部程序调用
@@ -46,7 +47,7 @@ class OriginWorker: NSObject
     
     
     //如果子类有自己的初始化方法，那么在最后要调用父类的初始化方法
-    //子类的初始化方法在最开始要设置状态为`notReady`
+    //子类如果有自定义初始化方法，那么在最开始要设置状态为`notReady`，在最后调用父类的这个初始化方法
     override init()
     {
         stMgr.setStatus(WorkState.notReady, forKey: WorkerStatusKey.workState)  //未就绪状态
@@ -78,6 +79,13 @@ extension OriginWorker
         case working = 2                    //工作中状态，正在处理业务
         case done = 3                       //完毕状态，完成工作后不再可用
     }
+    
+    //一些内部错误类型
+    enum WorkerError: Error {
+        case notReadyError                  //工作者还未准备好的错误，一般是一些初始数据还未获取到
+        case unavailableError               //不可用错误，工作者已经完成了工作，清理了所有状态和数据，不可再次使用
+    }
+    
 }
 
 
@@ -87,20 +95,31 @@ extension OriginWorker
  */
 extension OriginWorker: WorkerProtocol
 {
-    func currentWorkState() -> WorkState {
+    var currentWorkState: WorkState {
         return stMgr.status(forKey: WorkerStatusKey.workState) as! WorkState
     }
     
     var canWork: Bool {
-        if currentWorkState() == .ready || currentWorkState() == .working
+        if currentWorkState == .ready || currentWorkState == .working
         {
             return true
         }
         return false
     }
     
-    func startWork() {
-        stMgr.setStatus(WorkState.working, forKey: WorkerStatusKey.workState)
+    //子类在执行任何工作方法之前要调用这个方法
+    func startWork() throws {
+        //判断当前状态
+        switch currentWorkState {
+        case .notReady: //如果当前未准备好，那么返回错误信息
+            throw WorkerError.notReadyError
+        case .ready:    //就绪状态，正常流程，将状态切换为工作状态
+            stMgr.setStatus(WorkState.working, forKey: WorkerStatusKey.workState)
+        case .working:  //已经处于工作状态，什么都不做
+            break
+        case .done:     //当前工作者不再可用
+            throw WorkerError.unavailableError
+        }
     }
     
     //完成工作，子类如果覆写这个方法，需要在做完清理工作的最后调用父类方法
@@ -109,7 +128,6 @@ extension OriginWorker: WorkerProtocol
         stMgr.setStatus(WorkState.done, forKey: WorkerStatusKey.workState)
         monitor.deleteItem(self)
     }
-    
     
 }
 

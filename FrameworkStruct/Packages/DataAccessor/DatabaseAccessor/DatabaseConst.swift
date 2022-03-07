@@ -10,7 +10,6 @@ import Foundation
 //数据库中存储的数据的key定义
 typealias DBKeyType = String
 
-
 //数据库中存储的一些数据的key
 enum DatabaseKey: DBKeyType
 {

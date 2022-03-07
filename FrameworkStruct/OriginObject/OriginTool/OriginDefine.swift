@@ -53,4 +53,4 @@ let originStatusStep: Int = 10
 typealias VoidClosure = (() -> Void)
 
 //返回NSError的闭包
-typealias ErrorClosure = ((_ error: NSError) -> Void)
+typealias ErrorClosure = ((NSError) -> Void)

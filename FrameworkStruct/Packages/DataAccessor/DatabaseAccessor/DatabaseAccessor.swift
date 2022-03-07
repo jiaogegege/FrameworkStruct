@@ -374,6 +374,7 @@ extension DatabaseAccessor: ExternalInterface
     }
     
     ///执行一条Update的sql语句
+    ///返回值：更新是否成功
     func update(sql: String) -> Bool
     {
         guard currentState != .failure else {
@@ -401,6 +402,7 @@ extension DatabaseAccessor: ExternalInterface
     }
     
     ///执行一条query的sql语句
+    ///返回值1：查询是否成功，如果出错返回`false`，此时不应该解析数据；返回值2：查询结果，如果查询成功则要解析数据
     func query(sql: String) -> (Bool, FMResultSet?)
     {
         guard currentState != .failure else {
@@ -431,7 +433,7 @@ extension DatabaseAccessor: ExternalInterface
     
     ///在事务中执行多条sql语句
     ///参数：sqls：要执行多sql语句数组
-    ///返回值：是否执行成功，如果不成功则会滚
+    ///返回值：是否执行成功，如果不成功则回滚
     func transactionUpdate(sqls: Array<String>) -> Bool
     {
         guard currentState != .ready else {
@@ -467,7 +469,7 @@ extension DatabaseAccessor: ExternalInterface
     
     ///在事务中执行多条sql语句
     ///参数：sqls：要执行多sql语句数组
-    ///返回值：查询结果数组，如果不成功则会滚
+    ///返回值：查询结果数组，如果不成功则回滚
     func transactionQuery(sqls: Array<String>) -> (Bool, Array<FMResultSet>)
     {
         guard currentState != .ready else {
@@ -693,7 +695,7 @@ extension DatabaseAccessor: ExternalInterface
         FSLog("insert db version: \(version) \(update(sql: sql) ? "success" : "failure")")
     }
     
-    //查询数据库版本号
+    //查询数据库版本号，可提供给外部调用
     func queryDbVersion() -> String?
     {
         //构建sql语句
@@ -736,6 +738,12 @@ extension DatabaseAccessor: ExternalInterface
     /**************************************** 存取器内部查询更新方法 Section End ****************************************/
     
     /**************************************** 业务数据增删改查方法 Section Begin ****************************************/
+    /**
+     * - important: 对于各种数据的增删改查方法，可以提供`multithread`参数让外部程序调用的时候决定是否在多线程环境下，一般建议在后台线程中调用的时候传入`true`，在主线程调用的时候传入`false`（默认值）。在大部分情况下只需要使用默认值即可。在编写这些方法的时候，如果不想提供多线程环境，那么不提供这个参数也可以，方法将在默认线程中调用。
+     *
+     * - attention: 如果是在多线程环境下，不要在`callback`中的同一个线程中调用数据库方法，如果一定要调用数据库方法，那么使用异步线程`g_async`。一般建议在多线程环境下并行调用数据库方法。如果确实需要发起多次调用，那么建议在一个方法中执行多条sql语句。
+     *
+     */
     //MARK: 用户信息
     ///查询用户信息
     ///multithread:如果在多线程环境下执行，那么传true
@@ -769,7 +777,7 @@ extension DatabaseAccessor: ExternalInterface
     
     ///更新一个用户信息
     ///参数：multithread：是否在多线程环境下执行；user：用户信息；callback：回调，更新是否成功
-    func updateUserInfo(multithread: Bool = false , user: UserInfoModel, callback: ((Bool) -> Void)?)
+    func updateUserInfo(multithread: Bool = false, user: UserInfoModel, callback: ((Bool) -> Void)?)
     {
         let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, getCurrentTimeString(), user.id)
         
