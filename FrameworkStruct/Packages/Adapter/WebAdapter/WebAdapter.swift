@@ -61,7 +61,7 @@ extension WebAdapter: ExternalInterface
         return vc
     }
     
-    ///在弱引用数组中添加一个vc
+    ///将vc设置为当前正在显示的webviewVC
     func showWebVC(_ vc: BasicWebViewController)
     {
         self.currentWebVC = vc

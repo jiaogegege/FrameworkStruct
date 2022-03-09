@@ -290,7 +290,7 @@ iOS App基础架构设计
 * AppDelegate
 * SceneDelegate
 * BasicViewController：所有普通控制器都继承这个基类
-* BasicTableViewController：所有tabieview控制器都继承这个基类
+* BasicTableViewController：所有tableview控制器都继承这个基类
 * BasicNavigationController：所有导航控制器都继承这个基类
 * BasicTabbarController：所有tabbar控制器都继承这个基类
 

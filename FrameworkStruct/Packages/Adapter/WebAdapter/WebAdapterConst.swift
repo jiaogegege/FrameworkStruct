@@ -24,7 +24,8 @@ struct WebContentHandler {
 //js交互原生handler，根据具体需求定义
 enum WebHandlerNative {
     static let noneName = "none"
-    case none                       //空
+    case none                                                           //空
+    
     /**************************************** 默认加载的handler Section Begin ****************************************/
     static let neededHandlersName = "neededHandlers"
     case neededHandlers(BasicWebViewController)                         //H5页面将其需要的所有handler名字传过来，navtive根据获取的列表加载相应的handler，参数：一个回调，返回所有的handlers名字
@@ -51,13 +52,13 @@ enum WebHandlerNative {
     case alert                                                          //弹出一个弹框，带一个确定按钮
     
     static let alertConfirmCancelName = "alertConfirmCancel"
-    case alertConfirmCancel                     //弹出一个弹框，带确定和取消按钮，并将用户的选择结果返回给js
+    case alertConfirmCancel                                             //弹出一个弹框，带确定和取消按钮，并将用户的选择结果返回给js
     
     /**************************************** 默认加载的handler Section End ****************************************/
     
     /**************************************** 可选handler Section Begin ****************************************/
     static let getUserIdName = "getUserId"
-    case getUserId                              //获取当前用户id
+    case getUserId                                                      //获取当前用户id
     
     /**************************************** 可选handler Section End ****************************************/
     
@@ -224,13 +225,16 @@ enum WebHandlerH5Name: String {
 
 //MARK: H5想要push的本地界面的标志符，根据实际需求定义
 enum WebPushNativeVC: Int {
+    static let vcType: String = "type"                //H5页面push本地界面时传递的对应界面标志符的参数key
+    
     case none = 1000                                //未指定界面
     case simpleTableVC = 1001                       //进入简单表格界面
     
     //跳转界面
     static func gotoVC(params: Dictionary<String, Any>, hostVC: BasicWebViewController?)
     {
-        let type = WebPushNativeVC(rawValue: (params["type"] as? Int ?? WebPushNativeVC.none.rawValue))
+        //H5页面传递的参数根据项目实际情况约定
+        let type = WebPushNativeVC(rawValue: (params[WebPushNativeVC.vcType] as? Int ?? WebPushNativeVC.none.rawValue))
         switch type {
         case .simpleTableVC:
             let vc = SimpleTableViewController.getViewController()
@@ -248,4 +252,6 @@ enum WebPushNativeVC: Int {
  * Javascript片段
  */
 typealias JavascriptExpression = String
+
+///获取h5页面标题
 let js_getTitle: JavascriptExpression = "document.title"
