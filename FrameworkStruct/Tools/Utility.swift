@@ -84,7 +84,7 @@ func g_getObjClassName(_ obj: AnyObject) -> String
     }
 }
 
-/// iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
+/// iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11以下的，第二个参数表示scrollview或子类
 func g_adjustsScrollViewInsetNever(controller: UIViewController, scrollView: UIScrollView)
 {
     if #available(iOS 11.0, *)

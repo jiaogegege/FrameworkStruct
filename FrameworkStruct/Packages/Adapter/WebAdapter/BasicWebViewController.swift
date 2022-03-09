@@ -68,7 +68,7 @@ class BasicWebViewController: BasicViewController
     override func createUI() {
         super.createUI()
         //webview
-        self.webView = WKWebView(frame: kFullScreenRect, configuration: WKWebViewConfiguration())
+        self.webView = WKWebView(frame: .fullScreen, configuration: WKWebViewConfiguration())
         self.view.addSubview(webView)
         //进度条
         self.progressBar = UIProgressView(frame: CGRect(x: 0, y: (self.hideNavBar ? kStatusHeight : kSafeTopHeight), width: kScreenWidth, height: 2.0))
@@ -81,7 +81,7 @@ class BasicWebViewController: BasicViewController
             self.title = titleStr
         }
         //webview
-        webView.frame = kFullScreenRect
+        webView.frame = .fullScreen
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.addObserver(self, forKeyPath: WVObserveKey.webViewProgress.rawValue, options: [.old, .new], context: nil)

@@ -100,7 +100,7 @@ extension UIViewController
         
     }
     
-    /// iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
+    /// iOS11之后没有automaticallyAdjustsScrollViewInsets属性，第一个参数是当下的控制器适配iOS11以下的，第二个参数表示scrollview或子类
     func adjustsScrollViewInsetNever(scrollView: UIScrollView)
     {
         if #available(iOS 11.0, *)
@@ -535,7 +535,7 @@ extension UIImage
 {
     ///根据颜色生成纯色图片
     ///参数：color：传入的颜色；size：生成纯色图片的尺寸，默认屏幕大小
-    class func createImageWithColor(color: UIColor, size: CGSize = CGSize(width: kScreenWidth, height: kScreenHeight)) -> UIImage
+    class func createImageWithColor(color: UIColor, size: CGSize = .fullScreen) -> UIImage
     {
         let rect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)
         UIGraphicsBeginImageContext(rect.size)
