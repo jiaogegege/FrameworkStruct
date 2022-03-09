@@ -18,6 +18,9 @@ class ApplicationManager: OriginManager
     //单例
     static let shared = ApplicationManager()
     
+    //userdefaults
+    fileprivate lazy var ud: UserDefaultsAccessor = UserDefaultsAccessor.shared
+    
     //应用程序对象
     fileprivate(set) weak var app: UIApplication! = UIApplication.shared
     
@@ -57,6 +60,10 @@ class ApplicationManager: OriginManager
     private override init()
     {
         super.init()
+        //设置初始状态
+        stMgr.setStatus(AMAppState.unknown, forKey: AMStatusKey.appState)
+        
+        self.addNotification()
         //监控电池
         UIDevice.current.isBatteryMonitoringEnabled = true
     }
@@ -71,13 +78,121 @@ class ApplicationManager: OriginManager
         return self
     }
     
+    //添加通知
+    fileprivate func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidFinishLaunchNotification(notification:)), name: UIApplication.didFinishLaunchingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForegroundNotification(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActiveNotification(notification:)), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackgroundNotification(notification:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidReceiveMemoryWarningNotification(notification:)), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminateNotification(notification:)), name: UIApplication.willTerminateNotification, object: nil)
+    }
+    
+}
+
+
+//代理和通知方法
+extension ApplicationManager: DelegateProtocol
+{
+    /**************************************** UIApplication通知 Section Begin ***************************************/
+    //app启动完毕
+    @objc func applicationDidFinishLaunchNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.launched, forKey: AMStatusKey.appState)
+        //写入app启动次数
+        let runTimes = self.runTimes
+        ud.write(key: .runTimes, value: runTimes + 1)
+    }
+    
+    //app即将进入前台
+    @objc func applicationWillEnterForegroundNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.foreground, forKey: AMStatusKey.appState)
+    }
+    
+    //app已经获得焦点
+    @objc func applicationDidBecomeActiveNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.active, forKey: AMStatusKey.appState)
+    }
+    
+    //app即将失去焦点
+    @objc func applicationWillResignActiveNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.inactive, forKey: AMStatusKey.appState)
+    }
+    
+    //app已经进入后台
+    @objc func applicationDidEnterBackgroundNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.background, forKey: AMStatusKey.appState)
+    }
+    
+    //app收到内存警告
+    @objc func applicationDidReceiveMemoryWarningNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.memoryWarning, forKey: AMStatusKey.appState)
+    }
+    
+    //app即将被销毁
+    @objc func applicationWillTerminateNotification(notification: Notification)
+    {
+        stMgr.setStatus(AMAppState.terminate, forKey: AMStatusKey.appState)
+    }
+    
+    /**************************************** UIApplication通知 Section End ***************************************/
+    
+}
+
+
+//内部类型
+extension ApplicationManager: InternalType
+{
+    ///应用程序管理器状态key
+    enum AMStatusKey: SMKeyType {
+        case appState                       //app状态
+    }
+    
+    ///应用程序状态
+    enum AMAppState {
+        case unknown                        //最初的状态，未知
+        case launched                       //刚刚启动
+        case foreground                     //在前台
+        case active                         //活跃状态
+        case inactive                       //不活跃状态
+        case background                     //在后台
+        case memoryWarning                  //内存警告
+        case terminate                      //被销毁
+    }
+    
 }
 
 
 //接口方法
 extension ApplicationManager: ExternalInterface
 {
-    //屏幕旋转方向
+    ///是否安装或者更新后第一次启动app
+    var isFirstLaunch: Bool {
+        let lastVersion = ud.readString(key: .lastRunVersion)
+        let currentVersion = gAppVersion
+        //将本次启动版本号写入ud
+        ud.write(key: .lastRunVersion, value: currentVersion)
+        //判断上一次启动和本次启动的版本号是否一致，如果不一致，说明第一次启动或者更新后第一次启动
+        if lastVersion != currentVersion
+        {
+            return true
+        }
+        return false
+    }
+    
+    ///app启动次数
+    var runTimes: Int {
+        return ud.readInt(key: .runTimes)
+    }
+    
+    ///屏幕旋转方向
     var orientation: UIInterfaceOrientation {
         if #available(iOS 13, *)
         {
@@ -96,35 +211,30 @@ extension ApplicationManager: ExternalInterface
         }
     }
     
-    //是否竖屏
+    ///是否竖屏
     var isVertical: Bool {
         return self.orientation == .portrait || self.orientation == .portraitUpsideDown
     }
     
-    //判断是否横屏
+    ///判断是否横屏
     var isLandscape: Bool {
         return self.orientation == .landscapeLeft || self.orientation == .landscapeRight
     }
     
-    //电池电量：0-1
+    ///电池电量：0-1
     var deviceBattery: Float {
         return UIDevice.current.batteryLevel
     }
     
-    //电池状态
+    ///电池状态
     var batteryState: UIDevice.BatteryState {
         return UIDevice.current.batteryState
     }
     
-    //是否在充电
+    ///是否在充电
     var isCharging: Bool {
         return UIDevice.current.batteryState == .charging
     }
-    
-    
-    
-    
-    
     
     
 }

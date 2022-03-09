@@ -134,13 +134,17 @@ var kScreenHeight: CGFloat {
 //全屏大小尺寸
 extension CGRect
 {
-    static let fullScreen: CGRect = CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
+    static var fullScreen: CGRect {
+        CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight)
+    }
 }
 
 //全屏大小尺寸
 extension CGSize
 {
-    static let fullScreen: CGSize = CGSize(width: kScreenWidth, height: kScreenHeight)
+    static var fullScreen: CGSize {
+        CGSize(width: kScreenWidth, height: kScreenHeight)
+    }
 }
 
 //iPhone屏幕高度

@@ -52,12 +52,12 @@ extension String
         return String(temporaryString[temporaryIndex...])
     }
 
-    ///截取规定下标之前的字符串
+    ///截取规定下标之前的字符串，不包括index
     func subStringTo(index: Int) -> String
     {
         let temporaryString = self
         let temporaryIndex = temporaryString.index(temporaryString.startIndex, offsetBy: index)
-        return String(temporaryString[...temporaryIndex])
+        return String(temporaryString[..<temporaryIndex])
     }
     
     ///替换某个range的字符串
@@ -86,8 +86,8 @@ extension String
         return String(str[startIndex..<endIndex])
     }
         
-    /// 正则匹配第一次出现
-    func firstMatchWith(pattern: String) -> NSRange
+    /// 正则匹配第一次出现的范围
+    func firstMatchWith(pattern: RegexExpression) -> NSRange
     {
         if self.count == 0 {
             return NSMakeRange(0, 0)
@@ -95,15 +95,29 @@ extension String
         do
         {
             let str: String = self
-            let regular = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
+            let regular = try NSRegularExpression(pattern: pattern, options: [])
             let reg = regular.firstMatch(in: str, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, str.count))
             if let result = reg {
                 return NSMakeRange(result.range.location, result.range.length)
             }
         }catch {
-            FSLog("error: \(error)")
+            FSLog("regex error: \(error)")
         }
         return NSMakeRange(0, 0)
+    }
+    
+    ///该字符串是否符合正则表达式
+    func isMatch(pattern: RegexExpression) -> Bool
+    {
+        var ret = false
+        if let regex = try? NSRegularExpression(pattern: pattern, options: [])
+        {
+            if regex.firstMatch(in: self, options: [], range: NSMakeRange(0, self.count)) != nil
+            {
+                ret = true
+            }
+        }
+        return ret
     }
         
     /// 获取子串的所有range
