@@ -41,7 +41,7 @@ class NetworkAdapter: OriginAdapter
     ///获取默认参数，根据项目实际需要修改
     fileprivate func defaultParams() -> Dictionary<String, String>
     {
-        return [nt_request_macAddress: g_getDeviceId(), nt_request_deviceType: "ios", nt_request_clientTime: String(format: "%lld", getCurrentTimeInterval() * 1000)]
+        return [nt_request_macAddress: g_getDeviceId(), nt_request_deviceType: "ios", nt_request_clientTime: String(format: "%lld", currentTimeInterval() * 1000)]
     }
     
     //组合自定义参数和默认参数

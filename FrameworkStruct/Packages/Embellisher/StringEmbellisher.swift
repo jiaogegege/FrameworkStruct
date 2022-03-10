@@ -49,7 +49,7 @@ extension StringEmbellisher: ExternalInterface
     ///replaceChar：用于替换的字符；
     ///replaceCount：替换的字符重复次数，负数表示和length相同，0表示不填充，相当于删除，大于0表示填充的数量；
     ///compact：是否紧凑，如果传false，那么将在被替换的字符头尾加一个空格
-    func changeStringWithChar(originStr: String, start: Int, length: Int, replaceChar: Character, replaceCount: Int = -1, compact: Bool = true) -> String
+    func changeStringWithChar(_ originStr: String, start: Int, length: Int, replaceChar: Character, replaceCount: Int = -1, compact: Bool = true) -> String
     {
         //计算填充用的字符
         var replaceStr: String = ""
@@ -81,9 +81,9 @@ extension StringEmbellisher: ExternalInterface
     }
     
     ///将手机号中间几位替换为`*`
-    func changePhoneWithStar(phoneStr: String, start: Int = 3, length: Int = 4, replaceChar: Character = "*", withBlank: Bool = false) -> String
+    func changePhoneWithStar(_ originStr: String, start: Int = 3, length: Int = 4, replaceChar: Character = "*", withBlank: Bool = false) -> String
     {
-        self.changeStringWithChar(originStr: phoneStr, start: start, length: length, replaceChar: replaceChar, replaceCount: -1, compact: !withBlank)
+        self.changeStringWithChar(originStr, start: start, length: length, replaceChar: replaceChar, replaceCount: -1, compact: !withBlank)
     }
     
     ///在手机号中间4位数字前后加一个空格
@@ -91,10 +91,10 @@ extension StringEmbellisher: ExternalInterface
     ///start：插入空格的第一个位置
     ///length：中间字符的长度
     ///count：插入空格的数量
-    func phoneAddSpace(phoneStr: String, start: Int = 3, length: Int = 4, count: UInt = 1) -> String?
+    func phoneAddSpace(_ originStr: String, start: Int = 3, length: Int = 4, count: UInt = 1) -> String?
     {
         //先判断是否手机号
-        let ret = phoneStr.isMatch(pattern: cellPhoneRegex)
+        let ret = DatasChecker.shared.checkPhoneNum(originStr)
         if ret
         {
             var newStr: String = ""
@@ -103,11 +103,11 @@ extension StringEmbellisher: ExternalInterface
             {
                 spaceStr.append(" ")    //计算空格数量
             }
-            newStr.append(phoneStr.subStringTo(index: start))
-            newStr.append(spaceStr)
-            newStr.append(phoneStr.subStringWithRange(location: start, length: length))
-            newStr.append(spaceStr)
-            newStr.append(phoneStr.subStringFrom(index: start + length))
+            newStr.append(originStr.subStringTo(index: start))
+            newStr.append(originStr)
+            newStr.append(originStr.subStringWithRange(location: start, length: length))
+            newStr.append(originStr)
+            newStr.append(originStr.subStringFrom(index: start + length))
             return newStr
         }
         return nil

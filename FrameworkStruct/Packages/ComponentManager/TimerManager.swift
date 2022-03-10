@@ -45,7 +45,7 @@ class TimerManager: OriginManager
     //key由3部分组成：8位随机字符串，创建定时器的时刻，host名
     fileprivate func getInfoKey(host: AnyObject) -> String
     {
-        let key = EncryptManager.shared.uuidString().subStringTo(index: 8) + " - " + getCurrentTimeString() + ": " + g_getObjClassName(host)
+        let key = EncryptManager.shared.uuidString().subStringTo(index: 8) + " - " + currentTimeString() + ": " + g_getObjClassName(host)
         return key
     }
     

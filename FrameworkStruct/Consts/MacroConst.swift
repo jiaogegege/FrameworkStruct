@@ -101,24 +101,6 @@ enum FSError: Int, Error {
 }
 
 
-//MARK: 正则表达式
-typealias RegexExpression = String
-//判断用户名的正则表达式，2-10位汉字+字母
-let userNameRegex: RegexExpression = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
-
-//国内手机号的正则表达式，以`1`开头的11位数字
-let cellPhoneRegex: RegexExpression = "^1\\d{10}$"
-
-//一种密码的正则，8-12位大小写字母、数字、@#_
-let passwordRegex: RegexExpression = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
-
-//整数的字符串，至少一个数字
-let integerRegex: RegexExpression = "^\\d+$"
-
-//浮点数的字符串，小数点前有0个或多个数字，小数点后有1个或多个数字
-let floatRegex: RegexExpression = "^\\d*\\.\\d+$"
-
-
 /**************************************** 枚举选项示例 Section Begin ****************************************/
 ///枚举选项定义
 struct Sports: OptionSet

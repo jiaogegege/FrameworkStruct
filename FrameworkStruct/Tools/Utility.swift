@@ -17,7 +17,7 @@ func printMsg<T>(message: T, fileName: String = #file, methodName: String = #fun
 {
     #if DEBUG
         let arr = fileName.components(separatedBy: "/")
-        print(getCurrentTimeString() + "\(arr.last!) - \(methodName)[\(lineNumber)]:\(message)")
+        print(currentTimeString() + "\(arr.last!) - \(methodName)[\(lineNumber)]:\(message)")
     #endif
 }
 
@@ -25,7 +25,7 @@ func printMsg<T>(message: T, fileName: String = #file, methodName: String = #fun
 func FSLog(_ message: String)
 {
     #if DEBUG
-        print(getCurrentTimeString() + ": " + message)
+        print(currentTimeString() + ": " + message)
     #endif
 }
 

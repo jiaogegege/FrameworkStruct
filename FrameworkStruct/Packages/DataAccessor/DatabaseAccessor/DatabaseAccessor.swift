@@ -691,7 +691,7 @@ extension DatabaseAccessor: ExternalInterface
     fileprivate func insertDbVersion(_ version: String)
     {
         //构建sql语句
-        let sql = String(format: "INSERT INTO app_config (id, config_key, config_value, update_date, create_date) VALUES ('%@', '%@', '%@', '%@', '%@')", encryptMgr.uuidString(), DatabaseKey.dbVersion.rawValue, version, getCurrentTimeString(), getCurrentTimeString())
+        let sql = String(format: "INSERT INTO app_config (id, config_key, config_value, update_date, create_date) VALUES ('%@', '%@', '%@', '%@', '%@')", encryptMgr.uuidString(), DatabaseKey.dbVersion.rawValue, version, currentTimeString(), currentTimeString())
         FSLog("insert db version: \(version) \(update(sql: sql) ? "success" : "failure")")
     }
     
@@ -779,7 +779,7 @@ extension DatabaseAccessor: ExternalInterface
     ///参数：multithread：是否在多线程环境下执行；user：用户信息；callback：回调，更新是否成功
     func updateUserInfo(multithread: Bool = false, user: UserInfoModel, callback: ((Bool) -> Void)?)
     {
-        let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, getCurrentTimeString(), user.id)
+        let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, currentTimeString(), user.id)
         
         performUpdate(inQueue: multithread, sqls: [sql]) { (ret) in
             if let callback = callback {

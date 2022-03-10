@@ -20,6 +20,8 @@
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
+		EA08D61727D9855100D3961F /* DatasChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08D61627D9855100D3961F /* DatasChecker.swift */; };
+		EA08D61927D9C84400D3961F /* CheckerConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08D61827D9C84400D3961F /* CheckerConst.swift */; };
 		EA0E67AD27B49F8B00A11C20 /* NSString+DES.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67A627B49F8B00A11C20 /* NSString+DES.m */; };
 		EA0E67AE27B49F8B00A11C20 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67AB27B49F8B00A11C20 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA0E67AF27B49F8B00A11C20 /* NSData+DataToHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67AC27B49F8B00A11C20 /* NSData+DataToHexString.m */; };
@@ -373,7 +375,7 @@
 		EA922582276B3EAA00192E2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA922581276B3EAA00192E2E /* QuartzCore.framework */; };
 		EA922585276B439700192E2E /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA922584276B439700192E2E /* ControllerManager.swift */; };
 		EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA98982027CF1AF300C63950 /* DarkTheme.plist */; };
-		EA98982327CF68CB00C63950 /* DatasConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98982227CF68CB00C63950 /* DatasConst.swift */; };
+		EA98982327CF68CB00C63950 /* ContainerConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98982227CF68CB00C63950 /* ContainerConst.swift */; };
 		EA9936922799074B00480147 /* UIView+Cate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9936902799074B00480147 /* UIView+Cate.m */; };
 		EA99369427992F4900480147 /* ShadowTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA99369327992F4900480147 /* ShadowTestViewController.swift */; };
 		EA99371B27994F6100480147 /* TABAnimatedCacheModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA99369827994F6000480147 /* TABAnimatedCacheModel.m */; };
@@ -704,6 +706,8 @@
 		EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
+		EA08D61627D9855100D3961F /* DatasChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasChecker.swift; sourceTree = "<group>"; };
+		EA08D61827D9C84400D3961F /* CheckerConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerConst.swift; sourceTree = "<group>"; };
 		EA0E67A627B49F8B00A11C20 /* NSString+DES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DES.m"; sourceTree = "<group>"; };
 		EA0E67A727B49F8B00A11C20 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		EA0E67A827B49F8B00A11C20 /* NSData+DataToHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DataToHexString.h"; sourceTree = "<group>"; };
@@ -1139,7 +1143,7 @@
 		EA922581276B3EAA00192E2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EA922584276B439700192E2E /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
 		EA98982027CF1AF300C63950 /* DarkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DarkTheme.plist; sourceTree = "<group>"; };
-		EA98982227CF68CB00C63950 /* DatasConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasConst.swift; sourceTree = "<group>"; };
+		EA98982227CF68CB00C63950 /* ContainerConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerConst.swift; sourceTree = "<group>"; };
 		EA9936902799074B00480147 /* UIView+Cate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Cate.m"; sourceTree = "<group>"; };
 		EA9936912799074B00480147 /* UIView+Cate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Cate.h"; sourceTree = "<group>"; };
 		EA99369327992F4900480147 /* ShadowTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTestViewController.swift; sourceTree = "<group>"; };
@@ -3541,6 +3545,8 @@
 			isa = PBXGroup;
 			children = (
 				EAAA4E94276F658400C45712 /* README.md */,
+				EA08D61627D9855100D3961F /* DatasChecker.swift */,
+				EA08D61827D9C84400D3961F /* CheckerConst.swift */,
 			);
 			path = DataChecker;
 			sourceTree = "<group>";
@@ -4139,7 +4145,7 @@
 			children = (
 				EADB011527624246001B7223 /* README.md */,
 				EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */,
-				EA98982227CF68CB00C63950 /* DatasConst.swift */,
+				EA98982227CF68CB00C63950 /* ContainerConst.swift */,
 			);
 			path = DataContainer;
 			sourceTree = "<group>";
@@ -4180,9 +4186,9 @@
 			isa = PBXGroup;
 			children = (
 				EADB01312762433C001B7223 /* README.md */,
-				EADB01342762433C001B7223 /* ThemeProtocol.swift */,
 				EADB012F2762433C001B7223 /* ThemeManager.swift */,
 				EADB012E2762433C001B7223 /* ThemeContainer.swift */,
+				EADB01342762433C001B7223 /* ThemeProtocol.swift */,
 				EADB01352762433C001B7223 /* CustomTheme.swift */,
 				EADB01362762433C001B7223 /* ThemeModel.h */,
 				EADB01302762433C001B7223 /* ThemeModel.m */,
@@ -4520,6 +4526,7 @@
 				EA3E8ABE27B77CEA006A2715 /* ImageLayer.swift in Sources */,
 				EAC8A86A27625D490088293F /* SDImageGIFCoder.m in Sources */,
 				EA3E8B3427B77CEA006A2715 /* AnimatorNodeDebugging.swift in Sources */,
+				EA08D61727D9855100D3961F /* DatasChecker.swift in Sources */,
 				EA9A785927C7546100A11FC8 /* TimePeriodGroup.swift in Sources */,
 				EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */,
 				EA3E8AB227B77CEA006A2715 /* AnimationKeypath.swift in Sources */,
@@ -4795,7 +4802,7 @@
 				EAC8A88727625D490088293F /* SDDisplayLink.m in Sources */,
 				EA9A78D527C756C900A11FC8 /* MPITextKitContext.m in Sources */,
 				EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */,
-				EA98982327CF68CB00C63950 /* DatasConst.swift in Sources */,
+				EA98982327CF68CB00C63950 /* ContainerConst.swift in Sources */,
 				EA1AE48B277819E600D028F9 /* ConstraintView+Extensions.swift in Sources */,
 				EA99372F27994F6100480147 /* TABBinAnimationImpl.m in Sources */,
 				EA3E8ACD27B77CEA006A2715 /* CAAnimation+TimingConfiguration.swift in Sources */,
@@ -4894,6 +4901,7 @@
 				EA3E8B4327B77CEA006A2715 /* AnimationContext.swift in Sources */,
 				EAC8A85427625D490088293F /* SDWebImageDownloader.m in Sources */,
 				EADB00DB27624012001B7223 /* BasicTableViewController.swift in Sources */,
+				EA08D61927D9C84400D3961F /* CheckerConst.swift in Sources */,
 				EAC8A84B27625D490088293F /* SDWebImageManager.m in Sources */,
 				EA11126527B3BE2C006D0B83 /* URLSessionConfiguration+Alamofire.swift in Sources */,
 				EA75BB392792AA7C00910B4C /* FMDatabasePool.m in Sources */,

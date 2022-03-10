@@ -47,11 +47,20 @@ enum TimeStringFormat: String
     case dashYearMonthDayHourMinSecSSS = "YYYY-MM-dd HH:mm:ss.SSS"
     case dashYearMonthDayHourMinSec = "YYYY-MM-dd HH:mm:ss"
     case dashYearMonthDay = "YYYY-MM-dd"
+    case localYearMonthDayHourMinuteSecond = "yyyy年MM月dd日 HH时mm分ss秒"
+    case localYearMonthDay = "yyyy年MM月dd日"
     
+    ///获取DateFormatter
+    func getFormatter() -> DateFormatter
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = self.rawValue
+        return formatter
+    }
 }
 
 ///获取系统当前时间，OTC时间，"YYYY/MM/dd HH:mm:ss.SSS"
-func getCurrentTimeString() -> String
+func currentTimeString() -> String
 {
     let formatter = DateFormatter()
     formatter.dateFormat = TimeStringFormat.slashYearMonthDayHourMinSecSSS.rawValue
@@ -60,7 +69,7 @@ func getCurrentTimeString() -> String
 }
 
 ///获取系统当前时间距离1970年秒数，OTC时间
-func getCurrentTimeInterval() -> TimeInterval
+func currentTimeInterval() -> TimeInterval
 {
     let date = Date()
     return date.timeIntervalSince1970
@@ -102,4 +111,20 @@ func dateByAdd(interal: TimeInterval, baseDate: Date) -> Date
 func nowAfter(_ interval: TimeInterval) -> Date
 {
     return dateByAdd(interal: interval, baseDate: Date())
+}
+
+///在某个日期的基础上加上几天返回新的日期
+func dateByAdd(days: Int, baseDate: Date) -> Date
+{
+    let interval = TimeInterval(days) * tSecondsInDay
+    let newDate = baseDate.addingTimeInterval(interval)
+    return newDate
+}
+
+///两个日期之间间隔的天数，计算结果取整数部分
+func daysBetween(aDate: Date, another: Date)-> Int
+{
+    let interval = another.timeIntervalSince1970 - aDate.timeIntervalSince1970
+    let days = abs(Int(interval / tSecondsInDay))
+    return days
 }

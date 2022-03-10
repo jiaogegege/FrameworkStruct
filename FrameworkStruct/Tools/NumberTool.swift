@@ -95,42 +95,6 @@ func limitMax<T: Comparable>(_ value: T, max: T) -> T
     return val
 }
 
-///判断一个字符串是否整数
-func isInteger(str: String) -> Bool
-{
-    var ret = false
-    do {
-        let regex = try NSRegularExpression(pattern: integerRegex, options: [])
-        let result = regex.firstMatch(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.count))
-        ret = result != nil ? true : false
-    }
-    catch {
-        FSLog("regex error:str -> \(error)")
-    }
-    return ret
-}
-
-///判断一个字符串是否是浮点数
-func isFloat(str: String) -> Bool
-{
-    var ret = false
-    do {
-        let regex = try NSRegularExpression(pattern: floatRegex, options: [])
-        let result = regex.firstMatch(in: str, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, str.count))
-        ret = result != nil ? true : false
-    }
-    catch {
-        FSLog("regex error:str -> \(error)")
-    }
-    return ret
-}
-
-///判断一个字符串是否是数字，包括整数和浮点数
-func isNumber(str: String) -> Bool
-{
-    return isInteger(str: str) || isFloat(str: str)
-}
-
 ///判断一个数字是否是偶数
 func isEven(_ num: Int) -> Bool
 {
@@ -145,18 +109,6 @@ func isEven(_ num: Int) -> Bool
 func isOdd(_ num: Int) -> Bool
 {
     if num % 2 == 0
-    {
-        return false
-    }
-    return true
-}
-
-///判断字符串是否都是数字组成（不包括小数）
-///过滤掉所有10进制数字，剩下为空字符串则原字符串都是数字
-func isIntegerString(str: String) -> Bool
-{
-    let originStr = str.trimmingCharacters(in: CharacterSet.decimalDigits)
-    if originStr.count > 0
     {
         return false
     }
