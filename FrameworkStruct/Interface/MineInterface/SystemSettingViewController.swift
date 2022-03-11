@@ -47,12 +47,12 @@ class SystemSettingViewController: BasicTableViewController {
     //各种设置项的初始状态
     override func updateUI() {
         super.updateUI()
-        self.darkModeSwitch.isOn = themeMgr.isFollowDarkMode
+        self.darkModeSwitch.isOn = setMgr.followDarkMode
     }
     
     //设置是否跟随系统暗黑模式
     @IBAction func darkModeSwitchAction(_ sender: UISwitch) {
-        setMgr.setFollowDarkMode(sender.isOn)
+        setMgr.followDarkMode = sender.isOn
     }
     
     override func themeUpdateUI(theme: ThemeProtocol, isDark: Bool = false) {

@@ -40,15 +40,35 @@ class SettingsManager: OriginManager
 //接口方法
 extension SettingsManager: ExternalInterface
 {
-    ///设置是否跟随系统暗黑模式
-    func setFollowDarkMode(_ follow: Bool)
+    ///进入App系统设置界面
+    func gotoSystemSetting()
     {
-        //不一致的时候才设置
-        if follow != ThemeManager.shared.isFollowDarkMode
+        let url = URL(string: UIApplication.openSettingsURLString)
+        if let url = url
         {
-            ThemeManager.shared.setFollowDarkMode(follow: follow)
+            if UIApplication.shared.canOpenURL(url)
+            {
+                UIApplication.shared.open(url, options: [:]) { success in
+                    FSLog("open setting :\(success)")
+                }
+            }
         }
     }
+    
+    ///是否跟随系统暗黑模式
+    var followDarkMode: Bool {
+        get {
+            ThemeManager.shared.isFollowDarkMode
+        }
+        set {
+            //不一致的时候才设置
+            if newValue != ThemeManager.shared.isFollowDarkMode
+            {
+                ThemeManager.shared.setFollowDarkMode(follow: newValue)
+            }
+        }
+    }
+    
     
     
     
