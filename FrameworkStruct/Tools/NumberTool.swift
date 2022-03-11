@@ -10,6 +10,62 @@
  */
 import Foundation
 
+//MARK: 类型定义
+///整数区间类型
+typealias IntRangeType = (Int, Int)
+///浮点数区间类型
+typealias FloatRangeType = (Float, Float)
+typealias DoubleRangeType = (Double, Double)
+
+///数字枚举器
+///输入一个数字区间，按照设定的步长枚举出一个数列
+struct NumberEnumerator<T: Numeric & Comparable> {
+    fileprivate(set) var min: T     //最小值
+    fileprivate(set) var max: T     //最大值
+    fileprivate(set) var step: T    //枚举的步长
+    fileprivate(set) var current: T //当前值
+    
+    init(range: (T, T), step: T) {
+        min = minBetween(one: range.0, other: range.1)
+        max = maxBetween(one: range.0, other: range.1)
+        self.step = step
+        current = min - step     //先把当前值设置为一个较小的值
+    }
+    
+    ///每一次调用返回一个数值，根据步长不断累加，如果最后一个数值也返回过了，下次调用返回nil，根据nil判断是否结束
+    mutating func next() -> T?
+    {
+        if current < min   //第一次返回min
+        {
+            current = min
+        }
+        else if current + step <= max
+        {
+            current += step
+        }
+        else    //如果超过最大值，那么返回nil
+        {
+            current += step
+            return nil
+        }
+        return current
+    }
+    
+    ///是否全部枚举完毕
+    var isOver: Bool {
+        return current >= max
+    }
+    
+    ///重置到初始状态
+    mutating func reset()
+    {
+        current = min - step
+    }
+    
+}
+
+
+//MARK: 实用方法
 ///两个Double数字是否相等，比较它们差值的误差小于系统定义的最小误差
 func doubleEqual(_ a: Double, _ b: Double) -> Bool
 {

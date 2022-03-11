@@ -351,6 +351,7 @@
 		EA7A7CB427882F4700DD2310 /* WeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB327882F4700DD2310 /* WeakDictionary.m */; };
 		EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CB82788305200DD2310 /* WeakSet.m */; };
 		EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7A7CBB278830A200DD2310 /* WeakArray.m */; };
+		EA7F2A2627DAFAD9000E27DF /* UserManagerConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F2A2527DAFAD9000E27DF /* UserManagerConst.swift */; };
 		EA7F3E0F27BB798200C3E33F /* DatasContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */; };
 		EA83FFF6279D9833000F6473 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA83FFF5279D9833000F6473 /* CoreGraphics.framework */; };
 		EA84848D278F132E000E7FC2 /* FSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA84848C278F132E000E7FC2 /* FSActionSheet.swift */; };
@@ -1112,6 +1113,8 @@
 		EA7A7CB82788305200DD2310 /* WeakSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakSet.m; sourceTree = "<group>"; };
 		EA7A7CBA278830A200DD2310 /* WeakArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeakArray.h; sourceTree = "<group>"; };
 		EA7A7CBB278830A200DD2310 /* WeakArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeakArray.m; sourceTree = "<group>"; };
+		EA7F2A2427DAFABD000E27DF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA7F2A2527DAFAD9000E27DF /* UserManagerConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerConst.swift; sourceTree = "<group>"; };
 		EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasContainer.swift; sourceTree = "<group>"; };
 		EA83FFF5279D9833000F6473 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EA84848C278F132E000E7FC2 /* FSActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSActionSheet.swift; sourceTree = "<group>"; };
@@ -2800,6 +2803,16 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		EA7F2A2327DAFAAF000E27DF /* UserManager */ = {
+			isa = PBXGroup;
+			children = (
+				EA7F2A2427DAFABD000E27DF /* README.md */,
+				EADB014227624391001B7223 /* UserManager.swift */,
+				EA7F2A2527DAFAD9000E27DF /* UserManagerConst.swift */,
+			);
+			path = UserManager;
+			sourceTree = "<group>";
+		};
 		EA922558276AD54D00192E2E /* Monitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -2872,7 +2885,7 @@
 			isa = PBXGroup;
 			children = (
 				EAAA4E81276F3E4900C45712 /* README.md */,
-				EADB014227624391001B7223 /* UserManager.swift */,
+				EA7F2A2327DAFAAF000E27DF /* UserManager */,
 				EA00C86E27C213550034C95B /* NotificationManager.swift */,
 				EA5780A827D0A6C900C819E6 /* SettingsManager.swift */,
 			);
@@ -4630,6 +4643,7 @@
 				EA3E8AE027B77CEA006A2715 /* ImageCompositionLayer.swift in Sources */,
 				EA99373227994F6100480147 /* TABClassicAnimation.m in Sources */,
 				EA9A75AC27C731EB00A11FC8 /* ioapi.c in Sources */,
+				EA7F2A2627DAFAD9000E27DF /* UserManagerConst.swift in Sources */,
 				EA3E8AFB27B77CEA006A2715 /* StrokeNode.swift in Sources */,
 				EA9A756C27C7210200A11FC8 /* TYImageCache.m in Sources */,
 				EA9A75E527C739DF00A11FC8 /* SRSecurityPolicy.m in Sources */,
