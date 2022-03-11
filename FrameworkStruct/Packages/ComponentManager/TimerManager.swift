@@ -153,7 +153,7 @@ extension TimerManager: ExternalInterface
         var canFinish = false   //是否可以结束
         let timerId = g_uuidString()    //创建的定时器id
         
-        let timer = self.dispatchTimer(interval: interval, onMain: onMain, host: host) {
+        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) {
             action(restTime, &canFinish)    //执行动作
             //判断是否结束倒计时
             if canFinish    //优先判断外部状态
@@ -205,7 +205,7 @@ extension TimerManager: ExternalInterface
         var canFinish = false   //是否可以结束
         let timerId = g_uuidString()    //创建的定时器id
         
-        let timer = self.dispatchTimer(interval: interval, onMain: onMain, host: host) {
+        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) {
             action(totalTime, &canFinish)    //执行动作
             //判断是否结束秒表
             if canFinish    //优先判断外部状态
