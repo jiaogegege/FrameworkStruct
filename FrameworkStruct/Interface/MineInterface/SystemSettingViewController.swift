@@ -16,6 +16,8 @@ class SystemSettingViewController: BasicTableViewController {
     /**************************************** UI组件 Section End ***************************************/
     
     /**************************************** 内部属性 Section Begin ***************************************/
+    //系统设置管理器
+    fileprivate var setMgr = SettingsManager.shared
     //主题管理器
     fileprivate lazy var themeMgr = ThemeManager.shared
     
@@ -50,7 +52,7 @@ class SystemSettingViewController: BasicTableViewController {
     
     //设置是否跟随系统暗黑模式
     @IBAction func darkModeSwitchAction(_ sender: UISwitch) {
-        themeMgr.setFollowDarkMode(follow: sender.isOn)
+        setMgr.setFollowDarkMode(sender.isOn)
     }
     
     override func themeUpdateUI(theme: ThemeProtocol, isDark: Bool = false) {

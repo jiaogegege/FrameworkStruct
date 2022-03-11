@@ -41,7 +41,7 @@ class SettingsManager: OriginManager
 extension SettingsManager: ExternalInterface
 {
     ///设置是否跟随系统暗黑模式
-    func settingFollowDarkMode(_ follow: Bool)
+    func setFollowDarkMode(_ follow: Bool)
     {
         //不一致的时候才设置
         if follow != ThemeManager.shared.isFollowDarkMode

@@ -154,8 +154,8 @@ extension TimeEmbellisher: ExternalInterface
         return newDate
     }
     
-    ///得到一个日期当天0点的日期
-    func dateByZeroDay(_ aDate: Date) -> Date?
+    ///得到一个日期当天0点的日期，就是当天的0时0分0秒
+    func dateByZeroTime(_ aDate: Date) -> Date?
     {
         return self.dateByCustom(aDate, year: nil, month: nil, day: nil, hour: 0, minute: 0, second: 0, nanosecond: 0)
     }
