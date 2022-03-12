@@ -51,6 +51,17 @@ struct NumberEnumerator<T: Numeric & Comparable> {
         return current
     }
     
+    ///根据位置来获取枚举项，从0开始，超过最大值返回nil
+    func enumAt(_ index: Int) -> T?
+    {
+        let val = min + T(exactly: index)! * step
+        if val <= max
+        {
+            return val
+        }
+        return nil
+    }
+    
     ///是否全部枚举完毕
     var isOver: Bool {
         return current >= max
