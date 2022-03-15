@@ -29,6 +29,10 @@ extension NSObject
         }
     }
     
+    class var className: String {
+        return NSStringFromClass(Self.self).components(separatedBy: ".").last!
+    }
+    
 }
 
 
