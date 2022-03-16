@@ -19,6 +19,7 @@ typealias DoubleRangeType = (Double, Double)
 
 ///数字枚举器
 ///输入一个数字区间，按照设定的步长枚举出一个数列
+///注意：目前只支持从小到大枚举,step为正数
 struct NumberEnumerator<T: Numeric & Comparable> {
     fileprivate(set) var min: T     //最小值
     fileprivate(set) var max: T     //最大值
@@ -181,3 +182,4 @@ func isOdd(_ num: Int) -> Bool
     }
     return true
 }
+

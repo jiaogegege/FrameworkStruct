@@ -1,20 +1,21 @@
 //
-//  NSString+DES.m
-//  BabyBluetoothAppDemo
+//  NSString+Encrypt.m
+//  FrameworkStruct
 //
-//  Created by user on 2018/4/23.
-//  Copyright © 2018年 刘彦玮. All rights reserved.
+//  Created by 蒋旭蛟 on 2018/4/23.
+//  Copyright © 2018年 蒋旭蛟. All rights reserved.
 //
 
-#import "NSString+DES.h"
+#import "NSString+Encrypt.h"
 #import "GTMBase64.h"
 #import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonDigest.h>
 #import "NSData+DataToHexString.h"
 
 
-@implementation NSString (DES)
+@implementation NSString (Encrypt)
 
-///加密
+///des加密
 +(NSString *)des:(NSString *)str key:(NSString *)key
 {
     NSString *ciphertext = nil;
@@ -45,7 +46,7 @@
 }
 
 
-//解密
+//des解密
 +(NSString *)decryptDes:(NSString*)hexString key:(NSString*)key
 {
     NSData *data = [self hexStringToData:hexString];
@@ -67,7 +68,8 @@
     return nil;
 }
 
-+(NSData *)hexStringToData:(NSString *)hexString{
++(NSData *)hexStringToData:(NSString *)hexString
+{
     const char *chars = [hexString UTF8String];
     int i = 0;
     int len = (int)hexString.length;
@@ -82,6 +84,67 @@
         [data appendBytes:&wholeByte length:1];
     }
     return data;
+}
+
+#pragma mark - md5加密
+    ///32位 小写
++(NSString *)MD5ForLower32Bate:(NSString *)str
+{
+        //要进行UTF8的转码
+    const char* input = [str UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+    CC_MD5(input, (CC_LONG)strlen(input), result);
+#pragma clang diagnostic pop
+    NSMutableString *digest = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for (NSInteger i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+    {
+        [digest appendFormat:@"%02x", result[i]];
+    }
+    return digest;
+}
+
+///32位 大写
++(NSString *)MD5ForUpper32Bate:(NSString *)str
+{
+        //要进行UTF8的转码
+    const char* input = [str UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+    CC_MD5(input, (CC_LONG)strlen(input), result);
+#pragma clang diagnostic pop
+    NSMutableString *digest = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for (NSInteger i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+    {
+        [digest appendFormat:@"%02X", result[i]];
+    }
+    return digest;
+}
+
+///16位 大写
++(NSString *)MD5ForUpper16Bate:(NSString *)str
+{
+    NSString *md5Str = [self MD5ForUpper32Bate:str];
+    NSString  *string;
+    for (int i=0; i<24; i++)
+    {
+        string=[md5Str substringWithRange:NSMakeRange(8, 16)];
+    }
+    return string;
+}
+
+///16位 小写
++(NSString *)MD5ForLower16Bate:(NSString *)str
+{
+    NSString *md5Str = [self MD5ForLower32Bate:str];
+    NSString  *string;
+    for (int i=0; i<24; i++)
+    {
+        string=[md5Str substringWithRange:NSMakeRange(8, 16)];
+    }
+    return string;
 }
 
 @end

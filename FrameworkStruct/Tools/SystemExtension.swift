@@ -9,6 +9,7 @@
  * 主要对各种系统组件进行扩展
  */
 import Foundation
+import CommonCrypto
 
 //MARK: NSObject
 /**
@@ -46,6 +47,19 @@ extension String
     func trim() -> String
     {
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    ///去除字符串中的换行和空格
+    ///参数：includeSpace：是否去除空格，默认不去除
+    func trimSpaceAndNewLine(includeSpace: Bool = false) -> String
+    {
+        var str = self.replacingOccurrences(of: "\\n", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        if includeSpace
+        {
+            str = str.replacingOccurrences(of: " ", with: "")
+        }
+        return str
     }
     
     ///截取规定下标之后的字符串
@@ -194,6 +208,53 @@ extension String
             result = dic
         }
         return result
+    }
+    
+    ///将数组或字典对象转换成json字符串
+    static func convertObjToJsonString(_ obj: Any) -> String?
+    {
+        guard let data = try? JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted) else {
+            return nil
+        }
+        var str = String.init(data: data, encoding: .utf8)
+        str = str?.trimSpaceAndNewLine()
+        return str
+    }
+    
+    ///将json字符串转换为数组或字典
+    func toJsonObj() -> Any?
+    {
+        if let data = self.data(using: .utf8)
+        {
+            if let obj = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+            {
+                return obj
+            }
+        }
+        return nil
+    }
+    
+    ///md5加密
+    var md5: String {
+        let str = self.cString(using: String.Encoding.utf8)
+        let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+        CC_MD5(str!, strLen, result)
+        let hash = NSMutableString()
+        for i in 0..<digestLen {
+            hash.appendFormat("%02x", result[i])
+        }
+        result.deallocate()
+        return hash as String
+    }
+    
+    ///sha256加密
+    var sha256: String {
+        let utf8 = cString(using: .utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
+        return digest.reduce("") { $0 + String(format:"%02x", $1) }
     }
     
 }

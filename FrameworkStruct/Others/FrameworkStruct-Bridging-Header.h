@@ -29,7 +29,7 @@
 #import "FMDB.h"
 #import "TABAnimated.h"
 #import "UIButton+BAKit.h"
-#import "NSString+DES.h"
+#import "NSString+Encrypt.h"
 #import "POP.h"
 #import "YYImage.h"
 #import "TYAttributedLabel.h"

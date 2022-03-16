@@ -235,7 +235,7 @@ extension SandBoxAccessor: ExternalInterface
     ///文件名中不要包含`.`，因为用来区分扩展名
     func getSQLFilePath(fileName: String) -> String?
     {
-        return self.getBundleFilePath(fileName, ext: FileExtName.sql.rawValue)
+        return self.getBundleFilePath(fileName, ext: FileTypeName.sql.rawValue)
     }
     
     ///获取临时下载文件保存目录
@@ -252,5 +252,48 @@ extension SandBoxAccessor: ExternalInterface
     }
 
     /**************************************** 文件夹路径访问 Section End ****************************************/
+    
+    /**************************************** 具体读写文件方法 Section Begin ****************************************/
+    ///保存图片到沙盒
+    ///参数：compress：如果是jpg图片，可以设置压缩率(0-1)，数值越小，压缩率越高；filePath：要保存的沙盒文件路径
+    ///- Returns: 返回是否保存成功
+    func saveImage(image: UIImage, compress: CGFloat = 1, filePath: String) -> Bool
+    {
+        //尝试获取图片扩展名，没有则默认jpg
+        var extName = (filePath as NSString).pathExtension
+        var imageData: Data?
+        if g_isValidString(extName) //获取到扩展名
+        {
+            if extName == FileTypeName.png.rawValue
+            {
+                imageData = image.pngData()
+            }
+            else
+            {
+                imageData = image.jpegData(compressionQuality: compress)
+            }
+        }
+        else    //没有获取到扩展名，默认jpg
+        {
+            extName = FileTypeName.jpg.rawValue
+            imageData = image.jpegData(compressionQuality: compress)
+        }
+        //将UIImage转为Data
+        if let id = imageData
+        {
+            if (try? id.write(to: URL(fileURLWithPath: filePath), options: .atomic)) == nil
+            {
+                //如果写入时发生异常，返回false
+                return false
+            }
+        }
+        else    //如果未获取到图片Data
+        {
+            return false
+        }
+        return true
+    }
+    
+    /**************************************** 具体读写文件方法 Section End ****************************************/
     
 }

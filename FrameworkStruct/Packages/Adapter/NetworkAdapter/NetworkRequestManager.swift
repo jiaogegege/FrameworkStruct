@@ -112,7 +112,7 @@ class NetworkRequestManager: OriginManager
             {
                 do {
                     let resStr = String.init(data: res, encoding: .utf8)
-                    let decryptStr = NSString.decryptDes(resStr, key: nt_encryptDesKey)
+                    let decryptStr = g_decrypt(resStr, key: nt_encryptDesKey)
                     let decryptData = decryptStr?.data(using: .utf8)
                     let resDict = try JSONSerialization.jsonObject(with: decryptData!, options: .mutableLeaves)
                     return resDict as! Dictionary<String, Any>

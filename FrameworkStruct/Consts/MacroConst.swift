@@ -30,7 +30,10 @@ let gAppName: String = Bundle.main.infoDictionary!["CFBundleDisplayName"] as! St
 let gAppVersion: String = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 
 //app build版本
-let gAppBuild: String = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+let gAppBuildVersion: String = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+
+//app完整版本
+let gAppFullVersion: String = gAppVersion + "." + gAppBuildVersion
 
 //appstore下载地址
 let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"

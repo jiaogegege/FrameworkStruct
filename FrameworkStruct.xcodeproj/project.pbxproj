@@ -22,7 +22,7 @@
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
 		EA08D61727D9855100D3961F /* DatasChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08D61627D9855100D3961F /* DatasChecker.swift */; };
 		EA08D61927D9C84400D3961F /* CheckerConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08D61827D9C84400D3961F /* CheckerConst.swift */; };
-		EA0E67AD27B49F8B00A11C20 /* NSString+DES.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67A627B49F8B00A11C20 /* NSString+DES.m */; };
+		EA0E67AD27B49F8B00A11C20 /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67A627B49F8B00A11C20 /* NSString+Encrypt.m */; };
 		EA0E67AE27B49F8B00A11C20 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67AB27B49F8B00A11C20 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA0E67AF27B49F8B00A11C20 /* NSData+DataToHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67AC27B49F8B00A11C20 /* NSData+DataToHexString.m */; };
 		EA0E67B127B5062500A11C20 /* NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67B027B5062500A11C20 /* NetworkAdapter.swift */; };
@@ -687,6 +687,8 @@
 		EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9B277B4BEE00676268 /* OriginHandler.swift */; };
 		EAF85A9F277B4D7500676268 /* HandlerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */; };
 		EAFA821227C6845800CA1598 /* WebAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFA821127C6845800CA1598 /* WebAdapter.swift */; };
+		EAFC601727E1AAB00019CDEF /* CryptoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFC601627E1AAB00019CDEF /* CryptoKit.framework */; };
+		EAFC601B27E20B430019CDEF /* UnitTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC601A27E20B430019CDEF /* UnitTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -709,10 +711,10 @@
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
 		EA08D61627D9855100D3961F /* DatasChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasChecker.swift; sourceTree = "<group>"; };
 		EA08D61827D9C84400D3961F /* CheckerConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerConst.swift; sourceTree = "<group>"; };
-		EA0E67A627B49F8B00A11C20 /* NSString+DES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DES.m"; sourceTree = "<group>"; };
+		EA0E67A627B49F8B00A11C20 /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
 		EA0E67A727B49F8B00A11C20 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		EA0E67A827B49F8B00A11C20 /* NSData+DataToHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DataToHexString.h"; sourceTree = "<group>"; };
-		EA0E67A927B49F8B00A11C20 /* NSString+DES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DES.h"; sourceTree = "<group>"; };
+		EA0E67A927B49F8B00A11C20 /* NSString+Encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encrypt.h"; sourceTree = "<group>"; };
 		EA0E67AA27B49F8B00A11C20 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		EA0E67AB27B49F8B00A11C20 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		EA0E67AC27B49F8B00A11C20 /* NSData+DataToHexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DataToHexString.m"; sourceTree = "<group>"; };
@@ -1810,6 +1812,8 @@
 		EAF85AA4277B4F0100676268 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAF85AA5277B4FA300676268 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAFA821127C6845800CA1598 /* WebAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAdapter.swift; sourceTree = "<group>"; };
+		EAFC601627E1AAB00019CDEF /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
+		EAFC601A27E20B430019CDEF /* UnitTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1819,6 +1823,7 @@
 			files = (
 				EA9A759227C729E300A11FC8 /* CoreLocation.framework in Frameworks */,
 				EA20866427C527C600B63C8E /* UserNotifications.framework in Frameworks */,
+				EAFC601727E1AAB00019CDEF /* CryptoKit.framework in Frameworks */,
 				EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */,
 				EA20865C27C5276700B63C8E /* EventKitUI.framework in Frameworks */,
 				EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */,
@@ -1859,8 +1864,8 @@
 		EA0E67A527B49F8B00A11C20 /* NSString+DES */ = {
 			isa = PBXGroup;
 			children = (
-				EA0E67A927B49F8B00A11C20 /* NSString+DES.h */,
-				EA0E67A627B49F8B00A11C20 /* NSString+DES.m */,
+				EA0E67A927B49F8B00A11C20 /* NSString+Encrypt.h */,
+				EA0E67A627B49F8B00A11C20 /* NSString+Encrypt.m */,
 				EA0E67A727B49F8B00A11C20 /* GTMBase64.h */,
 				EA0E67AB27B49F8B00A11C20 /* GTMBase64.m */,
 				EA0E67A827B49F8B00A11C20 /* NSData+DataToHexString.h */,
@@ -2864,6 +2869,7 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAFC601627E1AAB00019CDEF /* CryptoKit.framework */,
 				EA9A759327C729EC00A11FC8 /* CoreLocationUI.framework */,
 				EA20866827C534F700B63C8E /* CoreServices.framework */,
 				EA20865E27C5277100B63C8E /* UserNotifications.framework */,
@@ -4030,6 +4036,7 @@
 				EACAD4E8277D82C800FBE2DA /* NumberTool.swift */,
 				EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */,
 				EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */,
+				EAFC601A27E20B430019CDEF /* UnitTool.swift */,
 				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
 				EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */,
 			);
@@ -4560,7 +4567,7 @@
 				EA3E8B1327B77CEA006A2715 /* ShapeTransform.swift in Sources */,
 				EA3E8AB627B77CEA006A2715 /* SizeValueProvider.swift in Sources */,
 				EA1AE489277819E600D028F9 /* ConstraintRelation.swift in Sources */,
-				EA0E67AD27B49F8B00A11C20 /* NSString+DES.m in Sources */,
+				EA0E67AD27B49F8B00A11C20 /* NSString+Encrypt.m in Sources */,
 				EADB00E52762410D001B7223 /* ImageConst.swift in Sources */,
 				EA3E8B2627B77CEA006A2715 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				EA99374327994F6100480147 /* NSArray+TABAnimatedChain.m in Sources */,
@@ -4770,6 +4777,7 @@
 				EA9A78CD27C756C900A11FC8 /* MPITextAsyncLayer.m in Sources */,
 				EA9A78CF27C756C900A11FC8 /* MPITextHashing.m in Sources */,
 				EA99372427994F6100480147 /* TABComponentLayer.m in Sources */,
+				EAFC601B27E20B430019CDEF /* UnitTool.swift in Sources */,
 				EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */,
 				EA3E8AE827B77CEA006A2715 /* LayerImageProvider.swift in Sources */,
 				EA99374427994F6100480147 /* UIView+TABControlAnimation.m in Sources */,

@@ -591,4 +591,24 @@ extension UIImage
         }
     }
     
+    ///将图片编码为base64字符串
+    func base64(imageType: FileTypeName = .png) -> String?
+    {
+        guard let data = imageType == .png ? self.pngData() : self.jpegData(compressionQuality: 1) else {
+            return nil
+        }
+        let str = data.base64EncodedString()
+//        let baseStr = str.addingPercentEncoding(withAllowedCharacters: CharacterSet.init(charactersIn: ":/?#[]@!$&’()*+,;="))
+        return str
+    }
+    
+    ///将base64图片转化为UIImage
+    class func fromBase64(_ str: String) -> UIImage?
+    {
+        guard let data = Data(base64Encoded: str) else {
+            return nil
+        }
+        return UIImage(data: data)
+    }
+    
 }

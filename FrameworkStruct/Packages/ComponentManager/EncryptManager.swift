@@ -65,12 +65,66 @@ extension EncryptManager: ExternalInterface
     }
     
     ///DES加密一个字符串
-    func desString(originStr: String, desKey: String) -> String
+    func desString(_ originStr: String, desKey: String) -> String
     {
         return NSString.des(originStr, key: desKey)
     }
     
+    ///des解密一个字符串
+    func desDecript(_ encryptStr: String, desKey: String) -> String
+    {
+        return NSString.decryptDes(encryptStr, key: desKey)
+    }
     
+    ///MD5加密一个字符串
+    ///参数：originStr：原始字符串；short：是否短格式，true返回16位，false返回32位；lower：是否小写字母
+    func md5String(_ originStr: String, short: Bool = false, lower: Bool = false) -> String
+    {
+        if short
+        {
+            return lower ? NSString.md5(forLower16Bate: originStr) : NSString.md5(forUpper16Bate: originStr)
+        }
+        else
+        {
+            return lower ? NSString.md5(forLower32Bate: originStr) : NSString.md5(forUpper32Bate: originStr)
+        }
+    }
+    
+    ///swift版本md5加密
+    func md5(_ originStr: String) -> String
+    {
+        return originStr.md5
+    }
+    
+    ///字符串sha256加密
+    func sha256(_ originStr: String) -> String
+    {
+        return originStr.sha256
+    }
+    
+    ///base64编码
+    func base64(_ data: Data) -> String
+    {
+        let baseStr = data.base64EncodedString()
+        return baseStr
+    }
+    
+    ///base64解码
+    func decodeBase64(_ str: String) -> Data?
+    {
+        let data = Data.init(base64Encoded: str)
+        return data
+    }
+    
+    ///解码base64字符串为字符串
+    func decodeBase64ToString(_ str: String) -> String?
+    {
+        if let data = self.decodeBase64(str)
+        {
+            return String.init(data: data, encoding: .utf8)
+        }
+        return nil
+    }
     
     
 }
