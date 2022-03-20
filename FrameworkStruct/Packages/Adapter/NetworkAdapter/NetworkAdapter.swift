@@ -6,8 +6,9 @@
 //
 
 /**
- 网络适配器
- 此处定义所有的网络接口方法
+ * 网络适配器
+ * 此处定义所有的网络接口方法
+ * 如果某些模块想要在模块内部编写网络接口方法，那么可以扩展该类，并可以通过实现一个和那个模块关联的空协议来标记该扩展
  */
 import UIKit
 
@@ -37,36 +38,6 @@ class NetworkAdapter: OriginAdapter
     {
         return self
     }
-    
-    ///获取默认参数，根据项目实际需要修改
-    fileprivate func defaultParams() -> Dictionary<String, String>
-    {
-        return [nt_request_macAddress: g_getDeviceId(),
-                nt_request_deviceType: "ios",
-                nt_request_clientTime: String(format: "%lld", currentTimeInterval() * 1000)]
-    }
-    
-    //组合自定义参数和默认参数
-    fileprivate func combineParams(_ customParams: Dictionary<String, Any>) -> Dictionary<String, Any>
-    {
-        var params = Dictionary<String, Any>()
-        params.merge(self.defaultParams()) { current, _ in
-            current
-        }   //组合默认参数
-        params.merge(customParams) { current, _ in
-            current
-        }   //组合自定义参数
-        return params
-    }
-    
-    //如果数据没有解析成功，那么生成错误信息
-    fileprivate func parseDataError() -> NSError
-    {
-        let errCode: HttpStatusCode = .dataParseError
-        let userInfo = [NSLocalizedDescriptionKey: errCode.getErrorDesc()]
-        let error = NSError(domain: NSCocoaErrorDomain, code: errCode.rawValue, userInfo: userInfo)
-        return error
-    }
 
 }
 
@@ -91,6 +62,40 @@ extension NetworkAdapter: ExternalInterface
     
     /**************************************** 基本网络功能 Section End ***************************************/
     
+    /**************************************** 网络请求工具方法 Section Begin ****************************************/
+    ///获取默认参数，根据项目实际需要修改
+    func defaultParams() -> Dictionary<String, String>
+    {
+        return [nt_request_macAddress: g_getDeviceId(),
+                nt_request_deviceType: "ios",
+                nt_request_clientTime: String(format: "%lld", currentTimeInterval() * 1000)]
+    }
+    
+    //组合自定义参数和默认参数
+    func combineParams(_ customParams: Dictionary<String, Any>) -> Dictionary<String, Any>
+    {
+        var params = Dictionary<String, Any>()
+        params.merge(self.defaultParams()) { current, _ in
+            current
+        }   //组合默认参数
+        params.merge(customParams) { current, _ in
+            current
+        }   //组合自定义参数
+        return params
+    }
+    
+    //如果数据没有解析成功，那么生成错误信息
+    func parseDataError() -> NSError
+    {
+        let errCode: HttpStatusCode = .dataParseError
+        let userInfo = [NSLocalizedDescriptionKey: errCode.getErrorDesc()]
+        let error = NSError(domain: NSCocoaErrorDomain, code: errCode.rawValue, userInfo: userInfo)
+        return error
+    }
+
+    /**************************************** 网络请求工具方法 Section End ****************************************/
+    
+    //MARK: 网络接口方法
     /**************************************** 注册登录 Section Begin ***************************************/
     /**
      * 验证码登录
