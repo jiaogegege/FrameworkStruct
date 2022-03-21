@@ -12,27 +12,27 @@ import Foundation
 
 //MARK: 温度
 ///摄氏度to开尔文
-func C2K(_ c: Double) -> Double
+func C2K(_ C: Double) -> Double
 {
-    return c + 273.15
+    return C + 273.15
 }
 
 ///开尔文to摄氏度
-func K2C(_ k: Double) -> Double
+func K2C(_ K: Double) -> Double
 {
-    return k - 273.15
+    return K - 273.15
 }
 
 ///摄氏度to华氏度
-func C2F(_ c: Double) -> Double
+func C2F(_ C: Double) -> Double
 {
-    return 32.0 + c * 1.8
+    return 32.0 + C * 1.8
 }
 
 ///华氏度to摄氏度
-func F2C(_ f: Double) -> Double
+func F2C(_ F: Double) -> Double
 {
-    return (f - 32.0) / 1.8
+    return (F - 32.0) / 1.8
 }
 
 
@@ -350,15 +350,15 @@ func kPa2mmHg(_ kPa: Double) -> Double
 }
 
 ///标准大气压to帕斯卡
-func atm2Pa(_ atm: Double) -> Double
+func atm2kPa(_ atm: Double) -> Double
 {
-    return atm * 101325.0
+    return atm * 101.325
 }
 
 ///帕斯卡to标准大气压
-func Pa2atm(_ Pa: Double) -> Double
+func kPa2atm(_ kPa: Double) -> Double
 {
-    return Pa / 101325.0
+    return kPa / 101.325
 }
 
 ///标准大气压to毫米汞柱
@@ -389,6 +389,18 @@ func J2cal(_ J: Double) -> Double
 
 
 //MARK: 功率
+///瓦to焦耳/秒
+func W2Js(_ W: Double) -> Double
+{
+    return W * 1.0
+}
+
+///焦耳/秒to瓦
+func Js2W(_ Js: Double) -> Double
+{
+    return Js / 1.0
+}
+
 ///千卡/秒to瓦
 func kcals2W(_ kcals: Double) -> Double
 {
@@ -411,16 +423,4 @@ func kW2hp(_ kW: Double) -> Double
 func hp2kW(_ hp: Double) -> Double
 {
     return hp / 1.341022
-}
-
-///瓦to焦耳/秒
-func W2Js(_ W: Double) -> Double
-{
-    return W * 1.0
-}
-
-///焦耳/秒to瓦
-func Js2W(_ Js: Double) -> Double
-{
-    return Js / 1.0
 }

@@ -114,8 +114,8 @@ struct Sports: OptionSet
     static let cycling = Sports(rawValue: 2)
     static let swimming = Sports(rawValue: 4)
     static let fencing = Sports(rawValue: 8)
-    static let shooting = Sports(rawValue: 32)
-    static let horseJumping = Sports(rawValue: 512)
+    static let shooting = Sports(rawValue: 16)
+    static let horseJumping = Sports(rawValue: 32)
 }
 //使用
 //func test()
