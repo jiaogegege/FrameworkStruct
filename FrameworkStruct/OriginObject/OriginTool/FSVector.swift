@@ -16,12 +16,13 @@ class FSVector<T: Equatable>
 {
     fileprivate var vector = [T]()
     fileprivate var currentIndex = 0
+    
 }
 
 /**
  * 对外接口方法
  */
-extension FSVector
+extension FSVector: ExternalInterface
 {
     ///在头部添加一个元素
     func pushFront(_ item: T?)

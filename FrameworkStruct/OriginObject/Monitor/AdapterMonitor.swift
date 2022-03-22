@@ -30,7 +30,13 @@ class AdapterMonitor: OriginMonitor
     {
         return self
     }
-    
+
+}
+
+
+//接口方法
+extension AdapterMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
         //初始化网络适配器

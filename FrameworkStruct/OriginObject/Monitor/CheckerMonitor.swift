@@ -31,6 +31,12 @@ class CheckerMonitor: OriginMonitor
         return self
     }
     
+}
+
+
+//接口方法
+extension CheckerMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
     }

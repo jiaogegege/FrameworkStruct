@@ -76,6 +76,12 @@ class MonitorMonitor: OriginMonitor
         return self
     }
     
+}
+
+
+//接口方法
+extension MonitorMonitor: ExternalInterface
+{
     ///最初的配置，需要外部调用
     override func originConfig() {
         super.originConfig()

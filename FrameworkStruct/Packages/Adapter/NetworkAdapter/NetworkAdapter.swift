@@ -41,28 +41,10 @@ class NetworkAdapter: OriginAdapter
 
 }
 
-//外部接口
-extension NetworkAdapter: ExternalInterface
+
+//保护方法
+extension NetworkAdapter: ProtectAvailable
 {
-    /**************************************** 基本网络功能 Section Begin ***************************************/
-    ///当前网络状态
-    var currentNetworkStatus: AFNetworkReachabilityStatus {
-        return request.networkStatus
-    }
-    
-    ///当前网络是否可用
-    var isNetworkOk: Bool {
-        return request.networkAvailable
-    }
-    
-    ///当前主机地址
-    var currentHost: String {
-        return request.hostUrl
-    }
-    
-    /**************************************** 基本网络功能 Section End ***************************************/
-    
-    /**************************************** 网络请求工具方法 Section Begin ****************************************/
     ///获取默认参数，根据项目实际需要修改
     func defaultParams() -> Dictionary<String, String>
     {
@@ -88,13 +70,33 @@ extension NetworkAdapter: ExternalInterface
     func parseDataError() -> NSError
     {
         let errCode: HttpStatusCode = .dataParseError
-        let userInfo = [NSLocalizedDescriptionKey: errCode.getErrorDesc()]
-        let error = NSError(domain: NSCocoaErrorDomain, code: errCode.rawValue, userInfo: userInfo)
-        return error
+        return errCode.getError()
     }
 
-    /**************************************** 网络请求工具方法 Section End ****************************************/
+}
+
+
+//外部接口
+extension NetworkAdapter: ExternalInterface
+{
+    /**************************************** 基本网络功能 Section Begin ***************************************/
+    ///当前网络状态
+    var currentNetworkStatus: AFNetworkReachabilityStatus {
+        return request.networkStatus
+    }
     
+    ///当前网络是否可用
+    var isNetworkOk: Bool {
+        return request.networkAvailable
+    }
+    
+    ///当前主机地址
+    var currentHost: String {
+        return request.hostUrl
+    }
+    
+    /**************************************** 基本网络功能 Section End ***************************************/
+
     //MARK: 网络接口方法
     /**************************************** 注册登录 Section Begin ***************************************/
     /**

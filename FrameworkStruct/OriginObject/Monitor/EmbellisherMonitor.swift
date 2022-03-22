@@ -30,7 +30,13 @@ class EmbellisherMonitor: OriginMonitor
     {
         return self
     }
-    
+
+}
+
+
+//接口方法
+extension EmbellisherMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
     }

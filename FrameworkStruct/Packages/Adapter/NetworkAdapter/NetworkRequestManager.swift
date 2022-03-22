@@ -57,19 +57,19 @@ class NetworkRequestManager: OriginManager
             var parameters = [String: Any]()
             for key in params.keys
             {
-                if !nt_escapeParamKey.contains(key)     //不包含在不加密数组中的key需要加密
+                if !nt_escapeParam_Key.contains(key)     //不包含在不加密数组中的key需要加密
                 {
                     if let value = params[key]
                     {
                         if value is String
                         {
                             let val = value as! String
-                            parameters[key] = g_des(val, key:nt_encryptDesKey)
+                            parameters[key] = g_des(val, key:nt_encryptDes_Key)
                         }
                         else    //如果value不是字符串，那么格式化成字符串
                         {
                             let val = String(format: "%@", value as! CVarArg)
-                            parameters[key] = g_des(val, key:nt_encryptDesKey)
+                            parameters[key] = g_des(val, key:nt_encryptDes_Key)
                         }
                     }
                 }
@@ -90,8 +90,8 @@ class NetworkRequestManager: OriginManager
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: params, options: .fragmentsAllowed)
                 let jsonStr = String.init(data: jsonData, encoding: .utf8)
-                let encryptStr = g_des(jsonStr!, key: nt_encryptDesKey)
-                return [nt_paramDataKey: encryptStr as Any]    //返回加密参数
+                let encryptStr = g_des(jsonStr!, key: nt_encryptDes_Key)
+                return [nt_paramData_Key: encryptStr as Any]    //返回加密参数
             } catch {
                 FSLog("encrypt error: \(error.localizedDescription)")
                 return params    //如果加密失败，返回原始参数
@@ -112,7 +112,7 @@ class NetworkRequestManager: OriginManager
             {
                 do {
                     let resStr = String.init(data: res, encoding: .utf8)
-                    let decryptStr = g_decrypt(resStr, key: nt_encryptDesKey)
+                    let decryptStr = g_decrypt(resStr, key: nt_encryptDes_Key)
                     let decryptData = decryptStr?.data(using: .utf8)
                     let resDict = try JSONSerialization.jsonObject(with: decryptData!, options: .mutableLeaves)
                     return resDict as! Dictionary<String, Any>
@@ -350,21 +350,21 @@ extension NetworkRequestManager: ExternalInterface
             //处理返回的数据，解密
             let resDict = self.decryptParams(responseObject!)
             //判断请求是否成功
-            let responseCode = resDict[nt_response_codeKey] as! Int
+            let responseCode = resDict[nt_response_code_Key] as! Int
             if responseCode == HttpStatusCode.ok.rawValue   //请求成功
             {
-                success(resDict[nt_response_dataKey] as Any)
+                success(resDict[nt_response_data_Key] as Any)
             }
             else    //请求失败，构造错误对象
             {
                 let errMsg: String
-                if let msg = resDict[nt_response_msgKey] as? String
+                if let msg = resDict[nt_response_msg_Key] as? String
                 {
                     errMsg = msg
                 }
                 else    //如果服务器没有给错误信息，那么尝试从本地获取
                 {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDesc() ?? String.networkError
+                    errMsg = HttpStatusCode(rawValue: responseCode)?.getDesc() ?? String.networkError
                 }
                 let userInfo = [NSLocalizedDescriptionKey: errMsg]
                 let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
@@ -501,21 +501,21 @@ extension NetworkRequestManager: ExternalInterface
             //处理返回的数据，解密
             let resDict = self.decryptParams(responseObject!)
             //判断请求是否成功
-            let responseCode = resDict[nt_response_codeKey] as! Int
+            let responseCode = resDict[nt_response_code_Key] as! Int
             if responseCode == HttpStatusCode.ok.rawValue   //请求成功
             {
-                success(resDict[nt_response_dataKey] as Any)     //具体返回的内容和服务器端约定
+                success(resDict[nt_response_data_Key] as Any)     //具体返回的内容和服务器端约定
             }
             else    //请求失败，构造错误对象
             {
                 let errMsg: String
-                if let msg = resDict[nt_response_msgKey] as? String
+                if let msg = resDict[nt_response_msg_Key] as? String
                 {
                     errMsg = msg
                 }
                 else    //如果服务器没有给错误信息，那么尝试从本地获取
                 {
-                    errMsg = HttpStatusCode(rawValue: responseCode)?.getErrorDesc() ?? String.networkError
+                    errMsg = HttpStatusCode(rawValue: responseCode)?.getDesc() ?? String.networkError
                 }
                 let userInfo = [NSLocalizedDescriptionKey: errMsg]
                 let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)

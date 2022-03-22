@@ -100,7 +100,8 @@ extension String: ConstantPropertyProtocol
     //没有提醒事项权限
     static let withoutReminder = localized("withoutReminder")
 
-    //MARK: 网络错误信息
+    //MARK: 网络状态错误信息
+    static let networkUndefinedStatus = localized("networkUndefinedStatus")
     static let networkUnavailable = localized("networkUnavailable")
     static let networkDataParseError = localized("networkDataParseError")
     static let networkOk = localized("networkOk")

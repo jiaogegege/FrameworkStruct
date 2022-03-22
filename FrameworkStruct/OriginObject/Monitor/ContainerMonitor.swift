@@ -31,6 +31,12 @@ class ContainerMonitor: OriginMonitor
         return self
     }
     
+}
+
+
+//接口方法
+extension ContainerMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
     }

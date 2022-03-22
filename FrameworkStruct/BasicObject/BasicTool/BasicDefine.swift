@@ -22,45 +22,6 @@ protocol BasicProtocol
     
 }
 
-/**
- * 接口协议
- * 表示这个extension中实现的方法都是接口协议中定义的，为了扩展该类型的功能，比如`Equatable`，`Comparable`或者自定义协议等
- */
-protocol InterfaceProtocol {
-    
-}
-
-/**
- * 外部接口方法协议
- * 这是个空协议，只是为了表示实现这个协议的extension中的方法是给外部程序调用的
- */
-protocol ExternalInterface {
-    
-}
-
-/**
- * 这个空协议规定内部类型
- * 如果一个类型要定义内部类型，那么在extension中实现这个空协议
- */
-protocol InternalType {
-    
-}
-
-/**
- * 这个空协议定义各种常量属性
- */
-protocol ConstantPropertyProtocol {
-    
-}
-
-/**
- * 这个空协议规定实现代理和通知代理的方法
- * 类型的这个extension中实现了各种组件的代理方法和通知中心回调方法
- */
-protocol DelegateProtocol {
-    
-}
-
 
 //MARK: 基础常量定义
 

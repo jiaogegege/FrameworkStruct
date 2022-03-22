@@ -15,10 +15,11 @@ class FSQueue<T: Any>
 {
     //默认队列容器
     fileprivate var queue = [T]()
+    
 }
 
 //对外接口方法
-extension FSQueue
+extension FSQueue: ExternalInterface
 {
     //追加一个元素到容器尾部
     func push(_ item: T?)

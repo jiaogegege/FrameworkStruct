@@ -30,7 +30,13 @@ class HandlerMonitor: OriginMonitor
     {
         return self
     }
-    
+
+}
+
+
+//接口方法
+extension HandlerMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
     }

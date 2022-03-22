@@ -30,7 +30,13 @@ class DocumentMonitor: OriginMonitor
     {
         return self
     }
-    
+
+}
+
+
+//接口方法
+extension DocumentMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
     }

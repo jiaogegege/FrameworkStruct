@@ -32,3 +32,13 @@ class WorkerMonitor: OriginMonitor
     }
     
 }
+
+
+//接口方法
+extension WorkerMonitor: ExternalInterface
+{
+    override func originConfig() {
+        super.originConfig()
+    }
+    
+}

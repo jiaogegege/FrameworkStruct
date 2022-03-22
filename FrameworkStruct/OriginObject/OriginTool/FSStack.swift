@@ -14,10 +14,11 @@ class FSStack<T: Any>
 {
     //容器
     fileprivate var stack = [T]()
+    
 }
 
 //对外接口方法
-extension FSStack
+extension FSStack: ExternalInterface
 {
     //在栈顶推入一个元素
     func push(_ item: T?)

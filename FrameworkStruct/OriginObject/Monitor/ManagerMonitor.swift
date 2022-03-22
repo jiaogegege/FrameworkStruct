@@ -30,7 +30,13 @@ class ManagerMonitor: OriginMonitor
     {
         return self
     }
-    
+
+}
+
+
+//接口方法
+extension ManagerMonitor: ExternalInterface
+{
     override func originConfig() {
         super.originConfig()
         //初始化应用程序管理器

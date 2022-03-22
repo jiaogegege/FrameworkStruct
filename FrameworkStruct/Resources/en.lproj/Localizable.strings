@@ -60,6 +60,7 @@ withoutReminder = "Without Access To Reminder";
 /**
  * 网络状态信息
  */
+networkUndefinedStatus = "Undefined Status";
 networkUnavailable = "Network Unavailable";
 networkDataParseError = "Data Parse Error";
 networkOk = "Request Success";

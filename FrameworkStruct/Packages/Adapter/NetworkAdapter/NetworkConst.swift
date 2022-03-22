@@ -12,17 +12,20 @@
 import Foundation
 
 //MARK: 常量定义
+/**************************************** 加密相关 Section Begin ****************************************/
 ///参数是否加密
 let nt_needEncryptParam = false
 
 ///DES加密的密钥
-let nt_encryptDesKey = "Aipi3pWCzdo6tA2SL0gp3ajx"
+let nt_encryptDes_Key = "Aipi3pWCzdo6tA2SL0gp3ajx"
 
 ///不需要加密的参数key，在这个数组中的key不会被加密
-let nt_escapeParamKey = ["imgCode"]
+let nt_escapeParam_Key = ["imgCode"]
 
 ///如果加密整个参数，那么最终返回的参数都放在key为`data`的字典中
-let nt_paramDataKey = "data"
+let nt_paramData_Key = "data"
+
+/**************************************** 加密相关 Section End ****************************************/
 
 ///请求超时时间间隔
 let nt_requestTimeoutInterval: TimeInterval = 30.0
@@ -39,9 +42,9 @@ let nt_request_macAddress = "macAddress"    //mac地址
 let nt_request_deviceType = "deviceType"    //ios
 let nt_request_clientTime = "clientTime"    //客户端时间
 
-let nt_response_codeKey = "errCode"  //返回的状态码key
-let nt_response_msgKey = "errMsg"    //返回的状态信息key
-let nt_response_dataKey = "data"     //返回数据的key
+let nt_response_code_Key = "errCode"  //返回的状态码key
+let nt_response_msg_Key = "errMsg"    //返回的状态信息key
+let nt_response_data_Key = "data"     //返回数据的key
 
 //MARK: 服务器环境定义
 ///服务器环境变量
@@ -84,24 +87,43 @@ let url_loginWithPhoneAndSms = "api/awaitz-mall/user/v1/sms/login"
 //MARK: HTTP相关信息定义
 //MIME type
 enum MIMEType: String {
+    case txt = "text/plain"
+    case xml = "text/xml"
     case html = "text/html"
-    case plain = "text/plain"
+    case svg = "image/svg+xml"
+    case css = "text/css"
+    case js = "text/javascript"
     case rtf = "application/rtf"
+    case rtx = "text/richtext"
+    case pdf = "application/pdf"
     case gif = "image/gif"
-    case jpg = "image/jpeg"
+    case jpeg = "image/jpeg"
+    case png = "image/png"
     case bmp = "image/bmp"
+    case xbm = "image/x-xbitmap"
+    case pbm = "image/x-portable-bitmap"
     case tiff = "image/tiff"
+    case psd = "image/x-photoshop"
     case au = "audio/basic"
     case wav = "audio/x-wav"
+    case kar = "audio/x-midi"
     case mid = "audio/mid"
     case midi = "audio/midi,audio/x-midi"
+    case mp3 = "audio/x-mpeg"
     case ra = "audio/x-pn-realaudio"
     case mpeg = "video/mpeg"
+    case mpv2 = "video/mpeg2"
+    case movie = "video/quicktime"
+    case qti = "image/x-quicktime"
     case avi = "video/x-msvideo"
+    case zip = "application/zip"
     case gz = "application/x-gzip"
     case tar = "application/x-tar"
+    case gtar = "application/x-gtar"
+    case swf = "application/x-shockwave-flash"
 }
 
+///HTTP方法
 enum HttpMethodType: String {
     case GET
     case POST
@@ -182,9 +204,10 @@ enum HttpResponseHeaderKey: String {
 ///接口返回的状态码，包括http标准状态码和自定义状态码
 enum HttpStatusCode: Int
 {
-    case unavailable = 0                    //网络不可用
+    case unknown = -1                       //未知状态，没有定义的状态
     
-    case dataParseError = 1                 //数据解析错误，接口返回了数据，但是本地解析出错
+    case unavailable = 0                    //网络不可用
+    case dataParseError = 10                //数据解析错误，接口返回了数据，但是本地解析出错
     
     case ok = 200                           //正常
     case created = 201                      //已创建。成功请求并创建了新的资源
@@ -201,10 +224,13 @@ enum HttpStatusCode: Int
     case badGetway = 502                    //服务器连接失败
     case serviceUnavailable = 503           //服务器暂时的无法处理客户端的请求
     
-    ///获取错误信息
-    func getErrorDesc() -> String
+    
+    ///获取状态信息
+    func getDesc() -> String
     {
         switch self {
+        case .unknown:
+            return String.networkUndefinedStatus
         case .unavailable:
             return String.networkUnavailable
         case .dataParseError:
@@ -234,5 +260,14 @@ enum HttpStatusCode: Int
         case .serviceUnavailable:
             return String.networkServiceUnavailable
         }
+    }
+    
+    ///获取错误对象
+    func getError() -> NSError
+    {
+        let errMsg = self.getDesc()
+        let userInfo = [NSLocalizedDescriptionKey: errMsg, NSLocalizedFailureErrorKey: errMsg, NSLocalizedFailureReasonErrorKey: errMsg]
+        let error = NSError(domain: NSCocoaErrorDomain, code: self.rawValue, userInfo: userInfo)
+        return error
     }
 }

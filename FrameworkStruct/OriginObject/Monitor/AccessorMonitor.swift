@@ -30,7 +30,13 @@ class AccessorMonitor: OriginMonitor
     {
         return self
     }
-    
+
+}
+
+
+//接口方法
+extension AccessorMonitor: ExternalInterface
+{
     ///添加需要初始化的组件
     override func originConfig() {
         super.originConfig()
