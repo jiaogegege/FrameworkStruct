@@ -278,7 +278,7 @@ extension DatabaseAccessor: ExternalInterface
         {
             //数据库文件路径
             let dbPath = SandBoxAccessor.shared.getDatabasePath()
-            FSLog(dbPath)
+//            FSLog(dbPath)
             
             //创建数据库操作队列对象，如果返回nil，说明创建不成功，一般都会成功
             self.dbQueue = FMDatabaseQueue(path: dbPath)
