@@ -18,11 +18,13 @@ class ApplicationManager: OriginManager
     //单例
     static let shared = ApplicationManager()
     
-    //userdefaults
+    //UserDefaults
     fileprivate lazy var ud: UserDefaultsAccessor = UserDefaultsAccessor.shared
     
     //应用程序对象
-    fileprivate(set) weak var app: UIApplication! = UIApplication.shared
+    var app: UIApplication {
+        UIApplication.shared
+    }
     
     //应用程序代理对象
     var appDelegate: AppDelegate {
@@ -102,8 +104,8 @@ extension ApplicationManager: DelegateProtocol
     {
         stMgr.setStatus(AMAppState.launched, forKey: AMStatusKey.appState)
         //写入app启动次数
-        let runTimes = self.runTimes
-        ud.write(key: .runTimes, value: runTimes + 1)
+        let launchTimes = self.launchTimes
+        ud.write(key: .runTimes, value: launchTimes + 1)
     }
     
     //app即将进入前台
@@ -188,7 +190,7 @@ extension ApplicationManager: ExternalInterface
     }
     
     ///app启动次数
-    var runTimes: Int {
+    var launchTimes: Int {
         return ud.readInt(key: .runTimes)
     }
     
