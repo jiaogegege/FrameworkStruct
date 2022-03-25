@@ -4053,20 +4053,20 @@
 			children = (
 				EADB014B276243FC001B7223 /* README.md */,
 				EAC4E6CD27B0C24400654EE6 /* Basic */,
-				EA1EAFA327EC411B002B4997 /* FSGuideView.swift */,
-				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
-				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
 				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
-				EA283F572795465A001A2710 /* SimpleTableView.swift */,
+				EA1EAFA327EC411B002B4997 /* FSGuideView.swift */,
 				EA9A4A842780309E00170BB3 /* FSTextField.h */,
 				EA9A4A832780309D00170BB3 /* FSTextField.m */,
 				EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */,
 				EA9A4A862780309E00170BB3 /* FSTextField+ChangeBlock.m */,
+				EA283F572795465A001A2710 /* SimpleTableView.swift */,
 				EA9A4A8B278030A700170BB3 /* CountDownButton.h */,
 				EA9A4A8A278030A700170BB3 /* CountDownButton.m */,
 				EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */,
 				EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */,
+				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
+				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
