@@ -73,7 +73,7 @@ class DatabaseAccessor: OriginAccessor
         
         //数据库文件路径
         let dbPath = SandBoxAccessor.shared.getDatabasePath()
-        FSLog(dbPath)
+//        FSLog(dbPath)
         
         //判断数据库文件是否存在
         let isDbExist = SandBoxAccessor.shared.isExist(path: dbPath)

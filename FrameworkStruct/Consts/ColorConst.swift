@@ -43,6 +43,8 @@ extension UIColor: ConstantPropertyProtocol
     @objc static var cGray_D6D6D9 = UIColor.colorWithHex(colorStr: "D6D6D9")
     //5B5B7E
     @objc static let cGray_5B5B7E = UIColor.colorFromHex(value: 0x5B5B7E)
+    //50%半透明黑色
+    @objc static let cBlack_50Alpha = UIColor(white: 0, alpha: 0.5)
 
     
 }

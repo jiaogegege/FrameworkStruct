@@ -37,6 +37,7 @@ confirm = "确定";
 cancel = "取消";
 success = "成功";
 failure = "失败";
+skip = "跳过";
 iKnown = "我知道了";
 selectFromPhotoLibiary = "从手机相册选择";
 takePhotoWithCamera = "拍照";

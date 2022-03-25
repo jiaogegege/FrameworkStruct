@@ -106,6 +106,7 @@
 		EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */; };
 		EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */; };
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
+		EA1EAFA427EC411B002B4997 /* FSGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EAFA327EC411B002B4997 /* FSGuideView.swift */; };
 		EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865227C4ADBF00B63C8E /* AudioConst.swift */; };
 		EA20865727C4B16900B63C8E /* VideoConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865627C4B16900B63C8E /* VideoConst.swift */; };
 		EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA20865927C5276700B63C8E /* EventKit.framework */; };
@@ -543,6 +544,7 @@
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
+		EABB3C9727ED7122005B98E3 /* GuideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABB3C9627ED7122005B98E3 /* GuideManager.swift */; };
 		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
@@ -807,6 +809,7 @@
 		EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintTestViewController.swift; sourceTree = "<group>"; };
 		EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTopSelectBar.swift; sourceTree = "<group>"; };
 		EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxAccessor.swift; sourceTree = "<group>"; };
+		EA1EAFA327EC411B002B4997 /* FSGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSGuideView.swift; sourceTree = "<group>"; };
 		EA20865227C4ADBF00B63C8E /* AudioConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioConst.swift; sourceTree = "<group>"; };
 		EA20865627C4B16900B63C8E /* VideoConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConst.swift; sourceTree = "<group>"; };
 		EA20865927C5276700B63C8E /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -1489,6 +1492,7 @@
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
+		EABB3C9627ED7122005B98E3 /* GuideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideManager.swift; sourceTree = "<group>"; };
 		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
@@ -2894,6 +2898,7 @@
 				EA7F2A2327DAFAAF000E27DF /* UserManager */,
 				EA00C86E27C213550034C95B /* NotificationManager.swift */,
 				EA5780A827D0A6C900C819E6 /* SettingsManager.swift */,
+				EABB3C9627ED7122005B98E3 /* GuideManager.swift */,
 			);
 			path = BusinessManager;
 			sourceTree = "<group>";
@@ -4048,6 +4053,7 @@
 			children = (
 				EADB014B276243FC001B7223 /* README.md */,
 				EAC4E6CD27B0C24400654EE6 /* Basic */,
+				EA1EAFA327EC411B002B4997 /* FSGuideView.swift */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
@@ -4538,6 +4544,7 @@
 				EA9A785F27C7546100A11FC8 /* Date+TimeAgo.swift in Sources */,
 				EA3E8AF727B77CEA006A2715 /* ShapeNode.swift in Sources */,
 				EAC8A87F27625D490088293F /* UIColor+SDHexString.m in Sources */,
+				EABB3C9727ED7122005B98E3 /* GuideManager.swift in Sources */,
 				EA99373A27994F6100480147 /* TABDropAnimationImpl.m in Sources */,
 				EA1AE493277819E600D028F9 /* ConstraintLayoutSupportDSL.swift in Sources */,
 				EA9A785727C7546100A11FC8 /* TimePeriod.swift in Sources */,
@@ -4836,6 +4843,7 @@
 				EA99374227994F6100480147 /* TABAnimatedChainManagerImpl.m in Sources */,
 				EA11126A27B3BE2C006D0B83 /* StringEncoding+Alamofire.swift in Sources */,
 				EAC8A77027625BA70088293F /* NSObject+MJProperty.m in Sources */,
+				EA1EAFA427EC411B002B4997 /* FSGuideView.swift in Sources */,
 				EA11126E27B3BE2C006D0B83 /* ParameterEncoding.swift in Sources */,
 				EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */,
 				EADB00A727623C76001B7223 /* OriginAdapter.swift in Sources */,

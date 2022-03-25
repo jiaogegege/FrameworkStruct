@@ -8,19 +8,24 @@
 /**
  * 所有可以被DialogManager管理的类都要继承这个类
  * 主要针对全屏幕覆盖，带有半透明背景的弹窗
+ * 可以是显示在屏幕中间，或从底部往上弹，或从上往下弹，或者其他。根据实际需要实现
+ *
+ * - note: 子类建议以`Dialog`结尾
+ *
  */
 import UIKit
 
 class FSDialog: UIView, DialogManagerProtocol
 {
     //MARK: 属性
+    /**************************************** 接口属性 Section Begin ****************************************/
     //遵循DialogManagerProtocol协议，提供属性
     var showCallback: VoidClosure?
     var hideCallback: VoidClosure?
     var dismissCallback: VoidClosure?
     
     //背景颜色，默认黑色50%透明度
-    var bgColor: UIColor = UIColor(white: 0, alpha: 0.5) {
+    var bgColor: UIColor = .cBlack_50Alpha {
         willSet {
             self.bgView.backgroundColor = newValue
         }
@@ -36,7 +41,9 @@ class FSDialog: UIView, DialogManagerProtocol
     //主题色
     var themeColor: UIColor = ThemeManager.shared.getCurrentTheme().mainColor
     
-    //UI组件
+    /**************************************** 接口属性 Section End ****************************************/
+    
+    ///UI组件
     fileprivate var bgView: UIView! //背景蒙层，一般是半透明
     var containerView: UIView!  //放置内容部分的容器视图
     
@@ -44,7 +51,7 @@ class FSDialog: UIView, DialogManagerProtocol
     //MARK: 方法
     //初始化方法，参数随便传，大小永远是整个屏幕大
     override init(frame: CGRect = .zero) {
-        super.init(frame: CGRect(x: 0.0, y: 0.0, width: kScreenWidth, height: kScreenHeight))
+        super.init(frame: .fullScreen)
         self.initData()
         self.createView()
         self.configView()

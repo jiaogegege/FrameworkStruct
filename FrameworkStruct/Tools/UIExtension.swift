@@ -186,7 +186,7 @@ extension UIView
      * 参数：self：要添加圆角和阴影的view；cornerSide：圆角在哪一边上；needShadow：是否要添加阴影
      * 做法：基本做法是在self上添加一个和自身等大的带4边圆角的view，然后盖住对面边的圆角；阴影也是添加在等大的view上
      */
-    func addRadiusAndShadow(cornerSide: UIViewCornerSide = .all, bgColor: UIColor = .white, cornerRadius: CGFloat = 10.0, needShadow: Bool = true, shadowColor: UIColor = .black, shadowOffset: CGSize = .zero, shadowOpacity: Float = 0.5, shadowRadius: CGFloat = 5.0)
+    func addRadiusAndShadow(cornerSide: UIViewSide = .all, bgColor: UIColor = .white, cornerRadius: CGFloat = 10.0, needShadow: Bool = true, shadowColor: UIColor = .black, shadowOffset: CGSize = .zero, shadowOpacity: Float = 0.5, shadowRadius: CGFloat = 5.0)
     {
         self.backgroundColor = .clear
         let cornerView = UIView()
@@ -232,8 +232,8 @@ extension UIView
 //UIView内部类型
 extension UIView
 {
-    //圆角边的位置：left/top/right/bottom/all
-    enum UIViewCornerSide {
+    //边的位置：left/top/right/bottom/all
+    enum UIViewSide {
     case left, top, right, bottom, all
     }
     

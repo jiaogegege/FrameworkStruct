@@ -73,6 +73,8 @@ extension String: ConstantPropertyProtocol
     static let success = localized("success")
     //失败
     static let failure = localized("failure")
+    //跳过
+    static let skip = localized("skip")
     //我知道了
     static let iKnown = localized("iKnown")
     //从相册选择

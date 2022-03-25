@@ -33,6 +33,7 @@ extension UIImage: ConstantPropertyProtocol
     static var iMineSelected: UIImage? {
         UIImage(named: "mine_selected")
     }
+    
     //返回按钮图片
     @objc static var iBackDark: UIImage? {
         UIImage(named: "common_back_dark")
@@ -46,10 +47,12 @@ extension UIImage: ConstantPropertyProtocol
     @objc static var iBackClose: UIImage? {
         UIImage(named: "common_back_close")
     }
+    
     //cell向右箭头
     @objc static var iRightArrow: UIImage? {
         UIImage(named: "right_arrow")
     }
+    
     //系统设置图标
     @objc static var iSysSettingIcon: UIImage? {
         UIImage(named: "sys_setting")
@@ -61,6 +64,9 @@ extension UIImage: ConstantPropertyProtocol
     //miku系列图片
     @objc static let iMiku_0 = UIImage(named: "miku_0")
     
+    //Guide提示图片
+    @objc static let iGuideHand = UIImage(named: "gudie_hand")
+    @objc static let iGuideOrderAdd = UIImage(named: "guide_order_add")
     
     
     

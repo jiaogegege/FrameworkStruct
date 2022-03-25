@@ -58,6 +58,9 @@ class ThemeSelectViewController: BasicViewController
     
     override func updateUI() {
         super.updateUI()
+        g_after(interval: 0.5) { [self] in
+            GuideManager.shared.guideOrderAdd(label: label, button: button, switcher: switcher)
+        }
     }
 
     //切换主题更新UI
