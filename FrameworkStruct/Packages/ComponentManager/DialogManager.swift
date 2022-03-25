@@ -161,6 +161,27 @@ class DialogManager: OriginManager
 }
 
 
+//内部类型
+extension DialogManager: InternalType
+{
+    //可以被DialogManager管理的类型
+    typealias DMDialogType = UIView & DialogManagerProtocol
+    
+    //状态key
+    enum DMStatusKey: SMKeyType
+    {
+        case isShowing  //是否在显示dialog：true/false
+    }
+    
+    //优先级
+    enum DMADialogPriority {
+        case defalut    //一般的dialog，都用这个，也是默认值
+        case high   //需要优先显示的dialog，会提前显示
+    }
+
+}
+
+
 //接口方法
 extension DialogManager: ExternalInterface
 {
@@ -230,25 +251,4 @@ extension DialogManager: ExternalInterface
         self.wantShow(vi: v)
     }
     
-}
-
-
-//内部类型
-extension DialogManager: InternalType
-{
-    //可以被DialogManager管理的类型
-    typealias DMDialogType = UIView & DialogManagerProtocol
-    
-    //状态key
-    enum DMStatusKey: SMKeyType
-    {
-        case isShowing  //是否在显示dialog：true/false
-    }
-    
-    //优先级
-    enum DMADialogPriority {
-        case defalut    //一般的dialog，都用这个，也是默认值
-        case high   //需要优先显示的dialog，会提前显示
-    }
-
 }
