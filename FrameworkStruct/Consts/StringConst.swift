@@ -25,6 +25,21 @@ extension String
     //"iCloud"
     static let icloud = "iCloud"
     
+    //一～十
+    static let s0 = "〇"
+    static let s1 = "一"
+    static let s2 = "二"
+    static let s3 = "三"
+    static let s4 = "四"
+    static let s5 = "五"
+    static let s6 = "六"
+    static let s7 = "七"
+    static let s8 = "八"
+    static let s9 = "九"
+    static let s10 = "十"
+    
+    
+    
     
     
     

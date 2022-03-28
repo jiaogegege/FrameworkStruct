@@ -90,6 +90,8 @@ class ApplicationManager: OriginManager
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackgroundNotification(notification:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidReceiveMemoryWarningNotification(notification:)), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminateNotification(notification:)), name: UIApplication.willTerminateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didTakeScreenShotNotification(notification:)), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(capturingDidChangeNotification(notification:)), name: UIScreen.capturedDidChangeNotification, object: nil)
     }
     
 }
@@ -144,6 +146,18 @@ extension ApplicationManager: DelegateProtocol
         stMgr.setStatus(AMAppState.terminate, forKey: AMStatusKey.appState)
     }
     
+    //截屏通知
+    @objc func didTakeScreenShotNotification(notification: Notification)
+    {
+        
+    }
+    
+    //录屏变化通知
+    @objc func capturingDidChangeNotification(notification: Notification)
+    {
+        
+    }
+    
     /**************************************** UIApplication通知 Section End ***************************************/
     
 }
@@ -155,6 +169,7 @@ extension ApplicationManager: InternalType
     ///应用程序管理器状态key
     enum AMStatusKey: SMKeyType {
         case appState                       //app状态
+        case brightness                     //上一次保存的屏幕亮度，用于在某个界面高亮后退出该界面再调回正常亮度
     }
     
     ///应用程序状态
@@ -236,6 +251,36 @@ extension ApplicationManager: ExternalInterface
     ///是否在充电
     var isCharging: Bool {
         return UIDevice.current.batteryState == .charging
+    }
+    
+    ///当前屏幕亮度，0-1
+    var currentBrightness: CGFloat {
+        return UIScreen.main.brightness
+    }
+    
+    ///提供给某个界面单独设置屏幕亮度,0-1
+    func setBrightness(_ brightness: CGFloat)
+    {
+        //先保存一下当前亮度
+        stMgr.setStatus(UIScreen.main.brightness, forKey: AMStatusKey.brightness)
+        //设置屏幕亮度
+        UIScreen.main.brightness = brightness
+    }
+    
+    ///恢复之前的屏幕亮度
+    func resetBrightness()
+    {
+        if let brightness = stMgr.status(forKey: AMStatusKey.brightness) as? CGFloat
+        {
+            UIScreen.main.brightness = brightness
+            //清除状态历史
+            stMgr.clear(forKey: AMStatusKey.brightness)
+        }
+    }
+    
+    ///是否在录屏，包括：屏幕录制/AirPlay/镜像
+    var isCaputring: Bool {
+        return UIScreen.main.isCaptured
     }
     
     
