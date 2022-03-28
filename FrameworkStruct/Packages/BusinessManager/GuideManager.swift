@@ -50,7 +50,7 @@ extension GuideManager: ExternalInterface
                        didShow: VoidClosure? = nil,
                        didNext: VoidClosure? = nil,
                        didSkip: VoidClosure? = nil,
-                       didFinish: VoidClosure? = nil)
+                       didFinish: VoidClosure? = nil) -> FSGuideView
     {
         let v = FSGuideView()
         let h1 = FSGuideView.HollowViewType(hollowView: label, expandRule: .customPercentage(0.1, 0.1), rounded: .circle)
@@ -88,6 +88,7 @@ extension GuideManager: ExternalInterface
             }
         }
         v.updateView()
+        return v
     }
     
 }

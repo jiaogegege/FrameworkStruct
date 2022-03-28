@@ -207,7 +207,7 @@ class FSGuideView: UIView
     }
     
     deinit {
-        FSLog(self.className + "dealloc")
+        FSLog(self.className + " dealloc")
     }
     
 }
