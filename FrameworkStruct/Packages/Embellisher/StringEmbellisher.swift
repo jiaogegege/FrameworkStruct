@@ -255,8 +255,8 @@ extension StringEmbellisher: ExternalInterface
         return attrStr
     }
     
-    ///根据数字返回大写数字，如果转换失败，返回nil
-    func getChineseNumFromArabNum(_ num: NSNumber) -> String?
+    ///将阿拉伯数字转换为中文数字，如果转换失败，返回nil
+    func arabNumToChineseNum(_ num: NSNumber) -> String?
     {
         let formatter = NumberFormatter()
         formatter.numberStyle = .spellOut
