@@ -722,6 +722,7 @@
 		EA0E67AC27B49F8B00A11C20 /* NSData+DataToHexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+DataToHexString.m"; sourceTree = "<group>"; };
 		EA0E67B027B5062500A11C20 /* NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdapter.swift; sourceTree = "<group>"; };
 		EA0E67B227B5064400A11C20 /* NetworkConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConst.swift; sourceTree = "<group>"; };
+		EA10583627F4038F00BFD971 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA10701827D73FE5006CD7C2 /* 软件结构.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "软件结构.png"; sourceTree = "<group>"; };
 		EA10701927D73FE5006CD7C2 /* 历史记录功能.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "历史记录功能.png"; sourceTree = "<group>"; };
 		EA10701A27D73FE5006CD7C2 /* 数据结构.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "数据结构.png"; sourceTree = "<group>"; };
@@ -1882,6 +1883,7 @@
 		EA10701627D73F6B006CD7C2 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
+				EA10583627F4038F00BFD971 /* README.md */,
 				EA10701727D73FE5006CD7C2 /* 软件层次结构图 */,
 			);
 			path = Docs;
@@ -3894,10 +3896,10 @@
 			isa = PBXGroup;
 			children = (
 				EA3A343827CCA97D00C29568 /* README.md */,
+				EA10701627D73F6B006CD7C2 /* Docs */,
 				EADB007927623B59001B7223 /* FrameworkStruct */,
 				EADB007827623B59001B7223 /* Products */,
 				EA922580276B3EAA00192E2E /* Frameworks */,
-				EA10701627D73F6B006CD7C2 /* Docs */,
 			);
 			sourceTree = "<group>";
 		};
