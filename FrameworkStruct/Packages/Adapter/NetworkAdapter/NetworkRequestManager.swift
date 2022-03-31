@@ -165,6 +165,7 @@ class NetworkRequestManager: OriginManager
 
 }
 
+
 //接口方法
 extension NetworkRequestManager: ExternalInterface
 {
