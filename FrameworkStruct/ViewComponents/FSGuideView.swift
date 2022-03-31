@@ -346,7 +346,7 @@ extension FSGuideView: InternalType
     enum HollowFrameExpand {
         case none       //不扩展
         case fixed(CGFloat)         //固定扩展范围，上下左右扩展同一个值
-        case symmetry(CGSize)     //对称扩展，size中的width和height分别指定左右和上下的扩展范围，左右和上下将会扩展相同的大小
+        case symmetry(CGFloat, CGFloat)     //对称扩展，分别指定左右和上下的扩展范围，左右和上下将会扩展相同的大小
         case custom(CGFloat, CGFloat, CGFloat, CGFloat)     //自定义扩展范围，可以分别指定左右上下
         case symmetryPercentage(Float)    //对称百分比扩展，左右和上下分别扩展width和height的一个百分比值
         case customPercentage(Float, Float)     //自定义百分比扩展，分别指定左右和上下扩展自width和height的百分比值
@@ -361,8 +361,8 @@ extension FSGuideView: InternalType
                 newFrame = frame
             case .fixed(let exp):
                 newFrame = CGRect(x: frame.origin.x - exp, y: frame.origin.y - exp, width: frame.size.width + exp * 2.0, height: frame.size.height + exp * 2.0)
-            case .symmetry(let size):
-                newFrame = CGRect(x: frame.origin.x - size.width, y: frame.origin.y - size.height, width: frame.size.width + size.width * 2.0, height: frame.size.height + size.height * 2.0)
+            case .symmetry(let lr, let tb):
+                newFrame = CGRect(x: frame.origin.x - lr, y: frame.origin.y - tb, width: frame.size.width + lr * 2.0, height: frame.size.height + tb * 2.0)
             case .custom(let left, let right, let top, let bottom):
                 newFrame = CGRect(x: frame.origin.x - left, y: frame.origin.y - top, width: frame.size.width + left + right, height: frame.size.height + top + bottom)
             case .symmetryPercentage(let ratio):
