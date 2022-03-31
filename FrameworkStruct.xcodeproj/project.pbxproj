@@ -15,7 +15,6 @@
 		EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C88F27C339C90034C95B /* sound_蛐蛐叫.caf */; };
 		EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89027C339C90034C95B /* sound_搞怪.caf */; };
 		EA00C89527C339CA0034C95B /* sound_烟花长爆.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89127C339CA0034C95B /* sound_烟花长爆.caf */; };
-		EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA00C89927C379810034C95B /* CoreLocation.framework */; };
 		EA00C8A527C39A6E0034C95B /* miku_1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA00C8A427C39A6E0034C95B /* miku_1.jpeg */; };
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
@@ -1831,7 +1830,6 @@
 				EAFC601727E1AAB00019CDEF /* CryptoKit.framework in Frameworks */,
 				EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */,
 				EA20865C27C5276700B63C8E /* EventKitUI.framework in Frameworks */,
-				EA00C89A27C379810034C95B /* CoreLocation.framework in Frameworks */,
 				EA20866527C527C600B63C8E /* UserNotificationsUI.framework in Frameworks */,
 				EA20866927C534F700B63C8E /* CoreServices.framework in Frameworks */,
 				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
@@ -4291,7 +4289,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					EADB007627623B59001B7223 = {
 						CreatedOnToolsVersion = 12.4;
