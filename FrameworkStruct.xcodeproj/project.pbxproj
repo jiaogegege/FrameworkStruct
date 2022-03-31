@@ -3896,10 +3896,10 @@
 			isa = PBXGroup;
 			children = (
 				EA3A343827CCA97D00C29568 /* README.md */,
-				EA10701627D73F6B006CD7C2 /* Docs */,
 				EADB007927623B59001B7223 /* FrameworkStruct */,
 				EADB007827623B59001B7223 /* Products */,
 				EA922580276B3EAA00192E2E /* Frameworks */,
+				EA10701627D73F6B006CD7C2 /* Docs */,
 			);
 			sourceTree = "<group>";
 		};
@@ -4062,11 +4062,11 @@
 				EA9A4A832780309D00170BB3 /* FSTextField.m */,
 				EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */,
 				EA9A4A862780309E00170BB3 /* FSTextField+ChangeBlock.m */,
-				EA283F572795465A001A2710 /* SimpleTableView.swift */,
 				EA9A4A8B278030A700170BB3 /* CountDownButton.h */,
 				EA9A4A8A278030A700170BB3 /* CountDownButton.m */,
 				EA9A4A91278032D800170BB3 /* UIButton+ButtonBlock.h */,
 				EA9A4A90278032D800170BB3 /* UIButton+ButtonBlock.m */,
+				EA283F572795465A001A2710 /* SimpleTableView.swift */,
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 			);

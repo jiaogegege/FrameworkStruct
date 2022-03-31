@@ -197,7 +197,7 @@ extension FSDialog: InternalType
     //显示类型，主要控制显示和消失的动画效果
     //子类可以自定义动画效果，自定义动画效果优先级高于该属性
     enum FSDShowType {
-        case gradient     //该类型一般用于显示在屏幕中间，做一个渐变的动画效果
+        case gradient     //该类型一般用于显示在屏幕中间，做一个渐显的动画效果
         case bounce     //该类型一般用于显示在屏幕底部，做一个向上弹的动画效果
     }
     
