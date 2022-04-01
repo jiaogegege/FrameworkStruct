@@ -23,6 +23,14 @@ protocol BasicProtocol
 }
 
 
+//MARK: 基础类型定义
+///正则表达式
+typealias RegexExpression = String
+
+///Javascript片段
+typealias JavascriptExpression = String
+
+
 //MARK: 基础常量定义
 
 ///控制器的状态管理器最大步数，可在程序运行过程中改变，那么会影响改变之后创建的控制器的状态管理器步数

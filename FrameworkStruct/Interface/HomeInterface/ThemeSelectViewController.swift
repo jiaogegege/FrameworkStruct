@@ -21,8 +21,8 @@ class ThemeSelectViewController: BasicViewController
     @IBOutlet weak var progress: UIProgressView!
     
     //内部属性
-    let themeMgr = ThemeManager.shared  //主题管理器
-    var themeArray: [ThemeProtocol]? = nil    //主题列表
+    fileprivate let themeMgr = ThemeManager.shared  //主题管理器
+    fileprivate var themeArray: [ThemeProtocol]? = nil    //主题列表
     
     
     override class func getViewController() -> Self {
@@ -107,5 +107,3 @@ extension ThemeSelectViewController: UITableViewDelegate, UITableViewDataSource
     }
     
 }
-
-

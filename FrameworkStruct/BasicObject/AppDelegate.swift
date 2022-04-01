@@ -69,6 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         NotificationAdapter.shared.registerForRemoteNotificationFail(error)
     }
     
+    //通过URL Schemes打开App
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        UrlSchemeAdapter.shared.dispatchUrl(url, options: options)
+        
+        return true
+    }
+    
     //如果需要自定义设置屏幕旋转，那么释放这段代码
 //    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
 //        if ApplicationManager.shared.isForceSetlandscape

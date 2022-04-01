@@ -29,13 +29,6 @@ func FSLog(_ message: String)
     #endif
 }
 
-///跳转到app store评分
-func g_gotoAppStoreComment()
-{
-    let urlStr = "itms-apps://itunes.apple.com/app/id\(gAppId)?action=write-review"
-    UIApplication.shared.open(URL.init(string: urlStr)!, options: [:], completionHandler: nil)
-}
-
 ///返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
 func g_getCopy(origin: Any?) -> Any?
 {
@@ -87,30 +80,7 @@ func g_getObjClassName(_ obj: AnyObject) -> String
 ///获取window对象
 func g_getWindow() -> UIWindow
 {
-    if let window = AppDelegate.shared().window
-    {
-        return window
-    }
-    if #available(iOS 13.0, *)
-    {
-        if let window = SceneDelegate.shared()?.currentWindow
-        {
-            return window
-        }
-    }
-    else
-    {
-        if let kw = UIApplication.shared.keyWindow
-        {
-            return kw
-        }
-    }
-    if let w = UIApplication.shared.windows.first
-    {
-        return w
-    }
-    
-    return UIWindow()   //永远不应该执行这一步
+    return ApplicationManager.shared.window
 }
 
 ///判断字符串是否是有效字符串，无效字符串：nil、null、<null>、<nil>、""、"(null)"、NSNull
@@ -160,26 +130,9 @@ func g_uuidString() -> String
 }
     
 ///获取设备id，在app安装周期内保持不变
-func g_getDeviceId() -> String
+func g_deviceId() -> String
 {
-    if let deviceId = UserDefaultsAccessor.shared.readString(key: UDAKeyType.deviceId)
-    {
-        return deviceId
-    }
-    else
-    {
-        let deviceId: String
-        if let devId = kDeviceIdentifier
-        {
-            deviceId = devId.replacingOccurrences(of: "-", with: "_")
-        }
-        else    //如果系统未获取到，那么生成一个随机字符串，一般都会获取到
-        {
-            deviceId = g_uuidString()
-        }
-        UserDefaultsAccessor.shared.write(key: UDAKeyType.deviceId, value: deviceId)
-        return deviceId
-    }
+    return ApplicationManager.shared.getDeviceId()
 }
 
 ///des加密一个字符串

@@ -38,7 +38,30 @@ class ApplicationManager: OriginManager
     
     //窗口对象
     var window: UIWindow {
-        g_getWindow()
+        if let window = appDelegate.window
+        {
+            return window
+        }
+        if #available(iOS 13.0, *)
+        {
+            if let window = sceneDelegate?.currentWindow
+            {
+                return window
+            }
+        }
+        else
+        {
+            if let kw = app.keyWindow
+            {
+                return kw
+            }
+        }
+        if let w = app.windows.first
+        {
+            return w
+        }
+        
+        return UIWindow()   //永远不应该执行这一步
     }
     
     ///强制设置屏幕是否横屏，默认竖屏
@@ -146,6 +169,7 @@ extension ApplicationManager: DelegateProtocol
         stMgr.setStatus(AMAppState.terminate, forKey: AMStatusKey.appState)
     }
     
+    /**************************************** UIApplication通知 Section End ***************************************/
     //截屏通知
     @objc func didTakeScreenShotNotification(notification: Notification)
     {
@@ -157,8 +181,6 @@ extension ApplicationManager: DelegateProtocol
     {
         
     }
-    
-    /**************************************** UIApplication通知 Section End ***************************************/
     
 }
 
@@ -209,6 +231,29 @@ extension ApplicationManager: ExternalInterface
         return ud.readInt(key: .runTimes)
     }
     
+    ///获取设备id，在app安装周期内保持不变
+    func getDeviceId() -> String
+    {
+        if let deviceId = UserDefaultsAccessor.shared.readString(key: UDAKeyType.deviceId)
+        {
+            return deviceId
+        }
+        else
+        {
+            let deviceId: String
+            if let devId = kDeviceIdentifier
+            {
+                deviceId = devId.replacingOccurrences(of: "-", with: "_")
+            }
+            else    //如果系统未获取到，那么生成一个随机字符串，一般都会获取到
+            {
+                deviceId = g_uuidString()
+            }
+            UserDefaultsAccessor.shared.write(key: UDAKeyType.deviceId, value: deviceId)
+            return deviceId
+        }
+    }
+    
     ///屏幕旋转方向
     var orientation: UIInterfaceOrientation {
         if #available(iOS 13, *)
@@ -233,7 +278,7 @@ extension ApplicationManager: ExternalInterface
         return self.orientation == .portrait || self.orientation == .portraitUpsideDown
     }
     
-    ///判断是否横屏
+    ///是否横屏
     var isLandscape: Bool {
         return self.orientation == .landscapeLeft || self.orientation == .landscapeRight
     }
@@ -281,6 +326,13 @@ extension ApplicationManager: ExternalInterface
     ///是否在录屏，包括：屏幕录制/AirPlay/镜像
     var isCaputring: Bool {
         return UIScreen.main.isCaptured
+    }
+    
+    ///跳转到app store评分
+    func gotoAppStoreComment()
+    {
+        let urlStr = "itms-apps://itunes.apple.com/app/id\(gAppId)?action=write-review"
+        UIApplication.shared.open(URL.init(string: urlStr)!, options: [:], completionHandler: nil)
     }
     
     

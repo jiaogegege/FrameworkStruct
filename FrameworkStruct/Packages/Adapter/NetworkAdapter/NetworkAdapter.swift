@@ -48,7 +48,7 @@ extension NetworkAdapter: ProtectAvailable
     ///获取默认参数，根据项目实际需要修改
     func defaultParams() -> Dictionary<String, String>
     {
-        return [nt_request_macAddress: g_getDeviceId(),
+        return [nt_request_macAddress: g_deviceId(),
                 nt_request_deviceType: "ios",
                 nt_request_clientTime: String(format: "%lld", currentTimeInterval() * 1000)]
     }

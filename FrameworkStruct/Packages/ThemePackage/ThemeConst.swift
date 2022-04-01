@@ -21,6 +21,9 @@ let sDarkThemeFileName = "DarkTheme.plist"
 
 ///暗黑主题id
 let sDarkThemeId = "0"
+let sPinkThemeId = "1"
+let sRedThemeId = "2"
+let sBlueThemeId = "3"
 
 ///所有主题数组
 let allThemeNameArray: [String] = [sPinkThemeFileName, sRedThemeFileName, sBlueThemeFileName, sDarkThemeFileName]

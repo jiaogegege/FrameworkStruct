@@ -681,6 +681,8 @@
 		EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015827624B4C001B7223 /* BlueTheme.plist */; };
 		EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015927624B4C001B7223 /* RedTheme.plist */; };
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
+		EADE521B27F6A105005417BE /* UrlSchemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */; };
+		EADE521E27F6C932005417BE /* UrlSchemeConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521D27F6C932005417BE /* UrlSchemeConst.swift */; };
 		EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0079327B63DEA008C71B4 /* HomeDataModel.m */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
@@ -1806,6 +1808,8 @@
 		EADB015827624B4C001B7223 /* BlueTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BlueTheme.plist; sourceTree = "<group>"; };
 		EADB015927624B4C001B7223 /* RedTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedTheme.plist; sourceTree = "<group>"; };
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
+		EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchemeAdapter.swift; sourceTree = "<group>"; };
+		EADE521D27F6C932005417BE /* UrlSchemeConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchemeConst.swift; sourceTree = "<group>"; };
 		EAE0079227B63DEA008C71B4 /* HomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataModel.h; sourceTree = "<group>"; };
 		EAE0079327B63DEA008C71B4 /* HomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDataModel.m; sourceTree = "<group>"; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
@@ -3550,6 +3554,7 @@
 				EADB0121276242E2001B7223 /* NetworkAdapter */,
 				EA66061227C86C35000B20A6 /* WebAdapter */,
 				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
+				EADE521C27F6C919005417BE /* UrlSchemeAdapter */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 			);
@@ -4246,6 +4251,15 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		EADE521C27F6C919005417BE /* UrlSchemeAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */,
+				EADE521D27F6C932005417BE /* UrlSchemeConst.swift */,
+			);
+			path = UrlSchemeAdapter;
+			sourceTree = "<group>";
+		};
 		EAF85AA2277B4E9600676268 /* Document */ = {
 			isa = PBXGroup;
 			children = (
@@ -4606,6 +4620,7 @@
 				EA00C87F27C272D60034C95B /* ApplicationManager.swift in Sources */,
 				EA99373827994F6100480147 /* TABBaseComponent+TABDropAnimation.m in Sources */,
 				EA9A75F027C739DF00A11FC8 /* SRRandom.m in Sources */,
+				EADE521E27F6C932005417BE /* UrlSchemeConst.swift in Sources */,
 				EA3E8AA027B77CEA006A2715 /* CompatibleAnimationView.swift in Sources */,
 				EACAD4ED277DA5E400FBE2DA /* DeviceTool.swift in Sources */,
 				EAC8A87027625D490088293F /* SDImageTransformer.m in Sources */,
@@ -4839,6 +4854,7 @@
 				EA3E8AE327B77CEA006A2715 /* AnimationContainer.swift in Sources */,
 				EA1AE476277819E600D028F9 /* ConstraintPriorityTarget.swift in Sources */,
 				EA3A051C27A2714E00A96DE2 /* EncryptManager.swift in Sources */,
+				EADE521B27F6A105005417BE /* UrlSchemeAdapter.swift in Sources */,
 				EAC8A75027625B450088293F /* AFURLRequestSerialization.m in Sources */,
 				EA99374227994F6100480147 /* TABAnimatedChainManagerImpl.m in Sources */,
 				EA11126A27B3BE2C006D0B83 /* StringEncoding+Alamofire.swift in Sources */,

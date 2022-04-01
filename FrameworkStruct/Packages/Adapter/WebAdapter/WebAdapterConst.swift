@@ -248,10 +248,5 @@ enum WebPushNativeVC: Int {
 
 
 //MARK: Javascript代码片段
-/**
- * Javascript片段
- */
-typealias JavascriptExpression = String
-
 ///获取h5页面标题
 let js_getTitle: JavascriptExpression = "document.title"

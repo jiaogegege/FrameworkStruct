@@ -39,7 +39,7 @@ extension UIViewController
     @objc class func getVC(from storyboard: String) -> Self
     {
         let board = UIStoryboard(name: storyboard, bundle: nil)
-        return board.instantiateViewController(withIdentifier: g_getClassName(Self.self)) as! Self
+        return board.instantiateViewController(withIdentifier: Self.className) as! Self
     }
     
     //初始化控制器数据，比如一些状态和变量
@@ -340,6 +340,7 @@ extension UITableView: InternalType
         case rowTag(Int)    //绑定row标记
         case indexPathTag(section: Int, row: Int)     //绑定indexPath标记(section, row)
         
+        ///计算属性
         ///返回绑定的section或row在tableview中的位置
         ///不需要的值，返回-1，取值的时候，只取需要的值
         var position: (section: Int, row: Int) {

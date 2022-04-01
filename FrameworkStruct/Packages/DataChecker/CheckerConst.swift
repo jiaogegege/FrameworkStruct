@@ -11,8 +11,6 @@
 import Foundation
 
 //MARK: 正则表达式
-typealias RegexExpression = String
-
 //判断用户名的正则表达式，2-10位汉字+字母
 let userNameRegex: RegexExpression = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
 
