@@ -683,6 +683,10 @@
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
 		EADE521B27F6A105005417BE /* UrlSchemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */; };
 		EADE521E27F6C932005417BE /* UrlSchemeConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521D27F6C932005417BE /* UrlSchemeConst.swift */; };
+		EADE522027F6F04A005417BE /* SocializeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521F27F6F04A005417BE /* SocializeAdapter.swift */; };
+		EADE522227F6F0B2005417BE /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADE522127F6F0B2005417BE /* Social.framework */; };
+		EADE522427F6F470005417BE /* ClipboardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522327F6F470005417BE /* ClipboardAdapter.swift */; };
+		EADE522827F6F554005417BE /* SocializeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522727F6F554005417BE /* SocializeActivity.swift */; };
 		EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0079327B63DEA008C71B4 /* HomeDataModel.m */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
@@ -1810,6 +1814,11 @@
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
 		EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchemeAdapter.swift; sourceTree = "<group>"; };
 		EADE521D27F6C932005417BE /* UrlSchemeConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchemeConst.swift; sourceTree = "<group>"; };
+		EADE521F27F6F04A005417BE /* SocializeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocializeAdapter.swift; sourceTree = "<group>"; };
+		EADE522127F6F0B2005417BE /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		EADE522327F6F470005417BE /* ClipboardAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardAdapter.swift; sourceTree = "<group>"; };
+		EADE522627F6F520005417BE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EADE522727F6F554005417BE /* SocializeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocializeActivity.swift; sourceTree = "<group>"; };
 		EAE0079227B63DEA008C71B4 /* HomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataModel.h; sourceTree = "<group>"; };
 		EAE0079327B63DEA008C71B4 /* HomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDataModel.m; sourceTree = "<group>"; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
@@ -1832,6 +1841,7 @@
 				EA9A759227C729E300A11FC8 /* CoreLocation.framework in Frameworks */,
 				EA20866427C527C600B63C8E /* UserNotifications.framework in Frameworks */,
 				EAFC601727E1AAB00019CDEF /* CryptoKit.framework in Frameworks */,
+				EADE522227F6F0B2005417BE /* Social.framework in Frameworks */,
 				EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */,
 				EA20865C27C5276700B63C8E /* EventKitUI.framework in Frameworks */,
 				EA20866527C527C600B63C8E /* UserNotificationsUI.framework in Frameworks */,
@@ -2877,6 +2887,7 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EADE522127F6F0B2005417BE /* Social.framework */,
 				EAFC601627E1AAB00019CDEF /* CryptoKit.framework */,
 				EA9A759327C729EC00A11FC8 /* CoreLocationUI.framework */,
 				EA20866827C534F700B63C8E /* CoreServices.framework */,
@@ -3553,10 +3564,12 @@
 				EAAA4E8E276F57BB00C45712 /* README.md */,
 				EADB0121276242E2001B7223 /* NetworkAdapter */,
 				EA66061227C86C35000B20A6 /* WebAdapter */,
-				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
 				EADE521C27F6C919005417BE /* UrlSchemeAdapter */,
+				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
+				EADE522527F6F50D005417BE /* SocializeAdapter */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
+				EADE522327F6F470005417BE /* ClipboardAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -4260,6 +4273,16 @@
 			path = UrlSchemeAdapter;
 			sourceTree = "<group>";
 		};
+		EADE522527F6F50D005417BE /* SocializeAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				EADE522627F6F520005417BE /* README.md */,
+				EADE521F27F6F04A005417BE /* SocializeAdapter.swift */,
+				EADE522727F6F554005417BE /* SocializeActivity.swift */,
+			);
+			path = SocializeAdapter;
+			sourceTree = "<group>";
+		};
 		EAF85AA2277B4E9600676268 /* Document */ = {
 			isa = PBXGroup;
 			children = (
@@ -4302,7 +4325,7 @@
 		EADB006F27623B59001B7223 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					EADB007627623B59001B7223 = {
@@ -4385,6 +4408,7 @@
 				EA99373F27994F6100480147 /* TABBaseComponent.m in Sources */,
 				EA3E8AA627B77CEA006A2715 /* AnimationViewBase.swift in Sources */,
 				EAC8A87927625D490088293F /* SDWebImageOptionsProcessor.m in Sources */,
+				EADE522827F6F554005417BE /* SocializeActivity.swift in Sources */,
 				EA92255E276AE48700192E2E /* FSVector.swift in Sources */,
 				EA3E8B0F27B77CEA006A2715 /* Trim.swift in Sources */,
 				EA1AE481277819E600D028F9 /* ConstraintView.swift in Sources */,
@@ -4428,6 +4452,7 @@
 				EA9A4A872780309E00170BB3 /* FSTextField.m in Sources */,
 				EA3E8AA427B77CEA006A2715 /* UIColorExtension.swift in Sources */,
 				EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */,
+				EADE522427F6F470005417BE /* ClipboardAdapter.swift in Sources */,
 				EA3E8B2B27B77CEA006A2715 /* Glyph.swift in Sources */,
 				EA9A78BE27C756C900A11FC8 /* MPITextInput.m in Sources */,
 				EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */,
@@ -4858,6 +4883,7 @@
 				EAC8A75027625B450088293F /* AFURLRequestSerialization.m in Sources */,
 				EA99374227994F6100480147 /* TABAnimatedChainManagerImpl.m in Sources */,
 				EA11126A27B3BE2C006D0B83 /* StringEncoding+Alamofire.swift in Sources */,
+				EADE522027F6F04A005417BE /* SocializeAdapter.swift in Sources */,
 				EAC8A77027625BA70088293F /* NSObject+MJProperty.m in Sources */,
 				EA1EAFA427EC411B002B4997 /* FSGuideView.swift in Sources */,
 				EA11126E27B3BE2C006D0B83 /* ParameterEncoding.swift in Sources */,
@@ -5212,6 +5238,7 @@
 		EADB008C27623B5A001B7223 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5256,6 +5283,7 @@
 		EADB008D27623B5A001B7223 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
