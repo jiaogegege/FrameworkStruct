@@ -45,6 +45,51 @@ class ThreadManager: OriginManager
 }
 
 
+//内部类型
+extension ThreadManager: InternalType
+{
+    ///线程标签
+    enum ThreadLabel: Equatable
+    {
+        case main
+        case global
+        case custom(String)
+        
+        //获取label文本
+        func getLabel() -> String
+        {
+            switch self {
+            case .main:
+                return "main"
+            case .global:
+                return "global"
+            case .custom(let label):
+                return label
+            }
+        }
+        
+        //比较
+        static func == (lhs: Self, rhs: Self) -> Bool
+        {
+            switch (lhs, rhs) {
+            case (.main, .main):
+                return true
+            case (.global, .global):
+                return true
+            case (.custom(let ll), .custom(let rl)):
+                return ll == rl
+            default:
+                return false
+            }
+        }
+    }
+    
+    ///异步操作闭包类型
+    typealias DispatchGroupClosure = ((_ finish: @escaping VoidClosure) -> Void)
+    
+}
+
+
 //接口方法
 extension ThreadManager: ExternalInterface
 {
@@ -243,50 +288,5 @@ extension ThreadManager: ExternalInterface
             }
         }
     }
-    
-}
-
-
-//内部类型
-extension ThreadManager: InternalType
-{
-    ///线程标签
-    enum ThreadLabel: Equatable
-    {
-        case main
-        case global
-        case custom(String)
-        
-        //获取label文本
-        func getLabel() -> String
-        {
-            switch self {
-            case .main:
-                return "main"
-            case .global:
-                return "global"
-            case .custom(let label):
-                return label
-            }
-        }
-        
-        //比较
-        static func == (lhs: Self, rhs: Self) -> Bool
-        {
-            switch (lhs, rhs) {
-            case (.main, .main):
-                return true
-            case (.global, .global):
-                return true
-            case (.custom(let ll), .custom(let rl)):
-                return ll == rl
-            default:
-                return false
-            }
-        }
-    }
-    
-    ///异步操作闭包类型
-    typealias DispatchGroupClosure = ((_ finish: @escaping VoidClosure) -> Void)
     
 }

@@ -36,6 +36,7 @@ class GraphicsManager: OriginManager
 
 }
 
+
 //接口方法
 extension GraphicsManager: ExternalInterface
 {

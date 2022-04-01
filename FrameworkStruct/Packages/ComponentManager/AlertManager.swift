@@ -254,6 +254,27 @@ class AlertManager: OriginManager
 }
 
 
+//内部类型
+extension AlertManager: InternalType
+{
+    //可以被AlertManager管理的类型
+    typealias AMAlertType = UIViewController & AlertManagerProtocol
+    
+    //状态key
+    enum AMStatusKey: SMKeyType
+    {
+        case isShowing  //是否在显示alert：true/false
+    }
+    
+    //优先级
+    enum AMAlertPriority {
+        case defalut    //一般的alert，都用这个，也是默认值
+        case high   //需要优先显示的alert，会提前显示
+    }
+
+}
+
+
 //接口方法
 extension AlertManager: ExternalInterface
 {
@@ -421,25 +442,4 @@ extension AlertManager: ExternalInterface
         }
     }
     
-}
-
-
-//内部类型
-extension AlertManager: InternalType
-{
-    //可以被AlertManager管理的类型
-    typealias AMAlertType = UIViewController & AlertManagerProtocol
-    
-    //状态key
-    enum AMStatusKey: SMKeyType
-    {
-        case isShowing  //是否在显示alert：true/false
-    }
-    
-    //优先级
-    enum AMAlertPriority {
-        case defalut    //一般的alert，都用这个，也是默认值
-        case high   //需要优先显示的alert，会提前显示
-    }
-
 }

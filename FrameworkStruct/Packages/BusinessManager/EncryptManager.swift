@@ -42,6 +42,7 @@ class EncryptManager: OriginManager
 
 }
 
+
 //接口方法
 extension EncryptManager: ExternalInterface
 {
@@ -125,6 +126,5 @@ extension EncryptManager: ExternalInterface
         }
         return nil
     }
-    
     
 }

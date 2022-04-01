@@ -37,6 +37,31 @@ class AnimationManager: OriginManager
 
 }
 
+
+//代理方法
+extension AnimationManager: DelegateProtocol, POPAnimationDelegate
+{
+    /**************************************** pop动画代理 Section Begin ***************************************/
+    func pop_animationDidStart(_ anim: POPAnimation!) {
+        
+    }
+    
+    func pop_animationDidReach(toValue anim: POPAnimation!) {
+        
+    }
+    
+    func pop_animationDidStop(_ anim: POPAnimation!, finished: Bool) {
+        
+    }
+    
+    func pop_animationDidApply(_ anim: POPAnimation!) {
+        
+    }
+    /**************************************** pop动画代理 Section End ***************************************/
+    
+}
+
+
 //接口方法
 extension AnimationManager: ExternalInterface
 {
@@ -219,28 +244,5 @@ extension AnimationManager: ExternalInterface
     
     
     /**************************************** 特定动画方法 Section End ***************************************/
-    
-}
-
-//代理方法
-extension AnimationManager: DelegateProtocol, POPAnimationDelegate
-{
-    /**************************************** pop动画代理 Section Begin ***************************************/
-    func pop_animationDidStart(_ anim: POPAnimation!) {
-        
-    }
-    
-    func pop_animationDidReach(toValue anim: POPAnimation!) {
-        
-    }
-    
-    func pop_animationDidStop(_ anim: POPAnimation!, finished: Bool) {
-        
-    }
-    
-    func pop_animationDidApply(_ anim: POPAnimation!) {
-        
-    }
-    /**************************************** pop动画代理 Section End ***************************************/
     
 }

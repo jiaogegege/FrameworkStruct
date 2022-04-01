@@ -2911,6 +2911,7 @@
 			children = (
 				EAAA4E81276F3E4900C45712 /* README.md */,
 				EA7F2A2327DAFAAF000E27DF /* UserManager */,
+				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
 				EA00C86E27C213550034C95B /* NotificationManager.swift */,
 				EA5780A827D0A6C900C819E6 /* SettingsManager.swift */,
 				EABB3C9627ED7122005B98E3 /* GuideManager.swift */,
@@ -3553,7 +3554,6 @@
 				EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */,
 				EA3E89B227B77B35006A2715 /* AnimationManager.swift */,
 				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
-				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
 			);
 			path = ComponentManager;
 			sourceTree = "<group>";

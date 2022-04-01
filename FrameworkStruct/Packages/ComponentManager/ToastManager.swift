@@ -207,6 +207,7 @@ class ToastManager: OriginManager
     
 }
 
+
 /**
  * HUD通知和代理方法
  * SV有通知和`completion`
@@ -274,6 +275,52 @@ extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
     }
     
 }
+
+
+/**
+ * 内部类型
+ */
+extension ToastManager: InternalType
+{
+    //状态key
+    enum TMStatusKey: SMKeyType {
+        case isShowing  //是否在显示HUD:true/false
+    }
+    
+    //使用HUD的类型
+    enum TMHudType
+    {
+        case mbHud  //MBProgressHUD，默认
+        case svHud  //SVProgressHUD
+    }
+    
+    //显示模式，并行或者串行
+    //如果不明确指定显示模式，那么使用串行，如果设置并行，只在那一次设置的时候有效
+    enum TMShowMode
+    {
+        case serial //串行，同时只能显示一个hud，默认模式，并且推荐使用该方式
+        case concurrent //并行，同时可显示多个hud，不推荐，多个hud同时显示会造成干扰和不可预见的情况
+    }
+    
+    //显示风格，白底黑字或者黑底白字
+    enum TMShowStyle
+    {
+        case dark   //黑底白字
+        case light  //白底黑字
+    }
+    
+    //转圈的风格
+    enum TMAnimationType
+    {
+        case activityIndicator  //系统自带菊花
+        case indefiniteRing     //无限转圈圆环，仅SV有
+    }
+    
+    //完成回调的类型
+    typealias CompletionCallback = VoidClosure
+    
+}
+
 
 /**
  * 外部接口方法
@@ -391,49 +438,5 @@ extension ToastManager: ExternalInterface
             SVProgressHUD.dismiss()
         }
     }
-    
-}
-
-/**
- * 内部类型
- */
-extension ToastManager: InternalType
-{
-    //状态key
-    enum TMStatusKey: SMKeyType {
-        case isShowing  //是否在显示HUD:true/false
-    }
-    
-    //使用HUD的类型
-    enum TMHudType
-    {
-        case mbHud  //MBProgressHUD，默认
-        case svHud  //SVProgressHUD
-    }
-    
-    //显示模式，并行或者串行
-    //如果不明确指定显示模式，那么使用串行，如果设置并行，只在那一次设置的时候有效
-    enum TMShowMode
-    {
-        case serial //串行，同时只能显示一个hud，默认模式，并且推荐使用该方式
-        case concurrent //并行，同时可显示多个hud，不推荐，多个hud同时显示会造成干扰和不可预见的情况
-    }
-    
-    //显示风格，白底黑字或者黑底白字
-    enum TMShowStyle
-    {
-        case dark   //黑底白字
-        case light  //白底黑字
-    }
-    
-    //转圈的风格
-    enum TMAnimationType
-    {
-        case activityIndicator  //系统自带菊花
-        case indefiniteRing     //无限转圈圆环，仅SV有
-    }
-    
-    //完成回调的类型
-    typealias CompletionCallback = VoidClosure
     
 }
