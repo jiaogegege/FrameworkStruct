@@ -29,6 +29,7 @@ drawTable = "绘制表格";
 layerShadow = "图层阴影";
 animationDemo = "动画演示";
 webInteraction = "H5交互";
+drawTest = "绘图测试";
 
 /**
  * 界面提示和按钮文案

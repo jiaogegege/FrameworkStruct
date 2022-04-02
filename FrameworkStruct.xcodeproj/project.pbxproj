@@ -121,6 +121,8 @@
 		EA3337DE2797E6AA00612DC3 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3337D92797E6AA00612DC3 /* sqlite3.c */; };
 		EA3337DF2797E6AA00612DC3 /* README in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DA2797E6AA00612DC3 /* README */; };
 		EA3337E02797E6AA00612DC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EA3337DB2797E6AA00612DC3 /* README.md */; };
+		EA33BF5027F82DF200DBE44D /* DrawTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA33BF4F27F82DF200DBE44D /* DrawTestViewController.swift */; };
+		EA33BF5227F82FB600DBE44D /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA33BF5127F82FB600DBE44D /* DrawingCanvasView.swift */; };
 		EA3A051C27A2714E00A96DE2 /* EncryptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */; };
 		EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */; };
 		EA3E89B127B77945006A2715 /* RegisterLoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3E89B027B77945006A2715 /* RegisterLoginWorker.swift */; };
@@ -832,6 +834,8 @@
 		EA3337DA2797E6AA00612DC3 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		EA3337DB2797E6AA00612DC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3337DC2797E6AA00612DC3 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		EA33BF4F27F82DF200DBE44D /* DrawTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawTestViewController.swift; sourceTree = "<group>"; };
+		EA33BF5127F82FB600DBE44D /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
 		EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptManager.swift; sourceTree = "<group>"; };
 		EA3A051D27A284C100A96DE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA3A051E27A2879E00A96DE2 /* 1_0_1.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_1.sql; sourceTree = "<group>"; };
@@ -4138,6 +4142,7 @@
 				EADB00F5276241D4001B7223 /* GCWaterfallFlowLayout.m */,
 				EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */,
 				EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */,
+				EA33BF5127F82FB600DBE44D /* DrawingCanvasView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4168,6 +4173,7 @@
 				EA99369327992F4900480147 /* ShadowTestViewController.swift */,
 				EA3E8B4427B77DC9006A2715 /* AnimationDemoViewController.swift */,
 				EA66061027C86C11000B20A6 /* TestWebViewController.swift */,
+				EA33BF4F27F82DF200DBE44D /* DrawTestViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -4625,10 +4631,12 @@
 				EA3E8AEE27B77CEA006A2715 /* GradientStrokeRenderer.swift in Sources */,
 				EA99372127994F6100480147 /* UIScrollView+TABExtension.m in Sources */,
 				EAC8A76C27625BA70088293F /* NSObject+MJKeyValue.m in Sources */,
+				EA33BF5027F82DF200DBE44D /* DrawTestViewController.swift in Sources */,
 				EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */,
 				EA75BB372792AA7C00910B4C /* FMDatabaseAdditions.m in Sources */,
 				EA1AE484277819E600D028F9 /* Typealiases.swift in Sources */,
 				EA1AE492277819E600D028F9 /* ConstraintDirectionalInsets.swift in Sources */,
+				EA33BF5227F82FB600DBE44D /* DrawingCanvasView.swift in Sources */,
 				EA3E8AA127B77CEA006A2715 /* FilepathImageProvider.swift in Sources */,
 				EADB00AB27623C76001B7223 /* OriginContainer.swift in Sources */,
 				EA9A75E227C739DF00A11FC8 /* SRWebSocket.m in Sources */,

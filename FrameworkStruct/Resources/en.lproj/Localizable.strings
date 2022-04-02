@@ -29,6 +29,7 @@ drawTable = "Draw Table";
 layerShadow = "Layer Shadow";
 animationDemo = "Animation Demo";
 webInteraction = "H5 Interaction";
+drawTest = "Draw Testing";
 
 /**
  * 界面提示和按钮文案

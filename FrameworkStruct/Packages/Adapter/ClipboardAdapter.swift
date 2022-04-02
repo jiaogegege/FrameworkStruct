@@ -7,6 +7,7 @@
 
 /**
  * 系统剪贴板适配器
+ * 读取系统剪贴板、向系统剪贴板写入内容等
  */
 import UIKit
 
@@ -34,4 +35,11 @@ class ClipboardAdapter: OriginAdapter
         return self
     }
 
+}
+
+
+//接口方法
+extension ClipboardAdapter: ExternalInterface
+{
+    
 }

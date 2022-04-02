@@ -78,6 +78,8 @@ extension String: ConstantPropertyProtocol
     static let animationDemo = localized("animationDemo")
     //H5交互
     static let webInteraction = localized("webInteraction")
+    //绘图测试
+    static let drawTest = localized("drawTest")
     
     //MARK: 界面提示和按钮文案
     //确定

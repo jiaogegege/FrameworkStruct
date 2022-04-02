@@ -612,4 +612,23 @@ extension UIImage
         return UIImage(data: data)
     }
     
+    ///保存到相册
+    func saveToAlbum()
+    {
+        UIImageWriteToSavedPhotosAlbum(self, nil, nil, nil)
+    }
+    
+    ///截取一个给定区域内的图片
+    func getImageInRect(_ rect: CGRect) -> UIImage?
+    {
+        let sourceImageRef = self.cgImage
+        let newImageRef = sourceImageRef?.cropping(to: rect)
+        if let newImageRef = newImageRef
+        {
+            return UIImage(cgImage: newImageRef)
+        }
+        
+        return nil
+    }
+    
 }

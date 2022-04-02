@@ -44,6 +44,7 @@ protocol NotificationAdapterDelegate
     
 }
 
+
 class NotificationAdapter: OriginAdapter
 {
     //MARK: 属性

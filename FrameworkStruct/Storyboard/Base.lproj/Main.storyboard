@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yuh-L0-12d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yuh-L0-12d">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -355,6 +355,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d4n-fg-AzU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4207" y="138"/>
+        </scene>
+        <!--绘图测试-->
+        <scene sceneID="Uie-Cy-pY1">
+            <objects>
+                <viewController storyboardIdentifier="DrawTestViewController" title="绘图测试" id="Qhw-9I-mTq" customClass="DrawTestViewController" customModule="FrameworkStruct" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ssE-ML-uee">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99Y-K3-lJ7" customClass="DrawingCanvasView" customModule="FrameworkStruct" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="a1X-R9-edC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="a1X-R9-edC" firstAttribute="bottom" secondItem="99Y-K3-lJ7" secondAttribute="bottom" id="Ibz-Yx-eGU"/>
+                            <constraint firstItem="99Y-K3-lJ7" firstAttribute="leading" secondItem="a1X-R9-edC" secondAttribute="leading" id="Utr-4P-Bqh"/>
+                            <constraint firstItem="a1X-R9-edC" firstAttribute="trailing" secondItem="99Y-K3-lJ7" secondAttribute="trailing" id="ZlI-XG-4q2"/>
+                            <constraint firstItem="99Y-K3-lJ7" firstAttribute="top" secondItem="a1X-R9-edC" secondAttribute="top" id="zUM-Tt-ECy"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xm7-X1-rVu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4871" y="138"/>
         </scene>
     </scenes>
     <resources>

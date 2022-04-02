@@ -12,6 +12,16 @@
  */
 import UIKit
 
+
+//应用程序管理器代理方法，根据实际需求设计
+protocol ApplicationManagerDelegate: NSObjectProtocol
+{
+    ///应用程序管理器截屏了
+    func applicationManagerDidScreenshot(image: UIImage?)
+    
+}
+
+
 class ApplicationManager: OriginManager
 {
     //MARK: 属性
@@ -78,6 +88,12 @@ class ApplicationManager: OriginManager
             }
         }
     }
+    
+    ///是否开启截屏监听
+    var isListenScreenshot: Bool = false
+    
+    ///代理对象
+    weak var delegate: ApplicationManagerDelegate?
     
     
     //MARK: 方法
@@ -173,7 +189,12 @@ extension ApplicationManager: DelegateProtocol
     //截屏通知
     @objc func didTakeScreenShotNotification(notification: Notification)
     {
-        
+        //如果在用户使用了系统截屏功能后收到通知，那么可以手动截屏
+        if isListenScreenshot
+        {
+            let img = self.screenshot()
+            delegate?.applicationManagerDidScreenshot(image: img)
+        }
     }
     
     //录屏变化通知
@@ -326,6 +347,24 @@ extension ApplicationManager: ExternalInterface
     ///是否在录屏，包括：屏幕录制/AirPlay/镜像
     var isCaputring: Bool {
         return UIScreen.main.isCaptured
+    }
+    
+    ///手动截取整个屏幕
+    func screenshot() -> UIImage?
+    {
+        let imageSize: CGSize = .fullScreen
+        //绘制图像
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
+        window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let imgData = image?.pngData()
+        if let imgD = imgData
+        {
+            return UIImage(data: imgD)
+        }
+        
+        return nil
     }
     
     ///跳转到app store评分
