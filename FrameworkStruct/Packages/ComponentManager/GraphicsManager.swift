@@ -329,6 +329,9 @@ extension GraphicsManager: ExternalInterface
     }
     
     ///绘制椭圆
+    ///rect:椭圆的外接矩形
+    ///useDotLine:是否使用虚线绘制
+    ///isFill：是否是填充模式
     func drawEllipse(context: CGContext,
                      rect: CGRect,
                      lineWidth: CGFloat,
@@ -352,11 +355,29 @@ extension GraphicsManager: ExternalInterface
         isFill ? context.fillPath() : context.strokePath()
     }
     
-    ///裁剪可绘制区域
+    ///裁剪多个可绘制区域
+    func clipRects(context: CGContext)
+    {
+        
+    }
     
     ///设置多个填充区域
+    func fillRects(context: CGContext)
+    {
+        
+    }
     
     ///绘制图像
+    func drawImage(context: CGContext)
+    {
+        
+    }
+    
+    ///绘制文字
+    func drawText(context: CGContext)
+    {
+        
+    }
     
     ///绘制一个简单表格
     func drawSimpleTableView(frame: CGRect, data: Array<Array<String>>) -> SimpleTableView
