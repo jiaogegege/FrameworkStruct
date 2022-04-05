@@ -25,7 +25,7 @@ class DrawingCanvasView: UIView {
             GraphicsManager.shared.drawArc(context: ctx, lineWidth: 4, lineColor: .red, center: CGPoint(x: 100, y: 100), radius: 80, start: 0, end: .pi-1, clockwise: true, useDotLine: false)
             GraphicsManager.shared.drawArc(context: ctx, lineWidth: 2, start: CGPoint(x: 0, y: 10), point1: CGPoint(x: 100, y: 10), point2: CGPoint(x: 150, y: 50), radius: 20)
             GraphicsManager.shared.drawRoundedRect(context: ctx, rect: CGRect(x: 100, y: 200, width: 250, height: 300), lineWidth: 4, lineColor: .orange, rounded: 20, useDotLine: false, isFill: true)
-            
+            GraphicsManager.shared.drawText(context: ctx, text: "圣诞快乐风景收到了看家实力的克己复礼开始点击是谁可怜的肌肤是考虑到解放路开始的实力对抗肌肤尻脸上的肌肤立刻圣诞节快乐发生的", font: UIFont.systemFont(ofSize: 20), color: .blue, position: CGPoint(x: 20, y: 50), areaSize: CGSize(width: 100, height: 200))
         }
     }
 

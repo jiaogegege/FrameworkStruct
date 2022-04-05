@@ -374,9 +374,34 @@ extension GraphicsManager: ExternalInterface
     }
     
     ///绘制文字
-    func drawText(context: CGContext)
+    ///参数：
+    ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制
+    func drawText(context: CGContext, text: String, font: UIFont, color: UIColor, position: CGPoint, areaSize: CGSize?)
     {
-        
+        let attrs = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color]
+        if let areaSize = areaSize
+        {
+            (text as NSString).draw(in: CGRect(origin: position, size: areaSize), withAttributes: attrs)
+        }
+        else
+        {
+            (text as NSString).draw(at: position, withAttributes: attrs)
+        }
+    }
+    
+    ///绘制属性文字
+    ///参数：
+    ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制
+    func drawAttrText(context: CGContext, attrStr: NSAttributedString, position: CGPoint, areaSize: CGSize?)
+    {
+        if let areaSize = areaSize
+        {
+            attrStr.draw(in: CGRect(origin: position, size: areaSize))
+        }
+        else
+        {
+            attrStr.draw(at: position)
+        }
     }
     
     ///绘制一个简单表格
