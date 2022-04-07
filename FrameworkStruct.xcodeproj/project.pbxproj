@@ -545,6 +545,7 @@
 		EAACA84027FE7BCB008EA586 /* CopyPasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */; };
 		EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84127FE7D5C008EA586 /* FSLabel.swift */; };
 		EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84327FE8993008EA586 /* FSImageView.swift */; };
+		EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */; };
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
@@ -1505,6 +1506,7 @@
 		EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyPasteViewController.swift; sourceTree = "<group>"; };
 		EAACA84127FE7D5C008EA586 /* FSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSLabel.swift; sourceTree = "<group>"; };
 		EAACA84327FE8993008EA586 /* FSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSImageView.swift; sourceTree = "<group>"; };
+		EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractionManager.swift; sourceTree = "<group>"; };
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
@@ -3564,6 +3566,7 @@
 				EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */,
 				EA3E89B227B77B35006A2715 /* AnimationManager.swift */,
 				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
+				EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */,
 			);
 			path = ComponentManager;
 			sourceTree = "<group>";
@@ -4933,6 +4936,7 @@
 				EADB00EB2762416E001B7223 /* JCollectionViewController.swift in Sources */,
 				EA9A75AD27C731EB00A11FC8 /* mztools.c in Sources */,
 				EA3E8ACC27B77CEA006A2715 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
+				EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */,
 				EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */,
 				EADB00E72762410D001B7223 /* ColorConst.swift in Sources */,
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
