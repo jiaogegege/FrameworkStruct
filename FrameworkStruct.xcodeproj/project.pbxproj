@@ -542,6 +542,9 @@
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
+		EAACA84027FE7BCB008EA586 /* CopyPasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */; };
+		EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84127FE7D5C008EA586 /* FSLabel.swift */; };
+		EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84327FE8993008EA586 /* FSImageView.swift */; };
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
@@ -1499,6 +1502,9 @@
 		EAAA4E8E276F57BB00C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyPasteViewController.swift; sourceTree = "<group>"; };
+		EAACA84127FE7D5C008EA586 /* FSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSLabel.swift; sourceTree = "<group>"; };
+		EAACA84327FE8993008EA586 /* FSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSImageView.swift; sourceTree = "<group>"; };
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
@@ -4078,6 +4084,8 @@
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
 				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
 				EA1EAFA327EC411B002B4997 /* FSGuideView.swift */,
+				EAACA84127FE7D5C008EA586 /* FSLabel.swift */,
+				EAACA84327FE8993008EA586 /* FSImageView.swift */,
 				EA9A4A842780309E00170BB3 /* FSTextField.h */,
 				EA9A4A832780309D00170BB3 /* FSTextField.m */,
 				EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */,
@@ -4174,6 +4182,7 @@
 				EA3E8B4427B77DC9006A2715 /* AnimationDemoViewController.swift */,
 				EA66061027C86C11000B20A6 /* TestWebViewController.swift */,
 				EA33BF4F27F82DF200DBE44D /* DrawTestViewController.swift */,
+				EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -4786,6 +4795,7 @@
 				EA9A785E27C7546100A11FC8 /* Date+Inits.swift in Sources */,
 				EA9A756E27C7210200A11FC8 /* TYAttributedLabel.m in Sources */,
 				EADB01392762433C001B7223 /* ThemeModel.m in Sources */,
+				EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */,
 				EA3E8A9D27B77CEA006A2715 /* AnimationPublic.swift in Sources */,
 				EA3E89B127B77945006A2715 /* RegisterLoginWorker.swift in Sources */,
 				EA0E67AF27B49F8B00A11C20 /* NSData+DataToHexString.m in Sources */,
@@ -4978,6 +4988,7 @@
 				EA9A75EC27C739DF00A11FC8 /* SRURLUtilities.m in Sources */,
 				EA3E8AA827B77CEA006A2715 /* AnimatedControl.swift in Sources */,
 				EA9A758327C7216D00A11FC8 /* YYSpriteSheetImage.m in Sources */,
+				EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */,
 				EA3E8B4327B77CEA006A2715 /* AnimationContext.swift in Sources */,
 				EAC8A85427625D490088293F /* SDWebImageDownloader.m in Sources */,
 				EADB00DB27624012001B7223 /* BasicTableViewController.swift in Sources */,
@@ -5046,6 +5057,7 @@
 				EA9936922799074B00480147 /* UIView+Cate.m in Sources */,
 				EA3E8AB727B77CEA006A2715 /* GradientValueProvider.swift in Sources */,
 				EA99373127994F6100480147 /* TABComponentLayerClassicSerializationImpl.m in Sources */,
+				EAACA84027FE7BCB008EA586 /* CopyPasteViewController.swift in Sources */,
 				EA1AE475277819E600D028F9 /* ConstraintViewDSL.swift in Sources */,
 				EA3E8AAC27B77CEA006A2715 /* Interpolatable.swift in Sources */,
 				EA3E8AD027B77CEA006A2715 /* TransformAnimations.swift in Sources */,

@@ -276,6 +276,24 @@ extension NSAttributedString
 }
 
 
+//MARK: Data
+/**
+ * Data
+ */
+extension Data
+{
+    ///将json对象转换成json字符串
+    func toDictionary() -> Dictionary<String, Any>?
+    {
+        if let obj = try? JSONSerialization.jsonObject(with: self, options: .mutableContainers) as? Dictionary<String, Any>
+        {
+            return obj
+        }
+        return nil
+    }
+}
+
+
 //MARK: Array
 /**
  * Array

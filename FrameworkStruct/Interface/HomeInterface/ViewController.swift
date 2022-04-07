@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest]
+    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste]
     
     override class func getViewController() -> Self {
         return getVC(from: gMainSB)
@@ -114,6 +114,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         else if indexPath.row == 8  //绘图测试
         {
             let vc = DrawTestViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else if indexPath.row == 9  //复制粘贴
+        {
+            let vc = CopyPasteViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }

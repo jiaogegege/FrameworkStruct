@@ -71,6 +71,9 @@ extension ClipboardAdapter: InternalType
         case system             //系统剪贴板
         case custom(String)     //自定义剪贴板，传入标志符
         
+        //用户剪贴板，用户保存一些app级的自定义内容
+        static let userPasteboard = CAPasteboardType.custom("userPasteboard")
+        
         //获取剪贴板对象
         func getPasteboard() -> UIPasteboard
         {
@@ -95,6 +98,25 @@ extension ClipboardAdapter: InternalType
         case colors
         case data(String)   //关联一个key，到时根据key取数据
         case any(String)    //关联一个key，到时根据key取数据
+    }
+    
+    ///保存的item数据类型，如果有新的类型，那么在此处新增
+    ///目前仅支持string/data/image
+    enum CAItemType {
+        case string, data, image
+        
+        //将Data转换成需要的数据类型
+        func convertData(data: Data) -> Any?
+        {
+            switch self {
+            case .string:
+                return String(data: data, encoding: .utf8)
+            case .data:
+                return Data(data)
+            case .image:
+                return UIImage(data: data)
+            }
+        }
     }
     
 }
@@ -161,6 +183,33 @@ extension ClipboardAdapter: ExternalInterface
         case .any(let key):
             return pb.value(forPasteboardType: key)
         }
+    }
+    
+    ///向剪贴板中添加key/values，并设置多少秒后过期，是否仅本app可用
+    ///目前仅支持string/data/image
+    func writeItem(_ item: Any, key: String, expire after: TimeInterval = .infinity, onlyLocal: Bool = false, in pasteboard: CAPasteboardType = .userPasteboard)
+    {
+        let pb = pasteboard.getPasteboard()
+        let options: [UIPasteboard.OptionsKey : Any] = [.expirationDate: nowAfter(after), .localOnly: onlyLocal]
+        pb.setItems([[key: item]], options: options)
+    }
+    
+    ///从剪贴板读取key/values，如果有并且未过期的话
+    func readItem(key: String, itemType: CAItemType, in pasteboard: CAPasteboardType = .userPasteboard) -> Any?
+    {
+        var value: Any? = nil
+        let pb = pasteboard.getPasteboard()
+        let items = pb.items
+        for item in items   //item是字典
+        {
+            if let val = item[key]
+            {
+                //由于从剪贴板读取数据后是Data类型，所以需要转换
+                value = itemType.convertData(data:(val as! Data))
+                break
+            }
+        }
+        return value
     }
     
     ///判断剪贴板中是否有某种类型的值

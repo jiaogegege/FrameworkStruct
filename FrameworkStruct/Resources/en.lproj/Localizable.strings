@@ -30,6 +30,7 @@ layerShadow = "Layer Shadow";
 animationDemo = "Animation Demo";
 webInteraction = "H5 Interaction";
 drawTest = "Draw Testing";
+copyPaste = "Copy Paste";
 
 /**
  * 界面提示和按钮文案
