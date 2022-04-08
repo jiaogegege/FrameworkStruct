@@ -47,6 +47,12 @@ extension DatasChecker: ExternalInterface
         return phoneStr.isMatch(pattern: cellPhoneRegex)
     }
     
+    ///是否邮件地址
+    func checkMail(_ mail: String) -> Bool
+    {
+        return mail.isMatch(pattern: mailRegex)
+    }
+    
     ///校验密码格式，8-12位大小写字母、数字、@#_
     func checkPassword(_ psdStr: String) -> Bool
     {

@@ -17,6 +17,9 @@ let userNameRegex: RegexExpression = "^[a-zA-Z\\u4E00-\\u9FA5]{2,10}$"
 //国内手机号的正则表达式，以`1`开头的11位数字
 let cellPhoneRegex: RegexExpression = "^1\\d{10}$"
 
+//邮件地址
+let mailRegex: RegexExpression = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+//.[A-Za-z]{2,6}$"
+
 //一种密码的正则，8-12位大小写字母、数字、@#_
 let passwordRegex: RegexExpression = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[#@_])[0-9a-zA-Z#@_]{8,12}$"
 

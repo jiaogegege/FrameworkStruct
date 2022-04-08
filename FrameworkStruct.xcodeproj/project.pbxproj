@@ -640,6 +640,7 @@
 		EACAD4ED277DA5E400FBE2DA /* DeviceTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */; };
 		EACAD4EF277DAFC000FBE2DA /* TimeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */; };
 		EACF2E4B27C9FDF800969BE9 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = EACF2E4A27C9FDF800969BE9 /* jstest.html */; };
+		EAD0B93727FFC88E00DB4949 /* CommunicationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */; };
 		EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007A27623B59001B7223 /* AppDelegate.swift */; };
 		EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007C27623B59001B7223 /* SceneDelegate.swift */; };
 		EADB007F27623B59001B7223 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007E27623B59001B7223 /* ViewController.swift */; };
@@ -1752,6 +1753,7 @@
 		EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTool.swift; sourceTree = "<group>"; };
 		EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTool.swift; sourceTree = "<group>"; };
 		EACF2E4A27C9FDF800969BE9 /* jstest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = jstest.html; sourceTree = "<group>"; };
+		EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationAdapter.swift; sourceTree = "<group>"; };
 		EADB007727623B59001B7223 /* FrameworkStruct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameworkStruct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADB007A27623B59001B7223 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EADB007C27623B59001B7223 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -3583,6 +3585,7 @@
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 				EADE522327F6F470005417BE /* ClipboardAdapter.swift */,
+				EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -4579,6 +4582,7 @@
 				EA3E8AC427B77CEA006A2715 /* BaseCompositionLayer.swift in Sources */,
 				EA9A758627C7216D00A11FC8 /* YYFrameImage.m in Sources */,
 				EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */,
+				EAD0B93727FFC88E00DB4949 /* CommunicationAdapter.swift in Sources */,
 				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,
 				EA3E8AF927B77CEA006A2715 /* TextAnimatorNode.swift in Sources */,
 				EA3E8ACA27B77CEA006A2715 /* CALayer+fillBounds.swift in Sources */,

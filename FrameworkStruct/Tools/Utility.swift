@@ -83,6 +83,12 @@ func g_getWindow() -> UIWindow
     return ApplicationManager.shared.window
 }
 
+///获取顶层控制器
+func g_topVC() -> UIViewController
+{
+    return ControllerManager.shared.topVC
+}
+
 ///判断字符串是否是有效字符串，无效字符串：nil、null、<null>、<nil>、""、"(null)"、NSNull
 func g_isValidString(_ str: String?) -> Bool
 {
