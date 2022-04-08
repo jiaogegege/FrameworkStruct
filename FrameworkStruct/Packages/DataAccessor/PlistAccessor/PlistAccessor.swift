@@ -83,7 +83,6 @@ class PlistAccessor: OriginAccessor
     }
     
     
-    
     //返回数据源相关信息
     override func accessorDataSourceInfo() -> Dictionary<String, String> {
         let infoDict = ["type": "plist"]

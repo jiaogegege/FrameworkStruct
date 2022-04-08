@@ -641,6 +641,7 @@
 		EACAD4EF277DAFC000FBE2DA /* TimeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */; };
 		EACF2E4B27C9FDF800969BE9 /* jstest.html in Resources */ = {isa = PBXBuildFile; fileRef = EACF2E4A27C9FDF800969BE9 /* jstest.html */; };
 		EAD0B93727FFC88E00DB4949 /* CommunicationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */; };
+		EAD0B9392800280C00DB4949 /* KeychainAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD0B9382800280C00DB4949 /* KeychainAccessor.swift */; };
 		EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007A27623B59001B7223 /* AppDelegate.swift */; };
 		EADB007D27623B59001B7223 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007C27623B59001B7223 /* SceneDelegate.swift */; };
 		EADB007F27623B59001B7223 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB007E27623B59001B7223 /* ViewController.swift */; };
@@ -1754,6 +1755,7 @@
 		EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTool.swift; sourceTree = "<group>"; };
 		EACF2E4A27C9FDF800969BE9 /* jstest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = jstest.html; sourceTree = "<group>"; };
 		EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationAdapter.swift; sourceTree = "<group>"; };
+		EAD0B9382800280C00DB4949 /* KeychainAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccessor.swift; sourceTree = "<group>"; };
 		EADB007727623B59001B7223 /* FrameworkStruct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrameworkStruct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADB007A27623B59001B7223 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EADB007C27623B59001B7223 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -4201,6 +4203,7 @@
 				EAB32C3E27CA71EA000108EA /* UserDefaultsAccessor */,
 				EA3337C62797AB7D00612DC3 /* SandBoxAccessor */,
 				EADB014E276244F2001B7223 /* DatabaseAccessor */,
+				EAD0B9382800280C00DB4949 /* KeychainAccessor.swift */,
 			);
 			path = DataAccessor;
 			sourceTree = "<group>";
@@ -4761,6 +4764,7 @@
 				EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */,
 				EA1AE477277819E600D028F9 /* ConstraintInsets.swift in Sources */,
 				EA3E8A9627B77CEA006A2715 /* BundleImageProvider.macOS.swift in Sources */,
+				EAD0B9392800280C00DB4949 /* KeychainAccessor.swift in Sources */,
 				EA1AE470277819E600D028F9 /* ConstraintMultiplierTarget.swift in Sources */,
 				EA3E8AED27B77CEA006A2715 /* GradientFillRenderer.swift in Sources */,
 				EA99372727994F6100480147 /* TABAnimatedProduction.m in Sources */,
