@@ -61,7 +61,7 @@ extension WebAdapter: ExternalInterface
         return vc
     }
     
-    ///将vc设置为当前正在显示的webviewVC
+    ///将vc设置为当前正在显示的webviewVC，创建webviewVC的时候会自动调用
     func showWebVC(_ vc: BasicWebViewController)
     {
         self.currentWebVC = vc
