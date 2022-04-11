@@ -25,7 +25,7 @@ extension String
     //"iCloud"
     static let icloud = "iCloud"
     
-    //一～十
+    //〇～十
     static let s0 = "〇"
     static let s1 = "一"
     static let s2 = "二"
@@ -37,6 +37,27 @@ extension String
     static let s8 = "八"
     static let s9 = "九"
     static let s10 = "十"
+    static let s100 = "百"
+    static let s1000 = "千"
+    static let s10000 = "万"
+    static let s100000000 = "亿"
+    
+    //人民币大写数字
+    static let sRMB0 = "零"
+    static let sRMB1 = "壹"
+    static let sRMB2 = "贰"
+    static let sRMB3 = "叁"
+    static let sRMB4 = "肆"
+    static let sRMB5 = "伍"
+    static let sRMB6 = "陆"
+    static let sRMB7 = "柒"
+    static let sRMB8 = "捌"
+    static let sRMB9 = "玖"
+    static let sRMB10 = "拾"
+    static let sRMB100 = "佰"
+    static let sRMB1000 = "仟"
+    static let sRMB10000 = "万"
+    static let sRMB100000000 = "亿"
     
     
     
@@ -51,6 +72,7 @@ extension String
     }
     
 }
+
 
 //MARK: 项目中文案定义，国际化文案
 extension String: ConstantPropertyProtocol
