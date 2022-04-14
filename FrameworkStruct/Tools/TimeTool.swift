@@ -76,7 +76,7 @@ func currentTimeInterval() -> TimeInterval
 }
 
 ///判断某个时间有没有过期
-///参数：criticalTimeStr:如果传入了过期时间，那么和传入时间比较，如果没有传入过期时间，那么和当前时间比较
+///参数：criticalTimeStr:如果传入了过期时间，那么和传入时间比较；如果没有传入过期时间，那么和当前时间比较
 ///如果传入的时间都无法转换，那么返回true
 func isTimePasted(timeStr: String, criticalTimeStr: String?) -> Bool
 {

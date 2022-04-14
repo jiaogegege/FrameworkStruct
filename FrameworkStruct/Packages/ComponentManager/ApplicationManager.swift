@@ -370,8 +370,7 @@ extension ApplicationManager: ExternalInterface
     ///跳转到app store评分
     func gotoAppStoreComment()
     {
-        let urlStr = "itms-apps://itunes.apple.com/app/id\(gAppId)?action=write-review"
-        UIApplication.shared.open(URL.init(string: urlStr)!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(URL.init(string: gAppStoreCommentUrl)!, options: [:], completionHandler: nil)
     }
     
     

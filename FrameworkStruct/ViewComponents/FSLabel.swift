@@ -51,6 +51,8 @@ class FSLabel: UILabel
                     if ges.isKind(of: UILongPressGestureRecognizer.self)
                     {
                         self.removeGestureRecognizer(ges)
+                        //删除长按手势后结束循环
+                        break
                     }
                 }
             }

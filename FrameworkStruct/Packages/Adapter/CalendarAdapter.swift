@@ -176,18 +176,16 @@ extension CalendarAdapter: InternalType
         case remindDefault
         
         //保存事件id，具体保存在什么数据源中，根据实际需求取舍，可以是UserDefaults，或者数据库等
-        func save(id: String)
+        func save(_ id: String)
         {
-            //保存数据源
+            //保存到数据源
         }
         
-        //读取事件id
+        //从数据源读取事件id
         func read() -> String
         {
             return ""
         }
-        
-        
     }
     
     ///事件持续时间

@@ -20,7 +20,7 @@ import UIKit
 //项目名称
 let gProjectName = "FrameworkStruct"
 
-//APPID
+//APPID，修改成AppStore分配的值
 let gAppId = "1476239189"
 
 //App名称
@@ -35,8 +35,11 @@ let gAppBuildVersion: String = Bundle.main.infoDictionary!["CFBundleVersion"] as
 //app完整版本
 let gAppFullVersion: String = gAppVersion + "." + gAppBuildVersion
 
-//appstore下载地址
-let gAppStoreUrl = "https://itunes.apple.com/cn/app/id1476239189?mt=8"
+//AppStore下载地址
+let gAppStoreDownloadUrl = "https://itunes.apple.com/cn/app/id\(gAppId)?mt=8"
+
+//AppStore评分地址
+let gAppStoreCommentUrl = "itms-apps://itunes.apple.com/app/id\(gAppId)?action=write-review"
 
 
 //MARK: Storyboard文件名定义

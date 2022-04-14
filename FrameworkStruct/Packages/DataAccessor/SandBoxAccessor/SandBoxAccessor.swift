@@ -7,6 +7,7 @@
 
 /**
  * 沙盒文件存取器
+ * 存取`Bundle`和沙盒中的文件
  */
 import UIKit
 
@@ -47,6 +48,7 @@ class SandBoxAccessor: OriginAccessor
 //接口方法
 extension SandBoxAccessor: ExternalInterface
 {
+    //MARK: 文件和目录操作
     /**************************************** 文件和目录操作 Section Begin ****************************************/
     //创建一个目录
     func createDir(path: String) -> Bool
@@ -118,7 +120,7 @@ extension SandBoxAccessor: ExternalInterface
     
     /**************************************** 文件和目录操作 Section End ****************************************/
     
-    
+    //MARK: 文件夹路径访问
     /**************************************** 文件夹路径访问 Section Begin ****************************************/
     ///获得沙盒文件夹路径
     func getHomeDirectory() -> String
@@ -253,6 +255,7 @@ extension SandBoxAccessor: ExternalInterface
 
     /**************************************** 文件夹路径访问 Section End ****************************************/
     
+    //MARK: 具体读写文件方法
     /**************************************** 具体读写文件方法 Section Begin ****************************************/
     ///保存图片到沙盒
     ///参数：compress：如果是jpg图片，可以设置压缩率(0-1)，数值越小，压缩率越高；filePath：要保存的沙盒文件路径

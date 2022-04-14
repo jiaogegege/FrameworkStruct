@@ -19,34 +19,63 @@ let sdDownloadTempDir = "download_temp"
 //沙盒中音频文件目录
 let sdSoundsDir = "Sounds"
 
+
 //文件扩展名列表，根据需要新增
 enum FileTypeName: String {
-    //文本
+    //文档
     case txt
     case rtf
+    case lrc
+    case ass
     case md
-    case json
-    case xml
+    case doc
+    case docx
+    case ppt
+    case pptx
+    case xls
+    case xlsx
+    case pdf
+    case mobi
+    case epub
     //编程语言
     case h
     case c
     case cpp
     case m
     case mm
+    case rs
+    case go
     case swift
     case java
+    case kt
+    case cs
     case py
+    case rb
     case sql
+    case json
+    case xml
     case html
     case css
     case js
+    case ts
+    case php
     //音频
     case aac
     case caf
     case mp3
+    case opus
+    case aiff
+    case aif
+    case wma
+    case flac
+    case ogg
     case wav
+    case midi
+    case ra
     //视频
     case mov
+    case m4v
+    case flv
     case mp4
     case mkv
     case mpv
@@ -66,5 +95,17 @@ enum FileTypeName: String {
     case svg
     case raw
     case webp
+    case psd
+    case ai
+    case cdr
+    //压缩文件
+    case zip
+    case rar
+    case tar
+    case ar
+    case bz
+    case car
+    case gz
+    case rz
     
 }

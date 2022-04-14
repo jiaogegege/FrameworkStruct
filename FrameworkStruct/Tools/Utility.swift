@@ -96,7 +96,7 @@ func g_isValidString(_ str: String?) -> Bool
         return false
     }
     
-    if s == "" || s == "(null)" || s == "<null>" || s == "nil" || s == "(nil)" || s == "<nil>" || (s as NSString).isKind(of: NSNull.self) || s.count <= 0
+    if s == "" || s == "null" || s == "(null)" || s == "<null>" || s == "nil" || s == "(nil)" || s == "<nil>" || (s as NSString).isKind(of: NSNull.self) || s.count <= 0
     {
         return false
     }
