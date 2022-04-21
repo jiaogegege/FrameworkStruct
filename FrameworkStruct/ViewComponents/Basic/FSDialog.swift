@@ -93,7 +93,11 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         self.isHidden = true
         self.bgView.alpha = 0.0
-        if showType == .gradient
+        if showType == .none
+        {
+            self.containerView.alpha = 0.0
+        }
+        else if showType == .gradient
         {
             self.containerView.alpha = 0.0
         }
@@ -109,7 +113,13 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         self.isHidden = false
         weak var weakSelf = self
-        if showType == .gradient
+        if showType == .none
+        {
+            self.bgView.alpha = 1.0
+            self.containerView.alpha = 1.0
+            completion()
+        }
+        else if showType == .gradient
         {
             UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
                 weakSelf?.bgView.alpha = 1.0
@@ -134,7 +144,13 @@ class FSDialog: UIView, DialogManagerProtocol
     func hideAnimation(completion: @escaping VoidClosure)
     {
         weak var weakSelf = self
-        if showType == .gradient
+        if showType == .none
+        {
+            self.bgView.alpha = 0.0
+            self.containerView.alpha = 0.0
+            completion()
+        }
+        else if showType == .gradient
         {
             UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
                 weakSelf?.bgView.alpha = 0.0
@@ -160,7 +176,13 @@ class FSDialog: UIView, DialogManagerProtocol
     func dismissAnimation(completion: @escaping VoidClosure)
     {
         weak var weakSelf = self
-        if showType == .gradient
+        if showType == .none
+        {
+            self.bgView.alpha = 0.0
+            self.containerView.alpha = 0.0
+            completion()
+        }
+        else if showType == .gradient
         {
             UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
                 weakSelf?.bgView.alpha = 0.0
@@ -197,8 +219,9 @@ extension FSDialog: InternalType
     //显示类型，主要控制显示和消失的动画效果
     //子类可以自定义动画效果，自定义动画效果优先级高于该属性
     enum FSDShowType {
-        case gradient     //该类型一般用于显示在屏幕中间，做一个渐显的动画效果
-        case bounce     //该类型一般用于显示在屏幕底部，做一个向上弹的动画效果
+        case none           //无动画效果
+        case gradient       //该类型一般用于显示在屏幕中间，做一个渐显的动画效果
+        case bounce         //该类型一般用于显示在屏幕底部，做一个向上弹的动画效果
     }
     
 }
