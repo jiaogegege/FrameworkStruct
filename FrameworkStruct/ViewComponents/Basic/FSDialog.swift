@@ -228,7 +228,7 @@ extension FSDialog: InternalType
 
 
 //接口方法
-extension FSDialog: ExternalInterface
+extension FSDialog
 {
     //子类根据需要覆写这个方法，默认添加在全局window上
     func show(hostView: UIView = g_getWindow())
