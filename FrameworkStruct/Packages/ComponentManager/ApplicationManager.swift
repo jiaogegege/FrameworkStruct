@@ -7,8 +7,8 @@
 
 /**
  * 应用程序管理器
- * 主要管理应用程序生命周期内的各种状态和事件
- * 包括但不限于`UIApplication`、`AppDelegate`、`UIWindow`、全局属性、全局状态等
+ * 主要管理应用程序生命周期内的各种状态和事件，监控各种应用级行为和系统行为
+ * 包括但不限于`UIApplication`、`AppDelegate`、`UIWindow`、全局属性、全局状态、全局事件和行为等
  */
 import UIKit
 
@@ -192,8 +192,14 @@ extension ApplicationManager: DelegateProtocol
         //如果在用户使用了系统截屏功能后收到通知，那么可以手动截屏
         if isListenScreenshot
         {
-            let img = self.screenshot()
-            delegate?.applicationManagerDidScreenshot(image: img)
+            //确实截到图了才通知外部程序，不然什么都不做
+            if let img = self.screenshot()
+            {
+                //通知代理对象
+                delegate?.applicationManagerDidScreenshot(image: img)
+                //发送截屏的通知
+                NotificationCenter.default.post(name: FSNotification.screenShot.name, object: [FSNotification.screenShot.paramKey: img])
+            }
         }
     }
     
