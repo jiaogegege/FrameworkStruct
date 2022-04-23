@@ -17,7 +17,7 @@ import Foundation
  */
 
 //MARK: 对String的扩展，包括一些实用方法和常量定义
-extension String
+extension String: ConstantPropertyProtocol
 {
     //iPhoneX资源文件后缀
     static let bangSuffix = "_bang"
@@ -75,7 +75,7 @@ extension String
 
 
 //MARK: 项目中文案定义，国际化文案
-extension String: ConstantPropertyProtocol
+extension String
 {
     //MARK: 项目中各种标题
     //app名称
