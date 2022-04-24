@@ -16,6 +16,13 @@ class FSGuideView: UIView
 {
     //MARK: 属性
     /**************************************** 接口属性 Section Begin ****************************************/
+    
+    ///需要镂空的组件列表，每一个引导页可以指定多个镂空组件，可以指定多个引导页
+    var hollowViewArray: Array<Array<HollowViewType>>?
+    
+    ///对需要镂空的组件的描述和引导组件，也就是在镂空组件周围添加一些帮助图片和信息，和`hollowViewArray`一一对应，并且对于一个镂空组件，可以有多个描述组件
+    var describeInfoArray: Array<Array<Array<HollowDescribeInfo>>>?
+    
     ///新手引导view开始显示回调
     var didShowCallback: VoidClosure?
     ///点击下一步回调，如果有多个引导页，那么每次点击后显示下一个引导页时会调用，显示第一个时也会调用
@@ -24,13 +31,7 @@ class FSGuideView: UIView
     var skipCallback: VoidClosure?
     ///新手引导结束，引导界面消失
     var finishCallback: VoidClosure?
-    
-    ///需要镂空的组件列表，每一个引导页可以指定多个镂空组件，可以指定多个引导页
-    var hollowViewArray: Array<Array<HollowViewType>>?
-    
-    ///对需要镂空的组件的描述和引导组件，也就是在镂空组件周围添加一些帮助图片和信息，和`hollowViewArray`一一对应，并且对于一个镂空组件，可以有多个描述组件
-    var describeInfoArray: Array<Array<Array<HollowDescribeInfo>>>?
-    
+
     ///是否显示跳过按钮，多于一个引导页的时候才显示，也可随时设置显示隐藏
     var showSkip: Bool = true {
         didSet {
