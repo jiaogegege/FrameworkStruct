@@ -346,6 +346,8 @@ iOS App基础架构设计
 	* UserManager：用户管理器
 	* NotificationManager：App内自定义通知管理器
 	* SettingsManager：系统设置管理器
+	* GuideManager：新手引导管理器
+	* LogManager：日志管理器
 * `ComponentManager`
 	* ApplicationManager：应用程序管理器
 	* ControllerManager：控制器管理器
