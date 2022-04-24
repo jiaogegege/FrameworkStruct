@@ -551,6 +551,7 @@
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
 		EABB3C9727ED7122005B98E3 /* GuideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABB3C9627ED7122005B98E3 /* GuideManager.swift */; };
 		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
+		EAC57DA92813D27E0090FB54 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC57DA82813D27E0090FB54 /* LogManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -1515,6 +1516,7 @@
 		EABB3C9627ED7122005B98E3 /* GuideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideManager.swift; sourceTree = "<group>"; };
 		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		EAC57DA82813D27E0090FB54 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -2931,6 +2933,7 @@
 				EA00C86E27C213550034C95B /* NotificationManager.swift */,
 				EA5780A827D0A6C900C819E6 /* SettingsManager.swift */,
 				EABB3C9627ED7122005B98E3 /* GuideManager.swift */,
+				EAC57DA82813D27E0090FB54 /* LogManager.swift */,
 			);
 			path = BusinessManager;
 			sourceTree = "<group>";
@@ -4829,6 +4832,7 @@
 				EA11128327B3BE2C006D0B83 /* ResponseSerialization.swift in Sources */,
 				EA1AE480277819E600D028F9 /* UILayoutSupport+Extensions.swift in Sources */,
 				EAC8A84627625D490088293F /* NSImage+Compatibility.m in Sources */,
+				EAC57DA92813D27E0090FB54 /* LogManager.swift in Sources */,
 				EA9A75F527C739DF00A11FC8 /* NSURLRequest+SRWebSocket.m in Sources */,
 				EA9A785A27C7546100A11FC8 /* Enums.swift in Sources */,
 				EA3E8B3B27B77CEA006A2715 /* BezierPath.swift in Sources */,
