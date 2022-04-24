@@ -258,6 +258,7 @@ iOS App基础架构设计
 	* FSQueue：队列容器，先进先出
 	* FSStack：栈容器
 	* FSVector：向量容器
+       * StatusManager：状态管理器
 * OriginModel：数据模型基类
 * OriginMonitor：监控器基类
 * OriginAccessor：数据存取器基类

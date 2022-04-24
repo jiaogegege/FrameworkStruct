@@ -94,7 +94,7 @@ extension StringEmbellisher: ExternalInterface
     func phoneAddSpace(_ originStr: String, start: Int = 3, length: Int = 4, count: UInt = 1) -> String?
     {
         //先判断是否手机号
-        let ret = DatasChecker.shared.checkPhoneNum(originStr)
+        let ret = DatasChecker.shared.checkPhone(originStr)
         if ret
         {
             var newStr: String = ""

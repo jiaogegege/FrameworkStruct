@@ -92,7 +92,7 @@ extension String
         return result
     }
     
-    ///获取某个range 的子串
+    ///获取某个range的子串
     func subStringWithRange(location: Int, length: Int) -> String
     {
         if location + length > self.count{
@@ -105,24 +105,26 @@ extension String
         return String(str[startIndex..<endIndex])
     }
         
-    /// 正则匹配第一次出现的范围
-    func firstMatchWith(pattern: RegexExpression) -> NSRange
+    /// 正则匹配第一次出现的范围，没有匹配到返回nil
+    func firstMatchWith(pattern: RegexExpression) -> NSRange?
     {
-        if self.count == 0 {
-            return NSMakeRange(0, 0)
-        }
-        do
+        if self.count == 0  //如果源字符串为空，返回nil
         {
+            return nil
+        }
+        
+        do {
             let str: String = self
-            let regular = try NSRegularExpression(pattern: pattern, options: [])
-            let reg = regular.firstMatch(in: str, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, str.count))
-            if let result = reg {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            let ret = regex.firstMatch(in: str, options: NSRegularExpression.MatchingOptions.init(rawValue: 0), range: NSMakeRange(0, str.count))
+            if let result = ret {
                 return NSMakeRange(result.range.location, result.range.length)
             }
         }catch {
             FSLog("regex error: \(error)")
         }
-        return NSMakeRange(0, 0)
+        
+        return nil
     }
     
     ///该字符串是否符合正则表达式
@@ -189,7 +191,7 @@ extension String
     }
     
     ///带有行间距、颜色和字体的属性字符串
-    func attrString(font: UIFont, color: UIColor = .black, lineSpace: CGFloat) -> NSAttributedString
+    func attrString(font: UIFont, color: UIColor, lineSpace: CGFloat = 4.0) -> NSAttributedString
     {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = lineSpace
@@ -198,14 +200,14 @@ extension String
     }
     
     ///字符串转字典，前提是这是个json字符串
-    func toDictionary() -> [String : Any]
+    func toDictionary() -> [String: Any]
     {
-        var result = [String : Any]()
+        var result = [String: Any]()
         guard !self.isEmpty else { return result }
         guard let dataSelf = self.data(using: .utf8) else {
             return result
         }
-        if let dic = try? JSONSerialization.jsonObject(with: dataSelf, options: .mutableContainers) as? [String : Any] {
+        if let dic = try? JSONSerialization.jsonObject(with: dataSelf, options: .mutableContainers) as? [String: Any] {
             result = dic
         }
         return result

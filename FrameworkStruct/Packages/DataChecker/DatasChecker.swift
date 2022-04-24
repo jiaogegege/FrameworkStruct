@@ -42,7 +42,7 @@ class DatasChecker: OriginChecker
 extension DatasChecker: ExternalInterface
 {
     ///是否是手机号，以`1`开头的11位数字
-    func checkPhoneNum(_ phoneStr: String) -> Bool
+    func checkPhone(_ phoneStr: String) -> Bool
     {
         return phoneStr.isMatch(pattern: cellPhoneRegex)
     }
@@ -66,33 +66,29 @@ extension DatasChecker: ExternalInterface
     }
     
     ///判断一个字符串是否整数
-    func checkIsInteger(_ str: String) -> Bool
+    func checkInt(_ str: String) -> Bool
     {
         return str.isMatch(pattern: integerRegex)
     }
 
     ///判断一个字符串是否是浮点数
-    func checkIsFloat(_ str: String) -> Bool
+    func checkFloat(_ str: String) -> Bool
     {
         return str.isMatch(pattern: floatRegex)
     }
 
     ///判断一个字符串是否是数字，包括整数和浮点数
-    func checkIsNumber(_ str: String) -> Bool
+    func checkNumber(_ str: String) -> Bool
     {
-        return checkIsInteger(str) || checkIsFloat(str)
+        return checkInt(str) || checkFloat(str)
     }
     
-    ///判断字符串是否是整数
+    ///判断字符串是否都是由数字组成
     ///过滤掉所有10进制数字，剩下为空字符串则原字符串都是数字
-    func checkIsIntegerString(_ str: String) -> Bool
+    func checkNumberString(_ str: String) -> Bool
     {
-        let originStr = str.trimmingCharacters(in: CharacterSet.decimalDigits)
-        if originStr.count > 0
-        {
-            return false
-        }
-        return true
+        let resStr = str.trimmingCharacters(in: CharacterSet.decimalDigits)
+        return resStr.count <= 0
     }
 
     
