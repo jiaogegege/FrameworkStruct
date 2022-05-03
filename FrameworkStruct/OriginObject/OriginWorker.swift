@@ -21,7 +21,7 @@ protocol WorkerProtocol
     ///工作者当前工作状态
     var currentWorkState: OriginWorker.WorkState { get }
     
-    ///是否可以工作，当处于ready和working状态时返回true
+    ///是否可以工作，当处于ready和working状态时返回true，调用任何业务类方法时，都要先判断是否可以工作，不然可能出现异常和闪退
     var canWork: Bool { get }
     
     ///开始工作，调用worker的任何方法都要先调用这个方法，表示工作者开始工作，如果状态不对，可能抛出一个错误
@@ -125,8 +125,11 @@ extension OriginWorker: WorkerProtocol
     //完成工作，子类如果覆写这个方法，需要在做完清理工作的最后调用父类方法
     func finishWork()
     {
-        stMgr.setStatus(WorkState.done, forKey: WorkerStatusKey.workState)
-        monitor.deleteItem(self)
+        if currentWorkState != .done    //如果还不是完毕状态，那么清理资源并设置为完毕状态
+        {
+            monitor.deleteItem(self)    //从监控器中删除
+            stMgr.setStatus(WorkState.done, forKey: WorkerStatusKey.workState)  //设置状态为完毕
+        }
     }
     
 }
