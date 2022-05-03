@@ -46,7 +46,7 @@ class NetworkAdapter: OriginAdapter
 extension NetworkAdapter: ProtectAvailable
 {
     ///获取默认参数，根据项目实际需要修改
-    func defaultParams() -> Dictionary<String, String>
+    func defaultParams() -> Dictionary<String, Any>
     {
         return [nt_request_macAddress: g_deviceId(),
                 nt_request_deviceType: "ios",
@@ -56,10 +56,7 @@ extension NetworkAdapter: ProtectAvailable
     //组合自定义参数和默认参数
     func combineParams(_ customParams: Dictionary<String, Any>) -> Dictionary<String, Any>
     {
-        var params = Dictionary<String, Any>()
-        params.merge(self.defaultParams()) { current, _ in
-            current
-        }   //组合默认参数
+        var params = defaultParams()    //组合默认参数
         params.merge(customParams) { current, _ in
             current
         }   //组合自定义参数
@@ -76,7 +73,7 @@ extension NetworkAdapter: ProtectAvailable
 }
 
 
-//外部接口
+//外部接口，可以在其它功能模块中扩展外部接口，比如某些接口调用和特定功能模块具有强关联性
 extension NetworkAdapter: ExternalInterface
 {
     /**************************************** 基本网络功能 Section Begin ***************************************/

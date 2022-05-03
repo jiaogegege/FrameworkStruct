@@ -207,6 +207,7 @@ enum HttpStatusCode: Int
     case unknown = -1                       //未知状态，没有定义的状态
     
     case unavailable = 0                    //网络不可用
+    
     case dataParseError = 10                //数据解析错误，接口返回了数据，但是本地解析出错
     
     case ok = 200                           //正常
