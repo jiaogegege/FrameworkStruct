@@ -17,7 +17,7 @@ import UIKit
 protocol ApplicationManagerDelegate: NSObjectProtocol
 {
     ///应用程序管理器截屏了
-    func applicationManagerDidScreenshot(image: UIImage?)
+    func applicationManagerDidScreenshot(image: UIImage)
     
 }
 
@@ -186,7 +186,8 @@ extension ApplicationManager: DelegateProtocol
     }
     
     /**************************************** UIApplication通知 Section End ***************************************/
-    //截屏通知
+    
+    //系统截屏通知
     @objc func didTakeScreenShotNotification(notification: Notification)
     {
         //如果在用户使用了系统截屏功能后收到通知，那么可以手动截屏

@@ -7,6 +7,7 @@
 
 /**
  * 通用工具集
+ * 对接其他功能模块中的方法，进行简化调用
  * 除去一些和特定领域及类型相关的专用特定的工具方法，这里定义一些杂七杂八的实用方法
  * 方法名前面加`g_`表示全局函数
  */
@@ -60,7 +61,7 @@ func g_getCopy(origin: Any?) -> Any?
 ///获得类型的类名的字符串
 func g_getClassName(_ aClass: AnyClass) -> String
 {
-    return NSStringFromClass(aClass).components(separatedBy: ".").last!
+    NSStringFromClass(aClass).components(separatedBy: ".").last!
 }
 
 ///获得一个对象的类名
@@ -80,41 +81,25 @@ func g_getObjClassName(_ obj: AnyObject) -> String
 ///获取window对象
 func g_getWindow() -> UIWindow
 {
-    return ApplicationManager.shared.window
+    ApplicationManager.shared.window
 }
 
 ///获取顶层控制器
 func g_topVC() -> UIViewController
 {
-    return ControllerManager.shared.topVC
+    ControllerManager.shared.topVC
 }
 
 ///判断字符串是否是有效字符串，无效字符串：nil、null、<null>、<nil>、""、"(null)"、NSNull
 func g_isValidString(_ str: String?) -> Bool
 {
-    guard let s = str?.trim() else {
-        return false
-    }
-    
-    if s == "" || s == "null" || s == "(null)" || s == "<null>" || s == "nil" || s == "(nil)" || s == "<nil>" || (s as NSString).isKind(of: NSNull.self) || s.count <= 0
-    {
-        return false
-    }
-    return true
+    DatasChecker.shared.checkValidString(str)
 }
 
 ///判断是否有效对象，无效对象：nil，NSNull
 func g_isValidObject(_ obj: AnyObject?) -> Bool
 {
-    guard let o = obj else {
-        return false
-    }
-    
-    if o.isKind(of: NSNull.self)
-    {
-        return false
-    }
-    return true
+    DatasChecker.shared.checkValidObject(obj)
 }
 
 ///在线程中异步执行代码
@@ -132,19 +117,19 @@ func g_after(interval: TimeInterval, onMain: Bool = true, action: @escaping Void
 ///生成一个随机字符串
 func g_uuidString() -> String
 {
-    return EncryptManager.shared.uuidString()
+    EncryptManager.shared.uuidString()
 }
     
 ///获取设备id，在app安装周期内保持不变
 func g_deviceId() -> String
 {
-    return ApplicationManager.shared.getDeviceId()
+    ApplicationManager.shared.getDeviceId()
 }
 
 ///des加密一个字符串
 func g_des(_ str: String, key: String) -> String
 {
-    return EncryptManager.shared.desString(str, desKey: key)
+    EncryptManager.shared.desString(str, desKey: key)
 }
 
 ///des解密一个字符串
@@ -154,4 +139,10 @@ func g_decrypt(_ str: String?, key: String) -> String?
         return nil
     }
     return EncryptManager.shared.desDecript(str!, desKey: key)
+}
+
+///全局截屏
+func g_screenShot() -> UIImage?
+{
+    ApplicationManager.shared.screenshot()
 }
