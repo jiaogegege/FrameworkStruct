@@ -129,7 +129,7 @@ func g_deviceId() -> String
 ///des加密一个字符串
 func g_des(_ str: String, key: String) -> String
 {
-    EncryptManager.shared.desString(str, desKey: key)
+    EncryptManager.shared.des(str, desKey: key)
 }
 
 ///des解密一个字符串
@@ -138,7 +138,7 @@ func g_decrypt(_ str: String?, key: String) -> String?
     guard str != nil else {
         return nil
     }
-    return EncryptManager.shared.desDecript(str!, desKey: key)
+    return EncryptManager.shared.desDecrypt(str!, desKey: key)
 }
 
 ///全局截屏
