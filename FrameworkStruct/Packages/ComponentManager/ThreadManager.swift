@@ -84,7 +84,7 @@ extension ThreadManager: InternalType
         }
     }
     
-    ///异步操作闭包类型，传入一个名为finish的无返回闭包，表示结束该任务，需要在异步操作完成后调用
+    ///异步操作闭包类型，传入一个名为finish的无返回闭包，表示结束该任务，需要在异步操作完成后调用，不管异步操作是否成功都需要调用
     typealias DispatchGroupClosure = ((_ finish: @escaping VoidClosure) -> Void)
     
 }

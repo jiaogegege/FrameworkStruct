@@ -60,7 +60,7 @@ extension GraphicsManager: InternalType
 //接口方法
 extension GraphicsManager: ExternalInterface
 {
-    ///设置是否使用虚线
+    ///设置是否使用虚线，将使用属性`dotLine`设置虚线，如果需要自定义虚线样式，那么需要先设置属性`dotLine`
     func setUseDotLine(context: CGContext, use: Bool)
     {
         /**

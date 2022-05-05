@@ -285,7 +285,7 @@ extension NSAttributedString
  */
 extension Data
 {
-    ///将json对象转换成json字符串
+    ///将二进制json对象转换成json字典
     func toDictionary() -> Dictionary<String, Any>?
     {
         if let obj = try? JSONSerialization.jsonObject(with: self, options: .mutableContainers) as? Dictionary<String, Any>
@@ -346,7 +346,7 @@ extension Dictionary
         return newDic
     }
     
-    ///字典转字符串
+    ///字典转json字符串
     func toJsonString() -> String?
     {
         guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) else {
