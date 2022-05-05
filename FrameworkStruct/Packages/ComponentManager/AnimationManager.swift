@@ -135,7 +135,7 @@ extension AnimationManager: ExternalInterface
         ani?.repeatForever = isLoop
         ani?.autoreverses = autoReverse
         ani?.delegate = self
-        let key = "POPBasicAnimation" + propertyName + g_uuidString()
+        let key = "POPBasicAnimation" + propertyName + g_uuid()
         ani?.name = key
         host.pop_add(ani, forKey: key)
         //保存完成的回调
@@ -185,7 +185,7 @@ extension AnimationManager: ExternalInterface
         ani?.repeatForever = isLoop
         ani?.autoreverses = autoReverse
         ani?.delegate = self
-        let key = "POPSpringAnimation" + propertyName + g_uuidString()
+        let key = "POPSpringAnimation" + propertyName + g_uuid()
         ani?.name = key
         host.pop_add(ani, forKey: key)
         //保存完成的回调
@@ -224,7 +224,7 @@ extension AnimationManager: ExternalInterface
         ani?.repeatForever = isLoop
         ani?.autoreverses = autoReverse
         ani?.delegate = self
-        let key = "POPSpringAnimation" + propertyName + g_uuidString()
+        let key = "POPSpringAnimation" + propertyName + g_uuid()
         ani?.name = key
         host.pop_add(ani, forKey: key)
         //保存完成的回调

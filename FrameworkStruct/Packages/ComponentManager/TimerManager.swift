@@ -45,7 +45,7 @@ class TimerManager: OriginManager
     //key由3部分组成：8位随机字符串，创建定时器的时刻，host名
     fileprivate func getInfoKey(host: AnyObject) -> String
     {
-        let key = EncryptManager.shared.uuidString().subStringTo(index: 8) + " - " + currentTimeString() + ": " + g_getObjClassName(host)
+        let key = EncryptManager.shared.uuidString().subStringTo(index: 8) + " - " + currentTimeString() + ": " + g_objClassName(host)
         return key
     }
     
@@ -151,7 +151,7 @@ extension TimerManager: ExternalInterface
         //准备数据
         var restTime = startTime    //剩余时间
         var canFinish = false   //是否可以结束
-        let timerId = g_uuidString()    //创建的定时器id
+        let timerId = g_uuid()    //创建的定时器id
         
         let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) {
             action(restTime, &canFinish)    //执行动作
@@ -203,7 +203,7 @@ extension TimerManager: ExternalInterface
         //准备数据
         var totalTime = 0.0    //累计时间
         var canFinish = false   //是否可以结束
-        let timerId = g_uuidString()    //创建的定时器id
+        let timerId = g_uuid()    //创建的定时器id
         
         let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) {
             action(totalTime, &canFinish)    //执行动作

@@ -115,7 +115,7 @@ class BasicTabbarController: UITabBarController
     deinit {
         NotificationCenter.default.removeObserver(self)
         
-        FSLog(g_getObjClassName(self) + " dealloc")
+        FSLog(self.className + " dealloc")
     }
 
 }

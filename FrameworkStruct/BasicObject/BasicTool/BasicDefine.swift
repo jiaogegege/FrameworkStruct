@@ -102,14 +102,14 @@ enum VCBackgroundStyle
             return UIColor.clear
         case .gradientDark:
             let la = CAGradientLayer()
-            la.frame = g_getWindow().bounds
+            la.frame = g_window().bounds
             la.zPosition = -1
             la.colors = [UIColor.cGray_5B5B7E.cgColor, UIColor.cBlack_2C2C3D.cgColor]
             return la
         case .bgImage(let img, let alpha):
             let la = CALayer()
             let cgImg = img?.cgImage
-            la.frame = g_getWindow().bounds
+            la.frame = g_window().bounds
             la.zPosition = -1
             la.contents = cgImg
             la.opacity = alpha

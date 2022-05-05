@@ -231,7 +231,7 @@ extension FSDialog: InternalType
 extension FSDialog
 {
     //子类根据需要覆写这个方法，默认添加在全局window上
-    func show(hostView: UIView = g_getWindow())
+    func show(hostView: UIView = g_window())
     {
         self.resetOrigin()
         //执行显示动画

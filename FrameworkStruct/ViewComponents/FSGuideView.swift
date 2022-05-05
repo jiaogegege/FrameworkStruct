@@ -230,7 +230,7 @@ extension FSGuideView: InternalType
         func getFramePath() -> (CGRect, UIBezierPath)
         {
             //计算镂空组件在window上的frame
-            var frame = hollowView.convert(hollowView.bounds, to: g_getWindow())
+            var frame = hollowView.convert(hollowView.bounds, to: g_window())
             //扩展frame
             frame = expandRule.getNewFrame(frame: frame)
             //计算frame的贝塞尔曲线
@@ -417,7 +417,7 @@ extension FSGuideView: ExternalInterface
     override func updateView() {
         if self.createGuideViews()
         {
-            g_getWindow().addSubview(self)
+            g_window().addSubview(self)
             //控制跳过按钮显示隐藏，如果只有一个引导页不显示，否则根据设置值显示
             skipBtn.isHidden = guideViewQueue.count() > 1 ? (showSkip ? false : true) : true
             if let cb = didShowCallback

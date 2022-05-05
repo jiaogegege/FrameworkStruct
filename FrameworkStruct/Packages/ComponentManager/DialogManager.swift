@@ -71,7 +71,7 @@ class DialogManager: OriginManager
     //显示一个弹窗
     fileprivate func show(_ vieww: DMDialogType? = nil)
     {
-        let hostView = g_getWindow()
+        let hostView = g_window()
         if let v = vieww //如果传入了参数，那么优先显示参数的view
         {
             if self.isShowing() //如果正在显示view，先隐藏
@@ -148,7 +148,7 @@ class DialogManager: OriginManager
         //如果有
         if let vi = self.stack.pop()
         {
-            vi.show(hostView: g_getWindow())
+            vi.show(hostView: g_window())
             //标记为正在显示
             self.showingView = vi
             stMgr.setStatus(true, forKey: DMStatusKey.isShowing)

@@ -65,7 +65,7 @@ extension ControllerManager: ExternalInterface
     //计算属性，rootViewController
     var rootVC: UIViewController {
         get {
-            return g_getWindow().rootViewController!
+            return g_window().rootViewController!
         }
     }
     

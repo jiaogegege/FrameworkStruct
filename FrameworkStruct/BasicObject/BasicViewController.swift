@@ -484,7 +484,7 @@ class BasicViewController: UIViewController
     deinit {
         NotificationCenter.default.removeObserver(self)
         
-        FSLog(g_getObjClassName(self) + " dealloc")
+        FSLog(self.className + " dealloc")
     }
     
 }

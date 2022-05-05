@@ -357,9 +357,9 @@ extension NotificationAdapter: InternalType
         {
             switch self {
             case .local(let fileName):
-                return "FS_" + g_uuidString() + "_" + fileName
+                return "FS_" + g_uuid() + "_" + fileName
             case .remote(let urlStr):
-                return "FS_" + g_uuidString() + "_" + urlStr
+                return "FS_" + g_uuid() + "_" + urlStr
             }
         }
     }
@@ -512,7 +512,7 @@ extension NotificationAdapter: ExternalInterface
                                  category: NAActionCategoryType? = nil,
                                  launchImageName: String? = nil,
                                  trigger: NATriggerType,
-                                 identifier: String = g_uuidString(),
+                                 identifier: String = g_uuid(),
                                  completion: ((_ error: Error?) -> Void)? = nil)
     {
         //判断是否可以使用推送

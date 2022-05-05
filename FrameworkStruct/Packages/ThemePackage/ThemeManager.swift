@@ -37,7 +37,7 @@ class ThemeManager: OriginManager
         self.stMgr.setStatus(ud.readBool(key: .followDarkMode), forKey: TMStatusKey.followDarkMode)
         
         //设置app是否跟随系统暗黑模式
-        g_getWindow().overrideUserInterfaceStyle = isFollowDarkMode ? .unspecified : .light
+        g_window().overrideUserInterfaceStyle = isFollowDarkMode ? .unspecified : .light
         
         //订阅当前主题更新服务
         self.themeContainer.subscribe(key: TCDataKey.currentTheme, delegate: self)
@@ -153,7 +153,7 @@ extension ThemeManager: ExternalInterface
         //修改状态
         self.stMgr.setStatus(follow, forKey: TMStatusKey.followDarkMode)
         //设置全局窗口样式
-        g_getWindow().overrideUserInterfaceStyle = follow ? .unspecified : .light
+        g_window().overrideUserInterfaceStyle = follow ? .unspecified : .light
         //更新到本地
         ud.write(key: .followDarkMode, value: follow)
     }

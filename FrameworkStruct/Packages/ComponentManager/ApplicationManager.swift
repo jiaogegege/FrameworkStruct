@@ -275,7 +275,7 @@ extension ApplicationManager: ExternalInterface
             }
             else    //如果系统未获取到，那么生成一个随机字符串，一般都会获取到
             {
-                deviceId = g_uuidString()
+                deviceId = g_uuid()
             }
             UserDefaultsAccessor.shared.write(key: UDAKeyType.deviceId, value: deviceId)
             return deviceId

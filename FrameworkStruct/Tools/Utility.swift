@@ -59,13 +59,13 @@ func g_getCopy(origin: Any?) -> Any?
 }
 
 ///获得类型的类名的字符串
-func g_getClassName(_ aClass: AnyClass) -> String
+func g_className(_ aClass: AnyClass) -> String
 {
     NSStringFromClass(aClass).components(separatedBy: ".").last!
 }
 
 ///获得一个对象的类名
-func g_getObjClassName(_ obj: AnyObject) -> String
+func g_objClassName(_ obj: AnyObject) -> String
 {
     let typeName = type(of: obj).description()
     if(typeName.contains("."))
@@ -79,7 +79,7 @@ func g_getObjClassName(_ obj: AnyObject) -> String
 }
 
 ///获取window对象
-func g_getWindow() -> UIWindow
+func g_window() -> UIWindow
 {
     ApplicationManager.shared.window
 }
@@ -115,7 +115,7 @@ func g_after(interval: TimeInterval, onMain: Bool = true, action: @escaping Void
 }
     
 ///生成一个随机字符串
-func g_uuidString() -> String
+func g_uuid() -> String
 {
     EncryptManager.shared.uuidString()
 }
@@ -133,7 +133,7 @@ func g_des(_ str: String, key: String) -> String
 }
 
 ///des解密一个字符串
-func g_decrypt(_ str: String?, key: String) -> String?
+func g_desDecrypt(_ str: String?, key: String) -> String?
 {
     guard str != nil else {
         return nil

@@ -158,7 +158,7 @@ let kiPhoneXHeight: CGFloat = 812.0
 var kStatusHeight: CGFloat {
     if #available(iOS 13.0, *)
     {
-        return g_getWindow().windowScene?.statusBarManager?.statusBarFrame.size.height ?? (kScreenHeight >= 812.0 ? 44.0 : 20.0)
+        return g_window().windowScene?.statusBarManager?.statusBarFrame.size.height ?? (kScreenHeight >= 812.0 ? 44.0 : 20.0)
     }
     else
     {
