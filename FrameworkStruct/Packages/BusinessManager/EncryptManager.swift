@@ -139,4 +139,28 @@ extension EncryptManager: ExternalInterface
         return String.init(data: data, encoding: .utf8)
     }
     
+    ///RSA公钥加密
+    func rsa()
+    {
+        
+    }
+    
+    ///RSA私钥解密
+    func rsaDecrypt()
+    {
+        
+    }
+    
+    ///AES加密
+    func aes()
+    {
+        
+    }
+    
+    ///AES解密
+    func aesDecrypt()
+    {
+        
+    }
+    
 }
