@@ -108,6 +108,12 @@ let originStatusStep: Int = 10
 //参数和返回值都为空的闭包
 typealias VoidClosure = (() -> Void)
 
+//返回值为Any的闭包
+typealias AnyClosure = ((Any) -> Void)
+
+//返回值为可选Any的闭包
+typealias OptionalAnyClosure = ((Any?) -> Void)
+
 //返回NSError的闭包
 typealias ErrorClosure = ((NSError) -> Void)
 

@@ -46,6 +46,27 @@ class WebAdapter: OriginAdapter
 //接口方法
 extension WebAdapter: ExternalInterface
 {
+    ///在系统浏览器中打开url，返回是否打开成功
+    func openInBrowser(_ urlStr: String, completion: ((_ success: Bool) -> Void)? = nil)
+    {
+        if let url = URL(string: urlStr)
+        {
+            UIApplication.shared.open(url, options: [:]) { (success) in
+                if let comp = completion
+                {
+                    comp(success)
+                }
+            }
+        }
+        else
+        {
+            if let comp = completion
+            {
+                comp(false)
+            }
+        }
+    }
+    
     ///创建一个webviewcontroller
     func createWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true) -> BasicWebViewController
     {
@@ -78,25 +99,6 @@ extension WebAdapter: ExternalInterface
         }
     }
     
-    ///在系统浏览器中打开url，返回是否打开成功
-    func openInBrowser(_ urlStr: String, completion: ((_ success: Bool) -> Void)? = nil)
-    {
-        if let url = URL(string: urlStr)
-        {
-            UIApplication.shared.open(url, options: [:]) { (success) in
-                if let comp = completion
-                {
-                    comp(success)
-                }
-            }
-        }
-        else
-        {
-            if let comp = completion
-            {
-                comp(false)
-            }
-        }
-    }
+    
     
 }

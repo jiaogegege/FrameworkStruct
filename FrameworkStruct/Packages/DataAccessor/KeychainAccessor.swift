@@ -50,8 +50,8 @@ extension KeychainAccessor: InternalType
     //保存的私密数据的类型，根据实际需求添加类型
     enum KADataType: String
     {
-        case password = "KA_password"           //密码
-        case idCard = "KA_idCard"               //身份证号
+        case password = "FS_KA_password"           //密码
+        case idCard = "FS_KA_idCard"               //身份证号
     }
     
 }

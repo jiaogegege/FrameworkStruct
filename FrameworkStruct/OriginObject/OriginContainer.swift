@@ -29,7 +29,7 @@ protocol ContainerProtocol
     func get(key: AnyHashable) -> Any?
     
     //异步获取数据，优先从容器中获取，如果没有则从数据源获取
-    func get(key: AnyHashable, completion: ((_ data: Any?) -> Void))
+    func get(key: AnyHashable, completion: OptionalAnyClosure)
         
     //同步修改数据，数据保存在容器中修改后通知所有订阅对象刷新数据
     func mutate(key: AnyHashable, value: Any)
@@ -39,7 +39,7 @@ protocol ContainerProtocol
     
     //异步提交数据，将数据写入本地数据源或远程数据源
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
-    func commit(key: AnyHashable, value: Any, success: ((_ result: Any?) -> Void), failure: ErrorClosure)
+    func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: ErrorClosure)
     
     //同步提交所有数据，将所有数据写入本地数据源
     func commitAll()
@@ -47,13 +47,13 @@ protocol ContainerProtocol
     //异步提交所有数据，将所有数据写入本地数据源或远程数据源
     //异步提交所有数据涉及到多个异步操作的同步通信，并且不一定所有数据都支持异步提交服务，慎重使用这个方法
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
-    func commitAll(success: ((_ result: Any?) -> Void), failure: ErrorClosure)
+    func commitAll(success: OptionalAnyClosure, failure: ErrorClosure)
     
     //同步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据；同时返回这个数据
     func refresh(key: AnyHashable) -> Any?
     
     //异步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据，同时返回这个数据
-    func refresh(key: AnyHashable, completion: ((_ data: Any?) -> Void))
+    func refresh(key: AnyHashable, completion: OptionalAnyClosure)
     
     //同步刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据，同时返回所有刷新的数据，key就是数据的key
     func refreshAll() -> Dictionary<AnyHashable, Any>?
@@ -149,7 +149,7 @@ extension OriginContainer: ContainerProtocol
         return self.getCopy(origin: data)
     }
     
-    @objc func get(key: AnyHashable, completion: ((Any?) -> Void)) {
+    @objc func get(key: AnyHashable, completion: OptionalAnyClosure) {
         //子类实现和具体存取器的交互
         //理论上优先从容器获取，如果没有则从具体的存取器获取
     }
@@ -164,7 +164,7 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
-    @objc func commit(key: AnyHashable, value: Any, success: ((Any?) -> Void), failure: (NSError) -> Void) {
+    @objc func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: ErrorClosure) {
         //子类实现和具体存取器的交互
     }
     
@@ -172,7 +172,7 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
-    func commitAll(success: ((Any?) -> Void), failure: (NSError) -> Void) {
+    func commitAll(success: OptionalAnyClosure, failure: ErrorClosure) {
         //子类实现和具体存取器的交互
     }
     
@@ -181,7 +181,7 @@ extension OriginContainer: ContainerProtocol
         return nil
     }
     
-    @objc func refresh(key: AnyHashable, completion: ((Any?) -> Void)) {
+    @objc func refresh(key: AnyHashable, completion: OptionalAnyClosure) {
         //子类实现和具体存取器的交互
     }
     
