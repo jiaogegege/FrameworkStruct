@@ -23,7 +23,7 @@ import UIKit
     var dismissCallback: VoidClosure? {get set}
     
     //要显示的弹框需要实现该方法，当管理器将要显示弹窗时，会调用这个方法，弹窗可根据实际情况进行显示的操作；hostView一般是UIWindow
-    func show(hostView: UIView)
+    func show(_ hostView: UIView?)
     
     //当某些弹窗的优先级更高，需要优先显示时，会隐藏当前正在显示的弹窗，这个方法告诉弹窗做一些处理工作，隐藏后等待时间再次显示
     func hide()
@@ -71,7 +71,6 @@ class DialogManager: OriginManager
     //显示一个弹窗
     fileprivate func show(_ vieww: DMDialogType? = nil)
     {
-        let hostView = g_window()
         if let v = vieww //如果传入了参数，那么优先显示参数的view
         {
             if self.isShowing() //如果正在显示view，先隐藏
@@ -80,13 +79,13 @@ class DialogManager: OriginManager
                 {
                     self.backup(vieww: vi)   //隐藏
                 }
-                v.show(hostView: hostView)
+                v.show(nil)
                 self.showingView = v
                 self.stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
             }
             else    //当前没有显示view，直接显示参数的view
             {
-                v.show(hostView: hostView)
+                v.show(nil)
                 self.showingView = v
                 self.stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
             }
@@ -104,7 +103,7 @@ class DialogManager: OriginManager
                 {
                     if let vi = self.queue.pop()
                     {
-                        vi.show(hostView: hostView)
+                        vi.show(nil)
                         self.showingView = vi
                         self.stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
                     }
@@ -148,7 +147,7 @@ class DialogManager: OriginManager
         //如果有
         if let vi = self.stack.pop()
         {
-            vi.show(hostView: g_window())
+            vi.show(nil)
             //标记为正在显示
             self.showingView = vi
             stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
@@ -236,9 +235,9 @@ extension DialogManager: ExternalInterface
     }
     
     ///想要显示青少年模式弹窗
-    func wantShowTeenMode(enter:@escaping VoidClosure, confirm:@escaping VoidClosure)
+    func wantShowTeenMode(enter:@escaping VoidClosure, confirm:@escaping VoidClosure, hostView: UIView? = nil)
     {
-        let v = TeenagerModeDialog(frame: .zero)
+        let v = TeenagerModeDialog()
         weak var weakObj = v
         v.enterTeenModeCallback = {() in
             weakObj?.dismiss()
@@ -247,6 +246,9 @@ extension DialogManager: ExternalInterface
         v.confirmCallback = {() in
             weakObj?.dismiss()
             confirm()
+        }
+        if let hostView = hostView {
+            v.hostView = hostView
         }
         self.wantShow(vi: v)
     }

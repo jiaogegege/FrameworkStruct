@@ -17,11 +17,11 @@ class TeenagerModeDialog: FSDialog
     var confirmCallback: VoidClosure? = nil     //我知道了
     
     //UI组件
-    var headImageView: UIImageView! //头图
-    var contentLabel: UILabel!  //内容说明
-    var goBtn: UIButton!    //去设置青少年模式
-    var sepLine: UIView!    //分割线
-    var confirmBtn: UIButton!   //我知道了按钮
+    fileprivate var headImageView: UIImageView! //头图
+    fileprivate var contentLabel: UILabel!  //内容说明
+    fileprivate var goBtn: UIButton!    //去设置青少年模式
+    fileprivate var sepLine: UIView!    //分割线
+    fileprivate var confirmBtn: UIButton!   //我知道了按钮
     
     
     //MARK: 方法
@@ -50,7 +50,6 @@ class TeenagerModeDialog: FSDialog
     override func configView() {
         super.configView()
         
-        containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 5.0
         containerView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

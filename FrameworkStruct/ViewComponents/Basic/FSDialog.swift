@@ -31,6 +31,9 @@ class FSDialog: UIView, DialogManagerProtocol
         }
     }
     
+    //宿主view，默认全局UIWindow，如果在`show()`的时候指定了hostView，那么该属性不起作用
+    var hostView: UIView = g_window()
+    
     //显示消失的动画效果类型
     //如果子类覆写了`showAnimation`等动画方法，其优先级高于该属性
     var showType: FSDShowType = .gradient
@@ -81,6 +84,8 @@ class FSDialog: UIView, DialogManagerProtocol
     {
         bgView.frame = self.bounds
         bgView.backgroundColor = self.bgColor
+        
+        containerView.backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
@@ -231,11 +236,19 @@ extension FSDialog: InternalType
 extension FSDialog
 {
     //子类根据需要覆写这个方法，默认添加在全局window上
-    func show(hostView: UIView = g_window())
+    func show(_ hostView: UIView?)
     {
         self.resetOrigin()
+        //计算hostView
+        var hv: UIView
+        if let host = hostView {
+            hv = host
+        }
+        else {
+            hv = self.hostView
+        }
+        hv.addSubview(self)
         //执行显示动画
-        hostView.addSubview(self)
         weak var weakSelf = self
         self.showAnimation {
             if let cb = weakSelf?.showCallback
