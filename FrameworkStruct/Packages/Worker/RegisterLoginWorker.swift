@@ -60,7 +60,6 @@ extension RegisterLoginWorker: ExternalInterface
                 //TODO: 登录失败后可能有一些操作
                 failure(error)
             }
-
         }
     }
     

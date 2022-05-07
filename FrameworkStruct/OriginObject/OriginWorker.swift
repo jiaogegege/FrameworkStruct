@@ -104,7 +104,7 @@ extension OriginWorker: WorkerProtocol
         {
             return true
         }
-        FSLog("can't work, current state is \(currentWorkState)")
+        FSLog("\(self.className) can't work, current state is \(currentWorkState)")
         return false
     }
     
