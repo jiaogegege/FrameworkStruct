@@ -24,7 +24,7 @@ protocol WorkerProtocol
     ///是否可以工作，当处于ready和working状态时返回true，调用任何业务类方法时，都要先判断是否可以工作，不然可能出现异常和闪退
     var canWork: Bool { get }
     
-    ///开始工作，调用worker的任何方法都要先调用这个方法，表示工作者开始工作，如果状态不对，可能抛出一个错误
+    ///开始工作，调用Worker的任何工作方法之前都要先调用这个方法，或者在所有初始化方法完成和外部数据赋值完毕之后调用该方法；表示工作者开始工作，如果状态不对，可能抛出一个错误
     func startWork() throws
     
     ///结束工作，每一个工作者在完成工作之后，都需要被调用这个方法，用来清理资源，释放内存，当调用完这个方法后，该工作者处于不可工作状态，不应该再调用其任何方法
@@ -42,7 +42,7 @@ class OriginWorker: NSObject
     //状态管理器，建议有复杂变化的状态都通过状态管理器管理
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
-    //监控器，每一个管理器在创建的时候都要加入到监控器中
+    //监控器，每一个工作者在创建的时候都要加入到监控器中
     weak var monitor: WorkerMonitor!
     
     
@@ -104,6 +104,7 @@ extension OriginWorker: WorkerProtocol
         {
             return true
         }
+        FSLog("can't work, current state is \(currentWorkState)")
         return false
     }
     

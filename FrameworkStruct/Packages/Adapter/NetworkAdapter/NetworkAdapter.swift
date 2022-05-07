@@ -101,7 +101,7 @@ extension NetworkAdapter: ExternalInterface
      *
      * 参数：
      * account：手机号；
-     * token：易盾返回的token；
+     * token：一个token，可以通过网易易盾获取或者本地生成；
      * verificationCode：内测码；
      * verifyCode：验证码
      *

@@ -12,10 +12,56 @@
  */
 import UIKit
 
-class RegisterLoginWorker: OriginWorker
+final class RegisterLoginWorker: OriginWorker
 {
     //MARK: 属性
+    //用户管理器
+    fileprivate lazy var userMgr: UserManager = UserManager.shared
+    
+    //注册或登录时的手机号，可能从外部输入，也可能从上次登录的信息中读取
+    fileprivate(set) var phone: String?
     
     //MARK: 方法
+    override init() {
+        //初始化一些数据
+        if let last = UserManager.shared.lastUserPhone
+        {
+            phone = last
+        }
+        super.init()
+    }
+}
+
+
+//接口方法
+extension RegisterLoginWorker: ExternalInterface
+{
+    ///外部输入手机号，比如在输入手机号界面输入手机号
+    func inputPhone(_ phoneStr: String)
+    {
+        guard canWork else {
+            return
+        }
+        phone = phoneStr.trim()
+    }
+    
+    ///验证码登录
+    func login(verificationCode: String, success: @escaping ((UserInfoModel) -> Void), failure: @escaping ErrorClosure)
+    {
+        guard canWork else {
+            return
+        }
+        if let ph = phone
+        {
+            userMgr.login(phone: ph, verificationCode: verificationCode.trim(), privateCode: nil) { userInfo in
+                //TODO: 登录成功后可能有一些操作
+                success(userInfo)
+            } failure: { error in
+                //TODO: 登录失败后可能有一些操作
+                failure(error)
+            }
+
+        }
+    }
     
 }
