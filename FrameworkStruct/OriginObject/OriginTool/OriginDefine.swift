@@ -114,8 +114,14 @@ typealias AnyClosure = ((Any) -> Void)
 //返回值为可选Any的闭包
 typealias OptionalAnyClosure = ((Any?) -> Void)
 
-//返回NSError的闭包
-typealias ErrorClosure = ((NSError) -> Void)
+//返回Error的闭包
+typealias ErrorClosure = ((Error) -> Void)
 
 //返回可选Error的闭包
-typealias OptionalErrorClosure = ((NSError?) -> Void)
+typealias OptionalErrorClosure = ((Error?) -> Void)
+
+//返回NSError的闭包
+typealias NSErrorClosure = ((NSError) -> Void)
+
+//返回可选NSError的闭包
+typealias OptionalNSErrorClosure = ((NSError?) -> Void)

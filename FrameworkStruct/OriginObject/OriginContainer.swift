@@ -39,7 +39,7 @@ protocol ContainerProtocol
     
     //异步提交数据，将数据写入本地数据源或远程数据源
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
-    func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: ErrorClosure)
+    func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: NSErrorClosure)
     
     //同步提交所有数据，将所有数据写入本地数据源
     func commitAll()
@@ -47,7 +47,7 @@ protocol ContainerProtocol
     //异步提交所有数据，将所有数据写入本地数据源或远程数据源
     //异步提交所有数据涉及到多个异步操作的同步通信，并且不一定所有数据都支持异步提交服务，慎重使用这个方法
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
-    func commitAll(success: OptionalAnyClosure, failure: ErrorClosure)
+    func commitAll(success: OptionalAnyClosure, failure: NSErrorClosure)
     
     //同步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据；同时返回这个数据
     func refresh(key: AnyHashable) -> Any?
@@ -164,7 +164,7 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
-    @objc func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: ErrorClosure) {
+    @objc func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: NSErrorClosure) {
         //子类实现和具体存取器的交互
     }
     
@@ -172,7 +172,7 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
-    func commitAll(success: OptionalAnyClosure, failure: ErrorClosure) {
+    func commitAll(success: OptionalAnyClosure, failure: NSErrorClosure) {
         //子类实现和具体存取器的交互
     }
     

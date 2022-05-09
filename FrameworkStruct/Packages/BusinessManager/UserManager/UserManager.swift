@@ -56,13 +56,13 @@ extension UserManager: ExternalInterface
     }
     
     //当前登录的用户id
-    var currentUserId: String {
-        return ""
+    var currentUserId: String? {
+        return currentUser?.userId
     }
 
     //当前登录的用户token
-    var currentUserToken: String {
-        return ""
+    var currentUserToken: String? {
+        return currentUser?.token
     }
     
     /**************************************** 登录注册相关功能 Section Begin ***************************************/
@@ -72,7 +72,7 @@ extension UserManager: ExternalInterface
                verificationCode: String,
                privateCode: String? = nil,
                success: @escaping ((UserInfoModel) -> Void),
-               failure: @escaping ErrorClosure)
+               failure: @escaping NSErrorClosure)
     {
         na.loginWithPhoneAndSms(phone: phone, token: ApplicationManager.shared.getDeviceId(), verifyCode: verificationCode, verificationCode: privateCode) { userInfo in
             //TODO: 登录成功后做一些数据保存的操作和注册推送等操作
