@@ -16,11 +16,11 @@ class UserManager: OriginManager
     //单例对象
     static let shared = UserManager()
     
-    //当前登录的用户信息，当用户登录或注册成功后有值
-    fileprivate(set) var currentUser: UserInfoModel?
-    
     //网络适配器
     fileprivate lazy var na: NetworkAdapter = NetworkAdapter.shared
+    
+    //数据容器
+    fileprivate lazy var dc: DatasContainer = DatasContainer.shared
     
     
     //MARK: 方法
@@ -55,6 +55,11 @@ extension UserManager: ExternalInterface
         return nil
     }
     
+    //当前登录的用户信息，当用户登录或注册成功后有值
+    var currentUser: UserInfoModel? {
+        DatasContainer.shared.getCurrentUserInfo()
+    }
+    
     //当前登录的用户id
     var currentUserId: String? {
         return currentUser?.userId
@@ -74,13 +79,21 @@ extension UserManager: ExternalInterface
                success: @escaping ((UserInfoModel) -> Void),
                failure: @escaping NSErrorClosure)
     {
-        na.loginWithPhoneAndSms(phone: phone, token: ApplicationManager.shared.getDeviceId(), verifyCode: verificationCode, verificationCode: privateCode) { userInfo in
+        na.loginWithPhoneAndSms(phone: phone, token: ApplicationManager.shared.getDeviceId(), verifyCode: verificationCode, verificationCode: privateCode) {[weak self] userInfo in
             //TODO: 登录成功后做一些数据保存的操作和注册推送等操作
+            //保存到数据容器
+            self?.dc.mutate(key: DCDataKey.currentUserInfo, value: userInfo)
             success(userInfo)
         } failure: { error in
             //TODO: 登录失败后可能有一些操作
             failure(error)
         }
+    }
+    
+    ///退出登录
+    func logout()
+    {
+        
     }
     
     /**************************************** 登录注册相关功能 Section End ***************************************/

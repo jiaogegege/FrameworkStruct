@@ -43,7 +43,7 @@ class DatasContainer: OriginContainer
 //接口方法，提供具体的数据访问方法
 extension DatasContainer: ExternalInterface
 {
-    ///获取所有用户信息
+    ///获取本地所有用户信息
     func getAllUserInfo(completion: @escaping ((_ users: [UserInfoModel]?) -> Void))
     {
         if let users = self.get(key: DCDataKey.allUserInfo)
@@ -62,8 +62,14 @@ extension DatasContainer: ExternalInterface
         }
     }
     
-    
-    
+    ///获取当前登录的用户信息,可能为nil
+    func getCurrentUserInfo() -> UserInfoModel?
+    {
+        guard let user = self.get(key: DCDataKey.currentUserInfo) as? UserInfoModel else {
+            return nil
+        }
+        return user
+    }
     
     
     
