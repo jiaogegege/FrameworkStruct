@@ -698,6 +698,8 @@
 		EADE522827F6F554005417BE /* SocializeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522727F6F554005417BE /* SocializeActivity.swift */; };
 		EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0079327B63DEA008C71B4 /* HomeDataModel.m */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
+		EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EB282A05AE0053BC85 /* OCUtility.m */; };
+		EAF401EF282A07530053BC85 /* FSException.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EE282A07530053BC85 /* FSException.m */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
 		EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A97277B4AD900676268 /* DocumentMonitor.swift */; };
 		EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9B277B4BEE00676268 /* OriginHandler.swift */; };
@@ -1840,6 +1842,10 @@
 		EAE0079227B63DEA008C71B4 /* HomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataModel.h; sourceTree = "<group>"; };
 		EAE0079327B63DEA008C71B4 /* HomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDataModel.m; sourceTree = "<group>"; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
+		EAF401EA282A05AE0053BC85 /* OCUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCUtility.h; sourceTree = "<group>"; };
+		EAF401EB282A05AE0053BC85 /* OCUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUtility.m; sourceTree = "<group>"; };
+		EAF401ED282A07530053BC85 /* FSException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSException.h; sourceTree = "<group>"; };
+		EAF401EE282A07530053BC85 /* FSException.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSException.m; sourceTree = "<group>"; };
 		EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 		EAF85A97277B4AD900676268 /* DocumentMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMonitor.swift; sourceTree = "<group>"; };
 		EAF85A9B277B4BEE00676268 /* OriginHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginHandler.swift; sourceTree = "<group>"; };
@@ -2840,6 +2846,10 @@
 				EA7A7CB82788305200DD2310 /* WeakSet.m */,
 				EA7A7CB227882F4700DD2310 /* WeakDictionary.h */,
 				EA7A7CB327882F4700DD2310 /* WeakDictionary.m */,
+				EAF401EA282A05AE0053BC85 /* OCUtility.h */,
+				EAF401EB282A05AE0053BC85 /* OCUtility.m */,
+				EAF401ED282A07530053BC85 /* FSException.h */,
+				EAF401EE282A07530053BC85 /* FSException.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -4724,6 +4734,7 @@
 				EA3E8B1A27B77CEA006A2715 /* Star.swift in Sources */,
 				EA3E8AC327B77CEA006A2715 /* ShapeLayer.swift in Sources */,
 				EA3E8AB327B77CEA006A2715 /* AnyValueProvider.swift in Sources */,
+				EAF401EF282A07530053BC85 /* FSException.m in Sources */,
 				EA3E8AE027B77CEA006A2715 /* ImageCompositionLayer.swift in Sources */,
 				EA99373227994F6100480147 /* TABClassicAnimation.m in Sources */,
 				EA9A75AC27C731EB00A11FC8 /* ioapi.c in Sources */,
@@ -4987,6 +4998,7 @@
 				EA3E8AEF27B77CEA006A2715 /* FillRenderer.swift in Sources */,
 				EAC8A76B27625BA70088293F /* MJPropertyType.m in Sources */,
 				EA99373D27994F6100480147 /* TABShimmerAnimation.m in Sources */,
+				EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */,
 				EA9A75E727C739DF00A11FC8 /* SRRunLoopThread.m in Sources */,
 				EA99371C27994F6100480147 /* TABAnimatedDocumentMethod.m in Sources */,
 				EA11126B27B3BE2C006D0B83 /* DispatchQueue+Alamofire.swift in Sources */,

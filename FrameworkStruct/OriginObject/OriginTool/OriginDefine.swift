@@ -125,3 +125,9 @@ typealias NSErrorClosure = ((NSError) -> Void)
 
 //返回可选NSError的闭包
 typealias OptionalNSErrorClosure = ((NSError?) -> Void)
+
+//返回Exception的闭包
+typealias ExceptionClosure = ((NSException) -> Void)
+
+//返回可选Exception的闭包
+typealias OptionalExceptionClosure = ((NSException?) -> Void)
