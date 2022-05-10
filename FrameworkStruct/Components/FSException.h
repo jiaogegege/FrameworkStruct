@@ -42,6 +42,12 @@ typedef NS_ENUM(NSInteger, FSExceptionSeverityRank)
 ///对于预定义的异常,使用该便利方法
 +(FSException *)exceptionWithCode:(FSExceptionCode)code userInfo:(NSDictionary *)aUserInfo;
 
+//获取异常的名字
++(NSString *_Nonnull)getExceptionName:(FSExceptionCode)code;
+
+//获取异常等级
++(FSExceptionSeverityRank)getExceptionRank:(FSExceptionCode)code;
+
 
 @end
 

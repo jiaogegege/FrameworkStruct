@@ -30,7 +30,7 @@
 }
 
 //获取异常的名字
-+(NSString *)getExceptionName:(FSExceptionCode)code
++(NSString *_Nonnull)getExceptionName:(FSExceptionCode)code
 {
     switch (code) {
         case FSExceptionCodeNone:
