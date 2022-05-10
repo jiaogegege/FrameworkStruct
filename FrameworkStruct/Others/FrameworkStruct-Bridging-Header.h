@@ -8,6 +8,7 @@
  */
 #import "OCConst.h"
 #import "OCUtility.h"
+#import "FSException.h"
 #import "GCWaterfallFlowLayout.h"
 #import "StatusManager.h"
 #import "NSObject+PropertyListing.h"
