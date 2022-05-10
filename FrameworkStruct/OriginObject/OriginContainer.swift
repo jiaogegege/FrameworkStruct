@@ -196,10 +196,16 @@ extension OriginContainer: ContainerProtocol
     
     @objc func clear(key: AnyHashable) {
         self.container.removeValue(forKey: key)
+        //清空数据的时候，要对所有订阅对象发出通知
+        self.dispatch(key: key, value: self.get(key: key) as Any)
     }
     
     @objc func clearAll() {
-        self.container.removeAll()
+        //遍历key，依次清空对应的数据
+        for key in self.container.keys
+        {
+            self.clear(key: key)
+        }
     }
     
     //订阅数据

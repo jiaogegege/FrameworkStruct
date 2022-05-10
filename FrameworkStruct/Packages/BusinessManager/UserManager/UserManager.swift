@@ -16,6 +16,9 @@ class UserManager: OriginManager
     //单例对象
     static let shared = UserManager()
     
+    //当前登录的用户信息，当用户登录或注册成功后有值
+    fileprivate(set) var currentUser: UserInfoModel?
+    
     //网络适配器
     fileprivate lazy var na: NetworkAdapter = NetworkAdapter.shared
     
@@ -28,6 +31,8 @@ class UserManager: OriginManager
     private override init()
     {
         super.init()
+        //订阅数据容器服务
+        self.dc.subscribe(key: DCDataKey.currentUserInfo, delegate: self)
     }
     
     //重写复制方法
@@ -45,6 +50,23 @@ class UserManager: OriginManager
 }
 
 
+//代理方法
+extension UserManager: DelegateProtocol, ContainerServices
+{
+    func containerDidUpdateData(key: AnyHashable, value: Any)
+    {
+        if let k = key as? DCDataKey
+        {
+            if k == DCDataKey.currentUserInfo
+            {
+                self.currentUser = value as? UserInfoModel
+            }
+        }
+    }
+    
+}
+
+
 /**
  * 外部接口方法
  */
@@ -53,11 +75,6 @@ extension UserManager: ExternalInterface
     //上一次登录用户的手机号，如果没有登录信息则为nil
     var lastUserPhone: String? {
         return nil
-    }
-    
-    //当前登录的用户信息，当用户登录或注册成功后有值
-    var currentUser: UserInfoModel? {
-        DatasContainer.shared.getCurrentUserInfo()
     }
     
     //当前登录的用户id
