@@ -14,8 +14,11 @@ import Foundation
  * 数据容器服务
  */
 protocol ContainerServices {
-    //数据容器更新了某个数据，通知所有关联对象更新该数据
+    //数据容器更新了某个数据，通知所有订阅对象更新该数据
     func containerDidUpdateData(key: AnyHashable, value: Any)
+    
+    //数据容器清空了某个数据,通知所有订阅对象数据被清空,订阅对象可根据实际需求作出反应
+    func containerDidClearData(key: AnyHashable)
     
 }
 
@@ -108,7 +111,7 @@ class OriginContainer: NSObject
     }
     
     //返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
-    func getCopy(_ origin: Any?) -> Any?
+    fileprivate func getCopy(_ origin: Any?) -> Any?
     {
         if origin != nil
         {
@@ -156,6 +159,7 @@ extension OriginContainer: ContainerProtocol
     
     @objc func mutate(key: AnyHashable, value: Any) {
         self.container[key] = self.getCopy(value)
+        
         //提交数据的时候，要对所有订阅对象发出通知
         self.dispatch(key: key, value: self.get(key: key) as Any)
     }
@@ -196,8 +200,26 @@ extension OriginContainer: ContainerProtocol
     
     @objc func clear(key: AnyHashable) {
         self.container.removeValue(forKey: key)
+        
         //清空数据的时候，要对所有订阅对象发出通知
-        self.dispatch(key: key, value: self.get(key: key) as Any)
+        let array = self.delegates[key]
+        array?.addPointer(nil)
+        array?.compact()
+        let count = array?.count ?? 0
+        if count > 0
+        {
+            for i in 0..<count
+            {
+                if let delegate = array?.object(at: i) as? ContainerServices
+                {
+                    delegate.containerDidClearData(key: key)
+                }
+            }
+        }
+        else    //如果没有对象，那么删除这个key/value（节省内存空间）
+        {
+            self.delegates[key] = nil
+        }
     }
     
     @objc func clearAll() {
@@ -234,10 +256,9 @@ extension OriginContainer: ContainerProtocol
         {
             for i in 0..<count
             {
-                let delegate = array?.object(at: i)
-                if let dele = delegate as? ContainerServices
+                if let delegate = array?.object(at: i) as? ContainerServices
                 {
-                    dele.containerDidUpdateData(key: key, value: value)
+                    delegate.containerDidUpdateData(key: key, value: value)
                 }
             }
         }

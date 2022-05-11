@@ -80,6 +80,16 @@ extension ThemeManager: DelegateProtocol, ContainerServices
         }
     }
     
+    func containerDidClearData(key: AnyHashable) {
+        if let k = key as? TCDataKey
+        {
+            if k == TCDataKey.currentTheme
+            {
+                //当前主题被清空?不太可能发生,至少有一个当前主题
+            }
+        }
+    }
+    
 }
 
 

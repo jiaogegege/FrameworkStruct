@@ -64,6 +64,16 @@ extension UserManager: DelegateProtocol, ContainerServices
         }
     }
     
+    func containerDidClearData(key: AnyHashable) {
+        if let k = key as? DCDataKey
+        {
+            if k == DCDataKey.currentUserInfo
+            {
+                self.currentUser = nil
+            }
+        }
+    }
+    
 }
 
 
