@@ -18,7 +18,7 @@ class DatasContainer: OriginContainer
     static let shared = DatasContainer()
     
     //数据库存取器
-    fileprivate let dba = DatabaseAccessor.shared
+    fileprivate lazy var dba = DatabaseAccessor.shared
     
     
     //MARK: 方法
