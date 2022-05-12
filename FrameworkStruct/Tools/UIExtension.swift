@@ -59,7 +59,7 @@ extension UIViewController
         
     }
     
-    //配置界面，用来设置界面组件，比如frame，约束，颜色，字体等，可多次执行
+    //配置界面，用来设置界面组件，比如frame，颜色，字体等，可多次执行
     //如果子类覆写这个方法，需要调用父类方法
     //初始化时执行一次
     @objc func configUI()
