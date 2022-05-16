@@ -110,6 +110,56 @@ func km2nmi(_ km: Double) -> Double
 }
 
 
+//MARK: 速度
+///千米/小时to米/秒
+func kmh2ms(_ kmh: Double) -> Double
+{
+    return kmh * 0.277778
+}
+
+///米/秒to千米/小时
+func ms2kmh(_ ms: Double) -> Double
+{
+    return ms / 0.277778
+}
+
+///英里/小时to千米/小时
+func mileh2kmh(_ mileh: Double) -> Double
+{
+    return mileh * 1.6093427
+}
+
+///千米/小时to英里/小时
+func kmh2mileh(_ kmh: Double) -> Double
+{
+    return kmh / 1.6093427
+}
+
+///节to千米/小时
+func kn2kmh(_ kn: Double) -> Double
+{
+    return kn * 1.852
+}
+
+///千米/小时to节
+func kmh2kn(_ kmh: Double) -> Double
+{
+    return kmh / 1.852
+}
+
+///马赫to米/秒
+func M2ms(_ M: Double) -> Double
+{
+    return M * 340.3
+}
+
+///米/秒to马赫
+func ms2M(_ ms: Double) -> Double
+{
+    return ms / 340.3
+}
+
+
 //MARK: 角度
 ///弧度to毫弧度
 func rad2mrad(_ rad: Double) -> Double
@@ -261,6 +311,30 @@ func L2pt(_ L: Double) -> Double
 
 
 //MARK: 重量
+///吨to千克
+func t2kg(_ t: Double) -> Double
+{
+    return t * 1000.0
+}
+
+///千克to吨
+func kg2t(_ kg: Double) -> Double
+{
+    return kg / 1000.0
+}
+
+///担to千克
+func dan2kg(_ dan: Double) -> Double
+{
+    return dan * 100.0
+}
+
+///千克to担
+func kg2dan(_ kg: Double)-> Double
+{
+    return kg / 100.0
+}
+
 ///磅to千克
 func pound2kg(_ pound: Double) -> Double
 {
@@ -273,16 +347,76 @@ func kg2pound(_ kg: Double) -> Double
     return kg / 0.45359237
 }
 
+///英石to千克
+func st2kg(_ st: Double) -> Double
+{
+    return st * 6.3502932
+}
+
+///千克to英石
+func kg2st(_ kg: Double) -> Double
+{
+    return kg / 6.3502932
+}
+
+///千克to斤
+func kg2jin(_ kg: Double) -> Double
+{
+    return kg * 2.0
+}
+
+///斤to千克
+func jin2kg(_ jin: Double) -> Double
+{
+    return jin / 2.0
+}
+
+///斤to两
+func jin2liang(_ jin: Double) -> Double
+{
+    return jin * 10.0
+}
+
+///两to斤
+func liang2jin(_ liang: Double) -> Double
+{
+    return liang / 10.0
+}
+
+///两to钱
+func liang2qian(_ liang: Double) -> Double
+{
+    return liang * 10.0
+}
+
+///钱to两
+func qian2liang(_ qian: Double) -> Double
+{
+    return qian / 10.0
+}
+
+///两to克
+func liang2g(_ liang: Double) -> Double
+{
+    return liang * 50.0
+}
+
+///克to两
+func g2liang(_ g: Double)-> Double
+{
+    return g / 50.0
+}
+
 ///常衡盎司to克
 func ozav2g(_ ozav: Double) -> Double
 {
-    return ozav * 28.350
+    return ozav * 28.3495231
 }
 
 ///克to常衡盎司
 func g2ozav(_ g: Double) -> Double
 {
-    return g / 28.350
+    return g / 28.3495231
 }
 
 ///金衡盎司to克
@@ -297,42 +431,64 @@ func g2ozt(_ g: Double) -> Double
     return g / 31.103
 }
 
-
-//MARK: 速度
-///千米/小时to米/秒
-func kmh2ms(_ kmh: Double) -> Double
+///克to格令
+func g2gr(_ g: Double) -> Double
 {
-    return kmh * 0.277778
+    return g * 15.4323584
 }
 
-///米/秒to千米/小时
-func ms2kmh(_ ms: Double) -> Double
+///格令to克
+func gr2g(_ gr: Double) -> Double
 {
-    return ms / 0.277778
+    return gr / 15.4323584
 }
 
-///英里/小时to千米/小时
-func mileh2kmh(_ mileh: Double) -> Double
+///克to克拉
+func g2ct(_ g: Double)-> Double
 {
-    return mileh * 1.6093427
+    return g * 5.0
 }
 
-///千米/小时to英里/小时
-func kmh2mileh(_ kmh: Double) -> Double
+///克拉to克
+func ct2g(_ ct: Double) -> Double
 {
-    return kmh / 1.6093427
+    return ct / 5.0
 }
 
-///马赫to米/秒
-func M2ms(_ M: Double) -> Double
+///克拉to分
+func ct2fen(_ ct: Double) -> Double
 {
-    return M * 340.3
+    return ct * 100.0
 }
 
-///米/秒to马赫
-func ms2M(_ ms: Double) -> Double
+///分to克拉
+func fen2ct(_ fen: Double) -> Double
 {
-    return ms / 340.3
+    return fen / 100.0
+}
+
+///克to微克
+func g2μg(_ g: Double) -> Double
+{
+    return g * 1000000.0
+}
+
+///微克to克
+func μg2g(_ μg: Double) -> Double
+{
+    return μg / 1000000.0
+}
+
+///克to分
+func g2fen(_ g: Double) -> Double
+{
+    return g * 500.0
+}
+
+///分to克
+func fen2g(_ fen: Double) -> Double
+{
+    return fen / 500.0
 }
 
 
@@ -349,13 +505,13 @@ func kPa2mmHg(_ kPa: Double) -> Double
     return kPa * 7.5006168
 }
 
-///标准大气压to帕斯卡
+///标准大气压to千帕
 func atm2kPa(_ atm: Double) -> Double
 {
     return atm * 101.325
 }
 
-///帕斯卡to标准大气压
+///千帕to标准大气压
 func kPa2atm(_ kPa: Double) -> Double
 {
     return kPa / 101.325
@@ -385,6 +541,42 @@ func cal2J(_ cal: Double) -> Double
 func J2cal(_ J: Double) -> Double
 {
     return J / 4.184
+}
+
+///度(千瓦·时)to焦耳
+func kWh2J(_ kWh: Double) -> Double
+{
+    return kWh * 3600000.0
+}
+
+///焦耳to度(千瓦·时)
+func J2kWh(_ J: Double) -> Double
+{
+    return J / 3600000.0
+}
+
+///千卡to千焦
+func kcal2kJ(_ kcal: Double) -> Double
+{
+    return kcal * 4.1858518
+}
+
+///千焦to千卡
+func kJ2kcal(_ kJ: Double) -> Double
+{
+    return kJ / 4.1858518
+}
+
+///千克·米to焦耳
+func kgm2J(_ kgm: Double) -> Double
+{
+    return kgm * 9.8039216
+}
+
+///焦耳to千克·米
+func J2kgm(_ J: Double) -> Double
+{
+    return J / 9.8039216
 }
 
 
