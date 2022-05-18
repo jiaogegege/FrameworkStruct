@@ -89,7 +89,7 @@ extension NetworkAdapter: ExternalInterface
     
     ///当前主机地址
     var currentHost: String {
-        return request.hostUrl
+        return request.host
     }
     
     /**************************************** 基本网络功能 Section End ***************************************/

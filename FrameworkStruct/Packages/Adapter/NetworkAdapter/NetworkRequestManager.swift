@@ -182,7 +182,7 @@ extension NetworkRequestManager: ExternalInterface
     }
 
     ///当前host地址
-    var hostUrl: String {
+    var host: String {
         return nt_serverHost.getHost()
     }
     
@@ -332,7 +332,7 @@ extension NetworkRequestManager: ExternalInterface
             desParams = self.encryptParamValues(pas)
         }
         //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
+        let url = exact ? urlPath : self.host + urlPath
         //启动请求
         let task = manager.dataTask(withHTTPMethod: httpMethod.rawValue, urlString: url, parameters: desParams, headers: nil) { uploadProgress in
             FSLog("uploadProgress:\(uploadProgress.completedUnitCount)---\(uploadProgress.totalUnitCount)")
@@ -393,7 +393,7 @@ extension NetworkRequestManager: ExternalInterface
                   completion: @escaping ((_ filePath: String) -> Void),
                   failure: @escaping RequestFailureCallback) -> URLSessionDownloadTask
     {
-        let url = exact ? urlPath : self.hostUrl + urlPath
+        let url = exact ? urlPath : self.host + urlPath
         let config = URLSessionConfiguration.default
         let manager = AFURLSessionManager.init(sessionConfiguration: config)
         var request = URLRequest(url: URL(string: url)!)
@@ -482,7 +482,7 @@ extension NetworkRequestManager: ExternalInterface
             desParams = self.encryptParamValues(pas)
         }
         //组合url
-        let url = exact ? urlPath : self.hostUrl + urlPath
+        let url = exact ? urlPath : self.host + urlPath
         //启动请求
         manager.post(url, parameters: desParams, headers: nil) { formData in
             //拼接数据
