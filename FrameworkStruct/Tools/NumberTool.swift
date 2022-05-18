@@ -17,6 +17,7 @@ typealias IntRangeType = (Int, Int)
 typealias FloatRangeType = (Float, Float)
 typealias DoubleRangeType = (Double, Double)
 
+
 ///数字枚举器
 ///输入一个数字区间，按照设定的步长枚举出一个数列
 ///注意：目前只支持从小到大枚举,step为正数
@@ -27,8 +28,8 @@ struct NumberEnumerator<T: Numeric & Comparable> {
     fileprivate(set) var current: T //当前值
     
     init(range: (T, T), step: T) {
-        min = minBetween(one: range.0, other: range.1)
-        max = maxBetween(one: range.0, other: range.1)
+        min = minBetween(range.0, range.1)
+        max = maxBetween(range.0, range.1)
         self.step = step
         current = min - step     //先把当前值设置为一个较小的值
     }
@@ -94,8 +95,8 @@ func floatEqual(_ a: Float, _ b: Float) -> Bool
 func numberInInterval<T: Comparable>(_ val: T, lhs: T, rhs: T) -> Bool
 {
     //计算最小最大范围
-    let min = minBetween(one: lhs, other: rhs)
-    let max = maxBetween(one: lhs, other: rhs)
+    let min = minBetween(lhs, rhs)
+    let max = maxBetween(lhs, rhs)
     //大于等于最小值，小于等于最大值
     if val >= min && val <= max
     {
@@ -105,13 +106,13 @@ func numberInInterval<T: Comparable>(_ val: T, lhs: T, rhs: T) -> Bool
 }
 
 ///求两个数值中的最大值
-func maxBetween<T: Comparable>(one: T, other: T) -> T
+func maxBetween<T: Comparable>(_ one: T, _ other: T) -> T
 {
     return one >= other ? one : other
 }
 
 ///求两个数值中的最小值
-func minBetween<T: Comparable>(one: T, other: T) -> T
+func minBetween<T: Comparable>(_ one: T, _ other: T) -> T
 {
     return one <= other ? one : other
 }
@@ -120,8 +121,8 @@ func minBetween<T: Comparable>(one: T, other: T) -> T
 func limitInterval<T: Comparable>(_ value: T, min: T, max: T) -> T
 {
     //先判断最大最小值，防止传错
-    let minV = minBetween(one: min, other: max)
-    let maxV = maxBetween(one: min, other: max)
+    let minV = minBetween(min, max)
+    let maxV = maxBetween(min, max)
     
     var val = value
     if val > maxV

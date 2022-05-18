@@ -102,15 +102,9 @@ func isTimePasted(timeStr: String, criticalTimeStr: String?) -> Bool
 }
 
 ///在某个时间基础上增加一定秒数
-func dateByAdd(interal: TimeInterval, baseDate: Date) -> Date
+func dateByAdd(_ interal: TimeInterval, baseDate: Date) -> Date
 {
     return baseDate.addingTimeInterval(interal)
-}
-
-///当前时间往后一定时间
-func nowAfter(_ interval: TimeInterval) -> Date
-{
-    return dateByAdd(interal: interval, baseDate: Date())
 }
 
 ///在某个日期的基础上加上几天返回新的日期
@@ -119,6 +113,12 @@ func dateByAdd(days: Int, baseDate: Date) -> Date
     let interval = TimeInterval(days) * tSecondsInDay
     let newDate = baseDate.addingTimeInterval(interval)
     return newDate
+}
+
+///当前时间往后一定时间
+func nowAfter(_ interval: TimeInterval) -> Date
+{
+    return dateByAdd(interval, baseDate: Date())
 }
 
 ///两个日期之间间隔的天数，计算结果取整数部分

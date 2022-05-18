@@ -264,7 +264,7 @@ extension UIButton
     func clickDisable(interval: TimeInterval = 0.0)
     {
         self.isEnabled = false
-        let intv = maxBetween(one: interval, other: self.disableInterval)
+        let intv = maxBetween(interval, self.disableInterval)
         g_after(interval: intv) {
             self.isEnabled = true
         }

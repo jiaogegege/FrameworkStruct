@@ -398,10 +398,10 @@ extension FSGuideView: InternalType
             case .none:
                 return 0.0
             case .circle:
-                let min = minBetween(one: frame.size.width, other: frame.size.height)
+                let min = minBetween(frame.size.width, frame.size.height)
                 return min / 2.0
             case .rounded(let num):
-                let maxRounded = minBetween(one: frame.size.width, other: frame.size.height) / 2.0
+                let maxRounded = minBetween(frame.size.width, frame.size.height) / 2.0
                 return num > maxRounded ? maxRounded : num
             }
         }
