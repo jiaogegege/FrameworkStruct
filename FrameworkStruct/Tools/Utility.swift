@@ -18,7 +18,7 @@ func printMsg<T>(message: T, fileName: String = #file, methodName: String = #fun
 {
     #if DEBUG
         let arr = fileName.components(separatedBy: "/")
-        print(currentTimeString() + "\(arr.last!) - \(methodName)[\(lineNumber)]:\(message)")
+        print(currentTimeString() + " -> " + "\(arr.last!) : \(methodName) : [\(lineNumber)] : \(message)")
     #endif
 }
 

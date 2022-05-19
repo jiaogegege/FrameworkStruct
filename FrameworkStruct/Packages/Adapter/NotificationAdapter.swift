@@ -185,111 +185,6 @@ class NotificationAdapter: OriginAdapter
 }
 
 
-//代理方法
-extension NotificationAdapter: DelegateProtocol, UNUserNotificationCenterDelegate
-{
-    //当应用在前台时，收到通知会触发这个代理方法;在展示通知前进行处理，即有机会在展示通知前再修改通知内容
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
-    {
-        //1. 处理通知
-//        let userInfo = notification.request.content.userInfo
-//        let request = notification.request
-//        let content = request.content
-//        let badge = content.badge
-//        let body = content.body
-//        let title = content.title
-//        let subtitle = content.subtitle
-//        let sound = content.sound
-//        if let ret = request.trigger?.isKind(of: UNPushNotificationTrigger.self), ret == true
-//        {
-//            //远程推送
-//        }
-//        else
-//        {
-//            //本地推送
-//        }
-        
-        //2. 处理完成后调用 completionHandler ，用于指示在前台显示通知的形式
-        if #available(iOS 14.0, *)
-        {
-            completionHandler([.badge, .sound, .list, .banner])
-        }
-        else
-        {
-            completionHandler([.badge, .sound, .alert])
-        }
-    }
-    
-    //当用户点击了通知中心，打开app，清除通知等操作之后的回调方法
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
-    {
-        //清除已触发的通知
-        self.getDeliveredNotifications {[weak self] (notifications) in
-            let count = notifications.count
-            self?.removeAllDeliveredNotifications()
-            g_async {
-                ApplicationManager.shared.app.applicationIconBadgeNumber -= count
-            }
-        }
-
-        let notification = response.notification
-//        let userInfo = notification.request.content.userInfo
-//        let request = notification.request
-//        let content = request.content
-//        let badge = content.badge
-//        let body = content.body
-//        let title = content.title
-//        let subtitle = content.subtitle
-//        let sound = content.sound
-        let actionIdentifier = response.actionIdentifier    //用户处理通知的动作
-//        let categoryIdentifier = content.categoryIdentifier     //action类别id
-//        if let ret = request.trigger?.isKind(of: UNPushNotificationTrigger.self), ret == true
-//        {
-//            //远程推送
-//        }
-//        else
-//        {
-//            //本地推送
-//        }
-        
-        //根据点击或取消执行动作
-        if actionIdentifier == UNNotificationDefaultActionIdentifier
-        {
-            //用户点击了通知
-            if let delegate = delegate
-            {
-                //将点击事件和通知数据传出去
-                delegate.notificationAdapterDidClickNotification(notification: notification)
-            }
-        }
-        else if actionIdentifier == UNNotificationDismissActionIdentifier
-        {
-            //用户划掉了通知
-            if let delegate = delegate
-            {
-                delegate.notificationAdapterDidDismissNotification(notification: notification)
-            }
-        }
-        else    //自定义动作id
-        {
-            //留给`handleActionCategory`处理
-//            self.handleActionCategory(response: response)
-        }
-        
-        self.handleActionCategory(response: response)
-        
-        completionHandler()
-    }
-    
-    //当用户在通知中心左滑某个通知选择设置时，会调用这个方法，从“设置”打开时，`notification`将为nil
-    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?)
-    {
-        
-    }
-    
-}
-
-
 //内部类型
 extension NotificationAdapter: InternalType
 {
@@ -468,6 +363,111 @@ extension NotificationAdapter: InternalType
         {
             center.setNotificationCategories([NAActionCategoryType.replyMsg.getCatetory(), NAActionCategoryType.confirmCancel.getCatetory()])
         }
+    }
+    
+}
+
+
+//代理方法
+extension NotificationAdapter: DelegateProtocol, UNUserNotificationCenterDelegate
+{
+    //当应用在前台时，收到通知会触发这个代理方法;在展示通知前进行处理，即有机会在展示通知前再修改通知内容
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        //1. 处理通知
+//        let userInfo = notification.request.content.userInfo
+//        let request = notification.request
+//        let content = request.content
+//        let badge = content.badge
+//        let body = content.body
+//        let title = content.title
+//        let subtitle = content.subtitle
+//        let sound = content.sound
+//        if let ret = request.trigger?.isKind(of: UNPushNotificationTrigger.self), ret == true
+//        {
+//            //远程推送
+//        }
+//        else
+//        {
+//            //本地推送
+//        }
+        
+        //2. 处理完成后调用 completionHandler ，用于指示在前台显示通知的形式
+        if #available(iOS 14.0, *)
+        {
+            completionHandler([.badge, .sound, .list, .banner])
+        }
+        else
+        {
+            completionHandler([.badge, .sound, .alert])
+        }
+    }
+    
+    //当用户点击了通知中心，打开app，清除通知等操作之后的回调方法
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
+    {
+        //清除已触发的通知
+        self.getDeliveredNotifications {[weak self] (notifications) in
+            let count = notifications.count
+            self?.removeAllDeliveredNotifications()
+            g_async {
+                ApplicationManager.shared.app.applicationIconBadgeNumber -= count
+            }
+        }
+
+        let notification = response.notification
+//        let userInfo = notification.request.content.userInfo
+//        let request = notification.request
+//        let content = request.content
+//        let badge = content.badge
+//        let body = content.body
+//        let title = content.title
+//        let subtitle = content.subtitle
+//        let sound = content.sound
+        let actionIdentifier = response.actionIdentifier    //用户处理通知的动作
+//        let categoryIdentifier = content.categoryIdentifier     //action类别id
+//        if let ret = request.trigger?.isKind(of: UNPushNotificationTrigger.self), ret == true
+//        {
+//            //远程推送
+//        }
+//        else
+//        {
+//            //本地推送
+//        }
+        
+        //根据点击或取消执行动作
+        if actionIdentifier == UNNotificationDefaultActionIdentifier
+        {
+            //用户点击了通知
+            if let delegate = delegate
+            {
+                //将点击事件和通知数据传出去
+                delegate.notificationAdapterDidClickNotification(notification: notification)
+            }
+        }
+        else if actionIdentifier == UNNotificationDismissActionIdentifier
+        {
+            //用户划掉了通知
+            if let delegate = delegate
+            {
+                delegate.notificationAdapterDidDismissNotification(notification: notification)
+            }
+        }
+        else    //自定义动作id
+        {
+            //留给`handleActionCategory`处理
+//            self.handleActionCategory(response: response)
+        }
+        
+        self.handleActionCategory(response: response)
+        
+        completionHandler()
+    }
+    
+    //当用户在通知中心左滑某个通知选择设置时，会调用这个方法，从“设置”打开时，`notification`将为nil
+    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?)
+    {
+        
     }
     
 }
