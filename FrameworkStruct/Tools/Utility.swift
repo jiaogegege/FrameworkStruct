@@ -102,6 +102,12 @@ func g_isValidObject(_ obj: AnyObject?) -> Bool
     DatasChecker.shared.checkValidObject(obj)
 }
 
+///判断一个字符串是否都是数字
+func g_checkNum(_ str: String) -> Bool
+{
+    DatasChecker.shared.checkNumber(str)
+}
+
 ///在线程中异步执行代码
 func g_async(onMain: Bool = true, action: @escaping VoidClosure)
 {

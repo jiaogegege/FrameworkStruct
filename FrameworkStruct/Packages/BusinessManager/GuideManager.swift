@@ -62,13 +62,13 @@ extension GuideManager: ExternalInterface
         let add = FSGuideView.HollowDescribeInfo(component: UIImageView(image: .iGuideOrderAdd), size: CGSize(width: 264, height: 34), top: .off, left: .off, bottom: .on(.bottom, 34 + 8), right: .on(.right, -50))
         let hand3 = FSGuideView.HollowDescribeInfo(component: UIImageView(image: .iGuideHand), size: CGSize(width: 38, height: 33), top: .on(.bottom, -4), left: .on(.right, 3), bottom: .off, right: .off)
         v.describeInfoArray = [[[hand2], [hand, add]], [[hand3]]]
-        v.didShowCallback = { () in
+        v.willShowCallback = { () in
             if let cb = didShow
             {
                 cb()
             }
         }
-        v.nextCallback = { () in
+        v.nextCallback = { (index) in
             if let cb = didNext
             {
                 cb()

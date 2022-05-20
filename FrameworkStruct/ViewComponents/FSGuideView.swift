@@ -17,16 +17,16 @@ class FSGuideView: UIView
     //MARK: 属性
     /**************************************** 接口属性 Section Begin ****************************************/
     
-    ///需要镂空的组件列表，每一个引导页可以指定多个镂空组件，可以指定多个引导页
+    ///需要镂空的组件列表，可以指定多个引导页,每一个引导页可以指定多个镂空组件
     var hollowViewArray: Array<Array<HollowViewType>>?
-    
-    ///对需要镂空的组件的描述和引导组件，也就是在镂空组件周围添加一些帮助图片和信息，和`hollowViewArray`一一对应，并且对于一个镂空组件，可以有多个描述组件
+    ///对需要镂空的组件的描述组件，也就是在镂空组件周围添加一些帮助图片和信息，和`hollowViewArray`一一对应，并且对于一个镂空组件，可以有多个描述组件
     var describeInfoArray: Array<Array<Array<HollowDescribeInfo>>>?
     
     ///新手引导view开始显示回调
-    var didShowCallback: VoidClosure?
+    var willShowCallback: VoidClosure?
     ///点击下一步回调，如果有多个引导页，那么每次点击后显示下一个引导页时会调用，显示第一个时也会调用
-    var nextCallback: VoidClosure?
+    ///参数:当前显示的引导页的index,从0开始
+    var nextCallback: ((Int) -> Void)?
     ///点击跳过的回调
     var skipCallback: VoidClosure?
     ///新手引导结束，引导界面消失
@@ -43,6 +43,9 @@ class FSGuideView: UIView
     var maskColor: UIColor = .cBlack_50Alpha
     
     /**************************************** 接口属性 Section End ****************************************/
+    
+    ///当前正在显示的引导页的index,未开始显示的时候是-1
+    fileprivate(set) var currentIndex: Int = -1
     
     //引导页列表
     fileprivate let guideViewQueue: FSQueue<UIView> = FSQueue()
@@ -180,9 +183,10 @@ class FSGuideView: UIView
         if let view = guideViewQueue.pop()
         {
             self.containerView.addSubview(view)
+            currentIndex += 1
             if let cb = nextCallback
             {
-                cb()
+                cb(currentIndex)
             }
         }
         else    //如果没有下一个引导页了，那么完成引导
@@ -420,7 +424,7 @@ extension FSGuideView: ExternalInterface
             g_window().addSubview(self)
             //控制跳过按钮显示隐藏，如果只有一个引导页不显示，否则根据设置值显示
             skipBtn.isHidden = guideViewQueue.count() > 1 ? (showSkip ? false : true) : true
-            if let cb = didShowCallback
+            if let cb = willShowCallback
             {
                 cb()
             }
