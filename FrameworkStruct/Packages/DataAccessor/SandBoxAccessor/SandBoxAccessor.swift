@@ -265,7 +265,7 @@ extension SandBoxAccessor: ExternalInterface
         //尝试获取图片扩展名，没有则默认jpg
         var extName = (filePath as NSString).pathExtension
         var imageData: Data?
-        if g_isValidString(extName) //获取到扩展名
+        if g_validString(extName) //获取到扩展名
         {
             if extName == FileTypeName.png.rawValue
             {

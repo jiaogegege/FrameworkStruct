@@ -309,7 +309,7 @@ extension Array
         var newArray = [Any]()
         for item in self
         {
-            newArray.append(g_getCopy(origin: item)!)
+            newArray.append(g_copy(item)!)
         }
         return newArray
     }
@@ -341,7 +341,7 @@ extension Dictionary
         var newDic = Dictionary<AnyHashable, Any>()
         for (k, v) in self
         {
-            newDic[k] = g_getCopy(origin: v)
+            newDic[k] = g_copy(v)
         }
         return newDic
     }

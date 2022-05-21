@@ -90,7 +90,7 @@ extension CommunicationAdapter: ExternalInterface
     ///拨打电话
     func callPhone(_ phone: String, completion: ((_ success: Bool) -> Void)? = nil)
     {
-        if g_isValidString(phone.trim())
+        if g_validString(phone.trim())
         {
             if let url = URL(string: String(format: "tel://%@", phone.trim()))
             {
@@ -121,7 +121,7 @@ extension CommunicationAdapter: ExternalInterface
     ///使用系统信息发送短信，可以传入手机号码
     func sendSystemSms(_ phone: String, completion: ((_ success: Bool) -> Void)? = nil)
     {
-        if g_isValidString(phone.trim())
+        if g_validString(phone.trim())
         {
             if let url = URL(string: String(format: "sms://%@", phone.trim()))
             {

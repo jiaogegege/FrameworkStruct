@@ -65,11 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //注册远程推送失败
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         //注册远程推送失败，做一些处理
-        FSLog("register remote notification error: \(error.localizedDescription)")
+//        FSLog("register remote notification error: \(error.localizedDescription)")
         NotificationAdapter.shared.registerForRemoteNotificationFail(error)
     }
     
-    //通过URL Schemes打开App
+    //通过URL Schemes或其它App打开此App
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         UrlSchemeAdapter.shared.dispatchUrl(url, options: options)
         

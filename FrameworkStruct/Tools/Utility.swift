@@ -1,5 +1,5 @@
 //
-//  CommonTools.swift
+//  Utility.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2021/11/5.
@@ -31,7 +31,7 @@ func FSLog(_ message: String)
 }
 
 ///返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
-func g_getCopy(origin: Any?) -> Any?
+func g_copy(_ origin: Any?) -> Any?
 {
     if origin != nil
     {
@@ -91,13 +91,13 @@ func g_topVC() -> UIViewController
 }
 
 ///判断字符串是否是有效字符串，无效字符串：nil、null、<null>、<nil>、""、"(null)"、NSNull
-func g_isValidString(_ str: String?) -> Bool
+func g_validString(_ str: String?) -> Bool
 {
     DatasChecker.shared.checkValidString(str)
 }
 
 ///判断是否有效对象，无效对象：nil，NSNull
-func g_isValidObject(_ obj: AnyObject?) -> Bool
+func g_validObject(_ obj: AnyObject?) -> Bool
 {
     DatasChecker.shared.checkValidObject(obj)
 }
@@ -115,7 +115,7 @@ func g_async(onMain: Bool = true, action: @escaping VoidClosure)
 }
 
 ///延时操作
-func g_after(interval: TimeInterval, onMain: Bool = true, action: @escaping VoidClosure)
+func g_after(_ interval: TimeInterval, onMain: Bool = true, action: @escaping VoidClosure)
 {
     TimerManager.shared.after(interval: interval, onMain: onMain, action: action)
 }

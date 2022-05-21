@@ -265,7 +265,7 @@ extension UIButton
     {
         self.isEnabled = false
         let intv = maxBetween(interval, self.disableInterval)
-        g_after(interval: intv) {
+        g_after(intv) {
             self.isEnabled = true
         }
     }

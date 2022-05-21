@@ -113,7 +113,7 @@ class BasicWebViewController: BasicViewController
             if webView.estimatedProgress >= 1.0
             {
                 //加载完成后一定时间隐藏进度条
-                g_after(interval: 0.25) {
+                g_after(0.25) {
                     self.progressBar.isHidden = true
                 }
             }
@@ -203,7 +203,7 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        g_after(interval: 0.25) {
+        g_after(0.25) {
             self.progressBar.isHidden = true
             self.progressBar.setProgress(0.0, animated: false)
         }
@@ -217,7 +217,7 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        g_after(interval: 0.25) {
+        g_after(0.25) {
             self.progressBar.isHidden = true
         }
     }
