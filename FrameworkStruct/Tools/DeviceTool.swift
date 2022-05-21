@@ -185,8 +185,7 @@ let kiPhoneXWidth: CGFloat = 414.0
 //参数1:需要适配的宽度值；参数2:作为比较基准的屏幕宽度
 func fitWidth(val: CGFloat, base: CGFloat) -> CGFloat
 {
-    let value = val * (kScreenWidth / base)
-    return value
+    return val * (kScreenWidth / base)
 }
 
 //适配iPhone8设计图尺寸
