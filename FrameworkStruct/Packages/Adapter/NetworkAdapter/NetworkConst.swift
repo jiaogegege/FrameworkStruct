@@ -31,7 +31,7 @@ let nt_paramData_Key = "data"
 let nt_requestTimeoutInterval: TimeInterval = 30.0
 
 ///可接受的返回数据类型
-let nt_acceptableContentType:Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
+let nt_acceptableContentType: Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
 
 //请求成功和失败的回调
 typealias RequestSuccessCallback = (_ response: Any) -> Void
@@ -85,6 +85,16 @@ let url_loginWithPhoneAndSms = "api/awaitz-mall/user/v1/sms/login"
 
 
 //MARK: HTTP相关信息定义
+///HTTP方法
+enum HttpMethodType: String {
+    case GET
+    case POST
+    case PUT
+    case PATCH
+    case HEAD
+    case DELETE
+}
+
 //MIME type
 enum MIMEType: String {
     case txt = "text/plain"
@@ -121,16 +131,6 @@ enum MIMEType: String {
     case tar = "application/x-tar"
     case gtar = "application/x-gtar"
     case swf = "application/x-shockwave-flash"
-}
-
-///HTTP方法
-enum HttpMethodType: String {
-    case GET
-    case POST
-    case PUT
-    case PATCH
-    case HEAD
-    case DELETE
 }
 
 ///request headers key

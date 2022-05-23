@@ -546,6 +546,12 @@
 		EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84127FE7D5C008EA586 /* FSLabel.swift */; };
 		EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84327FE8993008EA586 /* FSImageView.swift */; };
 		EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */; };
+		EAAEBFF6283B69B4001C9118 /* CommandConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF5283B69B4001C9118 /* CommandConst.swift */; };
+		EAAEBFF8283B69E7001C9118 /* CommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF7283B69E7001C9118 /* CommandManager.swift */; };
+		EAAEBFFA283B6A76001C9118 /* CommandAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF9283B6A76001C9118 /* CommandAdapter.swift */; };
+		EAAEBFFC283B6ADB001C9118 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFB283B6ADB001C9118 /* IOManager.swift */; };
+		EAAEBFFE283B6B37001C9118 /* IOEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */; };
+		EAAEC000283B6E98001C9118 /* IOChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFF283B6E98001C9118 /* IOChecker.swift */; };
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
@@ -1512,6 +1518,13 @@
 		EAACA84127FE7D5C008EA586 /* FSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSLabel.swift; sourceTree = "<group>"; };
 		EAACA84327FE8993008EA586 /* FSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSImageView.swift; sourceTree = "<group>"; };
 		EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractionManager.swift; sourceTree = "<group>"; };
+		EAAEBFF4283B6859001C9118 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAEBFF5283B69B4001C9118 /* CommandConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandConst.swift; sourceTree = "<group>"; };
+		EAAEBFF7283B69E7001C9118 /* CommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandManager.swift; sourceTree = "<group>"; };
+		EAAEBFF9283B6A76001C9118 /* CommandAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAdapter.swift; sourceTree = "<group>"; };
+		EAAEBFFB283B6ADB001C9118 /* IOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOManager.swift; sourceTree = "<group>"; };
+		EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOEmbellisher.swift; sourceTree = "<group>"; };
+		EAAEBFFF283B6E98001C9118 /* IOChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOChecker.swift; sourceTree = "<group>"; };
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
@@ -3624,6 +3637,20 @@
 			path = DataChecker;
 			sourceTree = "<group>";
 		};
+		EAAEBFF3283B683A001C9118 /* IOPackage */ = {
+			isa = PBXGroup;
+			children = (
+				EAAEBFF4283B6859001C9118 /* README.md */,
+				EAAEBFFB283B6ADB001C9118 /* IOManager.swift */,
+				EAAEBFFF283B6E98001C9118 /* IOChecker.swift */,
+				EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */,
+				EAAEBFF7283B69E7001C9118 /* CommandManager.swift */,
+				EAAEBFF9283B6A76001C9118 /* CommandAdapter.swift */,
+				EAAEBFF5283B69B4001C9118 /* CommandConst.swift */,
+			);
+			path = IOPackage;
+			sourceTree = "<group>";
+		};
 		EAB32C3E27CA71EA000108EA /* UserDefaultsAccessor */ = {
 			isa = PBXGroup;
 			children = (
@@ -4078,6 +4105,7 @@
 				EADB010C27624213001B7223 /* DataAccessor */,
 				EA52493C27A3E43B002E3616 /* Datas */,
 				EADB012D27624328001B7223 /* ThemePackage */,
+				EAAEBFF3283B683A001C9118 /* IOPackage */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -4632,6 +4660,7 @@
 				EA3E8B3427B77CEA006A2715 /* AnimatorNodeDebugging.swift in Sources */,
 				EA08D61727D9855100D3961F /* DatasChecker.swift in Sources */,
 				EA9A785927C7546100A11FC8 /* TimePeriodGroup.swift in Sources */,
+				EAAEBFFE283B6B37001C9118 /* IOEmbellisher.swift in Sources */,
 				EA922560276B1BBB00192E2E /* ManagerMonitor.swift in Sources */,
 				EA3E8AB227B77CEA006A2715 /* AnimationKeypath.swift in Sources */,
 				EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */,
@@ -4639,6 +4668,7 @@
 				EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */,
 				EA3E8AB827B77CEA006A2715 /* PointValueProvider.swift in Sources */,
 				EAC8A86727625D490088293F /* UIImage+ExtendedCacheData.m in Sources */,
+				EAAEBFF8283B69E7001C9118 /* CommandManager.swift in Sources */,
 				EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */,
 				EA3E8AE227B77CEA006A2715 /* MaskContainerLayer.swift in Sources */,
 				EA1AE487277819E600D028F9 /* ConstraintMakerEditable.swift in Sources */,
@@ -4678,6 +4708,7 @@
 				EA3E8B0E27B77CEA006A2715 /* Ellipse.swift in Sources */,
 				EA9A786027C7546100A11FC8 /* Integer+DateTools.swift in Sources */,
 				EA3E8AA927B77CEA006A2715 /* AnimationTime.swift in Sources */,
+				EAAEBFFA283B6A76001C9118 /* CommandAdapter.swift in Sources */,
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
 				EA73A15927BC8ED600980C26 /* MineNavigationController.swift in Sources */,
@@ -4831,6 +4862,7 @@
 				EA1AE478277819E600D028F9 /* ConstraintMakerFinalizable.swift in Sources */,
 				EAC8A77427625BA70088293F /* MJFoundation.m in Sources */,
 				EA99372527994F6100480147 /* TABAnimatedProductImpl.m in Sources */,
+				EAAEBFFC283B6ADB001C9118 /* IOManager.swift in Sources */,
 				EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */,
 				EA3E8AD127B77CEA006A2715 /* RectangleAnimation.swift in Sources */,
 				EA99371E27994F6100480147 /* TABAnimationMethod.m in Sources */,
@@ -5062,6 +5094,7 @@
 				EA3E8AA527B77CEA006A2715 /* AnimatedButton.swift in Sources */,
 				EA3E8A9727B77CEA006A2715 /* AnimationViewBase.macOS.swift in Sources */,
 				EA3E8B2527B77CEA006A2715 /* Marker.swift in Sources */,
+				EAAEBFF6283B69B4001C9118 /* CommandConst.swift in Sources */,
 				EA99371B27994F6100480147 /* TABAnimatedCacheModel.m in Sources */,
 				EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */,
 				EAFA821227C6845800CA1598 /* WebAdapter.swift in Sources */,
@@ -5084,6 +5117,7 @@
 				EA11126627B3BE2C006D0B83 /* Session.swift in Sources */,
 				EA9936922799074B00480147 /* UIView+Cate.m in Sources */,
 				EA3E8AB727B77CEA006A2715 /* GradientValueProvider.swift in Sources */,
+				EAAEC000283B6E98001C9118 /* IOChecker.swift in Sources */,
 				EA99373127994F6100480147 /* TABComponentLayerClassicSerializationImpl.m in Sources */,
 				EAACA84027FE7BCB008EA586 /* CopyPasteViewController.swift in Sources */,
 				EA1AE475277819E600D028F9 /* ConstraintViewDSL.swift in Sources */,
