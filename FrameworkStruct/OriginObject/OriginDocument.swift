@@ -31,7 +31,7 @@ class OriginDocument: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个文档对象在创建的时候都要加入到监控器中
-    weak var monitor: DocumentMonitor!
+    fileprivate(set) weak var monitor: DocumentMonitor!
     
     
     override init()

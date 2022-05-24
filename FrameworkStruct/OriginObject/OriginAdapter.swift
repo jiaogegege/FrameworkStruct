@@ -31,7 +31,7 @@ class OriginAdapter: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个适配器在创建的时候都要加入到监控器中
-    weak var monitor: AdapterMonitor!
+    fileprivate(set) weak var monitor: AdapterMonitor!
     
     
     override init()

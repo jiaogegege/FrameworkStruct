@@ -93,7 +93,7 @@ class OriginContainer: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个数据容器在创建的时候都要加入到监控器中
-    weak var monitor: ContainerMonitor!
+    fileprivate(set) weak var monitor: ContainerMonitor!
     
     //数据容器；key是数据对象的key，value是具体的数据模型
     fileprivate var container: Dictionary<AnyHashable, Any> = Dictionary()

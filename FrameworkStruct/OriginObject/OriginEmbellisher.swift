@@ -31,7 +31,7 @@ class OriginEmbellisher: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个修饰器在创建的时候都要加入到监控器中
-    weak var monitor: EmbellisherMonitor!
+    fileprivate(set) weak var monitor: EmbellisherMonitor!
     
     
     override init()

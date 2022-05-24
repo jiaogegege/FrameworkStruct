@@ -31,7 +31,7 @@ class OriginHandler: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个文档处理器在创建的时候都要加入到监控器中
-    weak var monitor: HandlerMonitor!
+    fileprivate(set) weak var monitor: HandlerMonitor!
     
     
     override init()

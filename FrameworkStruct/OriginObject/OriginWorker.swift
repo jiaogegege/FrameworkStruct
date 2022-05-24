@@ -43,7 +43,7 @@ class OriginWorker: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个工作者在创建的时候都要加入到监控器中
-    weak var monitor: WorkerMonitor!
+    fileprivate(set) weak var monitor: WorkerMonitor!
     
     
     //如果子类有自己的初始化方法，那么在最后要调用父类的初始化方法

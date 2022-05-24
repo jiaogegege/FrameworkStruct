@@ -32,7 +32,7 @@ class OriginChecker: NSObject
     let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     //监控器，每一个校验器在创建的时候都要加入到监控器中
-    weak var monitor: CheckerMonitor!
+    fileprivate(set) weak var monitor: CheckerMonitor!
     
     
     override init()
