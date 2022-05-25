@@ -80,7 +80,7 @@ extension TimerManager: ExternalInterface
     ///repeats：是否重复，如果为false相当于延时操作；
     ///mode：定时器添加的模式；
     ///action：执行的动作；
-    ///host：使用定时器的宿主，一般传self
+    ///host：使用定时器的宿主，一般传self,建议使用类和对象
     func timer(interval: TimeInterval,
                repeats: Bool = true,
                mode: RunLoop.Mode = .default,

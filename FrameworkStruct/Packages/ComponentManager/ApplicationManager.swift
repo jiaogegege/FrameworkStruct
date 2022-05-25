@@ -327,7 +327,7 @@ extension ApplicationManager: ExternalInterface
     }
     
     ///当前屏幕亮度，0-1
-    var currentBrightness: CGFloat {
+    var brightness: CGFloat {
         return UIScreen.main.brightness
     }
     
@@ -340,7 +340,7 @@ extension ApplicationManager: ExternalInterface
         UIScreen.main.brightness = brightness
     }
     
-    ///恢复之前的屏幕亮度
+    ///恢复之前的屏幕亮度,如果某个界面调整过屏幕亮度,当退出这个界面时调用该方法恢复之前的屏幕亮度
     func resetBrightness()
     {
         if let brightness = stMgr.status(forKey: AMStatusKey.brightness) as? CGFloat
@@ -351,7 +351,7 @@ extension ApplicationManager: ExternalInterface
         }
     }
     
-    ///是否在录屏，包括：屏幕录制/AirPlay/镜像
+    ///屏幕是否被捕获，包括：屏幕录制/AirPlay/镜像等
     var isCaputring: Bool {
         return UIScreen.main.isCaptured
     }
