@@ -26,7 +26,7 @@ protocol ContainerServices {
  * 数据容器定义的通用接口，如果有通用的功能需要子类实现，那么定义在此处
  * 可以作为类型使用
  */
-protocol ContainerProtocol
+protocol ContainerProtocol: NSObjectProtocol
 {
     //同步获取数据，优先从容器中获取，如果没有则从数据源获取
     func get(key: AnyHashable) -> Any?
@@ -35,7 +35,7 @@ protocol ContainerProtocol
     func get(key: AnyHashable, completion: OptionalAnyClosure)
         
     //同步修改数据，数据保存在容器中修改后通知所有订阅对象刷新数据
-    func mutate(key: AnyHashable, value: Any)
+    func mutate(key: AnyHashable, value: Any, meta: DataModelMeta)
     
     //同步提交数据，将数据写入本地数据源
     func commit(key: AnyHashable, value: Any)
@@ -96,7 +96,7 @@ class OriginContainer: NSObject
     fileprivate(set) weak var monitor: ContainerMonitor!
     
     //数据容器；key是数据对象的key，value是具体的数据模型
-    fileprivate var container: Dictionary<AnyHashable, Any> = Dictionary()
+    fileprivate var container: Dictionary<AnyHashable, DataModelStruct> = Dictionary()
     
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
@@ -148,8 +148,13 @@ class OriginContainer: NSObject
 extension OriginContainer: ContainerProtocol
 {
     @objc func get(key: AnyHashable) -> Any? {
-        let data = self.container[key]
-        return self.getCopy(data)
+        guard let dataStruct = self.container[key] else {
+            return nil
+        }
+        
+        let data = dataStruct.data
+        let meta = dataStruct.meta
+        return meta.needCopy ? self.getCopy(data) : data
     }
     
     @objc func get(key: AnyHashable, completion: OptionalAnyClosure) {
@@ -157,8 +162,9 @@ extension OriginContainer: ContainerProtocol
         //理论上优先从容器获取，如果没有则从具体的存取器获取
     }
     
-    @objc func mutate(key: AnyHashable, value: Any) {
-        self.container[key] = self.getCopy(value)
+    @objc func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta()) {
+        let dataStruct = DataModelStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
+        self.container[key] = dataStruct
         
         //提交数据的时候，要对所有订阅对象发出通知
         self.dispatch(key: key, value: self.get(key: key) as Any)
@@ -266,6 +272,20 @@ extension OriginContainer: ContainerProtocol
         {
             self.delegates[key] = nil
         }
+    }
+    
+}
+
+
+/**
+ * 内部类型
+ */
+extension OriginContainer
+{
+    //数据模型存储结构，包括数据域和元数据域
+    struct DataModelStruct {
+        var data: Any
+        var meta: DataModelMeta
     }
     
 }

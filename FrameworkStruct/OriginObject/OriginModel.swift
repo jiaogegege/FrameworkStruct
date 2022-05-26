@@ -56,3 +56,23 @@ extension OriginModel: OriginProtocol
     }
     
 }
+
+
+/**
+ * 元数据,对数据模型的描述信息
+ * - attention: 本来是定义成struct，但是在数据容器协议中无法转换为objC，因此定义成class
+ */
+class DataModelMeta: NSObject {
+    /**
+     * 数据模型在数据容器中进行传输的时候是否需要拷贝
+     * 默认会拷贝；如果设置为false，数据模型在数据容器中传输时将不会拷贝，如果数据模型是类类型，则将以指针传递，数据会有被外部意外改变的风险，但是可以提高访问性能
+     */
+    var needCopy: Bool = true
+    /**
+     * 该数据是否可写入数据源
+     * 如果设置为false，数据容器在进行commit的时候将会跳过该数据模型
+     */
+    var canCommit: Bool = true
+    
+}
+

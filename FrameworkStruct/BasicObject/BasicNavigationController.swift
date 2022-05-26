@@ -36,13 +36,13 @@ class BasicNavigationController: UINavigationController
         addNotification()
 
         //创建完成后添加到管理器中
-        ControllerManager.shared.pushController(controller: self)
+        ControllerManager.shared.pushController(self)
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        ControllerManager.shared.showController(controller: self)
+        ControllerManager.shared.showController(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -69,7 +69,7 @@ extension ControllerManager: ExternalInterface
         }
     }
     
-    //计算属性，任何一个控制器，主要用来present另一个控制器
+    //计算属性，最顶层的任何一个控制器，主要用来push/present另一个控制器
     //优先返回`currentVC`，然后返回`currentNavVC`，然后返回`tabbarVC`,然后返回`rootVC`
     var topVC: UIViewController {
         get {
@@ -94,7 +94,7 @@ extension ControllerManager: ExternalInterface
     
     //当一个控制器被创建的时候，调用这个方法并传入self，记录
     //建议在viewDidLoad方法中调用
-    func pushController(controller: UIViewController)
+    func pushController(_ controller: UIViewController)
     {
         self.allControllers.add(controller)
         //判断控制器类型
@@ -115,7 +115,7 @@ extension ControllerManager: ExternalInterface
     
     //控制器正在显示
     //建议在viewWillAppear方法中调用
-    func showController(controller: UIViewController)
+    func showController(_ controller: UIViewController)
     {
         if controller.isKind(of: UITabBarController.self)
         {
