@@ -284,8 +284,8 @@ extension OriginContainer
 {
     //数据模型存储结构，包括数据域和元数据域
     struct DataModelStruct {
-        var data: Any
-        var meta: DataModelMeta
+        var data: Any                           //数据域
+        var meta: DataModelMeta                 //元数据域
     }
     
 }
