@@ -96,7 +96,7 @@ class OriginContainer: NSObject
     fileprivate(set) weak var monitor: ContainerMonitor!
     
     //数据容器；key是数据对象的key，value是具体的数据模型
-    fileprivate var container: Dictionary<AnyHashable, DataModelStruct> = Dictionary()
+    fileprivate var container: Dictionary<AnyHashable, ContainerDataStruct> = Dictionary()
     
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
@@ -163,7 +163,7 @@ extension OriginContainer: ContainerProtocol
     }
     
     @objc func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta()) {
-        let dataStruct = DataModelStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
+        let dataStruct = ContainerDataStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
         self.container[key] = dataStruct
         
         //提交数据的时候，要对所有订阅对象发出通知
@@ -283,7 +283,7 @@ extension OriginContainer: ContainerProtocol
 extension OriginContainer
 {
     //数据模型存储结构，包括数据域和元数据域
-    struct DataModelStruct {
+    struct ContainerDataStruct {
         var data: Any                           //数据域
         var meta: DataModelMeta                 //元数据域
     }
