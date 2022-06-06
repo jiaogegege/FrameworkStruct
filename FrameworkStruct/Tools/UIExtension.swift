@@ -385,7 +385,7 @@ extension UITableView: InternalType
 
 //MARK: UICollectionView
 /**
- * UITableView
+ * UICollectionView
  */
 extension UICollectionView
 {
@@ -512,7 +512,7 @@ extension UIColor
     //暗黑模式级别
     enum DarkModeLevel {
         case deepen                     //最底层的黑色或最顶层的白色
-        case reduce                     //比最底层的黑色亮一点或比最顶层的白色暗一点
+        case dodge                      //比最底层的黑色亮一点或比最顶层的白色暗一点
         
         //获取颜色，dark：是否是黑色，否则就是白色
         func getColor(dark: Bool) -> UIColor
@@ -520,7 +520,7 @@ extension UIColor
             switch self {
             case .deepen:
                 return dark ? ThemeManager.shared.getDarkTheme().backgroundColor : ThemeManager.shared.getDarkTheme().mainTitleColor
-            case .reduce:
+            case .dodge:
                 return dark ? ThemeManager.shared.getDarkTheme().contentBackgroundColor : ThemeManager.shared.getDarkTheme().subTitleColor
             }
         }
