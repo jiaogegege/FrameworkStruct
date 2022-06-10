@@ -548,7 +548,6 @@
 		EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */; };
 		EAAEBFF6283B69B4001C9118 /* CommandConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF5283B69B4001C9118 /* CommandConst.swift */; };
 		EAAEBFF8283B69E7001C9118 /* CommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF7283B69E7001C9118 /* CommandManager.swift */; };
-		EAAEBFFA283B6A76001C9118 /* CommandAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF9283B6A76001C9118 /* CommandAdapter.swift */; };
 		EAAEBFFC283B6ADB001C9118 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFB283B6ADB001C9118 /* IOManager.swift */; };
 		EAAEBFFE283B6B37001C9118 /* IOEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */; };
 		EAAEC000283B6E98001C9118 /* IOChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFF283B6E98001C9118 /* IOChecker.swift */; };
@@ -1521,7 +1520,6 @@
 		EAAEBFF4283B6859001C9118 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAEBFF5283B69B4001C9118 /* CommandConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandConst.swift; sourceTree = "<group>"; };
 		EAAEBFF7283B69E7001C9118 /* CommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandManager.swift; sourceTree = "<group>"; };
-		EAAEBFF9283B6A76001C9118 /* CommandAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAdapter.swift; sourceTree = "<group>"; };
 		EAAEBFFB283B6ADB001C9118 /* IOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOManager.swift; sourceTree = "<group>"; };
 		EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOEmbellisher.swift; sourceTree = "<group>"; };
 		EAAEBFFF283B6E98001C9118 /* IOChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOChecker.swift; sourceTree = "<group>"; };
@@ -3645,7 +3643,6 @@
 				EAAEBFFF283B6E98001C9118 /* IOChecker.swift */,
 				EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */,
 				EAAEBFF7283B69E7001C9118 /* CommandManager.swift */,
-				EAAEBFF9283B6A76001C9118 /* CommandAdapter.swift */,
 				EAAEBFF5283B69B4001C9118 /* CommandConst.swift */,
 			);
 			path = IOPackage;
@@ -4708,7 +4705,6 @@
 				EA3E8B0E27B77CEA006A2715 /* Ellipse.swift in Sources */,
 				EA9A786027C7546100A11FC8 /* Integer+DateTools.swift in Sources */,
 				EA3E8AA927B77CEA006A2715 /* AnimationTime.swift in Sources */,
-				EAAEBFFA283B6A76001C9118 /* CommandAdapter.swift in Sources */,
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
 				EA73A15927BC8ED600980C26 /* MineNavigationController.swift in Sources */,

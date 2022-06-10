@@ -8,6 +8,7 @@
 /**
  指令管理器
  负责指令和参数的解析
+ 指令和实际功能函数的对接
  */
 import UIKit
 
@@ -16,9 +17,6 @@ class CommandManager: OriginManager
     //MARK: 属性
     //单例
     static let shared = CommandManager()
-    
-    //指令适配器
-    fileprivate lazy var ca = CommandAdapter.shared
     
     
     //MARK: 方法
