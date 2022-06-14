@@ -37,20 +37,18 @@ final class RegisterLoginWorker: OriginWorker
 extension RegisterLoginWorker: ExternalInterface
 {
     ///外部输入手机号，比如在输入手机号界面输入手机号
-    func inputPhone(_ phoneStr: String)
+    func inputPhone(_ phoneStr: String) throws
     {
-        guard canWork else {
-            return
-        }
+        try startWork()
+        
         phone = phoneStr.trim()
     }
     
     ///验证码登录
-    func login(verificationCode: String, success: @escaping ((UserInfoModel) -> Void), failure: @escaping NSErrorClosure)
+    func login(verificationCode: String, success: @escaping ((UserInfoModel) -> Void), failure: @escaping NSErrorClosure) throws
     {
-        guard canWork else {
-            return
-        }
+        try startWork()
+        
         if let ph = phone
         {
             userMgr.login(phone: ph, verificationCode: verificationCode.trim(), privateCode: nil) { userInfo in
