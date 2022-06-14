@@ -30,6 +30,14 @@ final class RegisterLoginWorker: OriginWorker
         }
         super.init()
     }
+    
+    //完成工作
+    override func finishWork() {
+        phone = nil
+        
+        super.finishWork()
+    }
+    
 }
 
 

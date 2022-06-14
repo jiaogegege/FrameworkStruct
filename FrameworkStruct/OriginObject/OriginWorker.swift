@@ -124,7 +124,7 @@ extension OriginWorker: WorkerProtocol
     }
     
     //完成工作，子类如果覆写这个方法，需要在做完清理工作的最后调用父类方法
-    func finishWork()
+    @objc func finishWork()
     {
         if currentWorkState != .done    //如果还不是完毕状态，那么清理资源并设置为完毕状态
         {
