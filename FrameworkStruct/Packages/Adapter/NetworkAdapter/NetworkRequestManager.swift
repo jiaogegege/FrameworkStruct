@@ -17,6 +17,9 @@ class NetworkRequestManager: OriginManager
     //单例
     static let shared = NetworkRequestManager()
     
+    //保存已经发起的请求对象
+    fileprivate var taskDict: WeakDictionary = WeakDictionary.init()
+    
     //网络状态监控对象
     fileprivate var networkReachabilityManager: AFNetworkReachabilityManager {
         let mgr = AFNetworkReachabilityManager.shared()
@@ -163,6 +166,40 @@ class NetworkRequestManager: OriginManager
         return [:]
     }
 
+    //为每一个请求任务计算一个唯一的字符串标识，通过标识访问请求任务，控制暂停/取消/恢复任务等；参数：请求的url地址
+    fileprivate func calcTaskId(_ urlStr: String) -> String
+    {
+        return currentTimeString() + " : " + g_uuid().subStringTo(index: 8) + " : " + urlStr
+    }
+    
+    //清除请求对象
+    fileprivate func clearTask()
+    {
+        var keyArr: [String] = []
+        for id in taskDict.keyEnumerator()
+        {
+            keyArr.append(id as! String)
+        }
+        for key in keyArr
+        {
+            if taskState(key) == .completed
+            {
+                taskDict.removeObject(forKey: key)
+            }
+        }
+    }
+    
+    //将请求对象保存到弱引用字典中；参数：url：请求的url地址，task：请求对象；返回值：请求任务的唯一标识
+    fileprivate func recordTask(url: String, task: URLSessionTask?) -> String
+    {
+        clearTask()
+        let id = calcTaskId(url)
+        if let task = task {
+            taskDict.setObject(task, forKey: id)
+        }
+        return id
+    }
+    
 }
 
 
@@ -186,6 +223,56 @@ extension NetworkRequestManager: ExternalInterface
         return nt_serverHost.getHost()
     }
     
+    ///获取所有的task信息
+    func allTasks() -> String
+    {
+        taskDict.description
+    }
+    
+    ///获取某个请求对象，id就是请求任务时生成的id
+    func getTask(_ id: String) -> URLSessionTask?
+    {
+        return taskDict.object(forKey: id) as? URLSessionTask
+    }
+    
+    ///获取某个任务的运行状态
+    func taskState(_ id: String) -> URLSessionTask.State?
+    {
+        if let task = getTask(id)
+        {
+            return task.state
+        }
+        return nil
+    }
+    
+    ///取消某个请求任务
+    func cancelTask(_ id: String)
+    {
+        if let task = getTask(id)
+        {
+            task.cancel()
+            taskDict.removeObject(forKey: id)
+        }
+    }
+    
+    ///暂时挂起某个请求任务
+    func suspendTask(_ id: String)
+    {
+        if let task = getTask(id)
+        {
+            task.suspend()
+        }
+    }
+    
+    ///恢复执行某个任务
+    func resumeTask(_ id: String)
+    {
+        if let task = getTask(id)
+        {
+            task.resume()
+        }
+    }
+    
     ///创建一个get请求
     ///参数：
     ///urlPath：接口地址，不包含host
@@ -203,9 +290,9 @@ extension NetworkRequestManager: ExternalInterface
              headers: Dictionary<String, String>? = nil,
              progressCallback: ((_ progress: Float) -> Void)? = nil,
              success: @escaping RequestSuccessCallback,
-             failure: @escaping RequestFailureCallback)
+             failure: @escaping RequestFailureCallback) -> String
     {
-        _ = self.dataTask(httpMethod: .GET, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: progressCallback, success: success, failure: failure)
+        self.dataTask(httpMethod: .GET, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: progressCallback, success: success, failure: failure)
     }
     
     ///创建一个post请求
@@ -225,9 +312,9 @@ extension NetworkRequestManager: ExternalInterface
               headers: Dictionary<String, String>? = nil,
               progressCallback: ((_ progress: Float) -> Void)? = nil,
               success: @escaping RequestSuccessCallback,
-              failure: @escaping RequestFailureCallback)
+              failure: @escaping RequestFailureCallback) -> String
     {
-        _ = self.dataTask(httpMethod: .POST, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: progressCallback, downloadProgressCallback: nil, success: success, failure: failure)
+        self.dataTask(httpMethod: .POST, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: progressCallback, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个put请求
@@ -245,9 +332,9 @@ extension NetworkRequestManager: ExternalInterface
              timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
              headers: Dictionary<String, String>? = nil,
              success: @escaping RequestSuccessCallback,
-             failure: @escaping RequestFailureCallback)
+             failure: @escaping RequestFailureCallback) -> String
     {
-        _ = self.dataTask(httpMethod: .PUT, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
+        self.dataTask(httpMethod: .PUT, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个delete请求
@@ -265,9 +352,9 @@ extension NetworkRequestManager: ExternalInterface
                 timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
                 headers: Dictionary<String, String>? = nil,
                 success: @escaping RequestSuccessCallback,
-                failure: @escaping RequestFailureCallback)
+                failure: @escaping RequestFailureCallback) -> String
     {
-        _ = self.dataTask(httpMethod: .DELETE, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
+        self.dataTask(httpMethod: .DELETE, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个patch请求
@@ -286,9 +373,9 @@ extension NetworkRequestManager: ExternalInterface
                timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
                headers: Dictionary<String, String>? = nil,
                success: @escaping RequestSuccessCallback,
-               failure: @escaping RequestFailureCallback)
+               failure: @escaping RequestFailureCallback) -> String
     {
-        _ = self.dataTask(httpMethod: .PATCH, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
+        self.dataTask(httpMethod: .PATCH, urlPath: urlPath, exact: exact, params: params, authorization: authorization, timeoutInterval: timeoutInterval, headers: headers, uploadProgressCallback: nil, downloadProgressCallback: nil, success: success, failure: failure)
     }
     
     ///创建一个数据请求
@@ -311,7 +398,7 @@ extension NetworkRequestManager: ExternalInterface
                   uploadProgressCallback: ((_ progress: Float) -> Void)? = nil,
                   downloadProgressCallback: ((_ progress: Float) -> Void)? = nil,
                   success: @escaping RequestSuccessCallback,
-                  failure: @escaping RequestFailureCallback) -> URLSessionDataTask?
+                  failure: @escaping RequestFailureCallback) -> String
     {
         //处理token和header
         var customHeaders = Dictionary<String, String>()
@@ -376,7 +463,8 @@ extension NetworkRequestManager: ExternalInterface
             failure(error as NSError)
         }
         task?.resume()
-        return task
+        
+        return recordTask(url: url, task: task)
     }
     
     ///下载大文件
@@ -391,7 +479,7 @@ extension NetworkRequestManager: ExternalInterface
                   headers: Dictionary<String, String>? = nil,
                   downloadProgressCallback: ((_ progress: Float) -> Void)? = nil,
                   completion: @escaping ((_ filePath: String) -> Void),
-                  failure: @escaping RequestFailureCallback) -> URLSessionDownloadTask
+                  failure: @escaping RequestFailureCallback) -> String
     {
         let url = exact ? urlPath : self.host + urlPath
         let config = URLSessionConfiguration.default
@@ -438,7 +526,8 @@ extension NetworkRequestManager: ExternalInterface
             }
         }
         downloadTask.resume()
-        return downloadTask
+        
+        return recordTask(url: url, task: downloadTask)
     }
     
     ///上传文件
@@ -461,7 +550,7 @@ extension NetworkRequestManager: ExternalInterface
                 headers: Dictionary<String, String>? = nil,
                 progressCallback: ((_ progress: Float) -> Void)? = nil,
                 success: @escaping RequestSuccessCallback,
-                failure: @escaping RequestFailureCallback)
+                failure: @escaping RequestFailureCallback) -> String
     {
         //处理token和header
         var customHeaders = Dictionary<String, String>()
@@ -484,7 +573,7 @@ extension NetworkRequestManager: ExternalInterface
         //组合url
         let url = exact ? urlPath : self.host + urlPath
         //启动请求
-        manager.post(url, parameters: desParams, headers: nil) { formData in
+        let task = manager.post(url, parameters: desParams, headers: nil) { formData in
             //拼接数据
             for (key, data) in fileDatas
             {
@@ -525,6 +614,8 @@ extension NetworkRequestManager: ExternalInterface
         } failure: { task, error in
             failure(error as NSError)
         }
+        
+        return recordTask(url: url, task: task)
     }
     
 }

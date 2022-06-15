@@ -93,6 +93,45 @@ extension NetworkAdapter: ExternalInterface
     }
     
     /**************************************** 基本网络功能 Section End ***************************************/
+    
+    /**************************************** 网络请求任务相关 Section Begin ***************************************/
+    ///所有请求任务信息
+    func allTasks() -> String
+    {
+        request.allTasks()
+    }
+    
+    ///获取某个请求对象，id就是请求任务时生成的id
+    func getTask(_ id: String) -> URLSessionTask?
+    {
+        request.getTask(id)
+    }
+    
+    ///获取某个任务的运行状态
+    func taskState(_ id: String) -> URLSessionTask.State?
+    {
+        request.taskState(id)
+    }
+    
+    ///取消某个请求任务
+    func cancelTask(_ id: String)
+    {
+        request.cancelTask(id)
+    }
+    
+    ///暂时挂起某个请求任务
+    func suspendTask(_ id: String)
+    {
+        request.suspendTask(id)
+    }
+    
+    ///恢复执行某个任务
+    func resumeTask(_ id: String)
+    {
+        request.resumeTask(id)
+    }
+    
+    /**************************************** 网络请求任务相关 Section End ***************************************/
 
     //MARK: 网络接口方法
     /**************************************** 注册登录 Section Begin ***************************************/
@@ -121,7 +160,7 @@ extension NetworkAdapter: ExternalInterface
         {
             param["verificationCode"] = verCode
         }
-        request.post(urlPath: url_loginWithPhoneAndSms, params: combineParams(param)) { response in
+        _ = request.post(urlPath: url_loginWithPhoneAndSms, params: combineParams(param)) { response in
             //解析数据
             if let userInfo = UserInfoModel.mj_object(withKeyValues: response)
             {
@@ -141,9 +180,9 @@ extension NetworkAdapter: ExternalInterface
     
     /**************************************** 首页数据 Section Begin ***************************************/
     ///获取首页模块、活动、banner等数据
-    func getHomeData(success: @escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback)
+    func getHomeData(success: @escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback) -> String
     {
-        request.get(urlPath: url_homeData, exact: false, params: defaultParams(), authorization: nil, timeoutInterval: nt_requestTimeoutInterval, headers: nil, progressCallback: nil) { response in
+        return request.get(urlPath: url_homeData, exact: false, params: defaultParams(), authorization: nil, timeoutInterval: nt_requestTimeoutInterval, headers: nil, progressCallback: nil) { response in
             //解析数据为对象
             if let homeDataModel = HomeDataModel.mj_object(withKeyValues: response)
             {
