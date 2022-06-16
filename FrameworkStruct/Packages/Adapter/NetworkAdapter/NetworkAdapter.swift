@@ -66,8 +66,7 @@ extension NetworkAdapter: ProtectAvailable
     //如果数据没有解析成功，那么生成错误信息
     func parseDataError() -> NSError
     {
-        let errCode: HttpStatusCode = .dataParseError
-        return errCode.getError()
+        HttpStatusCode.dataParseError.getError()
     }
 
 }
