@@ -47,14 +47,15 @@ extension String
     ///去除字符串头尾空格和换行
     func trim() -> String
     {
-        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     ///去除字符串中的换行和空格
     ///参数：includeSpace：是否去除空格，默认不去除
     func trimSpaceAndNewLine(includeSpace: Bool = false) -> String
     {
-        var str = self.replacingOccurrences(of: "\\n", with: "")
+        var str = self.trim()
+        str = str.replacingOccurrences(of: "\\n", with: "")
         str = str.replacingOccurrences(of: "\n", with: "")
         if includeSpace
         {
