@@ -46,7 +46,7 @@ extension UrlSchemeAdapter: ExternalInterface
     func dispatchUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
     {
         //创建一个url结构体
-        let urlStruct: UrlSchemeStructure = UrlSchemeStructure(url: url)
+        let urlStruct: UrlSchemeStructure = UrlSchemeStructure(url)
         //直接执行结构体预定义的功能，当然，也可以动态执行自定义功能
         urlStruct.performFunc()
     }

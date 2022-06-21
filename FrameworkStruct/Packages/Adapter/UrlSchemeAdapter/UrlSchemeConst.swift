@@ -19,11 +19,11 @@ let urlParamJoinChar = "="
 //url scheme结构
 struct UrlSchemeStructure
 {
-    var urlString: String                               //完整url
-    var `protocol`: UrlSchemeProtocol                   //协议
-    var functionality: UrlSchemeFunctionalityList       //主功能
-    var subFunctionality: UrlSchemeSubFunctionalityList //子功能
-    var params: Dictionary<String, String>              //参数列表
+    var urlString: String                                           //完整url
+    var `protocol`: UrlSchemeProtocol                               //协议
+    var functionality: UrlSchemeFunctionalityList                   //主功能
+    var subFunctionality: UrlSchemeSubFunctionalityList             //子功能
+    var params: Dictionary<UrlSchemeParamKey, String>               //参数列表
     
     init(urlString: String, protocoll: String?, host: String?, path: String?, query: String?)
     {
@@ -60,13 +60,13 @@ struct UrlSchemeStructure
                 let arr = paramStr.components(separatedBy: urlParamJoinChar)
                 if arr.count >= 2
                 {
-                    self.params[arr[0]] = arr[1]
+                    self.params[UrlSchemeParamKey.getKey(arr[0])] = arr[1]
                 }
             }
         }
     }
     
-    init(url: URL)
+    init(_ url: URL)
     {
         self.init(urlString: url.absoluteString, protocoll: url.scheme, host: url.host, path: url.path, query: url.query)
     }
@@ -94,7 +94,7 @@ enum UrlSchemeFunctionalityList: String
     case goMine                     //进入我的模块
     
     //执行指定的功能，主要是打开或进入某个功能模块
-    func performFunc(params: Dictionary<String, String>)
+    func performFunc(params: Dictionary<UrlSchemeParamKey, String>)
     {
         switch self {
         case .none:
@@ -124,4 +124,9 @@ enum UrlSchemeParamKey: String
 {
     case none = ""                  //没有参数
     
+    //从字符串创建枚举key类型
+    static func getKey(_ str: String) -> UrlSchemeParamKey
+    {
+        UrlSchemeParamKey(rawValue: str) ?? .none
+    }
 }
