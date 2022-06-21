@@ -55,24 +55,24 @@ class NetworkRequestManager: OriginManager
     //构造加密参数，只加密value，不加密key
     fileprivate func encryptParamValues(_ params: Dictionary<String, Any>) -> Dictionary<String, Any>
     {
-        if nt_needEncryptParam
+        if nt_encrypt
         {
             var parameters = [String: Any]()
             for key in params.keys
             {
-                if !nt_escapeParam_Key.contains(key)     //不包含在不加密数组中的key需要加密
+                if !nt_encrypt_escape_key.contains(key)     //不包含在不加密数组中的key需要加密
                 {
                     if let value = params[key]
                     {
                         if value is String
                         {
                             let val = value as! String
-                            parameters[key] = g_des(val, key:nt_encryptDes_Key)
+                            parameters[key] = g_des(val, key:nt_encrypt_des_key)
                         }
                         else    //如果value不是字符串，那么格式化成字符串
                         {
                             let val = String(format: "%@", value as! CVarArg)
-                            parameters[key] = g_des(val, key:nt_encryptDes_Key)
+                            parameters[key] = g_des(val, key:nt_encrypt_des_key)
                         }
                     }
                 }
@@ -88,13 +88,13 @@ class NetworkRequestManager: OriginManager
     //构造加密参数，加密整个参数列表，最终返回一个key为`data`的dict，如果不加密或者加密失败返回原始参数列表
     fileprivate func encryptParams(_ params: Dictionary<String, Any>) -> Dictionary<String, Any>
     {
-        if nt_needEncryptParam
+        if nt_encrypt
         {
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: params, options: .fragmentsAllowed)
                 let jsonStr = String.init(data: jsonData, encoding: .utf8)
-                let encryptStr = g_des(jsonStr!, key: nt_encryptDes_Key)
-                return [nt_paramData_Key: encryptStr as Any]    //返回加密参数
+                let encryptStr = g_des(jsonStr!, key: nt_encrypt_des_key)
+                return [nt_encrypt_data_key: encryptStr as Any]    //返回加密参数
             } catch {
                 FSLog("encrypt error: \(error.localizedDescription)")
                 return params    //如果加密失败，返回原始参数
@@ -109,13 +109,13 @@ class NetworkRequestManager: OriginManager
     ///解密返回数据，解密整个参数列表，最终返回一个dict
     fileprivate func decryptParams(_ responseObject: Any) -> Dictionary<String, Any>
     {
-        if nt_needEncryptParam  //如果要解密
+        if nt_encrypt  //如果要解密
         {
             if let res = responseObject as? Data
             {
                 do {
                     let resStr = String.init(data: res, encoding: .utf8)
-                    let decryptStr = g_desDecrypt(resStr, key: nt_encryptDes_Key)
+                    let decryptStr = g_desDecrypt(resStr, key: nt_encrypt_des_key)
                     let decryptData = decryptStr?.data(using: .utf8)
                     let resDict = try JSONSerialization.jsonObject(with: decryptData!, options: .mutableLeaves)
                     return resDict as! Dictionary<String, Any>
@@ -153,7 +153,7 @@ class NetworkRequestManager: OriginManager
         requestManager.requestSerializer = requestSerializer
         //response
         //如果参数加密了，那么返回的是二进制数据；用HTTP解析，如果不加密返回的是字典，用JSON解析
-        let responseSerializer = nt_needEncryptParam ? AFHTTPResponseSerializer() : AFJSONResponseSerializer()
+        let responseSerializer = nt_encrypt ? AFHTTPResponseSerializer() : AFJSONResponseSerializer()
         responseSerializer.acceptableContentTypes = nt_acceptableContentType
         requestManager.responseSerializer = responseSerializer
         
@@ -286,7 +286,7 @@ extension NetworkRequestManager: ExternalInterface
              exact: Bool = false,
              params: Dictionary<String, Any>? = nil,
              authorization: String? = nil,
-             timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+             timeoutInterval: TimeInterval = nt_request_timeoutInterval,
              headers: Dictionary<String, String>? = nil,
              progressCallback: ((_ progress: Float) -> Void)? = nil,
              success: @escaping RequestSuccessCallback,
@@ -308,7 +308,7 @@ extension NetworkRequestManager: ExternalInterface
               exact: Bool = false,
               params: Dictionary<String, Any>? = nil,
               authorization: String? = nil,
-              timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+              timeoutInterval: TimeInterval = nt_request_timeoutInterval,
               headers: Dictionary<String, String>? = nil,
               progressCallback: ((_ progress: Float) -> Void)? = nil,
               success: @escaping RequestSuccessCallback,
@@ -329,7 +329,7 @@ extension NetworkRequestManager: ExternalInterface
              exact: Bool = false,
              params: Dictionary<String, Any>? = nil,
              authorization: String? = nil,
-             timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+             timeoutInterval: TimeInterval = nt_request_timeoutInterval,
              headers: Dictionary<String, String>? = nil,
              success: @escaping RequestSuccessCallback,
              failure: @escaping RequestFailureCallback) -> String
@@ -349,7 +349,7 @@ extension NetworkRequestManager: ExternalInterface
                 exact: Bool = false,
                 params: Dictionary<String, Any>? = nil,
                 authorization: String? = nil,
-                timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+                timeoutInterval: TimeInterval = nt_request_timeoutInterval,
                 headers: Dictionary<String, String>? = nil,
                 success: @escaping RequestSuccessCallback,
                 failure: @escaping RequestFailureCallback) -> String
@@ -370,7 +370,7 @@ extension NetworkRequestManager: ExternalInterface
                exact: Bool = false,
                params: Dictionary<String, Any>? = nil,
                authorization: String? = nil,
-               timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+               timeoutInterval: TimeInterval = nt_request_timeoutInterval,
                headers: Dictionary<String, String>? = nil,
                success: @escaping RequestSuccessCallback,
                failure: @escaping RequestFailureCallback) -> String
@@ -393,7 +393,7 @@ extension NetworkRequestManager: ExternalInterface
                   exact: Bool = false,
                   params: Dictionary<String, Any>? = nil,
                   authorization: String? = nil,
-                  timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+                  timeoutInterval: TimeInterval = nt_request_timeoutInterval,
                   headers: Dictionary<String, String>? = nil,
                   uploadProgressCallback: ((_ progress: Float) -> Void)? = nil,
                   downloadProgressCallback: ((_ progress: Float) -> Void)? = nil,
@@ -546,7 +546,7 @@ extension NetworkRequestManager: ExternalInterface
                 mimeType: MIMEType,
                 params: Dictionary<String, Any>? = nil,
                 authorization: String? = nil,
-                timeoutInterval: TimeInterval = nt_requestTimeoutInterval,
+                timeoutInterval: TimeInterval = nt_request_timeoutInterval,
                 headers: Dictionary<String, String>? = nil,
                 progressCallback: ((_ progress: Float) -> Void)? = nil,
                 success: @escaping RequestSuccessCallback,

@@ -21,7 +21,7 @@ protocol AccessorProtocol
      * @说明：返回该数据存储器所操作的数据源相关信息
      * @返回值：返回的字典中包含以下key：type/...
      */
-    func accessorDataSourceInfo() -> Dictionary<String, String>
+    func accessorInfo() -> Dictionary<String, String>
     
 }
 
@@ -55,7 +55,7 @@ class OriginAccessor: NSObject
 extension OriginAccessor: AccessorProtocol
 {
     //返回数据源相关信息，如果是数据库存储器返回数据库的一些信息
-    @objc func accessorDataSourceInfo() -> Dictionary<String, String> {
+    @objc func accessorInfo() -> Dictionary<String, String> {
         let infoDict = ["type": "none"]
         return infoDict
     }

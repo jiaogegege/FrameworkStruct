@@ -36,7 +36,7 @@ class KeychainAccessor: OriginAccessor
     }
 
     
-    override func accessorDataSourceInfo() -> Dictionary<String, String> {
+    override func accessorInfo() -> Dictionary<String, String> {
         let infoDict = ["type": "keychain"]
         return infoDict
     }

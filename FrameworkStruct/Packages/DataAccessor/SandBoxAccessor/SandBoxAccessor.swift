@@ -37,7 +37,7 @@ class SandBoxAccessor: OriginAccessor
     
     
     //返回数据源相关信息
-    override func accessorDataSourceInfo() -> Dictionary<String, String> {
+    override func accessorInfo() -> Dictionary<String, String> {
         let infoDict = ["type": "sandbox"]
         return infoDict
     }

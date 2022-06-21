@@ -14,21 +14,21 @@ import Foundation
 //MARK: 常量定义
 /**************************************** 加密相关 Section Begin ****************************************/
 ///参数是否加密
-let nt_needEncryptParam = false
+let nt_encrypt = false
 
 ///DES加密的密钥
-let nt_encryptDes_Key = "Aipi3pWCzdo6tA2SL0gp3ajx"
+let nt_encrypt_des_key = "Aipi3pWCzdo6tA2SL0gp3ajx"
 
 ///不需要加密的参数key，在这个数组中的key不会被加密
-let nt_escapeParam_Key = ["imgCode"]
+let nt_encrypt_escape_key = ["imgCode"]
 
 ///如果加密整个参数，那么最终返回的参数都放在key为`data`的字典中
-let nt_paramData_Key = "data"
+let nt_encrypt_data_key = "data"
 
 /**************************************** 加密相关 Section End ****************************************/
 
 ///请求超时时间间隔
-let nt_requestTimeoutInterval: TimeInterval = 30.0
+let nt_request_timeoutInterval: TimeInterval = 30.0
 
 ///可接受的返回数据类型
 let nt_acceptableContentType: Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
@@ -61,15 +61,15 @@ enum ServerHostType {
     {
         switch self {
         case .dev:
-            return "http://192.168.50.54/"
+            return "http://192.168.50.54"
         case .qa:
-//            return "http://218.4.182.210/"    //外网ip
-//            return "http://192.168.50.63/"    //内网ip
-            return "https://jszhaofeng.cn/"
+//            return "http://218.4.182.210"    //外网ip
+//            return "http://192.168.50.63"    //内网ip
+            return "https://jszhaofeng.cn"
         case .uat:
-            return "https://www.awaitz.com/pre/"
+            return "https://www.awaitz.com/pre"
         case .pro:
-            return "https://www.awaitz.com/"
+            return "https://www.awaitz.com"
         }
     }
     
@@ -77,9 +77,9 @@ enum ServerHostType {
 
 //MARK: URL定义
 //首页数据，包括首页模块、活动信息和banner等
-let url_homeData = "api/awaitz-mall/home/v1/homeData"
+let url_homeData = "/api/awaitz-mall/home/v1/homeData"
 //使用手机号和验证码快速登录
-let url_loginWithPhoneAndSms = "api/awaitz-mall/user/v1/sms/login"
+let url_loginWithPhoneAndSms = "/api/awaitz-mall/user/v1/sms/login"
 
 
 

@@ -181,7 +181,7 @@ extension NetworkAdapter: ExternalInterface
     ///获取首页模块、活动、banner等数据
     func getHomeData(success: @escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback) -> String
     {
-        return request.get(urlPath: url_homeData, exact: false, params: defaultParams(), authorization: nil, timeoutInterval: nt_requestTimeoutInterval, headers: nil, progressCallback: nil) { response in
+        return request.get(urlPath: url_homeData, exact: false, params: defaultParams(), authorization: nil, timeoutInterval: nt_request_timeoutInterval, headers: nil, progressCallback: nil) { response in
             //解析数据为对象
             if let homeDataModel = HomeDataModel.mj_object(withKeyValues: response)
             {
