@@ -74,18 +74,10 @@ class ApplicationManager: OriginManager
         return UIWindow()   //永远不应该执行这一步
     }
     
-    ///强制设置屏幕是否横屏，默认竖屏
-    ///如果需要手动设置屏幕旋转，那么使用这个属性
-    var isForceLandscape: Bool = false {
-        didSet {
-            if isForceLandscape == true
-            {
-                UIDevice.current.setValue(UIDeviceOrientation.landscapeRight.rawValue, forKey: "orientation")
-            }
-            else
-            {
-                UIDevice.current.setValue(UIDeviceOrientation.portrait.rawValue, forKey: "orientation")
-            }
+    ///屏幕方向，默认支持任何方向，如果需要强制设置屏幕只支持某个方向需要设置该属性
+    var screenOrientation: AMScreenOrientation = .all {
+        willSet {
+            newValue.setOrientation()
         }
     }
     
@@ -232,6 +224,39 @@ extension ApplicationManager: InternalType
         case background                     //在后台
         case memoryWarning                  //内存警告
         case terminate                      //被销毁
+    }
+    
+    ///屏幕方向
+    enum AMScreenOrientation {
+        case all                //所有方向
+        case landscape          //左右横屏
+        case portrait           //上下竖屏
+        
+        //强制设置屏幕方向
+        func setOrientation()
+        {
+            switch self {
+            case .all:
+                UIDevice.current.setValue(UIDeviceOrientation.unknown.rawValue, forKey: "orientation")
+            case .landscape:
+                UIDevice.current.setValue(UIDeviceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+            case .portrait:
+                UIDevice.current.setValue(UIDeviceOrientation.portrait.rawValue, forKey: "orientation")
+            }
+        }
+        
+        //获得具体的屏幕方向
+        func getOrientation() -> UIInterfaceOrientationMask
+        {
+            switch self {
+            case .all:
+                return .all
+            case .landscape:
+                return .landscape
+            case .portrait:
+                return .portrait
+            }
+        }
     }
     
 }
