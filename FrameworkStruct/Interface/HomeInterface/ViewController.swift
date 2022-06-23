@@ -36,7 +36,7 @@ class ViewController: BasicViewController
     //创建界面
     override func createUI() {
         super.createUI()
-        
+        UIImpactFeedbackGenerator(style: .heavy)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -11,6 +11,7 @@
  * 包括但不限于`UIApplication`、`AppDelegate`、`UIWindow`、全局属性、全局状态、全局事件和行为等
  */
 import UIKit
+import AudioToolbox
 
 
 //应用程序管理器代理方法，根据实际需求设计
@@ -137,8 +138,8 @@ extension ApplicationManager: DelegateProtocol
     {
         stMgr.setStatus(AMAppState.launched, forKey: AMStatusKey.appState)
         //写入app启动次数
-        let launchTimes = self.launchTimes
-        ud.write(key: .runTimes, value: launchTimes + 1)
+        let launchCount = self.launchCount
+        ud.write(key: .runTimes, value: launchCount + 1)
     }
     
     //app即将进入前台
@@ -280,7 +281,7 @@ extension ApplicationManager: ExternalInterface
     }
     
     ///app启动次数
-    var launchTimes: Int {
+    var launchCount: Int {
         return ud.readInt(key: .runTimes)
     }
     
@@ -337,7 +338,7 @@ extension ApplicationManager: ExternalInterface
     }
     
     ///电池电量：0-1
-    var deviceBattery: Float {
+    var battery: Float {
         return UIDevice.current.batteryLevel
     }
     
@@ -376,7 +377,26 @@ extension ApplicationManager: ExternalInterface
         }
     }
     
-    ///屏幕是否被捕获，包括：屏幕录制/AirPlay/镜像等
+    ///强烈的振动
+    func vibrate()
+    {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+    }
+    
+    ///振动反馈，用于一些简单的提示
+    ///参数：style：振动类型；intensity：振动强度:0-1
+    func vibrateFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle = .heavy, intensity: CGFloat? = nil)
+    {
+        if let intensity = intensity {
+            UIImpactFeedbackGenerator(style: style).impactOccurred(intensity: intensity)
+        }
+        else
+        {
+            UIImpactFeedbackGenerator(style: style).impactOccurred()
+        }
+    }
+    
+    ///屏幕是否正在被捕获，包括：屏幕录制/AirPlay/镜像等
     var isCaputring: Bool {
         return UIScreen.main.isCaptured
     }
