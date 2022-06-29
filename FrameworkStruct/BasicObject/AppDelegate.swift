@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     //如果需要自定义设置屏幕方向，那么释放这段代码，支持`全部/左右横屏/上下竖屏`
 //    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-//        ApplicationManager.shared.screenOrientation.getOrientation()
+//        ApplicationManager.shared.forceOrientation.getOrientation()
 //    }
     
 }

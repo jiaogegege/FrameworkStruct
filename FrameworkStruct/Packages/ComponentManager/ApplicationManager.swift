@@ -23,6 +23,13 @@ protocol ApplicationManagerDelegate: NSObjectProtocol
 }
 
 
+///通知
+extension FSNotification
+{
+    static let screenShot = FSNotification(value: "screenShot", paramKey: "UIImage")        //截屏的通知
+}
+
+
 class ApplicationManager: OriginManager
 {
     //MARK: 属性
@@ -75,8 +82,8 @@ class ApplicationManager: OriginManager
         return UIWindow()   //永远不应该执行这一步
     }
     
-    ///屏幕方向，默认支持任何方向，如果需要强制设置屏幕只支持某个方向需要设置该属性
-    var screenOrientation: AMScreenOrientation = .all {
+    ///强制设置屏幕旋转方向，默认支持任何方向，如果需要强制设置屏幕只支持某个方向需要设置该属性
+    var forceOrientation: AMScreenOrientation = .all {
         willSet {
             newValue.setOrientation()
         }

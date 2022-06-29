@@ -10,6 +10,14 @@
  */
 import UIKit
 
+
+//通知
+//extension FSNotification
+//{
+//    static let changeTheme = FSNotification(value: "changeTheme", paramKey: "ThemeProtocol")        //切换主题的通知
+//}
+
+
 class ThemeManager: OriginManager
 {
     //MARK: 属性

@@ -51,28 +51,29 @@ let gMainSB = "Main"
 let gMineSB = "Mine"
 
 
-//MARK: 全局通用自定义通知
-enum FSNotification: String
+//MARK: 全局通用自定义通知，其它模块中如果需要定义通知，可以扩展该类，并新增static变量
+class FSNotification
 {
-    case changeTheme                            //切换主题的通知
-    case screenShot                             //截屏的通知
+    //原始值
+    var rawValue: String
+    //如果通知有参数，那么用这个属性获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
+    //返回的参数key就是类型的名字，可以是结构体名/类名/协议名
+    var paramKey: String?
     
+    //初始化
+    init(value: String, paramKey: String? = nil) {
+        self.rawValue = value
+        self.paramKey = paramKey
+    }
     
     //计算属性，获得通知字符串的名字，格式：项目名缩写+具体通知名称+通知后缀
     var name: Notification.Name {
         return Notification.Name(rawValue: "FS_" + self.rawValue + "_Notification")
     }
-
-    //计算属性，如果通知有参数，那么用这个方法获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
-    //返回的参数key就是类型的名字，可以是结构体名/类名/协议名
-    var paramKey: String {
-        switch self {
-        case .changeTheme:
-            return "ThemeProtocol"      //返回`ThemeProtocol`协议对象名字
-        case .screenShot:
-            return "UIImage"            //返回`UIImage`对象
-        }
-    }
+    
+    
+    ///全局通知枚举值
+    static let changeTheme = FSNotification(value: "changeTheme", paramKey: "ThemeProtocol")                        //切换主题的通知
     
 }
 
