@@ -29,18 +29,17 @@ struct UIExtensionStoragePropertyKey
  */
 extension UIViewController
 {
-    ///通用获取vc的方法
+    ///通用获取vc的方法，子类可覆写该方法，比如从storyboard创建VC时
     @objc class func getViewController() -> Self
     {
-        return Self.init()
+        Self.init()
     }
     
     ///从storyboard获得一个VC
     ///参数：storyboard：storyboard名字
-    @objc class func getVC(from storyboard: String) -> Self
+    @objc static func getVC(from storyboard: String) -> Self
     {
-        let board = UIStoryboard(name: storyboard, bundle: nil)
-        return board.instantiateViewController(withIdentifier: Self.className) as! Self
+        UIStoryboard(name: storyboard, bundle: nil).instantiateViewController(withIdentifier: Self.className) as! Self
     }
     
     //初始化控制器数据，比如一些状态和变量
