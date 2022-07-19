@@ -21,7 +21,7 @@ struct WebContentHandler {
 /**
  * 预定义的native方法
  */
-//js交互原生handler，根据具体需求定义
+//js交互原生handler，原生提供给h5调用的方法，根据具体需求定义
 enum WebHandlerNative {
     static let noneName = "none"
     case none                                                           //空
@@ -215,7 +215,7 @@ enum WebHandlerNative {
 }
 
 
-//js交互h5 handler名称
+//js交互h5 handler名称，h5提供给原生调用的方法
 enum WebHandlerH5Name: String {
     case getUrl                         //获取页面url地址字符串
     
