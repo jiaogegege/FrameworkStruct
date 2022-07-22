@@ -302,7 +302,7 @@ extension ApplicationManager: ExternalInterface
         else
         {
             let deviceId: String
-            if let devId = kDeviceIdentifier
+            if let devId = kDeviceId
             {
                 deviceId = devId.replacingOccurrences(of: "-", with: "_")
             }

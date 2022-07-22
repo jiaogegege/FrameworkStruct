@@ -12,7 +12,7 @@ import Foundation
 
 //MARK: 设备相关定义
 //设备唯一标志符
-var kDeviceIdentifier: String? {
+var kDeviceId: String? {
     return UIDevice.current.identifierForVendor?.uuidString
 }
 
@@ -174,7 +174,7 @@ let kLandscapeLeft: CGFloat = kScreenWidth >= 812.0 ? 34.0 : 0.0
 //适配iPhoneX横屏时，底部白条高度
 let kLandscapeBottom: CGFloat = kScreenWidth >= 812.0 ? 20.0 : 0.0
 //iPhoneX和iPhone8状态栏高度差
-let kBangGapToNormalHeight: CGFloat = kStatusHeight - 20.0
+let kGapBetweenBangToNormalStatusHeight: CGFloat = kStatusHeight - 20.0
 
 
 //iPhone屏幕宽度，iphonex和iphone8，这两个值根据设计图选择，一般设计图都是以iPhone8和iPhoneX的尺寸为主
