@@ -14,8 +14,8 @@ import UIKit
 import AudioToolbox
 
 
-//应用程序管理器代理方法，根据实际需求设计
-protocol ApplicationManagerDelegate: NSObjectProtocol
+//应用程序管理器服务，根据实际需求设计
+protocol ApplicationManagerServices: NSObjectProtocol
 {
     ///应用程序管理器截屏了
     func applicationManagerDidScreenshot(image: UIImage)
@@ -93,7 +93,7 @@ class ApplicationManager: OriginManager
     var isListenScreenshot: Bool = false
     
     ///代理对象
-    weak var delegate: ApplicationManagerDelegate?
+    weak var delegate: ApplicationManagerServices?
     
     
     //MARK: 方法
