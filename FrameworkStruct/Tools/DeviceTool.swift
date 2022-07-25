@@ -260,7 +260,7 @@ func smallerThanIphone8() -> Bool
 
 //MARK: iOS系统相关定义
 //iOS系统版本
-let kiOSVersion: Float = (UIDevice.current.systemVersion as NSString).floatValue
+let kiOSVersion: Float = (kSystemVersion as NSString).floatValue
 
 ///是否可用某个版本的系统
 func iOSAvailable(_ ver: Float) -> Bool
