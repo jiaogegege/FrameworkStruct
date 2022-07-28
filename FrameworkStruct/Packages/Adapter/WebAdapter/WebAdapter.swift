@@ -70,7 +70,18 @@ extension WebAdapter: ExternalInterface
     ///在内置safari中打开url
     func openInSafari(_ urlStr: String)
     {
-        
+        do {
+            try SafariServiceManager.shared.openInSafari(urlStr, entersReaderIfAvailable: false, barCollapsingEnabled: true, preferredBarTintColor: nil, preferredControlTintColor: nil, dismissButtonStyle: .close)
+        } catch {
+            print(error)
+        }
+    }
+    
+    ///在webView中打开一个url
+    func openInWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true)
+    {
+        let vc = self.createWebVC(url: url, remote: remote, title: title, hideNavBar: hideNavBar, showProgress: showProgress)
+        g_pushVC(vc)
     }
     
     ///创建一个webviewcontroller

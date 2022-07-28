@@ -148,6 +148,7 @@ extension SafariServiceManager: InternalType
     //错误类型
     enum SSMError: Error {
         case unsupportUrl   //不支持的url
+        
     }
     
 }
