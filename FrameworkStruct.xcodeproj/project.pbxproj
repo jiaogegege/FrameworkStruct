@@ -324,6 +324,7 @@
 		EA3E8C3227B782C4006A2715 /* POPLayerExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA3E8C1A27B782C4006A2715 /* POPLayerExtras.mm */; };
 		EA3E8C3327B782C4006A2715 /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA3E8C1B27B782C4006A2715 /* POPVector.mm */; };
 		EA3E8C3627B784C7006A2715 /* BLE_img_gear.json in Resources */ = {isa = PBXBuildFile; fileRef = EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */; };
+		EA44FD3E28921DFF00977943 /* SafariServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA44FD3D28921DFF00977943 /* SafariServiceManager.swift */; };
 		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
 		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
@@ -1089,6 +1090,7 @@
 		EA3E8C1E27B782C4006A2715 /* POPAnimationTracer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationTracer.h; sourceTree = "<group>"; };
 		EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BLE_img_gear.json; sourceTree = "<group>"; };
 		EA3E8C3727B784E1006A2715 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA44FD3D28921DFF00977943 /* SafariServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceManager.swift; sourceTree = "<group>"; };
 		EA52493D27A3E44B002E3616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
@@ -2763,6 +2765,7 @@
 			children = (
 				EA66061327C86D37000B20A6 /* README.md */,
 				EAFA821127C6845800CA1598 /* WebAdapter.swift */,
+				EA44FD3D28921DFF00977943 /* SafariServiceManager.swift */,
 				EA66061427C86DEE000B20A6 /* BasicWebViewController.swift */,
 				EA66061627C86E0E000B20A6 /* WebAdapterConst.swift */,
 				EACF2E4A27C9FDF800969BE9 /* jstest.html */,
@@ -4994,6 +4997,7 @@
 				EA11127827B3BE2C006D0B83 /* RequestTaskMap.swift in Sources */,
 				EA99371F27994F6100480147 /* TABAnimatedInjectionIIIHelper.m in Sources */,
 				EA9A78D727C756C900A11FC8 /* MPITextRenderAttributes.m in Sources */,
+				EA44FD3E28921DFF00977943 /* SafariServiceManager.swift in Sources */,
 				EA3E8AF627B77CEA006A2715 /* RectNode.swift in Sources */,
 				EADB00AC27623C76001B7223 /* OriginWorker.swift in Sources */,
 				EA3E8A9927B77CEA006A2715 /* FilepathImageProvider.macOS.swift in Sources */,

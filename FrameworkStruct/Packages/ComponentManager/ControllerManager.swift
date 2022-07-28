@@ -94,7 +94,7 @@ extension ControllerManager: ExternalInterface
     
     //当一个控制器被创建的时候，调用这个方法并传入self，记录
     //建议在viewDidLoad方法中调用
-    func pushController(_ controller: UIViewController)
+    func recordController(_ controller: UIViewController)
     {
         self.allControllers.add(controller)
         //判断控制器类型
@@ -115,7 +115,7 @@ extension ControllerManager: ExternalInterface
     
     //控制器正在显示
     //建议在viewWillAppear方法中调用
-    func showController(_ controller: UIViewController)
+    func displayController(_ controller: UIViewController)
     {
         if controller.isKind(of: UITabBarController.self)
         {
@@ -129,6 +129,18 @@ extension ControllerManager: ExternalInterface
         {
             self.currentVC = controller
         }
+    }
+    
+    //push一个控制器
+    func pushViewController(_ controller: UIViewController, animated: Bool = true)
+    {
+        self.currentNavVC?.pushViewController(controller, animated: animated)
+    }
+    
+    //present一个控制器
+    func presentViewController(_ controller: UIViewController, animated: Bool = true)
+    {
+        self.topVC.present(controller, animated: animated)
     }
     
 }

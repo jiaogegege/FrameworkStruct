@@ -43,14 +43,20 @@ class SocializeAdapter: OriginAdapter
 extension SocializeAdapter: ExternalInterface
 {
     ///系统分享，示例，具体根据实际需求定义
-    func systemShare(title: String, img: UIImage, urlStr: String?)
+    func systemShare(text: String, image: UIImage, urlStr: String?)
     {
-        let act = SocializeActivity(title: title, img: img, urlStr: urlStr)
-        let vc = UIActivityViewController(activityItems: [title, img], applicationActivities: [act])
+        var items: [Any] = [text, image]
+        if let urlStr = urlStr {
+            if let url = URL(string: urlStr)
+            {
+                items.append(url)
+            }
+        }
+        let vc = UIActivityViewController(activityItems: items, applicationActivities: [SocializeActivity.fsShareAction])
         vc.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
             FSLog("system share: \(completed ? "success" : "failure")")
         }
-        ControllerManager.shared.topVC.present(vc, animated: true)
+        g_presentVC(vc)
     }
     
 }

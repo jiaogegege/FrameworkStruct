@@ -67,6 +67,12 @@ extension WebAdapter: ExternalInterface
         }
     }
     
+    ///在内置safari中打开url
+    func openInSafari(_ urlStr: String)
+    {
+        
+    }
+    
     ///创建一个webviewcontroller
     func createWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true) -> BasicWebViewController
     {

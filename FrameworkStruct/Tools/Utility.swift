@@ -152,3 +152,15 @@ func g_screenShot() -> UIImage?
 {
     ApplicationManager.shared.screenshot()
 }
+
+//push控制器
+func g_pushVC(_ vc: UIViewController, animated: Bool = true)
+{
+    ControllerManager.shared.pushViewController(vc, animated: animated)
+}
+
+//present控制器
+func g_presentVC(_ vc: UIViewController, animated: Bool = true)
+{
+    ControllerManager.shared.presentViewController(vc, animated: animated)
+}

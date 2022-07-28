@@ -131,7 +131,7 @@ class BasicTableViewController: UITableViewController
         self.addNotification()
         
         //创建完成后添加到管理器中
-        ControllerManager.shared.pushController(self)
+        ControllerManager.shared.recordController(self)
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -141,7 +141,7 @@ class BasicTableViewController: UITableViewController
         //每次UI显示都更新导航栏样式，因为其他界面可能修改导航栏样式
         self.basicNavConfig()
         //显示为当前控制器
-        ControllerManager.shared.showController(self)
+        ControllerManager.shared.displayController(self)
     }
     
     override func viewWillDisappear(_ animated: Bool)

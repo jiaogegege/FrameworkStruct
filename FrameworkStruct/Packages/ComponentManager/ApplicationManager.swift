@@ -14,7 +14,9 @@ import UIKit
 import AudioToolbox
 
 
-//应用程序管理器服务，根据实际需求设计
+/**
+ 应用程序管理器服务，根据实际需求设计
+ */
 protocol ApplicationManagerServices: NSObjectProtocol
 {
     ///应用程序管理器截屏了
@@ -23,7 +25,9 @@ protocol ApplicationManagerServices: NSObjectProtocol
 }
 
 
-///通知
+/**
+ 通知
+ */
 extension FSNotification
 {
     static let screenShot = FSNotification(value: "screenShot", paramKey: "UIImage")        //截屏的通知
