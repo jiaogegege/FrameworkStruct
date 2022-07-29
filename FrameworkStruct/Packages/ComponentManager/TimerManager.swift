@@ -136,7 +136,7 @@ extension TimerManager: ExternalInterface
                    exact: Bool = false,
                    host: AnyObject,
                    action: @escaping ((_ restTime: TimeInterval, _ canFinish: inout Bool) -> Void),
-                   completion: ((_ endTime: TimeInterval) -> Void)? = nil)
+                   completion: ((_ endTime: TimeInterval) -> Void)? = nil) -> String?
     {
         //如果起始时间为负数，并且没有设置穿透，那么直接结束
         if startTime <= 0 && through == false
@@ -145,7 +145,7 @@ extension TimerManager: ExternalInterface
             {
                 co(startTime)
             }
-            return
+            return nil
         }
         
         //准备数据
@@ -184,6 +184,8 @@ extension TimerManager: ExternalInterface
             restTime -= interval    //剩余时间减少
         }
         self.countDownTimerDict[timerId] = timer
+        
+        return timerId
     }
     
     ///秒表，时间不断累加，秒表停止条件必须外部提供
@@ -198,7 +200,7 @@ extension TimerManager: ExternalInterface
                    exact: Bool = false,
                    host: AnyObject,
                    action: @escaping ((_ totalTime: TimeInterval, _ canFinish: inout Bool) -> Void),
-                   completion: ((_ endTime: TimeInterval) -> Void)? = nil)
+                   completion: ((_ endTime: TimeInterval) -> Void)? = nil) -> String
     {
         //准备数据
         var totalTime = 0.0    //累计时间
@@ -222,6 +224,16 @@ extension TimerManager: ExternalInterface
             totalTime += interval    //剩余时间减少
         }
         self.countDownTimerDict[timerId] = timer
+        
+        return timerId
+    }
+    
+    ///提前停止某个倒计时或秒表
+    ///参数：id：定时器id
+    func cancel(_ id: String)
+    {
+        let timer = self.countDownTimerDict[id]
+        timer?.cancel()
     }
     
 }
