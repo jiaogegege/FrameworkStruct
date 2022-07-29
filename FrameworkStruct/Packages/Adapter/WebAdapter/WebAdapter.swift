@@ -103,6 +103,8 @@ extension WebAdapter: ExternalInterface
         }
     }
     
+    /**************************************** webview交互 Section Begin ***************************************/
+    
     ///在webView中打开一个url
     func openInWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true)
     {
@@ -142,6 +144,6 @@ extension WebAdapter: ExternalInterface
         }
     }
     
-    
+    /**************************************** webview交互 Section End ***************************************/
     
 }

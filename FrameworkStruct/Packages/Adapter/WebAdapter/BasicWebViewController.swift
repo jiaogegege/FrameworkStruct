@@ -89,6 +89,7 @@ class BasicWebViewController: BasicViewController
         self.configJsBridge()
         //进度条
         progressBar.frame = CGRect(x: 0, y: (self.hideNavBar ? kStatusHeight : kSafeTopHeight), width: kScreenWidth, height: 2.0)
+        progressBar.progressViewStyle = .default
         progressBar.progressTintColor = theme.mainColor
         progressBar.trackTintColor = .clear
         progressBar.progress = 0.0
@@ -113,7 +114,7 @@ class BasicWebViewController: BasicViewController
             if webView.estimatedProgress >= 1.0
             {
                 //加载完成后一定时间隐藏进度条
-                g_after(0.25) {
+                g_after(BasicWebViewController.progressHiddenDelay) {
                     self.progressBar.isHidden = true
                 }
             }
@@ -203,9 +204,8 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        g_after(0.25) {
+        g_after(BasicWebViewController.progressHiddenDelay) {
             self.progressBar.isHidden = true
-            self.progressBar.setProgress(0.0, animated: false)
         }
         //标题，如果外部没有传入标题，那么从这里获取
         if self.titleStr == nil
@@ -217,7 +217,7 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        g_after(0.25) {
+        g_after(BasicWebViewController.progressHiddenDelay) {
             self.progressBar.isHidden = true
         }
     }
@@ -264,11 +264,6 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
 //内部类型
 extension BasicWebViewController: InternalType
 {
-    //KVO监听类型
-    enum WVObserveKey: String {
-        case webViewProgress = "estimatedProgress"      //webivew进度
-    }
-    
     //资源类型
     enum WVResourceType {
         case remote(String)     //网络资源，绑定一个url地址
@@ -286,6 +281,14 @@ extension BasicWebViewController: InternalType
         }
     }
     
+    //KVO监听类型
+    enum WVObserveKey: String {
+        case webViewProgress = "estimatedProgress"      //webivew进度
+    }
+    
+    //页面加载完成后进度条延迟消失的时间
+    static let progressHiddenDelay: TimeInterval = 0.4
+    
 }
 
 
@@ -295,7 +298,7 @@ extension BasicWebViewController: ExternalInterface
     ///重新加载页面
     func reload()
     {
-        self.loadRequest()
+        webView.reload()
     }
     
     ///能否在这个页面上执行某个H5 handler
