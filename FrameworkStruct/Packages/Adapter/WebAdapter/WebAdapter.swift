@@ -67,13 +67,21 @@ extension WebAdapter: ExternalInterface
         }
     }
     
-    ///在内置safari中打开url
-    func openInSafari(_ urlStr: String)
+    ///在内置safari中打开url，回调回传是否打开成功
+    func openInSafari(_ urlStr: String, isSuccess: ((_ success: Bool) -> Void)? = nil)
     {
         do {
             try SafariServiceManager.shared.openInSafari(urlStr, entersReaderIfAvailable: false, barCollapsingEnabled: true, preferredBarTintColor: nil, preferredControlTintColor: nil, dismissButtonStyle: .close)
+            if let cb = isSuccess
+            {
+                cb(true)
+            }
         } catch {
             print(error)
+            if let cb = isSuccess
+            {
+                cb(false)
+            }
         }
     }
     

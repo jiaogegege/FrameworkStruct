@@ -26,7 +26,7 @@ protocol SafariServiceManagerServices: NSObjectProtocol {
     func safariServiceManagerWillOpenInSystemBrowser(_ urlStr: String)
     
     //关闭safari界面时调用
-    func safariServiceManagerDidClose(_ urlStr: String)
+    func safariServiceManagerDidClose(_ urlStr: String?)
     
 }
 
@@ -137,6 +137,10 @@ extension SafariServiceManager: DelegateProtocol, SFSafariViewControllerDelegate
             self.urlDict[url] = nil
             self.delegate?.safariServiceManagerDidClose(url)
         }
+        else
+        {
+            self.delegate?.safariServiceManagerDidClose(nil)
+        }
     }
     
 }
@@ -182,6 +186,24 @@ extension SafariServiceManager: ExternalInterface
             config.barCollapsingEnabled = barCollapsingEnabled
             let vc = self.createInternalSafari(url: url, config: config, preferredBarTintColor: preferredBarTintColor, preferredControlTintColor: preferredControlTintColor, dismissButtonStyle: dismissButtonStyle)
             g_presentVC(vc)
+        }
+        else
+        {
+            throw SSMError.unsupportUrl
+        }
+    }
+    
+    //添加url到safari阅读列表
+    func addReadList(_ urlStr: String, title: String?, previewText: String?) throws
+    {
+        if let url = URL(string: urlStr), SSReadingList.supportsURL(url), let ssread = SSReadingList.default()
+        {
+            do {
+                try ssread.addItem(with: url, title: title, previewText: previewText)
+            } catch {
+                print(error)
+                throw SSMError.unsupportUrl
+            }
         }
         else
         {
