@@ -85,6 +85,24 @@ extension WebAdapter: ExternalInterface
         }
     }
     
+    ///添加url到safari阅读列表
+    func addToSafariReadList(_ urlStr: String, title: String?, previewText: String?, isSuccess: ((_ success: Bool) -> Void)? = nil)
+    {
+        do {
+            try SafariServiceAdapter.shared.addReadList(urlStr, title: title, previewText: previewText)
+            if let cb = isSuccess
+            {
+                cb(true)
+            }
+        } catch {
+            print(error)
+            if let cb = isSuccess
+            {
+                cb(false)
+            }
+        }
+    }
+    
     ///在webView中打开一个url
     func openInWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true)
     {
