@@ -71,7 +71,7 @@ extension WebAdapter: ExternalInterface
     func openInSafari(_ urlStr: String, isSuccess: ((_ success: Bool) -> Void)? = nil)
     {
         do {
-            try SafariServiceManager.shared.openInSafari(urlStr, entersReaderIfAvailable: false, barCollapsingEnabled: true, preferredBarTintColor: nil, preferredControlTintColor: nil, dismissButtonStyle: .close)
+            try SafariServiceAdapter.shared.openInSafari(urlStr, entersReaderIfAvailable: false, barCollapsingEnabled: true, preferredBarTintColor: nil, preferredControlTintColor: nil, dismissButtonStyle: .close)
             if let cb = isSuccess
             {
                 cb(true)

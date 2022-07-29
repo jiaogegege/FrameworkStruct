@@ -1,5 +1,5 @@
 //
-//  SafariServiceManager.swift
+//  SafariServiceAdapter.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2022/7/28.
@@ -15,32 +15,32 @@ import SafariServices
 /**
  服务代理方法
  */
-protocol SafariServiceManagerServices: NSObjectProtocol {
+protocol SafariServiceAdapterServices: NSObjectProtocol {
     //打开初始url成功或失败
-    func safariServiceManagerDidOpenUrl(_ urlStr: String, isSuccess: Bool)
+    func safariServiceAdapterDidOpenUrl(_ urlStr: String, isSuccess: Bool)
     
     //重定向初始url到某个url
-    func safariServiceManagerDidRedirectTo(originUrl: String, newUrl: String)
+    func safariServiceAdapterDidRedirectTo(originUrl: String, newUrl: String)
     
     //即将跳转到系统浏览器打开url
-    func safariServiceManagerWillOpenInSystemBrowser(_ urlStr: String)
+    func safariServiceAdapterWillOpenInSystemBrowser(_ urlStr: String)
     
     //关闭safari界面时调用
-    func safariServiceManagerDidClose(_ urlStr: String?)
+    func safariServiceAdapterDidClose(_ urlStr: String?)
     
 }
 
-class SafariServiceManager: OriginManager
+class SafariServiceAdapter: OriginAdapter
 {
     //MARK: 属性
     //单例
-    static let shared = SafariServiceManager()
+    static let shared = SafariServiceAdapter()
     
     //容器，绑定初始url和safari界面
     fileprivate lazy var urlDict: Dictionary<String, SFSafariViewController> = [:]
     
     //服务代理对象
-    weak var delegate: SafariServiceManagerServices?
+    weak var delegate: SafariServiceAdapterServices?
     
     //MARK: 方法
     //私有化初始化方法
@@ -93,13 +93,13 @@ class SafariServiceManager: OriginManager
 
 
 ///代理方法
-extension SafariServiceManager: DelegateProtocol, SFSafariViewControllerDelegate
+extension SafariServiceAdapter: DelegateProtocol, SFSafariViewControllerDelegate
 {
     //传入的url第一次加载完毕后调用，不管成功还是失败
     func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         if let url = getUrl(controller) //如果保存了对应的url，那么执行服务协议
         {
-            self.delegate?.safariServiceManagerDidOpenUrl(url, isSuccess: didLoadSuccessfully)
+            self.delegate?.safariServiceAdapterDidOpenUrl(url, isSuccess: didLoadSuccessfully)
         }
     }
 
@@ -107,7 +107,7 @@ extension SafariServiceManager: DelegateProtocol, SFSafariViewControllerDelegate
     func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
         if let originUrl = getUrl(controller)
         {
-            self.delegate?.safariServiceManagerDidRedirectTo(originUrl: originUrl, newUrl: URL.absoluteString)
+            self.delegate?.safariServiceAdapterDidRedirectTo(originUrl: originUrl, newUrl: URL.absoluteString)
         }
     }
     
@@ -125,7 +125,7 @@ extension SafariServiceManager: DelegateProtocol, SFSafariViewControllerDelegate
     func safariViewControllerWillOpenInBrowser(_ controller: SFSafariViewController) {
         if let url = getUrl(controller)
         {
-            self.delegate?.safariServiceManagerWillOpenInSystemBrowser(url)
+            self.delegate?.safariServiceAdapterWillOpenInSystemBrowser(url)
         }
     }
     
@@ -135,11 +135,11 @@ extension SafariServiceManager: DelegateProtocol, SFSafariViewControllerDelegate
         if let url = getUrl(controller)
         {
             self.urlDict[url] = nil
-            self.delegate?.safariServiceManagerDidClose(url)
+            self.delegate?.safariServiceAdapterDidClose(url)
         }
         else
         {
-            self.delegate?.safariServiceManagerDidClose(nil)
+            self.delegate?.safariServiceAdapterDidClose(nil)
         }
     }
     
@@ -147,7 +147,7 @@ extension SafariServiceManager: DelegateProtocol, SFSafariViewControllerDelegate
 
 
 ///内部类型
-extension SafariServiceManager: InternalType
+extension SafariServiceAdapter: InternalType
 {
     //错误类型
     enum SSMError: Error {
@@ -159,7 +159,7 @@ extension SafariServiceManager: InternalType
 
 
 ///外部接口
-extension SafariServiceManager: ExternalInterface
+extension SafariServiceAdapter: ExternalInterface
 {
     /**
      - 功能： 使用内置safari打开一个web页面
