@@ -5328,7 +5328,7 @@
 				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = M3DF85K738;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
@@ -5373,7 +5373,7 @@
 				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = M3DF85K738;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
