@@ -4021,9 +4021,9 @@
 		EADB009227623C15001B7223 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				EADB008527623B5A001B7223 /* LaunchScreen.storyboard */,
 				EADB008027623B59001B7223 /* Main.storyboard */,
 				EA73A15027BC8E6900980C26 /* Mine.storyboard */,
-				EADB008527623B5A001B7223 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -4132,9 +4132,9 @@
 				EAC4E6CD27B0C24400654EE6 /* Base */,
 				EA6D7F80278ED3C400D73386 /* FSAlertView.swift */,
 				EA84848C278F132E000E7FC2 /* FSActionSheet.swift */,
-				EA1EAFA327EC411B002B4997 /* FSGuideView.swift */,
 				EAACA84127FE7D5C008EA586 /* FSLabel.swift */,
 				EAACA84327FE8993008EA586 /* FSImageView.swift */,
+				EA1EAFA327EC411B002B4997 /* FSGuideView.swift */,
 				EA9A4A842780309E00170BB3 /* FSTextField.h */,
 				EA9A4A832780309D00170BB3 /* FSTextField.m */,
 				EA9A4A852780309E00170BB3 /* FSTextField+ChangeBlock.h */,
@@ -5328,7 +5328,7 @@
 				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = M3DF85K738;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;
@@ -5373,7 +5373,7 @@
 				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = M3DF85K738;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FrameworkStruct/Others/Info.plist;

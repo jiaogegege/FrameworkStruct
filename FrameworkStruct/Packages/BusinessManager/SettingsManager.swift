@@ -43,8 +43,7 @@ extension SettingsManager: ExternalInterface
     ///进入App系统设置界面
     func gotoSystemSetting()
     {
-        let url = URL(string: UIApplication.openSettingsURLString)
-        if let url = url
+        if let url = URL(string: UIApplication.openSettingsURLString)
         {
             if UIApplication.shared.canOpenURL(url)
             {

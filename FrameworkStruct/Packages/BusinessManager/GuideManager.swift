@@ -22,7 +22,7 @@ class GuideManager: OriginManager
     //私有化初始化方法
     private override init()
     {
-        
+        super.init()
     }
     
     override func copy() -> Any

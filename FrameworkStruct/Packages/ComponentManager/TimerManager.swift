@@ -20,7 +20,7 @@ class TimerManager: OriginManager
     ///每创建一个定时器都加入到字典中，随时可以查看活跃的定时器信息
     fileprivate var timerDict: WeakDictionary = WeakDictionary()
     
-    //倒计时定时器容器，key是随机字符串，value是定时器
+    //倒计时和秒表定时器容器，key是随机字符串，value是定时器
     fileprivate var countDownTimerDict: Dictionary<String, DispatchSourceTimer> = [:]
     
     
@@ -129,6 +129,8 @@ extension TimerManager: ExternalInterface
     ///host:使用倒计时的宿主
     ///action：每次倒计时执行的动作，参数：restTime：剩余时间；canFinish：是否可以结束倒计时，输入输出参数
     ///completion:倒计时结束后执行的动作
+    ///返回值：
+    ///如果倒计时创建成功，那么返回标记该倒计时的唯一标识符，如果没有创建成功返回nil
     func countDown(interval: TimeInterval = 1.0,
                    startTime: TimeInterval,
                    through: Bool = false,
@@ -153,14 +155,12 @@ extension TimerManager: ExternalInterface
         var canFinish = false   //是否可以结束
         let timerId = g_uuid()    //创建的定时器id
         
-        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) {
+        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) { [unowned self] in
             action(restTime, &canFinish)    //执行动作
             //判断是否结束倒计时
             if canFinish    //优先判断外部状态
             {
-                let timer = self.countDownTimerDict[timerId]
-                timer?.cancel()
-                self.countDownTimerDict[timerId] = nil
+                self.cancel(timerId)
                 //执行完成动作
                 if let co = completion
                 {
@@ -171,9 +171,7 @@ extension TimerManager: ExternalInterface
             {
                 if through == false && restTime <= 0.0
                 {
-                    let timer = self.countDownTimerDict[timerId]
-                    timer?.cancel()
-                    self.countDownTimerDict[timerId] = nil
+                    self.cancel(timerId)
                     //执行完成动作
                     if let co = completion
                     {
@@ -195,6 +193,8 @@ extension TimerManager: ExternalInterface
     ///host:使用秒表的宿主
     ///action：每次累加时间后执行的动作，参数：totalTime：剩余时间；canFinish：是否可以结束倒计时，输入输出参数
     ///completion:秒表结束后执行的动作
+    ///返回值：
+    ///如果倒计时创建成功，那么返回标记该倒计时的唯一标识符
     func stopWatch(interval: TimeInterval = 1.0,
                    onMain: Bool = true,
                    exact: Bool = false,
@@ -207,14 +207,12 @@ extension TimerManager: ExternalInterface
         var canFinish = false   //是否可以结束
         let timerId = g_uuid()    //创建的定时器id
         
-        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) {
+        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, host: host) { [unowned self] in
             action(totalTime, &canFinish)    //执行动作
             //判断是否结束秒表
             if canFinish    //优先判断外部状态
             {
-                let timer = self.countDownTimerDict[timerId]
-                timer?.cancel()
-                self.countDownTimerDict[timerId] = nil
+                self.cancel(timerId)
                 //执行完成动作
                 if let co = completion
                 {
@@ -234,6 +232,7 @@ extension TimerManager: ExternalInterface
     {
         let timer = self.countDownTimerDict[id]
         timer?.cancel()
+        self.countDownTimerDict[id] = nil
     }
     
 }
