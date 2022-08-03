@@ -261,6 +261,26 @@ extension String
         return digest.reduce("") { $0 + String(format:"%02x", $1) }
     }
     
+    ///如果字符串是url，那么拼接参数，如果value为nil，那么不拼接
+    func joinUrlParam(_ value: String?, key: String) -> String
+    {
+        var finalStr: String = self
+        if let value = value
+        {
+            if !self.contains("?")   //如果没有有问号，那么先拼接一个问号
+            {
+                finalStr += "?"
+            }
+            else    //如果有问号，说明已经有参数了，那么拼接一个`&`
+            {
+                finalStr += "&"
+            }
+            //拼接参数
+            finalStr += "\(key)=\(value)"
+        }
+        return finalStr
+    }
+    
 }
 
 

@@ -21,8 +21,9 @@ class TestWebViewController: BasicWebViewController {
 
     override func initData() {
         super.initData()
-        self.url = .local(SandBoxAccessor.shared.getBundleFilePath("jstest", ext: "html") ?? "")
-//        self.url = .remote("https://www.baidu.com")
+//        self.url = .remote(WebUrlPath.helpCenterUrl.getUrl())
+//        self.url = .local(SandBoxAccessor.shared.getBundleFilePath("jstest", ext: "html") ?? "")
+        self.url = .remote("https://www.baidu.com")
     }
 
 }

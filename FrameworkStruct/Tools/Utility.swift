@@ -164,3 +164,13 @@ func g_presentVC(_ vc: UIViewController, animated: Bool = true)
 {
     ControllerManager.shared.presentViewController(vc, animated: animated)
 }
+
+//当前用户token
+var g_userToken: String? {
+    UserManager.shared.currentUserToken
+}
+
+//当前用户id
+var g_userId: String? {
+    UserManager.shared.currentUserId
+}

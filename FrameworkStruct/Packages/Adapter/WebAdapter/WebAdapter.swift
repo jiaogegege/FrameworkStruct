@@ -106,7 +106,8 @@ extension WebAdapter: ExternalInterface
     /**************************************** webview交互 Section Begin ***************************************/
     
     ///在webView中打开一个url
-    func openInWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true)
+    ///参数：hostVC：如果传这个参数，就用这个vc来pushwebviewVC，否则用最顶上的navVC来push
+    func openInWebVC(url: String, remote: Bool = true, title: String? = nil, hideNavBar: Bool = false, showProgress: Bool = true, hostVC: UIViewController? = nil)
     {
         let vc = self.createWebVC(url: url, remote: remote, title: title, hideNavBar: hideNavBar, showProgress: showProgress)
         g_pushVC(vc)

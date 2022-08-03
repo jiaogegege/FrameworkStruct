@@ -21,7 +21,7 @@ struct WebContentHandler {
 /**
  * 预定义的native方法
  */
-//js交互原生handler，原生提供给h5调用的方法，根据具体需求定义
+//MARK: js交互原生handler，原生提供给h5调用的方法，根据具体需求定义
 enum WebHandlerNative {
     static let noneName = "none"
     case none                                                           //空
@@ -215,17 +215,16 @@ enum WebHandlerNative {
 }
 
 
-//js交互h5 handler名称，h5提供给原生调用的方法
+//MARK: js交互h5 handler名称，h5提供给原生调用的方法名，根据H5页面提供定义
 enum WebHandlerH5Name: String {
     case getUrl                         //获取页面url地址字符串
     
 }
 
 
-
-//MARK: H5想要push的本地界面的标志符，根据实际需求定义
+//MARK: H5想要push的本地界面的标志符，和`push`方法配合使用，根据实际需求定义
 enum WebPushNativeVC: Int {
-    static let vcType: String = "type"                //H5页面push本地界面时传递的对应界面标志符的参数key
+    static let vcType: String = "vcType"                //H5页面push本地界面时传递的对应界面标志符的参数key
     
     case none = 1000                                //未指定界面
     case simpleTableVC = 1001                       //进入简单表格界面
@@ -243,6 +242,48 @@ enum WebPushNativeVC: Int {
         default:
             break
         }
+    }
+}
+
+
+//MARK: 项目中一些特定url路径，根据实际需求定义
+enum WebUrlPath: String {
+    case appDownloadUrl = "/st/appDownload.html"                            //App下载地址
+    case privacyUrl = "/st/privacyPolicy.html"                              //隐私政策
+    case userAgreementUrl = "/st/userAgreement.html"                        //用户协议
+    case helpCenterUrl = "/st/helpCenter.html"                              //帮助中心
+    case waitSeckillUrl = "/st/activityList.html"                           //云待秒杀
+    case bigSubsidyUrl = "/st/brandSubsidies.html"                          //大牌补贴
+    
+    //获取完整url
+    func getUrl() -> String
+    {
+        NetworkAdapter.shared.currentHost + self.joinParams()
+    }
+    
+    //拼接参数
+    func joinParams() -> String
+    {
+        switch self {
+        case .appDownloadUrl:
+            return self.rawValue
+        case .privacyUrl:
+            return self.rawValue
+        case .userAgreementUrl:
+            return self.rawValue
+        case .helpCenterUrl:
+            return self.rawValue
+        case .waitSeckillUrl:
+            return self.rawValue.joinUrlParam(g_userToken, key: WUParamKey.token.rawValue)
+        case .bigSubsidyUrl:
+            return self.rawValue.joinUrlParam(g_userToken, key: WUParamKey.token.rawValue).joinUrlParam(g_userId, key: WUParamKey.userId.rawValue)
+        }
+    }
+    
+    //拼接的url参数key列表
+    enum WUParamKey: String {
+        case token                      //用户token
+        case userId                     //用户id
     }
 }
 

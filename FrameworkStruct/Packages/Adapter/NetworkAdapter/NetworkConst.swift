@@ -48,7 +48,7 @@ let nt_response_data_Key = "data"     //返回数据的key
 
 //MARK: 服务器环境定义
 ///服务器环境变量
-let nt_serverHost: ServerHostType = .dev
+let nt_serverHost: ServerHostType = .qa
 
 enum ServerHostType {
     case dev    //开发环境
