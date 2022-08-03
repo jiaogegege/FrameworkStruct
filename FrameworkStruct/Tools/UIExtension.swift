@@ -246,6 +246,7 @@ extension UIView
  */
 extension UIButton
 {
+    /**************************************** UIButton点击后延时不可点击 Section Begin ***************************************/
     ///设置button点击后在一定时间内不可再次点击，默认0
     var disableInterval: TimeInterval {
         set {
@@ -290,6 +291,7 @@ extension UIButton
             self.clickDisable()
         }
     }
+    /**************************************** UIButton点击后延时不可点击 Section End ***************************************/
     
 }
 
@@ -333,7 +335,7 @@ extension UITableView: InternalType
 {
     ///UITableView的section、row的位置标记
     ///用来替代indexPath的section和row的数字写法，改成枚举绑定数字，绑定的值就是那一行在tableview中的位置
-    ///绑定的值由业务逻辑决定，需要使用者手动绑定；如果指定的那一行不存在，那么绑定值为-1或其他负数
+    ///绑定的值由业务逻辑决定，需要使用者手动绑定；如果指定的那一行不存在，那么绑定值为-1或其它负数
     enum IndexPathTag
     {
         case sectionTag(Int)    //绑定section标记
@@ -376,7 +378,6 @@ extension UITableView: InternalType
                 count + indexPath.positionCount
             }
         }
-
     }
     
 }

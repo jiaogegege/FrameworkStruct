@@ -12,7 +12,7 @@ import Foundation
 
 //MARK: 设备相关定义
 //设备唯一标志符
-var kDeviceId: String? {
+var kDeviceIdentifier: String? {
     return UIDevice.current.identifierForVendor?.uuidString
 }
 
