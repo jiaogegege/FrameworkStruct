@@ -220,7 +220,7 @@ extension NetworkRequestManager: ExternalInterface
 
     ///当前host地址
     var host: String {
-        return nt_serverHost.getHost()
+        nt_serverHost.getHost()
     }
     
     ///获取所有的task信息
@@ -232,7 +232,7 @@ extension NetworkRequestManager: ExternalInterface
     ///获取某个请求对象，id就是请求任务时生成的id
     func getTask(_ id: String) -> URLSessionTask?
     {
-        return taskDict.object(forKey: id) as? URLSessionTask
+        taskDict.object(forKey: id) as? URLSessionTask
     }
     
     ///获取某个任务的运行状态
@@ -438,15 +438,15 @@ extension NetworkRequestManager: ExternalInterface
             //处理返回的数据，解密
             let resDict = self.decryptParams(responseObject!)
             //判断请求是否成功
-            let responseCode = resDict[nt_response_code_Key] as! Int
+            let responseCode = resDict[nt_response_code_key] as! Int
             if responseCode == HttpStatusCode.ok.rawValue   //请求成功
             {
-                success(resDict[nt_response_data_Key] as Any)
+                success(resDict[nt_response_data_key] as Any)
             }
             else    //请求失败，构造错误对象
             {
                 let errMsg: String
-                if let msg = resDict[nt_response_msg_Key] as? String
+                if let msg = resDict[nt_response_msg_key] as? String
                 {
                     errMsg = msg
                 }
@@ -591,15 +591,15 @@ extension NetworkRequestManager: ExternalInterface
             //处理返回的数据，解密
             let resDict = self.decryptParams(responseObject!)
             //判断请求是否成功
-            let responseCode = resDict[nt_response_code_Key] as! Int
+            let responseCode = resDict[nt_response_code_key] as! Int
             if responseCode == HttpStatusCode.ok.rawValue   //请求成功
             {
-                success(resDict[nt_response_data_Key] as Any)     //具体返回的内容和服务器端约定
+                success(resDict[nt_response_data_key] as Any)     //具体返回的内容和服务器端约定
             }
             else    //请求失败，构造错误对象
             {
                 let errMsg: String
-                if let msg = resDict[nt_response_msg_Key] as? String
+                if let msg = resDict[nt_response_msg_key] as? String
                 {
                     errMsg = msg
                 }

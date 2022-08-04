@@ -59,7 +59,100 @@ extension String: ConstantPropertyProtocol
     static let sRMB10000 = "万"
     static let sRMB100000000 = "亿"
     
+    //常用特殊字符
+    static let sTilde = "~"
+    static let sSigh = "!"
+    static let sAt = "@"
+    static let sSharp = "#"
+    static let sPercent = "%"
+    static let sCaret = "^"
+    static let sAnd = "&"
+    static let sStar = "*"
+    static let sOr = "|"
+    static let sQuestion = "?"
+    static let sAddMinus = "±"
+    static let sMultiply = "×"
+    static let sDivision = "÷"
+    static let sInfinite = "∞"
+    static let sEqual = "="
+    static let sUnequal = "≠"
+    static let sAboutEqual = "≈"
+    static let sGreaterEqual = "≥"
+    static let sComplexGreaterEqual = "≧"
+    static let sLessEqual = "≤"
+    static let sComplexLessEqual = "≦"
     
+    //货币字符
+    static let sCurrency = "¤"              //国际通货符号，当没有合适的货币符号时使用
+    static let sDollar = "$"                //美元
+    static let sFen = "¢"                   //分，美元和其他一些货币辅助单位的符号
+    static let sWen = "₥"                   //文（表示千分之一元或十分之一分）
+    static let sEuro = "€"                  //欧元
+    static let sRMB = "¥"                   //人民币
+    static let sYen = "¥"                   //日元
+    static let sPound = "£"                 //英镑
+    static let sRuble = "₽"                 //卢布
+    static let sTHB = "฿"                   //泰铢
+    static let sINR = "Rs."                 //印度卢比
+    static let sDONG = "₫"                  //越南盾
+    static let sKrona = "kr"                //丹麦克朗，挪威克朗，瑞典克朗以及冰岛克朗
+    static let sBRL = "R$"                  //雷亚尔，巴西的货币符号
+    static let sLira = "₤"                  //里拉
+    static let sPeso = "₱"                  //菲律宾比索，菲律宾的货币符号
+    static let sRand = "R"                  //南非兰特，南非的货币符号
+    static let sRupee = "৲৳"                //卢比符号(孟加拉地区使用)
+    static let sKRW = "₩"                   //韩元
+    static let sTWD = "NT$"                 //新台币
+    
+    //希腊字母
+    static let sUAlpha = "Α"
+    static let sAlpha = "α"
+    static let sUBeta = "Β"
+    static let sBeta = "β"
+    static let sUGamma = "Γ"
+    static let sGamma = "γ"
+    static let sUDelta = "Δ"
+    static let sDelta = "δ"
+    static let sUEpsilon = "Ε"
+    static let sEpsilon = "ε"
+    static let sUZeta = "Ζ"
+    static let sZeta = "ζ"
+    static let sUEta = "Η"
+    static let sEta = "η"
+    static let sUTheta = "Θ"
+    static let sTheta = "θ"
+    static let sUIota = "Ι"
+    static let sIota = "ι"
+    static let sUKappa = "Κ"
+    static let sKappa = "κ"
+    static let sULambda = "Λ"
+    static let sLambda = "λ"
+    static let sUMu = "Μ"
+    static let sMu = "μ"
+    static let sUNu = "Ν"
+    static let sNu = "ν"
+    static let sUXi = "Ξ"
+    static let sXi = "ξ"
+    static let sUOmicron = "Ο"
+    static let sOmicron = "ο"
+    static let sUPi = "Π"
+    static let sPi = "π"
+    static let sURho = "Ρ"
+    static let sRho = "ρ"
+    static let sUSigma = "Σ"
+    static let sSigma = "σ"
+    static let sUTau = "Τ"
+    static let sTau = "τ"
+    static let sUUpsilon = "Υ"
+    static let sUpsilon = "υ"
+    static let sUPhi = "Φ"
+    static let sPhi = "φ"
+    static let sUChi = "Χ"
+    static let sChi = "χ"
+    static let sUPsi = "Ψ"
+    static let sPsi = "ψ"
+    static let sUOmega = "Ω"
+    static let sOmega = "ω"
     
     
     

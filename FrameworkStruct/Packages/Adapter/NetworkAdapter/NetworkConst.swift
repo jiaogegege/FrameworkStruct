@@ -42,9 +42,9 @@ let nt_request_macAddress = "macAddress"    //mac地址
 let nt_request_deviceType = "deviceType"    //ios
 let nt_request_clientTime = "clientTime"    //客户端时间
 
-let nt_response_code_Key = "errCode"  //返回的状态码key
-let nt_response_msg_Key = "errMsg"    //返回的状态信息key
-let nt_response_data_Key = "data"     //返回数据的key
+let nt_response_code_key = "errCode"  //返回的状态码key
+let nt_response_msg_key = "errMsg"    //返回的状态信息key
+let nt_response_data_key = "data"     //返回数据的key
 
 //MARK: 服务器环境定义
 ///服务器环境变量
