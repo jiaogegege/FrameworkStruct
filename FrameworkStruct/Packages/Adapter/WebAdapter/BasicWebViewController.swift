@@ -269,6 +269,17 @@ extension BasicWebViewController: InternalType
         case remote(String)     //网络资源，绑定一个url地址
         case local(String)      //本地资源，绑定一个file路径
         
+        //获取url字符串
+        func getUrlStr() -> String
+        {
+            switch self {
+            case .remote(let string):
+                return string
+            case .local(let string):
+                return string
+            }
+        }
+        
         //获取URL
         func getUrl() -> URL?
         {
