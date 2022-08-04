@@ -65,15 +65,15 @@ enum WebHandlerNative {
     ///获取每个页面都要加载的默认handlers
     static func defaultHandlers(hostVC: BasicWebViewController) -> [WebContentHandler]
     {
-        return [WebHandlerNative.neededHandlers(hostVC).getHandler(),
-                WebHandlerNative.supportHandlers(hostVC).getHandler(),
-                WebHandlerNative.getAppName.getHandler(),
-                WebHandlerNative.go(hostVC).getHandler(),
-                WebHandlerNative.back(hostVC).getHandler(),
-                WebHandlerNative.push(hostVC).getHandler(),
-                WebHandlerNative.hideNavBar(hostVC).getHandler(),
-                WebHandlerNative.alert.getHandler(),
-                WebHandlerNative.alertConfirmCancel.getHandler()]
+        [WebHandlerNative.neededHandlers(hostVC).getHandler(),
+         WebHandlerNative.supportHandlers(hostVC).getHandler(),
+         WebHandlerNative.getAppName.getHandler(),
+         WebHandlerNative.go(hostVC).getHandler(),
+         WebHandlerNative.back(hostVC).getHandler(),
+         WebHandlerNative.push(hostVC).getHandler(),
+         WebHandlerNative.hideNavBar(hostVC).getHandler(),
+         WebHandlerNative.alert.getHandler(),
+         WebHandlerNative.alertConfirmCancel.getHandler()]
     }
     
     //从字符串获取枚举类型
