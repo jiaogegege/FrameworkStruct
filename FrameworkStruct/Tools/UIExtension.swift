@@ -340,7 +340,7 @@ extension UITableView: InternalType
     {
         case sectionTag(Int)    //绑定section标记
         case rowTag(Int)    //绑定row标记
-        case indexPathTag(section: Int, row: Int)     //绑定indexPath标记(section, row)
+        case indexTag(section: Int, row: Int)     //绑定index标记(section, row)
         
         ///计算属性
         ///返回绑定的section或row在tableview中的位置
@@ -351,7 +351,7 @@ extension UITableView: InternalType
                 return (section, -1)
             case .rowTag(let row):
                 return (-1, row)
-            case .indexPathTag(let section, let row):
+            case .indexTag(let section, let row):
                 return (section, row)
             }
         }
@@ -365,7 +365,7 @@ extension UITableView: InternalType
                 return section > -1 ? 1 : 0
             case .rowTag(let row):
                 return row > -1 ? 1 : 0
-            case .indexPathTag(let section, let row):
+            case .indexTag(let section, let row):
                 return (section > -1 && row > -1) ? 1 : 0
             }
         }
