@@ -11,6 +11,8 @@
  */
 import Foundation
 
+//url参数起始符
+let urlParamStartChar = "?"
 //url参数分隔符
 let urlParamSeparateChar = "&"
 //url参数连接符
