@@ -172,7 +172,6 @@ extension NetworkAdapter: ExternalInterface
         } failure: { error in
             failure(error)
         }
-
     }
     
     /**************************************** 注册登录 Section End ***************************************/

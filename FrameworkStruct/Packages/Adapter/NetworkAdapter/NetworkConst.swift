@@ -72,7 +72,6 @@ enum ServerHostType {
             return "https://www.awaitz.com"
         }
     }
-    
 }
 
 //MARK: URL定义
@@ -165,7 +164,6 @@ enum HttpRequestHeaderKey: String {
     case UserAgent = "User-Agent"   //User-Agent的内容包含发出请求的用户信息
     case Via = "Via"    //通知中间网关或代理服务器地址，通信协议：Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
     case Warning = "Warning"    //关于消息实体的警告信息：Warn: 199 Miscellaneous warning
-    
 }
 
 ///response headers key
@@ -198,7 +196,6 @@ enum HttpResponseHeaderKey: String {
     case Via = "Via"    //告知代理客户端响应是通过哪里发送的：Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
     case Warning = "Warning"    //警告实体可能存在的问题：Warning: 199 Miscellaneous warning
     case WWWAuthenticate = "WWW-Authenticate"   //表明客户端请求实体应该使用的授权方案：WWW-Authenticate: Basic
-    
 }
 
 ///接口返回的状态码，包括http标准状态码和自定义状态码
