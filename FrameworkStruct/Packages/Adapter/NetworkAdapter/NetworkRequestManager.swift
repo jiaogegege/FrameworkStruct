@@ -172,7 +172,7 @@ class NetworkRequestManager: OriginManager
         return currentTimeString() + " : " + g_uuid().subStringTo(index: 8) + " : " + urlStr
     }
     
-    //清除请求对象
+    //清除已经完成任务的请求对象
     fileprivate func clearTask()
     {
         var keyArr: [String] = []
@@ -223,6 +223,7 @@ extension NetworkRequestManager: ExternalInterface
         nt_serverHost.getHost()
     }
     
+    /**************************************** 请求任务管理 Section Begin ***************************************/
     ///获取所有的task信息
     func allTasks() -> String
     {
@@ -272,7 +273,9 @@ extension NetworkRequestManager: ExternalInterface
             task.resume()
         }
     }
+    /**************************************** 请求任务管理 Section End ***************************************/
     
+    /**************************************** 网络请求方法 Section Begin ***************************************/
     ///创建一个get请求
     ///参数：
     ///urlPath：接口地址，不包含host
@@ -282,6 +285,7 @@ extension NetworkRequestManager: ExternalInterface
     ///timeoutInterval：超时时间
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
     ///progressCallback:下载数据进度
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func get(urlPath: String,
              exact: Bool = false,
              params: Dictionary<String, Any>? = nil,
@@ -304,6 +308,7 @@ extension NetworkRequestManager: ExternalInterface
     ///timeoutInterval：超时时间
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
     ///progressCallback:上传数据进度
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func post(urlPath: String,
               exact: Bool = false,
               params: Dictionary<String, Any>? = nil,
@@ -325,6 +330,7 @@ extension NetworkRequestManager: ExternalInterface
     ///authorization:验证，比如用户token，需要验证用户身份的接口要传这个参数
     ///timeoutInterval：超时时间
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func put(urlPath: String,
              exact: Bool = false,
              params: Dictionary<String, Any>? = nil,
@@ -345,6 +351,7 @@ extension NetworkRequestManager: ExternalInterface
     ///authorization:验证，比如用户token，需要验证用户身份的接口要传这个参数
     ///timeoutInterval：超时时间
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func delete(urlPath: String,
                 exact: Bool = false,
                 params: Dictionary<String, Any>? = nil,
@@ -366,6 +373,7 @@ extension NetworkRequestManager: ExternalInterface
     ///timeoutInterval：超时时间
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
     ///progressCallback:上传数据进度
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func patch(urlPath: String,
                exact: Bool = false,
                params: Dictionary<String, Any>? = nil,
@@ -388,6 +396,7 @@ extension NetworkRequestManager: ExternalInterface
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
     ///downloadProgressCallback:下载数据进度
     ///uploadProgressCallback:上传数据进度
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func dataTask(httpMethod: HttpMethodType,
                   urlPath: String,
                   exact: Bool = false,
@@ -473,6 +482,7 @@ extension NetworkRequestManager: ExternalInterface
     ///exact:`urlPath`是否是完整的url，如果是true，那么不需要组合host地址，一般是false；主要用来测试一些完整的url
     ///downloadProgressCallback:下载数据进度
     ///completion：下载完成后的回调，传入本地下载文件路径
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func download(urlPath: String,
                   exact: Bool = false,
                   authorization: String? = nil,
@@ -540,6 +550,7 @@ extension NetworkRequestManager: ExternalInterface
     ///timeoutInterval：超时时间
     ///headers：自定义请求头，根据不同接口可能会不同，大部分为nil
     ///progressCallback:上传数据进度
+    ///返回值：任务标识符，可用来控制请求任务的暂停/继续/取消
     func upload(urlPath: String,
                 exact: Bool = false,
                 fileDatas: Dictionary<String, Data>,
@@ -617,5 +628,6 @@ extension NetworkRequestManager: ExternalInterface
         
         return recordTask(url: url, task: task)
     }
+    /**************************************** 网络请求方法 Section End ***************************************/
     
 }
