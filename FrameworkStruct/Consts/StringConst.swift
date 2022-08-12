@@ -84,17 +84,18 @@ extension String: ConstantPropertyProtocol
     
     //货币字符
     static let sCurrency = "¤"              //国际通货符号，当没有合适的货币符号时使用
-    static let sDollar = "$"                //美元
+    static let sUSD = "$"                   //美元
     static let sFen = "¢"                   //分，美元和其他一些货币辅助单位的符号
     static let sWen = "₥"                   //文（表示千分之一元或十分之一分）
-    static let sEuro = "€"                  //欧元
-    static let sRMB = "¥"                   //人民币
-    static let sYen = "¥"                   //日元
-    static let sPound = "£"                 //英镑
-    static let sRuble = "₽"                 //卢布
+    static let sEUR = "€"                   //欧元
+    static let sFRF = "₣"                   //法郎
+    static let sCNY = "¥"                   //人民币
+    static let sJPY = "¥"                   //日元
+    static let sGBP = "£"                   //英镑
+    static let sRUB = "₽"                   //卢布
     static let sTHB = "฿"                   //泰铢
     static let sINR = "Rs."                 //印度卢比
-    static let sDONG = "₫"                  //越南盾
+    static let sVND = "₫"                   //越南盾
     static let sKrona = "kr"                //丹麦克朗，挪威克朗，瑞典克朗以及冰岛克朗
     static let sBRL = "R$"                  //雷亚尔，巴西的货币符号
     static let sLira = "₤"                  //里拉
@@ -103,6 +104,7 @@ extension String: ConstantPropertyProtocol
     static let sRupee = "৲৳"                //卢比符号(孟加拉地区使用)
     static let sKRW = "₩"                   //韩元
     static let sTWD = "NT$"                 //新台币
+    static let sHKD = "HK$"                 //港元
     
     //希腊字母
     static let sUAlpha = "Α"
