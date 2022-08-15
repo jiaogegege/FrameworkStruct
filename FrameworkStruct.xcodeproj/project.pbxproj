@@ -540,6 +540,7 @@
 		EA9A78F127C75DA900A11FC8 /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A78EB27C75DA900A11FC8 /* WebViewJavascriptBridge_JS.m */; };
 		EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CBD279153BA0086E78C /* FSDialog.swift */; };
 		EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */; };
+		EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
@@ -1507,6 +1508,7 @@
 		EA9F1CBD279153BA0086E78C /* FSDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSDialog.swift; sourceTree = "<group>"; };
 		EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameSet.m"; sourceTree = "<group>"; };
 		EA9F1CC127916B3C0086E78C /* UIView+FrameSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameSet.h"; sourceTree = "<group>"; };
+		EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEmbellisher.swift; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E83276F3EC900C45712 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -4265,6 +4267,7 @@
 				EADB011B276242D1001B7223 /* README.md */,
 				EADB011C276242D1001B7223 /* StringEmbellisher.swift */,
 				EADB011A276242D1001B7223 /* TimeEmbellisher.swift */,
+				EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */,
 			);
 			path = Embellisher;
 			sourceTree = "<group>";
@@ -5022,6 +5025,7 @@
 				EA1AE482277819E600D028F9 /* ConstraintLayoutGuide.swift in Sources */,
 				EA99374127994F6100480147 /* TABComponentMutableKey.m in Sources */,
 				EA99372927994F6100480147 /* UIScrollView+TABAnimated.m in Sources */,
+				EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */,
 				EA11127E27B3BE2C006D0B83 /* Result+Alamofire.swift in Sources */,
 				EA9A78DA27C756C900A11FC8 /* UIView+MPITextKit.m in Sources */,
 				EA9A756727C7210200A11FC8 /* TYLinkTextStorage.m in Sources */,
