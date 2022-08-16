@@ -169,7 +169,7 @@ extension PriceEmbellisher: ExternalInterface
     }
     
     ///可以根据项目实际需要提供一个默认的价格字符串，作为大部分情况下的格式
-    func defaultPrice(_ fen: Int, format: PEPriceFormat = .twoDecimal, symbol: String = String.sCNY) -> NSAttributedString
+    func defaultAttrPrice(_ fen: Int, format: PEPriceFormat = .twoDecimal, symbol: String = String.sCNY) -> NSAttributedString
     {
         toAttrPrice(fen, format: format, hasSymbol: true, symbol: symbol, symbolColor: .black, symbolFont: .systemFont(ofSize: 14), integerColor: .black, integetFont: .systemFont(ofSize: 20), decimalColor: .black, decimalFont: .systemFont(ofSize: 14), strokeLineType: [], strokeLineColor: .clear, underLineType: [], underlineColor: .clear)
     }

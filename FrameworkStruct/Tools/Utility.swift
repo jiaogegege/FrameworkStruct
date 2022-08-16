@@ -178,5 +178,5 @@ var g_userId: String? {
 ///默认价格格式，参数：分
 func g_price(_ fen: Int) -> NSAttributedString
 {
-    PriceEmbellisher.shared.defaultPrice(fen)
+    PriceEmbellisher.shared.defaultAttrPrice(fen)
 }
