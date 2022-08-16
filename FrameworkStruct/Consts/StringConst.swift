@@ -61,6 +61,7 @@ extension String: ConstantPropertyProtocol
     
     //常用特殊字符
     static let cDot: Character = "."
+    static let sDot = "."
     static let sTilde = "~"
     static let sSigh = "!"
     static let sAt = "@"

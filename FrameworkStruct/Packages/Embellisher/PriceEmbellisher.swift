@@ -119,6 +119,7 @@ extension PriceEmbellisher: ExternalInterface
     ///格式化成带字体、颜色等的字符串
     ///参数：
     ///hasSymbol：是否有货币符号
+    ///symbol：货币符号，默认`¥`
     ///symbolColor：货币符号颜色；symbolFont：货币符号字体
     ///integerColor：整数部分颜色；integetFont：整数部分字体
     ///decimalColor：小数部分颜色；decimalFont：小数部分字体
@@ -129,6 +130,7 @@ extension PriceEmbellisher: ExternalInterface
     func toPrice(_ fen: Int,
                  format: PEPriceFormat = .twoDecimal,
                  hasSymbol: Bool = true,
+                 symbol: String = String.sCNY,
                  symbolColor: UIColor = .black,
                  symbolFont: UIFont = .systemFont(ofSize: 12),
                  integerColor: UIColor = .black,
@@ -144,7 +146,7 @@ extension PriceEmbellisher: ExternalInterface
         //处理货币符号
         if hasSymbol
         {
-            let symbolStr = NSAttributedString(string: String.sCNY, attributes: [NSAttributedString.Key.foregroundColor: symbolColor, NSAttributedString.Key.font: symbolFont])
+            let symbolStr = NSAttributedString(string: symbol, attributes: [NSAttributedString.Key.foregroundColor: symbolColor, NSAttributedString.Key.font: symbolFont])
             totalAttrStr.append(symbolStr)
         }
         //处理数字
