@@ -110,14 +110,15 @@ extension PriceEmbellisher: ExternalInterface
         format.getYuan(fen)
     }
     
-    ///格式化成带`¥`的元为单位的字符串
-    func toCNY(_ fen: Int, format: PEPriceFormat = .twoDecimal) -> String
+    ///格式化成带货币符号的元为单位的字符串
+    func toPrice(_ fen: Int, format: PEPriceFormat = .twoDecimal, symbol: String = String.sCNY) -> String
     {
-        String(format: "%@%@", String.sCNY, toYuan(fen, format: format))
+        String(format: "%@%@", symbol, toYuan(fen, format: format))
     }
     
-    ///格式化成带字体、颜色等的字符串
+    ///格式化成带字体、颜色等的价格字符串
     ///参数：
+    ///format：转换后的数字格式
     ///hasSymbol：是否有货币符号
     ///symbol：货币符号，默认`¥`
     ///symbolColor：货币符号颜色；symbolFont：货币符号字体
@@ -127,20 +128,20 @@ extension PriceEmbellisher: ExternalInterface
     ///underLineType：下划线样式；underlineColor：下划线颜色
     ///
     ///提示：在实际项目中可以将默认值设定为最常用的情况
-    func toPrice(_ fen: Int,
-                 format: PEPriceFormat = .twoDecimal,
-                 hasSymbol: Bool = true,
-                 symbol: String = String.sCNY,
-                 symbolColor: UIColor = .black,
-                 symbolFont: UIFont = .systemFont(ofSize: 12),
-                 integerColor: UIColor = .black,
-                 integetFont: UIFont = .systemFont(ofSize: 12),
-                 decimalColor: UIColor = .black,
-                 decimalFont: UIFont = .systemFont(ofSize: 12),
-                 strokeLineType: NSUnderlineStyle = [],
-                 strokeLineColor: UIColor = .clear,
-                 underLineType: NSUnderlineStyle = [],
-                 underlineColor: UIColor = .clear) -> NSAttributedString
+    func toAttrPrice(_ fen: Int,
+                     format: PEPriceFormat = .twoDecimal,
+                     hasSymbol: Bool = true,
+                     symbol: String = String.sCNY,
+                     symbolColor: UIColor = .black,
+                     symbolFont: UIFont = .systemFont(ofSize: 12),
+                     integerColor: UIColor = .black,
+                     integetFont: UIFont = .systemFont(ofSize: 12),
+                     decimalColor: UIColor = .black,
+                     decimalFont: UIFont = .systemFont(ofSize: 12),
+                     strokeLineType: NSUnderlineStyle = [],
+                     strokeLineColor: UIColor = .clear,
+                     underLineType: NSUnderlineStyle = [],
+                     underlineColor: UIColor = .clear) -> NSAttributedString
     {
         let totalAttrStr = NSMutableAttributedString()
         //处理货币符号
@@ -150,7 +151,7 @@ extension PriceEmbellisher: ExternalInterface
             totalAttrStr.append(symbolStr)
         }
         //处理数字
-        let priceStr = toYuan(fen, format: format)
+        let priceStr = format.getYuan(fen)
         let priceAttrStr = NSMutableAttributedString(string: priceStr, attributes: [NSAttributedString.Key.foregroundColor: integerColor, NSAttributedString.Key.font: integetFont])    //先设置为整数部分的样式
         if let sepIndex = priceStr.firstIndex(of: String.cDot)  //获取小数点的位置
         {
@@ -167,10 +168,10 @@ extension PriceEmbellisher: ExternalInterface
         return totalAttrStr
     }
     
-    ///可以提供一个默认的价格字符串，作为大部分情况下的格式
-    func defaultPrice(_ fen: Int) -> NSAttributedString
+    ///可以根据项目实际需要提供一个默认的价格字符串，作为大部分情况下的格式
+    func defaultPrice(_ fen: Int, format: PEPriceFormat = .twoDecimal, symbol: String = String.sCNY) -> NSAttributedString
     {
-        toPrice(fen, format: .twoDecimal, hasSymbol: true, symbolColor: .black, symbolFont: .systemFont(ofSize: 14), integerColor: .black, integetFont: .systemFont(ofSize: 20), decimalColor: .black, decimalFont: .systemFont(ofSize: 14), strokeLineType: [], strokeLineColor: .clear, underLineType: [], underlineColor: .clear)
+        toAttrPrice(fen, format: format, hasSymbol: true, symbol: symbol, symbolColor: .black, symbolFont: .systemFont(ofSize: 14), integerColor: .black, integetFont: .systemFont(ofSize: 20), decimalColor: .black, decimalFont: .systemFont(ofSize: 14), strokeLineType: [], strokeLineColor: .clear, underLineType: [], underlineColor: .clear)
     }
     
     
