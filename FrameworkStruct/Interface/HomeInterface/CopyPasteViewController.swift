@@ -16,6 +16,7 @@ class CopyPasteViewController: BasicViewController {
     @IBOutlet weak var targetLabel: FSLabel!
     @IBOutlet weak var sourceImgView: FSImageView!
     @IBOutlet weak var targetImgView: FSImageView!
+    @IBOutlet weak var priceLabel: UILabel!
     
     override class func getViewController() -> Self {
         getVC(from: gMainSB)
@@ -33,6 +34,10 @@ class CopyPasteViewController: BasicViewController {
         targetLabel.supportCopy = true
         sourceImgView.supportCopy = true
         targetImgView.supportCopy = true
+    }
+    
+    override func updateUI() {
+        priceLabel.attributedText = PriceEmbellisher.shared.defaultPrice(1233)
     }
     
 }

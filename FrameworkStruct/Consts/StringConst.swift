@@ -60,6 +60,7 @@ extension String: ConstantPropertyProtocol
     static let sRMB100000000 = "亿"
     
     //常用特殊字符
+    static let cDot: Character = "."
     static let sTilde = "~"
     static let sSigh = "!"
     static let sAt = "@"

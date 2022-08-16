@@ -153,24 +153,30 @@ func g_screenShot() -> UIImage?
     ApplicationManager.shared.screenshot()
 }
 
-//push控制器
+///push控制器
 func g_pushVC(_ vc: UIViewController, animated: Bool = true)
 {
     ControllerManager.shared.pushViewController(vc, animated: animated)
 }
 
-//present控制器
+///present控制器
 func g_presentVC(_ vc: UIViewController, animated: Bool = true)
 {
     ControllerManager.shared.presentViewController(vc, animated: animated)
 }
 
-//当前用户token
+///当前用户token
 var g_userToken: String? {
     UserManager.shared.currentUserToken
 }
 
-//当前用户id
+///当前用户id
 var g_userId: String? {
     UserManager.shared.currentUserId
+}
+
+///默认价格格式，参数：分
+func g_price(_ fen: Int) -> NSAttributedString
+{
+    PriceEmbellisher.shared.defaultPrice(fen)
 }
