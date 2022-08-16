@@ -37,7 +37,7 @@ class CopyPasteViewController: BasicViewController {
     }
     
     override func updateUI() {
-        priceLabel.attributedText = PriceEmbellisher.shared.defaultPrice(1233)
+        priceLabel.attributedText = g_price(10234)
     }
     
 }
