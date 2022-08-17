@@ -19,6 +19,9 @@ import Foundation
 //MARK: 对String的扩展，包括一些实用方法和常量定义
 extension String: ConstantPropertyProtocol
 {
+    //空字符
+    static let sEmpty = ""
+    
     //iPhoneX资源文件后缀
     static let bangSuffix = "_bang"
     
@@ -72,6 +75,10 @@ extension String: ConstantPropertyProtocol
     static let sStar = "*"
     static let sOr = "|"
     static let sQuestion = "?"
+    
+    //数学运算符
+    static let sPlus = "+"
+    static let sMinus = "-"
     static let sAddMinus = "±"
     static let sMultiply = "×"
     static let sDivision = "÷"

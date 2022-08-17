@@ -175,8 +175,8 @@ var g_userId: String? {
     UserManager.shared.currentUserId
 }
 
-///默认价格格式，参数：分
+///默认价格格式，提供项目中最常用的形式，根据实际需求增减参数，参数：分
 func g_price(_ fen: Int) -> NSAttributedString
 {
-    PriceEmbellisher.shared.defaultAttrPrice(fen)
+    PriceEmbellisher.shared.toAttrPrice(fen, format: .twoDecimal, signType: .none, signColor: .black, signFont: .systemFont(ofSize: 20), hasSymbol: true, symbol: String.sCNY, symbolColor: .black, symbolFont: .systemFont(ofSize: 14), integerColor: .black, integetFont: .systemFont(ofSize: 20), decimalColor: .black, decimalFont: .systemFont(ofSize: 14), strokeLineType: [], strokeLineColor: .clear, underLineType: [], underlineColor: .clear)
 }

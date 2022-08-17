@@ -90,6 +90,25 @@ extension PriceEmbellisher: InternalType
         }
     }
     
+    ///正负号
+    enum PESignType {
+        case none           //不显示
+        case positive       //显示正号
+        case negative       //显示负号
+        
+        //返回符号
+        var sign: String {
+            switch self {
+            case .none:
+                return String.sEmpty
+            case .positive:
+                return String.sPlus
+            case .negative:
+                return String.sMinus
+            }
+        }
+    }
+    
 }
 
 
@@ -105,20 +124,25 @@ extension PriceEmbellisher: ExternalInterface
     
     ///价格一般以`分`为单位，需要格式化成`元`的字符串
     ///参数：format：格式化后数字的格式，整数/小数
-    func toYuan(_ fen: Int, format: PEPriceFormat) -> String
+    ///signType：正负号
+    func toYuan(_ fen: Int, format: PEPriceFormat, signType: PESignType = .none) -> String
     {
-        format.getYuan(fen)
+        String(format: "%@%@", signType.sign, format.getYuan(fen))
     }
     
     ///格式化成带货币符号的元为单位的字符串
-    func toPrice(_ fen: Int, format: PEPriceFormat = .twoDecimal, symbol: String = String.sCNY) -> String
+    ///参数：format：格式化后数字的格式，整数/小数
+    ///signType：正负号
+    ///symbol：货币符号
+    func toPrice(_ fen: Int, format: PEPriceFormat = .twoDecimal, signType: PESignType = .none, symbol: String = String.sCNY) -> String
     {
-        String(format: "%@%@", symbol, toYuan(fen, format: format))
+        String(format: "%@%@%@", signType.sign, symbol, toYuan(fen, format: format))
     }
     
     ///格式化成带字体、颜色等的价格字符串
     ///参数：
     ///format：转换后的数字格式
+    ///signType：正负号；signColor：正负号颜色；signFont：正负号字体
     ///hasSymbol：是否有货币符号
     ///symbol：货币符号，默认`¥`
     ///symbolColor：货币符号颜色；symbolFont：货币符号字体
@@ -130,6 +154,9 @@ extension PriceEmbellisher: ExternalInterface
     ///提示：在实际项目中可以将默认值设定为最常用的情况
     func toAttrPrice(_ fen: Int,
                      format: PEPriceFormat = .twoDecimal,
+                     signType: PESignType = .none,
+                     signColor: UIColor = .black,
+                     signFont: UIFont = .systemFont(ofSize: 12),
                      hasSymbol: Bool = true,
                      symbol: String = String.sCNY,
                      symbolColor: UIColor = .black,
@@ -144,6 +171,9 @@ extension PriceEmbellisher: ExternalInterface
                      underlineColor: UIColor = .clear) -> NSAttributedString
     {
         let totalAttrStr = NSMutableAttributedString()
+        //处理正负号
+        let signAttrStr = NSAttributedString(string: signType.sign, attributes: [NSAttributedString.Key.foregroundColor: signColor, NSAttributedString.Key.font: signFont])
+        totalAttrStr.append(signAttrStr)
         //处理货币符号
         if hasSymbol
         {
@@ -168,16 +198,6 @@ extension PriceEmbellisher: ExternalInterface
         return totalAttrStr
     }
     
-    ///可以根据项目实际需要提供一个默认的价格字符串，作为大部分情况下的格式
-    func defaultAttrPrice(_ fen: Int,
-                          format: PEPriceFormat = .twoDecimal,
-                          symbol: String = String.sCNY,
-                          symbolFont: UIFont = .systemFont(ofSize: 14),
-                          integetFont: UIFont = .systemFont(ofSize: 20),
-                          decimalFont: UIFont = .systemFont(ofSize: 14)) -> NSAttributedString
-    {
-        toAttrPrice(fen, format: format, hasSymbol: true, symbol: symbol, symbolColor: .black, symbolFont: symbolFont, integerColor: .black, integetFont: integetFont, decimalColor: .black, decimalFont: decimalFont, strokeLineType: [], strokeLineColor: .clear, underLineType: [], underlineColor: .clear)
-    }
     
     
     /**************************************** 人民币格式 Section End ***************************************/
