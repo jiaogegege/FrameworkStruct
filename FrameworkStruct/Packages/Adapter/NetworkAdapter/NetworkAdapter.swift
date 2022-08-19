@@ -49,7 +49,7 @@ extension NetworkAdapter: ProtectAvailable
     func defaultParams() -> Dictionary<String, Any>
     {
         return [nt_request_macAddress: g_deviceId(),
-                nt_request_deviceType: "ios",
+                nt_request_deviceType: "iOS",
                 nt_request_clientTime: String(format: "%lld", currentTimeInterval() * 1000)]
     }
     

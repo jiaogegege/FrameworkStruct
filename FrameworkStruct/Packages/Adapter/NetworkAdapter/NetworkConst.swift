@@ -22,7 +22,7 @@ let nt_encrypt_des_key = "Aipi3pWCzdo6tA2SL0gp3ajx"
 ///不需要加密的参数key，在这个数组中的key不会被加密
 let nt_encrypt_escape_key = ["imgCode"]
 
-///如果加密整个参数，那么最终返回的参数都放在key为`data`的字典中
+///如果加密整个参数，那么最终返回的参数都放在key为`data`的字典中，和后端协商确定
 let nt_encrypt_data_key = "data"
 
 /**************************************** 加密相关 Section End ****************************************/
@@ -37,9 +37,9 @@ let nt_acceptableContentType: Set<String> = ["text/html", "application/json", "t
 typealias RequestSuccessCallback = (_ response: Any) -> Void
 typealias RequestFailureCallback = (_ error: NSError) -> Void
 
-//MARK: 部分参数名定义
+//MARK: 部分参数名定义，和后端协商确定
 let nt_request_macAddress = "macAddress"    //mac地址
-let nt_request_deviceType = "deviceType"    //ios
+let nt_request_deviceType = "deviceType"    //iOS
 let nt_request_clientTime = "clientTime"    //客户端时间
 
 let nt_response_code_key = "errCode"  //返回的状态码key
@@ -222,6 +222,8 @@ enum HttpStatusCode: Int
     case badGetway = 502                    //服务器连接失败
     case serviceUnavailable = 503           //服务器暂时的无法处理客户端的请求
     
+    //Error Domain
+    static let errorDomain: String = "FSNetworkErrorDomain"
     
     ///获取状态信息
     func getDesc() -> String
@@ -265,7 +267,7 @@ enum HttpStatusCode: Int
     {
         let errMsg = self.getDesc()
         let userInfo = [NSLocalizedDescriptionKey: errMsg, NSLocalizedFailureErrorKey: errMsg, NSLocalizedFailureReasonErrorKey: errMsg]
-        let error = NSError(domain: NSCocoaErrorDomain, code: self.rawValue, userInfo: userInfo)
+        let error = NSError(domain: Self.errorDomain, code: self.rawValue, userInfo: userInfo)
         return error
     }
 }

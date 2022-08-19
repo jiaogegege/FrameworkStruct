@@ -87,6 +87,9 @@ enum FSError: Int, Error {
     case noCalendarError = 10003             //没有日历权限
     case noReminderError = 10004             //没有提醒事项权限
     
+    //error domain
+    static let errorDomain: String = "FSErrorDomain"
+    
     //获取错误文案
     var desc: String {
         switch self {

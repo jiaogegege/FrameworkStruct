@@ -464,7 +464,7 @@ extension NetworkRequestManager: ExternalInterface
                     errMsg = HttpStatusCode(rawValue: responseCode)?.getDesc() ?? String.networkError
                 }
                 let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
+                let error = NSError(domain: HttpStatusCode.errorDomain, code: responseCode, userInfo: userInfo)
                 failure(error)
             }
         } failure: { (task, error) in
@@ -619,7 +619,7 @@ extension NetworkRequestManager: ExternalInterface
                     errMsg = HttpStatusCode(rawValue: responseCode)?.getDesc() ?? String.networkError
                 }
                 let userInfo = [NSLocalizedDescriptionKey: errMsg]
-                let error = NSError(domain: NSCocoaErrorDomain, code: responseCode, userInfo: userInfo)
+                let error = NSError(domain: HttpStatusCode.errorDomain, code: responseCode, userInfo: userInfo)
                 failure(error)
             }
         } failure: { task, error in
