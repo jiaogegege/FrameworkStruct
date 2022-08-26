@@ -512,3 +512,21 @@ extension BasicTableViewController:DelegateProtocol, UIGestureRecognizerDelegate
     }
     
 }
+
+
+//接口方法
+extension BasicTableViewController: ExternalInterface
+{
+    //是否可以push一个VC，取决于自身有没有navigationVC
+    func canPush() -> Bool
+    {
+        self.navigationController != nil
+    }
+    
+    //push一个VC，可能失败，取决于自身有没有navigationVC
+    func push(_ vc: UIViewController, animated: Bool)
+    {
+        self.navigationController?.pushViewController(vc, animated: animated)
+    }
+    
+}

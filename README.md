@@ -317,17 +317,20 @@ iOS App基础架构设计
 #### ViewComponents
 全局通用的视图组件，一般是针对本项目的自定义通用组件
 
-* `Basic`：此处放置可作为基类的视图组件
+* `Base`：此处放置可作为基类的视图组件
 	* FSDialog：通用弹窗基类
-* DemoTopSelectBar：测试用顶部选择条
-* TeenagerModeDialog：青少年模式弹窗
 * FSAlertView：通用弹框
 * FSActionSheet：通用底部菜单
+* FSLabel：带有长按弹出工具条的Label
+* FSImageView：带有长按复制图片的ImageView
+* FSGuideView：新手引导组件
 * SimpleTableView：简单表格
 * FSTextField：自定义文本输入框
 * FSTextField+ChangeBlock：自定义文本输入框扩展
 * CountDownButton：倒计时按钮
 * UIButton+ButtonBlock：为UIButton添加block点击事件
+* DemoTopSelectBar：测试用顶部选择条
+* TeenagerModeDialog：青少年模式弹窗
 
 #### Storyboard
 此处放置根据模块划分的storyboard文件
@@ -342,8 +345,12 @@ iOS App基础架构设计
 * `Worker`
 	* RegisterLoginWorker：注册登录工作者
 * `Embellisher`
+    * StringEmbellisher：字符串修饰器
+    * TimeEmbellisher：时间修饰器
+    * PriceEmbellisher：价格修饰器
 * `BusinesssManager`
 	* UserManager：用户管理器
+    * EncryptManager：加密管理器
 	* NotificationManager：App内自定义通知管理器
 	* SettingsManager：系统设置管理器
 	* GuideManager：新手引导管理器
@@ -358,35 +365,56 @@ iOS App基础架构设计
 	* TimerManager：定时器管理器
 	* AnimationManager：动画管理器
 	* GraphicsManager：绘图管理器
-	* EncryptManager：加密管理器
+    * MenuinteractionManager：应用内菜单管理器
 * `Adapter`
 	* NetworkAdapter：网络适配器
 	* WebAdapter：H5页面适配器
+    * UrlSchemeAdapter：urlscheme适配器
 	* BluetoothAdpater：蓝牙适配器
+    * SocializeAdapter：社会化适配器
 	* NotificationAdapter：系统推送通知适配器
 	* CalendarAdapter：系统日历和提醒事项适配器
+    * ClipboardAdapter：剪贴板适配器
+    * CommunicationAdapter：交流适配器
 * `Handler`
 * `Document`
 * `DataContainer`
 	* DatasContainer：通用数据容器
 	* DatasConst：常量定义
 * `DataChecker`
+    * DatasChecker：数据校验器
+    * CheckerConst：校验器常量
 * `DataAccessor`
 	* PlistAccessor：plist文件存取器
 	* SandBoxAccessor：沙盒文件存取器
 	* UserDefaultsAccessor：UserDefaults存取器
 	* DatabaseAccessor：数据库存取器
+    * KeychainAccessor：钥匙串存取器
 * `Datas`
 	* UserInfoModel：用户信息数据模型
 	* HomeDataModel：首页数据模型
 * `ThemePackage`：主题功能包
+    * ThemeManager：主题管理器
+    * ThemeContainer：主题容器
+    * ThemeProtocol：主题协议
+    * ThemeModel：主题数据模型
+    * ThemeConst：主题常量
+    * Resource：主题资源文件
+* `IOPackage`：输入输出包
+    * IOManager：输入输出管理器
+    * IOChecker：输入输出校验器
+    * IOEmbellisher：输入输出修饰器
+    * CommandManager：指令管理器
+    * CommandConst：指令常量
 
 #### Components
 其它非UI组件
 
+* OCUtility：OC工具集
 * WeakArray：弱引用数组
 * WeakSet：弱引用集合
 * WeakDictionary：弱引用字典
+* FSException：异常对象
 
 #### Tools
 工具集
@@ -395,6 +423,7 @@ iOS App基础架构设计
 * NumberTool：数字工具集
 * TimeTool：时间日期工具集
 * DeviceTool：设备相关工具集
+* UnitTool：物理单位工具集
 * SystemExtension：系统组件扩展
 * UIExtension：系统UI组件扩展
 
