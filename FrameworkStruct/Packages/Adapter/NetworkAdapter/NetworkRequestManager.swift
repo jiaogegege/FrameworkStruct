@@ -154,7 +154,7 @@ class NetworkRequestManager: OriginManager
         //response
         //如果参数加密了，那么返回的是二进制数据；用HTTP解析，如果不加密返回的是字典，用JSON解析
         let responseSerializer = nt_encrypt ? AFHTTPResponseSerializer() : AFJSONResponseSerializer()
-        responseSerializer.acceptableContentTypes = nt_acceptableContentType
+        responseSerializer.acceptableContentTypes = nt_response_acceptableContentType
         requestManager.responseSerializer = responseSerializer
         
         return requestManager

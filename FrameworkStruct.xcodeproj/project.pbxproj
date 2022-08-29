@@ -1092,6 +1092,7 @@
 		EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BLE_img_gear.json; sourceTree = "<group>"; };
 		EA3E8C3727B784E1006A2715 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA44FD3D28921DFF00977943 /* SafariServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceAdapter.swift; sourceTree = "<group>"; };
+		EA4AF3BE28BC5DC400AF9EF8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA52493D27A3E44B002E3616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
@@ -2740,6 +2741,14 @@
 			path = lotties;
 			sourceTree = "<group>";
 		};
+		EA4AF3BD28BC5DB300AF9EF8 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				EA4AF3BE28BC5DC400AF9EF8 /* README.md */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
 		EA52493C27A3E43B002E3616 /* Datas */ = {
 			isa = PBXGroup;
 			children = (
@@ -4012,6 +4021,7 @@
 			children = (
 				EA00C89E27C39A180034C95B /* BigImages */,
 				EA00C88227C336A50034C95B /* Sounds */,
+				EA4AF3BD28BC5DB300AF9EF8 /* Videos */,
 				EA3E8C3427B784B6006A2715 /* lotties */,
 				EADB008327623B5A001B7223 /* Assets.xcassets */,
 				EA00C87827C239760034C95B /* InfoPlist.strings */,

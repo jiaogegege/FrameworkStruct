@@ -491,7 +491,7 @@ class BasicViewController: UIViewController
 
 
 //代理和通知方法
-extension BasicViewController:DelegateProtocol, UIGestureRecognizerDelegate
+extension BasicViewController: UIGestureRecognizerDelegate
 {
     //处理主题通知的方法
     @objc fileprivate func themeDidChangeNotification(notify: Notification)
@@ -515,7 +515,7 @@ extension BasicViewController:DelegateProtocol, UIGestureRecognizerDelegate
 
 
 //接口方法
-extension BasicViewController: ExternalInterface
+extension BasicViewController
 {
     //是否可以push一个VC，取决于自身有没有navigationVC
     func canPush() -> Bool
@@ -524,7 +524,7 @@ extension BasicViewController: ExternalInterface
     }
     
     //push一个VC，可能失败，取决于自身有没有navigationVC
-    func push(_ vc: UIViewController, animated: Bool)
+    func push(_ vc: UIViewController, animated: Bool = true)
     {
         self.navigationController?.pushViewController(vc, animated: animated)
     }

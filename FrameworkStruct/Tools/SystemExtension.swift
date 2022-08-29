@@ -38,12 +38,67 @@ extension NSObject
 }
 
 
+//MARK: Character
+/**
+ * Character
+ */
+extension Character
+{
+    //字符转字符串
+    var toString: String {
+        String(self)
+    }
+    
+    //char转ASCII码
+    var toAscii: Int? {
+        guard let ascii = self.asciiValue else {
+            return nil
+        }
+        return Int(ascii)
+    }
+    
+    //char转unicode码
+    var toUnicode: Int {
+        Int(String(self).unicodeScalars.first!.value)
+    }
+    
+    //unicode或ascii转char
+    static func fromUnicode(_ num: Int) -> Character?
+    {
+        guard let unicode = UnicodeScalar(num) else {
+            return nil
+        }
+        return Character(unicode)
+    }
+    
+}
+
+
 //MARK: String
 /**
  * String
  */
 extension String
 {
+    ///字符串转字符
+    var chars: [Character] {
+        Array(self)
+    }
+    
+    ///用于单个字符串转字符
+    var toChar: Character? {
+        if let first = self.chars.first {
+            return first
+        }
+        return nil
+    }
+    
+    ///从char数组转字符串
+    static func fromChars(_ chars: [Character]) -> String
+    {
+        String(chars[0..<chars.count])
+    }
+    
     ///去除字符串头尾空格和换行
     func trim() -> String
     {
@@ -158,6 +213,72 @@ extension String
          }
          return results
      }
+    
+    ///根据下标，截取子字符，闭区间
+    func subStr(_ start: Int, _ end: Int) -> String
+    {
+        if start >= self.count {
+            return self
+        }
+        var newEnd: Int = end
+        if end >= self.count {
+            newEnd = self.count - 1
+        }
+        let startIdx = self.index(self.startIndex, offsetBy: start)
+        let endIdx = self.index(self.startIndex, offsetBy: newEnd)
+        return String(self[startIdx...endIdx])
+    }
+    
+    ///移除第一个子字符
+    func removeFirstSubStr(_ subStr: String) -> String
+    {
+        if subStr.count > self.count {
+             return self
+         }
+         
+         let len = subStr.count
+         for i in 0..<self.count {
+             let start = i
+             let end = i + len - 1
+             
+             if end > self.count - 1 { // 防止数组越界
+                 break
+             }
+             if subStr == self.subStr(start, end) {
+                 if i == 0 && end == self.count - 1 { // 前后完全覆盖
+                     return ""
+                 } else if i == 0 && end < self.count - 1 { // 从0开始覆盖前面一部分
+                     return self.subStr(end + 1, self.count - 1)
+                 } else if i > 0 && end == self.count - 1 { // 从结尾覆盖后面一部分
+                     return self.subStr(0, i - 1)
+                 } else { // 中间
+                     let preStr = self.subStr(0, i - 1)
+                     let trailStr = self.subStr(end + 1, self.count - 1)
+                     return preStr + trailStr
+                 }
+             }
+         }
+         
+         return self
+     }
+    
+    ///是否包含某个子字符
+    func isContainSubStr(_ subStr: String) -> Bool
+    {
+        let len = subStr.count
+        for i in 0..<self.count {
+            let start = i
+            let end = i + len - 1
+            if end > self.count - 1 {
+                break
+            }
+            if subStr == self.subStr(start, end) {
+                return true
+            }
+        }
+        
+        return false
+    }
     
     ///计算字符串尺寸大小
     func sizeWith(font: UIFont, maxWidth: CGFloat) -> CGSize

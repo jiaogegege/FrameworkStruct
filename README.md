@@ -307,12 +307,14 @@ iOS App基础架构设计
 		* HomeViewController
 		* TableViewController
 		* WebViewController
+        ...
 	* `MineInterface`
 		* `Models`：数据模型目录，`xxxModel`等
 		* `Views`：视图目录，`UITableViewCell`等
 		* MineNavigationController
 		* MineViewController
 		* SystemSettingViewController
+        ...
 
 #### ViewComponents
 全局通用的视图组件，一般是针对本项目的自定义通用组件
@@ -380,10 +382,10 @@ iOS App基础架构设计
 * `Document`
 * `DataContainer`
 	* DatasContainer：通用数据容器
-	* DatasConst：常量定义
+	* DatasConst：数据容器常量定义
 * `DataChecker`
     * DatasChecker：数据校验器
-    * CheckerConst：校验器常量
+    * CheckerConst：校验器常量定义
 * `DataAccessor`
 	* PlistAccessor：plist文件存取器
 	* SandBoxAccessor：沙盒文件存取器
@@ -482,9 +484,9 @@ iOS App基础架构设计
 #### Others
 其它文件
 
-* Info.plist
-* OCHeader
-* FrameworkStruct-Bridging-Header
+* Info.plist：工程配置文件
+* OCHeader：OC头文件引用
+* FrameworkStruct-Bridging-Header：OC和swift桥接文件
 
 #### Docs
 文档目录

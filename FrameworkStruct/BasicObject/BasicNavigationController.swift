@@ -127,7 +127,7 @@ class BasicNavigationController: UINavigationController
 
 
 //代理和通知方法
-extension BasicNavigationController:DelegateProtocol
+extension BasicNavigationController
 {
     //处理主题通知的方法
     @objc fileprivate func themeDidChangeNotification(notify: Notification?)

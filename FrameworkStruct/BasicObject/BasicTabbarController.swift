@@ -122,7 +122,7 @@ class BasicTabbarController: UITabBarController
 
 
 //代理和通知方法
-extension BasicTabbarController:DelegateProtocol
+extension BasicTabbarController
 {
     //处理主题通知的方法
     @objc fileprivate func themeDidChangeNotification(notify: Notification)

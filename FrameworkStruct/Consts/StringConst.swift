@@ -22,13 +22,10 @@ extension String: ConstantPropertyProtocol
     //空字符
     static let sEmpty = ""
     
-    //iPhoneX资源文件后缀
-    static let bangSuffix = "_bang"
-    
     //"iCloud"
     static let icloud = "iCloud"
     
-    //〇～十
+    //汉字数字
     static let s0 = "〇"
     static let s1 = "一"
     static let s2 = "二"
@@ -39,11 +36,11 @@ extension String: ConstantPropertyProtocol
     static let s7 = "七"
     static let s8 = "八"
     static let s9 = "九"
-    static let s10 = "十"
-    static let s100 = "百"
-    static let s1000 = "千"
-    static let s10000 = "万"
-    static let s100000000 = "亿"
+    static let s十 = "十"
+    static let s百 = "百"
+    static let s千 = "千"
+    static let s万 = "万"
+    static let s亿 = "亿"
     
     //人民币大写数字
     static let sRMB0 = "零"
@@ -56,25 +53,63 @@ extension String: ConstantPropertyProtocol
     static let sRMB7 = "柒"
     static let sRMB8 = "捌"
     static let sRMB9 = "玖"
-    static let sRMB10 = "拾"
-    static let sRMB100 = "佰"
-    static let sRMB1000 = "仟"
-    static let sRMB10000 = "万"
-    static let sRMB100000000 = "亿"
+    static let sRMB十 = "拾"
+    static let sRMB百 = "佰"
+    static let sRMB千 = "仟"
+    static let sRMB万 = "万"
+    static let sRMB亿 = "亿"
     
     //常用特殊字符
     static let cDot: Character = "."
     static let sDot = "."
+    static let cTilde: Character = "~"
     static let sTilde = "~"
+    static let cSigh: Character = "!"
     static let sSigh = "!"
+    static let cAt: Character = "@"
     static let sAt = "@"
+    static let cSharp: Character = "#"
     static let sSharp = "#"
+    static let cPercent: Character = "%"
     static let sPercent = "%"
+    static let cCaret: Character = "^"
     static let sCaret = "^"
+    static let cAnd: Character = "&"
     static let sAnd = "&"
+    static let cStar: Character = "*"
     static let sStar = "*"
+    static let cOr: Character = "|"
     static let sOr = "|"
+    static let cQuestion: Character = "?"
     static let sQuestion = "?"
+    static let cComma: Character = ","
+    static let sComma = ","
+    static let cSemicolon: Character = ";"
+    static let sSemicolon = ";"
+    static let cQuote: Character = "\""
+    static let sQuote = "\""
+    static let cSingleQuote: Character = "'"
+    static let sSingleQuote = "'"
+    static let cSlash: Character = "/"
+    static let sSlash = "/"
+    static let cBackslash: Character = "\\"
+    static let sBackslash = "\\"
+    static let cUnderline: Character = "_"
+    static let sUnderline = "_"
+    static let cColon: Character = ":"
+    static let sColon = ":"
+    static let cLeftBracket: Character = "("
+    static let sLeftBracket = "("
+    static let cRightBracket: Character = ")"
+    static let sRightBracket = ")"
+    static let cLeftSquareBracket: Character = "["
+    static let sLeftSquareBracket = "["
+    static let cRightSquareBracket: Character = "]"
+    static let sRightSquareBracket = "]"
+    static let cLeftCurlyBracket: Character = "{"
+    static let sLeftCurlyBracket = "{"
+    static let cRightCurlyBracket: Character = "}"
+    static let sRightCurlyBracket = "}"
     
     //数学运算符
     static let sPlus = "+"
@@ -91,7 +126,7 @@ extension String: ConstantPropertyProtocol
     static let sLessEqual = "≤"
     static let sComplexLessEqual = "≦"
     
-    //货币字符
+    //货币符号
     static let sCurrency = "¤"              //国际通货符号，当没有合适的货币符号时使用
     static let sUSD = "$"                   //美元
     static let sFen = "¢"                   //分，美元和其他一些货币辅助单位的符号
@@ -168,6 +203,9 @@ extension String: ConstantPropertyProtocol
     
     
     
+    
+    //iPhoneX资源文件后缀
+    static let bangSuffix = "_bang"
     
     //获取对应的iPhoneX下的文件名
     func bangString() -> String

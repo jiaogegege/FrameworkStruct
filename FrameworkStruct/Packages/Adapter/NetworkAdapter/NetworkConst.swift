@@ -31,16 +31,16 @@ let nt_encrypt_data_key = "data"
 let nt_request_timeoutInterval: TimeInterval = 30.0
 
 ///可接受的返回数据类型
-let nt_acceptableContentType: Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
+let nt_response_acceptableContentType: Set<String> = ["text/html", "application/json", "text/json", "text/javascript", "text/plain"]
 
 //请求成功和失败的回调
 typealias RequestSuccessCallback = (_ response: Any) -> Void
 typealias RequestFailureCallback = (_ error: NSError) -> Void
 
 //MARK: 部分参数名定义，和后端协商确定
-let nt_request_macAddress = "macAddress"    //mac地址
-let nt_request_deviceType = "deviceType"    //iOS
-let nt_request_clientTime = "clientTime"    //客户端时间
+let nt_request_macAddress_key = "macAddress"    //mac地址
+let nt_request_deviceType_key = "deviceType"    //iOS
+let nt_request_clientTime_key = "clientTime"    //客户端时间
 
 let nt_response_code_key = "errCode"  //返回的状态码key
 let nt_response_msg_key = "errMsg"    //返回的状态信息key
