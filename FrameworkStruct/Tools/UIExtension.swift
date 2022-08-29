@@ -421,7 +421,7 @@ extension UIColor
     
     ///16进制颜色字符串转UIColor
     ///colorStr:支持“#123456”、 “0X123456”、 “123456”三种格式
-    class func colorWithHex(colorStr: String , alpha: CGFloat = 1) -> UIColor
+    class func colorWithHex(_ colorStr: String , alpha: CGFloat = 1) -> UIColor
     {
         //删除字符串中的空格
         var cString = colorStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -463,7 +463,7 @@ extension UIColor
     }
     
     ///16进制颜色转换成UIColor
-    class func colorFromHex(value : Int , alpha : CGFloat = 1) -> UIColor
+    class func colorFromHex(_ value : Int , alpha : CGFloat = 1) -> UIColor
     {
         let red = CGFloat((value & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((value & 0xFF00) >> 8) / 255.0
@@ -509,6 +509,11 @@ extension UIColor
         }
     }
     
+}
+
+//UIColor内部类型
+extension UIColor: InternalType
+{
     //暗黑模式级别
     enum DarkModeLevel {
         case deepen                     //最底层的黑色或最顶层的白色

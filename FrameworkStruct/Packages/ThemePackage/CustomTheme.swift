@@ -29,31 +29,31 @@ class CustomTheme: ThemeProtocol
     
     //主色调
     var mainColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.mainColor)
+        return UIColor.colorWithHex(theme.mainColor)
     }
     //标题主色调
     var mainTitleColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.mainTitleColor)
+        return UIColor.colorWithHex(theme.mainTitleColor)
     }
     //副标题
     var subTitleColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.subTitleColor)
+        return UIColor.colorWithHex(theme.subTitleColor)
     }
     //文本内容
     var contentTextColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.contentTextColor)
+        return UIColor.colorWithHex(theme.contentTextColor)
     }
     //提示文本
     var hintTextColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.hintTextColor)
+        return UIColor.colorWithHex(theme.hintTextColor)
     }
     //背景色
     var backgroundColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.backgroundColor)
+        return UIColor.colorWithHex(theme.backgroundColor)
     }
     //内容背景色
     var contentBackgroundColor: UIColor {
-        return UIColor.colorWithHex(colorStr: theme.contentBackgroundColor)
+        return UIColor.colorWithHex(theme.contentBackgroundColor)
     }
     //主字体
     var mainFont: UIFont {
