@@ -29,8 +29,7 @@ let kSystemName:String = UIDevice.current.systemName
 let kSystemVersion: String = UIDevice.current.systemVersion
 
 //获取设备型号
-var kDeviceModelName: String
-{
+var kDeviceModelName: String {
     var systemInfo = utsname()
     uname(&systemInfo)
     let machineMirror = Mirror(reflecting: systemInfo.machine)
