@@ -6,22 +6,32 @@
 //
 
 /**
- * 自定义label，增加剪切/复制/粘贴功能
+ * 自定义label，增加剪切/复制/粘贴功能，自定义其它菜单功能
  */
 import UIKit
 
 class FSLabel: UILabel
 {
     //MARK: 属性
-    ///开启或关闭复制粘贴功能
-    var supportCopy: Bool = false {
-        didSet {
-            self.enableCopyPaste(supportCopy)
+    ///是否支持菜单功能
+    var supportMenu: Bool = false {
+        willSet {
+            self.enableMenu(newValue)
         }
     }
     
+    /**************************************** 支持的菜单项 Section Begin ***************************************/
+    //支持的菜单项
+    var canCopy: Bool = true                //复制
+    var canPaste: Bool = true               //粘贴
+    var canCut: Bool = true                 //剪切
+    var canDelete: Bool = true              //删除
+    var canAppend: Bool = true              //追加
+    
+    /**************************************** 支持的菜单项 Section End ***************************************/
+    
     override var canBecomeFirstResponder: Bool {
-        return true
+        return supportMenu
     }
     
     //剪贴板适配器
@@ -33,7 +43,7 @@ class FSLabel: UILabel
     //MARK: 方法
     /**************************************** 剪切复制粘贴功能 Section Begin ***************************************/
     //打开或关闭复制粘贴功能
-    fileprivate func enableCopyPaste(_ enabled: Bool)
+    fileprivate func enableMenu(_ enabled: Bool)
     {
         if enabled
         {
@@ -63,20 +73,40 @@ class FSLabel: UILabel
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(UIResponderStandardEditActions.copy(_:))
         {
-            return true
+            return canCopy
         }
         else if action == #selector(UIResponderStandardEditActions.cut(_:))
         {
-            return true
+            return canCut
         }
         else if action == #selector(UIResponderStandardEditActions.paste(_:))
         {
-            return true
+            return canPaste
+        }
+        else if action == #selector(UIResponderStandardEditActions.delete(_:))
+        {
+            return canDelete
+        }
+        else if action == #selector(append(_:))
+        {
+            return canAppend
         }
         else
         {
             return false
         }
+    }
+    
+    //获取自定义菜单项
+    func getCustomMenuItems() -> [UIMenuItem]
+    {
+        var items: [UIMenuItem] = []
+        if canAppend
+        {
+            items.append(UIMenuItem(title: String.append, action: #selector(append(_:))))
+        }
+        
+        return items
     }
     
     //显示复制粘贴工具菜单
@@ -85,6 +115,8 @@ class FSLabel: UILabel
         becomeFirstResponder()
         if !menu.isMenuVisible
         {
+            //构建自定义菜单项
+            menu.menuItems = getCustomMenuItems()
             menu.showMenu(from: self, rect: bounds)
         }
     }
@@ -120,6 +152,24 @@ class FSLabel: UILabel
         //操作完成后隐藏菜单
         menu.hideMenu(from: self)
     }
+    
+    //删除
+    override func delete(_ sender: Any?) {
+        text = nil
+    }
+    
+    //追加
+    @objc func append(_ sender: UIMenuController)
+    {
+        if let tx = ca.read(valueType: .string) as? String
+        {
+            let originTx: String = text ?? String.sEmpty
+            text = originTx + tx
+        }
+        //操作完成后隐藏菜单
+        menu.hideMenu(from: self)
+    }
+    
     /**************************************** 剪切复制粘贴功能 Section End ***************************************/
 
 }

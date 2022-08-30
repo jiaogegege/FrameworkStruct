@@ -30,10 +30,11 @@ class CopyPasteViewController: BasicViewController {
     
     override func configUI() {
         super.configUI()
-        sourceLabel.supportCopy = true
-        targetLabel.supportCopy = true
-        sourceImgView.supportCopy = true
-        targetImgView.supportCopy = true
+        sourceLabel.supportMenu = true
+        targetLabel.supportMenu = true
+        sourceImgView.supportMenu = true
+        targetImgView.supportMenu = true
+        targetImgView.image = GraphicsManager.shared.drawGroupImages([UIImage.iBackDark!, UIImage.iGuideHand!, UIImage.iHomeNormal!, UIImage.iBackClose!], direction: .vertical, align: .left)
     }
     
     override func updateUI() {

@@ -270,6 +270,8 @@ extension String
     static let send = localized("send")
     //输入消息
     static let inputMessage = localized("inputMessage")
+    //追加
+    static let append = localized("append")
     
     //MARK: Toast文案
     

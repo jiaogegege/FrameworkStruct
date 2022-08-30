@@ -54,6 +54,19 @@ extension GraphicsManager: InternalType
         static let defaultType: DotLineType = DotLineType(phase: 4.0, lengths: [4, 7, 10])
     }
     
+    ///图片排列方向，水平或竖直
+    enum GMArrangeDirection {
+        case horizontal         //水平
+        case vertical           //竖直
+    }
+    
+    ///图片对齐方式
+    enum GMAlignDirection {
+        case left
+        case center
+        case right
+    }
+    
 }
 
 
@@ -371,6 +384,81 @@ extension GraphicsManager: ExternalInterface
     func drawImage(context: CGContext)
     {
         
+    }
+    
+    ///绘制一组图像并返回一个大图，就是将多个图片组合在一起
+    ///参数：
+    ///images：图片数组；
+    ///horizontal：是否水平绘制，否则就是竖直绘制；
+    func drawGroupImages(_ images: [UIImage], direction: GMArrangeDirection = .horizontal, align: GMAlignDirection = .left) -> UIImage?
+    {
+        if images.count > 0
+        {
+            //计算画布尺寸
+            var size: CGSize = .zero
+            var width: CGFloat = 0.0
+            var height: CGFloat = 0.0
+            if direction == .horizontal
+            {
+                for img in images
+                {
+                    width += img.size.width
+                    height = img.size.height > height ? img.size.height : height
+                }
+                size = CGSize(width: width, height: height)
+            }
+            else if direction == .vertical
+            {
+                for img in images
+                {
+                    width = img.size.width > width ? img.size.width : width
+                    height += img.size.height
+                }
+                size = CGSize(width: width, height: height)
+            }
+            else    //也许以后会有其他选项
+            {
+                
+            }
+            //绘制图像
+            UIGraphicsBeginImageContext(size)
+            var totalLength: CGFloat = 0.0      //绘制方向的总长度
+            for img in images
+            {
+                var point: CGPoint = .zero
+                //计算point
+                if direction == .horizontal
+                {
+                    switch align {
+                    case .left:
+                        point = CGPoint(x: totalLength, y: 0)
+                    case .center:
+                        point = CGPoint(x: totalLength, y: (size.height - img.size.height) / 2.0)
+                    case .right:
+                        point = CGPoint(x: totalLength, y: size.height - img.size.height)
+                    }
+                }
+                else if direction == .vertical
+                {
+                    switch align {
+                    case .left:
+                        point = CGPoint(x: 0, y: totalLength)
+                    case .center:
+                        point = CGPoint(x: (size.width - img.size.width) / 2.0, y: totalLength)
+                    case .right:
+                        point = CGPoint(x: size.width - img.size.width, y: totalLength)
+                    }
+                }
+                //绘制
+                img.draw(at: point)
+                //累计长度
+                totalLength += direction == .horizontal ? img.size.width : img.size.height
+            }
+            let newImg = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImg
+        }
+        return nil
     }
     
     ///绘制文字

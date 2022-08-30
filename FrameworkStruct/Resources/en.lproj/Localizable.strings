@@ -46,6 +46,7 @@ takePhotoWithCamera = "Take Photo With Camera";
 newMsg = "New Message";
 send = "Send";
 inputMessage = "Input Message";
+append = "Append";
 
 /**
  * Toast文案

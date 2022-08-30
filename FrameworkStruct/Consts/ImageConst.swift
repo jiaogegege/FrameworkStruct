@@ -45,7 +45,7 @@ extension UIImage: ConstantPropertyProtocol
         UIImage(named: "common_back_light")
     }
     @objc static var iBackClose: UIImage? {
-        UIImage(named: "common_back_close")
+        UIImage(named: "common_back_close_dark")
     }
     
     //cell向右箭头
