@@ -90,7 +90,7 @@ extension PriceEmbellisher: InternalType
         }
     }
     
-    ///正负号
+    ///正负号，加在整个价格字符串的最前面，比如`+¥12.12`、`-¥12.12`，如果本身计算的数字是负数，那么不建议设置正负号
     enum PESignType {
         case none           //不显示
         case positive       //显示正号

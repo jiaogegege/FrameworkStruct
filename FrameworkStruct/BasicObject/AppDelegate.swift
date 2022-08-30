@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.initData()
-        print("1234".subStr(1, 2))
+        
         return true
     }
 
