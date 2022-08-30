@@ -51,10 +51,10 @@ extension SandBoxAccessor: ExternalInterface
     //MARK: 文件和目录操作
     /**************************************** 文件和目录操作 Section Begin ****************************************/
     //创建一个目录
-    func createDir(path: String) -> Bool
+    func createDir(_ path: String) -> Bool
     {
         //先判断是否存在
-        if isExist(path: path)
+        if isExist(path)
         {
             return true //存在直接返回true
         }
@@ -71,10 +71,10 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     //创建一个文件
-    func createFile(path: String) -> Bool
+    func createFile(_ path: String) -> Bool
     {
         //先判断是否存在
-        if isExist(path: path)
+        if isExist(path)
         {
             return true //存在直接返回true
         }
@@ -95,7 +95,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     //判断某个文件或目录是否存在
-    func isExist(path: String) -> Bool
+    func isExist(_ path: String) -> Bool
     {
         var ret = false
         ret = self.fileMgr.fileExists(atPath: path)
@@ -103,7 +103,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     //判断某个路径是否是目录
-    func isDir(path: String) -> Bool
+    func isDir(_ path: String) -> Bool
     {
         var ret = ObjCBool.init(false)
         self.fileMgr.fileExists(atPath: path, isDirectory: &ret)
@@ -111,7 +111,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     //判断某个路径是否是文件
-    func isFile(path: String) -> Bool
+    func isFile(_ path: String) -> Bool
     {
         var ret = ObjCBool.init(false)
         self.fileMgr.fileExists(atPath: path, isDirectory: &ret)
@@ -141,12 +141,12 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取一个Documents下的目录如果不存在则创建
-    func getDocumentDirWith(pathComponent: String) -> String
+    func getDocumentDirWith(_ pathComponent: String) -> String
     {
         let dirPath = (self.getDocumentDirectory() as NSString).appendingPathComponent(pathComponent)
-        if !self.isExist(path: dirPath) //不存在则创建
+        if !self.isExist(dirPath) //不存在则创建
         {
-            let _ = self.createDir(path: dirPath)
+            let _ = self.createDir(dirPath)
         }
         return dirPath
     }
@@ -160,12 +160,12 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取一个Library下的目录如果不存在则创建
-    func getLibraryDirWith(pathComponent: String) -> String
+    func getLibraryDirWith(_ pathComponent: String) -> String
     {
         let dirPath = (self.getLibraryDirectory() as NSString).appendingPathComponent(pathComponent)
-        if !self.isExist(path: dirPath) //不存在则创建
+        if !self.isExist(dirPath) //不存在则创建
         {
-            let _ = self.createDir(path: dirPath)
+            let _ = self.createDir(dirPath)
         }
         return dirPath
     }
@@ -179,12 +179,12 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取一个cache下的目录如果不存在则创建
-    func getCacheDirWith(pathComponent: String) -> String
+    func getCacheDirWith(_ pathComponent: String) -> String
     {
         let dirPath = (self.getCacheDirectory() as NSString).appendingPathComponent(pathComponent)
-        if !self.isExist(path: dirPath) //不存在则创建
+        if !self.isExist(dirPath) //不存在则创建
         {
-            let _ = self.createDir(path: dirPath)
+            let _ = self.createDir(dirPath)
         }
         return dirPath
     }
@@ -196,12 +196,12 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取一个Temp下的目录，不存在则创建
-    func getTempDirWith(pathComponent: String) -> String
+    func getTempDirWith(_ pathComponent: String) -> String
     {
         let dirPath = (self.getTempDirectory() as NSString).appendingPathComponent(pathComponent)
-        if !self.isExist(path: dirPath) //不存在则创建
+        if !self.isExist(dirPath) //不存在则创建
         {
-            let _ = self.createDir(path: dirPath)
+            let _ = self.createDir(dirPath)
         }
         return dirPath
     }
@@ -228,14 +228,14 @@ extension SandBoxAccessor: ExternalInterface
     ///获取数据库文件路径
     func getDatabasePath() -> String
     {
-        let dbDirPath = self.getDocumentDirWith(pathComponent: sdDatabaseDir)
+        let dbDirPath = self.getDocumentDirWith(sdDatabaseDir)
         let dbPath = (dbDirPath as NSString).appendingPathComponent(sdDatabaseFile)
         return dbPath
     }
     
     ///获取数据库表结构sql文件路径，参数包含扩展名，如果不包含扩展名，默认用`sql`
     ///文件名中不要包含`.`，因为用来区分扩展名
-    func getSQLFilePath(fileName: String) -> String?
+    func getSQLFilePath(_ fileName: String) -> String?
     {
         return self.getBundleFilePath(fileName, ext: FileTypeName.sql.rawValue)
     }
@@ -244,23 +244,24 @@ extension SandBoxAccessor: ExternalInterface
     ///放在Temp文件夹下
     func getTempDownloadDir() -> String
     {
-        return self.getTempDirWith(pathComponent: sdDownloadTempDir)
+        return self.getTempDirWith(sdDownloadTempDir)
     }
     
     ///获取沙盒音频文件目录
     func getSoundsDir() -> String
     {
-        return self.getLibraryDirWith(pathComponent: sdSoundsDir)
+        return self.getLibraryDirWith(sdSoundsDir)
     }
 
     /**************************************** 文件夹路径访问 Section End ****************************************/
     
     //MARK: 具体读写文件方法
     /**************************************** 具体读写文件方法 Section Begin ****************************************/
+    
     ///保存图片到沙盒
     ///参数：compress：如果是jpg图片，可以设置压缩率(0-1)，数值越小，压缩率越高；filePath：要保存的沙盒文件路径
     ///- Returns: 返回是否保存成功
-    func saveImage(image: UIImage, compress: CGFloat = 1, filePath: String) -> Bool
+    func saveImage(_ image: UIImage, compress: CGFloat = 1, filePath: String) -> Bool
     {
         //尝试获取图片扩展名，没有则默认jpg
         var extName = (filePath as NSString).pathExtension

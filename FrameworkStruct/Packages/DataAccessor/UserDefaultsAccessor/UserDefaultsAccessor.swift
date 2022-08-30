@@ -106,4 +106,5 @@ class UserDefaultsAccessor: OriginAccessor
         let infoDict = ["type": "UserDefaults"]
         return infoDict
     }
+    
 }

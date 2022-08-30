@@ -76,7 +76,7 @@ class DatabaseAccessor: OriginAccessor
 //        FSLog(dbPath)
         
         //判断数据库文件是否存在
-        let isDbExist = SandBoxAccessor.shared.isExist(path: dbPath)
+        let isDbExist = SandBoxAccessor.shared.isExist(dbPath)
         
         //创建数据库操作队列对象，如果返回nil，说明创建不成功，一般都会成功
         self.dbQueue = FMDatabaseQueue(path: dbPath)
@@ -130,10 +130,10 @@ class DatabaseAccessor: OriginAccessor
     //创建数据库表
     fileprivate func createDbTable()
     {
-        if let path = SandBoxAccessor.shared.getSQLFilePath(fileName: sdDatabaseOriginSQLFile)
+        if let path = SandBoxAccessor.shared.getSQLFilePath(sdDatabaseOriginSQLFile)
         {
             //获取sql文件并执行sql语句
-            self.executeSqlStatementFromFile(filePath: path)
+            self.executeSqlStatementFromFile(path)
             //创建成功后写入数据库版本号
             self.insertOrUpdateDbVersion(db_OriginVersion)
         }
@@ -144,7 +144,7 @@ class DatabaseAccessor: OriginAccessor
     }
     
     //规格化，处理sql字符串，替换换行
-    fileprivate func normalizeSqlString(originStr: String) -> String
+    fileprivate func normalizeSqlString(_ originStr: String) -> String
     {
         var str = originStr.replacingOccurrences(of: "\r\n", with: "\n")
         str = str.replacingOccurrences(of: "\\n", with: "\n")
@@ -154,12 +154,12 @@ class DatabaseAccessor: OriginAccessor
     }
     
     //执行一个sql文件中的sql语句，主要用来修改数据库结构和内容，并非查询
-    fileprivate func executeSqlStatementFromFile(filePath: String)
+    fileprivate func executeSqlStatementFromFile(_ filePath: String)
     {
         //获取文件内容
         do {
             var sqlContent = try NSString(contentsOfFile: filePath, encoding: String.Encoding.utf8.rawValue) as String
-            sqlContent = self.normalizeSqlString(originStr: sqlContent)
+            sqlContent = self.normalizeSqlString(sqlContent)
             //分割sql语句
             let sqlArr = sqlContent.components(separatedBy: ";")
             //执行sql语句
@@ -191,10 +191,10 @@ class DatabaseAccessor: OriginAccessor
             if self.needUpdate(ver)
             {
                 //获取对应版本号的sql文件
-                if let path = SandBoxAccessor.shared.getSQLFilePath(fileName: ver)
+                if let path = SandBoxAccessor.shared.getSQLFilePath(ver)
                 {
                     //执行sql语句
-                    self.executeSqlStatementFromFile(filePath: path)
+                    self.executeSqlStatementFromFile(path)
                     //创建成功后写入数据库版本号
                     self.updateDbVersion(ver)
                 }

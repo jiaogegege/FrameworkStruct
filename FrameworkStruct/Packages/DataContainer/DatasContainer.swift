@@ -44,7 +44,7 @@ class DatasContainer: OriginContainer
 extension DatasContainer: ExternalInterface
 {
     ///获取本地所有用户信息
-    func getAllUserInfo(completion: @escaping ((_ users: [UserInfoModel]?) -> Void))
+    func getAllUserInfo(_ completion: @escaping ((_ users: [UserInfoModel]?) -> Void))
     {
         if let users = self.get(key: DCDataKey.allUserInfo)
         {

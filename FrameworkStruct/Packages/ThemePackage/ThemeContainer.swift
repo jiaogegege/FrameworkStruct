@@ -46,14 +46,14 @@ class ThemeContainer: OriginContainer
     {
         if let current = udAccessor.readString(key: UDAKeyType.currentTheme)
         {
-            let themeDict = plAccessor.read(fileName: current)
+            let themeDict = plAccessor.read(current)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
             self.mutate(key: TCDataKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
         }
         else
         {
             //默认选择粉红色主题
-            let themeDict = plAccessor.read(fileName: sPinkThemeFileName)
+            let themeDict = plAccessor.read(sPinkThemeFileName)
             let curThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
             self.mutate(key: TCDataKey.currentTheme, value: CustomTheme.init(theme: curThemeModel!))
             //保存当前主题标识
@@ -64,7 +64,7 @@ class ThemeContainer: OriginContainer
     //初始化暗黑主题，默认只有一种
     fileprivate func initDarkTheme()
     {
-        let themeDict = plAccessor.read(fileName: sDarkThemeFileName)
+        let themeDict = plAccessor.read(sDarkThemeFileName)
         let darkThemeModel = ThemeModel.mj_object(withKeyValues: themeDict)
         self.mutate(key: TCDataKey.darkTheme, value: CustomTheme.init(theme: darkThemeModel!))
     }
@@ -74,7 +74,7 @@ class ThemeContainer: OriginContainer
     fileprivate func initCustomTheme(themeName: String) -> CustomTheme?
     {
         var theme: CustomTheme? = nil
-        let themeConfig = plAccessor.read(fileName: themeName)
+        let themeConfig = plAccessor.read(themeName)
         let themeModel = ThemeModel.mj_object(withKeyValues: themeConfig)
         theme = CustomTheme.init(theme: themeModel!)
         return theme

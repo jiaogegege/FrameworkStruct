@@ -37,7 +37,7 @@ class PlistAccessor: OriginAccessor
      * - parameters:
      * - fileName:文件名，包括后缀，也可以没有后缀
      */
-    func read(fileName: String) -> Dictionary<String, Any>
+    func read(_ fileName: String) -> Dictionary<String, Any>
     {
         let fileNameArr = fileName.components(separatedBy: ".")
         let bundle = Bundle.main
@@ -52,7 +52,7 @@ class PlistAccessor: OriginAccessor
      *  - fileName:文件名，包括后缀，也可以没有后缀
      *  - identifier:资源包id，如果是cocospods中的资源包，需要传入名字，比如："org.cocoapods.AFNetworking"
      */
-    func read(fileName: String, identifier: String) -> Dictionary<String, AnyHashable>
+    func read(_ fileName: String, identifier: String) -> Dictionary<String, AnyHashable>
     {
         let fileNameArr = fileName.components(separatedBy: ".")
         let bundle = Bundle.init(identifier: identifier)
@@ -67,7 +67,7 @@ class PlistAccessor: OriginAccessor
      *  - fileName:文件名，包括后缀，也可以没有后缀
      *  - urlStr:资源包id，如果是cocospods中的资源包，需要传入名字，比如："org.cocoapods.AFNetworking"
      */
-    func read(fileName: String, urlStr: String) -> Dictionary<String, AnyHashable>
+    func read(_ fileName: String, urlStr: String) -> Dictionary<String, AnyHashable>
     {
         let fileNameArr = fileName.components(separatedBy: ".")
         if let url = URL(string: urlStr)
