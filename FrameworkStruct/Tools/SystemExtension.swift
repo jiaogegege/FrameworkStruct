@@ -80,7 +80,7 @@ extension Character
  */
 extension String
 {
-    ///字符串转字符
+    ///字符串转字符数组
     var chars: [Character] {
         Array(self)
     }
