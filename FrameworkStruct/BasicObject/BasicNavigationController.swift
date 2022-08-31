@@ -17,6 +17,11 @@ class BasicNavigationController: UINavigationController
         }
     }
     
+    //返回顶层控制器状态栏颜色
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.topViewController!.preferredStatusBarStyle
+    }
+    
     //状态管理器，只能在本类中修改，外部和子类仅访问
     fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
     
@@ -47,11 +52,6 @@ class BasicNavigationController: UINavigationController
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-    }
-    
-    //返回顶层控制器状态栏颜色
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.topViewController!.preferredStatusBarStyle
     }
     
     //设置是否跟随系统暗黑模式

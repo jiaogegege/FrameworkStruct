@@ -92,7 +92,7 @@ extension ControllerManager: ExternalInterface
         }
     }
     
-    //当一个控制器被创建的时候，调用这个方法并传入self，记录
+    //当一个控制器被创建的时候，调用这个方法并传入self，记录一次
     //建议在viewDidLoad方法中调用
     func recordController(_ controller: UIViewController)
     {
@@ -114,16 +114,16 @@ extension ControllerManager: ExternalInterface
     }
     
     //控制器正在显示
-    //建议在viewWillAppear方法中调用
+    //建议在viewWillAppear方法中调用，可以多次调用
     func displayController(_ controller: UIViewController)
     {
-        if controller.isKind(of: UITabBarController.self)
+        if let ctl = controller as? UITabBarController
         {
-            self.tabbarVC = controller as? UITabBarController
+            self.tabbarVC = ctl
         }
-        else if controller.isKind(of: UINavigationController.self)
+        else if let ctl = controller as? UINavigationController
         {
-            self.currentNavVC = controller as? UINavigationController
+            self.currentNavVC = ctl
         }
         else
         {
