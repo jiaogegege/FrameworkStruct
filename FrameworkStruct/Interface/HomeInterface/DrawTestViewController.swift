@@ -19,7 +19,30 @@ class DrawTestViewController: BasicViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let op1: ThreadManager.DispatchGroupClosure = {finish in
+            print("op1 start")
+            TimerManager.shared.after(interval: 4) {
+                print("op1 finish")
+                finish()
+            }
+        }
+        let op2: ThreadManager.DispatchGroupClosure = {finish in
+            print("op2 start")
+            TimerManager.shared.after(interval: 2) {
+                print("op2 finish")
+                finish()
+            }
+        }
+        let op3: ThreadManager.DispatchGroupClosure = {finish in
+            print("op3 start")
+            TimerManager.shared.after(interval: 1) {
+                print("op3 finish")
+                finish()
+            }
+        }
+        ThreadManager.shared.asyncGroup(ops: [op1, op2, op3]) {
+            print("all finish")
+        }
     }
     
 
