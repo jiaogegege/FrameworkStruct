@@ -426,14 +426,14 @@ iOS App基础架构设计
 * TimeTool：时间日期工具集
 * DeviceTool：设备相关工具集
 * UnitTool：物理单位工具集
-* SystemExtension：系统组件扩展
-* UIExtension：系统UI组件扩展
+* SystemExtension：系统组件扩展，String/Array/Dictionary等
+* UIExtension：系统UI组件扩展，UIView/UIViewController/UIColor等
 
 #### Consts
 常量定义
 
 * MacroConst：项目中全局常量和配置，比如全局通知、全局错误和异常、正则表达式等
-* StringConst：文案定义
+* StringConst：文案定义，项目中文案/常用特殊字符/希腊字母/数字/数学符号等
 * ColorConst：颜色定义
 * ImageConst：图片定义
 * AudioConst：音频定义

@@ -125,6 +125,8 @@ extension String: ConstantPropertyProtocol
     static let sComplexGreaterEqual = "≧"
     static let sLessEqual = "≤"
     static let sComplexLessEqual = "≦"
+    static let sBecause = "∵"
+    static let sTherefore = "∴"
     
     //货币符号
     static let sCurrency = "¤"              //国际通货符号，当没有合适的货币符号时使用
@@ -199,6 +201,22 @@ extension String: ConstantPropertyProtocol
     static let sPsi = "ψ"
     static let sUOmega = "Ω"
     static let sOmega = "ω"
+    
+    //罗马数字
+    static let sRm1 = "Ⅰ"
+    static let sRm2 = "Ⅱ"
+    static let sRm3 = "Ⅲ"
+    static let sRm4 = "Ⅳ"
+    static let sRm5 = "Ⅴ"
+    static let sRm6 = "Ⅵ"
+    static let sRm7 = "Ⅶ"
+    static let sRm8 = "Ⅷ"
+    static let sRm9 = "Ⅸ"
+    static let sRm10 = "Ⅹ"
+    static let sRm50 = "L"
+    static let sRm100 = "C"
+    static let sRm500 = "D"
+    static let sRm1000 = "M"
     
     
     
