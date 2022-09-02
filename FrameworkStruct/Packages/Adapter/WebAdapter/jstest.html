@@ -10,6 +10,8 @@
       button { margin:0 3px 10px; font-size:12px; }
       .logLine { border-bottom:1px solid #ccc; padding:4px 2px; font-family:courier; font-size:11px; }
     </style>
+    <!--引入jsbridge文件-->
+    <script src="js_bridge.js"></script>
   </head>
   
   <body>
@@ -19,21 +21,10 @@
       window.onerror = function(err) {
         console.log('window.onerror: ' + err)
       }
-    
-      /*这段代码是固定的，必须要放到js中*/
-      function setupWebViewJavascriptBridge(callback) {
-        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
-        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
-        window.WVJBCallbacks = [callback];
-        var WVJBIframe = document.createElement('iframe');
-        WVJBIframe.style.display = 'none';
-        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
-        document.documentElement.appendChild(WVJBIframe);
-        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
-      }
-    
+
       /*与OC交互的所有JS方法都要放在此处注册，才能调用通过JS调用OC或者让OC调用这里的JS*/
       setupWebViewJavascriptBridge(function(bridge) {
+          /* 测试代码 */
        var uniqueId = 1
        function log(message, data) {
          var log = document.getElementById('log')
@@ -46,8 +37,9 @@
            log.appendChild(el)
          }
        }
+       
        /* Initialize your app here */
-       /** 告诉app需要哪些方法 */
+       /** 告诉app本页面需要哪些方法 */
        bridge.callHandler('neededHandlers', ['getUserId'])
        /** 告诉app本页面支持哪些方法 */
        bridge.callHandler('supportHandlers', ['getUrl'])
@@ -78,6 +70,11 @@
             console.log("JS 调用了 OC 注册的 alert 方法");
         })
       }
+        
+        //js调用oc代码push一个native界面
+        function ocPush() {
+            WebViewJavascriptBridge.callHandler('push', {'vcType': 1001})
+        }
       
     </script>
     
@@ -86,6 +83,7 @@
     <div>
        <input type="button" value="getAppName" id="blogId"/>
        <input type="button" value="ocAlert" id="ocalert" onclick="ocAlert()">
+       <input type="button" value="ocPush" id="ocPush" onclick="ocPush()">
     </div>
   </body>
 </html>

@@ -16,6 +16,7 @@
 		EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89027C339C90034C95B /* sound_搞怪.caf */; };
 		EA00C89527C339CA0034C95B /* sound_烟花长爆.caf in Resources */ = {isa = PBXBuildFile; fileRef = EA00C89127C339CA0034C95B /* sound_烟花长爆.caf */; };
 		EA00C8A527C39A6E0034C95B /* miku_1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EA00C8A427C39A6E0034C95B /* miku_1.jpeg */; };
+		EA06386D28C1A671007C6272 /* js_bridge.js in Resources */ = {isa = PBXBuildFile; fileRef = EA06386C28C1A671007C6272 /* js_bridge.js */; };
 		EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */; };
 		EA06EB6927674CAD00E6B785 /* SelectThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */; };
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
@@ -731,6 +732,7 @@
 		EA00C89B27C379920034C95B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EA00C89F27C39A330034C95B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA00C8A427C39A6E0034C95B /* miku_1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = miku_1.jpeg; sourceTree = "<group>"; };
+		EA06386C28C1A671007C6272 /* js_bridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = js_bridge.js; sourceTree = "<group>"; };
 		EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectViewController.swift; sourceTree = "<group>"; };
 		EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectThemeCell.swift; sourceTree = "<group>"; };
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
@@ -2780,6 +2782,7 @@
 				EA66061427C86DEE000B20A6 /* BasicWebViewController.swift */,
 				EA66061627C86E0E000B20A6 /* WebAdapterConst.swift */,
 				EACF2E4A27C9FDF800969BE9 /* jstest.html */,
+				EA06386C28C1A671007C6272 /* js_bridge.js */,
 			);
 			path = WebAdapter;
 			sourceTree = "<group>";
@@ -4453,6 +4456,7 @@
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */,
 				EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */,
+				EA06386D28C1A671007C6272 /* js_bridge.js in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EA3E8C2027B782C4006A2715 /* pop-ios-Info.plist in Resources */,

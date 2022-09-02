@@ -85,7 +85,7 @@ extension String
         Array(self)
     }
     
-    ///用于单个字符串转字符
+    ///用于单个字符串转字符，如果不止一个字符，那么取第一个字符
     var toChar: Character? {
         if let first = self.chars.first {
             return first

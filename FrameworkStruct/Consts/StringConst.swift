@@ -111,7 +111,7 @@ extension String: ConstantPropertyProtocol
     static let cRightCurlyBracket: Character = "}"
     static let sRightCurlyBracket = "}"
     
-    //数学运算符
+    //数学符号
     static let sPlus = "+"
     static let sMinus = "-"
     static let sAddMinus = "±"

@@ -76,7 +76,7 @@ enum WebHandlerNative {
          WebHandlerNative.alertConfirmCancel.getHandler()]
     }
     
-    //从字符串获取枚举类型
+    //从字符串获取枚举类型，一般是H5传递需要的handler名称
     static func getHandlerType(from name: String, hostVC: BasicWebViewController) -> WebHandlerNative
     {
         switch name {
@@ -139,9 +139,9 @@ enum WebHandlerNative {
             return handler
         case .getAppName:
             let handler = WebContentHandler(name: WebHandlerNative.getAppNameName, data: nil) { data, responseCallback in
-                if let res = responseCallback
+                if let cb = responseCallback
                 {
-                    res(String.appName)
+                    cb(String.appName)
                 }
             }
             return handler
@@ -188,14 +188,14 @@ enum WebHandlerNative {
                 if let data = data
                 {
                     AlertManager.shared.wantPresentAlert(title: nil, message: (data as! String), messageAlign: .center, leftTitle: String.cancel, leftBlock: {
-                        if let res = responseCallback
+                        if let cb = responseCallback
                         {
-                            res(false)
+                            cb(false)
                         }
                     }, rightTitle: String.confirm) {
-                        if let res = responseCallback
+                        if let cb = responseCallback
                         {
-                            res(true)
+                            cb(true)
                         }
                     }
                 }
@@ -204,9 +204,9 @@ enum WebHandlerNative {
         case .getUserId:
             let handler = WebContentHandler(name: WebHandlerNative.getUserIdName, data: nil) { data, responseCallback in
                 let userId = UserManager.shared.currentUserId
-                if let res = responseCallback
+                if let cb = responseCallback
                 {
-                    res(userId)
+                    cb(userId)
                 }
             }
             return handler
@@ -226,8 +226,8 @@ enum WebHandlerH5Name: String {
 enum WebPushNativeVC: Int {
     static let vcType: String = "vcType"                //H5页面push本地界面时传递的对应界面标志符的参数key
     
-    case none = 1000                                //未指定界面
-    case simpleTableVC = 1001                       //进入简单表格界面
+    case none = 1000                                    //未指定界面
+    case simpleTableVC = 1001                           //进入简单表格界面
     
     //跳转界面
     static func gotoVC(params: Dictionary<String, Any>, hostVC: BasicWebViewController?)
