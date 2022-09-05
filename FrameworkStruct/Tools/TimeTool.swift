@@ -53,6 +53,7 @@ enum TimeStringFormat: String
     case dashMonthDay = "MM-dd"
     case dashMonthDayShort = "M-d"
     case localYearMonthDayHourMinuteSecond = "yyyy年MM月dd日 HH时mm分ss秒"
+    case localMonthDayHourMinsec = "MM月dd日 HH时mm分ss秒"
     case localYearMonthDay = "yyyy年MM月dd日"
     case localMonthDay = "MM月dd日"
     case localMonthDayShort = "M月d日"
@@ -69,8 +70,7 @@ enum TimeStringFormat: String
 ///获取系统当前时间，OTC时间，"YYYY/MM/dd HH:mm:ss.SSS"
 func currentTimeString(format: TimeStringFormat = .slashYearMonthDayHourMinSecSSS) -> String
 {
-    let formatter = DateFormatter()
-    formatter.dateFormat = format.rawValue
+    let formatter = format.getFormatter()
     // GMT时间 转字符串，直接是系统当前时间
     return formatter.string(from: Date())
 }
@@ -85,10 +85,9 @@ func currentTimeInterval() -> TimeInterval
 ///判断某个时间有没有过期
 ///参数：criticalTimeStr:如果传入了过期时间，那么和传入时间比较；如果没有传入过期时间，那么和当前时间比较
 ///如果传入的时间都无法转换，那么返回true
-func isTimePasted(timeStr: String, criticalTimeStr: String?) -> Bool
+func isTimePasted(timeStr: String, criticalTimeStr: String?, format: TimeStringFormat = .dashYearMonthDayHourMinSec) -> Bool
 {
-    let formatter = DateFormatter()
-    formatter.dateFormat = TimeStringFormat.dashYearMonthDayHourMinSec.rawValue
+    let formatter = format.getFormatter()
     let date = formatter.date(from: timeStr)    //要判断的时间
     var criticalDate: Date?
     if let critical = criticalTimeStr

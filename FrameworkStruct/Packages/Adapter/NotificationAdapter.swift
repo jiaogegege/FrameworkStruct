@@ -224,20 +224,19 @@ extension NotificationAdapter: InternalType
         case critical           //重要性，绕过所有静默模式，一定会提示和播放声音
         
         ///转换成系统级别
-        @available(iOS 15.0, *)
-        func getLevel() -> UNNotificationInterruptionLevel
-        {
-            switch self {
-            case .passive:
-                return UNNotificationInterruptionLevel.passive
-            case .active:
-                return UNNotificationInterruptionLevel.active
-            case .timeSensitive:
-                return UNNotificationInterruptionLevel.timeSensitive
-            case .critical:
-                return UNNotificationInterruptionLevel.critical
-            }
-        }
+//        @available(iOS 15.0, *)
+//        func getLevel() -> UNNotificationInterruptionLevel {
+//            switch self {
+//            case .passive:
+//                return UNNotificationInterruptionLevel.passive
+//            case .active:
+//                return UNNotificationInterruptionLevel.active
+//            case .timeSensitive:
+//                return UNNotificationInterruptionLevel.timeSensitive
+//            case .critical:
+//                return UNNotificationInterruptionLevel.critical
+//            }
+//        }
     }
 
     ///附件类型
@@ -565,9 +564,9 @@ extension NotificationAdapter: ExternalInterface
         //提示音
         content.sound = sound.getSound()
         //通知等级
-        if #available(iOS 15.0, *) {
-            content.interruptionLevel = level.getLevel()
-        }
+//        if #available(iOS 15.0, *) {
+//            content.interruptionLevel = level.getLevel()
+//        }
         //数字标
         content.badge = NSNumber(value: ApplicationManager.shared.app.applicationIconBadgeNumber + 1)
         //处理附件

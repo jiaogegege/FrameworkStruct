@@ -36,7 +36,8 @@ class HealthCodeViewController: BasicViewController {
     fileprivate var codeImgView: UIImageView!   //健康码绿码
     
     
-    var canScrollContent: Bool = false       //是否可以滚动文字界面退出后不可以滚动
+    var canScrollContent: Bool = false       //是否可以更新UI数据，文字滚动和时间定时器
+    var timer: Timer?       //时间定时器
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,8 +169,6 @@ class HealthCodeViewController: BasicViewController {
         }
 
         //scrollview
-        var scrollHeight: CGFloat = 0.0     //滚动内容高度
-        
         scrollView = UIScrollView()
         self.view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
@@ -185,7 +184,6 @@ class HealthCodeViewController: BasicViewController {
             make.width.equalTo(kScreenWidth)
             make.height.equalTo(100)
         }
-        scrollHeight += 100
         
         //滚动文字
         scrollContentView = UIView()
@@ -207,9 +205,6 @@ class HealthCodeViewController: BasicViewController {
         
         contentLabel = UILabel()
         scrollContainerView.addSubview(contentLabel)
-        scrollHeight += 34
-        
-        scrollHeight += 8
         
         //健康码
         codeView = UIView()
@@ -219,19 +214,26 @@ class HealthCodeViewController: BasicViewController {
             make.right.equalTo(-12)
             make.top.equalTo(scrollContentView.snp.bottom).offset(8)
             make.width.equalTo(kScreenWidth - 12 * 2)
-            make.height.equalTo(kScreenWidth)
+            make.bottom.equalTo(-10)
         }
         codeTimeLabel = UILabel()
         codeView.addSubview(codeTimeLabel)
         codeTimeLabel.snp.makeConstraints { make in
             make.top.equalTo(28)
             make.left.right.equalToSuperview()
-            make.height.equalTo(31)
+            make.height.equalTo(42)
         }
-        
-        scrollHeight += kScreenWidth
-        
-        scrollView.contentSize = CGSize(width: kScreenWidth, height: scrollHeight)
+        codeImgView = UIImageView()
+        codeView.addSubview(codeImgView)
+        codeImgView.snp.makeConstraints { (make) in
+            make.top.equalTo(codeTimeLabel.snp.bottom).offset(22)
+            make.centerX.equalToSuperview()
+            make.left.equalTo(48)
+            make.right.equalTo(-48)
+            make.height.equalTo(codeImgView.snp.width)
+            make.bottom.equalTo(-28)
+        }
+
     }
     
     override func configUI() {
@@ -300,7 +302,6 @@ class HealthCodeViewController: BasicViewController {
         contentLabel.textColor = UIColor.colorFromHex(0xd0723f)
         contentLabel.text = "若您有近7天中高风险地区旅居史(含境外)请及时信息更新和风险报备。"
         canScrollContent = true
-        startContentScroll()
         
         //健康码
         codeView.backgroundColor = .white
@@ -310,11 +311,17 @@ class HealthCodeViewController: BasicViewController {
         codeView.layer.shadowRadius = 5
         codeView.layer.shadowOpacity = 0.1
         
-        codeTimeLabel.font = .boldSystemFont(ofSize: 30)
+        codeTimeLabel.font = UIFont.init(name: "Noto Sans Myanmar Bold", size: 42)
         codeTimeLabel.textColor = .cBlack_3
         codeTimeLabel.textAlignment = .center
         codeTimeLabel.text = currentTimeString(format: .dashMonthDayHourMinSec)
         
+        codeImgView.image = UIImage.iHealthCode
+    }
+    
+    override func updateUI() {
+        startContentScroll()
+        startTimer()
     }
 
     //开启文字滚动效果
@@ -334,6 +341,22 @@ class HealthCodeViewController: BasicViewController {
                 self?.startContentScroll()
             }
         }
+    }
+    
+    //开启时间定时器
+    func startTimer()
+    {
+        endTimer()
+        timer = TimerManager.shared.timer(interval: 1.0, repeats: true, mode: .common, host: self, action: {[weak self] (timer) in
+            self?.codeTimeLabel.text = currentTimeString(format: .dashMonthDayHourMinSec)
+        })
+    }
+    
+    //结束定时器
+    func endTimer()
+    {
+        timer?.invalidate()
+        timer = nil
     }
     
     deinit {
