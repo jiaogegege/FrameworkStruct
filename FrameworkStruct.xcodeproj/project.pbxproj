@@ -331,6 +331,7 @@
 		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
 		EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
+		EA62BCEB28C5C8CF006A6BFA /* HealthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62BCEA28C5C8CF006A6BFA /* HealthCodeViewController.swift */; };
 		EA66061127C86C11000B20A6 /* TestWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA66061027C86C11000B20A6 /* TestWebViewController.swift */; };
 		EA66061527C86DEE000B20A6 /* BasicWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA66061427C86DEE000B20A6 /* BasicWebViewController.swift */; };
 		EA66061727C86E0E000B20A6 /* WebAdapterConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA66061627C86E0E000B20A6 /* WebAdapterConst.swift */; };
@@ -541,6 +542,9 @@
 		EA9A78F127C75DA900A11FC8 /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9A78EB27C75DA900A11FC8 /* WebViewJavascriptBridge_JS.m */; };
 		EA9F1CBE279153BA0086E78C /* FSDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CBD279153BA0086E78C /* FSDialog.swift */; };
 		EA9F1CC227916B3C0086E78C /* UIView+FrameSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */; };
+		EAA392DE28C5DCFE009438DC /* health_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392DB28C5DCFD009438DC /* health_code.jpg */; };
+		EAA392DF28C5DCFE009438DC /* health_code_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392DC28C5DCFD009438DC /* health_code_head.jpg */; };
+		EAA392E028C5DCFE009438DC /* health_code_nav.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */; };
 		EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
@@ -1104,6 +1108,7 @@
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		EA62BCEA28C5C8CF006A6BFA /* HealthCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCodeViewController.swift; sourceTree = "<group>"; };
 		EA66061027C86C11000B20A6 /* TestWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWebViewController.swift; sourceTree = "<group>"; };
 		EA66061327C86D37000B20A6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA66061427C86DEE000B20A6 /* BasicWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicWebViewController.swift; sourceTree = "<group>"; };
@@ -1511,6 +1516,9 @@
 		EA9F1CBD279153BA0086E78C /* FSDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSDialog.swift; sourceTree = "<group>"; };
 		EA9F1CC027916B3C0086E78C /* UIView+FrameSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameSet.m"; sourceTree = "<group>"; };
 		EA9F1CC127916B3C0086E78C /* UIView+FrameSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameSet.h"; sourceTree = "<group>"; };
+		EAA392DB28C5DCFD009438DC /* health_code.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code.jpg; sourceTree = "<group>"; };
+		EAA392DC28C5DCFD009438DC /* health_code_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_head.jpg; sourceTree = "<group>"; };
+		EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_nav.jpg; sourceTree = "<group>"; };
 		EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEmbellisher.swift; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1916,6 +1924,9 @@
 			children = (
 				EA00C89F27C39A330034C95B /* README.md */,
 				EA00C8A427C39A6E0034C95B /* miku_1.jpeg */,
+				EAA392DC28C5DCFD009438DC /* health_code_head.jpg */,
+				EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */,
+				EAA392DB28C5DCFD009438DC /* health_code.jpg */,
 			);
 			path = BigImages;
 			sourceTree = "<group>";
@@ -4237,6 +4248,7 @@
 				EA008A1527B8EC2600F91ABD /* MainTabbarController.swift */,
 				EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */,
 				EADB007E27623B59001B7223 /* ViewController.swift */,
+				EA62BCEA28C5C8CF006A6BFA /* HealthCodeViewController.swift */,
 				EADB00EA2762416E001B7223 /* JCollectionViewController.swift */,
 				EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */,
 				EA779521276C68AF00D9707F /* ModalTestViewController.swift */,
@@ -4443,6 +4455,8 @@
 				EA00C87627C239760034C95B /* InfoPlist.strings in Resources */,
 				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
 				EACF2E4B27C9FDF800969BE9 /* jstest.html in Resources */,
+				EAA392DF28C5DCFE009438DC /* health_code_head.jpg in Resources */,
+				EAA392DE28C5DCFE009438DC /* health_code.jpg in Resources */,
 				EA00C89227C339CA0034C95B /* sound_竖琴铃声.caf in Resources */,
 				EA3337DD2797E6AA00612DC3 /* LICENSE in Resources */,
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
@@ -4453,6 +4467,7 @@
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */,
+				EAA392E028C5DCFE009438DC /* health_code_nav.jpg in Resources */,
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */,
 				EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */,
@@ -4764,6 +4779,7 @@
 				EA3E8AEA27B77CEA006A2715 /* CompositionLayersInitializer.swift in Sources */,
 				EA3E8AC927B77CEA006A2715 /* ValueProviderStore.swift in Sources */,
 				EA3E8B2227B77CEA006A2715 /* DashPattern.swift in Sources */,
+				EA62BCEB28C5C8CF006A6BFA /* HealthCodeViewController.swift in Sources */,
 				EA3E8ADD27B77CEA006A2715 /* TextCompositionLayer.swift in Sources */,
 				EA9A75E927C739DF00A11FC8 /* SRDelegateController.m in Sources */,
 				EA3E8AAA27B77CEA006A2715 /* Vectors.swift in Sources */,
@@ -5368,9 +5384,9 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jinfeng.crowdfunding;
+				PRODUCT_BUNDLE_IDENTIFIER = com.FrameworkStruct.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = crowdfunding_developer;
+				PROVISIONING_PROFILE_SPECIFIER = fstest;
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -5412,9 +5428,9 @@
 					"-DSQLITE_HAS_CODEC",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jinfeng.crowdfunding;
+				PRODUCT_BUNDLE_IDENTIFIER = com.FrameworkStruct.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = crowdfunding_developer;
+				PROVISIONING_PROFILE_SPECIFIER = fstest;
 				SWIFT_OBJC_BRIDGING_HEADER = "FrameworkStruct/Others/FrameworkStruct-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -244,6 +244,12 @@ extension String
     static let homeVC = localized("homeVC")
     //我的
     static let mineVC = localized("mineVC")
+    //健康码
+    static let healthCode = localized("healthCode")
+    //场所码
+    static let placeCode = localized("placeCode")
+    //行程卡
+    static let travelCard = localized("travelCard")
     //瀑布流
     static let waterfall = localized("waterfall")
     //主题选择

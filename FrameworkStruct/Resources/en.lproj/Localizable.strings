@@ -21,6 +21,9 @@ appName = "FrameworkStruct";
  */
 homeVC = "Home";
 mineVC = "Mine";
+healthCode = "Health Code";
+placeCode = "Place Code";
+travelCard = "Travel Card";
 waterfall = "Waterfall";
 themeSelect = "Theme Select";
 modalShow = "Modal Show";

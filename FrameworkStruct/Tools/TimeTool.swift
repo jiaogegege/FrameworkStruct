@@ -44,11 +44,18 @@ enum TimeStringFormat: String
     case slashYearMonthDayHourMinSecSSS = "YYYY/MM/dd HH:mm:ss.SSS"
     case slashYearMonthDayHourMinSec = "YYYY/MM/dd HH:mm:ss"
     case slashYearMonthDay = "YYYY/MM/dd"
+    case slashMonthDay = "MM/dd"
+    case slashMonthDayShort = "M/d"
     case dashYearMonthDayHourMinSecSSS = "YYYY-MM-dd HH:mm:ss.SSS"
     case dashYearMonthDayHourMinSec = "YYYY-MM-dd HH:mm:ss"
+    case dashMonthDayHourMinSec = "MM-dd HH:mm:ss"
     case dashYearMonthDay = "YYYY-MM-dd"
+    case dashMonthDay = "MM-dd"
+    case dashMonthDayShort = "M-d"
     case localYearMonthDayHourMinuteSecond = "yyyy年MM月dd日 HH时mm分ss秒"
     case localYearMonthDay = "yyyy年MM月dd日"
+    case localMonthDay = "MM月dd日"
+    case localMonthDayShort = "M月d日"
     
     ///获取DateFormatter
     func getFormatter() -> DateFormatter
@@ -60,10 +67,10 @@ enum TimeStringFormat: String
 }
 
 ///获取系统当前时间，OTC时间，"YYYY/MM/dd HH:mm:ss.SSS"
-func currentTimeString() -> String
+func currentTimeString(format: TimeStringFormat = .slashYearMonthDayHourMinSecSSS) -> String
 {
     let formatter = DateFormatter()
-    formatter.dateFormat = TimeStringFormat.slashYearMonthDayHourMinSecSSS.rawValue
+    formatter.dateFormat = format.rawValue
     // GMT时间 转字符串，直接是系统当前时间
     return formatter.string(from: Date())
 }

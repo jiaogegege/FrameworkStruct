@@ -215,6 +215,30 @@ extension NotificationAdapter: InternalType
             }
         }
     }
+    
+    ///通知级别
+    enum NALevel {
+        case passive            //只显示在通知列表中，不会有任何UI提示
+        case active             //显示在通知列表中，点亮屏幕，可能播放声音
+        case timeSensitive      //时效性，置顶通知列表，会在`专注模式`中显示
+        case critical           //重要性，绕过所有静默模式，一定会提示和播放声音
+        
+        ///转换成系统级别
+        @available(iOS 15.0, *)
+        func getLevel() -> UNNotificationInterruptionLevel
+        {
+            switch self {
+            case .passive:
+                return UNNotificationInterruptionLevel.passive
+            case .active:
+                return UNNotificationInterruptionLevel.active
+            case .timeSensitive:
+                return UNNotificationInterruptionLevel.timeSensitive
+            case .critical:
+                return UNNotificationInterruptionLevel.critical
+            }
+        }
+    }
 
     ///附件类型
     enum NAAttachmentType
@@ -505,6 +529,7 @@ extension NotificationAdapter: ExternalInterface
     ///completion:添加通知完成的操作
     func createLocalNotification(title: String, subtitle: String? = nil, body: String,
                                  sound: NASoundType = .default,
+                                 level: NALevel = .active,
                                  imageName: NAAttachmentType? = nil,
                                  audioName: NAAttachmentType? = nil,
                                  videoName: NAAttachmentType? = nil,
@@ -539,6 +564,10 @@ extension NotificationAdapter: ExternalInterface
         content.body = NSString.localizedUserNotificationString(forKey: body, arguments: nil)
         //提示音
         content.sound = sound.getSound()
+        //通知等级
+        if #available(iOS 15.0, *) {
+            content.interruptionLevel = level.getLevel()
+        }
         //数字标
         content.badge = NSNumber(value: ApplicationManager.shared.app.applicationIconBadgeNumber + 1)
         //处理附件

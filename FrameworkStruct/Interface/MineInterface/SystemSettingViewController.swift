@@ -34,7 +34,7 @@ class SystemSettingViewController: BasicTableViewController {
     
     override func customConfig() {
         self.statusBarStyle = .light
-        self.backStyle = .light
+        self.backStyle = .lightAlways
         self.navBackgroundColor = self.theme.mainColor
         self.navTitleColor = .white
     }

@@ -15,7 +15,7 @@ class ConstraintTestViewController: BasicViewController {
     }
     
     override func customConfig() {
-        self.backStyle = .light
+        self.backStyle = .lightAlways
         self.backgroundStyle = .gradientDark
         self.statusBarStyle = .light
         self.navAlpha = true

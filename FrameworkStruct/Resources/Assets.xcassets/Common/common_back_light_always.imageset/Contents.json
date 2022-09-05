@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "common_back_light.png",
+      "filename" : "common_back_light_always.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "common_back_light@2x.png",
+      "filename" : "common_back_light_always@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "common_back_light@3x.png",
+      "filename" : "common_back_light_always@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

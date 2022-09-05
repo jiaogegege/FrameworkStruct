@@ -48,8 +48,9 @@ enum VCBackStyle
     case none                   //不显示返回按钮
     case dark                   //深色返回按钮，暗黑模式下白色
     case darkAlways             //深色返回按钮，暗黑模式下也是深色
-    case light                  //浅色返回按钮
-    case close                  //关闭按钮
+    case darkThin               //深色细的返回按钮，暗黑模式下也是深色
+    case lightAlways            //浅色返回按钮，暗黑模式下也是白色
+    case darkClose              //深色关闭按钮，暗黑模式下白色
     
     ///获得图片，如果是none则返回nil
     func getImage() -> UIImage?
@@ -61,9 +62,11 @@ enum VCBackStyle
             return UIImage.iBackDark
         case .darkAlways:
             return UIImage.iBackDarkAlways
-        case .light:
-            return UIImage.iBackLight
-        case .close:
+        case .darkThin:
+            return UIImage.iBackThinDarkAlways
+        case .lightAlways:
+            return UIImage.iBackLightAlways
+        case .darkClose:
             return UIImage.iBackClose
         }
     }

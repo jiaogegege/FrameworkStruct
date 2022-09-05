@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste]
+    let titleArray = [String.healthCode, String.placeCode, String.travelCard, String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste]
     
     override class func getViewController() -> Self {
         return getVC(from: gMainSB)
@@ -29,6 +29,7 @@ class ViewController: BasicViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.statusBarStyle = .light
+        self.hideNavBar = false
         self.navBackgroundColor = self.theme.mainColor
         self.navTitleColor = .white
     }
@@ -60,19 +61,37 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if indexPath.row == 0       //瀑布流
+        if indexPath.row == 0   //健康码
+        {
+            let vc = HealthCodeViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.push(vc)
+        }
+        else if indexPath.row == 1      //场所码
+        {
+            let vc = HealthCodeViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.push(vc)
+        }
+        else if indexPath.row == 2      //行程卡
+        {
+            let vc = HealthCodeViewController.getViewController()
+            vc.hidesBottomBarWhenPushed = true
+            self.push(vc)
+        }
+        else if indexPath.row == 3       //瀑布流
         {
             let vc = JCollectionViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 1  //主题选择
+        else if indexPath.row == 4  //主题选择
         {
             let vc = ThemeSelectViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 2
+        else if indexPath.row == 5
         {
             let vc = ModalTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
@@ -80,48 +99,48 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
 //            vc.isModalInPresentation = true
             self.present(vc, animated: true, completion: nil)
         }
-        else if indexPath.row == 3  //约束测试
+        else if indexPath.row == 6  //约束测试
         {
             let vc = ConstraintTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 4  //绘制表格
+        else if indexPath.row == 7  //绘制表格
         {
             let vc = SimpleTableViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
             
         }
-        else if indexPath.row == 5  //阴影测试
+        else if indexPath.row == 8  //阴影测试
         {
             let vc = ShadowTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 6  //动画演示
+        else if indexPath.row == 9  //动画演示
         {
             let vc = AnimationDemoViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 7  //h5交互
+        else if indexPath.row == 10  //h5交互
         {
             let vc = TestWebViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 8  //绘图测试
+        else if indexPath.row == 11  //绘图测试
         {
             let vc = DrawTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
-        else if indexPath.row == 9  //复制粘贴
+        else if indexPath.row == 12  //复制粘贴
         {
             let vc = CopyPasteViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.push(vc)
         }
     }
     

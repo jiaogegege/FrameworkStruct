@@ -41,16 +41,22 @@ extension UIImage: ConstantPropertyProtocol
     @objc static var iBackDarkAlways: UIImage? {
         UIImage(named: "common_back_dark_always")
     }
-    @objc static var iBackLight: UIImage? {
-        UIImage(named: "common_back_light")
+    @objc static var iBackLightAlways: UIImage? {
+        UIImage(named: "common_back_light_always")
+    }
+    @objc static var iBackThinDarkAlways: UIImage? {
+        UIImage(named: "common_back_thin_dark_always")
     }
     @objc static var iBackClose: UIImage? {
         UIImage(named: "common_back_close_dark")
     }
     
-    //cell向右箭头
+    //cell方向箭头
     @objc static var iRightArrow: UIImage? {
         UIImage(named: "right_arrow")
+    }
+    @objc static var iRightArrowLightAlways: UIImage? {
+        UIImage(named: "common_right_arrow_light_always")
     }
     
     //系统设置图标
@@ -60,6 +66,11 @@ extension UIImage: ConstantPropertyProtocol
     
     //青少年模式弹窗头图
     @objc static var iTeenagerProtect = UIImage(named: "teenager_protect")
+    
+    //健康码图片
+    static var iHealthCodeNav = UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath("health_code_nav", ext: "jpg")!)
+    static var iHealthCodeHead = UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath("health_code_head", ext: "jpg")!)
+    static var iHealthCode = UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath("health_code", ext: "jpg")!)
     
     //miku系列图片
     @objc static let iMiku_0 = UIImage(named: "miku_0")

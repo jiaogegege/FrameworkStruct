@@ -177,7 +177,7 @@ class BasicTableViewController: UITableViewController
     fileprivate func setBackStyle()
     {
         switch backStyle {
-        case .dark, .darkAlways, .light, .close:
+        case .dark, .darkAlways, .darkThin, .lightAlways, .darkClose:
             if let image = backStyle.getImage() //如果有图片，那么创建返回按钮
             {
                 let backItem = UIBarButtonItem(image: image.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(backAction(sender:)))
