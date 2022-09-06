@@ -69,7 +69,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         }
         else if indexPath.row == 1      //场所码
         {
-            let vc = HealthCodeViewController.getViewController()
+            let vc = PlaceCodeViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
             self.push(vc)
         }

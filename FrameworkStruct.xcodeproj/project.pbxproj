@@ -549,6 +549,17 @@
 		EAA392E428C6DB72009438DC /* health_code_vaccine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */; };
 		EAA392E628C6DB79009438DC /* health_code_travel_card.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */; };
 		EAA392E828C6E3D6009438DC /* health_code_info_update.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */; };
+		EAA392EA28C6F573009438DC /* PlaceCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA392E928C6F573009438DC /* PlaceCodeViewController.swift */; };
+		EAA392EE28C71F71009438DC /* place_code_address.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392EC28C71F71009438DC /* place_code_address.jpg */; };
+		EAA392F228C72067009438DC /* place_code_bottom_bar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F128C72067009438DC /* place_code_bottom_bar.jpg */; };
+		EAA392F428C725B9009438DC /* place_code_tick.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F328C725B8009438DC /* place_code_tick.jpg */; };
+		EAA392F628C7291B009438DC /* place_code_hot_line.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F528C7291B009438DC /* place_code_hot_line.jpg */; };
+		EAA392F828C72A71009438DC /* place_code_health_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F728C72A71009438DC /* place_code_health_code.jpg */; };
+		EAA392FA28C72A7D009438DC /* place_code_travel_card.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F928C72A7D009438DC /* place_code_travel_card.jpg */; };
+		EAA392FC28C72A84009438DC /* place_code_samp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FB28C72A84009438DC /* place_code_samp.jpg */; };
+		EAA392FE28C72A8A009438DC /* place_code_nucleate_result.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FD28C72A8A009438DC /* place_code_nucleate_result.jpg */; };
+		EAA3930028C73130009438DC /* place_code_function.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FF28C73130009438DC /* place_code_function.jpg */; };
+		EAA3930228C73136009438DC /* place_code_publicity.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA3930128C73136009438DC /* place_code_publicity.jpg */; };
 		EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
@@ -1527,6 +1538,18 @@
 		EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_vaccine.jpg; sourceTree = "<group>"; };
 		EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_travel_card.jpg; sourceTree = "<group>"; };
 		EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_info_update.jpg; sourceTree = "<group>"; };
+		EAA392E928C6F573009438DC /* PlaceCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCodeViewController.swift; sourceTree = "<group>"; };
+		EAA392EC28C71F71009438DC /* place_code_address.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_address.jpg; sourceTree = "<group>"; };
+		EAA392F028C71FAE009438DC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAA392F128C72067009438DC /* place_code_bottom_bar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_bottom_bar.jpg; sourceTree = "<group>"; };
+		EAA392F328C725B8009438DC /* place_code_tick.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_tick.jpg; sourceTree = "<group>"; };
+		EAA392F528C7291B009438DC /* place_code_hot_line.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_hot_line.jpg; sourceTree = "<group>"; };
+		EAA392F728C72A71009438DC /* place_code_health_code.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_health_code.jpg; sourceTree = "<group>"; };
+		EAA392F928C72A7D009438DC /* place_code_travel_card.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_travel_card.jpg; sourceTree = "<group>"; };
+		EAA392FB28C72A84009438DC /* place_code_samp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_samp.jpg; sourceTree = "<group>"; };
+		EAA392FD28C72A8A009438DC /* place_code_nucleate_result.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_nucleate_result.jpg; sourceTree = "<group>"; };
+		EAA392FF28C73130009438DC /* place_code_function.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_function.jpg; sourceTree = "<group>"; };
+		EAA3930128C73136009438DC /* place_code_publicity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_publicity.jpg; sourceTree = "<group>"; };
 		EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEmbellisher.swift; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1931,14 +1954,8 @@
 			isa = PBXGroup;
 			children = (
 				EA00C89F27C39A330034C95B /* README.md */,
+				EAA392EF28C71F88009438DC /* EpidemicPreventionPolicy */,
 				EA00C8A427C39A6E0034C95B /* miku_1.jpeg */,
-				EAA392DC28C5DCFD009438DC /* health_code_head.jpg */,
-				EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */,
-				EAA392DB28C5DCFD009438DC /* health_code.jpg */,
-				EAA392E128C6DADB009438DC /* health_code_nucleate.jpg */,
-				EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */,
-				EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */,
-				EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */,
 			);
 			path = BigImages;
 			sourceTree = "<group>";
@@ -3621,6 +3638,31 @@
 			path = "UIView+Extension";
 			sourceTree = "<group>";
 		};
+		EAA392EF28C71F88009438DC /* EpidemicPreventionPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				EAA392F028C71FAE009438DC /* README.md */,
+				EAA392DC28C5DCFD009438DC /* health_code_head.jpg */,
+				EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */,
+				EAA392DB28C5DCFD009438DC /* health_code.jpg */,
+				EAA392E128C6DADB009438DC /* health_code_nucleate.jpg */,
+				EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */,
+				EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */,
+				EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */,
+				EAA392EC28C71F71009438DC /* place_code_address.jpg */,
+				EAA392F128C72067009438DC /* place_code_bottom_bar.jpg */,
+				EAA392F328C725B8009438DC /* place_code_tick.jpg */,
+				EAA392F528C7291B009438DC /* place_code_hot_line.jpg */,
+				EAA392F728C72A71009438DC /* place_code_health_code.jpg */,
+				EAA392F928C72A7D009438DC /* place_code_travel_card.jpg */,
+				EAA392FB28C72A84009438DC /* place_code_samp.jpg */,
+				EAA392FD28C72A8A009438DC /* place_code_nucleate_result.jpg */,
+				EAA392FF28C73130009438DC /* place_code_function.jpg */,
+				EAA3930128C73136009438DC /* place_code_publicity.jpg */,
+			);
+			path = EpidemicPreventionPolicy;
+			sourceTree = "<group>";
+		};
 		EAAA4E80276F3E2F00C45712 /* ComponentManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -4261,6 +4303,7 @@
 				EA73A14A27BC8A3E00980C26 /* HomeNavigationController.swift */,
 				EADB007E27623B59001B7223 /* ViewController.swift */,
 				EA62BCEA28C5C8CF006A6BFA /* HealthCodeViewController.swift */,
+				EAA392E928C6F573009438DC /* PlaceCodeViewController.swift */,
 				EADB00EA2762416E001B7223 /* JCollectionViewController.swift */,
 				EA06EB65276749E900E6B785 /* ThemeSelectViewController.swift */,
 				EA779521276C68AF00D9707F /* ModalTestViewController.swift */,
@@ -4463,6 +4506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAA392EE28C71F71009438DC /* place_code_address.jpg in Resources */,
 				EADB008727623B5A001B7223 /* LaunchScreen.storyboard in Resources */,
 				EA00C87627C239760034C95B /* InfoPlist.strings in Resources */,
 				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
@@ -4473,28 +4517,37 @@
 				EA00C89227C339CA0034C95B /* sound_竖琴铃声.caf in Resources */,
 				EA3337DD2797E6AA00612DC3 /* LICENSE in Resources */,
 				EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */,
+				EAA392F828C72A71009438DC /* place_code_health_code.jpg in Resources */,
 				EADB00C527623F29001B7223 /* Localizable.strings in Resources */,
 				EA3E8C2827B782C4006A2715 /* pop-osx-Info.plist in Resources */,
+				EAA392FA28C72A7D009438DC /* place_code_travel_card.jpg in Resources */,
+				EAA392F628C7291B009438DC /* place_code_hot_line.jpg in Resources */,
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
 				EA3E8C2627B782C4006A2715 /* pop-tvos-Info.plist in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
+				EAA392FE28C72A8A009438DC /* place_code_nucleate_result.jpg in Resources */,
 				EAA392E828C6E3D6009438DC /* health_code_info_update.jpg in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EAA392E628C6DB79009438DC /* health_code_travel_card.jpg in Resources */,
+				EAA392F428C725B9009438DC /* place_code_tick.jpg in Resources */,
 				EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */,
 				EAA392E028C5DCFE009438DC /* health_code_nav.jpg in Resources */,
 				EAA392E228C6DADB009438DC /* health_code_nucleate.jpg in Resources */,
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */,
 				EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */,
+				EAA392FC28C72A84009438DC /* place_code_samp.jpg in Resources */,
 				EA06386D28C1A671007C6272 /* js_bridge.js in Resources */,
 				EA75BB4C2792B1E200910B4C /* db_table.sql in Resources */,
 				EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */,
 				EA3E8C2027B782C4006A2715 /* pop-ios-Info.plist in Resources */,
+				EAA3930228C73136009438DC /* place_code_publicity.jpg in Resources */,
 				EA00C89527C339CA0034C95B /* sound_烟花长爆.caf in Resources */,
 				EA3E8C3627B784C7006A2715 /* BLE_img_gear.json in Resources */,
 				EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */,
+				EAA3930028C73130009438DC /* place_code_function.jpg in Resources */,
 				EA3A051F27A2879E00A96DE2 /* 1_0_1.sql in Resources */,
+				EAA392F228C72067009438DC /* place_code_bottom_bar.jpg in Resources */,
 				EA3337E02797E6AA00612DC3 /* README.md in Resources */,
 				EA00C8A527C39A6E0034C95B /* miku_1.jpeg in Resources */,
 				EA73A14E27BC8E6900980C26 /* Mine.storyboard in Resources */,
@@ -5041,6 +5094,7 @@
 				EA3E8ACC27B77CEA006A2715 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
 				EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */,
 				EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */,
+				EAA392EA28C6F573009438DC /* PlaceCodeViewController.swift in Sources */,
 				EADB00E72762410D001B7223 /* ColorConst.swift in Sources */,
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
 				EA11127827B3BE2C006D0B83 /* RequestTaskMap.swift in Sources */,

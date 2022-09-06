@@ -21,6 +21,7 @@ extension String: ConstantPropertyProtocol
 {
     //空字符
     static let sEmpty = ""
+    static let sSpace = " "
     
     //"iCloud"
     static let icloud = "iCloud"
