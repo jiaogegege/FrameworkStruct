@@ -35,6 +35,16 @@ class HealthCodeViewController: BasicViewController {
     fileprivate var codeTimeLabel: UILabel!
     fileprivate var codeImgView: UIImageView!   //健康码绿码
     
+    fileprivate var nucleateImgView: UIImageView!   //核酸结果
+    fileprivate var vaccineImgView: UIImageView!    //疫苗结果
+    fileprivate var travelImgView: UIImageView! //大数据行程卡
+    fileprivate var infoUpdateImgView: UIImageView!     //信息更新
+    
+    fileprivate var dataSourceLabel: UILabel!       //数据来源
+    fileprivate var line: UIView!
+    fileprivate var operationBtn: UIButton!     //操作说明
+    fileprivate var hotLineLabel: UILabel!  //服务热线
+    
     
     var canScrollContent: Bool = false       //是否可以更新UI数据，文字滚动和时间定时器
     var timer: Timer?       //时间定时器
@@ -60,7 +70,7 @@ class HealthCodeViewController: BasicViewController {
         navBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(kStatusHeight)
-            make.height.equalTo(44.0)
+            make.height.equalTo(navBar.snp.width).multipliedBy(44.0 / 375.0)
         }
         
         //底部view
@@ -181,8 +191,7 @@ class HealthCodeViewController: BasicViewController {
         scrollView.addSubview(headView)
         headView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-            make.width.equalTo(kScreenWidth)
-            make.height.equalTo(100)
+            make.height.equalTo(headView.snp.width).multipliedBy(100.0 / 375.0)
         }
         
         //滚动文字
@@ -214,7 +223,6 @@ class HealthCodeViewController: BasicViewController {
             make.right.equalTo(-12)
             make.top.equalTo(scrollContentView.snp.bottom).offset(8)
             make.width.equalTo(kScreenWidth - 12 * 2)
-            make.bottom.equalTo(-10)
         }
         codeTimeLabel = UILabel()
         codeView.addSubview(codeTimeLabel)
@@ -234,16 +242,98 @@ class HealthCodeViewController: BasicViewController {
             make.bottom.equalTo(-28)
         }
 
+        //核酸结果
+        nucleateImgView = UIImageView()
+        scrollView.addSubview(nucleateImgView)
+        nucleateImgView.snp.makeConstraints { make in
+            make.left.equalTo(9)
+            make.top.equalTo(codeView.snp.bottom).offset(8)
+            make.width.equalTo((kScreenWidth - 26.0) / 2.0)
+            make.height.equalTo(nucleateImgView.snp.width).multipliedBy(302.0 / 354.0)
+        }
+        
+        //疫苗结果
+        vaccineImgView = UIImageView()
+        scrollView.addSubview(vaccineImgView)
+        vaccineImgView.snp.makeConstraints { make in
+            make.top.equalTo(codeView.snp.bottom).offset(10)
+            make.right.equalTo(-10)
+            make.left.equalTo(nucleateImgView.snp.right).offset(8)
+            make.height.equalTo(vaccineImgView.snp.width).multipliedBy(296.0 / 356.0)
+        }
+        
+        //大数据行程卡
+        travelImgView = UIImageView()
+        scrollView.addSubview(travelImgView)
+        travelImgView.snp.makeConstraints { make in
+            make.top.equalTo(nucleateImgView.snp.bottom).offset(7)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(travelImgView.snp.width).multipliedBy(113.0 / 713.0)
+        }
+        
+        //信息更新
+        infoUpdateImgView = UIImageView()
+        scrollView.addSubview(infoUpdateImgView)
+        infoUpdateImgView.snp.makeConstraints { make in
+            make.top.equalTo(travelImgView.snp.bottom).offset(8)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(infoUpdateImgView.snp.width).multipliedBy(267.0 / 711.0)
+        }
+        
+        //数据来源
+        dataSourceLabel = UILabel()
+        scrollView.addSubview(dataSourceLabel)
+        dataSourceLabel.snp.makeConstraints { make in
+            make.top.equalTo(infoUpdateImgView.snp.bottom).offset(20)
+            make.left.equalTo(infoUpdateImgView).offset(29)
+            make.right.equalTo(infoUpdateImgView).offset(-29)
+        }
+        
+        //横线
+        line = UIView()
+        scrollView.addSubview(line)
+        line.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(dataSourceLabel.snp.bottom).offset(10)
+            make.height.equalTo(1)
+        }
+        
+        //操作说明
+        operationBtn = UIButton(type: .custom)
+        scrollView.addSubview(operationBtn)
+        operationBtn.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.width.equalTo(200)
+            make.height.equalTo(13)
+        }
+        
+        //服务热线
+        hotLineLabel = UILabel()
+        scrollView.addSubview(hotLineLabel)
+        hotLineLabel.snp.makeConstraints { make in
+            make.top.equalTo(operationBtn.snp.bottom).offset(5)
+            make.left.equalTo(29)
+            make.right.equalTo(-29)
+            make.bottom.equalTo(-25)
+        }
+        
     }
     
     override func configUI() {
         super.configUI()
         
+        self.view.insertSubview(bottomView, aboveSubview: scrollView)
+        
+        //导航栏
         navBar.setImage(UIImage.iHealthCodeNav, for: .normal)
         navBar.setImage(UIImage.iHealthCodeNav, for: .selected)
         navBar.setImage(UIImage.iHealthCodeNav, for: .highlighted)
         navBar.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         
+        //底部view
         bottomView.backgroundColor = .white
         bottomView.layer.shadowColor = UIColor.black.cgColor
         bottomView.layer.shadowRadius = 5
@@ -317,6 +407,37 @@ class HealthCodeViewController: BasicViewController {
         codeTimeLabel.text = currentTimeString(format: .dashMonthDayHourMinSec)
         
         codeImgView.image = UIImage.iHealthCode
+        
+        //核酸结果/疫苗结果/大数据行程卡
+        nucleateImgView.image = UIImage.iHealthCodeNucleate
+        vaccineImgView.image = UIImage.iHealthCodeVaccine
+        travelImgView.image = UIImage.iHealthCodeTravelCard
+        
+        //信息更新
+        infoUpdateImgView.image = UIImage.iHealthCodeInfoUpdate
+        
+        //数据来源
+        dataSourceLabel.textColor = UIColor.colorFromHex(0x3579F6)
+        dataSourceLabel.font = .systemFont(ofSize: 13)
+        dataSourceLabel.textAlignment = .center
+        dataSourceLabel.numberOfLines = 0
+        dataSourceLabel.text = "数据来源:全国一体化政务服务平台、个人申报信息和江苏省公共管理机构。"
+        
+        //横线
+        line.backgroundColor = UIColor.cGray_dc
+        
+        //操作说明
+        operationBtn.setTitle("操作说明", for: .normal)
+        operationBtn.setTitleColor(UIColor.colorFromHex(0x3579F6), for: .normal)
+        operationBtn.titleLabel?.font = .systemFont(ofSize: 13)
+        operationBtn.addTarget(self, action: #selector(operationAction(sender:)), for: .touchUpInside)
+        
+        //服务热线
+        hotLineLabel.textColor = UIColor.colorFromHex(0x777777)
+        hotLineLabel.font = .systemFont(ofSize: 13)
+        hotLineLabel.textAlignment = .center
+        hotLineLabel.numberOfLines = 0
+        hotLineLabel.text = "本服务由江苏省疾病预防控制中心提供\n––– 服务热线：12345 –––"
     }
     
     override func updateUI() {
@@ -352,11 +473,17 @@ class HealthCodeViewController: BasicViewController {
         })
     }
     
-    //结束定时器
+    //结束时间定时器
     func endTimer()
     {
         timer?.invalidate()
         timer = nil
+    }
+    
+    //操作说明事件
+    @objc func operationAction(sender: UIButton)
+    {
+        
     }
     
     deinit {

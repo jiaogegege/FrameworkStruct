@@ -110,6 +110,7 @@ extension String: ConstantPropertyProtocol
     static let sLeftCurlyBracket = "{"
     static let cRightCurlyBracket: Character = "}"
     static let sRightCurlyBracket = "}"
+    static let sEnDash = "–"
     
     //数学符号
     static let sPlus = "+"

@@ -545,6 +545,10 @@
 		EAA392DE28C5DCFE009438DC /* health_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392DB28C5DCFD009438DC /* health_code.jpg */; };
 		EAA392DF28C5DCFE009438DC /* health_code_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392DC28C5DCFD009438DC /* health_code_head.jpg */; };
 		EAA392E028C5DCFE009438DC /* health_code_nav.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */; };
+		EAA392E228C6DADB009438DC /* health_code_nucleate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E128C6DADB009438DC /* health_code_nucleate.jpg */; };
+		EAA392E428C6DB72009438DC /* health_code_vaccine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */; };
+		EAA392E628C6DB79009438DC /* health_code_travel_card.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */; };
+		EAA392E828C6E3D6009438DC /* health_code_info_update.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */; };
 		EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
@@ -1519,6 +1523,10 @@
 		EAA392DB28C5DCFD009438DC /* health_code.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code.jpg; sourceTree = "<group>"; };
 		EAA392DC28C5DCFD009438DC /* health_code_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_head.jpg; sourceTree = "<group>"; };
 		EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_nav.jpg; sourceTree = "<group>"; };
+		EAA392E128C6DADB009438DC /* health_code_nucleate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_nucleate.jpg; sourceTree = "<group>"; };
+		EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_vaccine.jpg; sourceTree = "<group>"; };
+		EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_travel_card.jpg; sourceTree = "<group>"; };
+		EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_code_info_update.jpg; sourceTree = "<group>"; };
 		EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEmbellisher.swift; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1927,6 +1935,10 @@
 				EAA392DC28C5DCFD009438DC /* health_code_head.jpg */,
 				EAA392DD28C5DCFD009438DC /* health_code_nav.jpg */,
 				EAA392DB28C5DCFD009438DC /* health_code.jpg */,
+				EAA392E128C6DADB009438DC /* health_code_nucleate.jpg */,
+				EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */,
+				EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */,
+				EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */,
 			);
 			path = BigImages;
 			sourceTree = "<group>";
@@ -4455,6 +4467,7 @@
 				EA00C87627C239760034C95B /* InfoPlist.strings in Resources */,
 				EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */,
 				EACF2E4B27C9FDF800969BE9 /* jstest.html in Resources */,
+				EAA392E428C6DB72009438DC /* health_code_vaccine.jpg in Resources */,
 				EAA392DF28C5DCFE009438DC /* health_code_head.jpg in Resources */,
 				EAA392DE28C5DCFE009438DC /* health_code.jpg in Resources */,
 				EA00C89227C339CA0034C95B /* sound_竖琴铃声.caf in Resources */,
@@ -4465,9 +4478,12 @@
 				EADB008427623B5A001B7223 /* Assets.xcassets in Resources */,
 				EA3E8C2627B782C4006A2715 /* pop-tvos-Info.plist in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
+				EAA392E828C6E3D6009438DC /* health_code_info_update.jpg in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
+				EAA392E628C6DB79009438DC /* health_code_travel_card.jpg in Resources */,
 				EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */,
 				EAA392E028C5DCFE009438DC /* health_code_nav.jpg in Resources */,
+				EAA392E228C6DADB009438DC /* health_code_nucleate.jpg in Resources */,
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA00C89327C339CA0034C95B /* sound_蛐蛐叫.caf in Resources */,
 				EA98982127CF1AF300C63950 /* DarkTheme.plist in Resources */,

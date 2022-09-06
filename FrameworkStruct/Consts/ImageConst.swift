@@ -67,11 +67,6 @@ extension UIImage: ConstantPropertyProtocol
     //青少年模式弹窗头图
     @objc static var iTeenagerProtect = UIImage(named: "teenager_protect")
     
-    //健康码图片
-    static var iHealthCodeNav = UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath("health_code_nav", ext: "jpg")!)
-    static var iHealthCodeHead = UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath("health_code_head", ext: "jpg")!)
-    static var iHealthCode = UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath("health_code", ext: "jpg")!)
-    
     //miku系列图片
     @objc static let iMiku_0 = UIImage(named: "miku_0")
     
@@ -79,13 +74,34 @@ extension UIImage: ConstantPropertyProtocol
     @objc static let iGuideHand = UIImage(named: "gudie_hand")
     @objc static let iGuideOrderAdd = UIImage(named: "guide_order_add")
     
+    //健康码图片
+    static var iHealthCodeNav: UIImage? = getPic("health_code_nav", ext: "jpg")
+    static var iHealthCodeHead: UIImage? = getPic("health_code_head", ext: "jpg")
+    static var iHealthCode: UIImage? = getPic("health_code", ext: "jpg")
+    //核酸/大数据/行程卡
+    static var iHealthCodeNucleate: UIImage? = getPic("health_code_nucleate", ext: "jpg")
+    static var iHealthCodeVaccine: UIImage? = getPic("health_code_vaccine", ext: "jpg")
+    static var iHealthCodeTravelCard: UIImage? = getPic("health_code_travel_card", ext: "jpg")
+    //信息更新
+    static var iHealthCodeInfoUpdate: UIImage? = getPic("health_code_info_update", ext: "jpg")
     
-    
-    
+
+}
+
+
+//实用方法
+extension UIImage
+{
     //对于某些全屏的图片有iPhone8和iPhoneX的尺寸区别，对于iPhoneX的图片，添加后缀`_bang`
     static func bangImage(name: String) -> UIImage?
     {
         return UIImage(named: name + String.bangSuffix)
     }
     
+    ///读取bundle中的一张大图，不缓存图片
+    static func getPic(_ name: String, ext: String? = nil) -> UIImage?
+    {
+        UIImage(contentsOfFile: SandBoxAccessor.shared.getBundleFilePath(name, ext: ext) ?? "")
+    }
+
 }

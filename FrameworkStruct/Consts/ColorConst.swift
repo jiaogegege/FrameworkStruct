@@ -33,8 +33,10 @@ extension UIColor: ConstantPropertyProtocol
     @objc static let cBlack_6 = UIColor.colorFromHex(0x666666)
     //黑色999999
     @objc static let cBlack_9 = UIColor.colorFromHex(0x999999)
-    //f4f4f4
+    //灰色f4f4f4
     @objc static let cGray_f4 = UIColor.colorFromHex(0xf4f4f4)
+    //灰色dcdcdc
+    @objc static let cGray_dc = UIColor.colorFromHex(0xdcdcdc)
     //E7E7E7
     @objc static let cGray_E7E7E7 = UIColor.colorFromHex(0xE7E7E7)
     //2C2C3D
