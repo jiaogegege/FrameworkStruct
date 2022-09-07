@@ -63,9 +63,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
     {
         if indexPath.row == 0   //健康码
         {
-            let vc = HealthCodeViewController.getViewController()
-            vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            g_alert(title: "是否今日检测？", leftTitle: String.no, leftBlock: {
+                let vc = HealthCodeViewController.getViewController()
+                vc.hidesBottomBarWhenPushed = true
+                vc.isTodaySamp = false
+                self.push(vc)
+            }, rightTitle: String.yes) {
+                let vc = HealthCodeViewController.getViewController()
+                vc.hidesBottomBarWhenPushed = true
+                vc.isTodaySamp = true
+                self.push(vc)
+            }
         }
         else if indexPath.row == 1      //场所码
         {

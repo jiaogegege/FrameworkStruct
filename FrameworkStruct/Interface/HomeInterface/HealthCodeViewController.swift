@@ -8,6 +8,9 @@
 import UIKit
 
 class HealthCodeViewController: BasicViewController {
+    //MARK: 属性
+    //是否今日采样，如果为true，则采样日期为今天，检测结果日期为昨天；如果为false，则采样日期和检测结果日期都为昨天
+    var isTodaySamp: Bool = false
     
     //UI组件
     fileprivate var navBar: UIButton!       //导航栏
@@ -345,7 +348,7 @@ class HealthCodeViewController: BasicViewController {
         sampDateLabel.textColor = .white
         sampDateLabel.font = .systemFont(ofSize: 12)
         sampDateLabel.textAlignment = .center
-        sampDateLabel.text = String(format: "%@核酸检测", currentTimeString(format: .localMonthDayShort))
+        sampDateLabel.text = String(format: "%@核酸检测", getTimeString(date: nowAfter(isTodaySamp ? 0 : -tSecondsInDay), sepType: .local, year: nil, month: .monthShort, day: .dayShort, hour: nil, min: nil, sec: nil))
         sampRetLabel.textColor = .white
         sampRetLabel.font = .systemFont(ofSize: 12)
         sampRetLabel.textAlignment = .center
@@ -357,7 +360,7 @@ class HealthCodeViewController: BasicViewController {
         resultDateLabel.textColor = .white
         resultDateLabel.font = .systemFont(ofSize: 12)
         resultDateLabel.textAlignment = .center
-        resultDateLabel.text = String(format: "%@核酸检测", currentTimeString(format: .localMonthDayShort))
+        resultDateLabel.text = String(format: "%@核酸检测", getTimeString(date: nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, day: .dayShort, hour: nil, min: nil, sec: nil))
         resultRetLabel.textColor = .white
         resultRetLabel.font = .systemFont(ofSize: 12)
         resultRetLabel.textAlignment = .center
@@ -488,5 +491,6 @@ class HealthCodeViewController: BasicViewController {
     
     deinit {
         self.canScrollContent = false
+        endTimer()
     }
 }
