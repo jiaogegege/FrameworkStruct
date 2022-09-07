@@ -196,3 +196,23 @@ func g_price(_ fen: Int) -> NSAttributedString
                                         underLineType: [],
                                         underlineColor: .clear)
 }
+
+///全局弹框
+func g_alert(title: String,
+             message: String? = nil,
+             messageAlign: NSTextAlignment = .center,
+             leftTitle: String? = String.cancel,
+             leftBlock: VoidClosure? = nil,
+             rightTitle: String? = String.confirm,
+             rightBlock: VoidClosure? = nil)
+{
+    AlertManager.shared.wantPresentAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: {
+        if let leftBlock = leftBlock {
+            leftBlock()
+        }
+    }, rightTitle: rightTitle) {
+        if let rightBlock = rightBlock {
+            rightBlock()
+        }
+    }
+}

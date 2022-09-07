@@ -40,6 +40,8 @@ copyPaste = "复制粘贴";
  */
 confirm = "确定";
 cancel = "取消";
+yes = "是";
+no = "否";
 success = "成功";
 failure = "失败";
 skip = "跳过";

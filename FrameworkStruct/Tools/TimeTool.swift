@@ -297,7 +297,7 @@ func dateByAdd(_ interal: TimeInterval, baseDate: Date) -> Date
     return baseDate.addingTimeInterval(interal)
 }
 
-///在某个日期的基础上加上几天返回新的日期
+///在某个日期的基础上加上或减去几天返回新的日期
 func dateByAdd(days: Int, baseDate: Date) -> Date
 {
     let interval = TimeInterval(days) * tSecondsInDay
@@ -305,7 +305,7 @@ func dateByAdd(days: Int, baseDate: Date) -> Date
     return newDate
 }
 
-///当前时间往后一定时间
+///当前时间往后一定时间，传入负值则往前
 func nowAfter(_ interval: TimeInterval) -> Date
 {
     return dateByAdd(interval, baseDate: Date())

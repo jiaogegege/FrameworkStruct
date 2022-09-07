@@ -278,6 +278,10 @@ extension String
     static let confirm = localized("confirm")
     //取消
     static let cancel = localized("cancel")
+    //是
+    static let yes = localized("yes")
+    //否
+    static let no = localized("no")
     //成功
     static let success = localized("success")
     //失败

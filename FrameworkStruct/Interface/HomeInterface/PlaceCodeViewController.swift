@@ -8,6 +8,10 @@
 import UIKit
 
 class PlaceCodeViewController: BasicViewController {
+    //MARK: 属性
+    //是否今日采样，如果为true，则采样日期为今天，检测结果日期为昨天；如果为false，则采样日期和检测结果日期都为昨天
+    var isTodaySamp: Bool = false
+    
     //UI组件
     @IBOutlet weak var placeField: UITextField! //具体场所
     @IBOutlet weak var areaField: UITextField!  //区域
@@ -32,8 +36,8 @@ class PlaceCodeViewController: BasicViewController {
 
     override func updateUI() {
         timeLabel.text = currentTimeString(format: .localYearMonthDay) + " " + currentTimeString(format: .dashHourMinSec)
-        sampTimeLabel.text = getTimeString(date: Date(), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
-        detectionTimeLabel.text = getTimeString(date: Date(), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
+        sampTimeLabel.text = getTimeString(date: nowAfter(isTodaySamp ? 0 : -tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
+        detectionTimeLabel.text = getTimeString(date: nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
     }
     
 }

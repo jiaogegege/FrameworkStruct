@@ -482,7 +482,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="763"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ltm-07-tKd">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="946"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="948"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mn2-if-WwF">
                                                 <rect key="frame" x="0.0" y="10" width="414" height="95"/>
@@ -533,7 +533,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjc-J9-2B8">
-                                                <rect key="frame" x="0.0" y="115" width="414" height="514"/>
+                                                <rect key="frame" x="0.0" y="115" width="414" height="516"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place_code_tick.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="7cs-9k-dbD">
                                                         <rect key="frame" x="167" y="35" width="80" height="80"/>
@@ -668,19 +668,12 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uz7-IA-rh6">
-                                                        <rect key="frame" x="33" y="451" width="348" height="49"/>
+                                                        <rect key="frame" x="33" y="451" width="343.5" height="51"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="* ">
+                                                            <fragment content="* 数据来源：苏州市卫生健康委员会。反映最近三天以来最新核酸采样记录和核酸检测报告情况，点击可查询更多，数据在不断汇聚和完善中。">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" metaFont="cellTitle"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="数据来源：苏州市卫生健康委员会。反映最近三天以来最新核酸采样记录和核酸检测报告情况，点击可查询更多，数据在不断汇聚和完善中。">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -718,7 +711,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iIU-Mk-1Eg">
-                                                <rect key="frame" x="0.0" y="639" width="414" height="135.5"/>
+                                                <rect key="frame" x="0.0" y="641" width="414" height="135.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place_code_function.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ROp-Wf-6Wx">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="135.5"/>
@@ -734,7 +727,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="593-s3-btD">
-                                                <rect key="frame" x="5" y="784.5" width="404" height="151.5"/>
+                                                <rect key="frame" x="5" y="786.5" width="404" height="151.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place_code_publicity.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0qm-9p-seS">
                                                         <rect key="frame" x="0.0" y="0.0" width="404" height="151.5"/>
