@@ -216,3 +216,15 @@ func g_alert(title: String,
         }
     }
 }
+
+///全局文本toast提示
+func g_toast(text: String, hideDelay: TimeInterval = 2.5, completion: @escaping ToastManager.CompletionCallback)
+{
+    ToastManager.shared.wantShowText(text: text, hideDelay: hideDelay, completion: completion)
+}
+
+///全局加载提示
+func g_loading(mode: ToastManager.TMShowMode = .serial)
+{
+    ToastManager.shared.wantShowAnimate(mode: mode)
+}
