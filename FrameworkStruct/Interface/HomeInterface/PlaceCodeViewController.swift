@@ -21,7 +21,7 @@ class PlaceCodeViewController: BasicViewController {
     
     
     override class func getViewController() -> Self {
-        getVC(from: "Main")
+        getVC(from: gMainSB)
     }
 
     override func viewDidLoad() {
