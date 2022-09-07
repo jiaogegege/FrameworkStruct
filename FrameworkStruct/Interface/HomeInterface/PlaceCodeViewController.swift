@@ -35,7 +35,7 @@ class PlaceCodeViewController: BasicViewController {
     }
 
     override func updateUI() {
-        timeLabel.text = currentTimeString(format: .localYearMonthDay) + " " + currentTimeString(format: .dashHourMinSec)
+        timeLabel.text = currentTimeString(format: .localYearMonthDay) + " " + currentTimeString(format: .hourMinSec)
         sampTimeLabel.text = getTimeString(date: nowAfter(isTodaySamp ? 0 : -tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
         detectionTimeLabel.text = getTimeString(date: nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
     }

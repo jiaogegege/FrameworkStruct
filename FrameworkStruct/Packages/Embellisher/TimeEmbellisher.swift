@@ -65,7 +65,7 @@ extension TimeEmbellisher: ExternalInterface
     ///参数：aDate：一个日期；isShort：是否短格式，如果true，只有年月日，否则`年月日时分秒`
     func date(from localStr: String, isShort: Bool = false) -> Date?
     {
-        let formatter = isShort ? TimeStringFormat.localYearMonthDay.getFormatter() : TimeStringFormat.localYearMonthDayHourMinuteSecond.getFormatter()
+        let formatter = isShort ? TimeStringFormat.localYearMonthDay.getFormatter() : TimeStringFormat.localYearMonthDayHourMinSec.getFormatter()
         return formatter.date(from: localStr)
     }
     
@@ -94,7 +94,7 @@ extension TimeEmbellisher: ExternalInterface
     ///参数：aDate：一个日期；isShort：是否短格式，如果true，只有年月日，否则`年月日时分秒`
     func localString(from aDate: Date, isShort: Bool = false) -> String
     {
-        let formatter = isShort ? TimeStringFormat.localYearMonthDay.getFormatter() : TimeStringFormat.localYearMonthDayHourMinuteSecond.getFormatter()
+        let formatter = isShort ? TimeStringFormat.localYearMonthDay.getFormatter() : TimeStringFormat.localYearMonthDayHourMinSec.getFormatter()
         return formatter.string(from: aDate)
     }
     

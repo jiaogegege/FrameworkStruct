@@ -38,28 +38,42 @@ let tSecondsInYear: TimeInterval = 31536000
 let tSecondsInLeapYear: TimeInterval = 31622400
 
 
-///日期字符串格式
+//MARK: 日期字符串格式
 enum TimeStringFormat: String
 {
     //常用时间格式
     case slashYearMonthDayHourMinSecSSS = "YYYY/MM/dd HH:mm:ss.SSS"
     case slashYearMonthDayHourMinSec = "YYYY/MM/dd HH:mm:ss"
+    case slashMonthDayHourMinSec = "MM/dd HH:mm:ss"
     case slashYearMonthDay = "YYYY/MM/dd"
     case slashMonthDay = "MM/dd"
     case slashMonthDayShort = "M/d"
+    
+    case dotYearMonthDayHourMinSecSSS = "YYYY.MM.dd HH:mm:ss.SSS"
+    case dotYearMonthDayHourMinSec = "YYYY.MM.dd HH:mm:ss"
+    case dotMonthDayHourMinSec = "MM.dd HH:mm:ss"
+    case dotYearMonthDay = "YYYY.MM.dd"
+    case dotMonthDay = "MM.dd"
+    case dotMonthDayShort = "M.d"
+    
     case dashYearMonthDayHourMinSecSSS = "YYYY-MM-dd HH:mm:ss.SSS"
     case dashYearMonthDayHourMinSec = "YYYY-MM-dd HH:mm:ss"
     case dashMonthDayHourMinSec = "MM-dd HH:mm:ss"
     case dashYearMonthDay = "YYYY-MM-dd"
     case dashMonthDay = "MM-dd"
     case dashMonthDayShort = "M-d"
-    case dashHourMinSec = "HH:mm:ss"
-    case localYearMonthDayHourMinuteSecond = "yyyy年MM月dd日 HH时mm分ss秒"
+    
+    case hourMinSec = "HH:mm:ss"
+    case hourMinSecSSS = "HH:mm:ss.SSS"
+    
+    case localYearMonthDayHourMinSecSSS = "yyyy年MM月dd日 HH时mm分ss秒SSS毫秒"
+    case localYearMonthDayHourMinSec = "yyyy年MM月dd日 HH时mm分ss秒"
     case localMonthDayHourMinsec = "MM月dd日 HH时mm分ss秒"
     case localYearMonthDay = "yyyy年MM月dd日"
     case localMonthDay = "MM月dd日"
     case localMonthDayShort = "M月d日"
     case localHourMinSec = "HH时mm分ss秒"
+    case localHourMinSecSSS = "HH时mm分ss秒SSS毫秒"
     
     //自定义时间组件
     enum TimeComponent: String {
@@ -129,10 +143,13 @@ enum TimeStringFormat: String
                     timeStr += sepType.rawValue
                 }
             }
-            //没有月/日，追加空格
+            //没有月/日，有时/分/秒/毫秒，追加空格
             if month == nil && day == nil
             {
-                timeStr += String.sSpace
+                if hour != nil || min != nil || sec != nil || sss != nil
+                {
+                    timeStr += String.sSpace
+                }
             }
         }
         //月
@@ -151,10 +168,13 @@ enum TimeStringFormat: String
                     timeStr += sepType.rawValue
                 }
             }
-            //没有日，追加空格
+            //没有日，有时/分/秒/毫秒，追加空格
             if day == nil
             {
-                timeStr += String.sSpace
+                if hour != nil || min != nil || sec != nil || sss != nil
+                {
+                    timeStr += String.sSpace
+                }
             }
         }
         //日
@@ -233,9 +253,10 @@ enum TimeStringFormat: String
         formatter.dateFormat = timeStr
         return formatter
     }
-
 }
 
+
+//MARK: 常用时间方法
 ///获取系统当前时间，OTC时间，"YYYY/MM/dd HH:mm:ss.SSS"
 func currentTimeString(format: TimeStringFormat = .slashYearMonthDayHourMinSecSSS) -> String
 {
