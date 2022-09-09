@@ -184,3 +184,18 @@ func isOdd(_ num: Int) -> Bool
     return true
 }
 
+///产生一个[0, +∞)或(-∞, 0]之间的随机整数
+///如果边界是负数，必定返回负数；正数同理
+func randomInt(_ border: Int) -> Int
+{
+    let ret = arc4random_uniform(UInt32(abs(border)))   //0~max-1的整数
+    return border < 0 ? -Int(ret) : Int(ret)
+}
+
+///产生一个[0,1]之间的随机小数
+func randomOne() -> Float
+{
+    //0～100的整数
+    let random: Float = Float(arc4random_uniform(101))
+    return random / 100.0
+}
