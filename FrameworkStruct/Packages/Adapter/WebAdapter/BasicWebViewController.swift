@@ -240,7 +240,7 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
     
     //网页弹框
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        AlertManager.shared.directPresentAlert(title: nil, message: message, leftTitle: nil, leftBlock: nil, rightTitle: String.confirm) {
+        AlertManager.shared.directPresentAlert(title: nil, message: message, leftTitle: nil, leftBlock: nil, rightTitle: String.confirm) { text in
             completionHandler()
         }
     }
@@ -248,7 +248,7 @@ extension BasicWebViewController: WKNavigationDelegate, WKUIDelegate
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         AlertManager.shared.directPresentAlert(title: nil, message: message, leftTitle: String.cancel, leftBlock: {
             completionHandler(false)
-        }, rightTitle: String.confirm) {
+        }, rightTitle: String.confirm) { text in
             completionHandler(true)
         }
     }

@@ -226,6 +226,8 @@ extension String: ConstantPropertyProtocol
     
     //iPhoneX资源文件后缀
     static let bangSuffix = "_bang"
+    //iPhone8资源文件后缀
+    static let smallSuffix = "_small"
     
     //获取对应的iPhoneX下的文件名
     func bangString() -> String

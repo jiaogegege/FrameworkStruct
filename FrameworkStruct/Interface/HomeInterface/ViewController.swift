@@ -68,7 +68,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
                 vc.hidesBottomBarWhenPushed = true
                 vc.isTodaySamp = false
                 self.push(vc)
-            }, rightTitle: String.yes) {
+            }, rightTitle: String.yes) { text in
                 let vc = HealthCodeViewController.getViewController()
                 vc.hidesBottomBarWhenPushed = true
                 vc.isTodaySamp = true
@@ -82,7 +82,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
                 vc.hidesBottomBarWhenPushed = true
                 vc.isTodaySamp = false
                 self.push(vc)
-            }, rightTitle: String.yes) {
+            }, rightTitle: String.yes) { text in
                 let vc = PlaceCodeViewController.getViewController()
                 vc.hidesBottomBarWhenPushed = true
                 vc.isTodaySamp = true
@@ -91,9 +91,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         }
         else if indexPath.row == 2      //行程卡
         {
-            let vc = HealthCodeViewController.getViewController()
-            vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            g_alert(title: "输入省市", needInput: true, inputPlaceHolder: "江苏省苏州市", usePlaceHolder: true) {
+                
+            } rightBlock: { text in
+                let vc = TravelCardViewController.getViewController()
+                vc.hidesBottomBarWhenPushed = true
+                vc.provinceCity = text
+                self.push(vc)
+            }
         }
         else if indexPath.row == 3       //瀑布流
         {

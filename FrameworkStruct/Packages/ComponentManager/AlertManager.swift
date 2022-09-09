@@ -179,10 +179,13 @@ class AlertManager: OriginManager
     fileprivate func createAlert(title: String? = nil,
                                  message: String? = nil,
                                  messageAlign: NSTextAlignment = .center,
+                                 needInput: Bool = false,
+                                 inputPlaceHolder: String? = nil,
+                                 usePlaceHolder: Bool = false,
                                  leftTitle: String? = String.cancel,
                                  leftBlock: VoidClosure? = nil,
                                  rightTitle: String? = String.confirm,
-                                 rightBlock: VoidClosure? = nil) -> FSAlertView?
+                                 rightBlock: OptionalStringClosure? = nil) -> FSAlertView?
     {
         var ident = ""
         if let ti = title
@@ -208,13 +211,13 @@ class AlertManager: OriginManager
                 cancel()
             }
         } : nil
-        let confirmBlock: ((UIAlertAction) -> Void)? = rightBlock != nil ? {(action) in
+        let confirmBlock: ((UIAlertAction, String?) -> Void)? = rightBlock != nil ? {(action, text) in
             if let confirm = rightBlock
             {
-                confirm()
+                confirm(text)
             }
         } : nil
-        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, identifierKey: ident, tintColor: UIColor.cMainThemeColor, cancelTitle: leftTitle, cancelBlock: cancelBlock, confirmTitle: rightTitle, confirmBlock: confirmBlock, inViewController: nil)
+        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, identifierKey: ident, tintColor: UIColor.cMainThemeColor, cancelTitle: leftTitle, cancelBlock: cancelBlock, confirmTitle: rightTitle, confirmBlock: confirmBlock, inViewController: nil)
         return alert
     }
     
@@ -313,12 +316,15 @@ extension AlertManager: ExternalInterface
     func wantPresentAlert(title: String? = nil,
                           message: String? = nil,
                           messageAlign: NSTextAlignment = .center,
+                          needInput: Bool = false,
+                          inputPlaceHolder: String? = nil,
+                          usePlaceHolder: Bool = false,
                           leftTitle: String? = String.cancel,
                           leftBlock: VoidClosure? = nil,
                           rightTitle: String? = String.confirm,
-                          rightBlock: VoidClosure? = nil)
+                          rightBlock: OptionalStringClosure? = nil)
     {
-        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
+        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
         {
             self.wantPresent(vc: alert)
         }
@@ -336,12 +342,15 @@ extension AlertManager: ExternalInterface
     func directPresentAlert(title: String? = nil,
                             message: String? = nil,
                             messageAlign: NSTextAlignment = .center,
+                            needInput: Bool = false,
+                            inputPlaceHolder: String? = nil,
+                            usePlaceHolder: Bool = false,
                             leftTitle: String? = String.cancel,
                             leftBlock: VoidClosure? = nil,
                             rightTitle: String? = String.confirm,
-                            rightBlock: VoidClosure? = nil)
+                            rightBlock: OptionalStringClosure? = nil)
     {
-        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
+        if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
         {
             self.wantPresent(vc: alert, priority: .high)
         }

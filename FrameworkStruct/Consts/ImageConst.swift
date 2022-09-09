@@ -92,10 +92,16 @@ extension UIImage: ConstantPropertyProtocol
 //实用方法
 extension UIImage
 {
-    //对于某些全屏的图片有iPhone8和iPhoneX的尺寸区别，对于iPhoneX的图片，添加后缀`_bang`
+    ///对于某些全屏的图片有iPhone8和iPhoneX的尺寸区别，对于iPhoneX的图片，添加后缀`_bang`
     static func bangImage(name: String) -> UIImage?
     {
-        return UIImage(named: name + String.bangSuffix)
+        UIImage(named: name + String.bangSuffix)
+    }
+    
+    ///对于某些全屏图片有iPhone8和iPhoneX的尺寸区别，对于iPhone8的图片，添加后缀`_small`
+    static func smallImage(name: String) -> UIImage?
+    {
+        UIImage(named: name + String.smallSuffix)
     }
     
     ///读取bundle中的一张大图，不缓存图片

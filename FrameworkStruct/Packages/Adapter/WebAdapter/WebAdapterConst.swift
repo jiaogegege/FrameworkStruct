@@ -177,7 +177,7 @@ enum WebHandlerNative {
             let handler = WebContentHandler(name: WebHandlerNative.alertName, data: nil) { data, responseCallback in
                 if let data = data
                 {
-                    AlertManager.shared.wantPresentAlert(title: nil, message: (data as! String), messageAlign: .center, leftTitle: nil, leftBlock: nil, rightTitle: String.confirm) {
+                    AlertManager.shared.wantPresentAlert(title: nil, message: (data as! String), messageAlign: .center, leftTitle: nil, leftBlock: nil, rightTitle: String.confirm) { text in
                         
                     }
                 }
@@ -192,7 +192,7 @@ enum WebHandlerNative {
                         {
                             cb(false)
                         }
-                    }, rightTitle: String.confirm) {
+                    }, rightTitle: String.confirm) { text in
                         if let cb = responseCallback
                         {
                             cb(true)

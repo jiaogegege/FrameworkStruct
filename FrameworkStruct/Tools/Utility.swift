@@ -201,18 +201,21 @@ func g_price(_ fen: Int) -> NSAttributedString
 func g_alert(title: String,
              message: String? = nil,
              messageAlign: NSTextAlignment = .center,
+             needInput: Bool = false,
+             inputPlaceHolder: String? = nil,
+             usePlaceHolder: Bool = false,
              leftTitle: String? = String.cancel,
              leftBlock: VoidClosure? = nil,
              rightTitle: String? = String.confirm,
-             rightBlock: VoidClosure? = nil)
+             rightBlock: OptionalStringClosure? = nil)
 {
-    AlertManager.shared.wantPresentAlert(title: title, message: message, messageAlign: messageAlign, leftTitle: leftTitle, leftBlock: {
+    AlertManager.shared.wantPresentAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: {
         if let leftBlock = leftBlock {
             leftBlock()
         }
-    }, rightTitle: rightTitle) {
+    }, rightTitle: rightTitle) { text in
         if let rightBlock = rightBlock {
-            rightBlock()
+            rightBlock(text)
         }
     }
 }

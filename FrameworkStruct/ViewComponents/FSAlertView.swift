@@ -35,7 +35,7 @@ class FSAlertView: UIAlertController, AlertManagerProtocol
         {
             callback()
         }
-//        FSLog("FSAlertView: dealloc")
+        FSLog("FSAlertView: dealloc")
     }
     
 }
@@ -46,15 +46,18 @@ extension FSAlertView: ExternalInterface
 {
     //创建一个alertview
     class func alertView(title: String? = nil,
-                          message: String? = nil,
-                          messageAlign: NSTextAlignment = .center,
-                          identifierKey: String,
-                          tintColor: UIColor,
-                          cancelTitle: String? = String.cancel,
-                          cancelBlock:((UIAlertAction) -> Void)? = nil,
-                          confirmTitle: String? = String.confirm,
-                          confirmBlock:((UIAlertAction) -> Void)? = nil,
-                          inViewController: UIViewController? = nil) -> FSAlertView?
+                         message: String? = nil,
+                         messageAlign: NSTextAlignment = .center,
+                         needInput: Bool = false,
+                         inputPlaceHolder: String? = nil,
+                         usePlaceHolder: Bool = false,          //如果没有输入文字，是否使用placeholder代替
+                         identifierKey: String,
+                         tintColor: UIColor,
+                         cancelTitle: String? = String.cancel,
+                         cancelBlock:((UIAlertAction) -> Void)? = nil,
+                         confirmTitle: String? = String.confirm,
+                         confirmBlock:((UIAlertAction, _ inputText: String?) -> Void)? = nil,
+                         inViewController: UIViewController? = nil) -> FSAlertView?
     {
         if identifierKeyMap.object(forKey: identifierKey) is FSAlertView
         {
@@ -77,6 +80,15 @@ extension FSAlertView: ExternalInterface
             attrMessage.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], range: NSMakeRange(0, me.count))
             alertView.setValue(attrMessage, forKey: "attributedMessage")
         }
+        //是否输入文本
+        if needInput == true
+        {
+            alertView.addTextField { textField in
+                //此处可以配置`textField`的属性
+                textField.font = UIFont.systemFont(ofSize: 14)
+                textField.placeholder = inputPlaceHolder
+            }
+        }
         //设置回调
         if let cancel = cancelBlock //如果cancel回调有值，那么创建取消按钮
         {
@@ -86,7 +98,18 @@ extension FSAlertView: ExternalInterface
         }
         if let confirm = confirmBlock   //如果confirm回调有值，那么创建确定按钮
         {
-            let confirmAction = UIAlertAction(title: confirmTitle, style: .default, handler: confirm)
+            let confirmAction = UIAlertAction(title: confirmTitle, style: .default) { [weak alertView] action in
+                var inputText: String? = nil
+                if let field = alertView?.textFields?.first {
+                    if let text = field.text, g_validString(text) {
+                        inputText = text
+                    }
+                    else {
+                        inputText = field.placeholder
+                    }
+                }
+                confirm(action, inputText)
+            }
             confirmAction.setValue(tintColor, forKey: "titleTextColor")
             alertView.addAction(confirmAction)
         }

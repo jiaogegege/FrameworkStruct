@@ -5,6 +5,10 @@
 //  Created by  蒋 雪姣 on 2022/9/5.
 //
 
+
+/**
+ 健康码
+ */
 import UIKit
 
 class HealthCodeViewController: BasicViewController {
