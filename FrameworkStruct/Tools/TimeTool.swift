@@ -265,8 +265,8 @@ func currentTimeString(format: TimeStringFormat = .slashYearMonthDayHourMinSecSS
     return formatter.string(from: Date())
 }
 
-///获取一个时间的字符串形式，时间组件可自定义
-func getTimeString(date: Date,
+///获取一个时间的字符串形式，时间组件可自定义，默认当前时间
+func getTimeString(date: Date = Date(),
                    sepType: TimeStringFormat.TimeComponentSep = .slash,
                    year: TimeStringFormat.TimeComponent? = .year,
                    month: TimeStringFormat.TimeComponent? = .month,
@@ -283,14 +283,13 @@ func getTimeString(date: Date,
 ///获取系统当前时间距离1970年秒数，OTC时间
 func currentTimeInterval() -> TimeInterval
 {
-    let date = Date()
-    return date.timeIntervalSince1970
+    Date().timeIntervalSince1970
 }
 
 ///判断某个时间有没有过期
 ///参数：criticalTimeStr:如果传入了过期时间，那么和传入时间比较；如果没有传入过期时间，那么和当前时间比较
 ///如果传入的时间都无法转换，那么返回true
-func isTimePasted(timeStr: String, criticalTimeStr: String?, format: TimeStringFormat = .dashYearMonthDayHourMinSec) -> Bool
+func isTimePasted(_ timeStr: String, criticalTimeStr: String?, format: TimeStringFormat = .dashYearMonthDayHourMinSec) -> Bool
 {
     let formatter = format.getFormatter()
     let date = formatter.date(from: timeStr)    //要判断的时间
