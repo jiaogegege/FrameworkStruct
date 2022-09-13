@@ -246,8 +246,7 @@ func random(_ min: UInt, _ max: UInt, reset: Bool = false) -> UInt
     }
     let rand: UInt = UInt(arc4random_uniform(UInt32(range.1)))
     //获取设定的范围内的值
-    let ret: UInt = rand + minBetween(min, max)
-    return ret
+    return rand + minBetween(min, max)
 }
 
 ///产生一个[0,1]之间的随机小数
