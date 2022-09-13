@@ -92,7 +92,7 @@ func floatEqual(_ a: Float, _ b: Float) -> Bool
 }
 
 ///判断某个数字是否在一个区间范围内(包含)
-func numberInInterval<T: Comparable>(_ val: T, lhs: T, rhs: T) -> Bool
+func numberIn<T: Comparable>(_ val: T, lhs: T, rhs: T) -> Bool
 {
     //计算最小最大范围
     let min = minBetween(lhs, rhs)
@@ -108,17 +108,53 @@ func numberInInterval<T: Comparable>(_ val: T, lhs: T, rhs: T) -> Bool
 ///求两个数值中的最大值
 func maxBetween<T: Comparable>(_ one: T, _ other: T) -> T
 {
-    return one >= other ? one : other
+    one >= other ? one : other
+}
+
+///求一个数组中的最大值
+func maxIn<T: Comparable>(_ arr: [T]) -> T?
+{
+    guard arr.count > 0 else {
+        return nil
+    }
+    
+    var max: T = arr.first!
+    for ele in arr
+    {
+        if ele > max
+        {
+            max = ele
+        }
+    }
+    return max
 }
 
 ///求两个数值中的最小值
 func minBetween<T: Comparable>(_ one: T, _ other: T) -> T
 {
-    return one <= other ? one : other
+    one <= other ? one : other
+}
+
+///求一个数组中的最小值
+func minIn<T: Comparable>(_ arr: [T]) -> T?
+{
+    guard arr.count > 0 else {
+        return nil
+    }
+    
+    var min: T = arr.first!
+    for ele in arr
+    {
+        if ele < min
+        {
+            min = ele
+        }
+    }
+    return min
 }
 
 ///限制一个数值的取值在最大最小区间（包含）
-func limitInterval<T: Comparable>(_ value: T, min: T, max: T) -> T
+func limitIn<T: Comparable>(_ value: T, min: T, max: T) -> T
 {
     //先判断最大最小值，防止传错
     let minV = minBetween(min, max)
@@ -137,9 +173,9 @@ func limitInterval<T: Comparable>(_ value: T, min: T, max: T) -> T
 }
 
 ///限制一个数值在0.0和1.0之间
-func limitIntervalInOne(_ value: Double) -> Double
+func limitInOne(_ value: Double) -> Double
 {
-    return limitInterval(value, min: 0.0, max: 1.0)
+    return limitIn(value, min: 0.0, max: 1.0)
 }
 
 ///限制一个数值的最小值
@@ -184,17 +220,44 @@ func isOdd(_ num: Int) -> Bool
     return true
 }
 
-///产生一个[0, +∞)或(-∞, 0]之间的随机整数
+///产生一个[0, +∞)或(-∞, 0]之间的随机整数，不包含`border`
 ///如果边界是负数，必定返回负数；正数同理
-func randomInt(_ border: Int) -> Int
+///reset：重置随机数种子
+func randomInt(_ border: Int, reset: Bool = false) -> Int
 {
+    if reset
+    {
+        arc4random_stir()   //使随机数更随机
+    }
     let ret = arc4random_uniform(UInt32(abs(border)))   //0~max-1的整数
     return border < 0 ? -Int(ret) : Int(ret)
 }
 
-///产生一个[0,1]之间的随机小数
-func randomOne() -> Float
+///产生一个[a, b]之间的随机正整数，范围为0～+∞
+///reset：重置随机数种子
+func random(min: UInt, max: UInt, reset: Bool = false) -> UInt
 {
+    //先转换到以[0, b - a + 1)为边界
+    let range: (UInt, UInt) = (0, maxBetween(min, max) - minBetween(min, max) + 1)
+    //计算随机数
+    if reset
+    {
+        arc4random_stir()   //使随机数更随机
+    }
+    let rand: UInt = UInt(arc4random_uniform(UInt32(range.1)))
+    //获取设定的范围内的值
+    let ret: UInt = rand + minBetween(min, max)
+    return ret
+}
+
+///产生一个[0,1]之间的随机小数
+///reset：重置随机数种子
+func randomOne(reset: Bool = false) -> Float
+{
+    if reset
+    {
+        arc4random_stir()   //使随机数更随机
+    }
     //0～100的整数
     let random: Float = Float(arc4random_uniform(101))
     return random / 100.0

@@ -287,7 +287,7 @@ extension SimpleTableView: ExternalInterface
     func getTopRowHeight(rowCount: Int) -> (CGFloat, Int)
     {
         //限制区间 1-array.count
-        let count = limitInterval(rowCount, min: 1, max: self.rowArray.count)
+        let count = limitIn(rowCount, min: 1, max: self.rowArray.count)
         //累加前 count 行的高度
         var height: CGFloat = 0.0
         for i in 0..<count
