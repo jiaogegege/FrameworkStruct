@@ -24,7 +24,7 @@ extension String: ConstantPropertyProtocol
     static let sSpace = " "
     
     //"iCloud"
-    static let icloud = "iCloud"
+    static let iCloud = "iCloud"
     
     //汉字数字
     static let s0 = "〇"
@@ -111,6 +111,7 @@ extension String: ConstantPropertyProtocol
     static let sLeftCurlyBracket = "{"
     static let cRightCurlyBracket: Character = "}"
     static let sRightCurlyBracket = "}"
+    static let cEnDash: Character = "–"
     static let sEnDash = "–"
     
     //数学符号
@@ -233,7 +234,13 @@ extension String: ConstantPropertyProtocol
     //获取对应的iPhoneX下的文件名
     func bangString() -> String
     {
-        return self + String.bangSuffix
+        self + String.bangSuffix
+    }
+    
+    //获取对应的iPhone8以下的文件名
+    func smallString() -> String
+    {
+        self + String.smallSuffix
     }
     
 }

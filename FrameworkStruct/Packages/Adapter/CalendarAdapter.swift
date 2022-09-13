@@ -157,7 +157,7 @@ extension CalendarAdapter: InternalType
         {
             switch self {
             case .icloud:
-                if source.sourceType == .calDAV && source.title == String.icloud
+                if source.sourceType == .calDAV && source.title == String.iCloud
                 {
                     return true
                 }
