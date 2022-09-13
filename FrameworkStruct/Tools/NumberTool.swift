@@ -235,7 +235,7 @@ func randomInt(_ border: Int, reset: Bool = false) -> Int
 
 ///产生一个[a, b]之间的随机正整数，范围为0～+∞
 ///reset：重置随机数种子
-func random(min: UInt, max: UInt, reset: Bool = false) -> UInt
+func random(_ min: UInt, _ max: UInt, reset: Bool = false) -> UInt
 {
     //先转换到以[0, b - a + 1)为边界
     let range: (UInt, UInt) = (0, maxBetween(min, max) - minBetween(min, max) + 1)
@@ -251,14 +251,18 @@ func random(min: UInt, max: UInt, reset: Bool = false) -> UInt
 }
 
 ///产生一个[0,1]之间的随机小数
+///precision：精度，保留几位小数，默认2位小数
 ///reset：重置随机数种子
-func randomOne(reset: Bool = false) -> Float
+func randomOne(_ precision: UInt = 2, reset: Bool = false) -> Double
 {
+    //计算精度
+    let base: UInt = UInt(pow(10, Double(precision)))
     if reset
     {
         arc4random_stir()   //使随机数更随机
     }
-    //0～100的整数
-    let random: Float = Float(arc4random_uniform(101))
-    return random / 100.0
+    //0～base的整数
+    let random: Double = Double(arc4random_uniform(UInt32(base) + 1))
+    //计算小数
+    return (random / Double(base))
 }

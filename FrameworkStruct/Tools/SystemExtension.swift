@@ -405,6 +405,21 @@ extension String
 }
 
 
+//MARK: Double
+/**
+ Double
+ */
+extension Double
+{
+    //截取到几位小数，非四舍五入
+    func truncate(_ places : UInt)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self) / pow(10.0, Double(places)))
+    }
+    
+}
+
+
 //MARK: NSAttributedString
 /**
  * NSAttributedString
