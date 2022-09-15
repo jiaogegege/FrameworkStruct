@@ -233,11 +233,11 @@ func randomInt(_ border: Int, reset: Bool = false) -> Int
     return border < 0 ? -Int(ret) : Int(ret)
 }
 
-///产生一个[a, b]之间的随机正整数，范围为0～+∞
+///产生一个[min, max]之间的随机正整数，范围为0～+∞
 ///reset：重置随机数种子
 func randomIn(_ min: UInt, _ max: UInt, reset: Bool = false) -> UInt
 {
-    //先转换到以[0, b - a + 1)为边界
+    //先转换到以[0, max - min + 1)为边界
     let range: (UInt, UInt) = (0, maxBetween(min, max) - minBetween(min, max) + 1)
     //计算随机数
     if reset
