@@ -112,6 +112,7 @@ enum TimeStringFormat: String
     func getFormatter() -> DateFormatter
     {
         let formatter = DateFormatter()
+        formatter.locale = NSLocale.system
         formatter.dateFormat = self.rawValue
         return formatter
     }
