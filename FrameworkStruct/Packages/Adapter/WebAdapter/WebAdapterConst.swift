@@ -255,7 +255,7 @@ enum WebUrlPath: String {
     case waitSeckillUrl = "/st/activityList.html"                           //云待秒杀
     case bigSubsidyUrl = "/st/brandSubsidies.html"                          //大牌补贴
     
-    //获取完整url
+    //获取完整url，拼接可获取的默认参数，其他参数可手动拼接
     func getUrl() -> String
     {
         NetworkAdapter.shared.currentHost + self.joinParams()
