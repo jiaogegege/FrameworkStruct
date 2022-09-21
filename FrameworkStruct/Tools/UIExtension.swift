@@ -303,7 +303,7 @@ extension UIButton
 extension UITableView
 {
     ///在此处刷新tableview可禁用动画效果，包括自动估高的抖动
-    class func refreshWithoutAnimation(tableView: UITableView, _ action: VoidClosure)
+    class func refreshWithoutAnimation(_ tableView: UITableView, _ action: VoidClosure)
     {
         UIView.performWithoutAnimation {
             tableView.beginUpdates()
@@ -383,6 +383,20 @@ extension UITableView: InternalType
 }
 
 
+//MARK: UITableViewCell
+/**
+ * UITableViewCell
+ */
+extension UITableViewCell
+{
+    ///cell类唯一标志符
+    class var reuseId: String {
+        Self.className
+    }
+    
+}
+
+
 //MARK: UICollectionView
 /**
  * UICollectionView
@@ -402,6 +416,20 @@ extension UICollectionView
         let section = self.numberOfSections - 1
         let row = self.numberOfItems(inSection: section) - 1
         self.scrollToItem(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
+    }
+    
+}
+
+
+//MARK: UICollectionViewCell
+/**
+ * UICollectionViewCell
+ */
+extension UICollectionViewCell
+{
+    ///cell类唯一标志符
+    class var reuseId: String {
+        Self.className
     }
     
 }
