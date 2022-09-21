@@ -465,7 +465,7 @@ extension UIColor
             cString = String(cString[cString.index(cString.startIndex, offsetBy: 2)...])
         }
         //如果是#开头的，那么截取字符串，字符串从索引为1的位置开始，一直到末尾
-        if (cString.hasPrefix("#"))
+        if (cString.hasPrefix(String.sSharp))
         {
             cString = String(cString[cString.index(cString.startIndex, offsetBy: 1)...])
         }

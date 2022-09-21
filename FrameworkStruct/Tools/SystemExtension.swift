@@ -20,9 +20,9 @@ extension NSObject
     ///获取对象的类名，计算属性
     var className: String {
         let typeName = type(of: self).description()
-        if(typeName.contains("."))
+        if(typeName.contains(String.sDot))
         {
-            return typeName.components(separatedBy: ".").last!
+            return typeName.components(separatedBy: String.sDot).last!
         }
         else
         {
@@ -32,7 +32,7 @@ extension NSObject
     
     ///获取类型的类名，计算属性
     class var className: String {
-        return NSStringFromClass(Self.self).components(separatedBy: ".").last!
+        return NSStringFromClass(Self.self).components(separatedBy: String.sDot).last!
     }
     
 }
@@ -110,11 +110,11 @@ extension String
     func trimSpaceAndNewLine(includeSpace: Bool = false) -> String
     {
         var str = self.trim()
-        str = str.replacingOccurrences(of: "\\n", with: "")
-        str = str.replacingOccurrences(of: "\n", with: "")
+        str = str.replacingOccurrences(of: String.sNewLine, with: String.sEmpty)
+        str = str.replacingOccurrences(of: String.sNewline, with: String.sEmpty)
         if includeSpace
         {
-            str = str.replacingOccurrences(of: " ", with: "")
+            str = str.replacingOccurrences(of: String.sSpace, with: String.sEmpty)
         }
         return str
     }
@@ -246,7 +246,7 @@ extension String
              }
              if subStr == self.subStr(start, end) {
                  if i == 0 && end == self.count - 1 { // 前后完全覆盖
-                     return ""
+                     return String.sEmpty
                  } else if i == 0 && end < self.count - 1 { // 从0开始覆盖前面一部分
                      return self.subStr(end + 1, self.count - 1)
                  } else if i > 0 && end == self.count - 1 { // 从结尾覆盖后面一部分
@@ -379,7 +379,7 @@ extension String
         let utf8 = cString(using: .utf8)
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
-        return digest.reduce("") { $0 + String(format:"%02x", $1) }
+        return digest.reduce(String.sEmpty) { $0 + String(format:"%02x", $1) }
     }
     
     ///如果字符串是url，那么拼接参数，如果value为nil，那么不拼接
@@ -388,13 +388,13 @@ extension String
         var finalStr: String = self
         if let value = value
         {
-            if !self.contains("?")   //如果没有有问号，那么先拼接一个问号
+            if !self.contains(String.sQuestion)   //如果没有有问号，那么先拼接一个问号
             {
-                finalStr += "?"
+                finalStr += String.sQuestion
             }
             else    //如果有问号，说明已经有参数了，那么拼接一个`&`
             {
-                finalStr += "&"
+                finalStr += String.sAnd
             }
             //拼接参数
             finalStr += "\(key)=\(value)"

@@ -17,7 +17,7 @@ import UIKit
 func printMsg<T>(message: T, fileName: String = #file, methodName: String = #function, lineNumber: Int = #line)
 {
     #if DEBUG
-        let arr = fileName.components(separatedBy: "/")
+    let arr = fileName.components(separatedBy: String.sSlash)
         print(currentTimeString() + " -> " + "\(arr.last!) : \(methodName) : [\(lineNumber)] : \(message)")
     #endif
 }
@@ -26,7 +26,7 @@ func printMsg<T>(message: T, fileName: String = #file, methodName: String = #fun
 func FSLog(_ message: String)
 {
     #if DEBUG
-        print(currentTimeString() + ": " + message)
+    print(currentTimeString() + String.sColon + String.sSpace + message)
     #endif
 }
 
@@ -61,16 +61,16 @@ func g_copy(_ origin: Any?) -> Any?
 ///获得类型的类名的字符串
 func g_className(_ aClass: AnyClass) -> String
 {
-    NSStringFromClass(aClass).components(separatedBy: ".").last!
+    NSStringFromClass(aClass).components(separatedBy: String.sDot).last!
 }
 
 ///获得一个对象的类名
 func g_objClassName(_ obj: AnyObject) -> String
 {
     let typeName = type(of: obj).description()
-    if(typeName.contains("."))
+    if(typeName.contains(String.sDot))
     {
-        return typeName.components(separatedBy: ".").last!
+        return typeName.components(separatedBy: String.sDot).last!
     }
     else
     {

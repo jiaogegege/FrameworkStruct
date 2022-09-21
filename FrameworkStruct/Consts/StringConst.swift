@@ -21,7 +21,11 @@ extension String: ConstantPropertyProtocol
 {
     //空字符
     static let sEmpty = ""
+    //一个空格
     static let sSpace = " "
+    //新行
+    static let sNewline = "\n"
+    static let sNewLine = "\\n"
     
     //"iCloud"
     static let iCloud = "iCloud"

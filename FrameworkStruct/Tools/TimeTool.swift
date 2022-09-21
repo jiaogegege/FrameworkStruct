@@ -126,7 +126,7 @@ enum TimeStringFormat: String
                                    sec: TimeComponent? = nil,
                                    sss: TimeComponent? = nil) -> DateFormatter
     {
-        var timeStr: String = ""
+        var timeStr: String = String.sEmpty
         //年
         if let year = year {
             timeStr += year.rawValue
