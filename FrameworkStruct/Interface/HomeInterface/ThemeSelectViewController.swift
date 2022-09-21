@@ -48,7 +48,7 @@ class ThemeSelectViewController: BasicViewController
     override func createUI()
     {
         super.createUI()
-        self.tableView.register(UINib(nibName: SelectThemeCellKey, bundle: nil), forCellReuseIdentifier: SelectThemeCellKey)
+        self.tableView.register(UINib(nibName: SelectThemeCell.className, bundle: nil), forCellReuseIdentifier: SelectThemeCell.reuseId)
     }
     
     override func configUI() {
@@ -88,7 +88,7 @@ extension ThemeSelectViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SelectThemeCellKey, for: indexPath) as! SelectThemeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SelectThemeCell.reuseId, for: indexPath) as! SelectThemeCell
         cell.theme = self.themeArray?[indexPath.row]
         cell.update()
         return cell

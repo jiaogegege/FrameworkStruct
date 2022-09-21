@@ -7,9 +7,6 @@
 
 import UIKit
 
-//cellidkey
-let SelectThemeCellKey = "SelectThemeCell"
-
 class SelectThemeCell: UITableViewCell {
     //MARK: 属性
     @IBOutlet weak var nameLabel: UILabel!  //主题名称

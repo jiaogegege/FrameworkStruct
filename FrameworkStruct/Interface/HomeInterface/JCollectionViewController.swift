@@ -26,7 +26,7 @@ class JCollectionViewController: BasicViewController
         self.collectionView.isScrollEnabled = true
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionviewcell")
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.reuseId)
         self.collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "collectionheaderview")
         self.collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "collectionfooterview")
         self.view.addSubview(self.collectionView)
