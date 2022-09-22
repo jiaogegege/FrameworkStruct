@@ -337,6 +337,8 @@
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
 		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
 		EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */; };
+		EA5843EE28DC5DB90016E6CA /* iCloudAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */; };
+		EA5843F028DC60FB0016E6CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5843EF28DC60FB0016E6CA /* CloudKit.framework */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA62BCEB28C5C8CF006A6BFA /* HealthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62BCEA28C5C8CF006A6BFA /* HealthCodeViewController.swift */; };
 		EA66061127C86C11000B20A6 /* TestWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA66061027C86C11000B20A6 /* TestWebViewController.swift */; };
@@ -1134,6 +1136,8 @@
 		EA52494127A3EDEB002E3616 /* 1_0_2.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_2.sql; sourceTree = "<group>"; };
 		EA5780A827D0A6C900C819E6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingViewController.swift; sourceTree = "<group>"; };
+		EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAdapter.swift; sourceTree = "<group>"; };
+		EA5843EF28DC60FB0016E6CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		EA5D10A7277ED4FB004FCE4C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -1940,6 +1944,7 @@
 				EA20865B27C5276700B63C8E /* EventKit.framework in Frameworks */,
 				EA20865C27C5276700B63C8E /* EventKitUI.framework in Frameworks */,
 				EA20866527C527C600B63C8E /* UserNotificationsUI.framework in Frameworks */,
+				EA5843F028DC60FB0016E6CA /* CloudKit.framework in Frameworks */,
 				EA20866927C534F700B63C8E /* CoreServices.framework in Frameworks */,
 				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
 				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
@@ -2997,6 +3002,7 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA5843EF28DC60FB0016E6CA /* CloudKit.framework */,
 				EADE522127F6F0B2005417BE /* Social.framework */,
 				EAFC601627E1AAB00019CDEF /* CryptoKit.framework */,
 				EA9A759327C729EC00A11FC8 /* CoreLocationUI.framework */,
@@ -3714,6 +3720,7 @@
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 				EADE522327F6F470005417BE /* ClipboardAdapter.swift */,
 				EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */,
+				EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -5178,6 +5185,7 @@
 				EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */,
 				EA3E8A9B27B77CEA006A2715 /* AnimationViewInitializers.swift in Sources */,
 				EA9A75EC27C739DF00A11FC8 /* SRURLUtilities.m in Sources */,
+				EA5843EE28DC5DB90016E6CA /* iCloudAdapter.swift in Sources */,
 				EA3E8AA827B77CEA006A2715 /* AnimatedControl.swift in Sources */,
 				EA9A758327C7216D00A11FC8 /* YYSpriteSheetImage.m in Sources */,
 				EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */,
