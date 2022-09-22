@@ -9,6 +9,9 @@
 /**
  iCloud存储适配器
  主要用来在iCloud中保存和同步数据
+ 
+ 配置方法：
+ 在开发者中心的AppIDs页面勾选iCloud，并配置添加Containers，identifier建议填写项目的bundleID，可配置多个；创建profile并下载安装；在Xcode的Capabilities中添加iCloud并勾选需要的服务，再勾选Containers
  */
 import UIKit
 import CloudKit
@@ -45,7 +48,7 @@ class iCloudAdapter: OriginAdapter {
 //内部类型
 extension iCloudAdapter: InternalType
 {
-    ///iCloud存储容器id
+    ///iCloud存储容器id，根据实际配置修改
     static let iCloudIdentifier = "iCloud.FrameworkStruct"
     
 }
