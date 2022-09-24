@@ -6,6 +6,31 @@
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>ShareFile</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.archive</string>
+				<string>public.data</string>
+				<string>public.text</string>
+				<string>public.image</string>
+				<string>public.source-code</string>
+				<string>public.audiovisual-content</string>
+				<string>com.adobe.pdf</string>
+				<string>com.apple.keynote.key</string>
+				<string>com.microsoft.word.doc</string>
+				<string>com.microsoft.excel.xls</string>
+				<string>com.microsoft.powerpoint.ppt</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,6 +48,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>FrameworkStruct</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fst</string>
@@ -30,8 +57,10 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -56,10 +85,24 @@
 	<string>框架结构想要使用您的麦克风</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>框架结构想要访问您的相册</string>
+	<key>NSPhotoLibraryLimitedAccessAPISupport</key>
+	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>框架结构想要访问您的相册</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>框架结构想要访问您的提醒事项</string>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.FrameworkStruct</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>$(PRODUCT_NAME)</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -113,5 +156,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 </dict>
 </plist>

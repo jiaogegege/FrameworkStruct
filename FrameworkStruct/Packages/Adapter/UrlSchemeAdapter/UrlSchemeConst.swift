@@ -81,10 +81,25 @@ struct UrlSchemeStructure
 }
 
 //url协议，目前只有一种
-enum UrlSchemeProtocol: String
+enum UrlSchemeProtocol: String, CaseIterable
 {
     case none = ""              //如果没有协议，那么为空
     case fst                    //在info.plist中定义的url协议
+    
+    //判断某个URL的协议是否是此处定义的协议
+    static func isLegalUrl(_ url: URL) -> Bool
+    {
+        var ret: Bool = false
+        for item in Self.allCases
+        {
+            if item.rawValue == url.scheme
+            {
+                ret = true
+                break
+            }
+        }
+        return ret
+    }
 }
 
 //主功能列表，根据实际需求定义

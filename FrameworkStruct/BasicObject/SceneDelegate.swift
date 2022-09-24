@@ -93,6 +93,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    //通过URL Schemes或其它App打开此App
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first
+        {
+            if SandBoxAccessor.shared.isLocalFile(url.url.absoluteString)
+            {
+                //打开沙盒或者文件App或者其他App中的文件
+                FileManageAdapter.shared.dispatchFileUrl(url.url, sceneOptions: url.options)
+            }
+            else if UrlSchemeAdapter.shared.isUrlScheme(url.url)
+            {
+                //从Url Scheme打开
+                UrlSchemeAdapter.shared.dispatchUrl(url.url, sceneOptions: url.options)
+            }
+            else
+            {
+                
+            }
+        }
+    }
 
 }
 

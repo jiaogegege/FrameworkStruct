@@ -42,8 +42,15 @@ class UrlSchemeAdapter: OriginAdapter
 //接口方法
 extension UrlSchemeAdapter: ExternalInterface
 {
+    ///判断url是否是通过url scheme打开的
+    func isUrlScheme(_ url: URL) -> Bool
+    {
+        UrlSchemeProtocol.isLegalUrl(url)
+    }
+    
     ///从AppDelegate中统一调用url输入方法，在UrlSchemeAdapter中做具体处理
-    func dispatchUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+    ///对于options，根据实际需求另做处理
+    func dispatchUrl(_ url: URL, appOptions: [UIApplication.OpenURLOptionsKey : Any]? = nil, sceneOptions: UIScene.OpenURLOptions? = nil)
     {
         //创建一个url结构体
         let urlStruct: UrlSchemeStructure = UrlSchemeStructure(url)

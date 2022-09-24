@@ -359,6 +359,12 @@ extension String
         return nil
     }
     
+    ///将字符串转换为Data
+    func toData() -> Data?
+    {
+        self.data(using: .utf8)
+    }
+    
     ///md5加密
     var md5: String {
         let str = self.cString(using: String.Encoding.utf8)

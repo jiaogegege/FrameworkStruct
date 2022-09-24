@@ -118,92 +118,97 @@ extension SandBoxAccessor: ExternalInterface
         return !ret.boolValue   //结果取反，ret为true是目录
     }
     
+    //判断是否本地沙盒或者文件App中的文件
+    func isLocalFile(_ path: String) -> Bool
+    {
+        path.hasPrefix(sdFilePrefix)
+    }
+    
     /**************************************** 文件和目录操作 Section End ****************************************/
     
     //MARK: 文件夹路径访问
     /**************************************** 文件夹路径访问 Section Begin ****************************************/
     ///获得沙盒文件夹路径
-    func getHomeDirectory() -> String
+    func getHomeDirectory() -> NSString
     {
-        let homePath = NSHomeDirectory()
-        return homePath
+        NSHomeDirectory() as NSString
     }
     
     ///获得Documents文件夹路径
-    func getDocumentDirectory() -> String
+    func getDocumentDirectory() -> NSString
     {
         // 检索指定路径
         // 第一个参数：指定的搜索路径
         // 第二个参数：检索的范围（沙盒内）
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let docPath = paths.first
-        return docPath!
+        return docPath! as NSString
     }
     
     ///获取一个Documents下的目录如果不存在则创建
-    func getDocumentDirWith(_ pathComponent: String) -> String
+    func getDocumentDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = (self.getDocumentDirectory() as NSString).appendingPathComponent(pathComponent)
+        let dirPath = self.getDocumentDirectory().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
         }
-        return dirPath
+        return dirPath as NSString
     }
     
     ///获得Library路径
-    func getLibraryDirectory() -> String
+    func getLibraryDirectory() -> NSString
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let libPath = paths.last
-        return libPath!
+        return libPath! as NSString
     }
     
     ///获取一个Library下的目录如果不存在则创建
-    func getLibraryDirWith(_ pathComponent: String) -> String
+    func getLibraryDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = (self.getLibraryDirectory() as NSString).appendingPathComponent(pathComponent)
+        let dirPath = self.getLibraryDirectory().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
         }
-        return dirPath
+        return dirPath as NSString
     }
     
     ///获取cache路径
-    func getCacheDirectory() -> String
+    func getCacheDirectory() -> NSString
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let cachePath = paths.last
-        return cachePath!
+        return cachePath! as NSString
     }
     
     ///获取一个cache下的目录如果不存在则创建
-    func getCacheDirWith(_ pathComponent: String) -> String
+    func getCacheDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = (self.getCacheDirectory() as NSString).appendingPathComponent(pathComponent)
+        let dirPath = self.getCacheDirectory().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
         }
-        return dirPath
+        return dirPath as NSString
     }
     
     ///获取 Temp 的路径
-    func getTempDirectory() -> String
+    func getTempDirectory() -> NSString
     {
-        return NSTemporaryDirectory()
+        NSTemporaryDirectory() as NSString
     }
     
     ///获取一个Temp下的目录，不存在则创建
-    func getTempDirWith(_ pathComponent: String) -> String
+    func getTempDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = (self.getTempDirectory() as NSString).appendingPathComponent(pathComponent)
+        let dirPath = self.getTempDirectory().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
         }
-        return dirPath
+        return dirPath as NSString
     }
     
     ///获取一个bundle中指定文件名的文件路径
@@ -228,7 +233,7 @@ extension SandBoxAccessor: ExternalInterface
     ///获取数据库文件路径
     func getDatabasePath() -> String
     {
-        let dbDirPath = self.getDocumentDirWith(sdDatabaseDir)
+        let dbDirPath = self.getDocumentDirWith(sdDatabaseDir)      //由于Documents可共享到`文件`App，考虑将数据库放在Library中
         let dbPath = (dbDirPath as NSString).appendingPathComponent(sdDatabaseFile)
         return dbPath
     }
@@ -237,20 +242,20 @@ extension SandBoxAccessor: ExternalInterface
     ///文件名中不要包含`.`，因为用来区分扩展名
     func getSQLFilePath(_ fileName: String) -> String?
     {
-        return self.getBundleFilePath(fileName, ext: FileTypeName.sql.rawValue)
+        getBundleFilePath(fileName, ext: FileTypeName.sql.rawValue)
     }
     
     ///获取临时下载文件保存目录
     ///放在Temp文件夹下
-    func getTempDownloadDir() -> String
+    func getTempDownloadDir() -> NSString
     {
-        return self.getTempDirWith(sdDownloadTempDir)
+        getTempDirWith(sdDownloadTempDir)
     }
     
     ///获取沙盒音频文件目录
-    func getSoundsDir() -> String
+    func getSoundsDir() -> NSString
     {
-        return self.getLibraryDirWith(sdSoundsDir)
+        getDocumentDirWith(sdSoundsDir)
     }
 
     /**************************************** 文件夹路径访问 Section End ****************************************/

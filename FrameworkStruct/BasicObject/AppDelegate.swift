@@ -37,7 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.initData()
-        
+        iCloudAdapter.shared.queryDocuments()
+//        do {
+//            let url = iCloudAdapter.shared.getDir()!.appendingPathComponent("test.txt")
+//            try "哈sfsdfsdfsdf哈哈".write(to: url, atomically: true, encoding: .utf8)
+//            print("success")
+//        } catch {
+//            print(error)
+//        }
         return true
     }
 
@@ -70,8 +77,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     }
     
     //通过URL Schemes或其它App打开此App
+    //如果未使用SceneDelegate，则系统调用这个方法
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        UrlSchemeAdapter.shared.dispatchUrl(url, options: options)
+        if SandBoxAccessor.shared.isLocalFile(url.absoluteString)
+        {
+            //打开沙盒或者文件App或者其他App中的文件
+            FileManageAdapter.shared.dispatchFileUrl(url, appOptions: options)
+        }
+        else if UrlSchemeAdapter.shared.isUrlScheme(url)
+        {
+            //从Url Scheme打开
+            UrlSchemeAdapter.shared.dispatchUrl(url, appOptions: options)
+        }
+        else
+        {
+            
+        }
         
         return true
     }

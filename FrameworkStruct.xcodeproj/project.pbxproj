@@ -570,6 +570,9 @@
 		EAA3930028C73130009438DC /* place_code_function.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FF28C73130009438DC /* place_code_function.jpg */; };
 		EAA3930228C73136009438DC /* place_code_publicity.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA3930128C73136009438DC /* place_code_publicity.jpg */; };
 		EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */; };
+		EAA60BC528DDA70A00E1AF0C /* iCloudDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA60BC428DDA70A00E1AF0C /* iCloudDocument.swift */; };
+		EAA60BCC28DEDE7300E1AF0C /* FileManageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA60BCB28DEDE7300E1AF0C /* FileManageAdapter.swift */; };
+		EAA60BCE28DEE6DB00E1AF0C /* FileManageConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA60BCD28DEE6DB00E1AF0C /* FileManageConst.swift */; };
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
@@ -577,6 +580,7 @@
 		EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84127FE7D5C008EA586 /* FSLabel.swift */; };
 		EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84327FE8993008EA586 /* FSImageView.swift */; };
 		EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */; };
+		EAAE472B28DD5D6700C244C8 /* iCloudAdapterConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE472A28DD5D6700C244C8 /* iCloudAdapterConst.swift */; };
 		EAAEBFF6283B69B4001C9118 /* CommandConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF5283B69B4001C9118 /* CommandConst.swift */; };
 		EAAEBFF8283B69E7001C9118 /* CommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF7283B69E7001C9118 /* CommandManager.swift */; };
 		EAAEBFFC283B6ADB001C9118 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFB283B6ADB001C9118 /* IOManager.swift */; };
@@ -1569,6 +1573,11 @@
 		EAA392FF28C73130009438DC /* place_code_function.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_function.jpg; sourceTree = "<group>"; };
 		EAA3930128C73136009438DC /* place_code_publicity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_publicity.jpg; sourceTree = "<group>"; };
 		EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEmbellisher.swift; sourceTree = "<group>"; };
+		EAA60BC428DDA70A00E1AF0C /* iCloudDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudDocument.swift; sourceTree = "<group>"; };
+		EAA60BC628DE8E8C00E1AF0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAA60BC828DEDD9500E1AF0C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAA60BCB28DEDE7300E1AF0C /* FileManageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageAdapter.swift; sourceTree = "<group>"; };
+		EAA60BCD28DEE6DB00E1AF0C /* FileManageConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageConst.swift; sourceTree = "<group>"; };
 		EAAA4E81276F3E4900C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E82276F3E7800C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E83276F3EC900C45712 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
@@ -1581,6 +1590,8 @@
 		EAACA84127FE7D5C008EA586 /* FSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSLabel.swift; sourceTree = "<group>"; };
 		EAACA84327FE8993008EA586 /* FSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSImageView.swift; sourceTree = "<group>"; };
 		EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractionManager.swift; sourceTree = "<group>"; };
+		EAAE472928DD5D3700C244C8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAE472A28DD5D6700C244C8 /* iCloudAdapterConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAdapterConst.swift; sourceTree = "<group>"; };
 		EAAEBFF4283B6859001C9118 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAEBFF5283B69B4001C9118 /* CommandConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandConst.swift; sourceTree = "<group>"; };
 		EAAEBFF7283B69E7001C9118 /* CommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandManager.swift; sourceTree = "<group>"; };
@@ -3689,6 +3700,16 @@
 			path = EpidemicPreventionPolicy;
 			sourceTree = "<group>";
 		};
+		EAA60BC728DEDD8700E1AF0C /* FileManageAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				EAA60BC828DEDD9500E1AF0C /* README.md */,
+				EAA60BCB28DEDE7300E1AF0C /* FileManageAdapter.swift */,
+				EAA60BCD28DEE6DB00E1AF0C /* FileManageConst.swift */,
+			);
+			path = FileManageAdapter;
+			sourceTree = "<group>";
+		};
 		EAAA4E80276F3E2F00C45712 /* ComponentManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -3716,11 +3737,12 @@
 				EADE521C27F6C919005417BE /* UrlSchemeAdapter */,
 				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
 				EADE522527F6F50D005417BE /* SocializeAdapter */,
+				EAAE472828DD5D2000C244C8 /* iCloudAdapter */,
+				EAA60BC728DEDD8700E1AF0C /* FileManageAdapter */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 				EADE522327F6F470005417BE /* ClipboardAdapter.swift */,
 				EAD0B93627FFC88E00DB4949 /* CommunicationAdapter.swift */,
-				EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -3742,6 +3764,17 @@
 				EA08D61827D9C84400D3961F /* CheckerConst.swift */,
 			);
 			path = DataChecker;
+			sourceTree = "<group>";
+		};
+		EAAE472828DD5D2000C244C8 /* iCloudAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				EAAE472928DD5D3700C244C8 /* README.md */,
+				EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */,
+				EAAE472A28DD5D6700C244C8 /* iCloudAdapterConst.swift */,
+				EAA60BC428DDA70A00E1AF0C /* iCloudDocument.swift */,
+			);
+			path = iCloudAdapter;
 			sourceTree = "<group>";
 		};
 		EAAEBFF3283B683A001C9118 /* IOPackage */ = {
@@ -4314,6 +4347,7 @@
 		EADB00E027624090001B7223 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				EAA60BC628DE8E8C00E1AF0C /* README.md */,
 				EADB008827623B5A001B7223 /* Info.plist */,
 				EA9A4A992780350500170BB3 /* OCHeader.h */,
 				EADB00CF27624011001B7223 /* FrameworkStruct-Bridging-Header.h */,
@@ -4833,6 +4867,7 @@
 				EADB013E2762433C001B7223 /* CustomTheme.swift in Sources */,
 				EA75BB372792AA7C00910B4C /* FMDatabaseAdditions.m in Sources */,
 				EA1AE484277819E600D028F9 /* Typealiases.swift in Sources */,
+				EAA60BC528DDA70A00E1AF0C /* iCloudDocument.swift in Sources */,
 				EA1AE492277819E600D028F9 /* ConstraintDirectionalInsets.swift in Sources */,
 				EA33BF5227F82FB600DBE44D /* DrawingCanvasView.swift in Sources */,
 				EA3E8AA127B77CEA006A2715 /* FilepathImageProvider.swift in Sources */,
@@ -5033,6 +5068,7 @@
 				EA9A786E27C7554C00A11FC8 /* TFHpple.m in Sources */,
 				EA3E8C2927B782C4006A2715 /* POPPropertyAnimation.mm in Sources */,
 				EADB00E62762410D001B7223 /* StringConst.swift in Sources */,
+				EAA60BCE28DEE6DB00E1AF0C /* FileManageConst.swift in Sources */,
 				EA9A78CD27C756C900A11FC8 /* MPITextAsyncLayer.m in Sources */,
 				EA9A78CF27C756C900A11FC8 /* MPITextHashing.m in Sources */,
 				EA99372427994F6100480147 /* TABComponentLayer.m in Sources */,
@@ -5200,6 +5236,7 @@
 				EA3E8B0427B77CEA006A2715 /* KeyframeInterpolator.swift in Sources */,
 				EA3E8ACE27B77CEA006A2715 /* ShapeAnimation.swift in Sources */,
 				EA11126427B3BE2C006D0B83 /* ParameterEncoder.swift in Sources */,
+				EAA60BCC28DEDE7300E1AF0C /* FileManageAdapter.swift in Sources */,
 				EA3E8C2227B782C4006A2715 /* POPSpringAnimation.mm in Sources */,
 				EA9A78CB27C756C900A11FC8 /* MPITextSelectionView.m in Sources */,
 				EA9A78D927C756C900A11FC8 /* MPITextTruncationInfo.m in Sources */,
@@ -5228,6 +5265,7 @@
 				EADB011D276242D1001B7223 /* TimeEmbellisher.swift in Sources */,
 				EA9A785C27C7546100A11FC8 /* TimePeriodChain.swift in Sources */,
 				EADB01382762433C001B7223 /* ThemeManager.swift in Sources */,
+				EAAE472B28DD5D6700C244C8 /* iCloudAdapterConst.swift in Sources */,
 				EA11128027B3BE2C006D0B83 /* HTTPHeaders.swift in Sources */,
 				EA3E8AB527B77CEA006A2715 /* FloatValueProvider.swift in Sources */,
 				EA3E8C2F27B782C4006A2715 /* POPAnimatableProperty.mm in Sources */,
@@ -5467,6 +5505,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M3DF85K738;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -5512,6 +5551,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FrameworkStruct/FrameworkStruct.entitlements;
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M3DF85K738;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";

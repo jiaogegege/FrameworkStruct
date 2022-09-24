@@ -231,3 +231,14 @@ func g_loading(mode: ToastManager.TMShowMode = .serial)
 {
     ToastManager.shared.wantShowAnimate(mode: mode)
 }
+
+
+///沙盒Documents目录，参数可追加子目录
+func g_documentsDir(subDir: String? = nil) -> NSString
+{
+    var dir = SandBoxAccessor.shared.getDocumentDirectory()
+    if let subDir = subDir {
+        dir = dir.appendingPathComponent(subDir) as NSString
+    }
+    return dir
+}
