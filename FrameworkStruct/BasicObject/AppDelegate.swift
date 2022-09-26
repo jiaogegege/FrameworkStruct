@@ -39,11 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         self.initData()
         iCloudAdapter.shared.queryDocuments()
 //        do {
-//            let url = iCloudAdapter.shared.getDir()!.appendingPathComponent("test.txt")
+//            let url = iCloudAdapter.shared.getDocumentsDir()!.appendingPathComponent("test.txt")
 //            try "哈sfsdfsdfsdf哈哈".write(to: url, atomically: true, encoding: .utf8)
 //            print("success")
 //        } catch {
 //            print(error)
+//        }
+        
+//        let mgr = FileManager.default
+//        if let path = iCloudAdapter.shared.getDir()?.appendingPathComponent("test.txt", isDirectory: false)
+//        {
+//            try? mgr.removeItem(at: path)
 //        }
         return true
     }

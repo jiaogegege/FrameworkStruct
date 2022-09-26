@@ -71,7 +71,7 @@ extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
         
     }
     
-    //选择了多个文件，iOS11
+    //选择了多个文件，iOS11，根据实际需求针对打开多个文件的情况进行处理，这里只做例子
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let url = urls.first
         {

@@ -11,6 +11,7 @@ import Foundation
 ///iCloud document目录预定义列表，根据实际需求修改
 enum IADocumentDir: String {
     case Documents
+    case db = "Documents/db"
 }
 
 ///可在icloud中保存的值的类型，都是基础类型
@@ -75,21 +76,21 @@ struct IADocumentResultModel {
     var displayName: String
     var url: URL
     var path: String
-    var size: Int64
+    var size: Int64?
     var createDate: Date
     var changeDate: Date
     var contentType: String
-    var contentTypeTree: [String]
+    var contentTypeTree: [String]?
     var isUbiquitous: Bool
     var hasUnresolvedConflicts: Bool
     var downloadingStatus: String   //NSMetadataUbiquitousItemDownloadingStatusNotDownloaded/NSMetadataUbiquitousItemDownloadingStatusDownloaded/NSMetadataUbiquitousItemDownloadingStatusCurrent
     var isDownloading: Bool
     var isUploaded: Bool
     var isUploading: Bool
-    var percentDownloaded: Double
+    var percentDownloaded: Double?
     var percentUploaded: Double
-    var downloadingError: NSError
-    var uploadingError: NSError
+    var downloadingError: NSError?
+    var uploadingError: NSError?
     var downloadRequested: Bool
     var isExternalDocument: Bool
     var containerDisplayName: String
@@ -104,24 +105,24 @@ struct IADocumentResultModel {
     init(info: NSMetadataItem) {
         self.name = info.value(forAttribute: NSMetadataItemFSNameKey) as! String
         self.displayName = info.value(forAttribute: NSMetadataItemDisplayNameKey) as! String
-        self.url = info.value(forAttribute: NSMetadataItemFSNameKey) as! URL
+        self.url = info.value(forAttribute: NSMetadataItemURLKey) as! URL
         self.path = info.value(forAttribute: NSMetadataItemPathKey) as! String
-        self.size = info.value(forAttribute: NSMetadataItemFSSizeKey) as! Int64
+        self.size = info.value(forAttribute: NSMetadataItemFSSizeKey) as? Int64
         self.createDate = info.value(forAttribute: NSMetadataItemFSCreationDateKey) as! Date
         self.changeDate = info.value(forAttribute: NSMetadataItemFSContentChangeDateKey) as! Date
         self.path = info.value(forAttribute: NSMetadataItemPathKey) as! String
         self.contentType = info.value(forAttribute: NSMetadataItemContentTypeKey) as! String
-        self.contentTypeTree = info.value(forAttribute: NSMetadataItemContentTypeTreeKey) as! [String]
+        self.contentTypeTree = info.value(forAttribute: NSMetadataItemContentTypeTreeKey) as? [String]
         self.isUbiquitous = info.value(forAttribute: NSMetadataItemIsUbiquitousKey) as! Bool
         self.hasUnresolvedConflicts = info.value(forAttribute: NSMetadataUbiquitousItemHasUnresolvedConflictsKey) as! Bool
         self.downloadingStatus = info.value(forAttribute: NSMetadataUbiquitousItemDownloadingStatusKey) as! String
         self.isDownloading = info.value(forAttribute: NSMetadataUbiquitousItemIsDownloadingKey) as! Bool
         self.isUploaded = info.value(forAttribute: NSMetadataUbiquitousItemIsUploadedKey) as! Bool
         self.isUploading = info.value(forAttribute: NSMetadataUbiquitousItemIsUploadingKey) as! Bool
-        self.percentDownloaded = info.value(forAttribute: NSMetadataUbiquitousItemPercentDownloadedKey) as! Double
+        self.percentDownloaded = info.value(forAttribute: NSMetadataUbiquitousItemPercentDownloadedKey) as? Double
         self.percentUploaded = info.value(forAttribute: NSMetadataUbiquitousItemPercentUploadedKey) as! Double
-        self.downloadingError = info.value(forAttribute: NSMetadataUbiquitousItemDownloadingErrorKey) as! NSError
-        self.uploadingError = info.value(forAttribute: NSMetadataUbiquitousItemUploadingErrorKey) as! NSError
+        self.downloadingError = info.value(forAttribute: NSMetadataUbiquitousItemDownloadingErrorKey) as? NSError
+        self.uploadingError = info.value(forAttribute: NSMetadataUbiquitousItemUploadingErrorKey) as? NSError
         self.downloadRequested = info.value(forAttribute: NSMetadataUbiquitousItemDownloadRequestedKey) as! Bool
         self.isExternalDocument = info.value(forAttribute: NSMetadataUbiquitousItemIsExternalDocumentKey) as! Bool
         self.containerDisplayName = info.value(forAttribute: NSMetadataUbiquitousItemContainerDisplayNameKey) as! String
