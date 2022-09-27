@@ -43,6 +43,8 @@ extension AdapterMonitor: ExternalInterface
         _ = NetworkAdapter.shared
         //初始化推送通知适配器
         _ = NotificationAdapter.shared
+        //初始化iCloud适配器，如果支持iCloud的话
+        _ = iCloudAdapter.shared
     }
     
 }

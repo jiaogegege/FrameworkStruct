@@ -32,7 +32,7 @@ extension NSObject
     
     ///获取类型的类名，计算属性
     class var className: String {
-        return NSStringFromClass(Self.self).components(separatedBy: String.sDot).last!
+        NSStringFromClass(Self.self).components(separatedBy: String.sDot).last!
     }
     
 }

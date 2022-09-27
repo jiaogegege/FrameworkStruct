@@ -50,13 +50,17 @@ class iCloudAdapter: OriginAdapter {
         return query
     }()
     
+    //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
+    fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentResultModel]) -> Void)] = []
+    
     
     //MARK: 方法
     //私有化初始化方法
     private override init()
     {
         super.init()
-        
+        //判断icloud是否有Documents文件夹，如果不存在则创建
+        initContainer()
         addNotification()
     }
     
@@ -70,7 +74,39 @@ class iCloudAdapter: OriginAdapter {
         return self
     }
     
-    func addNotification()
+    //初始化iCloud文件夹， 主要是初始化Documents文件夹
+    fileprivate func initContainer()
+    {
+        //先判断Documents文件夹是否存在       //创建根目录下临时文件路径
+        if let documentPath = getDocumentsDir()?.path, let metaUrl = getDir()?.appendingPathComponent(iCloudAdapter.metaFileName)
+        {
+            //不存在则创建，因为Documents是系统默认文件夹，所以不能手动创建，可以通过在iCloud根目录下保存一个文件来让系统自动创建，创建完成后在把这个文件删除
+            if !sbMgr.isExist(documentPath)
+            {
+                do {
+                    //写入一个空格字符串
+                    try String.sSpace.write(to: metaUrl, atomically: true, encoding: .utf8)
+                    FSLog("create iCloud Documents success")
+                } catch {
+                    FSLog("create iCloud Documents failure")
+                }
+            }
+            else    //如果存在Documents文件夹，则删除`meta.data`临时文件，如果有的话
+            {
+                if sbMgr.isExist(metaUrl.path)
+                {
+                    do {
+                        try fileMgr.removeItem(at: metaUrl)
+                        FSLog("delete meta.dat success")
+                    } catch {
+                        FSLog("delete meta.dat failure")
+                    }
+                }
+            }
+        }
+    }
+    
+    fileprivate func addNotification()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(iCloudAdapterDidReceiveValueChangeNotification(notification:)), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
     }
@@ -108,8 +144,13 @@ extension iCloudAdapter: DelegateProtocol
             let it = item as! NSMetadataItem
             let st = IADocumentResultModel.init(info: it)
             fileArray.append(st)
-            print(st.name)
         }
+        for cb in queryDocumentsCallbacks
+        {
+            cb(fileArray)
+        }
+        //完毕之后，清理回调
+        queryDocumentsCallbacks.removeAll()
     }
     
 }
@@ -120,6 +161,9 @@ extension iCloudAdapter: InternalType
 {
     ///iCloud存储容器id，根据实际配置修改
     static let iCloudIdentifier = "iCloud.FrameworkStruct"
+    
+    ///用于创建Documents的临时文件名
+    fileprivate static let metaFileName = "meta.dat"
     
     ///icloud目录搜索范围
     enum IASearchScope {
@@ -138,7 +182,7 @@ extension iCloudAdapter: InternalType
                 return [NSMetadataQueryUbiquitousDocumentsScope]
             case .rootAndDocuments:
                 return [NSMetadataQueryUbiquitousDataScope, NSMetadataQueryUbiquitousDocumentsScope]
-            case .external:
+            case .external: //不明所以，先写上
                 return [NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope]
             }
         }
@@ -286,9 +330,13 @@ extension iCloudAdapter: ExternalInterface
     }
     
     ///查询icloud文件信息
-    func queryDocuments()
+    func queryDocuments(_ callback: @escaping ([IADocumentResultModel]) -> Void)
     {
-        self.fileQuery.start()
+        self.queryDocumentsCallbacks.append(callback)
+        if !self.fileQuery.isStarted || self.fileQuery.isStopped    //如果还未开始查询，那么开始查询
+        {
+            self.fileQuery.start()
+        }
     }
     
     ///将数据写入iCloud文件
