@@ -51,7 +51,7 @@ class iCloudAdapter: OriginAdapter {
     }()
     
     ///搜索结果排序规则
-    fileprivate(set) var querySort: IASort?
+    fileprivate(set) var querySort: IASearchResultSort?
     
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
     fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentResultModel]) -> Void)] = []
@@ -344,7 +344,7 @@ extension iCloudAdapter: ExternalInterface
     }
     
     ///设置排序规则
-    func setSort(type: IASort)
+    func setSort(type: IASearchResultSort)
     {
         self.querySort = type
     }
