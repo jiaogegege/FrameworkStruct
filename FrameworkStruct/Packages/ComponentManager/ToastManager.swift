@@ -341,7 +341,7 @@ extension ToastManager: ExternalInterface
     }
     
     //只显示一个文本，设置一段时间后消失，并执行一个回调
-    func wantShowText(text:String, hideDelay: TimeInterval, completion: @escaping CompletionCallback)
+    func wantShowText(text:String, hideDelay: TimeInterval, completion: CompletionCallback? = nil)
     {
         self.wantShow(text: text, animate: false, hideDelay: hideDelay, completion: completion)
     }

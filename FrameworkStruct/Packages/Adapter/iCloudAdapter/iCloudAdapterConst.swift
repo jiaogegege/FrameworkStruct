@@ -8,11 +8,6 @@
 import Foundation
 
 
-///iCloud document目录预定义列表，根据实际需求修改
-enum IADocumentDir: String {
-    case Documents
-    case db = "Documents/db"
-}
 
 ///可在icloud中保存的值的类型，都是基础类型
 enum IAValueType {
@@ -24,6 +19,14 @@ enum IAValueType {
     case data
     case array
     case dict
+}
+
+///iCloud document目录预定义列表，根据实际需求修改
+enum IADocumentDir: String {
+    case Documents
+    case data = "Documents/Data"        //Documents下有一个Data文件夹
+    case text = "Documents/Text"        //Documents下有一个Text文件夹
+    case image = "Documents/Image"      //Documents下有一个Image文件夹
 }
 
 ///可在icloud读写的value的key定义，根据实际需求定义

@@ -576,6 +576,7 @@
 		EAAA4E84276F3EC900C45712 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E83276F3EC900C45712 /* AlertManager.swift */; };
 		EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E87276F3EF600C45712 /* ToastManager.swift */; };
 		EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA4E8A276F3F3C00C45712 /* ThreadManager.swift */; };
+		EAAC7A5A28E2A52E009F4B56 /* iCloudFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC7A5928E2A52E009F4B56 /* iCloudFileViewController.swift */; };
 		EAACA84027FE7BCB008EA586 /* CopyPasteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */; };
 		EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84127FE7D5C008EA586 /* FSLabel.swift */; };
 		EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84327FE8993008EA586 /* FSImageView.swift */; };
@@ -1586,6 +1587,7 @@
 		EAAA4E8E276F57BB00C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E92276F64F200C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAA4E94276F658400C45712 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAC7A5928E2A52E009F4B56 /* iCloudFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudFileViewController.swift; sourceTree = "<group>"; };
 		EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyPasteViewController.swift; sourceTree = "<group>"; };
 		EAACA84127FE7D5C008EA586 /* FSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSLabel.swift; sourceTree = "<group>"; };
 		EAACA84327FE8993008EA586 /* FSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSImageView.swift; sourceTree = "<group>"; };
@@ -4376,6 +4378,7 @@
 				EA66061027C86C11000B20A6 /* TestWebViewController.swift */,
 				EA33BF4F27F82DF200DBE44D /* DrawTestViewController.swift */,
 				EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */,
+				EAAC7A5928E2A52E009F4B56 /* iCloudFileViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -4651,6 +4654,7 @@
 				EA66061727C86E0E000B20A6 /* WebAdapterConst.swift in Sources */,
 				EA75BB262792A80900910B4C /* DatabaseAccessor.swift in Sources */,
 				EA99371D27994F6100480147 /* TABAnimatedCacheManager.m in Sources */,
+				EAAC7A5A28E2A52E009F4B56 /* iCloudFileViewController.swift in Sources */,
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
 				EA9A75AB27C731EB00A11FC8 /* zip.c in Sources */,
 				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,

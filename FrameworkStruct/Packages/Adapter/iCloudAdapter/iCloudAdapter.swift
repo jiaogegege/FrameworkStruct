@@ -40,7 +40,7 @@ class iCloudAdapter: OriginAdapter {
     //沙盒存取器
     fileprivate lazy var sbMgr: SandBoxAccessor = SandBoxAccessor.shared
     
-    //icloud数据查询对象
+    //icloud文件查询器
     fileprivate lazy var fileQuery: NSMetadataQuery = {
         let query = NSMetadataQuery()
         query.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]      //默认搜索icloud的Documents目录
@@ -49,6 +49,9 @@ class iCloudAdapter: OriginAdapter {
         NotificationCenter.default.addObserver(self, selector: #selector(fileQueryFinished(notification:)), name: NSNotification.Name.NSMetadataQueryDidUpdate, object: query)
         return query
     }()
+    
+    ///搜索结果排序规则
+    fileprivate(set) var querySort: IASort?
     
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
     fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentResultModel]) -> Void)] = []
@@ -86,9 +89,9 @@ class iCloudAdapter: OriginAdapter {
                 do {
                     //写入一个空格字符串
                     try String.sSpace.write(to: metaUrl, atomically: true, encoding: .utf8)
-                    FSLog("create iCloud Documents success")
+//                    FSLog("create iCloud Documents success")
                 } catch {
-                    FSLog("create iCloud Documents failure")
+                    FSLog("create iCloud Documents failure: \(error.localizedDescription)")
                 }
             }
             else    //如果存在Documents文件夹，则删除`meta.data`临时文件，如果有的话
@@ -97,9 +100,9 @@ class iCloudAdapter: OriginAdapter {
                 {
                     do {
                         try fileMgr.removeItem(at: metaUrl)
-                        FSLog("delete meta.dat success")
+//                        FSLog("delete meta.dat success")
                     } catch {
-                        FSLog("delete meta.dat failure")
+                        FSLog("delete meta.dat failure: \(error.localizedDescription)")
                     }
                 }
             }
@@ -145,6 +148,13 @@ extension iCloudAdapter: DelegateProtocol
             let st = IADocumentResultModel.init(info: it)
             fileArray.append(st)
         }
+        //排序
+        if let sort = querySort
+        {
+            fileArray.sort { (lhs, rhs) in
+                sort.compare(lhs: lhs, rhs: rhs)
+            }
+        }
         for cb in queryDocumentsCallbacks
         {
             cb(fileArray)
@@ -160,7 +170,9 @@ extension iCloudAdapter: DelegateProtocol
 extension iCloudAdapter: InternalType
 {
     ///iCloud存储容器id，根据实际配置修改
-    static let iCloudIdentifier = "iCloud.FrameworkStruct"
+    enum iCloudContainerIdentifier: String {
+        case frameworkStruct = "iCloud.FrameworkStruct"
+    }
     
     ///用于创建Documents的临时文件名
     fileprivate static let metaFileName = "meta.dat"
@@ -184,6 +196,26 @@ extension iCloudAdapter: InternalType
                 return [NSMetadataQueryUbiquitousDataScope, NSMetadataQueryUbiquitousDocumentsScope]
             case .external: //不明所以，先写上
                 return [NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope]
+            }
+        }
+    }
+    
+    ///搜索结果排序规则，绑定的值是是否升序
+    enum IASearchResultSort {
+        case name(Bool)
+        case createDate(Bool)
+        case changeDate(Bool)
+        
+        //返回排序结果
+        func compare(lhs: IADocumentResultModel, rhs: IADocumentResultModel) -> Bool
+        {
+            switch self {
+            case .name(let bool):
+                return bool ? lhs.name < rhs.name : lhs.name > rhs.name
+            case .createDate(let bool):
+                return bool ? lhs.createDate < rhs.createDate : lhs.createDate > rhs.createDate
+            case .changeDate(let bool):
+                return bool ? lhs.changeDate < rhs.changeDate : lhs.changeDate > rhs.changeDate
             }
         }
     }
@@ -293,14 +325,38 @@ extension iCloudAdapter: ExternalInterface
         self.fileQuery.searchScopes = scope.getScope()
     }
     
+    ///设置搜索结果过滤条件
+    ///参数：type：要过滤的类型；opposite：是否取反，如果为true，那么type中的类型会被去除，否则只保留type中指定的类型
+    func setFilter(_ types: [FMUTIs], opposite: Bool = false)
+    {
+        var predicateStr: PredicateExpression = ""
+        for type in types {
+            //"(kMDItemContentType != 'com.apple.mail.emlx') && (kMDItemContentType != 'public.vcard')"
+            //[NSPredicate predicateWithFormat:@"(%K == %@)", NSMetadataItemContentTypeKey, whatToFilter]
+            if g_validString(predicateStr)  //如果已经有内容了，那么追加` && `
+            {
+                predicateStr.append(" && ")
+            }
+            //拼接过滤条件
+            predicateStr.append(String(format: "(kMDItemContentType %@ '%@')", (opposite ? "!=" : "=="), type.rawValue))
+        }
+        self.fileQuery.predicate = NSPredicate(format: predicateStr)
+    }
+    
+    ///设置排序规则
+    func setSort(type: IASort)
+    {
+        self.querySort = type
+    }
+    
     ///获取icloud对应container根目录或者子目录路径，如果目录不存在则创建，不能创建根目录，不能创建`Documents`目录，因为这是系统目录，用户没有权限修改
     ///请确保是目录，而非文件
     ///参数：
     ///path：子目录路径，不传则返回根目录；identifier：icloud容器id，可配置多个容器
-    func getDir(_ path: IADocumentDir? = nil, identifier: String = iCloudIdentifier) -> URL?
+    func getDir(_ path: IADocumentDir? = nil, identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
     {
         var dirUrl: URL? = nil
-        if let url = fileMgr.url(forUbiquityContainerIdentifier: identifier)
+        if let url = fileMgr.url(forUbiquityContainerIdentifier: identifier.rawValue)
         {
             dirUrl = url
             if let path = path {
@@ -324,9 +380,15 @@ extension iCloudAdapter: ExternalInterface
     }
     
     ///获取iCloud Documents目录
-    func getDocumentsDir(identifier: String = iCloudIdentifier) -> URL?
+    func getDocumentsDir(identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
     {
         getDir(.Documents, identifier: identifier)
+    }
+    
+    ///获取icloud下`Documents/Data`目录
+    func getDataDir(identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
+    {
+        getDir(.data, identifier: identifier)
     }
     
     ///查询icloud文件信息
@@ -344,22 +406,50 @@ extension iCloudAdapter: ExternalInterface
     ///data：要保存的数据；
     ///targetUrl：要保存文件的icloud路径，可能包含文件名；
     ///fileName：icloud上的文件名，包含扩展名，如果targetUrl没有包含文件名，在这个参数中传入
-    func write(_ data: Data, targetUrl: URL, fileName: String? = nil)
+    func writeDocument(_ data: Data, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
     {
-        
+        //组装fileUrl
+        var fileUrl = targetUrl
+        if let fileName = fileName {
+            fileUrl = fileUrl.appendingPathComponent(fileName)
+        }
+        let document = iCloudDocument(fileURL: fileUrl)
+        document.data = data
+        document.save(to: fileUrl, for: .forOverwriting) { isSuccess in
+            if let cb = completion
+            {
+                cb(isSuccess)
+            }
+        }
     }
     
-    ///将本地文件写入icloud中
+    ///将本地文件写入icloud中，通常用于备份本地文件到icloud
     ///参数：
     ///fileUrl：本地文件路径；
     ///targetUrl：icloud上的目标文件路径；
     ///fileName：如果传这个参数表示前面的两个参数都不包含文件名和扩展名，用这个参数拼接
-    func write(_ sourceUrl: URL, targetUrl: URL, fileName: String? = nil)
+    func writeDocument(_ sourceUrl: URL, targetUrl: URL, fileName: String? = nil)
     {
         
     }
     
-    
+    ///删除一个icloud上的文件
+    func deleteDocument(_ fileUrl: URL, completion: OptionalErrorClosure? = nil)
+    {
+        do {
+            try fileMgr.removeItem(at: fileUrl)
+            if let cb = completion
+            {
+                cb(nil)
+            }
+        } catch {
+            if let cb = completion
+            {
+                cb(error)
+            }
+        }
+    }
+
     
     /**************************************** document存储 Section End ***************************************/
     

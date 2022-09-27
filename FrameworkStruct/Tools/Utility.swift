@@ -221,7 +221,7 @@ func g_alert(title: String,
 }
 
 ///全局文本toast提示
-func g_toast(text: String, hideDelay: TimeInterval = 2.5, completion: @escaping ToastManager.CompletionCallback)
+func g_toast(text: String, hideDelay: TimeInterval = 2.5, completion: ToastManager.CompletionCallback? = nil)
 {
     ToastManager.shared.wantShowText(text: text, hideDelay: hideDelay, completion: completion)
 }
@@ -232,6 +232,11 @@ func g_loading(mode: ToastManager.TMShowMode = .serial)
     ToastManager.shared.wantShowAnimate(mode: mode)
 }
 
+///全局停止加载提示
+func g_endLoading()
+{
+    ToastManager.shared.hideHUD()
+}
 
 ///沙盒Documents目录，参数可追加子目录
 func g_documentsDir(subDir: String? = nil) -> NSString

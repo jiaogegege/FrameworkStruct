@@ -37,24 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.initData()
-        iCloudAdapter.shared.queryDocuments { fileUrls in
-            for f in fileUrls
-            {
-                print(f.name)
-            }
-        }
-
-//        g_after(1) {
-//            print(SandBoxAccessor.shared.isExist(iCloudAdapter.shared.getDocumentsDir()!.path))
-//        }
-        
-//        do {
-//            let url = iCloudAdapter.shared.getDocumentsDir()!.appendingPathComponent("test.txt")
-//            try "哈sfsdfsdfsdf哈哈".write(to: url, atomically: true, encoding: .utf8)
-//            print("create test.txt success")
-//        } catch {
-//            print(error)
-//        }
         
         return true
     }

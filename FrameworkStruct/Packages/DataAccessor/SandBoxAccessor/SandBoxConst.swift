@@ -26,6 +26,7 @@ let sdSoundsDir = "Sounds"
 //文件扩展名列表，根据需要新增
 enum FileTypeName: String {
     //文档
+    case dat
     case txt
     case rtf
     case lrc

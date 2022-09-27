@@ -62,7 +62,7 @@ extension JCollectionViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionviewcell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.reuseId, for: indexPath)
 //        cell.contentView.backgroundColor = self.colors[Int(arc4random_uniform(UInt32(self.colors.count)))]
         cell.contentView.backgroundColor = UIColor.lightGray
         return cell

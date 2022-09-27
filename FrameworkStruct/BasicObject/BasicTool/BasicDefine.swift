@@ -27,6 +27,9 @@ protocol BasicProtocol
 ///正则表达式
 typealias RegexExpression = String
 
+///谓词表达式
+typealias PredicateExpression = String
+
 ///Javascript片段
 typealias JavascriptExpression = String
 

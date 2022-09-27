@@ -286,6 +286,8 @@ extension String
     static let drawTest = localized("drawTest")
     //复制粘贴
     static let copyPaste = localized("copyPaste")
+    //iCloud文件管理
+    static let iCloudFileManage = localized("iCloudFileManage")
     
     //MARK: 界面提示和按钮文案
     //确定

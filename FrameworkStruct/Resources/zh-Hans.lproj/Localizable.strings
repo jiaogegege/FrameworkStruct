@@ -34,6 +34,7 @@ animationDemo = "动画演示";
 webInteraction = "H5交互";
 drawTest = "绘图测试";
 copyPaste = "复制粘贴";
+iCloudFileManage = "iCloud文件管理";
 
 /**
  * 界面提示和按钮文案

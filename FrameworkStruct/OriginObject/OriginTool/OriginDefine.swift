@@ -114,6 +114,12 @@ typealias AnyClosure = ((Any) -> Void)
 //返回值为可选Any的闭包
 typealias OptionalAnyClosure = ((Any?) -> Void)
 
+//返回值为Bool的闭包
+typealias BoolClosure = ((Bool) -> Void)
+
+//返回值为可选Bool的闭包
+typealias OptionalBoolClosure = ((Bool?) -> Void)
+
 //返回值为String的闭包
 typealias StringClosure = ((String) -> Void)
 

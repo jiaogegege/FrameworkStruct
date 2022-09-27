@@ -11,14 +11,17 @@ import UniformTypeIdentifiers
 ///支持的UTIs，可以添加更多，参考`UTType`或者UTIs官网
 enum FMUTIs: String, CaseIterable
 {
+    case folder = "public.folder"
+    case directory = "public.directory"
     case item = "public.item"
     case content = "public.content"
     case compositeContent = "public.composite-content"
     case diskImage = "public.disk-image"
     case archive = "public.archive"
     case data = "public.data"
-    case directory = "public.directory"
     case symbolicLink = "public.symlink"
+    case appleMail = "com.apple.mail.emlx"
+    case vCard = "public.vcard"
     case executable = "public.executable"
     case appleBookmark = "com.apple.bookmark"
     case url = "public.url"

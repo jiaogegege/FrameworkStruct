@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.healthCode, String.placeCode, String.travelCard, String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste]
+    let titleArray = [String.healthCode, String.placeCode, String.travelCard, String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste, String.iCloudFileManage]
     
     override class func getViewController() -> Self {
         return getVC(from: gMainSB)
@@ -104,13 +104,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         {
             let vc = JCollectionViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 4  //主题选择
         {
             let vc = ThemeSelectViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 5
         {
@@ -118,50 +118,55 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
             vc.hidesBottomBarWhenPushed = true
             vc.modalPresentationStyle = .pageSheet
 //            vc.isModalInPresentation = true
-            self.present(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
         }
         else if indexPath.row == 6  //约束测试
         {
             let vc = ConstraintTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 7  //绘制表格
         {
             let vc = SimpleTableViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
             
         }
         else if indexPath.row == 8  //阴影测试
         {
             let vc = ShadowTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 9  //动画演示
         {
             let vc = AnimationDemoViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 10  //h5交互
         {
             let vc = TestWebViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 11  //绘图测试
         {
             let vc = DrawTestViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
         }
         else if indexPath.row == 12  //复制粘贴
         {
             let vc = CopyPasteViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            push(vc)
+        }
+        else if indexPath.row == 13 //iCloud文件管理
+        {
+            let vc = iCloudFileViewController.getViewController()
+            push(vc)
         }
     }
     
