@@ -37,7 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.initData()
-        
+        g_after(4) {
+            iCloudAdapter.shared.copyDocument(SandBoxAccessor.shared.getDatabasePath(), targetUrl: iCloudAdapter.shared.getFileUrl(in: iCloudAdapter.shared.getDocumentsDir()!, fileName: sdDatabaseFile), fileName: nil) { success in
+                g_toast(text: (success ? "备份成功" : "备份失败"))
+            }
+        }
         return true
     }
 

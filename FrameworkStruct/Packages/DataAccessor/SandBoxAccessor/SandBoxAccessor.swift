@@ -129,13 +129,13 @@ extension SandBoxAccessor: ExternalInterface
     //MARK: 文件夹路径访问
     /**************************************** 文件夹路径访问 Section Begin ****************************************/
     ///获得沙盒文件夹路径
-    func getHomeDirectory() -> NSString
+    func getHomeDir() -> NSString
     {
         NSHomeDirectory() as NSString
     }
     
     ///获得Documents文件夹路径
-    func getDocumentDirectory() -> NSString
+    func getDocumentDir() -> NSString
     {
         // 检索指定路径
         // 第一个参数：指定的搜索路径
@@ -148,7 +148,7 @@ extension SandBoxAccessor: ExternalInterface
     ///获取一个Documents下的目录如果不存在则创建
     func getDocumentDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = self.getDocumentDirectory().appendingPathComponent(pathComponent)
+        let dirPath = self.getDocumentDir().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
@@ -157,7 +157,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获得Library路径
-    func getLibraryDirectory() -> NSString
+    func getLibraryDir() -> NSString
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let libPath = paths.last
@@ -167,7 +167,7 @@ extension SandBoxAccessor: ExternalInterface
     ///获取一个Library下的目录如果不存在则创建
     func getLibraryDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = self.getLibraryDirectory().appendingPathComponent(pathComponent)
+        let dirPath = self.getLibraryDir().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
@@ -176,7 +176,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取cache路径
-    func getCacheDirectory() -> NSString
+    func getCacheDir() -> NSString
     {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let cachePath = paths.last
@@ -186,7 +186,7 @@ extension SandBoxAccessor: ExternalInterface
     ///获取一个cache下的目录如果不存在则创建
     func getCacheDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = self.getCacheDirectory().appendingPathComponent(pathComponent)
+        let dirPath = self.getCacheDir().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)
@@ -195,7 +195,7 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     ///获取 Temp 的路径
-    func getTempDirectory() -> NSString
+    func getTempDir() -> NSString
     {
         NSTemporaryDirectory() as NSString
     }
@@ -203,7 +203,7 @@ extension SandBoxAccessor: ExternalInterface
     ///获取一个Temp下的目录，不存在则创建
     func getTempDirWith(_ pathComponent: String) -> NSString
     {
-        let dirPath = self.getTempDirectory().appendingPathComponent(pathComponent)
+        let dirPath = self.getTempDir().appendingPathComponent(pathComponent)
         if !self.isExist(dirPath) //不存在则创建
         {
             let _ = self.createDir(dirPath)

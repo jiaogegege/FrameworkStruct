@@ -403,6 +403,12 @@ extension iCloudAdapter: ExternalInterface
         getDir(.data, identifier: identifier)
     }
     
+    ///获取icloud下的某个目录下的某个文件的路径，fileName：包括扩展名
+    func getFileUrl(in dir: URL, fileName: String) -> URL
+    {
+        dir.appendingPathComponent(fileName)
+    }
+    
     ///查询icloud文件信息
     func queryDocuments(_ callback: @escaping ([IADocumentSearchResult]) -> Void)
     {
@@ -514,27 +520,50 @@ extension iCloudAdapter: ExternalInterface
     
     ///将本地文件复制到icloud中，通常用于备份本地文件到icloud
     ///参数：
-    ///fileUrl：本地文件路径；
+    ///sourcePath：本地文件路径；
     ///targetUrl：icloud上的目标文件路径；
     ///fileName：如果传这个参数表示前面的两个参数都不包含文件名和扩展名，用这个参数拼接
-    func copyDocument(_ sourceUrl: URL, targetUrl: URL, fileName: String? = nil)
+    func copyDocument(_ sourcePath: String, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
     {
-        var source = sourceUrl
+        var source = sourcePath
         var target = targetUrl
         //处理文件路径
         if let fn = fileName
         {
-            if !source.path.hasSuffix(fn)
+            if !source.hasSuffix(fn)
             {
-                source.appendingPathComponent(fn)
+                source = (source as NSString).appendingPathComponent(fn)
             }
             if !target.path.hasSuffix(fn)
             {
-                target.appendingPathComponent(fn)
+                target = target.appendingPathComponent(fn)
             }
         }
-        let document = iCloudDocument(fileURL: target)
-        
+        //读写文件较慢，所以异步操作
+        let currentQueue = OperationQueue.current?.underlyingQueue  //记录当前queue
+        g_async(onMain: false) {
+            //读取本地文件data
+            if let data = self.fileMgr.contents(atPath: source)
+            {
+                //写入icloud文件
+                let document = iCloudDocument(fileURL: target)
+                document.data = data
+                document.save(to: target, for: .forOverwriting) {[weak document] success in
+                    var queue: DispatchQueue = .main
+                    if let currentQueue = currentQueue {
+                        queue = currentQueue
+                    }
+                    queue.async {
+                        //保存完成后关闭文件
+                        document?.close()
+                        if let cb = completion
+                        {
+                            cb(success)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     ///删除一个icloud上的文件

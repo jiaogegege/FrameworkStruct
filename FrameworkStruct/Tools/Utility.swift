@@ -248,7 +248,7 @@ func g_endLoading()
 ///沙盒Documents目录，参数可追加子目录
 func g_documentsDir(subDir: String? = nil) -> NSString
 {
-    var dir = SandBoxAccessor.shared.getDocumentDirectory()
+    var dir = SandBoxAccessor.shared.getDocumentDir()
     if let subDir = subDir {
         dir = dir.appendingPathComponent(subDir) as NSString
     }

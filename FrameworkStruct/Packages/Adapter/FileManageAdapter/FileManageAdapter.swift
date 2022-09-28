@@ -52,7 +52,7 @@ class FileManageAdapter: OriginAdapter
                 fileData = try? Data.init(contentsOf: newUrl, options: [.mappedIfSafe])
                 if let data = fileData {
                     //获取到数据，暂时保存到本地沙盒
-                    try? data.write(to: URL(fileURLWithPath: SandBoxAccessor.shared.getDocumentDirectory().appendingPathComponent(fileName)))
+                    try? data.write(to: URL(fileURLWithPath: SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)))
                 }
             }
         }
@@ -93,7 +93,7 @@ extension FileManageAdapter: ExternalInterface
 //        let fileExt = fileUrl.pathExtension   //扩展名
 //        let absFileName = fileUrl.deletingPathExtension().lastPathComponent   //文件名
         //保存的文件路径
-        let savePath = SandBoxAccessor.shared.getDocumentDirectory().appendingPathComponent(fileName)
+        let savePath = SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)
         if let fileData = try? Data(contentsOf: fileUrl)
         {
             try? fileData.write(to: URL(fileURLWithPath: savePath))
