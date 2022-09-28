@@ -35,6 +35,7 @@ webInteraction = "H5交互";
 drawTest = "绘图测试";
 copyPaste = "复制粘贴";
 iCloudFileManage = "iCloud文件管理";
+editiCloudFile = "编辑iCloud文件";
 
 /**
  * 界面提示和按钮文案

@@ -74,7 +74,7 @@ struct IAValueChangeModel {
 }
 
 ///Document查询结果
-struct IADocumentResultModel {
+struct IADocumentSearchResult {
     var name: String
     var displayName: String
     var url: URL

@@ -26,6 +26,8 @@ extension String: ConstantPropertyProtocol
     //新行
     static let sNewline = "\n"
     static let sNewLine = "\\n"
+    //通用分隔符
+    static let sSeprator = "<=>"
     
     //"iCloud"
     static let iCloud = "iCloud"
@@ -288,6 +290,8 @@ extension String
     static let copyPaste = localized("copyPaste")
     //iCloud文件管理
     static let iCloudFileManage = localized("iCloudFileManage")
+    //编辑iCloud文件
+    static let editiCloudFile = localized("editiCloudFile")
     
     //MARK: 界面提示和按钮文案
     //确定

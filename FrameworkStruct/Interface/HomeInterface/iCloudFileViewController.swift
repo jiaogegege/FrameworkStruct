@@ -21,7 +21,7 @@ class iCloudFileViewController: BasicTableViewController {
     }()
     
     //icloud文件列表
-    fileprivate var fileArray: [IADocumentResultModel]?
+    fileprivate var fileArray: [IADocumentSearchResult]?
     
     
     //MARK: 方法
@@ -61,14 +61,12 @@ class iCloudFileViewController: BasicTableViewController {
             //获取到文件名后
             if let name = name
             {
-                if let fileName = (name as NSString).appendingPathExtension(FileTypeName.txt.rawValue)
-                {
-                    self.ia.writeDocument("测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容".toData()!, targetUrl: self.ia.getDocumentsDir()!, fileName: fileName) { success in
-                        g_toast(text: success ? "创建文件成功" : "创建文件失败")
-                        //刷新界面，网络有延迟
-                        g_after(1) {
-                            self.refresh()
-                        }
+                let fileName = FileTypeName.txt.fullName(name)
+                self.ia.createDocument("测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容".toData()!, targetUrl: self.ia.getDocumentsDir()!, fileName: fileName) { success in
+                    g_toast(text: success ? "创建文件成功" : "创建文件失败")
+                    //刷新界面，网络有延迟
+                    g_after(1) {
+                        self.refresh()
                     }
                 }
             }
@@ -117,6 +115,15 @@ extension iCloudFileViewController: DelegateProtocol
                     }
                 }
             }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let info = self.fileArray?[indexPath.row]
+        {
+            let vc = EditiCloudFileViewController.getViewController()
+            vc.fileInfo = info
+            push(vc)
         }
     }
     

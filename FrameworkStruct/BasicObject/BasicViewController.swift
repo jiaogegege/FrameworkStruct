@@ -524,9 +524,77 @@ extension BasicViewController
     }
     
     //push一个VC，可能失败，取决于自身有没有navigationVC
-    func push(_ vc: UIViewController, animated: Bool = true)
+    func push(_ vc: UIViewController, hideTabBar: Bool = true, animated: Bool = true)
     {
+        vc.hidesBottomBarWhenPushed = hideTabBar
         self.navigationController?.pushViewController(vc, animated: animated)
+    }
+    
+    ///pop返回上一VC或rootVC
+    func pop(_ toRoot: Bool = false, animated: Bool = true)
+    {
+        if toRoot
+        {
+            self.navigationController?.popToRootViewController(animated: animated)
+        }
+        else
+        {
+            self.navigationController?.popViewController(animated: animated)
+        }
+    }
+    
+    ///pop返回多层VC，如果index大于最大VC数，则返回到rootVC
+    ///参数：index：返回第几个VC，0=当前VC；1=上一个VC；2=上上个VC
+    func popAt(_ index: UInt, animated: Bool = true)
+    {
+        if let vcs = self.navigationController?.viewControllers
+        {
+            if index <= 0
+            {
+                //当前VC什么都不做
+            }
+            else if index >= vcs.count - 1   //返回rootVC
+            {
+                self.navigationController?.popToRootViewController(animated: animated)
+            }
+            else    //返回某一个VC
+            {
+                let vc = vcs[vcs.count - 1 - Int(index)]
+                self.navigationController?.popToViewController(vc, animated: animated)
+            }
+        }
+    }
+    
+    ///pop返回到stack中的第一个某一种VC，没找到则什么都不做
+    func popTo(_ vcType: UIViewController.Type, animated: Bool = true)
+    {
+        if let vcs = self.navigationController?.viewControllers
+        {
+            //查找第一个符合要求的vc，反向遍历
+            for (_, value) in vcs.enumerated().reversed()
+            {
+                if type(of: value) == vcType
+                {
+                    self.navigationController?.popToViewController(value, animated: animated)
+                    break
+                }
+            }
+        }
+    }
+    
+    ///modal显示一个VC
+    ///参数：
+    ///mode：modal模式；isModal：是否禁止手动下滑让modal的VC消失，默认不禁止
+    func modal(_ vc: UIViewController, mode: UIModalPresentationStyle = .fullScreen, isModal: Bool = false, animated: Bool = true, completion: VoidClosure? = nil)
+    {
+        vc.modalPresentationStyle = mode
+        vc.isModalInPresentation = isModal
+        self.present(vc, animated: animated) {
+            if let cb = completion
+            {
+                cb()
+            }
+        }
     }
     
 }

@@ -738,6 +738,8 @@
 		EADE522427F6F470005417BE /* ClipboardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522327F6F470005417BE /* ClipboardAdapter.swift */; };
 		EADE522827F6F554005417BE /* SocializeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522727F6F554005417BE /* SocializeActivity.swift */; };
 		EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0079327B63DEA008C71B4 /* HomeDataModel.m */; };
+		EAE6A33228E3EA030049E15F /* EditiCloudFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */; };
+		EAE6A33428E41FD30049E15F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE6A33328E41FD30049E15F /* HealthKit.framework */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
 		EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EB282A05AE0053BC85 /* OCUtility.m */; };
 		EAF401EF282A07530053BC85 /* FSException.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EE282A07530053BC85 /* FSException.m */; };
@@ -1929,6 +1931,8 @@
 		EADE522727F6F554005417BE /* SocializeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocializeActivity.swift; sourceTree = "<group>"; };
 		EAE0079227B63DEA008C71B4 /* HomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataModel.h; sourceTree = "<group>"; };
 		EAE0079327B63DEA008C71B4 /* HomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDataModel.m; sourceTree = "<group>"; };
+		EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiCloudFileViewController.swift; sourceTree = "<group>"; };
+		EAE6A33328E41FD30049E15F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
 		EAF401EA282A05AE0053BC85 /* OCUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCUtility.h; sourceTree = "<group>"; };
 		EAF401EB282A05AE0053BC85 /* OCUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUtility.m; sourceTree = "<group>"; };
@@ -1959,6 +1963,7 @@
 				EA20866527C527C600B63C8E /* UserNotificationsUI.framework in Frameworks */,
 				EA5843F028DC60FB0016E6CA /* CloudKit.framework in Frameworks */,
 				EA20866927C534F700B63C8E /* CoreServices.framework in Frameworks */,
+				EAE6A33428E41FD30049E15F /* HealthKit.framework in Frameworks */,
 				EA75BB492792ABA100910B4C /* libz.tbd in Frameworks */,
 				EA75BB472792AB9B00910B4C /* libsqlite3.tbd in Frameworks */,
 				EA3337D62797DA8800612DC3 /* SystemConfiguration.framework in Frameworks */,
@@ -3015,6 +3020,7 @@
 		EA922580276B3EAA00192E2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAE6A33328E41FD30049E15F /* HealthKit.framework */,
 				EA5843EF28DC60FB0016E6CA /* CloudKit.framework */,
 				EADE522127F6F0B2005417BE /* Social.framework */,
 				EAFC601627E1AAB00019CDEF /* CryptoKit.framework */,
@@ -4379,6 +4385,7 @@
 				EA33BF4F27F82DF200DBE44D /* DrawTestViewController.swift */,
 				EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */,
 				EAAC7A5928E2A52E009F4B56 /* iCloudFileViewController.swift */,
+				EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -5276,6 +5283,7 @@
 				EA3E8AA527B77CEA006A2715 /* AnimatedButton.swift in Sources */,
 				EA3E8A9727B77CEA006A2715 /* AnimationViewBase.macOS.swift in Sources */,
 				EA3E8B2527B77CEA006A2715 /* Marker.swift in Sources */,
+				EAE6A33228E3EA030049E15F /* EditiCloudFileViewController.swift in Sources */,
 				EAAEBFF6283B69B4001C9118 /* CommandConst.swift in Sources */,
 				EA99371B27994F6100480147 /* TABAnimatedCacheModel.m in Sources */,
 				EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */,

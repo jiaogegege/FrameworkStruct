@@ -112,19 +112,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
             vc.hidesBottomBarWhenPushed = true
             push(vc)
         }
-        else if indexPath.row == 5
+        else if indexPath.row == 5  //modal显示
         {
             let vc = ModalTestViewController.getViewController()
-            vc.hidesBottomBarWhenPushed = true
-            vc.modalPresentationStyle = .pageSheet
-//            vc.isModalInPresentation = true
-            present(vc, animated: true, completion: nil)
+            modal(vc, mode: .pageSheet)
         }
         else if indexPath.row == 6  //约束测试
         {
             let vc = ConstraintTestViewController.getViewController()
-            vc.hidesBottomBarWhenPushed = true
-            push(vc)
+            push(vc, hideTabBar: false)
         }
         else if indexPath.row == 7  //绘制表格
         {

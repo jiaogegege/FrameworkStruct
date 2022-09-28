@@ -125,6 +125,13 @@ func g_uuid() -> String
 {
     EncryptManager.shared.uuidString()
 }
+
+///用于生成一类带时间和uuid的特定字符串，通常用来唯一标记一个key
+///形如："2022/02/02 11:11:11<=>skldffjslwfw9323rwjfxzskldf3fjww293jf<=>http://www.baidu.com/search=123"
+func g_identifier(_ id: String) -> String
+{
+    currentTimeString() + String.sSeprator + g_uuid() + String.sSeprator + id
+}
     
 ///获取设备id，在app安装周期内保持不变
 func g_deviceId() -> String

@@ -448,6 +448,12 @@ extension NSAttributedString
  */
 extension Data
 {
+    ///将Data转换成string
+    func toString(encode: String.Encoding = .utf8) -> String?
+    {
+        String(data: self, encoding: encode)
+    }
+    
     ///将二进制json对象转换成json字典
     func toDictionary() -> Dictionary<String, Any>?
     {

@@ -54,7 +54,10 @@ class iCloudAdapter: OriginAdapter {
     fileprivate(set) var querySort: IASearchResultSort?
     
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
-    fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentResultModel]) -> Void)] = []
+    fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentSearchResult]) -> Void)] = []
+    
+    //正在操作的文件句柄dict
+    fileprivate var handledFiles: [IADocumentHandlerType: iCloudDocument] = [:]
     
     
     //MARK: 方法
@@ -113,6 +116,12 @@ class iCloudAdapter: OriginAdapter {
     {
         NotificationCenter.default.addObserver(self, selector: #selector(iCloudAdapterDidReceiveValueChangeNotification(notification:)), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
     }
+    
+    ///生成一个文件id作为key
+    fileprivate func generateFileId(fileUrl: URL) -> IADocumentHandlerType
+    {
+        g_identifier(fileUrl.absoluteString)
+    }
 
 }
 
@@ -141,11 +150,11 @@ extension iCloudAdapter: DelegateProtocol
     @objc func fileQueryFinished(notification: Notification)
     {
         fileQuery.stop()
-        var fileArray: [IADocumentResultModel] = []
+        var fileArray: [IADocumentSearchResult] = []
         for item in fileQuery.results
         {
             let it = item as! NSMetadataItem
-            let st = IADocumentResultModel.init(info: it)
+            let st = IADocumentSearchResult.init(info: it)
             fileArray.append(st)
         }
         //排序
@@ -200,14 +209,14 @@ extension iCloudAdapter: InternalType
         }
     }
     
-    ///搜索结果排序规则，绑定的值是是否升序
+    ///搜索结果排序规则，绑定的值是是否升序，更多排序规则根据实际需求添加
     enum IASearchResultSort {
         case name(Bool)
         case createDate(Bool)
         case changeDate(Bool)
         
         //返回排序结果
-        func compare(lhs: IADocumentResultModel, rhs: IADocumentResultModel) -> Bool
+        func compare(lhs: IADocumentSearchResult, rhs: IADocumentSearchResult) -> Bool
         {
             switch self {
             case .name(let bool):
@@ -219,6 +228,9 @@ extension iCloudAdapter: InternalType
             }
         }
     }
+    
+    ///正在操作的文件句柄类型
+    typealias IADocumentHandlerType = String
 
 }
 
@@ -392,7 +404,7 @@ extension iCloudAdapter: ExternalInterface
     }
     
     ///查询icloud文件信息
-    func queryDocuments(_ callback: @escaping ([IADocumentResultModel]) -> Void)
+    func queryDocuments(_ callback: @escaping ([IADocumentSearchResult]) -> Void)
     {
         self.queryDocumentsCallbacks.append(callback)
         if !self.fileQuery.isStarted || self.fileQuery.isStopped    //如果还未开始查询，那么开始查询
@@ -401,12 +413,8 @@ extension iCloudAdapter: ExternalInterface
         }
     }
     
-    ///将数据写入iCloud文件
-    ///参数：
-    ///data：要保存的数据；
-    ///targetUrl：要保存文件的icloud路径，可能包含文件名；
-    ///fileName：icloud上的文件名，包含扩展名，如果targetUrl没有包含文件名，在这个参数中传入
-    func writeDocument(_ data: Data, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
+    ///在iCloud中创建一个文件并传入数据，没有数据为什么要创建文件呢
+    func createDocument(_ data: Data, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
     {
         //组装fileUrl
         var fileUrl = targetUrl
@@ -415,21 +423,117 @@ extension iCloudAdapter: ExternalInterface
         }
         let document = iCloudDocument(fileURL: fileUrl)
         document.data = data
-        document.save(to: fileUrl, for: .forOverwriting) { isSuccess in
+        document.save(to: fileUrl, for: .forOverwriting) {[weak document] isSuccess in
             if let cb = completion
             {
                 cb(isSuccess)
             }
+            //创建完毕后关闭文件
+            document?.close()
         }
     }
     
-    ///将本地文件写入icloud中，通常用于备份本地文件到icloud
+    ///打开一个文件，返回文件句柄，失败返回nil
+    func openDocument(_ fileUrl: URL, completion: @escaping ((IADocumentHandlerType?) -> Void))
+    {
+        let document = iCloudDocument(fileURL: fileUrl)
+        let id = generateFileId(fileUrl: fileUrl)
+        handledFiles[id] = document
+        document.open {[weak self, weak document] success in
+            //打开成功
+            if success
+            {
+                completion(id)
+            }
+            else
+            {
+                //关闭文件
+                document?.close()
+                self?.handledFiles.removeValue(forKey: id)
+                completion(nil)
+            }
+        }
+    }
+    
+    ///读取文件内容
+    func readDocument(_ id: IADocumentHandlerType) -> Data?
+    {
+        guard let document = handledFiles[id] else {
+            return nil
+        }
+        
+        return document.data
+    }
+    
+    ///将数据写入iCloud文件
+    ///参数：
+    ///id：要保存的文件id
+    ///data：要保存的数据；
+    func writeDocument(_ id: IADocumentHandlerType, data: Data, completion: BoolClosure? = nil)
+    {
+        if let document = handledFiles[id]
+        {
+            document.data = data
+            document.save(to: document.fileURL, for: .forOverwriting) { success in
+                if let cb = completion
+                {
+                    cb(success)
+                }
+            }
+        }
+        else
+        {
+            if let cb = completion
+            {
+                cb(false)
+            }
+        }
+    }
+    
+    ///关闭文件
+    func closeDocument(_ id: IADocumentHandlerType, completion: BoolClosure? = nil)
+    {
+        if let document = handledFiles[id]
+        {
+            document.close {[weak self] success in
+                self?.handledFiles.removeValue(forKey: id)
+                if let cb = completion
+                {
+                    cb(success)
+                }
+            }
+        }
+        else
+        {
+            if let cb = completion
+            {
+                cb(false)
+            }
+        }
+    }
+    
+    ///将本地文件复制到icloud中，通常用于备份本地文件到icloud
     ///参数：
     ///fileUrl：本地文件路径；
     ///targetUrl：icloud上的目标文件路径；
     ///fileName：如果传这个参数表示前面的两个参数都不包含文件名和扩展名，用这个参数拼接
-    func writeDocument(_ sourceUrl: URL, targetUrl: URL, fileName: String? = nil)
+    func copyDocument(_ sourceUrl: URL, targetUrl: URL, fileName: String? = nil)
     {
+        var source = sourceUrl
+        var target = targetUrl
+        //处理文件路径
+        if let fn = fileName
+        {
+            if !source.path.hasSuffix(fn)
+            {
+                source.appendingPathComponent(fn)
+            }
+            if !target.path.hasSuffix(fn)
+            {
+                target.appendingPathComponent(fn)
+            }
+        }
+        let document = iCloudDocument(fileURL: target)
         
     }
     
