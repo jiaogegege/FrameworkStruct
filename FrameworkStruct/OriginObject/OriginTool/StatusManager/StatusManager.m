@@ -142,11 +142,15 @@
     if (actionArray == nil) //如果为空，那么创建一个新的
     {
         actionArray = [NSMutableArray array];
+        [actionArray addObject:action];
         [_actionDict setObject:actionArray forKey:key];
     }
-    if (![actionArray containsObject:action])
+    else    //如果不为空，那么判断是否已经有这个action了，没有才添加
     {
-        [actionArray addObject:action];
+        if (![actionArray containsObject:action])
+        {
+            [actionArray addObject:action];
+        }
     }
 }
 
