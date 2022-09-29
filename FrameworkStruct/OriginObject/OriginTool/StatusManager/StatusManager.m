@@ -66,7 +66,7 @@
     {
         return nil;
     }
-    id obj = [vec first];
+    id obj = [[vec first] copy];
     return obj;
 }
 
@@ -78,7 +78,7 @@
     {
         return nil;
     }
-    id obj = [vec objectAtIndex:1];
+    id obj = [[vec objectAtIndex:1] copy];
     return obj;
 }
 
@@ -90,7 +90,7 @@
     {
         return nil;
     }
-    id obj = [vec objectAtIndex:times];
+    id obj = [[vec objectAtIndex:times] copy];
     return obj;
 }
 
@@ -107,7 +107,7 @@
             //遍历容器，取出所有的元素
             for (int i = 0; i < count; ++i)
             {
-                id obj = [vec objectAtIndex:i];
+                id obj = [[vec objectAtIndex:i] copy];
                 [ar addObject:obj];
             }
             return ar;
