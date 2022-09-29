@@ -57,7 +57,7 @@ class ToastManager: OriginManager
     var interaction: Bool = false
     
     //显示的最小时长
-    var minTimeInterval: TimeInterval = 1.5
+    var minTimeInterval: TimeInterval = 2.0
     
     //一个很久的时间
     let longDistanceFuture: TimeInterval = 999999999
@@ -102,7 +102,7 @@ class ToastManager: OriginManager
     fileprivate func createHudClosure(text: String? = nil,
                                       detail: String? = nil,
                                       animate: Bool = true,
-                                      hideDelay:TimeInterval = 1.5,
+                                      hideDelay:TimeInterval = 2.0,
                                       completion: CompletionCallback? = nil) -> VoidClosure
     {
          let closure = {[weak self] in
@@ -128,13 +128,13 @@ class ToastManager: OriginManager
                 {
                     hud.completionBlock = callback
                 }
-                hud.hide(animated: true, afterDelay: (hideDelay < self!.minTimeInterval ? self!.minTimeInterval : hideDelay))
+                hud.hide(animated: true, afterDelay: (hideDelay < self!.generateShowTime(text: text, detail: detail) ? self!.generateShowTime(text: text, detail: detail) : hideDelay))
             }
             else
             {
                 SVProgressHUD.setDefaultStyle(self?.style == .dark ? .dark : .light)
-                SVProgressHUD.setMinimumDismissTimeInterval(self!.minTimeInterval)
-                SVProgressHUD.setMaximumDismissTimeInterval(hideDelay + self!.minTimeInterval)
+                SVProgressHUD.setMinimumDismissTimeInterval(self!.generateShowTime(text: text, detail: detail))
+                SVProgressHUD.setMaximumDismissTimeInterval(hideDelay + self!.generateShowTime(text: text, detail: detail))
                 if self?.blur == false
                 {
                     SVProgressHUD.setDefaultStyle(.custom)
@@ -156,7 +156,7 @@ class ToastManager: OriginManager
                     //因此，如果只显示文字，建议使用MB
                     SVProgressHUD.showInfo(withStatus: text)
                 }
-                SVProgressHUD.dismiss(withDelay: (hideDelay < self!.minTimeInterval ? self!.minTimeInterval : hideDelay), completion: completion)
+                SVProgressHUD.dismiss(withDelay: (hideDelay < self!.generateShowTime(text: text, detail: detail) ? self!.generateShowTime(text: text, detail: detail) : hideDelay), completion: completion)
             }
         }
         return closure
@@ -198,6 +198,25 @@ class ToastManager: OriginManager
                 }
             }
         }
+    }
+    
+    //计算toast文本显示时长，默认有一个最小时间，用户可以传入一个特定时间，如果不传，根据文本长度计算显示时长，最小不小于默认最小时间
+    fileprivate func generateShowTime(text: String?, detail: String?) -> TimeInterval
+    {
+        if text == nil && detail == nil     //都没有值的时候返回最小时间
+        {
+            return self.minTimeInterval
+        }
+        //计算文本长度
+        var tx: String = ""
+        if let text = text {
+            tx += text
+        }
+        if let detail = detail {
+            tx += detail
+        }
+        
+        return maxBetween(CGFloat(tx.count) * 0.06 + 0.5, self.minTimeInterval) //计算动态时间和最小时间的较大值
     }
     
     //析构方法，理论上永远不会执行
@@ -365,7 +384,7 @@ extension ToastManager: ExternalInterface
      *  - text: 主要文本，默认空字符串
      *  - detail:详细文本(仅MB，SV忽略)，默认空字符串
      *  - animate:是否有转圈动画
-     *  - hideDelay:延迟多少秒后消失，最小1.5
+     *  - hideDelay:延迟多少秒后消失，最小2.0
      *  - mode:显示模式，默认串行
      *  - completion:HUD消失之后执行的回调
      */
@@ -392,10 +411,10 @@ extension ToastManager: ExternalInterface
      *  - text: 主要文本，默认空字符串
      *  - detail:详细文本(仅MB，SV忽略)，默认空字符串
      *  - animate:是否有转圈动画
-     *  - hideDelay:延迟多少秒后消失，最小1.5
+     *  - hideDelay:延迟多少秒后消失，最小2.0
      *  - completion:HUD消失之后执行的回调
      */
-    func directShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay: TimeInterval = 1.5, completion: CompletionCallback? = nil)
+    func directShow(text: String? = nil, detail: String? = nil, animate: Bool = true, hideDelay: TimeInterval = 2.0, completion: CompletionCallback? = nil)
     {
         self.wantShow(text: text, detail: detail, animate: animate, hideDelay: hideDelay, mode: .concurrent, completion: completion)
     }
