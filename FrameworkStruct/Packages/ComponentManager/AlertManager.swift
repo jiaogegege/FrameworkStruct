@@ -73,21 +73,21 @@ class AlertManager: OriginManager
                         //隐藏完成后，显示新的alert
                         topVC.present(vc, animated: true, completion: nil)
                         self.showingAlert = vc
-                        self.stMgr.setStatus(true, forKey: AMStatusKey.isShowing)
+                        self.stMgr.set(true, key: AMStatusKey.isShowing)
                     }
                 }
                 else    //如果没有正在显示的alert，直接显示，理论上这里不该执行
                 {
                     topVC.present(vc, animated: true, completion: nil)
                     self.showingAlert = vc
-                    self.stMgr.setStatus(true, forKey: AMStatusKey.isShowing)
+                    self.stMgr.set(true, key: AMStatusKey.isShowing)
                 }
             }
             else    //当前没有显示alert，直接显示参数的alert
             {
                 topVC.present(vc, animated: true, completion: nil)
                 self.showingAlert = vc
-                self.stMgr.setStatus(true, forKey: AMStatusKey.isShowing)
+                self.stMgr.set(true, key: AMStatusKey.isShowing)
             }
         }
         else    //没有传入alertVC参数，那么去数据结构中获取alert
@@ -105,7 +105,7 @@ class AlertManager: OriginManager
                     {
                         topVC.present(alert, animated: true, completion: nil)
                         self.showingAlert = alert
-                        self.stMgr.setStatus(true, forKey: AMStatusKey.isShowing)
+                        self.stMgr.set(true, key: AMStatusKey.isShowing)
                     }
                     else
                     {
@@ -119,7 +119,7 @@ class AlertManager: OriginManager
     //当前是否在显示alert
     fileprivate func isShowing() -> Bool
     {
-        if let isShowing = self.stMgr.status(forKey: AMStatusKey.isShowing) as? Bool
+        if let isShowing = self.stMgr.status(AMStatusKey.isShowing) as? Bool
         {
             return isShowing
         }
@@ -143,7 +143,7 @@ class AlertManager: OriginManager
             weak var weakSelf = self
             parent.dismiss(animated: false) {
                 weakSelf?.showingAlert = nil
-                weakSelf?.stMgr.setStatus(false, forKey: AMStatusKey.isShowing)
+                weakSelf?.stMgr.set(false, key: AMStatusKey.isShowing)
                 if let comp = completion
                 {
                     comp()
@@ -169,7 +169,7 @@ class AlertManager: OriginManager
             ControllerManager.shared.topVC.present(alert, animated: true, completion: nil)
             //标记为正在显示
             self.showingAlert = alert
-            stMgr.setStatus(true, forKey: AMStatusKey.isShowing)
+            stMgr.set(true, key: AMStatusKey.isShowing)
             return true
         }
         return false
@@ -288,7 +288,7 @@ extension AlertManager: ExternalInterface
         //给vc添加一个消失的回调
         vc.dismissCallback = {[weak self]() in
             self?.showingAlert = nil
-            self?.stMgr.setStatus(false, forKey: AMStatusKey.isShowing)
+            self?.stMgr.set(false, key: AMStatusKey.isShowing)
             //消失后尝试显示一个alert
             self?.present()
         }
@@ -447,7 +447,7 @@ extension AlertManager: ExternalInterface
         {
             vc.presentingViewController?.dismiss(animated: false, completion: nil)
             self.showingAlert = nil
-            self.stMgr.setStatus(false, forKey: AMStatusKey.isShowing)
+            self.stMgr.set(false, key: AMStatusKey.isShowing)
         }
     }
     

@@ -81,13 +81,13 @@ class DialogManager: OriginManager
                 }
                 v.show(nil)
                 self.showingView = v
-                self.stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
+                self.stMgr.set(true, key: DMStatusKey.isShowing)
             }
             else    //当前没有显示view，直接显示参数的view
             {
                 v.show(nil)
                 self.showingView = v
-                self.stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
+                self.stMgr.set(true, key: DMStatusKey.isShowing)
             }
         }
         else    //没有传入view参数，那么去数据结构中获取view
@@ -105,7 +105,7 @@ class DialogManager: OriginManager
                     {
                         vi.show(nil)
                         self.showingView = vi
-                        self.stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
+                        self.stMgr.set(true, key: DMStatusKey.isShowing)
                     }
                     else
                     {
@@ -119,7 +119,7 @@ class DialogManager: OriginManager
     //当前是否在显示view
     fileprivate func isShowing() -> Bool
     {
-        if let isShowing = self.stMgr.status(forKey: DMStatusKey.isShowing) as? Bool
+        if let isShowing = self.stMgr.status(DMStatusKey.isShowing) as? Bool
         {
             return isShowing
         }
@@ -150,7 +150,7 @@ class DialogManager: OriginManager
             vi.show(nil)
             //标记为正在显示
             self.showingView = vi
-            stMgr.setStatus(true, forKey: DMStatusKey.isShowing)
+            stMgr.set(true, key: DMStatusKey.isShowing)
             return true
         }
         return false
@@ -196,7 +196,7 @@ extension DialogManager: ExternalInterface
         vi.dismissCallback = {[weak self] () in
             //消失后，尝试显示下一个view
             self?.showingView = nil
-            self?.stMgr.setStatus(false, forKey: DMStatusKey.isShowing)
+            self?.stMgr.set(false, key: DMStatusKey.isShowing)
             self?.show()
         }
         if priority == .high

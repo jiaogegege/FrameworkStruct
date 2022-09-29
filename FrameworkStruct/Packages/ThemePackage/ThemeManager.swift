@@ -42,7 +42,7 @@ class ThemeManager: OriginManager
     {
         super.init()
         //读取一些状态
-        self.stMgr.setStatus(ud.readBool(key: .followDarkMode), forKey: TMStatusKey.followDarkMode)
+        self.stMgr.set(ud.readBool(key: .followDarkMode), key: TMStatusKey.followDarkMode)
         
         //设置app是否跟随系统暗黑模式
         g_window().overrideUserInterfaceStyle = isFollowDarkMode ? .unspecified : .light
@@ -169,7 +169,7 @@ extension ThemeManager: ExternalInterface
     func setFollowDarkMode(follow: Bool)
     {
         //修改状态
-        self.stMgr.setStatus(follow, forKey: TMStatusKey.followDarkMode)
+        self.stMgr.set(follow, key: TMStatusKey.followDarkMode)
         //设置全局窗口样式
         g_window().overrideUserInterfaceStyle = follow ? .unspecified : .light
         //更新到本地
@@ -178,7 +178,7 @@ extension ThemeManager: ExternalInterface
     
     ///判断是否跟随暗黑模式
     var isFollowDarkMode: Bool {
-        return stMgr.status(forKey: TMStatusKey.followDarkMode) as! Bool
+        return stMgr.status(TMStatusKey.followDarkMode) as! Bool
     }
     
     ///判断主题是否是暗黑主题

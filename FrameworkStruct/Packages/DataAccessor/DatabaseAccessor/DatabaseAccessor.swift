@@ -69,7 +69,7 @@ class DatabaseAccessor: OriginAccessor
         super.init()
         
         /*********** 开始创建数据库 *************/
-        stMgr.setStatus(WorkState.creating, forKey: DBAStatusKey.workState)
+        stMgr.set(WorkState.creating, key: DBAStatusKey.workState)
         
         //数据库文件路径
         let dbPath = SandBoxAccessor.shared.getDatabasePath()
@@ -85,7 +85,7 @@ class DatabaseAccessor: OriginAccessor
         /************* 如果数据库打开不成功，那么打印错误信息 **************/
         guard self.dbQueue != nil else {
             //创建失败
-            stMgr.setStatus(WorkState.failure, forKey: DBAStatusKey.workState)
+            stMgr.set(WorkState.failure, key: DBAStatusKey.workState)
             FSLog("create db failure")
             return
         }
@@ -102,7 +102,7 @@ class DatabaseAccessor: OriginAccessor
         }
         
         /************** 数据库创建并打开成功 ******************/
-        stMgr.setStatus(WorkState.created, forKey: DBAStatusKey.workState)
+        stMgr.set(WorkState.created, key: DBAStatusKey.workState)
         
         //查询数据库版本号，判断是否要更新数据库
         self.checkAndUpdateDbVersion()
@@ -110,7 +110,7 @@ class DatabaseAccessor: OriginAccessor
         //如果操作完毕后，状态是`updated`，那么将状态设置为ready
         if self.currentState != .failure
         {
-            stMgr.setStatus(WorkState.ready, forKey: DBAStatusKey.workState)
+            stMgr.set(WorkState.ready, key: DBAStatusKey.workState)
         }
         
 //        FSLog("DatabaseAccessor: finish initialize")
@@ -184,7 +184,7 @@ class DatabaseAccessor: OriginAccessor
     fileprivate func checkAndUpdateDbVersion()
     {
         //开始升级
-        stMgr.setStatus(WorkState.updating, forKey: DBAStatusKey.workState)
+        stMgr.set(WorkState.updating, key: DBAStatusKey.workState)
         
         for ver in db_updateVersionList
         {
@@ -201,7 +201,7 @@ class DatabaseAccessor: OriginAccessor
                 else
                 {
                     //升级失败
-                    stMgr.setStatus(WorkState.failure, forKey: DBAStatusKey.workState)
+                    stMgr.set(WorkState.failure, key: DBAStatusKey.workState)
                     FSLog("get sql file error")
                     
                     //如果某个版本升级失败则退出
@@ -211,7 +211,7 @@ class DatabaseAccessor: OriginAccessor
         }
         
         //升级完毕
-        stMgr.setStatus(WorkState.updated, forKey: DBAStatusKey.workState)
+        stMgr.set(WorkState.updated, key: DBAStatusKey.workState)
     }
     
     //判断是否需要更新该版本，版本号形如：1_0_1
@@ -268,7 +268,7 @@ extension DatabaseAccessor: ExternalInterface
     /**************************************** 通用基础方法 Section Begin **************************************/
     ///获取存取器当前状态
     var currentState: WorkState {
-        return stMgr.status(forKey: DBAStatusKey.workState) as! DatabaseAccessor.WorkState
+        return stMgr.status(DBAStatusKey.workState) as! DatabaseAccessor.WorkState
     }
     
     ///打开数据库，在程序生命周期内手动打开数据库，不会对数据库进行完整性校验和版本升级

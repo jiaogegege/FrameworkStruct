@@ -19,6 +19,9 @@
 //建议使用该类型作为状态管理器的key
 typedef NSString * SMKeyType;
 
+//订阅者block类型
+typedef void(^SubscribeAction)(id _Nullable newStatus,id _Nullable oldStatus);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface StatusManager : NSObject
@@ -30,26 +33,31 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)initWithCapacity:(NSInteger)capacity;
 
 ///插入一个状态
--(BOOL)setStatus:(id)status ForKey:(id)key;
+-(BOOL)set:(id)status key:(id)key;
 
 ///获得当前某个指定key的状态，key一般是NSNumber/NSString类型；返回值是一个对象
--(id)statusForKey:(id)key;
+-(id)status:(id)key;
 
 ///获得上一次的状态
--(id)perviousStatusForKey:(id)key;
+-(id)perviousStatus:(id)key;
 
 ///获得之前某次的状态，参数：times指定之前第几次，当前为0，上一次为1，上上一次为2，最大不超过指定容量，没有返回nil
--(id)beforeTimes:(NSInteger)times StatusForKey:(id)key;
+-(id)before:(NSInteger)times status:(id)key;
 
 ///获得所有历史状态，没有返回nil
--(NSArray *)allStatusForKey:(id)key;
+-(NSArray *)allStatus:(id)key;
 
 ///清空某个状态
--(void)clearForKey:(id)key;
+-(void)clear:(id)key;
 
 ///清空所有状态
 -(void)reset;
 
+///清理所有资源
+-(void)clear;
+
+///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
+-(void)subscribe:(id)key action:(SubscribeAction)action;
 
 
 

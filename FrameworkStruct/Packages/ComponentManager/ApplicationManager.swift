@@ -106,7 +106,7 @@ class ApplicationManager: OriginManager
     {
         super.init()
         //设置初始状态
-        stMgr.setStatus(AMAppState.unknown, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.unknown, key: AMStatusKey.appState)
         
         self.addNotification()
         //监控电池
@@ -147,7 +147,7 @@ extension ApplicationManager: DelegateProtocol
     //app启动完毕
     @objc func applicationDidFinishLaunchNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.launched, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.launched, key: AMStatusKey.appState)
         //写入app启动次数
         let launchCount = self.launchCount
         ud.write(key: .runTimes, value: launchCount + 1)
@@ -156,37 +156,37 @@ extension ApplicationManager: DelegateProtocol
     //app即将进入前台
     @objc func applicationWillEnterForegroundNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.foreground, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.foreground, key: AMStatusKey.appState)
     }
     
     //app已经获得焦点
     @objc func applicationDidBecomeActiveNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.active, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.active, key: AMStatusKey.appState)
     }
     
     //app即将失去焦点
     @objc func applicationWillResignActiveNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.inactive, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.inactive, key: AMStatusKey.appState)
     }
     
     //app已经进入后台
     @objc func applicationDidEnterBackgroundNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.background, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.background, key: AMStatusKey.appState)
     }
     
     //app收到内存警告
     @objc func applicationDidReceiveMemoryWarningNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.memoryWarning, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.memoryWarning, key: AMStatusKey.appState)
     }
     
     //app即将被销毁
     @objc func applicationWillTerminateNotification(notification: Notification)
     {
-        stMgr.setStatus(AMAppState.terminate, forKey: AMStatusKey.appState)
+        stMgr.set(AMAppState.terminate, key: AMStatusKey.appState)
     }
     
     /**************************************** UIApplication通知 Section End ***************************************/
@@ -372,7 +372,7 @@ extension ApplicationManager: ExternalInterface
     func setBrightness(_ brightness: CGFloat)
     {
         //先保存一下当前亮度
-        stMgr.setStatus(UIScreen.main.brightness, forKey: AMStatusKey.brightness)
+        stMgr.set(UIScreen.main.brightness, key: AMStatusKey.brightness)
         //设置屏幕亮度
         UIScreen.main.brightness = brightness
     }
@@ -380,11 +380,11 @@ extension ApplicationManager: ExternalInterface
     ///恢复之前的屏幕亮度,如果某个界面调整过屏幕亮度,当退出这个界面时调用该方法恢复之前的屏幕亮度
     func resetBrightness()
     {
-        if let brightness = stMgr.status(forKey: AMStatusKey.brightness) as? CGFloat
+        if let brightness = stMgr.status(AMStatusKey.brightness) as? CGFloat
         {
             UIScreen.main.brightness = brightness
             //清除状态历史
-            stMgr.clear(forKey: AMStatusKey.brightness)
+            stMgr.clear(AMStatusKey.brightness)
         }
     }
     

@@ -24,8 +24,15 @@ class CopyPasteViewController: BasicViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func createUI() {
+        super.createUI()
+        stMgr.subscribe("text") {[unowned self] (newStr, oldStr) in
+            self.priceLabel.text = "\(oldStr ?? "") -> \(newStr ?? "")"
+        }
     }
     
     override func configUI() {
@@ -39,6 +46,15 @@ class CopyPasteViewController: BasicViewController {
     
     override func updateUI() {
         priceLabel.attributedText = g_price(10234)
+        g_after(1) {
+            self.stMgr.set("1", key: "text")
+        }
+        g_after(2) {
+            self.stMgr.set("2", key: "text")
+        }
+        g_after(3) {
+            self.stMgr.set("3", key: "text")
+        }
     }
     
 }

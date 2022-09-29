@@ -171,12 +171,12 @@ class ToastManager: OriginManager
         {
             clo()
             //显示hud后将状态设置为正在显示
-            stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+            stMgr.set(true, key: TMStatusKey.isShowing)
         }
         else
         {
             //如果当前不在显示hud，那么可以显示下一个hud
-            if let isShowing = stMgr.status(forKey: TMStatusKey.isShowing) as? Bool
+            if let isShowing = stMgr.status(TMStatusKey.isShowing) as? Bool
             {
                 if !isShowing
                 {
@@ -184,7 +184,7 @@ class ToastManager: OriginManager
                     {
                         closure()
                         //显示hud后将状态设置为正在显示
-                        stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+                        stMgr.set(true, key: TMStatusKey.isShowing)
                     }
                 }
             }
@@ -194,7 +194,7 @@ class ToastManager: OriginManager
                 {
                     closure()
                     //显示hud后将状态设置为正在显示
-                    stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+                    stMgr.set(true, key: TMStatusKey.isShowing)
                 }
             }
         }
@@ -224,7 +224,7 @@ extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
         {
             self.tmpMBHUD = nil
             //状态设置为不在显示hud
-            stMgr.setStatus(false, forKey: TMStatusKey.isShowing)
+            stMgr.set(false, key: TMStatusKey.isShowing)
         }
         
         //尝试显示下一个闭包，如果有的话
@@ -239,7 +239,7 @@ extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
             print(userInfo[SVProgressHUDStatusUserInfoKey] as Any)
         }
         //状态设置为正在显示hud
-        stMgr.setStatus(true, forKey: TMStatusKey.isShowing)
+        stMgr.set(true, key: TMStatusKey.isShowing)
     }
     
     //SV已经显示
@@ -268,7 +268,7 @@ extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
             print(userInfo[SVProgressHUDStatusUserInfoKey] as Any)
         }
         //状态设置为不在显示hud
-        stMgr.setStatus(false, forKey: TMStatusKey.isShowing)
+        stMgr.set(false, key: TMStatusKey.isShowing)
         
         //尝试显示下一个闭包，如果有的话
         self.show()
