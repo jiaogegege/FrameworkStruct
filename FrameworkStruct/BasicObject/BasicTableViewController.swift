@@ -375,7 +375,7 @@ class BasicTableViewController: UITableViewController
         
     }
     
-    //基础设置，设置这个控制器的基础属性
+    //基础设置，设置这个控制器的基础属性，默认在VC创建时执行一次
     //不建议覆写这个方法
     func basicConfig()
     {
@@ -384,16 +384,16 @@ class BasicTableViewController: UITableViewController
         self.setNavAlpha()
         //返回按钮样式
         self.setBackStyle()
-        //侧滑返回
-        self.setLeftSlideBack()
         //背景色
         self.setBackgroundColor()
     }
     
-    //设置导航栏和状态栏样式
+    //设置导航栏和状态栏样式，可多次执行，默认每次进入VC执行一次
     //不建议覆写这个方法
     func basicNavConfig()
     {
+        //侧滑返回
+        self.setLeftSlideBack()
         //导航栏透明
         self.setNavAlpha()
         //隐藏导航栏底部横线
