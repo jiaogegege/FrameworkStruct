@@ -132,13 +132,13 @@ extension ControllerManager: ExternalInterface
     }
     
     //push一个控制器
-    func pushViewController(_ controller: UIViewController, animated: Bool = true)
+    func pushController(_ controller: UIViewController, animated: Bool = true)
     {
         self.currentNavVC?.pushViewController(controller, animated: animated)
     }
     
     //present一个控制器
-    func presentViewController(_ controller: UIViewController, animated: Bool = true)
+    func presentController(_ controller: UIViewController, animated: Bool = true)
     {
         self.topVC.present(controller, animated: animated)
     }

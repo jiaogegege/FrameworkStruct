@@ -121,13 +121,15 @@ func g_screenShot() -> UIImage?
 func g_pushVC(_ vc: UIViewController, hideTabBar: Bool = true, animated: Bool = true)
 {
     vc.hidesBottomBarWhenPushed = hideTabBar
-    ControllerManager.shared.pushViewController(vc, animated: animated)
+    ControllerManager.shared.pushController(vc, animated: animated)
 }
 
 ///present控制器
-func g_presentVC(_ vc: UIViewController, animated: Bool = true)
+func g_presentVC(_ vc: UIViewController, mode: UIModalPresentationStyle = .fullScreen, isModal: Bool = false, animated: Bool = true)
 {
-    ControllerManager.shared.presentViewController(vc, animated: animated)
+    vc.modalPresentationStyle = mode
+    vc.isModalInPresentation = isModal
+    ControllerManager.shared.presentController(vc, animated: animated)
 }
 
 //MARK: 字符串和对象有效性判断
