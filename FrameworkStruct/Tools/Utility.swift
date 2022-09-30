@@ -118,8 +118,9 @@ func g_screenShot() -> UIImage?
 }
 
 ///push控制器
-func g_pushVC(_ vc: UIViewController, animated: Bool = true)
+func g_pushVC(_ vc: UIViewController, hideTabBar: Bool = true, animated: Bool = true)
 {
+    vc.hidesBottomBarWhenPushed = hideTabBar
     ControllerManager.shared.pushViewController(vc, animated: animated)
 }
 

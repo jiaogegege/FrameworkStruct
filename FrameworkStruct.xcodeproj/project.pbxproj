@@ -73,6 +73,7 @@
 		EA11128A27B3BE7B006D0B83 /* UIButton+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = EA11128827B3BE7B006D0B83 /* UIButton+BAKit.m */; };
 		EA11128C27B3C47F006D0B83 /* NetworkRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */; };
 		EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1387E12764A6D80041AB89 /* SystemExtension.swift */; };
+		EA19C5D028E6BA0600BE09E0 /* HomeShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA19C5CF28E6BA0600BE09E0 /* HomeShortcutManager.swift */; };
 		EA1AE470277819E600D028F9 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44B277819E600D028F9 /* ConstraintMultiplierTarget.swift */; };
 		EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44C277819E600D028F9 /* LayoutConstraintItem.swift */; };
 		EA1AE472277819E600D028F9 /* ConstraintMakerPrioritizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE44D277819E600D028F9 /* ConstraintMakerPrioritizable.swift */; };
@@ -837,6 +838,7 @@
 		EA11128927B3BE7B006D0B83 /* UIButton+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+BAKit.h"; sourceTree = "<group>"; };
 		EA11128B27B3C47F006D0B83 /* NetworkRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestManager.swift; sourceTree = "<group>"; };
 		EA1387E12764A6D80041AB89 /* SystemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtension.swift; sourceTree = "<group>"; };
+		EA19C5CF28E6BA0600BE09E0 /* HomeShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShortcutManager.swift; sourceTree = "<group>"; };
 		EA1AE44B277819E600D028F9 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		EA1AE44C277819E600D028F9 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		EA1AE44D277819E600D028F9 /* ConstraintMakerPrioritizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPrioritizable.swift; sourceTree = "<group>"; };
@@ -3731,6 +3733,7 @@
 				EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */,
 				EA3E89B227B77B35006A2715 /* AnimationManager.swift */,
 				EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */,
+				EA19C5CF28E6BA0600BE09E0 /* HomeShortcutManager.swift */,
 				EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */,
 			);
 			path = ComponentManager;
@@ -4701,6 +4704,7 @@
 				EA3E8B2B27B77CEA006A2715 /* Glyph.swift in Sources */,
 				EA9A78BE27C756C900A11FC8 /* MPITextInput.m in Sources */,
 				EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */,
+				EA19C5D028E6BA0600BE09E0 /* HomeShortcutManager.swift in Sources */,
 				EAC8A87627625D490088293F /* SDImageCacheConfig.m in Sources */,
 				EA3E8AB927B77CEA006A2715 /* AnimationFontProvider.swift in Sources */,
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,

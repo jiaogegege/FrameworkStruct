@@ -118,7 +118,7 @@ class BasicTableViewController: UITableViewController
         self.customConfig()
 
         //设置UI的基础样式
-        self.basicConfig()
+        self.basicOnceConfig()
         
         //立即设置约束，保证获取的frame是正确的
 //        self.view.setNeedsLayout()
@@ -139,9 +139,15 @@ class BasicTableViewController: UITableViewController
         super.viewWillAppear(animated)
         
         //每次UI显示都更新导航栏样式，因为其他界面可能修改导航栏样式
-        self.basicNavConfig()
+        self.basicMultiConfig()
         //显示为当前控制器
         ControllerManager.shared.displayController(self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.basicMultiDidConfig()
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -377,7 +383,7 @@ class BasicTableViewController: UITableViewController
     
     //基础设置，设置这个控制器的基础属性，默认在VC创建时执行一次
     //不建议覆写这个方法
-    func basicConfig()
+    func basicOnceConfig()
     {
         setFollowDarkMode()
         //导航栏透明
@@ -389,11 +395,12 @@ class BasicTableViewController: UITableViewController
     }
     
     //设置导航栏和状态栏样式，可多次执行，默认每次进入VC执行一次
+    //在`viewDidAppear`中执行
     //不建议覆写这个方法
-    func basicNavConfig()
+    func basicMultiConfig()
     {
-        //侧滑返回
-        self.setLeftSlideBack()
+        //导航栏隐藏
+        self.setHideNavigationBar()
         //导航栏透明
         self.setNavAlpha()
         //隐藏导航栏底部横线
@@ -408,6 +415,14 @@ class BasicTableViewController: UITableViewController
         {
             self.setNavBackgroundColor()
         }
+    }
+    
+    //这个方法在`viewDidAppear`中执行，可多次执行，主要针对一些不能在`viewWillAppear`中执行的方法
+    //不建议覆写这个方法
+    func basicMultiDidConfig()
+    {
+        //侧滑返回
+        self.setLeftSlideBack()
     }
     
     //创建界面，一般用来创建界面组件

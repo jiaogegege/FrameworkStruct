@@ -54,6 +54,10 @@ newMsg = "新消息";
 send = "发送";
 inputMessage = "请输入消息";
 append = "追加";
+//home快捷按钮
+myFavorite = "我的收藏";
+changeTheme = "切换主题";
+icloudFile = "iCloud文件";
 
 /**
  * Toast文案

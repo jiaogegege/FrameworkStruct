@@ -62,6 +62,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        self.window?.rootViewController = BasicTabbarController.init()
 //        self.window?.makeKeyAndVisible()
         
+        //处理shortcut打开app
+        ApplicationManager.shared.dispatchShortcut(connectionOptions.shortcutItem)
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -112,6 +115,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
             }
         }
+    }
+    
+    //当app在后台通过shortchut打开的时候调用
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        //处理shortcut打开app
+        ApplicationManager.shared.dispatchShortcut(shortcutItem)
+        
+        completionHandler(true)
     }
 
 }

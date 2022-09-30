@@ -322,6 +322,12 @@ extension String
     static let inputMessage = localized("inputMessage")
     //追加
     static let append = localized("append")
+    //我的收藏
+    static let myFavorite = localized("myFavorite")
+    //切换主题
+    static let changeTheme = localized("changeTheme")
+    //icloud文件
+    static let icloudFile = localized("icloudFile")
     
     //MARK: Toast文案
     

@@ -20,7 +20,7 @@
 typedef NSString * SMKeyType;
 
 //订阅者block类型
-typedef void(^SubscribeAction)(id _Nullable newStatus,id _Nullable oldStatus);
+typedef void(^SMSubscribeAction)(id _Nullable newStatus,id _Nullable oldStatus);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)clear;
 
 ///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
--(void)subscribe:(id)key action:(SubscribeAction)action;
+-(void)subscribe:(id)key action:(SMSubscribeAction)action;
 
 
 

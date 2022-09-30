@@ -27,3 +27,6 @@ NSBluetoothAlwaysUsageDescription = "框架结构需要使用蓝牙才能连接�
 NSLocationAlwaysUsageDescription = "框架结构想要获取您的位置信息";
 NSLocationAlwaysAndWhenInUseUsageDescription = "框架结构想要获取您的位置信息";
 NSLocationWhenInUseUsageDescription = "框架结构想要获取您的位置信息";
+NSHealthClinicalHealthRecordsShareUsageDescription = "框架结构想要记录您的健康信息";
+NSHealthShareUsageDescription = "框架结构想要访问您的健康信息";
+NSHealthUpdateUsageDescription = "框架结构想要更新您的健康信息";

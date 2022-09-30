@@ -128,6 +128,39 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeFavorite</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>打开我的收藏</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>我的收藏</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.FrameworkStruct.test.MyFavorites</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>key1</key>
+				<string>value1</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeTime</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>切换主题</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>切换主题</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.FrameworkStruct.test.ChangeTheme</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>key2</key>
+				<string>value2</string>
+			</dict>
+		</dict>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

@@ -99,6 +99,9 @@ class ApplicationManager: OriginManager
     ///代理对象
     weak var delegate: ApplicationManagerServices?
     
+    //shortcut
+    fileprivate(set) var shortcut: UIApplicationShortcutItem?
+    
     
     //MARK: 方法
     //私有化初始化方法
@@ -137,6 +140,15 @@ class ApplicationManager: OriginManager
         NotificationCenter.default.addObserver(self, selector: #selector(capturingDidChangeNotification(notification:)), name: UIScreen.capturedDidChangeNotification, object: nil)
     }
     
+    ///处理shortut
+    fileprivate func handleShortcut(_ shortcut: UIApplicationShortcutItem)
+    {
+        HomeShortcutManager.shared.dispatchShortcut(shortcut)
+        
+        //处理完后清空
+        self.shortcut = nil
+    }
+    
 }
 
 
@@ -163,6 +175,12 @@ extension ApplicationManager: DelegateProtocol
     @objc func applicationDidBecomeActiveNotification(notification: Notification)
     {
         stMgr.set(AMAppState.active, key: AMStatusKey.appState)
+        
+        //处理shortcut，如果有的话
+        if let shortcut = self.shortcut
+        {
+            self.handleShortcut(shortcut)
+        }
     }
     
     //app即将失去焦点
@@ -294,6 +312,12 @@ extension ApplicationManager: ExternalInterface
     ///app启动次数
     var launchCount: Int {
         return ud.readInt(key: .runTimes)
+    }
+    
+    ///处理shortcut
+    func dispatchShortcut(_ shortcut: UIApplicationShortcutItem?)
+    {
+        self.shortcut = shortcut
     }
     
     ///获取设备id，在app安装周期内保持不变

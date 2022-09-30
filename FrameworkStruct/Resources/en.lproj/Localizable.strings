@@ -36,6 +36,10 @@ drawTest = "Draw Testing";
 copyPaste = "Copy Paste";
 iCloudFileManage = "iCloud File Manage";
 editiCloudFile = "Edit iCloud File";
+//home快捷按钮
+myFavorite = "My Favorite";
+changeTheme = "Change Theme";
+icloudFile = "iCloud File";
 
 /**
  * 界面提示和按钮文案

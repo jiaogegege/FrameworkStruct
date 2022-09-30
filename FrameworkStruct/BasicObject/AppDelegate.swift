@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         //初始化程序组件
         rootMonitor.originConfig()
+        
+        //初始化home shortcuts
+        ApplicationManager.shared.app.shortcutItems = HomeShortcutManager.shared.getAllDynamic()
+        
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

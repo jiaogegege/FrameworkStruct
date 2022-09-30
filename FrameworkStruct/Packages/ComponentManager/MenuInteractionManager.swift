@@ -6,7 +6,7 @@
 //
 
 /**
- * 对于`UIContextMenuInteraction`功能的封装
+ * 对`UIContextMenuInteraction`功能的封装
  * 还没想好怎么弄，参考：https://blog.csdn.net/guoyongming925/article/details/110839969
  */
 import UIKit

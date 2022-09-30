@@ -136,7 +136,7 @@
 }
 
 ///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
--(void)subscribe:(id)key action:(SubscribeAction)action
+-(void)subscribe:(id)key action:(SMSubscribeAction)action
 {
     NSMutableArray *actionArray = [_actionDict objectForKey:key];
     if (actionArray == nil) //如果为空，那么创建一个新的
@@ -164,7 +164,7 @@
         //有订阅者，那么发送订阅信息
         id newValue = [self status:key];
         id oldValue = [self perviousStatus:key];
-        for (SubscribeAction action in actionArray)
+        for (SMSubscribeAction action in actionArray)
         {
             action(newValue, oldValue);
         }
