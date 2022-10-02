@@ -8,7 +8,7 @@
 import Foundation
 
 //判断文件是否从本地沙盒或者文件App中打开的路径前缀
-let sdFilePrefix = "file:///private"
+let sdFilePrefix = "file:///"
 
 //MARK: 文件路径定义，以`sd`开头，表示`sandbox`缩写
 //数据库文件路径

@@ -35,6 +35,12 @@ extension NSObject
         NSStringFromClass(Self.self).components(separatedBy: String.sDot).last!
     }
     
+    ///判断self是否和指定对象是同样的类的实例
+    func isBrother(_ to: Any) -> Bool
+    {
+        type(of: self) == type(of: to)
+    }
+    
 }
 
 

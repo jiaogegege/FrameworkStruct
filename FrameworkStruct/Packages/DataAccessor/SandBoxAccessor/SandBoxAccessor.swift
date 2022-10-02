@@ -119,9 +119,9 @@ extension SandBoxAccessor: ExternalInterface
     }
     
     //判断是否本地沙盒或者文件App中的文件
-    func isLocalFile(_ path: String) -> Bool
+    func isLocalFile(_ fileUrl: String) -> Bool
     {
-        path.hasPrefix(sdFilePrefix)
+        fileUrl.hasPrefix(sdFilePrefix)
     }
     
     /**************************************** 文件和目录操作 Section End ****************************************/

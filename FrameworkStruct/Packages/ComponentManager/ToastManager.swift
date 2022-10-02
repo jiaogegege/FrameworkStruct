@@ -216,7 +216,7 @@ class ToastManager: OriginManager
             tx += detail
         }
         
-        return maxBetween(CGFloat(tx.count) * 0.06 + 0.5, self.minTimeInterval) //计算动态时间和最小时间的较大值
+        return maxBetween(Double(tx.count) * 0.06 + 0.5, self.minTimeInterval) //计算动态时间和最小时间的较大值
     }
     
     //析构方法，理论上永远不会执行

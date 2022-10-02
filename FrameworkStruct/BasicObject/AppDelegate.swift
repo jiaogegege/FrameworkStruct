@@ -68,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     //注册远程推送失败
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        //注册远程推送失败，做一些处理
 //        FSLog("register remote notification error: \(error.localizedDescription)")
+        //注册远程推送失败，做一些处理
         NotificationAdapter.shared.registerForRemoteNotificationFail(error)
     }
     

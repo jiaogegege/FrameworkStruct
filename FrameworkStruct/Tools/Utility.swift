@@ -32,22 +32,48 @@ func FSLog(_ message: String)
 }
 
 //MARK: 类型判断和复制
-///判断是否是类对象
+///获得类型的类名的字符串
+func g_className(_ aClass: AnyClass) -> String
+{
+    NSStringFromClass(aClass).components(separatedBy: String.sDot).last!
+}
+
+///获得一个对象的类名
+func g_objClassName(_ obj: AnyObject) -> String
+{
+    let typeName = type(of: obj).description()
+    if(typeName.contains(String.sDot))
+    {
+        return typeName.components(separatedBy: String.sDot).last!
+    }
+    else
+    {
+        return typeName
+    }
+}
+
+///判断是否是对象
 func g_isObj(_ obj: Any) -> Bool
 {
     type(of: obj) is AnyClass
 }
 
-///是否是NSObject对象
+///判断是否是NSObject对象
 func g_isObjc(_ obj: AnyObject) -> Bool
 {
     type(of: obj) is NSObject.Type
 }
 
-///是否是NSObject子类
+///判断一个类是否是NSObject子类
 func g_isOC(_ cls: AnyClass) -> Bool
 {
     cls is NSObject.Type
+}
+
+///判断两个变量是否是同样的类型
+func g_isBrother(_ one: Any, _ another: Any) -> Bool
+{
+    type(of: one) == type(of: another)
 }
 
 ///返回一个拷贝的数据对象，如果是NSObject，那么返回copy对象；如果是Array/Dictionary，需要复制容器中的所有对象，返回新的容器和对象；其他返回原始值（基础类型、结构体、枚举等）
@@ -78,25 +104,6 @@ func g_copy(_ origin: Any?) -> Any?
     }
 }
 
-///获得类型的类名的字符串
-func g_className(_ aClass: AnyClass) -> String
-{
-    NSStringFromClass(aClass).components(separatedBy: String.sDot).last!
-}
-
-///获得一个对象的类名
-func g_objClassName(_ obj: AnyObject) -> String
-{
-    let typeName = type(of: obj).description()
-    if(typeName.contains(String.sDot))
-    {
-        return typeName.components(separatedBy: String.sDot).last!
-    }
-    else
-    {
-        return typeName
-    }
-}
 
 //MARK: 全局窗口和VC
 ///获取window对象
