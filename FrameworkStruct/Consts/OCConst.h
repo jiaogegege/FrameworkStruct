@@ -12,6 +12,19 @@
 #define OCConst_h
 
 
+//替换NSLog打印日志，在Release环境下不打印
+// 保证 #ifdef __OBJC__ 中的宏定义只会在 OC 的代码中被引用,否则，一旦引入 C/C++ 的代码或者框架，就会出错！
+#ifdef __OBJC__
+
+#ifdef DEBUG
+#define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#define NSLog(...)
+#endif
+
+#endif
+
+
 ///弱引用宏定义
 #define WS __weak typeof(self) weakSelf = self;
 #define WO(obj) __weak typeof(obj) weakObj = obj;

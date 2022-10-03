@@ -272,9 +272,9 @@ class SimpleTableView: UIView
         return contentView
     }
     
-    deinit {
-        FSLog("SimpleTableView: dealloc")
-    }
+//    deinit {
+//        FSLog("SimpleTableView: dealloc")
+//    }
     
 }
 

@@ -123,8 +123,7 @@ enum UrlSchemeFunctionalityList: String
                 nav.pushViewController(vc, animated: true)
             }
         case .goMine:
-            let tabbarVC = ControllerManager.shared.tabbarVC
-            tabbarVC?.selectedIndex = 1
+            ControllerManager.shared.tabbarVC?.selectedIndex = 1
         }
     }
 }

@@ -98,19 +98,18 @@ class ApplicationManager: OriginManager
     
     ///代理对象
     weak var delegate: ApplicationManagerServices?
-    
-    //shortcut
-    fileprivate(set) var shortcut: UIApplicationShortcutItem?
-    
+
     
     //MARK: 方法
     //私有化初始化方法
     private override init()
     {
         super.init()
+        
         //设置初始状态
         stMgr.set(AMAppState.unknown, key: AMStatusKey.appState)
         
+        self.initData()
         self.addNotification()
         //监控电池
         UIDevice.current.isBatteryMonitoringEnabled = true
@@ -126,6 +125,13 @@ class ApplicationManager: OriginManager
         return self
     }
     
+    //初始化一些App全局数据，根据需求配置
+    fileprivate func initData()
+    {
+        //初始化home shortcuts
+        self.app.shortcutItems = HomeShortcutManager.shared.getAllDynamic()
+    }
+    
     //添加通知
     fileprivate func addNotification()
     {
@@ -138,15 +144,6 @@ class ApplicationManager: OriginManager
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminateNotification(notification:)), name: UIApplication.willTerminateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didTakeScreenShotNotification(notification:)), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(capturingDidChangeNotification(notification:)), name: UIScreen.capturedDidChangeNotification, object: nil)
-    }
-    
-    ///处理shortut
-    fileprivate func handleShortcut(_ shortcut: UIApplicationShortcutItem)
-    {
-        HomeShortcutManager.shared.dispatchShortcut(shortcut)
-        
-        //处理完后清空
-        self.shortcut = nil
     }
     
 }
@@ -175,12 +172,6 @@ extension ApplicationManager: DelegateProtocol
     @objc func applicationDidBecomeActiveNotification(notification: Notification)
     {
         stMgr.set(AMAppState.active, key: AMStatusKey.appState)
-        
-        //处理shortcut，如果有的话
-        if let shortcut = self.shortcut
-        {
-            self.handleShortcut(shortcut)
-        }
     }
     
     //app即将失去焦点
@@ -295,6 +286,115 @@ extension ApplicationManager: InternalType
 //接口方法
 extension ApplicationManager: ExternalInterface
 {
+    /**************************************** AppDelegate和SceneDelegate适配方法 Section Begin ****************************************/
+    //App启动
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        //根据启动情况做一些处理
+        if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL
+        {
+            if SandBoxAccessor.shared.isLocalFile(url.absoluteString)
+            {
+                //打开沙盒或者文件App或者其他App中的文件
+                FileManageAdapter.shared.dispatchFileUrl(url, appOptions: nil)
+            }
+            else if UrlSchemeAdapter.shared.isUrlScheme(url)
+            {
+                //从Url Scheme打开
+                UrlSchemeAdapter.shared.dispatchUrl(url, appOptions: nil)
+            }
+            else
+            {
+                
+            }
+        }
+        
+        //处理shortcut打开app
+        if let sh = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem
+        {
+            HomeShortcutManager.shared.dispatchShortcut(sh)
+        }
+        
+        return true
+    }
+    
+    //通过URL Schemes或其它App打开此App
+    //如果未使用SceneDelegate，则系统调用这个方法
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if SandBoxAccessor.shared.isLocalFile(url.absoluteString)
+        {
+            //打开沙盒或者文件App或者其他App中的文件
+            FileManageAdapter.shared.dispatchFileUrl(url, appOptions: options)
+        }
+        else if UrlSchemeAdapter.shared.isUrlScheme(url)
+        {
+            //从Url Scheme打开
+            UrlSchemeAdapter.shared.dispatchUrl(url, appOptions: options)
+        }
+        else
+        {
+            
+        }
+        
+        return true
+    }
+    
+    //SceneDelegate连接到一个Scene
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
+    {
+        //处理url scheme和外部app打开文件
+        if let url = connectionOptions.urlContexts.first
+        {
+            if SandBoxAccessor.shared.isLocalFile(url.url.absoluteString)
+            {
+                //打开沙盒或者文件App或者其他App中的文件
+                FileManageAdapter.shared.dispatchFileUrl(url.url, sceneOptions: url.options)
+            }
+            else if UrlSchemeAdapter.shared.isUrlScheme(url.url)
+            {
+                //从Url Scheme打开
+                UrlSchemeAdapter.shared.dispatchUrl(url.url, sceneOptions: url.options)
+            }
+            else
+            {
+                
+            }
+        }
+        
+        //处理shortcut打开app
+        HomeShortcutManager.shared.dispatchShortcut(connectionOptions.shortcutItem)
+    }
+    
+    //通过URL Schemes或其它App打开此App
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first
+        {
+            if SandBoxAccessor.shared.isLocalFile(url.url.absoluteString)
+            {
+                //打开沙盒或者文件App或者其他App中的文件
+                FileManageAdapter.shared.dispatchFileUrl(url.url, sceneOptions: url.options)
+            }
+            else if UrlSchemeAdapter.shared.isUrlScheme(url.url)
+            {
+                //从Url Scheme打开
+                UrlSchemeAdapter.shared.dispatchUrl(url.url, sceneOptions: url.options)
+            }
+            else
+            {
+                
+            }
+        }
+    }
+    
+    //当app在后台通过shortchut打开的时候调用
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        //处理shortcut打开app
+        HomeShortcutManager.shared.dispatchShortcut(shortcutItem)
+        
+        completionHandler(true)
+    }
+    
+    /**************************************** AppDelegate和SceneDelegate适配方法 Section End ****************************************/
+    
     ///是否安装或者更新后第一次启动app
     var isFirstLaunch: Bool {
         let lastVersion = ud.readString(key: .lastRunVersion)
@@ -312,12 +412,6 @@ extension ApplicationManager: ExternalInterface
     ///app启动次数
     var launchCount: Int {
         return ud.readInt(key: .runTimes)
-    }
-    
-    ///处理shortcut
-    func dispatchShortcut(_ shortcut: UIApplicationShortcutItem?)
-    {
-        self.shortcut = shortcut
     }
     
     ///获取设备id，在app安装周期内保持不变

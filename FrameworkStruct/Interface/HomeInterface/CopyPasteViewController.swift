@@ -33,6 +33,7 @@ class CopyPasteViewController: BasicViewController {
         stMgr.subscribe("text") {[unowned self] (newStr, oldStr) in
             self.priceLabel.text = "\(oldStr ?? "") -> \(newStr ?? "")"
         }
+        stMgr.subscribe("text", delegate: self)
     }
     
     override func configUI() {
@@ -55,6 +56,15 @@ class CopyPasteViewController: BasicViewController {
         g_after(3) {
             self.stMgr.set("3", key: "text")
         }
+    }
+    
+}
+
+
+extension CopyPasteViewController: DelegateProtocol, StatusManagerDelegate
+{
+    func statusManagerDidUpdateStatus(_ key: Any, newValue: Any?, oldValue: Any?) {
+        print("\(String(describing: newValue))-\(String(describing: oldValue))")
     }
     
 }

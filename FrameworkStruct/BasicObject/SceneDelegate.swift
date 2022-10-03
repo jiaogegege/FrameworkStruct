@@ -62,8 +62,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        self.window?.rootViewController = BasicTabbarController.init()
 //        self.window?.makeKeyAndVisible()
         
-        //处理shortcut打开app
-        ApplicationManager.shared.dispatchShortcut(connectionOptions.shortcutItem)
+        ApplicationManager.shared.scene(scene, willConnectTo: session, options: connectionOptions)
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }
@@ -98,31 +97,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     //通过URL Schemes或其它App打开此App
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first
-        {
-            if SandBoxAccessor.shared.isLocalFile(url.url.absoluteString)
-            {
-                //打开沙盒或者文件App或者其他App中的文件
-                FileManageAdapter.shared.dispatchFileUrl(url.url, sceneOptions: url.options)
-            }
-            else if UrlSchemeAdapter.shared.isUrlScheme(url.url)
-            {
-                //从Url Scheme打开
-                UrlSchemeAdapter.shared.dispatchUrl(url.url, sceneOptions: url.options)
-            }
-            else
-            {
-                
-            }
-        }
+        ApplicationManager.shared.scene(scene, openURLContexts: URLContexts)
     }
     
     //当app在后台通过shortchut打开的时候调用
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         //处理shortcut打开app
-        ApplicationManager.shared.dispatchShortcut(shortcutItem)
-        
-        completionHandler(true)
+        ApplicationManager.shared.windowScene(windowScene, performActionFor: shortcutItem) { (succeeded) in
+            completionHandler(succeeded)
+        }
     }
 
 }

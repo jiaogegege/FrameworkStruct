@@ -13,8 +13,13 @@
  3. 状态的value是id类型，所以可以是任意对象；但是有个问题，对象一般是指针类型，所以状态value建议使用基础类型的包装类，防止状态value在外部被改变，或者使用深复制；
  4. 状态管理器支持历史状态回溯，可以查看历史状态列表（该功能有时间再实现）；
  */
-
 #import <Foundation/Foundation.h>
+
+@protocol StatusManagerDelegate <NSObject>
+//状态管理器更新了某个状态，通知所有订阅对象，返回新状态和上一个旧状态，可能为nil
+-(void)statusManagerDidUpdateStatus:(id _Nonnull)key newValue:(id _Nullable)newValue oldValue:(id _Nullable)oldValue;
+
+@end
 
 //建议使用该类型作为状态管理器的key
 typedef NSString * SMKeyType;
@@ -59,10 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
 -(void)subscribe:(id)key action:(SMSubscribeAction)action;
 
-
-
-
-
+///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
+-(void)subscribe:(id)key delegate:(id<StatusManagerDelegate>)delegate;
 
 
 

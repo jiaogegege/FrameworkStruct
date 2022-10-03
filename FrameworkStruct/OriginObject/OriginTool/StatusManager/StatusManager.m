@@ -7,7 +7,8 @@
 
 #import "StatusManager.h"
 #import "SMVector.h"
-
+#import "WeakArray.h"
+#import "OCConst.h"
 
 @interface StatusManager ()
 //内部数据结构，保存状态，key是那个状态的指定key，value是一个`SMVector`对象，存储指定数量的状态
@@ -15,6 +16,9 @@
 
 //订阅状态的action，key是指定状态的key，value是action数组，因为一个状态可能被多个aciton订阅
 @property(nonatomic, strong)NSMutableDictionary *actionDict;
+
+//订阅状态的对象，key是指定状态的key，value是一个订阅状态的对象的`NSPointArray`列表，因为一个状态可以被多个对象订阅
+@property(nonatomic, strong)NSMutableDictionary *delegatesDict;
 
 
 @end
@@ -28,6 +32,7 @@
     {
         _dict = [NSMutableDictionary dictionary];
         _actionDict = [NSMutableDictionary dictionary];
+        _delegatesDict = [NSMutableDictionary dictionary];
         _capacity = capacity;       //每一个状态的最大容量
     }
     return self;
@@ -116,23 +121,33 @@
     return nil;
 }
 
-    ///清空某个状态
+///清空某个状态
 -(void)clear:(id)key
 {
     [_dict removeObjectForKey:key];
+    
+    //清空某个状态的时候，通知订阅者
+    [self dispatchStatus:key];
 }
 
-    ///清空所有状态
--(void)reset
+///清空所有状态
+-(void)clear
 {
+    NSArray *keyArr = _dict.allKeys;
     [_dict removeAllObjects];
+    
+    for (id key in keyArr)
+    {
+        [self clear:key];
+    }
 }
 
 ///清理所有资源
--(void)clear
+-(void)reset
 {
-    [self reset];
+    [self clear];
     [_actionDict removeAllObjects];
+    [_delegatesDict removeAllObjects];
 }
 
 ///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
@@ -154,19 +169,49 @@
     }
 }
 
+///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
+-(void)subscribe:(id)key delegate:(id<StatusManagerDelegate>)delegate
+{
+    WeakArray *weakArr = self.delegatesDict[key];
+    if (weakArr != nil)
+    {
+        [weakArr compact];
+        [weakArr addObject:delegate];
+    }
+    else
+    {
+        weakArr = [[WeakArray alloc] init];
+        [weakArr addObject:delegate];
+        self.delegatesDict[key] = weakArr;
+    }
+}
+
 ///发送状态变化信息
 -(void)dispatchStatus:(id)key
 {
-    //先找出有没有订阅者
+    id newValue = [self status:key];
+    id oldValue = [self perviousStatus:key];
+    
+    //先找出有没有订阅者action
     NSArray *actionArray = [_actionDict objectForKey:key];
     if (actionArray != nil && actionArray.count > 0)
     {
         //有订阅者，那么发送订阅信息
-        id newValue = [self status:key];
-        id oldValue = [self perviousStatus:key];
         for (SMSubscribeAction action in actionArray)
         {
             action(newValue, oldValue);
+        }
+    }
+    
+    //找出有没有订阅者delegate
+    WeakArray *weakArr = self.delegatesDict[key];
+    if (weakArr && weakArr.count > 0)
+    {
+        [weakArr compact];
+        for (int i = 0; i < weakArr.count; ++i)
+        {
+            id<StatusManagerDelegate> obj = [weakArr objectAtIndex:i];
+            [obj statusManagerDidUpdateStatus:key newValue:newValue oldValue:oldValue];
         }
     }
 }
@@ -177,6 +222,8 @@
     self.dict = nil;
     [self.actionDict removeAllObjects];
     self.actionDict = nil;
+    [self.delegatesDict removeAllObjects];
+    self.delegatesDict = nil;
 //    NSLog(@"StatusManager: dealloc");
 }
 

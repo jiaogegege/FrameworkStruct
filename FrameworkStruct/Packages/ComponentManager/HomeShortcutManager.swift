@@ -16,12 +16,17 @@ class HomeShortcutManager: OriginManager
     //单例
     static let shared = HomeShortcutManager()
     
+    //shortcut
+    fileprivate(set) var shortcut: UIApplicationShortcutItem?
+    
     
     //MARK: 方法
     //私有化初始化方法
     private override init()
     {
         super.init()
+        
+        self.addNotification()
     }
     
     override func copy() -> Any
@@ -33,7 +38,42 @@ class HomeShortcutManager: OriginManager
     {
         return self
     }
+    
+    fileprivate func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    ///处理shortut
+    fileprivate func handleShortcut(_ shortcut: UIApplicationShortcutItem)
+    {
+        if let st = ShortcutType(rawValue: shortcut.type)
+        {
+            g_async {
+                st.handle()
+            }
+            
+            //处理完后清空
+            self.shortcut = nil
+        }
+    }
+    
+}
 
+
+//协议通知
+extension HomeShortcutManager: DelegateProtocol
+{
+    //app已经获得焦点
+    @objc func applicationDidBecomeActiveNotification(notification: Notification)
+    {
+        //处理shortcut，如果有的话
+        if let shortcut = self.shortcut
+        {
+            self.handleShortcut(shortcut)
+        }
+    }
+    
 }
 
 
@@ -99,14 +139,12 @@ extension HomeShortcutManager: ExternalInterface
         }
     }
     
-    ///处理一个shortcut
-    func dispatchShortcut(_ shortcut: UIApplicationShortcutItem)
+    ///处理shortcut
+    func dispatchShortcut(_ shortcut: UIApplicationShortcutItem?)
     {
-        if let st = ShortcutType(rawValue: shortcut.type)
+        if let sh = shortcut
         {
-            g_async {
-                st.handle()
-            }
+            self.shortcut = sh
         }
     }
     

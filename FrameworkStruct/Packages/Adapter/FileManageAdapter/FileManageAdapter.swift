@@ -7,7 +7,7 @@
 
 /**
  文件管理适配器
- 主要处理从外部打开一个文件，或者使用外部App打开本地文件
+ 主要处理从外部打开一个文件，或者使用外部App打开本地文件，以及手动打开一个外部文件
  */
 import UIKit
 import UniformTypeIdentifiers
@@ -18,12 +18,17 @@ class FileManageAdapter: OriginAdapter
     //单例
     static let shared = FileManageAdapter()
     
+    //打开app时携带的信息
+    fileprivate var openInfo: OpenUrlInfo?
+    
     
     //MARK: 方法
     //私有化初始化方法
     private override init()
     {
         super.init()
+        
+        self.addNotification()
     }
     
     override func copy() -> Any
@@ -36,7 +41,12 @@ class FileManageAdapter: OriginAdapter
         return self
     }
     
-    //处理从文件App打开文件
+    fileprivate func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    //处理从文件App打开文件，此处示例为暂时保存到Documents文件夹
     fileprivate func processOpenFile(_ fileUrl: URL)
     {
         var fileData: Data?
@@ -66,6 +76,28 @@ class FileManageAdapter: OriginAdapter
 //通知代理方法
 extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
 {
+    //app已经获得焦点
+    @objc func applicationDidBecomeActiveNotification(notification: Notification)
+    {
+        //处理fileUrl，如果有的话
+        if let info = self.openInfo
+        {
+            //暂时写入Documents文件夹
+            let fileName = info.fileUrl.lastPathComponent    //包含扩展名的文件名
+//            let fileExt = info.fileUrl.pathExtension   //扩展名
+//            let absFileName = info.fileUrl.deletingPathExtension().lastPathComponent   //文件名
+            //保存的文件路径
+            let savePath = SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)
+            if let fileData = try? Data(contentsOf: info.fileUrl)
+            {
+                try? fileData.write(to: URL(fileURLWithPath: savePath))
+            }
+            
+            //处理完后清空
+            self.openInfo = nil
+        }
+    }
+    
     //取消选择文件
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         
@@ -82,22 +114,29 @@ extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
 }
 
 
+//内部类型
+extension FileManageAdapter: InternalType
+{
+    //打开app的信息结构体，包括url/options
+    struct OpenUrlInfo {
+        //打开此app时传递的fileUrl
+        var fileUrl: URL
+        //通过appdelegate打开时携带的信息
+        var appOptions: [UIApplication.OpenURLOptionsKey : Any]?
+        //通过scenedelegate打开时携带的信息
+        var sceneOptions: UIScene.OpenURLOptions?
+    }
+    
+}
+
+
 //接口方法
 extension FileManageAdapter: ExternalInterface
 {
     ///从本地或者其他App打开一个文件，具体处理方法根据实际需求
     func dispatchFileUrl(_ fileUrl: URL, appOptions: [UIApplication.OpenURLOptionsKey : Any]? = nil, sceneOptions: UIScene.OpenURLOptions? = nil)
     {
-        //暂时写入Documents文件夹
-        let fileName = fileUrl.lastPathComponent    //包含扩展名的文件名
-//        let fileExt = fileUrl.pathExtension   //扩展名
-//        let absFileName = fileUrl.deletingPathExtension().lastPathComponent   //文件名
-        //保存的文件路径
-        let savePath = SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)
-        if let fileData = try? Data(contentsOf: fileUrl)
-        {
-            try? fileData.write(to: URL(fileURLWithPath: savePath))
-        }
+        self.openInfo = OpenUrlInfo(fileUrl: fileUrl, appOptions: appOptions, sceneOptions: sceneOptions)
     }
     
     ///主动从本地文件App打开沙盒中的文件

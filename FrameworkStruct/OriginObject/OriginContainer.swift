@@ -241,6 +241,7 @@ extension OriginContainer: ContainerProtocol
     {
         if let weakArr = self.delegates[key]
         {
+            weakArr.compact()
             weakArr.addObject(delegate)
         }
         else

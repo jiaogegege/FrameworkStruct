@@ -27,22 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         return UIApplication.shared.delegate! as! AppDelegate
     }
     
-    //初始化应用程序数据
+    //初始化应用程序组件
     func initData()
     {
         //初始化程序组件
         rootMonitor.originConfig()
-        
-        //初始化home shortcuts
-        ApplicationManager.shared.app.shortcutItems = HomeShortcutManager.shared.getAllDynamic()
-        
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.initData()
         
-        return true
+        return ApplicationManager.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     // MARK: UISceneSession Lifecycle
@@ -76,22 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //通过URL Schemes或其它App打开此App
     //如果未使用SceneDelegate，则系统调用这个方法
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if SandBoxAccessor.shared.isLocalFile(url.absoluteString)
-        {
-            //打开沙盒或者文件App或者其他App中的文件
-            FileManageAdapter.shared.dispatchFileUrl(url, appOptions: options)
-        }
-        else if UrlSchemeAdapter.shared.isUrlScheme(url)
-        {
-            //从Url Scheme打开
-            UrlSchemeAdapter.shared.dispatchUrl(url, appOptions: options)
-        }
-        else
-        {
-            
-        }
-        
-        return true
+        ApplicationManager.shared.application(app, open: url, options: options)
     }
     
     //如果需要自定义设置屏幕方向，那么释放这段代码，支持`全部/左右横屏/上下竖屏`
