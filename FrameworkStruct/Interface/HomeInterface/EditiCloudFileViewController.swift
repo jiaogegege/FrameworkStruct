@@ -12,10 +12,10 @@ class EditiCloudFileViewController: BasicViewController {
     //文件信息
     var fileInfo: IADocumentSearchResult?
     
-    fileprivate lazy var ia: iCloudAdapter = iCloudAdapter.shared
+    fileprivate lazy var ia: iCloudAccessor = iCloudAccessor.shared
     
     //打开文件的id
-    fileprivate var fileId: iCloudAdapter.IADocumentHandlerType?
+    fileprivate var fileId: iCloudAccessor.IADocumentHandlerType?
     
     //UI组件
     @IBOutlet weak var textView: UITextView!

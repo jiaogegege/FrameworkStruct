@@ -1,5 +1,5 @@
 //
-//  iCloudAdapterConst.swift
+//  iCloudAccessorConst.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2022/9/23.
@@ -37,7 +37,7 @@ enum IAValueKey: String, CaseIterable {
     ///获取value，提供一种只能获得key的情况下快速获取value的方法，比如通知
     func getValue() -> Any?
     {
-        iCloudAdapter.shared.getValue(self)
+        iCloudAccessor.shared.getValue(self)
     }
 }
 

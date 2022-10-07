@@ -338,7 +338,7 @@
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
 		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
 		EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */; };
-		EA5843EE28DC5DB90016E6CA /* iCloudAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */; };
+		EA5843EE28DC5DB90016E6CA /* iCloudAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5843ED28DC5DB90016E6CA /* iCloudAccessor.swift */; };
 		EA5843F028DC60FB0016E6CA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5843EF28DC60FB0016E6CA /* CloudKit.framework */; };
 		EA5D10A8277ED4FC004FCE4C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */; };
 		EA62BCEB28C5C8CF006A6BFA /* HealthCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA62BCEA28C5C8CF006A6BFA /* HealthCodeViewController.swift */; };
@@ -370,6 +370,28 @@
 		EA7F3E0F27BB798200C3E33F /* DatasContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */; };
 		EA83FFF6279D9833000F6473 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA83FFF5279D9833000F6473 /* CoreGraphics.framework */; };
 		EA84848D278F132E000E7FC2 /* FSActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA84848C278F132E000E7FC2 /* FSActionSheet.swift */; };
+		EA8CFC9A28EDC39100EE3B73 /* MPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFC9928EDC39100EE3B73 /* MPManager.swift */; };
+		EA8CFC9D28EDC41300EE3B73 /* MPPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */; };
+		EA8CFCA528EDCA4400EE3B73 /* MPLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFCA428EDCA4400EE3B73 /* MPLibraryManager.swift */; };
+		EA8CFD0528EDD6F000EE3B73 /* MPSongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD0428EDD6F000EE3B73 /* MPSongModel.swift */; };
+		EA8CFD0928EDD70B00EE3B73 /* MPArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD0828EDD70B00EE3B73 /* MPArtistModel.swift */; };
+		EA8CFD0D28EDD73900EE3B73 /* MPAlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD0C28EDD73900EE3B73 /* MPAlbumModel.swift */; };
+		EA8CFD1128EDD74600EE3B73 /* MPLyricModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD1028EDD74600EE3B73 /* MPLyricModel.swift */; };
+		EA8CFD1528EDD75100EE3B73 /* MPMusicbookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD1428EDD75100EE3B73 /* MPMusicbookModel.swift */; };
+		EA8CFD1928EDD76700EE3B73 /* MPTagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD1828EDD76700EE3B73 /* MPTagModel.swift */; };
+		EA8CFD1D28EDD77900EE3B73 /* MPPlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD1C28EDD77900EE3B73 /* MPPlaylistModel.swift */; };
+		EA8CFD2128EDD78600EE3B73 /* MPSonglistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2028EDD78600EE3B73 /* MPSonglistModel.swift */; };
+		EA8CFD2528EDD79200EE3B73 /* MPFavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2428EDD79200EE3B73 /* MPFavoriteModel.swift */; };
+		EA8CFD2928EDD79F00EE3B73 /* MPPodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */; };
+		EA8CFD2D28EDD7AB00EE3B73 /* MPCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2C28EDD7AB00EE3B73 /* MPCategoryModel.swift */; };
+		EA8CFD3128EDD7B500EE3B73 /* MPStageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */; };
+		EA8CFD3528EDD7C100EE3B73 /* MPMoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */; };
+		EA8CFD3928EDD7CF00EE3B73 /* MPHistorySongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */; };
+		EA8CFD3D28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */; };
+		EA8CFD4128EE606C00EE3B73 /* MPConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD4028EE606C00EE3B73 /* MPConst.swift */; };
+		EA8CFD5928EE844300EE3B73 /* ArchiverAdatper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */; };
+		EA8CFD5F28EFC43A00EE3B73 /* MPContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */; };
+		EA8CFD6228EFCCDC00EE3B73 /* MPMediaLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD6128EFCCDC00EE3B73 /* MPMediaLibraryModel.swift */; };
 		EA91D17B27C2027500DD1BE1 /* NotificationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */; };
 		EA91D17F27C202E800DD1BE1 /* CalendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */; };
 		EA91D18227C2034200DD1BE1 /* BluetoothAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D18127C2034200DD1BE1 /* BluetoothAdapter.swift */; };
@@ -582,7 +604,7 @@
 		EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84127FE7D5C008EA586 /* FSLabel.swift */; };
 		EAACA84427FE8993008EA586 /* FSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84327FE8993008EA586 /* FSImageView.swift */; };
 		EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */; };
-		EAAE472B28DD5D6700C244C8 /* iCloudAdapterConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE472A28DD5D6700C244C8 /* iCloudAdapterConst.swift */; };
+		EAAE472B28DD5D6700C244C8 /* iCloudAccessorConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE472A28DD5D6700C244C8 /* iCloudAccessorConst.swift */; };
 		EAAEBFF6283B69B4001C9118 /* CommandConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF5283B69B4001C9118 /* CommandConst.swift */; };
 		EAAEBFF8283B69E7001C9118 /* CommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFF7283B69E7001C9118 /* CommandManager.swift */; };
 		EAAEBFFC283B6ADB001C9118 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFB283B6ADB001C9118 /* IOManager.swift */; };
@@ -1145,7 +1167,7 @@
 		EA52494127A3EDEB002E3616 /* 1_0_2.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_2.sql; sourceTree = "<group>"; };
 		EA5780A827D0A6C900C819E6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingViewController.swift; sourceTree = "<group>"; };
-		EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAdapter.swift; sourceTree = "<group>"; };
+		EA5843ED28DC5DB90016E6CA /* iCloudAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAccessor.swift; sourceTree = "<group>"; };
 		EA5843EF28DC60FB0016E6CA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EA5D10A5277ED4FB004FCE4C /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		EA5D10A6277ED4FB004FCE4C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -1200,6 +1222,30 @@
 		EA7F3E0E27BB798200C3E33F /* DatasContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasContainer.swift; sourceTree = "<group>"; };
 		EA83FFF5279D9833000F6473 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EA84848C278F132E000E7FC2 /* FSActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSActionSheet.swift; sourceTree = "<group>"; };
+		EA8CFC9828EDC20900EE3B73 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA8CFC9928EDC39100EE3B73 /* MPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPManager.swift; sourceTree = "<group>"; };
+		EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlayer.swift; sourceTree = "<group>"; };
+		EA8CFCA428EDCA4400EE3B73 /* MPLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLibraryManager.swift; sourceTree = "<group>"; };
+		EA8CFCA828EDCD2C00EE3B73 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA8CFD0428EDD6F000EE3B73 /* MPSongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSongModel.swift; sourceTree = "<group>"; };
+		EA8CFD0828EDD70B00EE3B73 /* MPArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPArtistModel.swift; sourceTree = "<group>"; };
+		EA8CFD0C28EDD73900EE3B73 /* MPAlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAlbumModel.swift; sourceTree = "<group>"; };
+		EA8CFD1028EDD74600EE3B73 /* MPLyricModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLyricModel.swift; sourceTree = "<group>"; };
+		EA8CFD1428EDD75100EE3B73 /* MPMusicbookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMusicbookModel.swift; sourceTree = "<group>"; };
+		EA8CFD1828EDD76700EE3B73 /* MPTagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTagModel.swift; sourceTree = "<group>"; };
+		EA8CFD1C28EDD77900EE3B73 /* MPPlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlaylistModel.swift; sourceTree = "<group>"; };
+		EA8CFD2028EDD78600EE3B73 /* MPSonglistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSonglistModel.swift; sourceTree = "<group>"; };
+		EA8CFD2428EDD79200EE3B73 /* MPFavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPFavoriteModel.swift; sourceTree = "<group>"; };
+		EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPodcastModel.swift; sourceTree = "<group>"; };
+		EA8CFD2C28EDD7AB00EE3B73 /* MPCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCategoryModel.swift; sourceTree = "<group>"; };
+		EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStageModel.swift; sourceTree = "<group>"; };
+		EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMoodModel.swift; sourceTree = "<group>"; };
+		EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistorySongModel.swift; sourceTree = "<group>"; };
+		EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistoryPlaylistModel.swift; sourceTree = "<group>"; };
+		EA8CFD4028EE606C00EE3B73 /* MPConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPConst.swift; sourceTree = "<group>"; };
+		EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverAdatper.swift; sourceTree = "<group>"; };
+		EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPContainer.swift; sourceTree = "<group>"; };
+		EA8CFD6128EFCCDC00EE3B73 /* MPMediaLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMediaLibraryModel.swift; sourceTree = "<group>"; };
 		EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAdapter.swift; sourceTree = "<group>"; };
 		EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAdapter.swift; sourceTree = "<group>"; };
 		EA91D18127C2034200DD1BE1 /* BluetoothAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAdapter.swift; sourceTree = "<group>"; };
@@ -1597,7 +1643,7 @@
 		EAACA84327FE8993008EA586 /* FSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSImageView.swift; sourceTree = "<group>"; };
 		EAACA84527FEBF72008EA586 /* MenuInteractionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractionManager.swift; sourceTree = "<group>"; };
 		EAAE472928DD5D3700C244C8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		EAAE472A28DD5D6700C244C8 /* iCloudAdapterConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAdapterConst.swift; sourceTree = "<group>"; };
+		EAAE472A28DD5D6700C244C8 /* iCloudAccessorConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAccessorConst.swift; sourceTree = "<group>"; };
 		EAAEBFF4283B6859001C9118 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAEBFF5283B69B4001C9118 /* CommandConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandConst.swift; sourceTree = "<group>"; };
 		EAAEBFF7283B69E7001C9118 /* CommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandManager.swift; sourceTree = "<group>"; };
@@ -2971,6 +3017,44 @@
 			path = UserManager;
 			sourceTree = "<group>";
 		};
+		EA8CFC9728EDC1E800EE3B73 /* MusicPackage */ = {
+			isa = PBXGroup;
+			children = (
+				EA8CFC9828EDC20900EE3B73 /* README.md */,
+				EA8CFC9928EDC39100EE3B73 /* MPManager.swift */,
+				EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */,
+				EA8CFCA428EDCA4400EE3B73 /* MPLibraryManager.swift */,
+				EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */,
+				EA8CFD4028EE606C00EE3B73 /* MPConst.swift */,
+				EA8CFCA728EDCD0600EE3B73 /* Datas */,
+			);
+			path = MusicPackage;
+			sourceTree = "<group>";
+		};
+		EA8CFCA728EDCD0600EE3B73 /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				EA8CFCA828EDCD2C00EE3B73 /* README.md */,
+				EA8CFD6128EFCCDC00EE3B73 /* MPMediaLibraryModel.swift */,
+				EA8CFD0428EDD6F000EE3B73 /* MPSongModel.swift */,
+				EA8CFD0C28EDD73900EE3B73 /* MPAlbumModel.swift */,
+				EA8CFD0828EDD70B00EE3B73 /* MPArtistModel.swift */,
+				EA8CFD1028EDD74600EE3B73 /* MPLyricModel.swift */,
+				EA8CFD1428EDD75100EE3B73 /* MPMusicbookModel.swift */,
+				EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */,
+				EA8CFD1828EDD76700EE3B73 /* MPTagModel.swift */,
+				EA8CFD1C28EDD77900EE3B73 /* MPPlaylistModel.swift */,
+				EA8CFD2028EDD78600EE3B73 /* MPSonglistModel.swift */,
+				EA8CFD2428EDD79200EE3B73 /* MPFavoriteModel.swift */,
+				EA8CFD2C28EDD7AB00EE3B73 /* MPCategoryModel.swift */,
+				EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */,
+				EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */,
+				EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */,
+				EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */,
+			);
+			path = Datas;
+			sourceTree = "<group>";
+		};
 		EA922558276AD54D00192E2E /* Monitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -3748,8 +3832,8 @@
 				EADE521C27F6C919005417BE /* UrlSchemeAdapter */,
 				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
 				EADE522527F6F50D005417BE /* SocializeAdapter */,
-				EAAE472828DD5D2000C244C8 /* iCloudAdapter */,
 				EAA60BC728DEDD8700E1AF0C /* FileManageAdapter */,
+				EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 				EADE522327F6F470005417BE /* ClipboardAdapter.swift */,
@@ -3777,15 +3861,15 @@
 			path = DataChecker;
 			sourceTree = "<group>";
 		};
-		EAAE472828DD5D2000C244C8 /* iCloudAdapter */ = {
+		EAAE472828DD5D2000C244C8 /* iCloudAccessor */ = {
 			isa = PBXGroup;
 			children = (
 				EAAE472928DD5D3700C244C8 /* README.md */,
-				EA5843ED28DC5DB90016E6CA /* iCloudAdapter.swift */,
-				EAAE472A28DD5D6700C244C8 /* iCloudAdapterConst.swift */,
+				EA5843ED28DC5DB90016E6CA /* iCloudAccessor.swift */,
+				EAAE472A28DD5D6700C244C8 /* iCloudAccessorConst.swift */,
 				EAA60BC428DDA70A00E1AF0C /* iCloudDocument.swift */,
 			);
-			path = iCloudAdapter;
+			path = iCloudAccessor;
 			sourceTree = "<group>";
 		};
 		EAAEBFF3283B683A001C9118 /* IOPackage */ = {
@@ -4255,6 +4339,7 @@
 				EAAA4E93276F657D00C45712 /* DataChecker */,
 				EADB010C27624213001B7223 /* DataAccessor */,
 				EA52493C27A3E43B002E3616 /* Datas */,
+				EA8CFC9728EDC1E800EE3B73 /* MusicPackage */,
 				EADB012D27624328001B7223 /* ThemePackage */,
 				EAAEBFF3283B683A001C9118 /* IOPackage */,
 			);
@@ -4397,6 +4482,7 @@
 			isa = PBXGroup;
 			children = (
 				EADB010F2762422D001B7223 /* README.md */,
+				EAAE472828DD5D2000C244C8 /* iCloudAccessor */,
 				EAB32C4227CA7405000108EA /* PlistAccessor */,
 				EAB32C3E27CA71EA000108EA /* UserDefaultsAccessor */,
 				EA3337C62797AB7D00612DC3 /* SandBoxAccessor */,
@@ -4659,12 +4745,14 @@
 				EA92255E276AE48700192E2E /* FSVector.swift in Sources */,
 				EA3E8B0F27B77CEA006A2715 /* Trim.swift in Sources */,
 				EA1AE481277819E600D028F9 /* ConstraintView.swift in Sources */,
+				EA8CFD0928EDD70B00EE3B73 /* MPArtistModel.swift in Sources */,
 				EA1AE47E277819E600D028F9 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				EA3E8AAE27B77CEA006A2715 /* AnimationCacheProvider.swift in Sources */,
 				EA66061727C86E0E000B20A6 /* WebAdapterConst.swift in Sources */,
 				EA75BB262792A80900910B4C /* DatabaseAccessor.swift in Sources */,
 				EA99371D27994F6100480147 /* TABAnimatedCacheManager.m in Sources */,
 				EAAC7A5A28E2A52E009F4B56 /* iCloudFileViewController.swift in Sources */,
+				EA8CFD3928EDD7CF00EE3B73 /* MPHistorySongModel.swift in Sources */,
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
 				EA9A75AB27C731EB00A11FC8 /* zip.c in Sources */,
 				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,
@@ -4706,6 +4794,7 @@
 				EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */,
 				EA19C5D028E6BA0600BE09E0 /* HomeShortcutManager.swift in Sources */,
 				EAC8A87627625D490088293F /* SDImageCacheConfig.m in Sources */,
+				EA8CFD0528EDD6F000EE3B73 /* MPSongModel.swift in Sources */,
 				EA3E8AB927B77CEA006A2715 /* AnimationFontProvider.swift in Sources */,
 				EAC8A86E27625D490088293F /* SDImageCachesManager.m in Sources */,
 				EA9A78F027C75DA900A11FC8 /* WebViewJavascriptBridge.m in Sources */,
@@ -4731,6 +4820,7 @@
 				EA9A75EB27C739DF00A11FC8 /* SRHTTPConnectMessage.m in Sources */,
 				EADB013B2762433C001B7223 /* ThemeConst.swift in Sources */,
 				EA99374B27994F6100480147 /* UIView+TABControlModel.m in Sources */,
+				EA8CFD2528EDD79200EE3B73 /* MPFavoriteModel.swift in Sources */,
 				EA1AE48A277819E600D028F9 /* ConstraintLayoutGuideDSL.swift in Sources */,
 				EA9A786627C754DE00A11FC8 /* GDataXMLNode.m in Sources */,
 				EA11127427B3BE2C006D0B83 /* HTTPMethod.swift in Sources */,
@@ -4765,6 +4855,7 @@
 				EA91D17F27C202E800DD1BE1 /* CalendarAdapter.swift in Sources */,
 				EAC8A85A27625D490088293F /* SDImageCodersManager.m in Sources */,
 				EA3E8B0527B77CEA006A2715 /* SingleValueProvider.swift in Sources */,
+				EA8CFC9A28EDC39100EE3B73 /* MPManager.swift in Sources */,
 				EAC8A86C27625D490088293F /* SDWebImageDownloaderOperation.m in Sources */,
 				EA9A78CC27C756C900A11FC8 /* MPITextKitBugFixer.m in Sources */,
 				EA11126D27B3BE2C006D0B83 /* Protected.swift in Sources */,
@@ -4772,6 +4863,7 @@
 				EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */,
 				EA3E8B0B27B77CEA006A2715 /* RenderNode.swift in Sources */,
 				EA3E8AC727B77CEA006A2715 /* PreCompLayer.swift in Sources */,
+				EA8CFCA528EDCA4400EE3B73 /* MPLibraryManager.swift in Sources */,
 				EA1AE47D277819E600D028F9 /* ConstraintDirectionalInsetTarget.swift in Sources */,
 				EA1AE486277819E600D028F9 /* ConstraintOffsetTarget.swift in Sources */,
 				EA11127627B3BE2C006D0B83 /* URLRequest+Alamofire.swift in Sources */,
@@ -4811,6 +4903,7 @@
 				EA9A758627C7216D00A11FC8 /* YYFrameImage.m in Sources */,
 				EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */,
 				EAD0B93727FFC88E00DB4949 /* CommunicationAdapter.swift in Sources */,
+				EA8CFD1928EDD76700EE3B73 /* MPTagModel.swift in Sources */,
 				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,
 				EA3E8AF927B77CEA006A2715 /* TextAnimatorNode.swift in Sources */,
 				EA3E8ACA27B77CEA006A2715 /* CALayer+fillBounds.swift in Sources */,
@@ -4834,6 +4927,7 @@
 				EA3E8AF727B77CEA006A2715 /* ShapeNode.swift in Sources */,
 				EAC8A87F27625D490088293F /* UIColor+SDHexString.m in Sources */,
 				EABB3C9727ED7122005B98E3 /* GuideManager.swift in Sources */,
+				EA8CFD3D28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift in Sources */,
 				EA99373A27994F6100480147 /* TABDropAnimationImpl.m in Sources */,
 				EA1AE493277819E600D028F9 /* ConstraintLayoutSupportDSL.swift in Sources */,
 				EA9A785727C7546100A11FC8 /* TimePeriod.swift in Sources */,
@@ -4946,6 +5040,7 @@
 				EA3E8B0227B77CEA006A2715 /* KeypathSearchable.swift in Sources */,
 				EA3E8B2327B77CEA006A2715 /* Transform.swift in Sources */,
 				EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */,
+				EA8CFD2D28EDD7AB00EE3B73 /* MPCategoryModel.swift in Sources */,
 				EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */,
 				EA3E8AFD27B77CEA006A2715 /* GradientStrokeNode.swift in Sources */,
 				EA3E8B1A27B77CEA006A2715 /* Star.swift in Sources */,
@@ -4960,6 +5055,7 @@
 				EA9A756C27C7210200A11FC8 /* TYImageCache.m in Sources */,
 				EA9A75E527C739DF00A11FC8 /* SRSecurityPolicy.m in Sources */,
 				EAC8A75227625B450088293F /* AFSecurityPolicy.m in Sources */,
+				EA8CFD5928EE844300EE3B73 /* ArchiverAdatper.swift in Sources */,
 				EA3E8AFF27B77CEA006A2715 /* NodeProperty.swift in Sources */,
 				EA3E8AB427B77CEA006A2715 /* ColorValueProvider.swift in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
@@ -4984,8 +5080,10 @@
 				EACAD4EF277DAFC000FBE2DA /* TimeTool.swift in Sources */,
 				EA3E8A9C27B77CEA006A2715 /* AnimationView.swift in Sources */,
 				EAC8A84A27625D490088293F /* SDWebImageDownloaderDecryptor.m in Sources */,
+				EA8CFD3528EDD7C100EE3B73 /* MPMoodModel.swift in Sources */,
 				EACAD4E9277D82C800FBE2DA /* NumberTool.swift in Sources */,
 				EA3E8AF227B77CEA006A2715 /* PathOutputNode.swift in Sources */,
+				EA8CFD6228EFCCDC00EE3B73 /* MPMediaLibraryModel.swift in Sources */,
 				EA3E8B1727B77CEA006A2715 /* GradientStroke.swift in Sources */,
 				EA9A75EE27C739DF00A11FC8 /* SRHash.m in Sources */,
 				EA3E8C2127B782C4006A2715 /* POPMath.mm in Sources */,
@@ -5029,6 +5127,7 @@
 				EAC8A87427625D490088293F /* SDImageCacheDefine.m in Sources */,
 				EA3E8ACB27B77CEA006A2715 /* Keyframes+combinedIfPossible.swift in Sources */,
 				EADB0148276243D3001B7223 /* Utility.swift in Sources */,
+				EA8CFD5F28EFC43A00EE3B73 /* MPContainer.swift in Sources */,
 				EADB00E82762410D001B7223 /* MacroConst.swift in Sources */,
 				EA1AE473277819E600D028F9 /* ConstraintDescription.swift in Sources */,
 				EA3E8C3227B782C4006A2715 /* POPLayerExtras.mm in Sources */,
@@ -5067,10 +5166,12 @@
 				EA3E8B3B27B77CEA006A2715 /* BezierPath.swift in Sources */,
 				EA9A78BD27C756C900A11FC8 /* MPITextDefaultsValueHelpers.m in Sources */,
 				EA9A78DB27C756C900A11FC8 /* MPILabel.m in Sources */,
+				EA8CFD2128EDD78600EE3B73 /* MPSonglistModel.swift in Sources */,
 				EA11126327B3BE2C006D0B83 /* NetworkReachabilityManager.swift in Sources */,
 				EA00C86F27C213550034C95B /* NotificationManager.swift in Sources */,
 				EAC8A84D27625D490088293F /* UIImageView+HighlightedWebCache.m in Sources */,
 				EA9A78D427C756C900A11FC8 /* MPITextDebugOption.m in Sources */,
+				EA8CFD1128EDD74600EE3B73 /* MPLyricModel.swift in Sources */,
 				EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */,
 				EA1AE472277819E600D028F9 /* ConstraintMakerPrioritizable.swift in Sources */,
 				EA3E8ABF27B77CEA006A2715 /* SolidLayer.swift in Sources */,
@@ -5093,6 +5194,7 @@
 				EA99374427994F6100480147 /* UIView+TABControlAnimation.m in Sources */,
 				EA9A756B27C7210200A11FC8 /* NSMutableAttributedString+TY.m in Sources */,
 				EA9A78C827C756C900A11FC8 /* MPITextRendererKey.m in Sources */,
+				EA8CFD1528EDD75100EE3B73 /* MPMusicbookModel.swift in Sources */,
 				EA3E8AF827B77CEA006A2715 /* StarNode.swift in Sources */,
 				EA9A78C327C756C900A11FC8 /* MPITextBackground.m in Sources */,
 				EA3E8AFC27B77CEA006A2715 /* FillNode.swift in Sources */,
@@ -5154,12 +5256,14 @@
 				EADB00A727623C76001B7223 /* OriginAdapter.swift in Sources */,
 				EAAA4E8B276F3F3C00C45712 /* ThreadManager.swift in Sources */,
 				EA3E8B0027B77CEA006A2715 /* AnyNodeProperty.swift in Sources */,
+				EA8CFD3128EDD7B500EE3B73 /* MPStageModel.swift in Sources */,
 				EADB00A827623C76001B7223 /* OriginDocument.swift in Sources */,
 				EA3E8B0627B77CEA006A2715 /* GroupInterpolator.swift in Sources */,
 				EAC8A86F27625D490088293F /* SDWebImageTransition.m in Sources */,
 				EA99372327994F6100480147 /* TABAnimated.m in Sources */,
 				EA99374727994F6100480147 /* TABCollectionAnimated.m in Sources */,
 				EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */,
+				EA8CFD2928EDD79F00EE3B73 /* MPPodcastModel.swift in Sources */,
 				EAC8A86327625D490088293F /* NSButton+WebCache.m in Sources */,
 				EA9A78DC27C756C900A11FC8 /* MPITextRenderer.m in Sources */,
 				EA0E67B327B5064400A11C20 /* NetworkConst.swift in Sources */,
@@ -5209,6 +5313,7 @@
 				EADB00DA27624012001B7223 /* BasicTabbarController.swift in Sources */,
 				EA3E8B2F27B77CEA006A2715 /* PrecompAsset.swift in Sources */,
 				EA1AE482277819E600D028F9 /* ConstraintLayoutGuide.swift in Sources */,
+				EA8CFD1D28EDD77900EE3B73 /* MPPlaylistModel.swift in Sources */,
 				EA99374127994F6100480147 /* TABComponentMutableKey.m in Sources */,
 				EA99372927994F6100480147 /* UIScrollView+TABAnimated.m in Sources */,
 				EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */,
@@ -5227,8 +5332,10 @@
 				EA3E8B0827B77CEA006A2715 /* ShapeRenderLayer.swift in Sources */,
 				EA11127727B3BE2C006D0B83 /* URLConvertible+URLRequestConvertible.swift in Sources */,
 				EA3E8B2D27B77CEA006A2715 /* Font.swift in Sources */,
+				EA8CFC9D28EDC41300EE3B73 /* MPPlayer.swift in Sources */,
 				EA008A1627B8EC2600F91ABD /* MainTabbarController.swift in Sources */,
 				EA11127127B3BE2C006D0B83 /* RedirectHandler.swift in Sources */,
+				EA8CFD4128EE606C00EE3B73 /* MPConst.swift in Sources */,
 				EA9A4A8C278030A800170BB3 /* CountDownButton.m in Sources */,
 				EAC8A77327625BA70088293F /* MJPropertyKey.m in Sources */,
 				EA11128A27B3BE7B006D0B83 /* UIButton+BAKit.m in Sources */,
@@ -5236,7 +5343,7 @@
 				EA1AE471277819E600D028F9 /* LayoutConstraintItem.swift in Sources */,
 				EA3E8A9B27B77CEA006A2715 /* AnimationViewInitializers.swift in Sources */,
 				EA9A75EC27C739DF00A11FC8 /* SRURLUtilities.m in Sources */,
-				EA5843EE28DC5DB90016E6CA /* iCloudAdapter.swift in Sources */,
+				EA5843EE28DC5DB90016E6CA /* iCloudAccessor.swift in Sources */,
 				EA3E8AA827B77CEA006A2715 /* AnimatedControl.swift in Sources */,
 				EA9A758327C7216D00A11FC8 /* YYSpriteSheetImage.m in Sources */,
 				EAACA84227FE7D5C008EA586 /* FSLabel.swift in Sources */,
@@ -5279,8 +5386,9 @@
 				EA3E8AF327B77CEA006A2715 /* PassThroughOutputNode.swift in Sources */,
 				EADB011D276242D1001B7223 /* TimeEmbellisher.swift in Sources */,
 				EA9A785C27C7546100A11FC8 /* TimePeriodChain.swift in Sources */,
+				EA8CFD0D28EDD73900EE3B73 /* MPAlbumModel.swift in Sources */,
 				EADB01382762433C001B7223 /* ThemeManager.swift in Sources */,
-				EAAE472B28DD5D6700C244C8 /* iCloudAdapterConst.swift in Sources */,
+				EAAE472B28DD5D6700C244C8 /* iCloudAccessorConst.swift in Sources */,
 				EA11128027B3BE2C006D0B83 /* HTTPHeaders.swift in Sources */,
 				EA3E8AB527B77CEA006A2715 /* FloatValueProvider.swift in Sources */,
 				EA3E8C2F27B782C4006A2715 /* POPAnimatableProperty.mm in Sources */,

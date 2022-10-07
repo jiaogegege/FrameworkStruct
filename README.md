@@ -304,9 +304,22 @@ iOS App基础架构设计
 		* `Views`：视图目录，`UITableViewCell`等
 		* MainTabbarController
 		* HomeNavigationController
-		* HomeViewController
-		* TableViewController
-		* WebViewController
+		* ViewController
+		* HealthCodeViewController
+		* PlaceCodeViewController
+        * TravelCardViewController
+        * JCollectionViewController
+        * ThemeSelectViewController
+        * ModalTestViewController
+        * ConstraintTestViewController
+        * SimpleTableViewController
+        * ShadowTestViewController
+        * AnimationDemoViewController
+        * TestWebViewController
+        * DrawTestViewController
+        * CopyPasteViewController
+        * iCloudFileViewController
+        * EditiCloudFileViewController
         ...
 	* `MineInterface`
 		* `Models`：数据模型目录，`xxxModel`等
@@ -320,7 +333,7 @@ iOS App基础架构设计
 全局通用的视图组件，一般是针对本项目的自定义通用组件
 
 * `Base`：此处放置可作为基类的视图组件
-	* FSDialog：通用弹窗基类
+* FSDialog：通用弹窗基类
 * FSAlertView：通用弹框
 * FSActionSheet：通用底部菜单
 * FSLabel：带有长按弹出工具条的Label
@@ -367,6 +380,7 @@ iOS App基础架构设计
 	* TimerManager：定时器管理器
 	* AnimationManager：动画管理器
 	* GraphicsManager：绘图管理器
+    * HomeShortcutManager: 主屏幕快捷按钮管理器
     * MenuinteractionManager：应用内菜单管理器
 * `Adapter`
 	* NetworkAdapter：网络适配器
@@ -374,6 +388,8 @@ iOS App基础架构设计
     * UrlSchemeAdapter：urlscheme适配器
 	* BluetoothAdpater：蓝牙适配器
     * SocializeAdapter：社会化适配器
+    * iCloudAdapter：iCloud适配器
+    * FileManageAdapter：文件管理适配器
 	* NotificationAdapter：系统推送通知适配器
 	* CalendarAdapter：系统日历和提醒事项适配器
     * ClipboardAdapter：剪贴板适配器

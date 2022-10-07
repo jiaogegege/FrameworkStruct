@@ -92,11 +92,11 @@ extension HomeShortcutManager: InternalType
         {
             switch self {
             case .myFavorite:
-                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.myFavorite, localizedSubtitle: String.myFavorite, icon: UIApplicationShortcutIcon(type: .favorite), userInfo: nil)
+                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.myFavorite, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .favorite), userInfo: nil)
             case .changeTheme:
-                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.changeTheme, localizedSubtitle: String.changeTheme, icon: UIApplicationShortcutIcon(type: .time), userInfo: nil)
+                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.changeTheme, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .time), userInfo: nil)
             case .icloudFile:
-                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.icloudFile, localizedSubtitle: String.icloudFile, icon: UIApplicationShortcutIcon(type: .cloud), userInfo: nil)
+                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.icloudFile, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .cloud), userInfo: nil)
             }
         }
         

@@ -1,5 +1,5 @@
 //
-//  iCloudAdapter.swift
+//  iCloudAccessor.swift
 //  FrameworkStruct
 //
 //  Created by  蒋 雪姣 on 2022/9/22.
@@ -26,10 +26,10 @@ extension FSNotification
 }
 
 
-class iCloudAdapter: OriginAdapter {
+class iCloudAccessor: OriginAccessor {
     //MARK: 属性
     //单例
-    static let shared = iCloudAdapter()
+    static let shared = iCloudAccessor()
     
     //key-value存储管理器
     fileprivate(set) lazy var kvMgr: NSUbiquitousKeyValueStore = NSUbiquitousKeyValueStore.default
@@ -84,7 +84,7 @@ class iCloudAdapter: OriginAdapter {
     fileprivate func initContainer()
     {
         //先判断Documents文件夹是否存在       //创建根目录下临时文件路径
-        if let documentPath = getDocumentsDir()?.path, let metaUrl = getDir()?.appendingPathComponent(iCloudAdapter.metaFileName)
+        if let documentPath = getDocumentsDir()?.path, let metaUrl = getDir()?.appendingPathComponent(iCloudAccessor.metaFileName)
         {
             //不存在则创建，因为Documents是系统默认文件夹，所以不能手动创建，可以通过在iCloud根目录下保存一个文件来让系统自动创建，创建完成后在把这个文件删除
             if !sbMgr.isExist(documentPath)
@@ -127,7 +127,7 @@ class iCloudAdapter: OriginAdapter {
 
 
 //通知代理
-extension iCloudAdapter: DelegateProtocol
+extension iCloudAccessor: DelegateProtocol
 {
     //收到icloud value变化的通知
     @objc func iCloudAdapterDidReceiveValueChangeNotification(notification: Notification)
@@ -176,7 +176,7 @@ extension iCloudAdapter: DelegateProtocol
 
 
 //内部类型
-extension iCloudAdapter: InternalType
+extension iCloudAccessor: InternalType
 {
     ///iCloud存储容器id，根据实际配置修改
     enum iCloudContainerIdentifier: String {
@@ -236,7 +236,7 @@ extension iCloudAdapter: InternalType
 
 
 //接口方法
-extension iCloudAdapter: ExternalInterface
+extension iCloudAccessor: ExternalInterface
 {
     /**************************************** key-value存储 Section Begin ***************************************/
     ///向icloud保存一个值

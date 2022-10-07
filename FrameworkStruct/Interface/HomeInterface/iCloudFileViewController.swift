@@ -13,8 +13,8 @@ import UIKit
 
 class iCloudFileViewController: BasicTableViewController {
     //icloud适配器
-    fileprivate lazy var ia: iCloudAdapter = {
-        let ia = iCloudAdapter.shared
+    fileprivate lazy var ia: iCloudAccessor = {
+        let ia = iCloudAccessor.shared
         ia.setFilter([.folder], opposite: true)
         ia.setSort(type: .name(true))
         return ia

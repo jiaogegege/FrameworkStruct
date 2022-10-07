@@ -15,6 +15,7 @@
  */
 #import <Foundation/Foundation.h>
 
+//状态管理器代理协议
 @protocol StatusManagerDelegate <NSObject>
 //状态管理器更新了某个状态，通知所有订阅对象，返回新状态和上一个旧状态，可能为nil
 -(void)statusManagerDidUpdateStatus:(id _Nonnull)key newValue:(id _Nullable)newValue oldValue:(id _Nullable)oldValue;

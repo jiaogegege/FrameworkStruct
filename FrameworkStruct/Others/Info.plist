@@ -133,8 +133,6 @@
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeFavorite</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>打开我的收藏</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>我的收藏</string>
 			<key>UIApplicationShortcutItemType</key>
@@ -148,8 +146,6 @@
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeTime</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>切换主题</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>切换主题</string>
 			<key>UIApplicationShortcutItemType</key>
