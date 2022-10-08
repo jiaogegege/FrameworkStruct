@@ -6,10 +6,12 @@
 //
 
 /**
- 歌词
+ 歌词或字幕
+ 作为扩展功能，有时间再开发
  */
 import UIKit
 
-class MPLyricModel: OriginModel {
-
+class MPLyricModel: OriginModel
+{
+    
 }

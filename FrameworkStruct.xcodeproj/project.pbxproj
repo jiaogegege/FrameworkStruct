@@ -383,7 +383,6 @@
 		EA8CFD2128EDD78600EE3B73 /* MPSonglistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2028EDD78600EE3B73 /* MPSonglistModel.swift */; };
 		EA8CFD2528EDD79200EE3B73 /* MPFavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2428EDD79200EE3B73 /* MPFavoriteModel.swift */; };
 		EA8CFD2928EDD79F00EE3B73 /* MPPodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */; };
-		EA8CFD2D28EDD7AB00EE3B73 /* MPCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2C28EDD7AB00EE3B73 /* MPCategoryModel.swift */; };
 		EA8CFD3128EDD7B500EE3B73 /* MPStageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */; };
 		EA8CFD3528EDD7C100EE3B73 /* MPMoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */; };
 		EA8CFD3928EDD7CF00EE3B73 /* MPHistorySongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */; };
@@ -773,6 +772,8 @@
 		EAFA821227C6845800CA1598 /* WebAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFA821127C6845800CA1598 /* WebAdapter.swift */; };
 		EAFC601727E1AAB00019CDEF /* CryptoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFC601627E1AAB00019CDEF /* CryptoKit.framework */; };
 		EAFC601B27E20B430019CDEF /* UnitTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC601A27E20B430019CDEF /* UnitTool.swift */; };
+		EAFDF36A28F15D260026F0F3 /* MPAudioBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFDF36928F15D260026F0F3 /* MPAudioBookModel.swift */; };
+		EAFDF36C28F15D7B0026F0F3 /* MPFavoriteListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFDF36B28F15D7B0026F0F3 /* MPFavoriteListModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1237,7 +1238,6 @@
 		EA8CFD2028EDD78600EE3B73 /* MPSonglistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSonglistModel.swift; sourceTree = "<group>"; };
 		EA8CFD2428EDD79200EE3B73 /* MPFavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPFavoriteModel.swift; sourceTree = "<group>"; };
 		EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPodcastModel.swift; sourceTree = "<group>"; };
-		EA8CFD2C28EDD7AB00EE3B73 /* MPCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCategoryModel.swift; sourceTree = "<group>"; };
 		EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStageModel.swift; sourceTree = "<group>"; };
 		EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMoodModel.swift; sourceTree = "<group>"; };
 		EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistorySongModel.swift; sourceTree = "<group>"; };
@@ -1995,6 +1995,8 @@
 		EAFA821127C6845800CA1598 /* WebAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAdapter.swift; sourceTree = "<group>"; };
 		EAFC601627E1AAB00019CDEF /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
 		EAFC601A27E20B430019CDEF /* UnitTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTool.swift; sourceTree = "<group>"; };
+		EAFDF36928F15D260026F0F3 /* MPAudioBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAudioBookModel.swift; sourceTree = "<group>"; };
+		EAFDF36B28F15D7B0026F0F3 /* MPFavoriteListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPFavoriteListModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3037,18 +3039,19 @@
 				EA8CFCA828EDCD2C00EE3B73 /* README.md */,
 				EA8CFD6128EFCCDC00EE3B73 /* MPMediaLibraryModel.swift */,
 				EA8CFD0428EDD6F000EE3B73 /* MPSongModel.swift */,
-				EA8CFD0C28EDD73900EE3B73 /* MPAlbumModel.swift */,
+				EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */,
+				EAFDF36928F15D260026F0F3 /* MPAudioBookModel.swift */,
 				EA8CFD0828EDD70B00EE3B73 /* MPArtistModel.swift */,
 				EA8CFD1028EDD74600EE3B73 /* MPLyricModel.swift */,
 				EA8CFD1428EDD75100EE3B73 /* MPMusicbookModel.swift */,
-				EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */,
 				EA8CFD1828EDD76700EE3B73 /* MPTagModel.swift */,
 				EA8CFD1C28EDD77900EE3B73 /* MPPlaylistModel.swift */,
+				EA8CFD0C28EDD73900EE3B73 /* MPAlbumModel.swift */,
 				EA8CFD2028EDD78600EE3B73 /* MPSonglistModel.swift */,
 				EA8CFD2428EDD79200EE3B73 /* MPFavoriteModel.swift */,
-				EA8CFD2C28EDD7AB00EE3B73 /* MPCategoryModel.swift */,
 				EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */,
 				EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */,
+				EAFDF36B28F15D7B0026F0F3 /* MPFavoriteListModel.swift */,
 				EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */,
 				EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */,
 			);
@@ -4964,6 +4967,7 @@
 				EADB00E52762410D001B7223 /* ImageConst.swift in Sources */,
 				EA3E8B2627B77CEA006A2715 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				EA99374327994F6100480147 /* NSArray+TABAnimatedChain.m in Sources */,
+				EAFDF36A28F15D260026F0F3 /* MPAudioBookModel.swift in Sources */,
 				EADB00D827624012001B7223 /* NSObject+PropertyListing.m in Sources */,
 				EA3E8B0127B77CEA006A2715 /* NodePropertyMap.swift in Sources */,
 				EA99373B27994F6100480147 /* TABDropAnimation.m in Sources */,
@@ -5040,7 +5044,6 @@
 				EA3E8B0227B77CEA006A2715 /* KeypathSearchable.swift in Sources */,
 				EA3E8B2327B77CEA006A2715 /* Transform.swift in Sources */,
 				EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */,
-				EA8CFD2D28EDD7AB00EE3B73 /* MPCategoryModel.swift in Sources */,
 				EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */,
 				EA3E8AFD27B77CEA006A2715 /* GradientStrokeNode.swift in Sources */,
 				EA3E8B1A27B77CEA006A2715 /* Star.swift in Sources */,
@@ -5251,6 +5254,7 @@
 				EADE522027F6F04A005417BE /* SocializeAdapter.swift in Sources */,
 				EAC8A77027625BA70088293F /* NSObject+MJProperty.m in Sources */,
 				EA1EAFA427EC411B002B4997 /* FSGuideView.swift in Sources */,
+				EAFDF36C28F15D7B0026F0F3 /* MPFavoriteListModel.swift in Sources */,
 				EA11126E27B3BE2C006D0B83 /* ParameterEncoding.swift in Sources */,
 				EA06EB66276749E900E6B785 /* ThemeSelectViewController.swift in Sources */,
 				EADB00A727623C76001B7223 /* OriginAdapter.swift in Sources */,

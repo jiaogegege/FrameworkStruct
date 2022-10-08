@@ -10,19 +10,19 @@
  */
 import UIKit
 
-class MPSongModel: OriginModel, NSCoding
+class MPSongModel: OriginModel, Archivable
 {
     //MARK: 属性
     var id: String
     var name: String
     var url: URL
-    var artists: Array<MPArtistModel>?
-    var album: MPAlbumModel?
+    var artistIds: Array<String>?
+    var albumId: String?
     var artistImgs: Array<URL>?
     var albumImgs: Array<URL>?
-    var lyric: MPLyricModel?
-    var musicbook: MPMusicbookModel?
-    var tags: Array<MPTagModel>?
+    var lyricId: String?
+    var musicbookId: String?
+    var tagIds: Array<String>?
     var intro: String?
     
     //MARK: 方法
@@ -38,28 +38,28 @@ class MPSongModel: OriginModel, NSCoding
         
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
-        self.url = URL(string: coder.decodeObject(forKey: PropertyKey.url.rawValue) as! String)!
-        self.artists = coder.decodeObject(forKey: PropertyKey.artists.rawValue) as? Array<MPArtistModel>
-        self.album = coder.decodeObject(forKey: PropertyKey.album.rawValue) as? MPAlbumModel
+        self.url = coder.decodeObject(forKey: PropertyKey.url.rawValue) as! URL
+        self.artistIds = coder.decodeObject(forKey: PropertyKey.artists.rawValue) as? [String]
+        self.albumId = coder.decodeObject(forKey: PropertyKey.album.rawValue) as? String
         self.artistImgs = coder.decodeObject(forKey: PropertyKey.artistImgs.rawValue) as? Array<URL>
         self.albumImgs = coder.decodeObject(forKey: PropertyKey.albumImgs.rawValue) as? Array<URL>
-        self.lyric = coder.decodeObject(forKey: PropertyKey.lyric.rawValue) as? MPLyricModel
-        self.musicbook = coder.decodeObject(forKey: PropertyKey.musicbook.rawValue) as? MPMusicbookModel
-        self.tags = coder.decodeObject(forKey: PropertyKey.tags.rawValue) as? Array<MPTagModel>
+        self.lyricId = coder.decodeObject(forKey: PropertyKey.lyric.rawValue) as? String
+        self.musicbookId = coder.decodeObject(forKey: PropertyKey.musicbook.rawValue) as? String
+        self.tagIds = coder.decodeObject(forKey: PropertyKey.tags.rawValue) as? [String]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
     }
 
     func encode(with coder: NSCoder) {
         coder.encode(self.id, forKey: PropertyKey.id.rawValue)
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
-        coder.encode(self.url.absoluteString, forKey: PropertyKey.url.rawValue)
-        coder.encode(self.artists, forKey: PropertyKey.artists.rawValue)
-        coder.encode(self.album, forKey: PropertyKey.album.rawValue)
+        coder.encode(self.url, forKey: PropertyKey.url.rawValue)
+        coder.encode(self.artistIds, forKey: PropertyKey.artists.rawValue)
+        coder.encode(self.albumId, forKey: PropertyKey.album.rawValue)
         coder.encode(self.artistImgs, forKey: PropertyKey.artistImgs.rawValue)
         coder.encode(self.albumImgs, forKey: PropertyKey.albumImgs.rawValue)
-        coder.encode(self.lyric, forKey: PropertyKey.lyric.rawValue)
-        coder.encode(self.musicbook, forKey: PropertyKey.musicbook.rawValue)
-        coder.encode(self.tags, forKey: PropertyKey.tags.rawValue)
+        coder.encode(self.lyricId, forKey: PropertyKey.lyric.rawValue)
+        coder.encode(self.musicbookId, forKey: PropertyKey.musicbook.rawValue)
+        coder.encode(self.tagIds, forKey: PropertyKey.tags.rawValue)
         coder.encode(self.intro, forKey: PropertyKey.intro.rawValue)
     }
     
@@ -82,11 +82,13 @@ extension MPSongModel: MPAudioProtocol
     }
     
     var audioArtists: Array<MPArtistModel>? {
-        artists
+        guard let ids = self.artistIds else { return nil }
+        return MPLibraryManager.shared.getArtists(ids)
     }
     
     var audioAlbum: MPAlbumModel? {
-        album
+        guard let id = self.albumId else { return nil }
+        return MPLibraryManager.shared.getAlbum(id)
     }
     
     var audioArtistImgs: Array<URL>? {
@@ -98,15 +100,18 @@ extension MPSongModel: MPAudioProtocol
     }
     
     var audioLyric: MPLyricModel? {
-        lyric
+        guard let id = self.lyricId else { return nil }
+        return MPLibraryManager.shared.getLyric(id)
     }
     
     var audioMusicbook: MPMusicbookModel? {
-        musicbook
+        guard let id = self.musicbookId else { return nil }
+        return MPLibraryManager.shared.getMusicbook(id)
     }
     
     var audioTags: Array<MPTagModel>? {
-        tags
+        guard let ids = self.tagIds else { return nil }
+        return MPLibraryManager.shared.getTags(ids)
     }
     
     var audioIntro: String? {
@@ -133,12 +138,5 @@ extension MPSongModel: InternalType
         case tags
         case intro
     }
-    
-}
-
-
-//接口方法
-extension MPSongModel: ExternalInterface
-{
     
 }

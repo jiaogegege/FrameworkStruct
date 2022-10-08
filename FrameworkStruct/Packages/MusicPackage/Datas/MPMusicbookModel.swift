@@ -11,6 +11,7 @@
  */
 import UIKit
 
-class MPMusicbookModel: OriginModel {
-
+class MPMusicbookModel: OriginModel
+{
+    
 }

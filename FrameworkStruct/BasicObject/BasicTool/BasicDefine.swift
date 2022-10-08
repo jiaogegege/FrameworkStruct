@@ -8,6 +8,7 @@
 /**
  * 程序中的基础定义，定义全局通用的接口方法和各种基础数据
  * 一般和具体的业务逻辑无关，而是关于程序和组件本身的定义
+ * 此处定义的内容可以包含一些具体的功能逻辑，比较面对实际功能
  */
 import Foundation
 import UIKit
@@ -20,6 +21,33 @@ import UIKit
 protocol BasicProtocol
 {
     
+}
+
+
+/**
+ 可归档解档协议
+ */
+protocol Archivable: NSCoding {
+    associatedtype AnyType = Self
+    
+    //归档
+    func archive() -> Data?
+    
+    //解档
+    static func unarchive(_ data: Data) -> AnyType?
+}
+
+//协议基础实现
+extension Archivable {
+    func archive() -> Data?
+    {
+        ArchiverAdatper.shared.archive(self)
+    }
+    
+    static func unarchive(_ data: Data) -> AnyType?
+    {
+        ArchiverAdatper.shared.unarchive(data) as? AnyType
+    }
 }
 
 

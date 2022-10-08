@@ -347,7 +347,7 @@ extension iCloudAccessor: ExternalInterface
             //[NSPredicate predicateWithFormat:@"(%K == %@)", NSMetadataItemContentTypeKey, whatToFilter]
             if g_validString(predicateStr)  //如果已经有内容了，那么追加` && `
             {
-                predicateStr.append(" && ")
+                predicateStr.append(String(format: " %@ ", opposite ? "&&" : "||"))
             }
             //拼接过滤条件
             predicateStr.append(String(format: "(kMDItemContentType %@ '%@')", (opposite ? "!=" : "=="), type.rawValue))

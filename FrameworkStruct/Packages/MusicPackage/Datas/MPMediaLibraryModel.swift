@@ -11,7 +11,7 @@
  */
 import UIKit
 
-class MPMediaLibraryModel: OriginModel, NSCoding
+class MPMediaLibraryModel: OriginModel, Archivable
 {
     //MARK: 属性
     var id: String
@@ -77,12 +77,5 @@ extension MPMediaLibraryModel: InternalType
         case lyrics
         case musicbooks
     }
-    
-}
-
-
-//接口方法
-extension MPMediaLibraryModel: ExternalInterface
-{
     
 }

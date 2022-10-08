@@ -65,9 +65,6 @@ protocol MPPlaylistProtocol {
     //播放列表类型
     var playlistType: MPPlaylistType {get}
     
-    //播放列表标签
-    var playlistTags: Array<MPTagModel>? {get}
-    
     //播放列表简介
     var playlistIntro: String? {get}
     
@@ -76,21 +73,28 @@ protocol MPPlaylistProtocol {
 }
 
 ///数据源类型，根据实际需求增减
-enum MPMediaSource {
-    case iCloud             //来自icloud的音乐资源，可以手动上传
-    case local              //来自本地沙盒的音乐资源，可以手动导入或下载
-    case iTunes             //来自iTunes的音乐资源，暂时不实现
-    case other              //其它音乐资源
+enum MPMediaSource: Int {
+    case local = 0                  //来自本地沙盒的音乐资源，可以手动导入或下载
+    case iCloud = 1                 //来自icloud的音乐资源，可以手动上传
+    case iTunes = 2                 //来自iTunes的音乐资源，暂时不实现
+    case others = 3                 //其它音乐资源
 }
 
 ///播放列表类型，根据实际需求增减
-enum MPPlaylistType {
-    case playlist               //标准播放列表
-    case songlist               //歌单
-    case favorite               //我的收藏
-    case album                  //专辑
-    case podcast                //播客
-    case category               //类别
-    case stage                  //场景
-    case mood                   //心情
+enum MPPlaylistType: Int {
+    case playlist = 0               //标准播放列表
+    
+    case songlist = 1               //歌单
+    case favorite = 2               //我的收藏
+    case album = 3                  //专辑
+    case podcast = 4                //播客
+    case stage = 5                  //场景
+    case mood = 6                   //心情
+}
+
+///媒体类型，比如音乐、播客、有声书等
+enum MPMediaType: Int {
+    case song                       //乐曲
+    case podcast                    //播客
+    case audioBook                  //有声书
 }

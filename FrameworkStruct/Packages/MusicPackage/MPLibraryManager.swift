@@ -44,5 +44,82 @@ class MPLibraryManager: OriginManager
 //外部接口
 extension MPLibraryManager: ExternalInterface
 {
+    ///根据歌曲id获取歌曲
+    func getSong(_ id: String) -> MPSongModel?
+    {
+        return nil
+    }
+    
+    ///根据歌曲ids获取歌曲s
+    func getSongs(_ ids: [String]) -> [MPSongModel]
+    {
+        var songs = [MPSongModel]()
+        for id in ids
+        {
+            if let song = self.getSong(id)
+            {
+                songs.append(song)
+            }
+        }
+        return songs
+    }
+    
+    ///根据艺术家id返回艺术家对象
+    func getArtist(_ id: String) -> MPArtistModel?
+    {
+        return nil
+    }
+    
+    ///根据艺术家id数组返回艺术家数组
+    func getArtists(_ ids: [String]) -> [MPArtistModel]
+    {
+        var artists = [MPArtistModel]()
+        for id in ids
+        {
+            if let artist = self.getArtist(id)
+            {
+                artists.append(artist)
+            }
+        }
+        return artists
+    }
+    
+    ///根据专辑id获取专辑对象
+    func getAlbum(_ id: String) -> MPAlbumModel?
+    {
+        return nil
+    }
+    
+    ///根据歌词或字幕id获取歌词或字幕对象
+    func getLyric(_ id: String) -> MPLyricModel?
+    {
+        return nil
+    }
+    
+    ///根据乐谱id获取乐谱
+    func getMusicbook(_ id: String) -> MPMusicbookModel?
+    {
+        return nil
+    }
+    
+    ///根据标签id获取标签对象
+    func getTag(_ id: String) -> MPTagModel?
+    {
+        return nil
+    }
+    
+    ///根据标签id列表获取标签对象列表
+    func getTags(_ ids: [String]) -> [MPTagModel]
+    {
+        var tags = [MPTagModel]()
+        for id in ids
+        {
+            if let tag = self.getTag(id)
+            {
+                tags.append(tag)
+            }
+        }
+        return tags
+    }
     
 }

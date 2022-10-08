@@ -25,6 +25,7 @@ enum FMUTIs: String, CaseIterable
     case url = "public.url"
     case fileUrl = "public.file-url"
     //文本
+    case txt = "public.txt"
     case text = "public.text"
     case plainText = "public.plain-text"
     case utf8PlainText = "public.utf8-plain-text"
@@ -137,6 +138,16 @@ enum FMUTIs: String, CaseIterable
     case epub = "org.idpf.epub-container"
     case log = "public.log"
     
+    
+    //常用组合
+    ///纯文本
+    static let textGroup = [Self.text, Self.plainText, Self.utf8PlainText, Self.utf16PlainText]
+    ///图像
+    static let imageGroup = [Self.image, Self.jpeg, Self.png, Self.svg, Self.tiff, Self.gif, Self.bmp]
+    ///音频
+    static let audioGroup = [Self.audio, Self.mp3, Self.aiff, Self.wav, Self.midi, Self.mpeg4Audio]
+    ///视频
+    static let videoGroup = [Self.mpeg, Self.mpeg4, Self.movie, Self.video, Self.quickTime, Self.mpeg2Video, Self.avi]
     
     //获取对应uti的UTType
     @available(iOS 14.0, *)

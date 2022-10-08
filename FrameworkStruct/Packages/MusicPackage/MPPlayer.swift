@@ -14,6 +14,10 @@ import UIKit
 class MPPlayer: OriginWorker
 {
     //MARK: 属性
+    //当前播放列表
+    fileprivate var currentPlaylist: MPPlaylistProtocol?
+    //当前正在播放的音乐
+    fileprivate var currentSong: MPAudioProtocol?
     
     
     //MARK: 方法
