@@ -17,8 +17,18 @@ class MPLibraryManager: OriginManager
     //单例
     static let shared = MPLibraryManager()
     
+    //数据容器
+    fileprivate lazy var container: MPContainer = {
+        let container = MPContainer.shared
+        
+        return container
+    }()
+    
     //icloud存取器
-    fileprivate lazy var ia = iCloudAccessor.shared
+    fileprivate lazy var ia: iCloudAccessor = {
+        let ia = iCloudAccessor.shared
+        return ia
+    }()
     
     
     //MARK: 方法
@@ -44,6 +54,12 @@ class MPLibraryManager: OriginManager
 //外部接口
 extension MPLibraryManager: ExternalInterface
 {
+    ///获取某个资源库的所有歌曲
+    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: (([Any]) -> Void))
+    {
+        
+    }
+    
     ///根据歌曲id获取歌曲
     func getSong(_ id: String) -> MPSongModel?
     {

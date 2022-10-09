@@ -72,8 +72,8 @@ protocol MPPlaylistProtocol {
     func getPlaylist() -> MPPlaylistModel
 }
 
-///数据源类型，根据实际需求增减
-enum MPMediaSource: Int {
+///资源库类型，根据实际需求增减
+enum MPLibraryType: Int {
     case local = 0                  //来自本地沙盒的音乐资源，可以手动导入或下载
     case iCloud = 1                 //来自icloud的音乐资源，可以手动上传
     case iTunes = 2                 //来自iTunes的音乐资源，暂时不实现
@@ -94,7 +94,18 @@ enum MPPlaylistType: Int {
 
 ///媒体类型，比如音乐、播客、有声书等
 enum MPMediaType: Int {
-    case song                       //乐曲
-    case podcast                    //播客
-    case audioBook                  //有声书
+    case song = 0                   //乐曲
+    case podcast = 1                //播客
+    case audioBook = 2              //有声书
+}
+
+///资源库资源类型
+enum MPLibraryResourceType {
+    case songs                  //歌曲
+    case albums                 //专辑
+    case artists                //艺术家
+    case lyrics                 //歌词或字幕
+    case musicbooks             //乐谱
+    case podcasts               //播客
+    case audiobooks             //有声书
 }

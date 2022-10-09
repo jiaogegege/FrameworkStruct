@@ -49,6 +49,7 @@ extension MPContainer: InternalType
         case currentPlaylist                //当前播放列表
         case currentSong                    //当前播放歌曲
         case historySongs                   //历史播放歌曲
+        case historyPodcasts                //历史播放播客
         case historyPlaylists               //历史播放列表
     }
     

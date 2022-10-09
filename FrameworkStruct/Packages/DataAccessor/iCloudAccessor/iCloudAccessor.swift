@@ -50,8 +50,8 @@ class iCloudAccessor: OriginAccessor {
         return query
     }()
     
-    ///搜索结果排序规则
-    fileprivate(set) var querySort: IASearchResultSort?
+    ///搜索结果排序规则，默认按文件名升序
+    fileprivate(set) var querySort: IASearchResultSort = .name(true)
     
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
     fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentSearchResult]) -> Void)] = []
@@ -158,11 +158,8 @@ extension iCloudAccessor: DelegateProtocol
             fileArray.append(st)
         }
         //排序
-        if let sort = querySort
-        {
-            fileArray.sort { (lhs, rhs) in
-                sort.compare(lhs: lhs, rhs: rhs)
-            }
+        fileArray.sort { (lhs, rhs) in
+            querySort.compare(lhs: lhs, rhs: rhs)
         }
         for cb in queryDocumentsCallbacks
         {
@@ -331,6 +328,14 @@ extension iCloudAccessor: ExternalInterface
     /**************************************** key-value存储 Section End ***************************************/
     
     /**************************************** document存储 Section Begin ***************************************/
+    ///设置在后台线程搜索，如果数据量过大，防止阻塞UI
+    func setBackgroundQueue()
+    {
+        let queue = OperationQueue()
+        queue.qualityOfService = .background
+        self.fileQuery.operationQueue = queue
+    }
+    
     ///设置icloud目录搜索范围
     func setSearchScope(_ scope: IASearchScope)
     {

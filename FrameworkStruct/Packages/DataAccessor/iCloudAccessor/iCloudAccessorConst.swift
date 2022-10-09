@@ -24,9 +24,10 @@ enum IAValueType {
 ///iCloud document目录预定义列表，根据实际需求修改
 enum IADocumentDir: String {
     case Documents
-    case data = "Documents/Data"        //Documents下有一个Data文件夹
-    case text = "Documents/Text"        //Documents下有一个Text文件夹
-    case image = "Documents/Image"      //Documents下有一个Image文件夹
+    case data = "Documents/Data"                            //Documents下有一个Data文件夹
+    case text = "Documents/Text"                            //Documents下有一个Text文件夹
+    case image = "Documents/Image"                          //Documents下有一个Image文件夹
+    case music = "Documents/Music"                          //Documents下有一个Music文件夹
 }
 
 ///可在icloud读写的value的key定义，根据实际需求定义

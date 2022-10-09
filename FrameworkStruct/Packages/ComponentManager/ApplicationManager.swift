@@ -12,6 +12,8 @@
  */
 import UIKit
 import AudioToolbox
+import AVFAudio
+import MediaPlayer
 
 
 /**
@@ -464,6 +466,20 @@ extension ApplicationManager: ExternalInterface
     ///是否横屏
     var isLandscape: Bool {
         return self.orientation == .landscapeLeft || self.orientation == .landscapeRight
+    }
+    
+    ///当前音量:0.0~1.0
+    var volume: Float {
+        AVAudioSession.sharedInstance().outputVolume
+    }
+    
+    ///设置系统音量:0.0~1.0
+    func setVolume(_ volume: Float)
+    {
+        let volumeView = MPVolumeView()
+        if let view = volumeView.subviews.first as? UISlider {
+            view.value = volume
+        }
     }
     
     ///电池电量：0-1
