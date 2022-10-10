@@ -328,6 +328,8 @@ extension String
     static let changeTheme = localized("changeTheme")
     //icloud文件
     static let icloudFile = localized("icloudFile")
+    //音乐库
+    static let musicLibrary = localized("musicLibrary")
     
     //MARK: Toast文案
     

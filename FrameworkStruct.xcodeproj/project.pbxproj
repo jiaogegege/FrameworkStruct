@@ -763,6 +763,7 @@
 		EAE6A33228E3EA030049E15F /* EditiCloudFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */; };
 		EAE6A33428E41FD30049E15F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE6A33328E41FD30049E15F /* HealthKit.framework */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
+		EAF0986328F4151E00AB487E /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF0986228F4151E00AB487E /* MusicViewController.swift */; };
 		EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EB282A05AE0053BC85 /* OCUtility.m */; };
 		EAF401EF282A07530053BC85 /* FSException.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EE282A07530053BC85 /* FSException.m */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
@@ -1982,6 +1983,7 @@
 		EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiCloudFileViewController.swift; sourceTree = "<group>"; };
 		EAE6A33328E41FD30049E15F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
+		EAF0986228F4151E00AB487E /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		EAF401EA282A05AE0053BC85 /* OCUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCUtility.h; sourceTree = "<group>"; };
 		EAF401EB282A05AE0053BC85 /* OCUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUtility.m; sourceTree = "<group>"; };
 		EAF401ED282A07530053BC85 /* FSException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSException.h; sourceTree = "<group>"; };
@@ -4477,6 +4479,7 @@
 				EAACA83F27FE7BCB008EA586 /* CopyPasteViewController.swift */,
 				EAAC7A5928E2A52E009F4B56 /* iCloudFileViewController.swift */,
 				EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */,
+				EAF0986228F4151E00AB487E /* MusicViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -5329,6 +5332,7 @@
 				EA3E8AEF27B77CEA006A2715 /* FillRenderer.swift in Sources */,
 				EAC8A76B27625BA70088293F /* MJPropertyType.m in Sources */,
 				EA99373D27994F6100480147 /* TABShimmerAnimation.m in Sources */,
+				EAF0986328F4151E00AB487E /* MusicViewController.swift in Sources */,
 				EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */,
 				EA9A75E727C739DF00A11FC8 /* SRRunLoopThread.m in Sources */,
 				EA99371C27994F6100480147 /* TABAnimatedDocumentMethod.m in Sources */,

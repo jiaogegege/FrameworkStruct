@@ -15,7 +15,7 @@ class iCloudFileViewController: BasicTableViewController {
     //icloud适配器
     fileprivate lazy var ia: iCloudAccessor = {
         let ia = iCloudAccessor.shared
-        ia.setFilter(FMUTIs.textGroup, opposite: false)
+        ia.setFilter(files: FMUTIs.textGroup, filesOpposite: false, dirs: nil, dirsOpposite: false)
         ia.setSort(type: .name(false))
         return ia
     }()

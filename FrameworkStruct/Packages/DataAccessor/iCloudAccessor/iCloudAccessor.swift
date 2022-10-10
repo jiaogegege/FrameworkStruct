@@ -44,6 +44,10 @@ class iCloudAccessor: OriginAccessor {
     fileprivate lazy var fileQuery: NSMetadataQuery = {
         let query = NSMetadataQuery()
         query.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]      //默认搜索icloud的Documents目录
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.qualityOfService = .background
+        query.operationQueue = queue
         query.notificationBatchingInterval = nt_request_timeoutInterval
         NotificationCenter.default.addObserver(self, selector: #selector(fileQueryFinished(notification:)), name: NSNotification.Name.NSMetadataQueryDidFinishGathering, object: query)
         NotificationCenter.default.addObserver(self, selector: #selector(fileQueryFinished(notification:)), name: NSNotification.Name.NSMetadataQueryDidUpdate, object: query)
@@ -132,16 +136,18 @@ extension iCloudAccessor: DelegateProtocol
     //收到icloud value变化的通知
     @objc func iCloudAdapterDidReceiveValueChangeNotification(notification: Notification)
     {
-        if let userInfo = notification.userInfo
-        {
-            let reason = userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as! Int
-            let keys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as! [String]
-            for key in keys {
-                //只应该出现预先设定的key
-                let keyE = IAValueKey(rawValue: key)
-                let value = keyE?.getValue()
-                let obj = IAValueChangeModel(key: keyE!, value: value, changeReasion: IAValueChangeReason(rawValue: reason))
-                NotificationCenter.default.post(name: FSNotification.iCloudValueChange.name, object: [FSNotification.iCloudValueChange.paramKey: obj])
+        g_async {
+            if let userInfo = notification.userInfo
+            {
+                let reason = userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as! Int
+                let keys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as! [String]
+                for key in keys {
+                    //只应该出现预先设定的key
+                    let keyE = IAValueKey(rawValue: key)
+                    let value = keyE?.getValue()
+                    let obj = IAValueChangeModel(key: keyE!, value: value, changeReasion: IAValueChangeReason(rawValue: reason))
+                    NotificationCenter.default.post(name: FSNotification.iCloudValueChange.name, object: [FSNotification.iCloudValueChange.paramKey: obj])
+                }
             }
         }
     }
@@ -149,24 +155,26 @@ extension iCloudAccessor: DelegateProtocol
     //fileQuery查询或获取更新完毕
     @objc func fileQueryFinished(notification: Notification)
     {
-        fileQuery.stop()
-        var fileArray: [IADocumentSearchResult] = []
-        for item in fileQuery.results
-        {
-            let it = item as! NSMetadataItem
-            let st = IADocumentSearchResult.init(info: it)
-            fileArray.append(st)
+        g_async {
+            self.fileQuery.stop()
+            var fileArray: [IADocumentSearchResult] = []
+            for item in self.fileQuery.results
+            {
+                let it = item as! NSMetadataItem
+                let st = IADocumentSearchResult.init(info: it)
+                fileArray.append(st)
+            }
+            //排序
+            fileArray.sort { (lhs, rhs) in
+                self.querySort.compare(lhs: lhs, rhs: rhs)
+            }
+            for cb in self.queryDocumentsCallbacks
+            {
+                cb(fileArray)
+            }
+            //完毕之后，清理回调
+            self.queryDocumentsCallbacks.removeAll()
         }
-        //排序
-        fileArray.sort { (lhs, rhs) in
-            querySort.compare(lhs: lhs, rhs: rhs)
-        }
-        for cb in queryDocumentsCallbacks
-        {
-            cb(fileArray)
-        }
-        //完毕之后，清理回调
-        queryDocumentsCallbacks.removeAll()
     }
     
 }
@@ -328,34 +336,58 @@ extension iCloudAccessor: ExternalInterface
     /**************************************** key-value存储 Section End ***************************************/
     
     /**************************************** document存储 Section Begin ***************************************/
-    ///设置在后台线程搜索，如果数据量过大，防止阻塞UI
-    func setBackgroundQueue()
-    {
-        let queue = OperationQueue()
-        queue.qualityOfService = .background
-        self.fileQuery.operationQueue = queue
-    }
-    
-    ///设置icloud目录搜索范围
+    ///设置icloud系统目录搜索范围，比如根目录、Documents目录
     func setSearchScope(_ scope: IASearchScope)
     {
         self.fileQuery.searchScopes = scope.getScope()
     }
     
     ///设置搜索结果过滤条件
-    ///参数：type：要过滤的类型；opposite：是否取反，如果为true，那么type中的类型会被去除，否则只保留type中指定的类型
-    func setFilter(_ types: [FMUTIs], opposite: Bool = false)
+    ///参数：fileTypes：要过滤的文件类型；fileTypesOpposite：文件类型是否取反，如果为true，那么type中的类型会被去除，否则只保留type中指定的类型
+    func setFilter(files: [FMUTIs]?, filesOpposite: Bool = false, dirs: [IADocumentDir]?, dirsOpposite: Bool = false)
     {
         var predicateStr: PredicateExpression = ""
-        for type in types {
-            //"(kMDItemContentType != 'com.apple.mail.emlx') && (kMDItemContentType != 'public.vcard')"
-            //[NSPredicate predicateWithFormat:@"(%K == %@)", NSMetadataItemContentTypeKey, whatToFilter]
-            if g_validString(predicateStr)  //如果已经有内容了，那么追加` && `
-            {
-                predicateStr.append(String(format: " %@ ", opposite ? "&&" : "||"))
+        var fileStr = ""
+        var dirStr = ""
+        //处理文件类型
+        if let files = files {
+            for file in files {
+                //"(kMDItemContentType != 'com.apple.mail.emlx') && (kMDItemContentType != 'public.vcard')"
+                //[NSPredicate predicateWithFormat:@"(%K == %@)", NSMetadataItemContentTypeKey, whatToFilter]
+                if g_validString(fileStr)  //如果已经有内容了，那么追加` && `
+                {
+                    fileStr.append(String(format: " %@ ", filesOpposite ? "&&" : "||"))
+                }
+                //拼接过滤条件
+                fileStr.append(String(format: "(kMDItemContentType %@ '%@')", (filesOpposite ? "!=" : "=="), file.rawValue))
             }
-            //拼接过滤条件
-            predicateStr.append(String(format: "(kMDItemContentType %@ '%@')", (opposite ? "!=" : "=="), type.rawValue))
+        }
+        //处理目录
+        if let dirs = dirs {
+            for dir in dirs {
+                if g_validString(dirStr)  //如果已经有内容了，那么追加` && `
+                {
+                    dirStr.append(String(format: " %@ ", dirsOpposite ? "&&" : "||"))
+                }
+                //拼接过滤条件
+                dirStr.append(String(format: "%@(kMDItemPath CONTAINS '%@')%@", dirsOpposite ? "(NOT " : "", dir.rawValue, dirsOpposite ? ")" : ""))
+            }
+        }
+        //拼接完整str
+        if g_validString(fileStr)
+        {
+            predicateStr += fileStr
+        }
+        if g_validString(dirStr)
+        {
+            if g_validString(fileStr)
+            {
+                predicateStr = String(format: "(%@) && (%@)", predicateStr, dirStr)
+            }
+            else
+            {
+                predicateStr += dirStr
+            }
         }
         self.fileQuery.predicate = NSPredicate(format: predicateStr)
     }
@@ -405,7 +437,19 @@ extension iCloudAccessor: ExternalInterface
     ///获取icloud下`Documents/Data`目录
     func getDataDir(identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
     {
-        getDir(.data, identifier: identifier)
+        getDir(.Data, identifier: identifier)
+    }
+    
+    ///获取iCloud下的`Documents/Music`目录
+    func getMusicDir(identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
+    {
+        getDir(.Music, identifier: identifier)
+    }
+    
+    ///获取iCloud下`Documents/Music/Library`目录
+    func getMusicLibrary(identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
+    {
+        getDir(.MusicLibrary, identifier: identifier)
     }
     
     ///获取icloud下的某个目录下的某个文件的路径，fileName：包括扩展名

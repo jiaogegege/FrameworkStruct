@@ -23,7 +23,7 @@ class MPFavoriteModel: OriginModel, Archivable
     var intro: String?
     
     //MARK: 方法
-    //创建一个空歌单
+    //创建一个空收藏列表
     init(name: String, mediaType: MPMediaType) {
         self.id = g_uuid()
         self.name = name

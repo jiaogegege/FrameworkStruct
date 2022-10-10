@@ -58,6 +58,7 @@ append = "追加";
 myFavorite = "我的收藏";
 changeTheme = "切换主题";
 icloudFile = "iCloud文件";
+musicLibrary = "音乐库";
 
 /**
  * Toast文案

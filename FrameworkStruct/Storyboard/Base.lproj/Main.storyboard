@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -1096,6 +1096,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kql-dz-t6B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7832" y="137"/>
+        </scene>
+        <!--音乐库-->
+        <scene sceneID="PfZ-N3-bwR">
+            <objects>
+                <viewController storyboardIdentifier="MusicViewController" title="音乐库" id="TGg-sG-pTs" customClass="MusicViewController" customModule="FrameworkStruct" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bE0-B6-TjL">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUu-p8-WAP">
+                                <rect key="frame" x="0.0" y="44" width="428" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLh-XB-7q5">
+                                        <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="音乐库"/>
+                                        <connections>
+                                            <action selector="libraryAction:" destination="TGg-sG-pTs" eventType="touchUpInside" id="ZqC-yk-rYQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npZ-Ol-RqL">
+                                        <rect key="frame" x="142.66666666666669" y="0.0" width="142.66666666666669" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="我喜欢"/>
+                                        <connections>
+                                            <action selector="favoriteAction:" destination="TGg-sG-pTs" eventType="touchUpInside" id="OqA-Ls-dEz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCZ-ei-mxy">
+                                        <rect key="frame" x="285.33333333333331" y="0.0" width="142.66666666666669" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="歌单"/>
+                                        <connections>
+                                            <action selector="songListAction:" destination="TGg-sG-pTs" eventType="touchUpInside" id="owV-ea-cWR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="QCZ-ei-mxy" secondAttribute="trailing" id="0pi-Ck-Vgt"/>
+                                    <constraint firstItem="npZ-Ol-RqL" firstAttribute="width" secondItem="JLh-XB-7q5" secondAttribute="width" id="DFt-l5-fdR"/>
+                                    <constraint firstAttribute="bottom" secondItem="JLh-XB-7q5" secondAttribute="bottom" id="MzC-m6-k06"/>
+                                    <constraint firstItem="QCZ-ei-mxy" firstAttribute="leading" secondItem="npZ-Ol-RqL" secondAttribute="trailing" id="Rxx-Fs-BRP"/>
+                                    <constraint firstItem="QCZ-ei-mxy" firstAttribute="width" secondItem="JLh-XB-7q5" secondAttribute="width" id="ad5-AQ-9uq"/>
+                                    <constraint firstAttribute="height" constant="50" id="cq4-be-akw"/>
+                                    <constraint firstItem="JLh-XB-7q5" firstAttribute="leading" secondItem="bUu-p8-WAP" secondAttribute="leading" id="nE2-YF-bFp"/>
+                                    <constraint firstItem="npZ-Ol-RqL" firstAttribute="top" secondItem="bUu-p8-WAP" secondAttribute="top" id="qVr-rN-c0q"/>
+                                    <constraint firstItem="npZ-Ol-RqL" firstAttribute="leading" secondItem="JLh-XB-7q5" secondAttribute="trailing" id="qXY-nt-3b9"/>
+                                    <constraint firstAttribute="bottom" secondItem="npZ-Ol-RqL" secondAttribute="bottom" id="u5K-9g-7cD"/>
+                                    <constraint firstItem="JLh-XB-7q5" firstAttribute="top" secondItem="bUu-p8-WAP" secondAttribute="top" id="u8e-gf-fi4"/>
+                                    <constraint firstItem="QCZ-ei-mxy" firstAttribute="top" secondItem="bUu-p8-WAP" secondAttribute="top" id="uxO-Zk-e6h"/>
+                                    <constraint firstAttribute="bottom" secondItem="QCZ-ei-mxy" secondAttribute="bottom" id="yvB-Jh-1Ly"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XNu-gl-5YV">
+                                <rect key="frame" x="0.0" y="94" width="428" height="798"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="TGg-sG-pTs" id="YLw-P8-g84"/>
+                                    <outlet property="delegate" destination="TGg-sG-pTs" id="wIf-fe-KyF"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sM5-Nl-hqc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bUu-p8-WAP" firstAttribute="leading" secondItem="sM5-Nl-hqc" secondAttribute="leading" id="3uD-Nd-PPo"/>
+                            <constraint firstItem="XNu-gl-5YV" firstAttribute="top" secondItem="bUu-p8-WAP" secondAttribute="bottom" id="AzV-Wc-qLw"/>
+                            <constraint firstItem="sM5-Nl-hqc" firstAttribute="trailing" secondItem="bUu-p8-WAP" secondAttribute="trailing" id="HsZ-me-kDg"/>
+                            <constraint firstItem="sM5-Nl-hqc" firstAttribute="trailing" secondItem="XNu-gl-5YV" secondAttribute="trailing" id="PP9-Uw-oIl"/>
+                            <constraint firstItem="bUu-p8-WAP" firstAttribute="top" secondItem="sM5-Nl-hqc" secondAttribute="top" id="Psy-r1-UaL"/>
+                            <constraint firstItem="sM5-Nl-hqc" firstAttribute="bottom" secondItem="XNu-gl-5YV" secondAttribute="bottom" id="kBs-Ey-5Ei"/>
+                            <constraint firstItem="XNu-gl-5YV" firstAttribute="leading" secondItem="sM5-Nl-hqc" secondAttribute="leading" id="uOt-DL-PV6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="XNu-gl-5YV" id="Gpe-qf-PtR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0tY-Bm-hYB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8467.2897196261674" y="136.71706263498922"/>
         </scene>
     </scenes>
     <resources>

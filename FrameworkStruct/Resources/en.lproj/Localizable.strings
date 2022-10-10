@@ -40,6 +40,7 @@ editiCloudFile = "Edit iCloud File";
 myFavorite = "My Favorite";
 changeTheme = "Change Theme";
 icloudFile = "iCloud File";
+musicLibrary = "Music Library";
 
 /**
  * 界面提示和按钮文案

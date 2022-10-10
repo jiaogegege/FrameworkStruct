@@ -11,7 +11,7 @@ class ViewController: BasicViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    let titleArray = [String.healthCode, String.placeCode, String.travelCard, String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste, String.iCloudFileManage]
+    let titleArray = [String.healthCode, String.placeCode, String.travelCard, String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste, String.iCloudFileManage, String.musicLibrary]
     
     override class func getViewController() -> Self {
         return getVC(from: gMainSB)
@@ -162,6 +162,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         else if indexPath.row == 13 //iCloud文件管理
         {
             let vc = iCloudFileViewController.getViewController()
+            push(vc)
+        }
+        else if indexPath.row == 14 //音乐库
+        {
+            let vc = MusicViewController.getViewController()
             push(vc)
         }
     }

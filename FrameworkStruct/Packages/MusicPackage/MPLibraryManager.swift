@@ -11,6 +11,12 @@
  */
 import UIKit
 
+protocol MPLibraryManagerDelegate: NSObjectProtocol {
+    ///媒体库管理器初始化完成
+    func mpLibraryManagerDidInitCompleted()
+    
+}
+
 class MPLibraryManager: OriginManager
 {
     //MARK: 属性
@@ -18,17 +24,9 @@ class MPLibraryManager: OriginManager
     static let shared = MPLibraryManager()
     
     //数据容器
-    fileprivate lazy var container: MPContainer = {
-        let container = MPContainer.shared
-        
-        return container
-    }()
+    fileprivate var container = MPContainer.shared
     
-    //icloud存取器
-    fileprivate lazy var ia: iCloudAccessor = {
-        let ia = iCloudAccessor.shared
-        return ia
-    }()
+    weak var delegate: MPLibraryManagerDelegate?
     
     
     //MARK: 方法
@@ -36,6 +34,7 @@ class MPLibraryManager: OriginManager
     private override init()
     {
         super.init()
+        self.addNotification()
     }
     
     override func copy() -> Any
@@ -48,16 +47,40 @@ class MPLibraryManager: OriginManager
         return self
     }
     
+    func addNotification()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(containerDidInitCompleted(notify:)), name: FSNotification.containerInitFinished.name, object: nil)
+    }
+    
+}
+
+
+extension MPLibraryManager: DelegateProtocol
+{
+    //媒体库初始化完成
+    @objc func containerDidInitCompleted(notify: Notification)
+    {
+        if let del = self.delegate
+        {
+            del.mpLibraryManagerDidInitCompleted()
+        }
+    }
+    
 }
 
 
 //外部接口
 extension MPLibraryManager: ExternalInterface
 {
-    ///获取某个资源库的所有歌曲
-    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: (([Any]) -> Void))
+    ///获取某个资源
+    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: @escaping (([Any]) -> Void))
     {
-        
+        if libraryType == .iCloud
+        {
+            container.getiCloudLibrary { lib in
+                completion(lib.songs)
+            }
+        }
     }
     
     ///根据歌曲id获取歌曲
