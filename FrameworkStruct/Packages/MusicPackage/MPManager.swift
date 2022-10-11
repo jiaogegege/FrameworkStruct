@@ -26,11 +26,11 @@ class MPManager: OriginManager
     
     //媒体库管理器
     fileprivate var libMgr = MPLibraryManager.shared
-    
-    fileprivate var ia = iCloudAccessor.shared
-    
     //播放器
     fileprivate var player: MPPlayer = MPPlayer()
+    
+    //iCloud交互
+    fileprivate var ia = iCloudAccessor.shared
     
     //弱引用代理数组，一般是UI组件
     fileprivate var delegates: WeakArray = WeakArray.init()
