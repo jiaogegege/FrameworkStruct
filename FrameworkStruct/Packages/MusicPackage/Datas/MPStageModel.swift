@@ -15,7 +15,7 @@ class MPStageModel: OriginModel, Archivable
     //MARK: 属性
     var id: String
     var name: String
-    var songIds: Array<String>
+    var songs: Array<MPSongModel>
     var type: MPPlaylistType
     var images: Array<URL>?
     var intro: String?
@@ -25,7 +25,7 @@ class MPStageModel: OriginModel, Archivable
     init(name: String) {
         self.id = g_uuid()
         self.name = name
-        self.songIds = []
+        self.songs = []
         self.type = .stage
     }
     
@@ -34,7 +34,7 @@ class MPStageModel: OriginModel, Archivable
         
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
-        self.songIds = coder.decodeObject(forKey: PropertyKey.songIds.rawValue) as! [String]
+        self.songs = coder.decodeObject(forKey: PropertyKey.songs.rawValue) as! [MPSongModel]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
         self.images = coder.decodeObject(forKey: PropertyKey.images.rawValue) as? [URL]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
@@ -43,7 +43,7 @@ class MPStageModel: OriginModel, Archivable
     func encode(with coder: NSCoder) {
         coder.encode(self.id, forKey: PropertyKey.id.rawValue)
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
-        coder.encode(self.songIds, forKey: PropertyKey.songIds.rawValue)
+        coder.encode(self.songs, forKey: PropertyKey.songs.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
         coder.encode(self.images, forKey: PropertyKey.images.rawValue)
         coder.encode(self.intro, forKey: PropertyKey.intro.rawValue)
@@ -63,7 +63,7 @@ extension MPStageModel: MPPlaylistProtocol
     }
     
     var playlistAudios: Array<MPAudioProtocol> {
-        MPLibraryManager.shared.getSongs(self.songIds)
+        songs
     }
     
     var playlistType: MPPlaylistType {
@@ -88,7 +88,7 @@ extension MPStageModel: InternalType
     enum PropertyKey: String {
         case id
         case name
-        case songIds
+        case songs
         case type
         case images
         case intro

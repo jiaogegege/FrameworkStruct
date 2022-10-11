@@ -70,6 +70,14 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         })
     }
     
+    //音乐库更新
+    func mpManagerDidUpdated() {
+        mpr.getAlliCloudSongs(completion: {[weak self] songs in
+            self?.libraryArray = songs
+            self?.tableView.reloadData()
+        })
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if type == .library
         {
@@ -110,7 +118,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if type == .library
         {
-            mpr.playSong(libraryArray[indexPath.row], libraryType: .iCloud, playlistType: nil, playlistId: nil) { success in
+            mpr.playSong(libraryArray[indexPath.row], in: .iCloud) { success in
                 
             }
         }

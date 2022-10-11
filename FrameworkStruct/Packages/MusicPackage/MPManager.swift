@@ -14,7 +14,8 @@ import UIKit
 protocol MPManagerDelegate: NSObjectProtocol {
     ///初始化完成
     func mpManagerDidInitCompleted()
-    
+    ///更新完成
+    func mpManagerDidUpdated()
 }
 
 class MPManager: OriginManager
@@ -25,6 +26,11 @@ class MPManager: OriginManager
     
     //媒体库管理器
     fileprivate var libMgr = MPLibraryManager.shared
+    
+    fileprivate var ia = iCloudAccessor.shared
+    
+    //播放器
+    fileprivate var player: MPPlayer = MPPlayer()
     
     //弱引用代理数组，一般是UI组件
     fileprivate var delegates: WeakArray = WeakArray.init()
@@ -55,10 +61,25 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate
 {
     //媒体库管理器初始化完成
     func mpLibraryManagerDidInitCompleted() {
+        delegates.compact()
         for i in 0..<delegates.count
         {
-            let delegate = delegates.object(at: i) as! MPManagerDelegate
-            delegate.mpManagerDidInitCompleted()
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerDidInitCompleted()
+            }
+        }
+    }
+    
+    //媒体库管理器更新
+    func mpLibraryManagerDidUpdated() {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerDidUpdated()
+            }
         }
     }
     
@@ -71,27 +92,52 @@ extension MPManager: ExternalInterface
     ///添加代理
     func addDelegate(_ obj: MPManagerDelegate)
     {
-        self.delegates.add(obj)
+        delegates.add(obj)
+        delegates.compact()
     }
     
     ///获取所有iCloud歌曲
     func getAlliCloudSongs(completion: @escaping ([MPSongModel]) -> Void)
     {
         libMgr.getResource(libraryType: .iCloud, resourceType: .songs) { songs in
-            completion(songs as! [MPSongModel])
+            if let songs = songs {
+                completion(songs as! [MPSongModel])
+            }
         }
     }
     
-    ///播放一首歌曲
-    ///参数：song：要播放的歌曲，libraryType：所在的库，playlistType：播放列表类型，playlistId：播放列表id，completion：播放是否成功
-    ///libraryType和playlistType互斥
-    ///playlistType和playlistId必须同时出现
-    func playSong(_ song: MPSongModel, libraryType: MPLibraryType?, playlistType: MPPlaylistType?, playlistId: String?, completion: BoolClosure? = nil)
+    /**************************************** 播放音乐相关 Section Begin ***************************************/
+    
+    ///播放一首媒体库中的音乐
+    ///参数：library：媒体库类型，目前只有iCloud；completion：播放是否成功
+    ///说明：会生成一个播放列表，包含媒体库中所有歌曲
+    func playSong(_ song: MPSongModel , in library: MPLibraryType, completion: BoolClosure)
     {
+        if library == .iCloud
+        {
+            libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] items in
+                if let songs = items as? [MPSongModel] {
+                    //生成一个播放列表
+                    let playlist = MPPlaylistModel(name: String.iCloud, songs: songs, type: .playlist, intro: nil)
+                    //先打开歌曲文件，同时也是从iCloud下载
+                    self?.ia.openDocument(song.url) { id in
+                        if let id = id {
+                            self?.ia.closeDocument(id)
+                        }
+                        //播放音乐
+                        self?.player.play(song, playlist: playlist, completion: { success in
+                            
+                        })
+                    }
+                }
+            }
+        }
         
     }
     
     
+    
+    /**************************************** 播放音乐相关 Section End ***************************************/
     
     
 }

@@ -90,9 +90,10 @@ extension MPMediaLibraryModel: InternalType
 //接口方法
 extension MPMediaLibraryModel: ExternalInterface
 {
-    ///diff songs
-    func diffSongs(_ newSongs: [MPSongModel])
+    ///diff songs，返回是否有更新
+    func diffSongs(_ newSongs: [MPSongModel]) -> Bool
     {
+        var hasUpdate = false
         //检查新增
         for newSong in newSongs {
             var exist = false   //新歌曲是否存在，如果在旧列表中不存在，那么添加到列表中
@@ -107,6 +108,7 @@ extension MPMediaLibraryModel: ExternalInterface
             if exist == false
             {
                 self.songs.append(newSong)
+                hasUpdate = true
             }
         }
         //检查删除
@@ -122,8 +124,14 @@ extension MPMediaLibraryModel: ExternalInterface
             if exist == false
             {
                 self.songs.removeObject(oldSong)
+                hasUpdate = true
             }
         }
+        //排序，根据name
+        self.songs.sort { lhs, rhs in
+            return lhs.name < rhs.name
+        }
+        return hasUpdate
     }
     
 }

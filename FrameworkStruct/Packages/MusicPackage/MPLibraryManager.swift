@@ -14,6 +14,8 @@ import UIKit
 protocol MPLibraryManagerDelegate: NSObjectProtocol {
     ///媒体库管理器初始化完成
     func mpLibraryManagerDidInitCompleted()
+    ///媒体库更新完成
+    func mpLibraryManagerDidUpdated()
     
 }
 
@@ -25,6 +27,9 @@ class MPLibraryManager: OriginManager
     
     //数据容器
     fileprivate var container = MPContainer.shared
+    
+    //媒体库
+    fileprivate var librarys: [MPMediaLibraryModel]?
     
     weak var delegate: MPLibraryManagerDelegate?
     
@@ -49,7 +54,8 @@ class MPLibraryManager: OriginManager
     
     func addNotification()
     {
-        NotificationCenter.default.addObserver(self, selector: #selector(containerDidInitCompleted(notify:)), name: FSNotification.containerInitFinished.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(containerDidInitCompleted(notify:)), name: FSNotification.mpContainerInitFinished.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(containerDidUpdated(notify:)), name: FSNotification.mpContainerUpdated.name, object: nil)
     }
     
 }
@@ -60,9 +66,28 @@ extension MPLibraryManager: DelegateProtocol
     //媒体库初始化完成
     @objc func containerDidInitCompleted(notify: Notification)
     {
+        //获取媒体库
+        container.getLibrarys({[weak self] libs in
+            self?.librarys = libs
+        })
+        //通知代理
         if let del = self.delegate
         {
             del.mpLibraryManagerDidInitCompleted()
+        }
+    }
+    
+    //媒体库更新
+    @objc func containerDidUpdated(notify: Notification)
+    {
+        //获取媒体库
+        container.getLibrarys({[weak self] libs in
+            self?.librarys = libs
+        })
+        //通知代理
+        if let del = self.delegate
+        {
+            del.mpLibraryManagerDidUpdated()
         }
     }
     
@@ -73,13 +98,17 @@ extension MPLibraryManager: DelegateProtocol
 extension MPLibraryManager: ExternalInterface
 {
     ///获取某个资源
-    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: @escaping (([Any]) -> Void))
+    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: @escaping (([Any]?) -> Void))
     {
         if libraryType == .iCloud
         {
             container.getiCloudLibrary { lib in
-                completion(lib.songs)
+                completion(lib?.songs)
             }
+        }
+        else
+        {
+            
         }
     }
     
