@@ -41,7 +41,7 @@ class MPContainer: OriginContainer
     {
         super.init()
         self.addNotification()
-        self.initLibrary()
+        self.initLibrarys()
     }
     
     override func copy() -> Any
@@ -63,7 +63,7 @@ class MPContainer: OriginContainer
     
     //初始化媒体库列表
     //参数：是否是更新操作
-    fileprivate func initLibrary(isUpdate: Bool = false)
+    fileprivate func initLibrarys(isUpdate: Bool = false)
     {
         //尝试获取保存在icloud上的媒体库文件，包含一个媒体库列表
         if let libDir = self.libDir
@@ -244,15 +244,21 @@ class MPContainer: OriginContainer
         }
     }
     
+    //提交到iCloud
+    override func commit(key: AnyHashable, value: Any, success: (Any?) -> Void, failure: (NSError) -> Void) {
+        
+    }
+    
 }
 
 
+//通知代理
 extension MPContainer: DelegateProtocol
 {
     //app已经获得焦点，刷新媒体库
     @objc func applicationDidBecomeActiveNotification(notification: Notification)
     {
-        self.initLibrary(isUpdate: true)
+        self.initLibrarys(isUpdate: true)
     }
     
 }
