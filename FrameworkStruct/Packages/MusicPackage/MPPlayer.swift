@@ -74,12 +74,15 @@ extension MPPlayer: DelegateProtocol
     //播放完毕
     @objc fileprivate func playFinished(notify: Notification)
     {
-        
+        if let item = notify.object as? AVPlayerItem, item.isEqual(self.playerItem) //必须是发出通知的那个`PlayerItem`
+        {
+            
+        }
     }
     
     //播放器状态变化
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let playerItem = object as? AVPlayerItem
+        if let playerItem = object as? AVPlayerItem, playerItem.isEqual(self.playerItem)    //必须是监听的那个PlayerItem
         {
             if keyPath == PlayerKeyPath.status.rawValue
             {
