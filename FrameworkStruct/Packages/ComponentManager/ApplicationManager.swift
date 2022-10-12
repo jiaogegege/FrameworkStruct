@@ -12,7 +12,7 @@
  */
 import UIKit
 import AudioToolbox
-import AVFAudio
+import AVFoundation
 import MediaPlayer
 
 
