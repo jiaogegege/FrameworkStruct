@@ -28,6 +28,9 @@
 				<string>com.microsoft.word.doc</string>
 				<string>com.microsoft.excel.xls</string>
 				<string>com.microsoft.powerpoint.ppt</string>
+				<string>public.mp3</string>
+				<string>public.audio</string>
+				<string>public.mpeg</string>
 			</array>
 		</dict>
 	</array>

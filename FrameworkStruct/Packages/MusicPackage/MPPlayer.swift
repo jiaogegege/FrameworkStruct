@@ -15,10 +15,12 @@ import AVKit
 class MPPlayer: OriginWorker
 {
     //MARK: 属性
-    //当前播放列表
-    fileprivate var currentPlaylist: MPPlaylistProtocol?
     //当前正在播放的音频
-    fileprivate var currentAudio: MPAudioProtocol?
+    fileprivate(set) var currentAudio: MPAudioProtocol?
+    //当前播放列表
+    fileprivate(set) var currentPlaylist: MPPlaylistProtocol?
+    //播放模式，默认顺序播放
+    fileprivate(set) var playMode: PlayMode = .sequence
     
     //播放器
     fileprivate var player: AVPlayer
@@ -26,6 +28,10 @@ class MPPlayer: OriginWorker
     fileprivate var playerItem: AVPlayerItem?
     //资源信息
     fileprivate var itemAsset: AVURLAsset?
+    
+    //播放音乐是否成功的回调
+    fileprivate var playResultCallback: BoolClosure?
+    
     
     //MARK: 方法
     override init() {
@@ -50,6 +56,16 @@ class MPPlayer: OriginWorker
         NotificationCenter.default.addObserver(self, selector: #selector(playFinished(notify:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
+    //执行播放是否成功的回调
+    fileprivate func performPlayCallback(_ result: Bool)
+    {
+        if let cb = playResultCallback
+        {
+            cb(result)
+            playResultCallback = nil    //执行完后清空
+        }
+    }
+    
 }
 
 
@@ -71,14 +87,17 @@ extension MPPlayer: DelegateProtocol
                 if status == .readyToPlay   //准备播放
                 {
                     self.play()
+                    self.performPlayCallback(true)
                 }
                 else if status == .failed   //播放失败
                 {
                     FSLog("play audio failed")
+                    self.performPlayCallback(false)
                 }
                 else if status == .unknown  //未知
                 {
                     FSLog("player status unknown")
+                    self.performPlayCallback(false)
                 }
             }
         }
@@ -87,11 +106,19 @@ extension MPPlayer: DelegateProtocol
 }
 
 
+//内部类型
 extension MPPlayer: InternalType
 {
     //keypath
     enum PlayerKeyPath: String {
-        case status
+        case status                 //AVPlayerItem.status
+    }
+    
+    //播放模式
+    enum PlayMode {
+        case sequence               //列表顺序，播放完毕后从头开始
+        case singleCycle            //单曲循环
+        case random                 //列表随机，在一次列表随机中，保证每一首乐曲都能播放一次，然后重新随机
     }
     
 }
@@ -102,8 +129,12 @@ extension MPPlayer: ExternalInterface
 {
     ///播放一首音乐
     ///参数：audio：歌曲对象；playlist：所在播放列表；completion：播放是否成功
-    func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: BoolClosure)
+    func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
     {
+        self.playResultCallback = completion
+        self.currentAudio = audio
+        self.currentPlaylist = playlist
+        
         stop()
         
         itemAsset = AVURLAsset(url: audio.audioUrl)
@@ -144,6 +175,18 @@ extension MPPlayer: ExternalInterface
         itemAsset = nil
         playerItem = nil
         player.replaceCurrentItem(with: nil)
+    }
+    
+    ///下一首，如果有的话
+    func next()
+    {
+        
+    }
+    
+    ///上一首，如果有的话
+    func previous()
+    {
+        
     }
     
     

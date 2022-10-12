@@ -33,6 +33,21 @@ class MPSongModel: OriginModel, Archivable
         self.url = url
     }
     
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let song = MPSongModel(name: self.name, url: self.url)
+        song.id = self.id
+        song.artistIds = self.artistIds
+        song.albumId = self.albumId
+        song.artistImgs = self.artistImgs
+        song.albumImgs = self.albumImgs
+        song.lyricId = self.lyricId
+        song.musicbookId = self.musicbookId
+        song.tagIds = self.tagIds
+        song.intro = self.intro
+        
+        return song
+    }
+    
     required init?(coder: NSCoder) {
         guard let id = coder.decodeObject(forKey: PropertyKey.id.rawValue) as? String else { return nil }
         

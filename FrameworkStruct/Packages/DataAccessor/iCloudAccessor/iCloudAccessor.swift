@@ -469,6 +469,7 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///在iCloud中创建一个文件并传入数据，没有数据为什么要创建文件呢
+    ///targetUrl:目标文件url，如果不包含文件名，只有目录，可以在`fileName`中传入文件名
     func createDocument(_ data: Data, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
     {
         //组装fileUrl

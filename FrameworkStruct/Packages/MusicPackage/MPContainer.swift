@@ -25,14 +25,14 @@ class MPContainer: OriginContainer
     //单例
     static let shared = MPContainer()
     
-    //沙盒存取器
-    fileprivate lazy var sb = SandBoxAccessor.shared
-    
     //icloud存取器
     fileprivate lazy var ia: iCloudAccessor = {
         let ia = iCloudAccessor.shared
         return ia
     }()
+    
+    //音乐库文件目录
+    fileprivate lazy var libDir: URL? = ia.getMusicLibrary()
 
     
     //MARK: 方法
@@ -66,55 +66,49 @@ class MPContainer: OriginContainer
     fileprivate func initLibrary(isUpdate: Bool = false)
     {
         //尝试获取保存在icloud上的媒体库文件，包含一个媒体库列表
-        if let libDir = ia.getMusicLibrary()
+        if let libDir = self.libDir
         {
             let libFileUrl = ia.getFileUrl(in: libDir, fileName: Self.libraryFileName)
-            if sb.isExist(libFileUrl.path)
-            {
-                //如果存在媒体库文件，那么尝试打开
-                ia.openDocument(libFileUrl) {[weak self] handler in
-                    if let had = handler
+            //尝试打开媒体库文件，如果失败则创建一个新的；如果媒体库文件在iCloud中没有下载到本地则打开失败
+            //不能通过FileManager判断媒体库文件是否存在，因为如果没有下载到本地会返回false，但是实际存在iCloud上
+            ia.openDocument(libFileUrl) {[weak self] handler in
+                if let had = handler
+                {
+                    //读取文件
+                    if let data = self?.ia.readDocument(had)
                     {
-                        //读取文件
-                        if let data = self?.ia.readDocument(had)
+                        //序列化data为MPMediaLibraryModel数组
+                        if let libs = ArchiverAdatper.shared.unarchive(data) as? [MPMediaLibraryModel]
                         {
-                            //序列化data为MPMediaLibraryModel数组
-                            if let libs = ArchiverAdatper.shared.unarchive(data) as? [MPMediaLibraryModel]
-                            {
-                                //更新媒体库，目前只有iCloud
-                                self?.updateLibrarys(libs, completion: { (newLibs, hasUpdate) in
-                                    //媒体库更新完成后，保存到container中
-                                    self?.mutate(key: MPDataKey.librarys, value: newLibs)
-                                    //如果有数据更新，那么需要更新iCloud库文件
-                                    if hasUpdate
+                            //更新媒体库，目前只有iCloud
+                            self?.updateLibrarys(libs, completion: { (newLibs, hasUpdate) in
+                                //媒体库更新完成后，保存到container中
+                                self?.mutate(key: MPDataKey.librarys, value: newLibs)
+                                //如果有数据更新，那么需要更新iCloud库文件
+                                if hasUpdate
+                                {
+                                    if let data = ArchiverAdatper.shared.archive(newLibs as NSCoding)
                                     {
-                                        if let data = ArchiverAdatper.shared.archive(newLibs as NSCoding)
-                                        {
-                                            self?.ia.writeDocument(had, data: data, completion: { success in
-                                                //关闭文件
-                                                self?.ia.closeDocument(had)
-                                                NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
-                                            })
-                                        }
+                                        self?.ia.writeDocument(had, data: data, completion: { success in
+                                            //关闭文件
+                                            self?.ia.closeDocument(had)
+                                            NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
+                                        })
                                     }
-                                    else    //如果没有数据更新
-                                    {
-                                        //发出通知
-                                        NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
-                                    }
-                                })
-                            }
+                                }
+                                else    //如果没有数据更新
+                                {
+                                    //发出通知
+                                    NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
+                                }
+                            })
                         }
                     }
-                    else    //如果文件打开失败，则创建一个新的
-                    {
-                        self?.createLibrarys(libFileUrl)
-                    }
                 }
-            }
-            else    //如果媒体库文件不存在，那么创建一个新的媒体库
-            {
-                self.createLibrarys(libFileUrl)
+                else    //如果文件打开失败，则创建一个新的
+                {
+                    self?.createLibrarys(libFileUrl)
+                }
             }
         }
     }
@@ -187,6 +181,69 @@ class MPContainer: OriginContainer
         }
     }
     
+    //在iCloud中创建一个新文件，返回是否创建成功
+    fileprivate func createFileIniCloud(_ data: Data, fileName: String, completion: @escaping (Bool) -> Void)
+    {
+        if let libDir = self.libDir
+        {
+            let fileUrl = ia.getFileUrl(in: libDir, fileName: fileName)
+            ia.createDocument(data, targetUrl: fileUrl) { success in
+                completion(success)
+            }
+        }
+        else    //不存在库文件，比如模拟器，返回nil
+        {
+            completion(false)
+        }
+    }
+    
+    //从iCloud中打开一个文件，返回文件handler
+    fileprivate func openFileFromiCloud(_ fileName: String, completion: @escaping (iCloudAccessor.IADocumentHandlerType?) -> Void)
+    {
+        if let libDir = self.libDir
+        {
+            let fileUrl = ia.getFileUrl(in: libDir, fileName: fileName)
+            ia.openDocument(fileUrl) { fileId in
+                completion(fileId)
+            }
+        }
+        else    //不存在库文件，比如模拟器，返回nil
+        {
+            completion(nil)
+        }
+    }
+    
+    //从iCloud中读取一个文件，返回data
+    fileprivate func readFileFromiCloud(_ fileName: String, completion: @escaping (Data?) -> Void)
+    {
+        if let libDir = self.libDir
+        {
+            let fileUrl = ia.getFileUrl(in: libDir, fileName: fileName)
+            ia.openDocument(fileUrl) { [weak self] fileId in
+                if let id = fileId
+                {
+                    //读取文件
+                    if let data = self?.ia.readDocument(id)
+                    {
+                        completion(data)
+                    }
+                    else    //读取文件失败
+                    {
+                        completion(nil)
+                    }
+                }
+                else    //打开文件失败，返回nil
+                {
+                    completion(nil)
+                }
+            }
+        }
+        else    //不存在库文件，比如模拟器，返回nil
+        {
+            completion(nil)
+        }
+    }
+    
 }
 
 
@@ -206,7 +263,15 @@ extension MPContainer: InternalType
 {
     ///保存在icloud上的文件名
     //媒体库文件，媒体库对象列表，以`mplib`结尾
-    static let libraryFileName = "library.mplib"
+    static let libraryFileName = "library.dat"
+    //当前播放歌曲文件
+    static let currentSongFileName = "currentSong.dat"
+    //当前播放列表文件
+    static let currentPlaylistFileName = "currentPlaylist.dat"
+    //历史播放歌曲列表文件
+    static let historySongsFileName = "historySongs.dat"
+    //历史播放列表列表文件
+    static let historyPlaylistsFileName = "historyPlaylists.dat"
  
     //数据对象的key
     enum MPDataKey: String {
@@ -216,6 +281,23 @@ extension MPContainer: InternalType
         case currentPlaylist                //当前播放列表
         case historySongs                   //历史播放歌曲
         case historyPlaylists               //历史播放列表
+        
+        //获取key对应的在iCloud中的文件名
+        func getiCloudFileName() -> String
+        {
+            switch self {
+            case .librarys:
+                return MPContainer.libraryFileName
+            case .currentSong:
+                return MPContainer.currentSongFileName
+            case .currentPlaylist:
+                return MPContainer.currentPlaylistFileName
+            case .historySongs:
+                return MPContainer.historySongsFileName
+            case .historyPlaylists:
+                return MPContainer.historyPlaylistsFileName
+            }
+        }
     }
     
 }
@@ -224,6 +306,35 @@ extension MPContainer: InternalType
 //外部接口
 extension MPContainer: ExternalInterface
 {
+    ///修改，value必须是NSCoding；key必须是MPDataKey
+    ///先保存缓存，然后保存到iCloud
+    override func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta())
+    {
+        //先保存到缓存
+        super.mutate(key: key, value: value, meta: meta)
+        
+        //写入iCloud文件，如果acrhive失败，什么都不做
+        if let k = key as? MPDataKey, let val = value as? NSCoding, let data = ArchiverAdatper.shared.archive(val)
+        {
+            let fileName = k.getiCloudFileName()
+            //尝试打开文件
+            openFileFromiCloud(fileName) {[weak self] fileId in
+                if let fileId = fileId {
+                    //修改文件
+                    self?.ia.writeDocument(fileId, data: data, completion: { success in
+//                        FSLog("write icloud file \(success) : \(fileName)")
+                    })
+                }
+                else    //创建一个新文件
+                {
+                    self?.createFileIniCloud(data, fileName: fileName, completion: { success in
+                        FSLog("create icloud file \(success) : \(fileName)")
+                    })
+                }
+            }
+        }
+    }
+    
     ///获取所有库
     func getLibrarys(_ completion: @escaping (([MPMediaLibraryModel]?) -> Void))
     {
@@ -256,5 +367,128 @@ extension MPContainer: ExternalInterface
             completion(nil)
         }
     }
+    
+    ///获取当前播放歌曲
+    func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    {
+        if let song = self.get(key: MPDataKey.currentSong) as? MPSongModel
+        {
+            completion(song)
+        }
+        else    //如果缓存中没有，那么尝试从iCloud获取
+        {
+            readFileFromiCloud(Self.currentSongFileName) {[weak self] data in
+                if let data = data {
+                    if let song = MPSongModel.unarchive(data)
+                    {
+                        //先保存到缓存
+                        self?.mutate(key: MPDataKey.currentSong, value: song)
+                        //返回song
+                        completion(song)
+                    }
+                    else
+                    {
+                        completion(nil)
+                    }
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    ///获取当前播放列表
+    func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    {
+        if let playlist = self.get(key: MPDataKey.currentPlaylist) as? MPPlaylistModel
+        {
+            completion(playlist)
+        }
+        else    //如果缓存中没有，那么尝试从iCloud获取
+        {
+            readFileFromiCloud(Self.currentPlaylistFileName) { [weak self] data in
+                if let data = data {
+                    if let playlist = MPPlaylistModel.unarchive(data)
+                    {
+                        self?.mutate(key: MPDataKey.currentPlaylist, value: playlist)
+                        completion(playlist)
+                    }
+                    else
+                    {
+                        completion(nil)
+                    }
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    ///获取历史播放歌曲列表
+    func getHistorySongs(_ completion: @escaping (MPHistorySongModel?) -> Void)
+    {
+        if let playlist = self.get(key: MPDataKey.historySongs) as? MPHistorySongModel
+        {
+            completion(playlist)
+        }
+        else    //如果缓存中没有，那么尝试从iCloud获取
+        {
+            readFileFromiCloud(Self.historySongsFileName) { [weak self] data in
+                if let data = data {
+                    if let playlist = MPHistorySongModel.unarchive(data)
+                    {
+                        self?.mutate(key: MPDataKey.historySongs, value: playlist)
+                        completion(playlist)
+                    }
+                    else
+                    {
+                        completion(nil)
+                    }
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    ///获取历史播放列表列表
+    func getHistoryPlaylists(_ completion: @escaping ([MPHistoryPlaylistModel]?) -> Void)
+    {
+        if let playlists = self.get(key: MPDataKey.historyPlaylists) as? [MPHistoryPlaylistModel]
+        {
+            completion(playlists)
+        }
+        else    //如果缓存中没有，那么尝试从iCloud获取
+        {
+            readFileFromiCloud(Self.historyPlaylistsFileName) { [weak self] data in
+                if let data = data {
+                    if let playlists = ArchiverAdatper.shared.unarchive(data) as? [MPHistoryPlaylistModel]
+                    {
+                        self?.mutate(key: MPDataKey.historyPlaylists, value: playlists)
+                        completion(playlists)
+                    }
+                    else
+                    {
+                        completion(nil)
+                    }
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
 }

@@ -330,6 +330,8 @@ extension String
     static let icloudFile = localized("icloudFile")
     //音乐库
     static let musicLibrary = localized("musicLibrary")
+    //历史播放
+    static let historyPlay = localized("historyPlay")
     
     //MARK: Toast文案
     

@@ -119,7 +119,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         if type == .library
         {
             mpr.playSong(libraryArray[indexPath.row], in: .iCloud) { success in
-                
+                g_toast(text: (success ? "播放成功" : "播放失败"))
             }
         }
         else if type == .favorite

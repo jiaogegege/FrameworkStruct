@@ -111,7 +111,7 @@ extension MPManager: ExternalInterface
     ///播放一首媒体库中的音乐
     ///参数：library：媒体库类型，目前只有iCloud；completion：播放是否成功
     ///说明：会生成一个播放列表，包含媒体库中所有歌曲
-    func playSong(_ song: MPSongModel , in library: MPLibraryType, completion: BoolClosure)
+    func playSong(_ song: MPSongModel , in library: MPLibraryType, completion: @escaping BoolClosure)
     {
         if library == .iCloud
         {
@@ -123,18 +123,57 @@ extension MPManager: ExternalInterface
                     self?.ia.openDocument(song.url) { id in
                         if let id = id {
                             self?.ia.closeDocument(id)
+                            //播放音乐
+                            self?.player.play(song, playlist: playlist, completion: { success in
+                                //处理播放结果，如果播放成功，那么保存当前播放歌曲和当前播放列表
+                                if success
+                                {
+                                    self?.libMgr.saveCurrent(song, in: playlist)
+                                }
+                                completion(success)
+                            })
                         }
-                        //播放音乐
-                        self?.player.play(song, playlist: playlist, completion: { success in
-                            
-                        })
+                        else    //播放失败
+                        {
+                            completion(false)
+                        }
                     }
+                }
+                else    //没有查询到媒体库，播放失败
+                {
+                    completion(false)
                 }
             }
         }
-        
+        else    //其他媒体库，暂时不开发
+        {
+            
+        }
     }
     
+    ///获取当前播放歌曲，可能为nil
+    func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    {
+        libMgr.readCurrentSong { song in
+            completion(song)
+        }
+    }
+    
+    ///获取当前播放列表
+    func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    {
+        libMgr.readCurrentPlaylist { playlist in
+            completion(playlist)
+        }
+    }
+    
+    ///获取历史播放歌曲列表
+    func getHistorySongs(_ completion: @escaping (MPHistorySongModel?) -> Void)
+    {
+        libMgr.readHistorySongs { historySongs in
+            completion(historySongs)
+        }
+    }
     
     
     /**************************************** 播放音乐相关 Section End ***************************************/

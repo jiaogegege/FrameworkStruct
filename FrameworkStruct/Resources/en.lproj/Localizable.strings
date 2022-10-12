@@ -36,11 +36,6 @@ drawTest = "Draw Testing";
 copyPaste = "Copy Paste";
 iCloudFileManage = "iCloud File Manage";
 editiCloudFile = "Edit iCloud File";
-//home快捷按钮
-myFavorite = "My Favorite";
-changeTheme = "Change Theme";
-icloudFile = "iCloud File";
-musicLibrary = "Music Library";
 
 /**
  * 界面提示和按钮文案
@@ -59,6 +54,11 @@ newMsg = "New Message";
 send = "Send";
 inputMessage = "Input Message";
 append = "Append";
+myFavorite = "My Favorite";
+changeTheme = "Change Theme";
+icloudFile = "iCloud File";
+musicLibrary = "Music Library";
+historyPlay = "History Play";
 
 /**
  * Toast文案

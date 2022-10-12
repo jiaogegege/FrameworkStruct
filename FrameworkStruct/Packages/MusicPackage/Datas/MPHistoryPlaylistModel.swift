@@ -27,6 +27,14 @@ class MPHistoryPlaylistModel: OriginModel, Archivable
         self.type = type
     }
     
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let model = MPHistoryPlaylistModel(name: self.name, type: self.type)
+        model.id = self.id
+        model.listIds = self.listIds
+        
+        return model
+    }
+    
     required init?(coder: NSCoder) {
         guard let id = coder.decodeObject(forKey: PropertyKey.id.rawValue) as? String else { return nil }
         

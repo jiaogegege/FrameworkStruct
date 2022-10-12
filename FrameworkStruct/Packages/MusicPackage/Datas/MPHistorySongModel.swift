@@ -28,6 +28,14 @@ class MPHistorySongModel: OriginModel, Archivable
         self.mediaType = mediaType
     }
     
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let model = MPHistorySongModel(name: self.name, mediaType: self.mediaType)
+        model.id = self.id
+        model.medias = self.medias
+        
+        return model
+    }
+    
     required init?(coder: NSCoder) {
         guard let id = coder.decodeObject(forKey: PropertyKey.id.rawValue) as? String else { return nil }
         
