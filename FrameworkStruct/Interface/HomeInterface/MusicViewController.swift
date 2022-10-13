@@ -13,6 +13,9 @@ import UIKit
 class MusicViewController: BasicViewController
 {
     //MARK: 属性
+    @IBOutlet weak var libraryBtn: UIButton!
+    @IBOutlet weak var favoriteBtn: UIButton!
+    @IBOutlet weak var songListsBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     fileprivate var mpr = MPManager.shared
@@ -22,6 +25,8 @@ class MusicViewController: BasicViewController
     fileprivate var songLists: [MPSonglistModel] = []
     
     fileprivate var type: ListType = .library
+    
+    fileprivate var currentBtn: UIButton?
     
     
     //MARK: 方法
@@ -34,9 +39,20 @@ class MusicViewController: BasicViewController
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ApplicationManager.shared.screenIdle = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ApplicationManager.shared.screenIdle = false
+    }
+    
     override func createUI() {
         super.createUI()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseId)
+        self.currentBtn = self.libraryBtn
     }
     
     override func initData() {
@@ -49,12 +65,30 @@ class MusicViewController: BasicViewController
     }
     
     @IBAction func libraryAction(_ sender: UIButton) {
+        if sender != self.currentBtn
+        {
+            self.currentBtn?.isSelected = false
+            sender.isSelected = true
+            self.currentBtn = sender
+        }
     }
     
     @IBAction func favoriteAction(_ sender: UIButton) {
+        if sender != self.currentBtn
+        {
+            self.currentBtn?.isSelected = false
+            sender.isSelected = true
+            self.currentBtn = sender
+        }
     }
     
     @IBAction func songListAction(_ sender: UIButton) {
+        if sender != self.currentBtn
+        {
+            self.currentBtn?.isSelected = false
+            sender.isSelected = true
+            self.currentBtn = sender
+        }
     }
     
 }

@@ -141,9 +141,9 @@ extension MPLibraryManager: ExternalInterface
     func saveCurrent(_ song: MPSongModel, in playlist: MPPlaylistModel)
     {
         //当前歌曲
-        container.mutate(key: MPContainer.MPDataKey.currentSong, value: song)
+        container.setCurrentSong(song)
         //当前播放列表
-        container.mutate(key: MPContainer.MPDataKey.currentPlaylist, value: playlist)
+        container.setCurrentPlaylist(playlist)
         
         //如果历史播放歌曲中还没有这首歌，那么在历史播放歌曲中新增一个，在最前位置
         container.getHistorySongs {[weak self] historySongs in
@@ -157,20 +157,20 @@ extension MPLibraryManager: ExternalInterface
                         break
                     }
                 }
-                //说明已经存在了，那么提前最前的位置
+                //说明已经存在了，那么提到最前的位置
                 if existIndex >= 0 {
                     historySongs.medias.remove(at: existIndex)
                 }
                 historySongs.medias.insert(song, at: 0)
                 //写入文件
-                self?.container.mutate(key: MPContainer.MPDataKey.historySongs, value: historySongs)
+                self?.container.setHistorySongs(historySongs)
             }
             else    //如果还没有历史歌曲记录，创建一个历史记录列表，就是个播放列表
             {
                 let history = MPHistorySongModel(name: String.historyPlay, mediaType: .song)
                 history.medias.append(song)
                 //写入文件
-                self?.container.mutate(key: MPContainer.MPDataKey.historySongs, value: history)
+                self?.container.setHistorySongs(history)
             }
         }
     }

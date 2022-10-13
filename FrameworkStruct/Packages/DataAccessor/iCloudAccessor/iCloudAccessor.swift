@@ -632,7 +632,20 @@ extension iCloudAccessor: ExternalInterface
             }
         }
     }
-
+    
+    ///判断某个文件是否是iCloud文件
+    func isiCloudFile(_ fileUrl: URL) -> Bool
+    {
+        if let dir = getDir()
+        {
+            return fileUrl.absoluteString.hasPrefix(dir.absoluteString)
+        }
+        else
+        {
+            return fileUrl.absoluteString.contains(String.iCloud + String.sTilde)
+        }
+    }
+    
     
     /**************************************** document存储 Section End ***************************************/
     

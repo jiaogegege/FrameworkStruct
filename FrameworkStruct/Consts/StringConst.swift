@@ -346,6 +346,8 @@ extension String
     static let withoutCalendar = localized("withoutCalendar")
     //没有提醒事项权限
     static let withoutReminder = localized("withoutReminder")
+    //保存到iCloud失败
+    static let saveToiCloudError = localized("saveToiCloudError")
 
     //MARK: 网络状态错误信息
     static let networkUndefinedStatus = localized("networkUndefinedStatus")

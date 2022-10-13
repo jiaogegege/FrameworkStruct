@@ -588,7 +588,6 @@
 		EAA392F828C72A71009438DC /* place_code_health_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F728C72A71009438DC /* place_code_health_code.jpg */; };
 		EAA392FA28C72A7D009438DC /* place_code_travel_card.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392F928C72A7D009438DC /* place_code_travel_card.jpg */; };
 		EAA392FC28C72A84009438DC /* place_code_samp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FB28C72A84009438DC /* place_code_samp.jpg */; };
-		EAA392FE28C72A8A009438DC /* place_code_nucleate_result.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FD28C72A8A009438DC /* place_code_nucleate_result.jpg */; };
 		EAA3930028C73130009438DC /* place_code_function.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA392FF28C73130009438DC /* place_code_function.jpg */; };
 		EAA3930228C73136009438DC /* place_code_publicity.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA3930128C73136009438DC /* place_code_publicity.jpg */; };
 		EAA5560528A9F3D1003035A9 /* PriceEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */; };
@@ -613,6 +612,7 @@
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
 		EABB3C9727ED7122005B98E3 /* GuideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABB3C9627ED7122005B98E3 /* GuideManager.swift */; };
+		EABF5ED328F7A30E00D10D9F /* place_code_nucleate_result.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABF5ED228F7A30E00D10D9F /* place_code_nucleate_result.jpg */; };
 		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
 		EAC57DA92813D27E0090FB54 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC57DA82813D27E0090FB54 /* LogManager.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
@@ -1621,7 +1621,6 @@
 		EAA392F728C72A71009438DC /* place_code_health_code.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_health_code.jpg; sourceTree = "<group>"; };
 		EAA392F928C72A7D009438DC /* place_code_travel_card.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_travel_card.jpg; sourceTree = "<group>"; };
 		EAA392FB28C72A84009438DC /* place_code_samp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_samp.jpg; sourceTree = "<group>"; };
-		EAA392FD28C72A8A009438DC /* place_code_nucleate_result.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_nucleate_result.jpg; sourceTree = "<group>"; };
 		EAA392FF28C73130009438DC /* place_code_function.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_function.jpg; sourceTree = "<group>"; };
 		EAA3930128C73136009438DC /* place_code_publicity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_publicity.jpg; sourceTree = "<group>"; };
 		EAA5560428A9F3D1003035A9 /* PriceEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceEmbellisher.swift; sourceTree = "<group>"; };
@@ -1655,6 +1654,7 @@
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
 		EABB3C9627ED7122005B98E3 /* GuideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideManager.swift; sourceTree = "<group>"; };
+		EABF5ED228F7A30E00D10D9F /* place_code_nucleate_result.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_nucleate_result.jpg; sourceTree = "<group>"; };
 		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		EAC57DA82813D27E0090FB54 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
@@ -3786,7 +3786,7 @@
 				EAA392F728C72A71009438DC /* place_code_health_code.jpg */,
 				EAA392F928C72A7D009438DC /* place_code_travel_card.jpg */,
 				EAA392FB28C72A84009438DC /* place_code_samp.jpg */,
-				EAA392FD28C72A8A009438DC /* place_code_nucleate_result.jpg */,
+				EABF5ED228F7A30E00D10D9F /* place_code_nucleate_result.jpg */,
 				EAA392FF28C73130009438DC /* place_code_function.jpg */,
 				EAA3930128C73136009438DC /* place_code_publicity.jpg */,
 				EA0A925F28CB0CDF0036B339 /* travel_card_nav.jpg */,
@@ -4696,8 +4696,8 @@
 				EA3E8C2627B782C4006A2715 /* pop-tvos-Info.plist in Resources */,
 				EA0A926228CB0CED0036B339 /* travel_card_head.jpg in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
-				EAA392FE28C72A8A009438DC /* place_code_nucleate_result.jpg in Resources */,
 				EAA392E828C6E3D6009438DC /* health_code_info_update.jpg in Resources */,
+				EABF5ED328F7A30E00D10D9F /* place_code_nucleate_result.jpg in Resources */,
 				EA92257F276B3E7C00192E2E /* SVProgressHUD.bundle in Resources */,
 				EAA392E628C6DB79009438DC /* health_code_travel_card.jpg in Resources */,
 				EAA392F428C725B9009438DC /* place_code_tick.jpg in Resources */,

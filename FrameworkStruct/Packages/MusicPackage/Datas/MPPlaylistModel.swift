@@ -17,7 +17,7 @@ class MPPlaylistModel: OriginModel, Archivable
     var name: String
     var songs: Array<MPAudioProtocol>
     var type: MPPlaylistType
-    var tags: Array<MPTagModel>?
+    var tagIds: Array<String>?
     var intro: String?
     
     //MARK:  方法
@@ -43,7 +43,7 @@ class MPPlaylistModel: OriginModel, Archivable
         playlist.id = self.id
         playlist.songs = self.songs
         playlist.type = self.type
-        playlist.tags = self.tags
+        playlist.tagIds = self.tagIds
         playlist.intro = self.intro
         
         return playlist
@@ -56,7 +56,7 @@ class MPPlaylistModel: OriginModel, Archivable
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.songs = coder.decodeObject(forKey: PropertyKey.songs.rawValue) as! [MPAudioProtocol]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
-        self.tags = coder.decodeObject(forKey: PropertyKey.tags.rawValue) as? [MPTagModel]
+        self.tagIds = coder.decodeObject(forKey: PropertyKey.tagIds.rawValue) as? [String]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
     }
     
@@ -65,7 +65,7 @@ class MPPlaylistModel: OriginModel, Archivable
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.songs, forKey: PropertyKey.songs.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
-        coder.encode(self.tags, forKey: PropertyKey.tags.rawValue)
+        coder.encode(self.tagIds, forKey: PropertyKey.tagIds.rawValue)
         coder.encode(self.intro, forKey: PropertyKey.intro.rawValue)
     }
     
@@ -110,7 +110,7 @@ extension MPPlaylistModel: InternalType
         case name
         case songs
         case type
-        case tags
+        case tagIds
         case intro
     }
     

@@ -27,7 +27,7 @@ class MPManager: OriginManager
     //媒体库管理器
     fileprivate var libMgr = MPLibraryManager.shared
     //播放器
-    fileprivate var player: MPPlayer = MPPlayer()
+    fileprivate var player = MPPlayer()
     
     //iCloud交互
     fileprivate var ia = iCloudAccessor.shared
@@ -42,6 +42,7 @@ class MPManager: OriginManager
     {
         super.init()
         self.libMgr.delegate = self
+        self.player.delegate = self
     }
     
     override func copy() -> Any
@@ -57,8 +58,9 @@ class MPManager: OriginManager
 }
 
 
-extension MPManager: DelegateProtocol, MPLibraryManagerDelegate
+extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegate
 {
+    /**************************************** 媒体库管理器代理 Section Begin ***************************************/
     //媒体库管理器初始化完成
     func mpLibraryManagerDidInitCompleted() {
         delegates.compact()
@@ -82,6 +84,57 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate
             }
         }
     }
+    
+    /**************************************** 媒体库管理器代理 Section End ***************************************/
+    
+    /**************************************** MPPlayer代理方法 Section Begin ***************************************/
+    func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping (Bool) -> Void) {
+        //如果是iCloud文件，那么先打开
+        if ia.isiCloudFile(audio.audioUrl)
+        {
+            ia.openDocument(audio.audioUrl) {[weak self] id in
+                if let id = id {
+                    self?.ia.closeDocument(id)
+                    //返回成功
+                    success(true)
+                }
+                else
+                {
+                    success(false)
+                }
+            }
+        }
+        else    //其他情况，目前先都返回成功
+        {
+            success(true)
+        }
+    }
+    
+    func mpPlayerStartToPlay(_ audio: MPAudioProtocol) {
+        
+    }
+    
+    func mpPlayerPauseToPlay(_ audio: MPAudioProtocol) {
+        
+    }
+    
+    func mpPlayerResumeToPlay(_ audio: MPAudioProtocol) {
+        
+    }
+    
+    func mpPlayerFinishPlay(_ audio: MPAudioProtocol) {
+        
+    }
+    
+    func mpPlayerStopToPlay(_ audio: MPAudioProtocol) {
+        
+    }
+    
+    func mpPlayerFailToPlay(_ audio: MPAudioProtocol) {
+        
+    }
+    
+    /**************************************** MPPlayer代理方法 Section End ***************************************/
     
 }
 
@@ -119,25 +172,15 @@ extension MPManager: ExternalInterface
                 if let songs = items as? [MPSongModel] {
                     //生成一个播放列表
                     let playlist = MPPlaylistModel(name: String.iCloud, songs: songs, type: .playlist, intro: nil)
-                    //先打开歌曲文件，同时也是从iCloud下载
-                    self?.ia.openDocument(song.url) { id in
-                        if let id = id {
-                            self?.ia.closeDocument(id)
-                            //播放音乐
-                            self?.player.play(song, playlist: playlist, completion: { success in
-                                //处理播放结果，如果播放成功，那么保存当前播放歌曲和当前播放列表
-                                if success
-                                {
-                                    self?.libMgr.saveCurrent(song, in: playlist)
-                                }
-                                completion(success)
-                            })
-                        }
-                        else    //播放失败
+                    //播放音乐
+                    self?.player.play(song, playlist: playlist, completion: { success in
+                        //处理播放结果，如果播放成功，那么保存当前播放歌曲和当前播放列表
+                        if success
                         {
-                            completion(false)
+                            self?.libMgr.saveCurrent(song, in: playlist)
                         }
-                    }
+                        completion(success)
+                    })
                 }
                 else    //没有查询到媒体库，播放失败
                 {

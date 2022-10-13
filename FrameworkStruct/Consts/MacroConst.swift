@@ -80,12 +80,14 @@ class FSNotification
 
 //MARK: 全局通用错误和异常信息定义
 enum FSError: Int, Error {
-    case unknownError = -1                   //未知错误，如果没有其他任何匹配的错误，那么使用这个
+    case unknownError = -1                      //未知错误，如果没有其他任何匹配的错误，那么使用这个
     
-    case networkError = 10001                //网络错误
-    case noPushError = 10002                 //没有推送权限
-    case noCalendarError = 10003             //没有日历权限
-    case noReminderError = 10004             //没有提醒事项权限
+    case networkError = 10001                   //网络错误
+    case noPushError = 10002                    //没有推送权限
+    case noCalendarError = 10003                //没有日历权限
+    case noReminderError = 10004                //没有提醒事项权限
+    
+    case saveToiCloudError = 10005              //保存到iCloud失败
     
     //error domain
     static let errorDomain: String = "FSErrorDomain"
@@ -103,6 +105,8 @@ enum FSError: Int, Error {
             return String.withoutCalendar
         case .noReminderError:
             return String.withoutReminder
+        case .saveToiCloudError:
+            return String.saveToiCloudError
         }
     }
     

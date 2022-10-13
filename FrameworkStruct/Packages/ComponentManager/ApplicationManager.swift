@@ -439,6 +439,16 @@ extension ApplicationManager: ExternalInterface
         }
     }
     
+    ///屏幕常亮，true：常亮；false：根据系统设置
+    var screenIdle: Bool {
+        set {
+            app.isIdleTimerDisabled = newValue
+        }
+        get {
+            app.isIdleTimerDisabled
+        }
+    }
+    
     ///屏幕旋转方向
     var orientation: UIInterfaceOrientation {
         if #available(iOS 13, *)

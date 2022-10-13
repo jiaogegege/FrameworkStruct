@@ -12,6 +12,31 @@
 import UIKit
 import AVKit
 
+
+protocol MPPlayerDelegate: NSObjectProtocol {
+    ///准备播放，需要外部管理器处理一下这个文件，比如下载iCloud文件到本地
+    ///audio：要播放的音频；success：外部管理器处理完后执行是否成功的回调，如果成功，player将尝试播放该音频
+    func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping BoolClosure)
+    
+    ///开始播放某个音频
+    func mpPlayerStartToPlay(_ audio: MPAudioProtocol)
+    
+    ///暂停播放某个音频
+    func mpPlayerPauseToPlay(_ audio: MPAudioProtocol)
+    
+    ///恢复播放某个音频
+    func mpPlayerResumeToPlay(_ audio: MPAudioProtocol)
+    
+    ///完成播放某个音频
+    func mpPlayerFinishPlay(_ audio: MPAudioProtocol)
+    
+    ///停止播放某个音频，可能是中途停止
+    func mpPlayerStopToPlay(_ audio: MPAudioProtocol)
+    
+    ///播放某个音频失败
+    func mpPlayerFailToPlay(_ audio: MPAudioProtocol)
+}
+
 class MPPlayer: OriginWorker
 {
     //MARK: 属性
@@ -20,7 +45,16 @@ class MPPlayer: OriginWorker
     //当前播放列表
     fileprivate(set) var currentPlaylist: MPPlaylistProtocol?
     //播放模式，默认顺序播放
-    fileprivate(set) var playMode: PlayMode = .sequence
+    fileprivate var playMode: PlayMode = .sequence
+    //播放速率，默认1.0，可设置为0.0～2.0
+    @LimitNumRange(min: 0.0, max: 3.0) fileprivate var playRate: Float = 1.0 {
+        willSet {
+            self.player.rate = newValue
+        }
+    }
+    
+    //代理对象
+    weak var delegate: MPPlayerDelegate?
     
     //播放器
     fileprivate var player: AVPlayer
@@ -56,6 +90,18 @@ class MPPlayer: OriginWorker
         NotificationCenter.default.addObserver(self, selector: #selector(playFinished(notify:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
+    //执行播放
+    fileprivate func performPlay(_ audio: MPAudioProtocol)
+    {
+        stop()
+        
+        itemAsset = AVURLAsset(url: audio.audioUrl)
+        playerItem = AVPlayerItem(asset: itemAsset!)
+        player.replaceCurrentItem(with: playerItem)
+        //监听播放状态
+        playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.status.rawValue, options: .new, context: nil)
+    }
+    
     //执行播放是否成功的回调
     fileprivate func performPlayCallback(_ result: Bool)
     {
@@ -89,18 +135,30 @@ extension MPPlayer: DelegateProtocol
                 let status = playerItem.status
                 if status == .readyToPlay   //准备播放
                 {
-                    self.play()
+                    self.resume()
                     self.performPlayCallback(true)
+                    if let del = self.delegate
+                    {
+                        del.mpPlayerStartToPlay(currentAudio!)
+                    }
                 }
                 else if status == .failed   //播放失败
                 {
                     FSLog("play audio failed")
                     self.performPlayCallback(false)
+                    if let del = self.delegate
+                    {
+                        del.mpPlayerFailToPlay(currentAudio!)
+                    }
                 }
                 else if status == .unknown  //未知
                 {
                     FSLog("player status unknown")
                     self.performPlayCallback(false)
+                    if let del = self.delegate
+                    {
+                        del.mpPlayerFailToPlay(currentAudio!)
+                    }
                 }
             }
         }
@@ -138,13 +196,27 @@ extension MPPlayer: ExternalInterface
         self.currentAudio = audio
         self.currentPlaylist = playlist
         
-        stop()
-        
-        itemAsset = AVURLAsset(url: audio.audioUrl)
-        playerItem = AVPlayerItem(asset: itemAsset!)
-        player.replaceCurrentItem(with: playerItem)
-        //监听播放状态
-        playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.status.rawValue, options: .new, context: nil)
+        //准备播放
+        if let delegate = self.delegate {
+            delegate.mpPlayerPrepareToPlay(audio) {[weak self] succeed in
+                if succeed  //准备播放资源成功，尝试播放
+                {
+                    self?.performPlay(audio)
+                }
+                else    //准备失败
+                {
+                    self?.performPlayCallback(false)
+                    if let del = self?.delegate
+                    {
+                        del.mpPlayerFailToPlay(audio)
+                    }
+                }
+            }
+        }
+        else    //如果没有代理对象，那么直接尝试播放，可能会失败
+        {
+            self.performPlay(audio)
+        }
     }
     
     ///是否在播放
@@ -152,21 +224,29 @@ extension MPPlayer: ExternalInterface
         player.timeControlStatus == .playing ? true : false
     }
     
-    ///播放，前提是暂停状态
-    func play()
+    ///恢复播放，前提是暂停状态
+    func resume()
     {
-        if player.timeControlStatus == .paused
+        if player.timeControlStatus == .paused, self.currentAudio != nil
         {
             player.play()
+            if let delegate = self.delegate
+            {
+                delegate.mpPlayerResumeToPlay(currentAudio!)
+            }
         }
     }
     
     ///暂停，前提是正在播放
     func pause()
     {
-        if player.timeControlStatus == .playing
+        if player.timeControlStatus == .playing, self.currentAudio != nil
         {
             player.pause()
+            if let delegate = self.delegate
+            {
+                delegate.mpPlayerPauseToPlay(currentAudio!)
+            }
         }
     }
     
@@ -178,6 +258,11 @@ extension MPPlayer: ExternalInterface
         itemAsset = nil
         playerItem = nil
         player.replaceCurrentItem(with: nil)
+        
+        if let delegate = self.delegate, currentAudio != nil
+        {
+            delegate.mpPlayerStopToPlay(currentAudio!)
+        }
     }
     
     ///下一首，如果有的话

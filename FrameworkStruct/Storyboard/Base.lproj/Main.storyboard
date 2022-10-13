@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -1108,26 +1108,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUu-p8-WAP">
                                 <rect key="frame" x="0.0" y="44" width="428" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLh-XB-7q5">
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLh-XB-7q5">
                                         <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="50"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="音乐库"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="音乐库">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.57647058819999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" title="音乐库"/>
                                         <connections>
                                             <action selector="libraryAction:" destination="TGg-sG-pTs" eventType="touchUpInside" id="ZqC-yk-rYQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npZ-Ol-RqL">
                                         <rect key="frame" x="142.66666666666669" y="0.0" width="142.66666666666669" height="50"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="我喜欢"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="我喜欢">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.57647058819999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" title="我喜欢"/>
                                         <connections>
                                             <action selector="favoriteAction:" destination="TGg-sG-pTs" eventType="touchUpInside" id="OqA-Ls-dEz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCZ-ei-mxy">
                                         <rect key="frame" x="285.33333333333331" y="0.0" width="142.66666666666669" height="50"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="歌单"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="歌单">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.57647058819999997" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" title="歌单"/>
                                         <connections>
                                             <action selector="songListAction:" destination="TGg-sG-pTs" eventType="touchUpInside" id="owV-ea-cWR"/>
                                         </connections>
@@ -1172,6 +1181,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favoriteBtn" destination="npZ-Ol-RqL" id="gn7-mk-hBF"/>
+                        <outlet property="libraryBtn" destination="JLh-XB-7q5" id="kPw-ea-9G9"/>
+                        <outlet property="songListsBtn" destination="QCZ-ei-mxy" id="ifk-GE-rWf"/>
                         <outlet property="tableView" destination="XNu-gl-5YV" id="Gpe-qf-PtR"/>
                     </connections>
                 </viewController>

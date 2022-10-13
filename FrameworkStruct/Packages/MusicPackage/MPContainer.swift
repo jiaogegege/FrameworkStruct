@@ -98,6 +98,8 @@ class MPContainer: OriginContainer
                                 }
                                 else    //如果没有数据更新
                                 {
+                                    //关闭文件
+                                    self?.ia.closeDocument(had)
                                     //发出通知
                                     NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
                                 }
@@ -244,9 +246,41 @@ class MPContainer: OriginContainer
         }
     }
     
-    //提交到iCloud
-    override func commit(key: AnyHashable, value: Any, success: (Any?) -> Void, failure: (NSError) -> Void) {
-        
+    //提交数据到持久性数据源，目前都保存到iCloud的文件
+    override func commit(key: AnyHashable, value: Any, success: @escaping (Any?) -> Void, failure: @escaping (NSError) -> Void) {
+        if let k = key as? MPDataKey, let val = value as? NSCoding, let data = ArchiverAdatper.shared.archive(val)
+        {
+            let fileName = k.getiCloudFileName()
+            //尝试打开文件
+            openFileFromiCloud(fileName) { [weak self] fileId in
+                if let fileId = fileId {
+                    //修改文件
+                    self?.ia.writeDocument(fileId, data: data, completion: { succeed in
+                        if succeed
+                        {
+                            success(nil)
+                        }
+                        else
+                        {
+                            failure(FSError.saveToiCloudError.getError())
+                        }
+                    })
+                }
+                else    //创建一个新文件
+                {
+                    self?.createFileIniCloud(data, fileName: fileName, completion: { succeed in
+                        if succeed
+                        {
+                            success(nil)
+                        }
+                        else
+                        {
+                            failure(FSError.saveToiCloudError.getError())
+                        }
+                    })
+                }
+            }
+        }
     }
     
 }
@@ -312,35 +346,6 @@ extension MPContainer: InternalType
 //外部接口
 extension MPContainer: ExternalInterface
 {
-    ///修改，value必须是NSCoding；key必须是MPDataKey
-    ///先保存缓存，然后保存到iCloud
-    override func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta())
-    {
-        //先保存到缓存
-        super.mutate(key: key, value: value, meta: meta)
-        
-        //写入iCloud文件，如果acrhive失败，什么都不做
-        if let k = key as? MPDataKey, let val = value as? NSCoding, let data = ArchiverAdatper.shared.archive(val)
-        {
-            let fileName = k.getiCloudFileName()
-            //尝试打开文件
-            openFileFromiCloud(fileName) {[weak self] fileId in
-                if let fileId = fileId {
-                    //修改文件
-                    self?.ia.writeDocument(fileId, data: data, completion: { success in
-//                        FSLog("write icloud file \(success) : \(fileName)")
-                    })
-                }
-                else    //创建一个新文件
-                {
-                    self?.createFileIniCloud(data, fileName: fileName, completion: { success in
-                        FSLog("create icloud file \(success) : \(fileName)")
-                    })
-                }
-            }
-        }
-    }
-    
     ///获取所有库
     func getLibrarys(_ completion: @escaping (([MPMediaLibraryModel]?) -> Void))
     {
@@ -405,6 +410,18 @@ extension MPContainer: ExternalInterface
         }
     }
     
+    ///保存当前播放歌曲
+    func setCurrentSong(_ song: MPSongModel)
+    {
+        self.mutate(key: MPDataKey.currentSong, value: song)
+        //保存到iCloud
+        self.commit(key: MPDataKey.currentSong, value: song) { obj in
+            
+        } failure: { error in
+            FSLog("MPContainer save current song : \(error.localizedDescription)")
+        }
+    }
+    
     ///获取当前播放列表
     func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
     {
@@ -431,6 +448,18 @@ extension MPContainer: ExternalInterface
                     completion(nil)
                 }
             }
+        }
+    }
+    
+    ///保存当前播放列表
+    func setCurrentPlaylist(_ playlist: MPPlaylistModel)
+    {
+        self.mutate(key: MPDataKey.currentPlaylist, value: playlist)
+        //保存到iCloud
+        self.commit(key: MPDataKey.currentPlaylist, value: playlist) { obj in
+            
+        } failure: { error in
+            FSLog("MPContainer save current playlist : \(error.localizedDescription)")
         }
     }
     
@@ -463,6 +492,18 @@ extension MPContainer: ExternalInterface
         }
     }
     
+    ///保存历史播放歌曲列表
+    func setHistorySongs(_ historySongs: MPHistorySongModel)
+    {
+        self.mutate(key: MPDataKey.historySongs, value: historySongs)
+        //保存到iCloud
+        self.commit(key: MPDataKey.historySongs, value: historySongs) { obj in
+            
+        } failure: { error in
+            FSLog("MPContainer save historySongs : \(error.localizedDescription)")
+        }
+    }
+    
     ///获取历史播放列表列表
     func getHistoryPlaylists(_ completion: @escaping ([MPHistoryPlaylistModel]?) -> Void)
     {
@@ -492,6 +533,17 @@ extension MPContainer: ExternalInterface
         }
     }
     
+    ///保存历史播放列表列表
+    func setHistoryPlaylists(_ historyPlaylists: MPHistoryPlaylistModel)
+    {
+        self.mutate(key: MPDataKey.historyPlaylists, value: historyPlaylists)
+        //保存到iCloud
+        self.commit(key: MPDataKey.historyPlaylists, value: historyPlaylists) { obj in
+            
+        } failure: { error in
+            FSLog("MPContainer save historyPlaylists : \(error.localizedDescription)")
+        }
+    }
     
     
     

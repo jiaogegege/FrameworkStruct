@@ -18,6 +18,30 @@ typealias FloatRangeType = (Float, Float)
 typealias DoubleRangeType = (Double, Double)
 
 
+///限制取值范围的属性包装器
+@propertyWrapper struct LimitNumRange<T: Comparable>
+{
+    private var value: T
+    private var min: T
+    private var max: T
+    
+    var wrappedValue: T {
+        get {
+            value
+        }
+        set {
+            value = limitIn(newValue, min: min, max: max)
+        }
+    }
+    
+    init(wrappedValue: T, min: T, max: T) {
+        assert(min <= wrappedValue && max >= wrappedValue, "\(wrappedValue) is not between \(min) - \(max)")
+        self.value = wrappedValue
+        self.min = min
+        self.max = max
+    }
+}
+
 ///数字枚举器
 ///输入一个数字区间，按照设定的步长枚举出一个数列
 ///注意：目前只支持从小到大枚举,step为正数

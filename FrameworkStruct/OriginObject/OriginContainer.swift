@@ -32,7 +32,7 @@ protocol ContainerProtocol: NSObjectProtocol
     func get(key: AnyHashable) -> Any?
     
     //异步获取数据，优先从容器中获取，如果没有则从数据源获取
-    func get(key: AnyHashable, completion: OptionalAnyClosure)
+    func get(key: AnyHashable, completion: @escaping OptionalAnyClosure)
         
     //同步修改数据，数据保存在容器中修改后通知所有订阅对象刷新数据
     func mutate(key: AnyHashable, value: Any, meta: DataModelMeta)
@@ -42,7 +42,7 @@ protocol ContainerProtocol: NSObjectProtocol
     
     //异步提交数据，将数据写入本地数据源或远程数据源
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
-    func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: NSErrorClosure)
+    func commit(key: AnyHashable, value: Any, success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure)
     
     //同步提交所有数据，将所有数据写入本地数据源
     func commitAll()
@@ -50,13 +50,13 @@ protocol ContainerProtocol: NSObjectProtocol
     //异步提交所有数据，将所有数据写入本地数据源或远程数据源
     //异步提交所有数据涉及到多个异步操作的同步通信，并且不一定所有数据都支持异步提交服务，慎重使用这个方法
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
-    func commitAll(success: OptionalAnyClosure, failure: NSErrorClosure)
+    func commitAll(success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure)
     
     //同步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据；同时返回这个数据
     func refresh(key: AnyHashable) -> Any?
     
     //异步刷新某个数据，先清空缓存，再从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据，同时返回这个数据
-    func refresh(key: AnyHashable, completion: OptionalAnyClosure)
+    func refresh(key: AnyHashable, completion: @escaping OptionalAnyClosure)
     
     //同步刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据，同时返回所有刷新的数据，key就是数据的key
     func refreshAll() -> Dictionary<AnyHashable, Any>?
@@ -64,7 +64,7 @@ protocol ContainerProtocol: NSObjectProtocol
     //异步刷新所有数据，从数据源中重新读取，如果有的话，并通知所有相关对象刷新数据
     //异步刷新所有数据涉及到多个异步操作的同步通信，并且不一定所有数据都支持异步刷新服务，慎重使用这个方法
     //参数：datas：所有获取到的数据对象
-    func refreshAll(completion: ((_ datas: Dictionary<AnyHashable, Any>?) -> Void))
+    func refreshAll(completion: @escaping ((_ datas: Dictionary<AnyHashable, Any>?) -> Void))
     
     //清空某个数据，从容器中删除
     func clear(key: AnyHashable)
@@ -157,11 +157,12 @@ extension OriginContainer: ContainerProtocol
         return meta.needCopy ? self.getCopy(data) : data
     }
     
-    @objc func get(key: AnyHashable, completion: OptionalAnyClosure) {
+    @objc func get(key: AnyHashable, completion: @escaping OptionalAnyClosure) {
         //子类实现和具体存取器的交互
         //理论上优先从容器获取，如果没有则从具体的存取器获取
     }
     
+    //不建议覆写这个方法
     @objc func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta()) {
         let dataStruct = ContainerDataStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
         self.container[key] = dataStruct
@@ -174,7 +175,7 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
-    @objc func commit(key: AnyHashable, value: Any, success: OptionalAnyClosure, failure: NSErrorClosure) {
+    @objc func commit(key: AnyHashable, value: Any, success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure) {
         //子类实现和具体存取器的交互
     }
     
@@ -182,7 +183,7 @@ extension OriginContainer: ContainerProtocol
         //子类实现和具体存取器的交互
     }
     
-    func commitAll(success: OptionalAnyClosure, failure: NSErrorClosure) {
+    func commitAll(success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure) {
         //子类实现和具体存取器的交互
     }
     
@@ -191,7 +192,7 @@ extension OriginContainer: ContainerProtocol
         return nil
     }
     
-    @objc func refresh(key: AnyHashable, completion: OptionalAnyClosure) {
+    @objc func refresh(key: AnyHashable, completion: @escaping OptionalAnyClosure) {
         //子类实现和具体存取器的交互
     }
     
@@ -200,10 +201,11 @@ extension OriginContainer: ContainerProtocol
         return nil
     }
     
-    @objc func refreshAll(completion: ((Dictionary<AnyHashable, Any>?) -> Void)) {
+    @objc func refreshAll(completion: @escaping ((Dictionary<AnyHashable, Any>?) -> Void)) {
         //子类实现和具体存取器的交互
     }
     
+    //不建议覆写这个方法
     @objc func clear(key: AnyHashable) {
         self.container.removeValue(forKey: key)
         
@@ -228,6 +230,7 @@ extension OriginContainer: ContainerProtocol
         }
     }
     
+    //不建议覆写这个方法
     @objc func clearAll() {
         //遍历key，依次清空对应的数据
         for key in self.container.keys
