@@ -5543,6 +5543,7 @@
 					"-DSQLITE_TEMP_STORE=2",
 					"-DSQLITE_HAS_CODEC",
 				);
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FrameworkStruct.test;
@@ -5589,6 +5590,7 @@
 					"-DSQLITE_TEMP_STORE=2",
 					"-DSQLITE_HAS_CODEC",
 				);
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FrameworkStruct.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
