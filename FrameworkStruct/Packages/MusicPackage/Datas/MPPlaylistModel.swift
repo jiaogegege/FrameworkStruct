@@ -15,7 +15,7 @@ class MPPlaylistModel: OriginModel, Archivable
     //MARK: 属性
     var id: String
     var name: String
-    var songs: Array<MPAudioProtocol>
+    var audios: Array<MPAudioProtocol>
     var type: MPPlaylistType
     var tagIds: Array<String>?
     var intro: String?
@@ -25,15 +25,15 @@ class MPPlaylistModel: OriginModel, Archivable
     init(name: String) {
         self.id = g_uuid()
         self.name = name
-        self.songs = []
+        self.audios = []
         self.type = .playlist
     }
     
     //根据现有数据创建一个播放列表，通常是从其他类型的列表转换为播放列表
-    init(name: String, songs: Array<MPAudioProtocol>, type: MPPlaylistType, intro: String?) {
+    init(name: String, audios: Array<MPAudioProtocol>, type: MPPlaylistType, intro: String?) {
         self.id = g_uuid()
         self.name = name
-        self.songs = songs
+        self.audios = audios
         self.type = type
         self.intro = intro
     }
@@ -41,7 +41,7 @@ class MPPlaylistModel: OriginModel, Archivable
     override func copy(with zone: NSZone? = nil) -> Any {
         let playlist = MPPlaylistModel(name: self.name)
         playlist.id = self.id
-        playlist.songs = self.songs
+        playlist.audios = self.audios
         playlist.type = self.type
         playlist.tagIds = self.tagIds
         playlist.intro = self.intro
@@ -54,7 +54,7 @@ class MPPlaylistModel: OriginModel, Archivable
         
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
-        self.songs = coder.decodeObject(forKey: PropertyKey.songs.rawValue) as! [MPAudioProtocol]
+        self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPAudioProtocol]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
         self.tagIds = coder.decodeObject(forKey: PropertyKey.tagIds.rawValue) as? [String]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
@@ -63,7 +63,7 @@ class MPPlaylistModel: OriginModel, Archivable
     func encode(with coder: NSCoder) {
         coder.encode(self.id, forKey: PropertyKey.id.rawValue)
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
-        coder.encode(self.songs, forKey: PropertyKey.songs.rawValue)
+        coder.encode(self.audios, forKey: PropertyKey.audios.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
         coder.encode(self.tagIds, forKey: PropertyKey.tagIds.rawValue)
         coder.encode(self.intro, forKey: PropertyKey.intro.rawValue)
@@ -83,7 +83,7 @@ extension MPPlaylistModel: MPPlaylistProtocol
     }
     
     var playlistAudios: Array<MPAudioProtocol> {
-        songs
+        audios
     }
     
     var playlistType: MPPlaylistType {
@@ -92,6 +92,20 @@ extension MPPlaylistModel: MPPlaylistProtocol
 
     var playlistIntro: String? {
         intro
+    }
+    
+    func getIndexOf(audio: MPAudioProtocol?) -> Int {
+        guard let au = audio else { return -1 }
+        
+        for (index, item) in self.audios.enumerated()
+        {
+            if item.audioId == au.audioId
+            {
+                return index
+            }
+        }
+        
+        return -1
     }
     
     func getPlaylist() -> MPPlaylistModel {
@@ -108,7 +122,7 @@ extension MPPlaylistModel: InternalType
     enum PropertyKey: String {
         case id
         case name
-        case songs
+        case audios
         case type
         case tagIds
         case intro

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -39,6 +40,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         self.initData()
         
         return ApplicationManager.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    //接受远程控制信息，比如控制中心和锁屏界面的播放器操作
+    override func remoteControlReceived(with event: UIEvent?) {
+        if let event = event {
+            if event.type == .remoteControl     //控制中心播放操作
+            {
+                MPManager.shared.remoteControl(event.subtype)
+            }
+        }
     }
 
     // MARK: UISceneSession Lifecycle

@@ -464,9 +464,9 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取历史播放歌曲列表
-    func getHistorySongs(_ completion: @escaping (MPHistorySongModel?) -> Void)
+    func getHistorySongs(_ completion: @escaping (MPHistoryAudioModel?) -> Void)
     {
-        if let playlist = self.get(key: MPDataKey.historySongs) as? MPHistorySongModel
+        if let playlist = self.get(key: MPDataKey.historySongs) as? MPHistoryAudioModel
         {
             completion(playlist)
         }
@@ -474,7 +474,7 @@ extension MPContainer: ExternalInterface
         {
             readFileFromiCloud(Self.historySongsFileName) { [weak self] data in
                 if let data = data {
-                    if let playlist = MPHistorySongModel.unarchive(data)
+                    if let playlist = MPHistoryAudioModel.unarchive(data)
                     {
                         self?.mutate(key: MPDataKey.historySongs, value: playlist)
                         completion(playlist)
@@ -493,7 +493,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///保存历史播放歌曲列表
-    func setHistorySongs(_ historySongs: MPHistorySongModel)
+    func setHistorySongs(_ historySongs: MPHistoryAudioModel)
     {
         self.mutate(key: MPDataKey.historySongs, value: historySongs)
         //保存到iCloud

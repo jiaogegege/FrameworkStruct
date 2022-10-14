@@ -74,8 +74,22 @@ extension MPStageModel: MPPlaylistProtocol
         intro
     }
     
+    func getIndexOf(audio: MPAudioProtocol?) -> Int {
+        guard let au = audio else { return -1 }
+        
+        for (index, item) in self.songs.enumerated()
+        {
+            if item.audioId == au.audioId
+            {
+                return index
+            }
+        }
+        
+        return -1
+    }
+    
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, songs: playlistAudios, type: type, intro: intro)
+        MPPlaylistModel(name: name, audios: playlistAudios, type: type, intro: intro)
     }
     
 }

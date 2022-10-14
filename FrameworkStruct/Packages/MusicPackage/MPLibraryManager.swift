@@ -130,7 +130,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///读取历史播放歌曲
-    func readHistorySongs(_ completion: @escaping (MPHistorySongModel?) -> Void)
+    func readHistorySongs(_ completion: @escaping (MPHistoryAudioModel?) -> Void)
     {
         container.getHistorySongs { history in
             completion(history)
@@ -148,31 +148,21 @@ extension MPLibraryManager: ExternalInterface
         //如果历史播放歌曲中还没有这首歌，那么在历史播放歌曲中新增一个，在最前位置
         container.getHistorySongs {[weak self] historySongs in
             if let historySongs = historySongs {
-                var existIndex: Int = -1    //是否已经存在历史记录
-                for (index, audio) in historySongs.medias.enumerated()
-                {
-                    if audio.audioId == song.id
-                    {
-                        existIndex = index
-                        break
-                    }
-                }
-                //说明已经存在了，那么提到最前的位置
-                if existIndex >= 0 {
-                    historySongs.medias.remove(at: existIndex)
-                }
-                historySongs.medias.insert(song, at: 0)
+                historySongs.addAudio(song)
                 //写入文件
                 self?.container.setHistorySongs(historySongs)
             }
             else    //如果还没有历史歌曲记录，创建一个历史记录列表，就是个播放列表
             {
-                let history = MPHistorySongModel(name: String.historyPlay, mediaType: .song)
-                history.medias.append(song)
+                let history = MPHistoryAudioModel(name: String.historyPlay, mediaType: .song)
+                history.addAudio(song)
                 //写入文件
                 self?.container.setHistorySongs(history)
             }
         }
+        
+        //处理历史播放列表记录
+        
     }
     
     

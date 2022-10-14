@@ -385,7 +385,7 @@
 		EA8CFD2928EDD79F00EE3B73 /* MPPodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */; };
 		EA8CFD3128EDD7B500EE3B73 /* MPStageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */; };
 		EA8CFD3528EDD7C100EE3B73 /* MPMoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */; };
-		EA8CFD3928EDD7CF00EE3B73 /* MPHistorySongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */; };
+		EA8CFD3928EDD7CF00EE3B73 /* MPHistoryAudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3828EDD7CF00EE3B73 /* MPHistoryAudioModel.swift */; };
 		EA8CFD3D28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */; };
 		EA8CFD4128EE606C00EE3B73 /* MPConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD4028EE606C00EE3B73 /* MPConst.swift */; };
 		EA8CFD5928EE844300EE3B73 /* ArchiverAdatper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */; };
@@ -1241,7 +1241,7 @@
 		EA8CFD2828EDD79F00EE3B73 /* MPPodcastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPodcastModel.swift; sourceTree = "<group>"; };
 		EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStageModel.swift; sourceTree = "<group>"; };
 		EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMoodModel.swift; sourceTree = "<group>"; };
-		EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistorySongModel.swift; sourceTree = "<group>"; };
+		EA8CFD3828EDD7CF00EE3B73 /* MPHistoryAudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistoryAudioModel.swift; sourceTree = "<group>"; };
 		EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistoryPlaylistModel.swift; sourceTree = "<group>"; };
 		EA8CFD4028EE606C00EE3B73 /* MPConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPConst.swift; sourceTree = "<group>"; };
 		EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverAdatper.swift; sourceTree = "<group>"; };
@@ -3054,7 +3054,7 @@
 				EA8CFD3028EDD7B500EE3B73 /* MPStageModel.swift */,
 				EA8CFD3428EDD7C100EE3B73 /* MPMoodModel.swift */,
 				EAFDF36B28F15D7B0026F0F3 /* MPFavoriteListModel.swift */,
-				EA8CFD3828EDD7CF00EE3B73 /* MPHistorySongModel.swift */,
+				EA8CFD3828EDD7CF00EE3B73 /* MPHistoryAudioModel.swift */,
 				EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */,
 			);
 			path = Datas;
@@ -4758,7 +4758,7 @@
 				EA75BB262792A80900910B4C /* DatabaseAccessor.swift in Sources */,
 				EA99371D27994F6100480147 /* TABAnimatedCacheManager.m in Sources */,
 				EAAC7A5A28E2A52E009F4B56 /* iCloudFileViewController.swift in Sources */,
-				EA8CFD3928EDD7CF00EE3B73 /* MPHistorySongModel.swift in Sources */,
+				EA8CFD3928EDD7CF00EE3B73 /* MPHistoryAudioModel.swift in Sources */,
 				EADB00B127623C76001B7223 /* OriginManager.swift in Sources */,
 				EA9A75AB27C731EB00A11FC8 /* zip.c in Sources */,
 				EA7A7CBC278830A200DD2310 /* WeakArray.m in Sources */,

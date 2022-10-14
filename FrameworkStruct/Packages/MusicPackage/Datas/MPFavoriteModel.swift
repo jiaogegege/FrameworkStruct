@@ -16,7 +16,7 @@ class MPFavoriteModel: OriginModel, Archivable
     //MARK: 属性
     var id: String
     var name: String    //`我喜欢`、`我的收藏`或者其他
-    var songs: Array<MPSongModel>
+    var audios: Array<MPAudioProtocol>
     var type: MPPlaylistType
     var mediaType: MPMediaType
     var images: Array<URL>?
@@ -27,7 +27,7 @@ class MPFavoriteModel: OriginModel, Archivable
     init(name: String, mediaType: MPMediaType) {
         self.id = g_uuid()
         self.name = name
-        self.songs = []
+        self.audios = []
         self.type = .favorite
         self.mediaType = mediaType
     }
@@ -37,7 +37,7 @@ class MPFavoriteModel: OriginModel, Archivable
         
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
-        self.songs = coder.decodeObject(forKey: PropertyKey.songs.rawValue) as! [MPSongModel]
+        self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPSongModel]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
         self.mediaType = MPMediaType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
         self.images = coder.decodeObject(forKey: PropertyKey.images.rawValue) as? [URL]
@@ -47,7 +47,7 @@ class MPFavoriteModel: OriginModel, Archivable
     func encode(with coder: NSCoder) {
         coder.encode(self.id, forKey: PropertyKey.id.rawValue)
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
-        coder.encode(self.songs, forKey: PropertyKey.songs.rawValue)
+        coder.encode(self.audios, forKey: PropertyKey.audios.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
         coder.encode(self.mediaType.rawValue, forKey: PropertyKey.mediaType.rawValue)
         coder.encode(self.images, forKey: PropertyKey.images.rawValue)
@@ -68,7 +68,7 @@ extension MPFavoriteModel: MPPlaylistProtocol
     }
     
     var playlistAudios: Array<MPAudioProtocol> {
-        songs
+        audios
     }
     
     var playlistType: MPPlaylistType {
@@ -79,8 +79,22 @@ extension MPFavoriteModel: MPPlaylistProtocol
         intro
     }
     
+    func getIndexOf(audio: MPAudioProtocol?) -> Int {
+        guard let au = audio else { return -1 }
+        
+        for (index, item) in self.audios.enumerated()
+        {
+            if item.audioId == au.audioId
+            {
+                return index
+            }
+        }
+        
+        return -1
+    }
+    
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, songs: playlistAudios, type: type, intro: intro)
+        MPPlaylistModel(name: name, audios: playlistAudios, type: type, intro: intro)
     }
     
 }
@@ -93,7 +107,7 @@ extension MPFavoriteModel: InternalType
     enum PropertyKey: String {
         case id
         case name
-        case songs
+        case audios
         case type
         case mediaType
         case images

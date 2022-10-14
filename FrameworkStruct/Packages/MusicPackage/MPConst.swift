@@ -68,6 +68,9 @@ protocol MPPlaylistProtocol {
     //播放列表简介
     var playlistIntro: String? {get}
     
+    //获取某个音频在列表中的位置，没有返回-1
+    func getIndexOf(audio: MPAudioProtocol?) -> Int
+    
     //获取标准播放列表
     func getPlaylist() -> MPPlaylistModel
 }

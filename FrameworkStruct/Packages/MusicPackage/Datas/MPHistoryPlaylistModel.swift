@@ -8,7 +8,11 @@
 /**
  播放列表历史记录，包括播放列表、专辑、歌单等
  可记录播放过的播放列表，方便返回之前的播放列表继续播放
+ 一般设定最多有几个历史记录列表
  */
+
+//还未考虑好如何设计，待定
+
 import UIKit
 
 class MPHistoryPlaylistModel: OriginModel, Archivable
