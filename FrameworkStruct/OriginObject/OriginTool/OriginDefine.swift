@@ -27,6 +27,14 @@
  * - version: <#版本信息#>
  *
  */
+
+/**
+ 弃用方法的两种形式
+ @available(*, deprecated, message: "Don't use this anymore")
+ @available(iOS, introduced: 1.0, deprecated: 1.0, message: "Don't use this anymore")
+ */
+
+
 import Foundation
 
 //MARK: 协议定义

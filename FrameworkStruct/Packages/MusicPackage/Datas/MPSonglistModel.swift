@@ -92,6 +92,31 @@ extension MPSonglistModel: MPPlaylistProtocol
         return -1
     }
     
+    func insertAudio(audio: MPAudioProtocol, index: Int?) -> Int {
+        var lastIndex: Int = -1
+        if let song = audio as? MPSongModel
+        {
+            if let ind = index
+            {
+                if ind > songs.count
+                {
+                    lastIndex = songs.count
+                }
+                else
+                {
+                    lastIndex = ind
+                }
+                songs.insert(song, at: lastIndex)
+            }
+            else
+            {
+                songs.append(song)
+                lastIndex = songs.count - 1
+            }
+        }
+        return lastIndex
+    }
+    
     func getPlaylist() -> MPPlaylistModel {
         MPPlaylistModel(name: name, audios: playlistAudios, type: type, intro: intro)
     }

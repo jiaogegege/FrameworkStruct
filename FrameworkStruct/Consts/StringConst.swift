@@ -334,6 +334,12 @@ extension String
     static let historyPlay = localized("historyPlay")
     //播放音乐
     static let playMusic = localized("playMusic")
+    //喜欢
+    static let like = localized("like")
+    //不喜欢
+    static let dislike = localized("dislike")
+    //添加到书签
+    static let addToBookmark = localized("addToBookmark")
     
     //MARK: Toast文案
     

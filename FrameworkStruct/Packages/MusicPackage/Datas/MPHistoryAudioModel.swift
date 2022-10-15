@@ -18,16 +18,16 @@ class MPHistoryAudioModel: OriginModel, Archivable
     var id: String
     var name: String
     var audios: Array<MPAudioProtocol>
-    var mediaType: MPMediaType
+    var mediaType: MPAudioType
     var capacity: Int
     
     //MARK: 方法
-    init(name: String, mediaType: MPMediaType) {
+    init(name: String, mediaType: MPAudioType) {
         self.id = g_uuid()
         self.name = name
         self.audios = []
         self.mediaType = mediaType
-        self.capacity = 200
+        self.capacity = MPMaxHistorySongCount
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
@@ -44,7 +44,7 @@ class MPHistoryAudioModel: OriginModel, Archivable
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPAudioProtocol]
-        self.mediaType = MPMediaType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
+        self.mediaType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
         self.capacity = coder.decodeInteger(forKey: PropertyKey.capacity.rawValue)
     }
     

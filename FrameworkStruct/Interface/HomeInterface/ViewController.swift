@@ -9,10 +9,13 @@ import UIKit
 
 class ViewController: BasicViewController
 {
+    //MARK: 属性
     @IBOutlet weak var tableView: UITableView!
     
     let titleArray = [String.musicLibrary, String.healthCode, String.placeCode, String.travelCard, String.waterfall, String.themeSelect, String.modalShow, String.constraintTest, String.drawTable, String.layerShadow, String.animationDemo, String.webInteraction, String.drawTest, String.copyPaste, String.iCloudFileManage]
     
+    
+    //MARK: 方法
     override class func getViewController() -> Self {
         return getVC(from: gMainSB)
     }

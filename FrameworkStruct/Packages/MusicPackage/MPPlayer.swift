@@ -38,6 +38,12 @@ protocol MPPlayerDelegate: NSObjectProtocol {
     
     ///播放某个音频失败
     func mpPlayerFailToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
+    
+    ///播放列表更新
+    func mpPlayerPlaylistChanged(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
+    
+    ///播放进度和速率改变
+    func mpPlayerTimeChange(_ time: TimeInterval, rate: Float)
 }
 
 class MPPlayer: OriginWorker
@@ -49,16 +55,18 @@ class MPPlayer: OriginWorker
     fileprivate(set) var currentPlaylist: MPPlaylistProtocol?
     //当前播放歌曲在播放列表中的位置，如果没有就是-1
     fileprivate(set) var currentIndex: Int = -1
+    //随机播放模式下保存的播放列表歌曲序号列表
+    fileprivate var playlistIndexArray: [Int] = []
+    //如果用户点了下一首播放，那么记住这个位置，不管何种播放模式，都会按最新到最旧的加入顺序播放下一首
+    fileprivate var indexsOfIfNextPlay: [Int] = []
+    //一个播放列表的中已播放歌曲列表，当切换播放列表时被清空
+    fileprivate var elapsedAudioArray: [MPAudioProtocol] = []
     
     //播放模式，默认顺序播放
-    fileprivate var playMode: PlayMode = .sequence
+    var playMode: PlayMode = .sequence
     
-    //播放速率，默认1.0，可设置为0.0～2.0
-    @LimitNumRange(min: 0.0, max: 3.0) fileprivate var playRate: Float = 1.0 {
-        willSet {
-            self.player.rate = newValue
-        }
-    }
+    //播放速率，默认1.0，可设置为0.0～3.0
+    @LimitNumRange(min: 0.0, max: 3.0) fileprivate(set) var playRate: Float = 1.0
     
     //代理对象
     weak var delegate: MPPlayerDelegate?
@@ -154,22 +162,128 @@ class MPPlayer: OriginWorker
         self.prepareToPlay(currentAudio!)
     }
     
-    //获取下一首乐曲
+    //获取下一首乐曲，处理index
     fileprivate func getNextAudioByMode() -> MPAudioProtocol
     {
         switch playMode {
         case .sequence:     //顺序播放
-            currentIndex += 1
-            if currentIndex >= currentPlaylist!.playlistAudios.count
+            if indexsOfIfNextPlay.count > 0
             {
-                currentIndex = 0
+                currentIndex = indexsOfIfNextPlay.popLast()!
+            }
+            else
+            {
+                currentIndex += 1
+                if currentIndex >= currentPlaylist!.playlistAudios.count
+                {
+                    currentIndex = 0
+                }
             }
             return currentPlaylist!.playlistAudios[currentIndex]
         case .singleCycle:  //单曲循环
+            if indexsOfIfNextPlay.count > 0
+            {
+                currentIndex = indexsOfIfNextPlay.popLast()!
+            }
+            else
+            {
+                currentIndex += 1
+                if currentIndex >= currentPlaylist!.playlistAudios.count
+                {
+                    currentIndex = 0
+                }
+            }
             return currentPlaylist!.playlistAudios[currentIndex]
         case .random:       //随机播放
-            //稍后开发，当前先返回单曲循环
+            if indexsOfIfNextPlay.count > 0
+            {
+                currentIndex = indexsOfIfNextPlay.popLast()!
+            }
+            else
+            {
+                let indexOfIndex = Int(randomIn(0, UInt(playlistIndexArray.count - 1)))
+                currentIndex = playlistIndexArray[indexOfIndex]     //随机获取一个index
+                playlistIndexArray.remove(at: indexOfIndex)     //从序号数组中删除获取的这个序号
+                //如果序号数组剩余0个，说明所有歌曲都随机了一遍，那么重新生成序号数组
+                if playlistIndexArray.count <= 0
+                {
+                    for index in 0..<self.currentPlaylist!.playlistAudios.count
+                    {
+                        self.playlistIndexArray.append(index)
+                    }
+                }
+            }
             return currentPlaylist!.playlistAudios[currentIndex]
+        }
+    }
+    
+    ///播放上一首乐曲，根据不同的播放模式
+    fileprivate func playPreviousByMode()
+    {
+        //先获取上一首乐曲
+        self.currentAudio = self.getPreviousAudioByMode()
+        //准备播放
+        self.prepareToPlay(currentAudio!)
+    }
+    
+    ///获取上一首乐曲
+    fileprivate func getPreviousAudioByMode() -> MPAudioProtocol
+    {
+        switch playMode {
+        case .sequence:
+            if elapsedAudioArray.count > 0
+            {
+                let audio = elapsedAudioArray.popLast()!
+                currentIndex = currentPlaylist!.getIndexOf(audio: audio)
+                return audio
+            }
+            else
+            {
+                currentIndex -= 1
+                if currentIndex < 0
+                {
+                    currentIndex = 0
+                }
+                return currentPlaylist!.playlistAudios[currentIndex]
+            }
+        case .singleCycle:
+            if elapsedAudioArray.count > 0
+            {
+                let audio = elapsedAudioArray.popLast()!
+                currentIndex = currentPlaylist!.getIndexOf(audio: audio)
+                return audio
+            }
+            else
+            {
+                currentIndex -= 1
+                if currentIndex < 0
+                {
+                    currentIndex = 0
+                }
+                return currentPlaylist!.playlistAudios[currentIndex]
+            }
+        case .random:
+            if elapsedAudioArray.count > 0
+            {
+                let audio = elapsedAudioArray.popLast()!
+                currentIndex = currentPlaylist!.getIndexOf(audio: audio)
+                return audio
+            }
+            else
+            {
+                let indexOfIndex = Int(randomIn(0, UInt(playlistIndexArray.count - 1)))
+                currentIndex = playlistIndexArray[indexOfIndex]     //随机获取一个index
+                playlistIndexArray.remove(at: indexOfIndex)     //从序号数组中删除获取的这个序号
+                //如果序号数组剩余0个，说明所有歌曲都随机了一遍，那么重新生成序号数组
+                if playlistIndexArray.count <= 0
+                {
+                    for index in 0..<self.currentPlaylist!.playlistAudios.count
+                    {
+                        self.playlistIndexArray.append(index)
+                    }
+                }
+                return currentPlaylist!.playlistAudios[currentIndex]
+            }
         }
     }
     
@@ -183,12 +297,13 @@ extension MPPlayer: DelegateProtocol
     {
         if let item = notify.object as? AVPlayerItem, item.isEqual(self.playerItem) //必须是发出通知的那个`PlayerItem`
         {
+            //保存已经播放的歌曲
+            elapsedAudioArray.append(self.currentAudio!)
             //播放完毕通知
             if let del = self.delegate
             {
                 del.mpPlayerFinishPlay(self.currentAudio!, playlist: self.currentPlaylist!)
             }
-            
             //尝试播放下一首
             self.playNextByMode()
         }
@@ -256,17 +371,6 @@ extension MPPlayer: InternalType
 //外部接口
 extension MPPlayer: ExternalInterface
 {
-    ///播放一首音乐
-    ///参数：audio：歌曲对象；playlist：所在播放列表；completion：播放是否成功
-    func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
-    {
-        self.playResultCallback = completion
-        self.currentAudio = audio
-        self.currentPlaylist = playlist
-        self.currentIndex = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
-        self.prepareToPlay(audio)
-    }
-    
     ///是否在播放
     var isPlaying: Bool {
         player.timeControlStatus == .playing && self.currentAudio != nil
@@ -280,6 +384,48 @@ extension MPPlayer: ExternalInterface
     ///是否是空闲状态，就是什么播放资源都没有
     var isFree: Bool {
         currentAudio == nil && currentPlaylist == nil && playerItem == nil
+    }
+    
+    ///播放一首音乐，用于从一个新的列表中点击一首歌曲播放，比如音乐库、歌单、历史播放列表、专辑、我喜欢、心情等
+    ///参数：audio：歌曲对象；playlist：所在播放列表；completion：播放是否成功
+    func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
+    {
+        self.playResultCallback = completion
+        self.currentAudio = audio
+        self.currentPlaylist = playlist
+        self.currentIndex = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
+        self.playlistIndexArray.removeAll()
+        for index in 0..<self.currentPlaylist!.playlistAudios.count
+        {
+            //如果是随机播放，那么去掉这个index
+            if playMode == .random && index == self.currentIndex
+            {
+                
+            }
+            else
+            {
+                self.playlistIndexArray.append(index)
+            }
+        }
+        self.elapsedAudioArray.removeAll()      //每次开始一个新的播放列表时，都清空原来的临时播放记录
+        self.indexsOfIfNextPlay.removeAll()     //每次开始一个新的播放列表时，都清空下一首播放列表
+        self.prepareToPlay(audio)
+    }
+    
+    ///下一首播放，在当前播放列表中插入一首新乐曲并且会在当前歌曲播放完毕后播放，不管是何种播放模式
+    func playFollow(_ audio: MPAudioProtocol)
+    {
+        //将新歌曲插入到当前播放列表
+        if let playlist = self.currentPlaylist
+        {
+            var index = currentIndex + 1
+            index = playlist.insertAudio(audio: audio, index: index)
+            indexsOfIfNextPlay.append(index)   //记录下一首播放的index
+            if let del = self.delegate
+            {
+                del.mpPlayerPlaylistChanged(self.currentAudio!, playlist: self.currentPlaylist!)
+            }
+        }
     }
     
     ///恢复播放，前提是暂停状态
@@ -326,15 +472,99 @@ extension MPPlayer: ExternalInterface
     ///下一首，如果有的话
     func next()
     {
-        
+        if currentPlaylist?.playlistAudios.count ?? 0 > 0
+        {
+            //保存已经播放的歌曲
+            self.elapsedAudioArray.append(self.currentAudio!)
+            self.playNextByMode()
+        }
     }
     
     ///上一首，如果有的话
     func previous()
     {
-        
+        if currentPlaylist?.playlistAudios.count ?? 0 > 0
+        {
+            self.playPreviousByMode()
+        }
     }
     
+    ///总时间
+    var totalTime: TimeInterval {
+        if let item = playerItem
+        {
+            return CMTimeGetSeconds(item.duration)
+        }
+        return 0
+    }
     
+    ///当前时间
+    var currentTime: TimeInterval {
+        if let time = playerItem?.currentTime()
+        {
+            return CMTimeGetSeconds(time)
+        }
+        return 0.0
+    }
+    
+    ///拖动进度到某个时刻
+    func seek(_ to: TimeInterval, success: BoolClosure?)
+    {
+        if !isFree
+        {
+            player.seek(to: CMTimeMakeWithSeconds(to, preferredTimescale: itemAsset!.duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero) {[weak self] (succeed) in
+                if let delegate = self?.delegate
+                {
+                    delegate.mpPlayerTimeChange(self?.currentTime ?? 0, rate: self?.playRate ?? 1.0)
+                }
+                if let cb = success
+                {
+                    cb(succeed)
+                }
+            }
+        }
+        else
+        {
+            if let cb = success
+            {
+                cb(false)
+            }
+        }
+    }
+    
+    ///向前或向后跳过几秒
+    ///backward：为true则向后，最小0；为false则向前，最大就是歌曲duration
+    func skip(_ by: TimeInterval, backward: Bool = false, success: BoolClosure?)
+    {
+        if let item = playerItem
+        {
+            var newTime = currentTime + (backward ? -by : by)
+            newTime = limitIn(newTime, min: 0.0, max: CMTimeGetSeconds(item.duration))  //限制范围
+            seek(newTime) { (succeed) in
+                if let cb = success
+                {
+                    cb(succeed)
+                }
+            }
+        }
+        else
+        {
+            if let cb = success
+            {
+                cb(false)
+            }
+        }
+    }
+    
+    ///改变播放速率
+    func setPlayRate(_ rate: Float)
+    {
+        playRate = rate
+        self.player.rate = rate
+        if let delegate = self.delegate
+        {
+            delegate.mpPlayerTimeChange(currentTime, rate: rate)
+        }
+    }
     
 }

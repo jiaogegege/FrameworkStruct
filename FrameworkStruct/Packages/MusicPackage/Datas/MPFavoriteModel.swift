@@ -18,13 +18,13 @@ class MPFavoriteModel: OriginModel, Archivable
     var name: String    //`我喜欢`、`我的收藏`或者其他
     var audios: Array<MPAudioProtocol>
     var type: MPPlaylistType
-    var mediaType: MPMediaType
+    var mediaType: MPAudioType
     var images: Array<URL>?
     var intro: String?
     
     //MARK: 方法
     //创建一个空收藏列表
-    init(name: String, mediaType: MPMediaType) {
+    init(name: String, mediaType: MPAudioType) {
         self.id = g_uuid()
         self.name = name
         self.audios = []
@@ -39,7 +39,7 @@ class MPFavoriteModel: OriginModel, Archivable
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPSongModel]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
-        self.mediaType = MPMediaType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
+        self.mediaType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
         self.images = coder.decodeObject(forKey: PropertyKey.images.rawValue) as? [URL]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
     }
@@ -91,6 +91,28 @@ extension MPFavoriteModel: MPPlaylistProtocol
         }
         
         return -1
+    }
+    
+    func insertAudio(audio: MPAudioProtocol, index: Int?) -> Int {
+        var lastIndex: Int
+        if let ind = index
+        {
+            if ind > audios.count
+            {
+                lastIndex = audios.count
+            }
+            else
+            {
+                lastIndex = ind
+            }
+            audios.insert(audio, at: lastIndex)
+        }
+        else
+        {
+            audios.append(audio)
+            lastIndex = audios.count - 1
+        }
+        return lastIndex
     }
     
     func getPlaylist() -> MPPlaylistModel {

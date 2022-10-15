@@ -41,16 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         return ApplicationManager.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
-    
-    //接受远程控制信息，比如控制中心和锁屏界面的播放器操作
-    override func remoteControlReceived(with event: UIEvent?) {
-        if let event = event {
-            if event.type == .remoteControl     //控制中心播放操作
-            {
-                MPManager.shared.remoteControl(event.subtype)
-            }
-        }
-    }
 
     // MARK: UISceneSession Lifecycle
 
@@ -89,6 +79,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     //如果需要自定义设置屏幕方向，那么释放这段代码，支持`全部/左右横屏/上下竖屏`
 //    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
 //        ApplicationManager.shared.forceOrientation.getOrientation()
+//    }
+    
+    
+    //接受远程控制信息，比如控制中心和锁屏界面的播放器操作
+    //在`MPManager`中使用`MPRemoteCommandCenter`
+//    override func remoteControlReceived(with event: UIEvent?) {
+//        if let event = event {
+//            if event.type == .remoteControl     //控制中心播放操作
+//            {
+//                MPManager.shared.remoteControl(event.subtype)
+//            }
+//        }
 //    }
     
 }

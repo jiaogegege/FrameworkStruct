@@ -61,6 +61,9 @@ musicLibrary = "Music Library";
 historyPlay = "History Play";
 saveToiCloudError = "Save To iCloud Error";
 playMusic = "Play Music";
+like = "Like";
+dislike = "Dislike";
+addToBookmark = "Add To Bookmark";
 
 /**
  * Toast文案

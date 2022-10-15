@@ -71,6 +71,9 @@ protocol MPPlaylistProtocol {
     //获取某个音频在列表中的位置，没有返回-1
     func getIndexOf(audio: MPAudioProtocol?) -> Int
     
+    //在播放列表中插入一首歌曲，有index则插入指定的index，不能超过范围；如果没有则插入到最末尾；返回实际插入的index；返回-1表示插入不成功
+    func insertAudio(audio: MPAudioProtocol, index: Int?) -> Int
+    
     //获取标准播放列表
     func getPlaylist() -> MPPlaylistModel
 }
@@ -96,7 +99,7 @@ enum MPPlaylistType: Int {
 }
 
 ///媒体类型，比如音乐、播客、有声书等
-enum MPMediaType: Int {
+enum MPAudioType: Int {
     case song = 0                   //乐曲
     case podcast = 1                //播客
     case audioBook = 2              //有声书
@@ -112,3 +115,20 @@ enum MPLibraryResourceType {
     case podcasts               //播客
     case audiobooks             //有声书
 }
+
+///播放速率
+enum MPPlayRate: Float {
+    case quarter = 0.25
+    case half = 0.5
+    case threeQuarter = 0.75
+    case one = 1.0
+    case oneQuarter = 1.25
+    case oneHalf = 1.5
+    case oneThreeQuarter = 1.75
+    case two = 2.0
+    case twoHalf = 2.5
+    case three = 3.0
+}
+
+///历史记录最多记录多少歌曲
+let MPMaxHistorySongCount: Int = 300

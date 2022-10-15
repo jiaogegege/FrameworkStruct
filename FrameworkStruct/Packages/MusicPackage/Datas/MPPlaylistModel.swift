@@ -108,6 +108,28 @@ extension MPPlaylistModel: MPPlaylistProtocol
         return -1
     }
     
+    func insertAudio(audio: MPAudioProtocol, index: Int?) -> Int {
+        var lastIndex: Int
+        if let ind = index
+        {
+            if ind > audios.count
+            {
+                lastIndex = audios.count
+            }
+            else
+            {
+                lastIndex = ind
+            }
+            audios.insert(audio, at: lastIndex)
+        }
+        else
+        {
+            audios.append(audio)
+            lastIndex = audios.count - 1
+        }
+        return lastIndex
+    }
+    
     func getPlaylist() -> MPPlaylistModel {
         self
     }
