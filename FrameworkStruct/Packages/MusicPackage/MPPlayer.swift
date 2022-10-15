@@ -269,13 +269,23 @@ extension MPPlayer: ExternalInterface
     
     ///是否在播放
     var isPlaying: Bool {
-        player.timeControlStatus == .playing ? true : false
+        player.timeControlStatus == .playing && self.currentAudio != nil
+    }
+    
+    ///是否是暂停状态，有播放资源
+    var isPaused: Bool {
+        player.timeControlStatus == .paused && self.currentAudio != nil
+    }
+    
+    ///是否是空闲状态，就是什么播放资源都没有
+    var isFree: Bool {
+        currentAudio == nil && currentPlaylist == nil && playerItem == nil
     }
     
     ///恢复播放，前提是暂停状态
     func resume()
     {
-        if player.timeControlStatus == .paused, self.currentAudio != nil
+        if isPaused
         {
             player.play()
             if let delegate = self.delegate
@@ -288,7 +298,7 @@ extension MPPlayer: ExternalInterface
     ///暂停，前提是正在播放
     func pause()
     {
-        if player.timeControlStatus == .playing, self.currentAudio != nil
+        if isPlaying
         {
             player.pause()
             if let delegate = self.delegate

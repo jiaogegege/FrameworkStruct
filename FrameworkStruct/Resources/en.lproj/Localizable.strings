@@ -60,6 +60,7 @@ icloudFile = "iCloud File";
 musicLibrary = "Music Library";
 historyPlay = "History Play";
 saveToiCloudError = "Save To iCloud Error";
+playMusic = "Play Music";
 
 /**
  * Toast文案

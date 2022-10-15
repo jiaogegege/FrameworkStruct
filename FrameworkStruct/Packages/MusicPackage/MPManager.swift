@@ -10,7 +10,7 @@
  管理所有音乐资源和播放功能，是整个音乐播放包和外部程序的接口
  */
 import UIKit
-import AVFAudio
+import AVFoundation
 
 protocol MPManagerDelegate: NSObjectProtocol {
     ///初始化完成
@@ -24,6 +24,9 @@ class MPManager: OriginManager
     //MARK: 属性
     //单例
     static let shared = MPManager()
+    
+    //可以传入一个延时任务，当MPManager初始化完成或者更新完成后执行
+    fileprivate var initOrUpdateCallback: VoidClosure?
     
     //媒体库管理器
     fileprivate var libMgr = MPLibraryManager.shared
@@ -107,6 +110,16 @@ class MPManager: OriginManager
         {
             UIApplication.shared.endBackgroundTask(self.backgroundTaskId)
             self.backgroundTaskId = .invalid
+        }
+    }
+    
+    ///执行延时回调
+    fileprivate func performInitOrUpdateCallback()
+    {
+        if let cb = self.initOrUpdateCallback
+        {
+            cb()
+            self.initOrUpdateCallback = nil
         }
     }
     
@@ -202,6 +215,9 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 delegate.mpManagerDidInitCompleted()
             }
         }
+        
+        //执行延时回调
+        performInitOrUpdateCallback()
     }
     
     //媒体库管理器更新
@@ -214,6 +230,9 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 delegate.mpManagerDidUpdated()
             }
         }
+        
+        //执行延时回调
+        performInitOrUpdateCallback()
     }
     
     /**************************************** 媒体库管理器代理 Section End ***************************************/
@@ -290,6 +309,41 @@ extension MPManager: InternalType
 //外部接口
 extension MPManager: ExternalInterface
 {
+    ///执行一个延时任务,播放当前歌曲，如果有的话
+    func performPlayCurrent(_ completion: BoolClosure?)
+    {
+        //如果是空闲状态，那么执行一个延时操作，播放当前歌曲
+        if player.isFree
+        {
+            self.initOrUpdateCallback = {[weak self] in
+                self?.getCurrentSong({ (song) in
+                    self?.getCurrentPlaylist({ (playlist) in
+                        if let song = song, let playlist = playlist
+                        {
+                            self?.player.play(song, playlist: playlist, completion: { (succeed) in
+                                if let cb = completion
+                                {
+                                    cb(succeed)
+                                }
+                            })
+                        }
+                        else
+                        {
+                            if let cb = completion
+                            {
+                                cb(false)
+                            }
+                        }
+                    })
+                })
+            }
+        }
+        else if player.isPaused //暂停状态则恢复播放
+        {
+            player.resume()
+        }
+    }
+    
     ///添加代理
     func addDelegate(_ obj: MPManagerDelegate)
     {

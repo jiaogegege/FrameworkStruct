@@ -86,6 +86,7 @@ extension HomeShortcutManager: InternalType
         case changeTheme = "com.FrameworkStruct.test.ChangeTheme"               //切换主题, info.plist
         
         case icloudFile = "com.FrameworkStruct.test.iCloudFile"                 //访问icloud文件
+        case playMusic = "com.FrameworkStruct.test.PlayMusic"                   //播放音乐
         
         //获得快捷按钮对象
         func getShortcut() -> UIApplicationShortcutItem
@@ -97,6 +98,8 @@ extension HomeShortcutManager: InternalType
                 return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.changeTheme, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .time), userInfo: nil)
             case .icloudFile:
                 return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.icloudFile, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .cloud), userInfo: nil)
+            case .playMusic:
+                return UIApplicationShortcutItem(type: self.rawValue, localizedTitle: String.playMusic, localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
             }
         }
         
@@ -110,13 +113,18 @@ extension HomeShortcutManager: InternalType
                 g_pushVC(ThemeSelectViewController.getViewController())
             case .icloudFile:
                 g_pushVC(iCloudFileViewController.getViewController())
+            case .playMusic:
+                //尝试播放音乐
+                MPManager.shared.performPlayCurrent { (succeed) in
+                    FSLog("\(succeed)")
+                }
             }
         }
         
         ///获得所有可动态配置的shortcuts，除去在info.plist中剩下的
         static func allCustom() -> [ShortcutType]
         {
-            [icloudFile]
+            [icloudFile, playMusic]
         }
         
         ///获得所有在info.plist中的shortcuts

@@ -59,6 +59,7 @@ changeTheme = "切换主题";
 icloudFile = "iCloud文件";
 musicLibrary = "音乐库";
 historyPlay = "历史播放";
+playMusic = "播放音乐";
 
 /**
  * Toast文案
