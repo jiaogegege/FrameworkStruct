@@ -146,7 +146,6 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     {
         if let userInfo = notify.userInfo, let type = userInfo[AVAudioSessionInterruptionTypeKey] as? Int
         {
-            print(type)
             if type == 1   //打断开始
             {
                 
@@ -165,6 +164,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         {
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? Int
             {   //AVAudioSession.RouteChangeReason
+                print(reason)
                 let oldRoute = userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription
                 let oldOutput = oldRoute?.outputs.first?.portType   //AVAudioSession.Port
                 let newOutput = AVAudioSession.sharedInstance().currentRoute.outputs.first?.portType    //AVAudioSession.Port
@@ -173,13 +173,14 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 case 0: //unknown
                     break
                 case 1: //newDeviceAvailable
-                    if newOutput == .headphones //耳机连上了，尝试恢复
+                    if newOutput == .headphones || newOutput == .bluetoothA2DP  //耳机或蓝牙音箱连上了，尝试恢复
                     {
+                        
                         player.resume()
                     }
                     break
                 case 2: //oldDeviceUnavailable
-                    if oldOutput == .headphones //耳机断了，暂停播放
+                    if oldOutput == .headphones || oldOutput == .bluetoothA2DP //耳机或蓝牙音箱断了，暂停播放
                     {
                         player.pause()
                     }

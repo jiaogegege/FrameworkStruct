@@ -116,7 +116,7 @@ extension HomeShortcutManager: InternalType
             case .playMusic:
                 //尝试播放音乐
                 MPManager.shared.performPlayCurrent { (succeed) in
-                    FSLog("\(succeed)")
+//                    FSLog("\(succeed)")
                 }
             }
         }
