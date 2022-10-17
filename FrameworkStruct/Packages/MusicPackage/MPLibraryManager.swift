@@ -28,9 +28,6 @@ class MPLibraryManager: OriginManager
     //数据容器
     fileprivate var container = MPContainer.shared
     
-    //媒体库
-    fileprivate var librarys: [MPMediaLibraryModel]?
-    
     weak var delegate: MPLibraryManagerDelegate?
     
     
@@ -66,10 +63,6 @@ extension MPLibraryManager: DelegateProtocol
     //媒体库初始化完成
     @objc func containerDidInitCompleted(notify: Notification)
     {
-        //获取媒体库
-        container.getLibrarys({[weak self] libs in
-            self?.librarys = libs
-        })
         //通知代理
         if let del = self.delegate
         {
@@ -80,10 +73,6 @@ extension MPLibraryManager: DelegateProtocol
     //媒体库更新
     @objc func containerDidUpdated(notify: Notification)
     {
-        //获取媒体库
-        container.getLibrarys({[weak self] libs in
-            self?.librarys = libs
-        })
         //通知代理
         if let del = self.delegate
         {

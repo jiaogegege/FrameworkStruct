@@ -203,7 +203,7 @@ class MPManager: OriginManager
         rateCmd.maximumRating = 5.0
         rateCmd.addTarget { (event) -> MPRemoteCommandHandlerStatus in
             let e = event as! MPRatingCommandEvent
-            print(e.rating)
+            FSLog("\(e.rating)")
             return .success
         }
         //喜欢
@@ -386,7 +386,6 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         {
             if let reason = userInfo[AVAudioSessionRouteChangeReasonKey] as? Int
             {   //AVAudioSession.RouteChangeReason
-                print(reason)
                 let oldRoute = userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription
                 let oldOutput = oldRoute?.outputs.first?.portType   //AVAudioSession.Port
                 let newOutput = AVAudioSession.sharedInstance().currentRoute.outputs.first?.portType    //AVAudioSession.Port

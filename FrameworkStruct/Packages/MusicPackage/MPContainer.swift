@@ -63,7 +63,7 @@ class MPContainer: OriginContainer
     
     //初始化媒体库列表
     //参数：是否是更新操作
-    fileprivate func initLibrarys(isUpdate: Bool = false)
+    fileprivate func initLibrarys()
     {
         //尝试获取保存在icloud上的媒体库文件，包含一个媒体库列表
         if let libDir = self.libDir
@@ -80,30 +80,14 @@ class MPContainer: OriginContainer
                         //序列化data为MPMediaLibraryModel数组
                         if let libs = ArchiverAdatper.shared.unarchive(data) as? [MPMediaLibraryModel]
                         {
+                            //读取文件后先保存到缓存中
+                            self?.mutate(key: MPDataKey.librarys, value: libs)
+                            //发出初始化完成的通知
+                            NotificationCenter.default.post(name: FSNotification.mpContainerInitFinished.name, object: nil)
+                            //关闭文件
+                            self?.ia.closeDocument(had)
                             //更新媒体库，目前只有iCloud
-                            self?.updateLibrarys(libs, completion: { (newLibs, hasUpdate) in
-                                //媒体库更新完成后，保存到container中
-                                self?.mutate(key: MPDataKey.librarys, value: newLibs)
-                                //如果有数据更新，那么需要更新iCloud库文件
-                                if hasUpdate
-                                {
-                                    if let data = ArchiverAdatper.shared.archive(newLibs as NSCoding)
-                                    {
-                                        self?.ia.writeDocument(had, data: data, completion: { success in
-                                            //关闭文件
-                                            self?.ia.closeDocument(had)
-                                            NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
-                                        })
-                                    }
-                                }
-                                else    //如果没有数据更新
-                                {
-                                    //关闭文件
-                                    self?.ia.closeDocument(had)
-                                    //发出通知
-                                    NotificationCenter.default.post(name: isUpdate ? FSNotification.mpContainerUpdated.name : FSNotification.mpContainerInitFinished.name, object: nil)
-                                }
-                            })
+                            self?.updateLibrarys()
                         }
                     }
                 }
@@ -137,18 +121,42 @@ class MPContainer: OriginContainer
     
     //update媒体库中的媒体，比如iCloud中有了新的歌曲，需要更新到媒体库中
     //目前只更新iCloud媒体库
-    //返回值：(新的媒体库列表, 是否有数据更新)
-    fileprivate func updateLibrarys(_ originLibs: [MPMediaLibraryModel], completion: @escaping (([MPMediaLibraryModel], Bool) -> Void))
+    //参数：originLibs：本地库列表；handler：打开的本地库文件句柄
+    fileprivate func updateLibrarys()
     {
-        for lib in originLibs {
-            if lib.type == .iCloud
-            {
-                //查询所有iCloud中的歌曲
-                self.queryAlliCloudSongs { songs in
-                    //有新增歌曲则增加，有删除歌曲则减少
-                    let hasUpdate = lib.diffSongs(songs)
-                    g_async {
-                        completion(originLibs, hasUpdate)
+        getLibrarys { (libs) in
+            if let libs = libs {
+                for lib in libs {
+                    if lib.type == .iCloud
+                    {
+                        //查询所有iCloud中的歌曲
+                        self.queryAlliCloudSongs {[weak self] songs in
+                            //有新增歌曲则增加，有删除歌曲则减少
+                            let hasUpdate = lib.diffSongs(songs)
+                            //读取文件后先保存到缓存中
+                            self?.mutate(key: MPDataKey.librarys, value: libs)
+                            //如果有数据更新，那么需要更新iCloud库文件
+                            if hasUpdate, let data = ArchiverAdatper.shared.archive(libs as NSCoding), let libDir = self?.libDir, let libFileUrl = self?.ia.getFileUrl(in: libDir, fileName: Self.libraryFileName)
+                            {
+                                self?.ia.openDocument(libFileUrl, completion: { (handler) in
+                                    if let had = handler
+                                    {
+                                        self?.ia.writeDocument(had, data: data, completion: { success in
+                                            //关闭文件
+                                            self?.ia.closeDocument(had)
+                                            //读取文件后先保存到缓存中
+                                            self?.mutate(key: MPDataKey.librarys, value: libs)
+                                            //发出更新完成的通知
+                                            NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
+                                        })
+                                    }
+                                })
+                            }
+                            else    //如果没有数据更新，目前什么都不做
+                            {
+                                
+                            }
+                        }
                     }
                 }
             }
@@ -292,7 +300,7 @@ extension MPContainer: DelegateProtocol
     //app已经获得焦点，刷新媒体库
     @objc func applicationDidBecomeActiveNotification(notification: Notification)
     {
-        self.initLibrarys(isUpdate: true)
+        self.updateLibrarys()
     }
     
 }
