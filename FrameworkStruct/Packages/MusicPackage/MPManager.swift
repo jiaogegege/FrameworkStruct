@@ -13,12 +13,26 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
+
 protocol MPManagerDelegate: NSObjectProtocol {
     ///初始化完成
     func mpManagerDidInitCompleted()
     ///更新完成
     func mpManagerDidUpdated()
+    //播放歌曲变化
+    func mpManagerSongChange(_ song: MPAudioProtocol)
+    //播放进度变化，每秒变化
+    func mpManagerProgressChange(_ progress: TimeInterval)
 }
+
+
+extension FSNotification {
+    //播放歌曲变化
+    static let mpSongChange = FSNotification(value: "mpSongChange", paramKey: "MPAudioProtocol")
+    //播放进度改变，每秒变化
+    static let mpProgressChange = FSNotification(value: "mpProgressChange", paramKey: "TImeInterval")
+}
+
 
 class MPManager: OriginManager
 {
@@ -289,19 +303,21 @@ class MPManager: OriginManager
     }
     
     ///在控制中心显示信息
-    fileprivate func showAudioInfoInControlCenter()
+    fileprivate func showAudioInfoInControlCenter(_ audio: MPAudioProtocol)
     {
+        //生成歌曲的资源
+        let info = MPEmbellisher.shared.parseSongFile(audio)
         var dict = [String: Any]()
         //标题
-        dict[MPMediaItemPropertyTitle] = player.currentAudio?.audioName
+        dict[MPMediaItemPropertyTitle] = audio.audioName
         //专辑标题
-//        dict[MPMediaItemPropertyAlbumTitle] = String
+        dict[MPMediaItemPropertyAlbumTitle] = info[.albumName] ?? ""
         //歌手
-        dict[MPMediaItemPropertyArtist] = "初音未来"
+        dict[MPMediaItemPropertyArtist] = info[.artist] ?? ""
         //专辑歌手
-//        dict[MPMediaItemPropertyAlbumArtist] = String
+        dict[MPMediaItemPropertyAlbumArtist] = info[.artist] ?? ""
         //作曲家
-//        dict[MPMediaItemPropertyComposer] = String
+        dict[MPMediaItemPropertyComposer] = info[.artist] ?? ""
         //总时长
         dict[MPMediaItemPropertyPlaybackDuration] = player.totalTime
         //当前时长
@@ -311,7 +327,7 @@ class MPManager: OriginManager
         //播放倍速
         dict[MPNowPlayingInfoPropertyPlaybackRate] = playRate
         //封面图片，获取一个正方形
-        let originImg = UIImage.iMiku_0!
+        let originImg = info[.artwork] != nil ? info[.artwork] as! UIImage : UIImage.iMiku_0!
         let rect = CGRect(x: 0, y: 0, width: minBetween(originImg.size.width, originImg.size.height), height:  minBetween(originImg.size.width, originImg.size.height))
         dict[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: rect.size, requestHandler: { (size) -> UIImage in
             if let img = originImg.getImageInRect(rect)
@@ -470,10 +486,21 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     //开始播放音乐，记录一些信息
     func mpPlayerStartToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         //在控制中心显示歌曲信息
-        showAudioInfoInControlCenter()
+        showAudioInfoInControlCenter(audio)
         //播放成功，那么保存当前播放歌曲和当前播放列表
         //目前只有歌曲
         libMgr.saveCurrent(audio as! MPSongModel, in: playlist as! MPPlaylistModel)
+        
+        //将信息传出去
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerSongChange(audio)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpSongChange.name, object: nil, userInfo: [FSNotification.mpSongChange.paramKey: audio])
     }
     
     //正在等待加载资源
@@ -483,12 +510,12 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     func mpPlayerPauseToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         //在控制中心显示歌曲信息
-        showAudioInfoInControlCenter()
+        showAudioInfoInControlCenter(audio)
     }
     
     func mpPlayerResumeToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         //在控制中心显示歌曲信息
-        showAudioInfoInControlCenter()
+        showAudioInfoInControlCenter(audio)
     }
     
     func mpPlayerFinishPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
@@ -508,9 +535,24 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         libMgr.saveCurrent(audio as! MPSongModel, in: playlist as! MPPlaylistModel)
     }
     
-    func mpPlayerTimeChange(_ time: TimeInterval, rate: Float) {
+    //播放进度变化
+    func mpPlayerTimeChange(_ time: TimeInterval) {
+        //将信息传出去
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerProgressChange(time)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpProgressChange.name, object: nil, userInfo: [FSNotification.mpProgressChange.paramKey: time])
+    }
+    
+    //播放速率变化
+    func mpPlayerRateChange(_ rage: Float) {
         //在控制中心显示歌曲信息
-        showAudioInfoInControlCenter()
+        showAudioInfoInControlCenter(player.currentAudio!)
     }
     
     /**************************************** MPPlayer代理方法 Section End ***************************************/

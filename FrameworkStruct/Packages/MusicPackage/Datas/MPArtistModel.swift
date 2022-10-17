@@ -87,3 +87,18 @@ extension MPArtistModel: InternalType
     }
     
 }
+
+
+extension MPArtistModel: ExternalInterface
+{
+   ///获取全名
+    var fullName: String {
+        var full = firstName
+        if let mid = middleName {
+            full += mid
+        }
+        full += lastName
+        return full
+    }
+    
+}

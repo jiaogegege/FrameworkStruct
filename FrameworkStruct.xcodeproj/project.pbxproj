@@ -615,6 +615,7 @@
 		EABF5ED328F7A30E00D10D9F /* place_code_nucleate_result.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABF5ED228F7A30E00D10D9F /* place_code_nucleate_result.jpg */; };
 		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
 		EAC57DA92813D27E0090FB54 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC57DA82813D27E0090FB54 /* LogManager.swift */; };
+		EAC79EDF28FD46C40059EA77 /* MPEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */; };
 		EAC8A74D27625B450088293F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74327625B450088293F /* AFURLResponseSerialization.m */; };
 		EAC8A74E27625B450088293F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74427625B450088293F /* AFHTTPSessionManager.m */; };
 		EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC8A74627625B450088293F /* AFURLSessionManager.m */; };
@@ -1658,6 +1659,7 @@
 		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		EAC57DA82813D27E0090FB54 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEmbellisher.swift; sourceTree = "<group>"; };
 		EAC8A73F27625B450088293F /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		EAC8A74027625B450088293F /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EAC8A74127625B450088293F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -3028,6 +3030,7 @@
 				EA8CFC9928EDC39100EE3B73 /* MPManager.swift */,
 				EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */,
 				EA8CFCA428EDCA4400EE3B73 /* MPLibraryManager.swift */,
+				EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */,
 				EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */,
 				EA8CFD4028EE606C00EE3B73 /* MPConst.swift */,
 				EA8CFCA728EDCD0600EE3B73 /* Datas */,
@@ -4999,6 +5002,7 @@
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
 				EA73A15927BC8ED600980C26 /* MineNavigationController.swift in Sources */,
 				EA9A78D227C756C900A11FC8 /* MPITextBackedString.m in Sources */,
+				EAC79EDF28FD46C40059EA77 /* MPEmbellisher.swift in Sources */,
 				EA00C87F27C272D60034C95B /* ApplicationManager.swift in Sources */,
 				EA99373827994F6100480147 /* TABBaseComponent+TABDropAnimation.m in Sources */,
 				EA9A75F027C739DF00A11FC8 /* SRRandom.m in Sources */,

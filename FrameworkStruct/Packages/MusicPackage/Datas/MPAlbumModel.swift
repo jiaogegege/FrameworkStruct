@@ -17,7 +17,7 @@ class MPAlbumModel: OriginModel, Archivable
     var name: String
     var songs: Array<MPSongModel>
     var type: MPPlaylistType
-    var artistIds: Array<String>
+    var artists: Array<MPArtistModel>?
     var tagIds: Array<String>?
     var albumImgs: Array<URL>?
     var title: String?
@@ -25,12 +25,11 @@ class MPAlbumModel: OriginModel, Archivable
     
     //MARK: 方法
     //创建一个新的空专辑
-    init(name: String, artistIds: [String]) {
+    init(name: String) {
         self.id = g_uuid()
         self.name = name
         self.songs = []
         self.type = .album
-        self.artistIds = artistIds
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +39,7 @@ class MPAlbumModel: OriginModel, Archivable
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.songs = coder.decodeObject(forKey: PropertyKey.songs.rawValue) as! [MPSongModel]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
-        self.artistIds = coder.decodeObject(forKey: PropertyKey.artists.rawValue) as! [String]
+        self.artists = coder.decodeObject(forKey: PropertyKey.artists.rawValue) as? [MPArtistModel]
         self.tagIds = coder.decodeObject(forKey: PropertyKey.tags.rawValue) as? [String]
         self.albumImgs = coder.decodeObject(forKey: PropertyKey.albumImgs.rawValue) as? [URL]
         self.title = coder.decodeObject(forKey: PropertyKey.title.rawValue) as? String
@@ -52,7 +51,7 @@ class MPAlbumModel: OriginModel, Archivable
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.songs, forKey: PropertyKey.songs.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
-        coder.encode(self.artistIds, forKey: PropertyKey.artists.rawValue)
+        coder.encode(self.artists, forKey: PropertyKey.artists.rawValue)
         coder.encode(self.tagIds, forKey: PropertyKey.tags.rawValue)
         coder.encode(self.albumImgs, forKey: PropertyKey.albumImgs.rawValue)
         coder.encode(self.title, forKey: PropertyKey.title.rawValue)

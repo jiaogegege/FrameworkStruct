@@ -112,6 +112,14 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         })
     }
     
+    func mpManagerSongChange(_ song: MPAudioProtocol) {
+        
+    }
+    
+    func mpManagerProgressChange(_ progress: TimeInterval) {
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if type == .library
         {

@@ -42,8 +42,11 @@ protocol MPPlayerDelegate: NSObjectProtocol {
     ///播放列表更新
     func mpPlayerPlaylistChanged(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
     
-    ///播放进度和速率改变
-    func mpPlayerTimeChange(_ time: TimeInterval, rate: Float)
+    ///播放进度改变
+    func mpPlayerTimeChange(_ time: TimeInterval)
+    
+    ///播放速率改变
+    func mpPlayerRateChange(_ rage: Float)
 }
 
 class MPPlayer: OriginWorker
@@ -77,6 +80,8 @@ class MPPlayer: OriginWorker
     fileprivate var playerItem: AVPlayerItem?
     //资源信息
     fileprivate var itemAsset: AVURLAsset?
+    //播放器观察者，记录时间
+    fileprivate var timeObserver: Any?
     
     //播放音乐是否成功的回调，一般用于外部第一次播放一首乐曲时
     fileprivate var playResultCallback: BoolClosure?
@@ -318,6 +323,15 @@ extension MPPlayer: DelegateProtocol
                 let status = playerItem.status
                 if status == .readyToPlay   //准备播放
                 {
+                    //添加播放进度观察
+                    self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1.0, preferredTimescale: itemAsset!.duration.timescale), queue: nil) {[weak self] cmtime in
+                        //计算已播放时间
+                        let time = CMTimeGetSeconds(cmtime)
+                        if let delegate = self?.delegate
+                        {
+                            delegate.mpPlayerTimeChange(time)
+                        }
+                    }
                     self.resume()
                     self.performPlayCallback(true)
                     if let del = self.delegate
@@ -356,6 +370,7 @@ extension MPPlayer: InternalType
     //keypath
     enum PlayerKeyPath: String {
         case status                 //AVPlayerItem.status
+        
     }
     
     //播放模式
@@ -392,7 +407,10 @@ extension MPPlayer: ExternalInterface
     {
         self.playResultCallback = completion
         self.currentAudio = audio
-        self.currentPlaylist = playlist
+        if playlist.playlistId != currentPlaylist?.playlistId
+        {
+            self.currentPlaylist = playlist
+        }
         self.currentIndex = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
         self.playlistIndexArray.removeAll()
         for index in 0..<self.currentPlaylist!.playlistAudios.count
@@ -458,6 +476,10 @@ extension MPPlayer: ExternalInterface
     func stop()
     {
         player.pause()
+        if let ob = timeObserver
+        {
+            player.removeTimeObserver(ob)
+        }
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.status.rawValue)
         itemAsset = nil
         playerItem = nil
@@ -515,7 +537,7 @@ extension MPPlayer: ExternalInterface
             player.seek(to: CMTimeMakeWithSeconds(to, preferredTimescale: itemAsset!.duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero) {[weak self] (succeed) in
                 if let delegate = self?.delegate
                 {
-                    delegate.mpPlayerTimeChange(self?.currentTime ?? 0, rate: self?.playRate ?? 1.0)
+                    delegate.mpPlayerTimeChange(self?.currentTime ?? 0)
                 }
                 if let cb = success
                 {
@@ -563,7 +585,7 @@ extension MPPlayer: ExternalInterface
         self.player.rate = rate
         if let delegate = self.delegate
         {
-            delegate.mpPlayerTimeChange(currentTime, rate: rate)
+            delegate.mpPlayerRateChange(rate)
         }
     }
     
