@@ -241,6 +241,80 @@ extension AnimationManager: ExternalInterface
     /**************************************** 通用动画方法 Section End ***************************************/
     
     /**************************************** 特定动画方法 Section Begin ***************************************/
+    ///UIView Transform组合动画
+    func viewTransform(tranX: CGFloat,
+                       tranY: CGFloat,
+                       scaleX: CGFloat,
+                       scaleY: CGFloat,
+                       radian: CGFloat,
+                       duration: TimeInterval,
+                       delay: TimeInterval,
+                       options: UIView.AnimationOptions = [],
+                       on view: UIView,
+                       completion: BoolClosure? = nil)
+    {
+        UIView.animate(withDuration: duration, delay: delay, options: options) {
+            //6个值的组合形式不知道怎么算的，暂时先这样，以后研究
+            view.transform = CGAffineTransform(a: scaleX, b: radian, c: radian, d: scaleY, tx: tranX, ty: tranY)
+        } completion: { finished in
+            if let completion = completion {
+                completion(finished)
+            }
+        }
+    }
+    
+    ///UIView2D平移动画
+    func viewTranslation(x: CGFloat,
+                         y: CGFloat,
+                         duration: TimeInterval,
+                         delay: TimeInterval,
+                         options: UIView.AnimationOptions = [],
+                         on view: UIView,
+                         completion: BoolClosure? = nil)
+    {
+        UIView.animate(withDuration: duration, delay: delay, options: options) {
+            view.transform = CGAffineTransform(translationX: x, y: y)
+        } completion: { finished in
+            if let completion = completion {
+                completion(finished)
+            }
+        }
+    }
+    
+    ///UIView2D缩放动画，x/y取值0-1
+    func viewScale(x: CGFloat,
+                   y: CGFloat,
+                   duration: TimeInterval,
+                   delay: TimeInterval,
+                   options: UIView.AnimationOptions = [],
+                   on view: UIView,
+                   completion: BoolClosure? = nil)
+    {
+        UIView.animate(withDuration: duration, delay: delay, options: options) {
+            view.transform = CGAffineTransform(scaleX: x, y: y)
+        } completion: { finished in
+            if let completion = completion {
+                completion(finished)
+            }
+        }
+    }
+    
+    ///UIView2D旋转动画，弧度: e.g.：Double.pi
+    func viewRotate(radian: CGFloat,
+                    duration: TimeInterval,
+                    delay: TimeInterval,
+                    options: UIView.AnimationOptions = [],
+                    on view: UIView,
+                    completion: BoolClosure? = nil)
+    {
+        UIView.animate(withDuration: duration, delay: delay, options: options) {
+            view.transform = CGAffineTransform(rotationAngle: radian)
+        } completion: { finished in
+            if let completion = completion {
+                completion(finished)
+            }
+        }
+    }
     
     
     /**************************************** 特定动画方法 Section End ***************************************/

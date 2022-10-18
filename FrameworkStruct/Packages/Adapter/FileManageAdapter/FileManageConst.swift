@@ -74,6 +74,9 @@ enum FMUTIs: String, CaseIterable
     case mp3 = "public.mp3"
     case aiff = "public.aiff-audio"
     case wav = "com.microsoft.waveform-audio"
+    case wma = "com.microsoft.windows-media-wma"
+    case aac = "com.apple.m4a-audio"
+    case flac = "org.xiph.flac"
     case midi = "public.midi-audio"
     case playlist = "public.playlist"
     case m3uPlaylist = "public.m3u-playlist"
@@ -145,7 +148,7 @@ enum FMUTIs: String, CaseIterable
     ///图像
     static let imageGroup = [Self.image, Self.jpeg, Self.png, Self.svg, Self.tiff, Self.gif, Self.bmp]
     ///音频
-    static let audioGroup = [Self.audio, Self.mp3, Self.aiff, Self.wav, Self.midi, Self.mpeg4Audio]
+    static let audioGroup = [Self.audio, Self.mp3, Self.aiff, Self.wav, Self.midi, Self.mpeg4Audio, Self.wma, Self.aac, Self.flac]
     ///视频
     static let videoGroup = [Self.mpeg, Self.mpeg4, Self.movie, Self.video, Self.quickTime, Self.mpeg2Video, Self.avi]
     

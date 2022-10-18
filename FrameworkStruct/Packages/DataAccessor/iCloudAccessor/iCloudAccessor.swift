@@ -155,19 +155,19 @@ extension iCloudAccessor: DelegateProtocol
     //fileQuery查询或获取更新完毕
     @objc func fileQueryFinished(notification: Notification)
     {
+        self.fileQuery.stop()
+        var fileArray: [IADocumentSearchResult] = []
+        for item in self.fileQuery.results
+        {
+            let it = item as! NSMetadataItem
+            let st = IADocumentSearchResult.init(info: it)
+            fileArray.append(st)
+        }
+        //排序
+        fileArray.sort { (lhs, rhs) in
+            self.querySort.compare(lhs: lhs, rhs: rhs)
+        }
         g_async {
-            self.fileQuery.stop()
-            var fileArray: [IADocumentSearchResult] = []
-            for item in self.fileQuery.results
-            {
-                let it = item as! NSMetadataItem
-                let st = IADocumentSearchResult.init(info: it)
-                fileArray.append(st)
-            }
-            //排序
-            fileArray.sort { (lhs, rhs) in
-                self.querySort.compare(lhs: lhs, rhs: rhs)
-            }
             for cb in self.queryDocumentsCallbacks
             {
                 cb(fileArray)
@@ -342,8 +342,56 @@ extension iCloudAccessor: ExternalInterface
         self.fileQuery.searchScopes = scope.getScope()
     }
     
-    ///设置搜索结果过滤条件
+    ///针对特定扩展名和目录搜索
+    func setExtFilter(exts: [FileTypeName]?, extOpposite: Bool = false, dirs: [IADocumentDir]?, dirsOpposite: Bool = false)
+    {
+        var predicateStr: PredicateExpression = ""
+        var extStr = ""
+        var dirStr = ""
+        //处理扩展名
+        if let exts = exts {
+            for ext in exts {
+                if g_validString(extStr)  //如果已经有内容了，那么追加` && `
+                {
+                    extStr.append(String(format: " %@ ", extOpposite ? "&&" : "||"))
+                }
+                //拼接过滤条件    //kMDItemFSName//kMDItemDisplayName
+                extStr.append(String(format: "%@(kMDItemFSName CONTAINS[c] '%@')%@", extOpposite ? "(NOT " : "", ext.rawValue, extOpposite ? ")" : ""))
+            }
+        }
+        //处理目录
+        if let dirs = dirs {
+            for dir in dirs {
+                if g_validString(dirStr)  //如果已经有内容了，那么追加` && `
+                {
+                    dirStr.append(String(format: " %@ ", dirsOpposite ? "&&" : "||"))
+                }
+                //拼接过滤条件
+                dirStr.append(String(format: "%@(kMDItemPath CONTAINS '%@')%@", dirsOpposite ? "(NOT " : "", dir.rawValue, dirsOpposite ? ")" : ""))
+            }
+        }
+        //拼接完整str
+        if g_validString(extStr)
+        {
+            predicateStr += extStr
+        }
+        if g_validString(dirStr)
+        {
+            if g_validString(extStr)
+            {
+                predicateStr = String(format: "(%@) && (%@)", predicateStr, dirStr)
+            }
+            else
+            {
+                predicateStr += dirStr
+            }
+        }
+        self.fileQuery.predicate = NSPredicate(format: predicateStr)
+    }
+    
+    ///根据文件类型和目录设置搜索结果过滤条件
     ///参数：fileTypes：要过滤的文件类型；fileTypesOpposite：文件类型是否取反，如果为true，那么type中的类型会被去除，否则只保留type中指定的类型
+    ///dirs：过滤文件夹；dirsOpposite：false表示只搜索该文件夹，true表示不搜索该文件夹
     func setFilter(files: [FMUTIs]?, filesOpposite: Bool = false, dirs: [IADocumentDir]?, dirsOpposite: Bool = false)
     {
         var predicateStr: PredicateExpression = ""
@@ -466,6 +514,18 @@ extension iCloudAccessor: ExternalInterface
         {
             self.fileQuery.start()
         }
+    }
+    
+    ///是否在查询中
+    func isQuerying() -> Bool
+    {
+        !self.fileQuery.isStopped
+    }
+    
+    ///停止查询，外部调用，防止在多线程操作中出现意外情况
+    func stopQuery()
+    {
+        self.fileQuery.stop()
     }
     
     ///在iCloud中创建一个文件并传入数据，没有数据为什么要创建文件呢

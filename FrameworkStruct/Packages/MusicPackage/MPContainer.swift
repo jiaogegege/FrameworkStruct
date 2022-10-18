@@ -59,6 +59,7 @@ class MPContainer: OriginContainer
     {
         //监听app active
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActiveNotification(notification:)), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     //初始化媒体库列表
@@ -82,11 +83,11 @@ class MPContainer: OriginContainer
                         {
                             //读取文件后先保存到缓存中
                             self?.mutate(key: MPDataKey.librarys, value: libs)
-                            //发出初始化完成的通知
-                            NotificationCenter.default.post(name: FSNotification.mpContainerInitFinished.name, object: nil)
                             //关闭文件
                             self?.ia.closeDocument(had)
-                            //更新媒体库，目前只有iCloud
+                            //发出初始化完成的通知
+                            NotificationCenter.default.post(name: FSNotification.mpContainerInitFinished.name, object: nil)
+                            //尝试更新媒体库，目前只有iCloud
                             self?.updateLibrarys()
                         }
                     }
@@ -182,7 +183,7 @@ class MPContainer: OriginContainer
     ///查询所有iCloud中的歌曲
     fileprivate func queryAlliCloudSongs(completion: @escaping ([MPSongModel]) -> Void)
     {
-        ia.setFilter(files: FMUTIs.audioGroup, dirs: [.Music])
+        ia.setFilter(files: FMUTIs.audioGroup, dirs: [.MusicSong])
         ia.queryDocuments { files in
             let songs = files.map { file in
                 MPSongModel(name: file.displayName, url: file.url)
@@ -241,6 +242,8 @@ class MPContainer: OriginContainer
                     {
                         completion(nil)
                     }
+                    //关闭文件
+                    self?.ia.closeDocument(id)
                 }
                 else    //打开文件失败，返回nil
                 {
@@ -266,6 +269,8 @@ class MPContainer: OriginContainer
                     self?.ia.writeDocument(fileId, data: data, completion: { succeed in
                         if succeed
                         {
+                            //关闭文件
+                            self?.ia.closeDocument(fileId)
                             success(nil)
                         }
                         else
@@ -301,6 +306,15 @@ extension MPContainer: DelegateProtocol
     @objc func applicationDidBecomeActiveNotification(notification: Notification)
     {
         self.updateLibrarys()
+    }
+    
+    //app失去焦点，停止更新媒体库
+    @objc func applicationWillResignActiveNotification(notification: Notification)
+    {
+        if ia.isQuerying()
+        {
+            self.ia.stopQuery()
+        }
     }
     
 }

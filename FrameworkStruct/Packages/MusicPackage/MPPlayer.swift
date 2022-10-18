@@ -54,18 +54,23 @@ class MPPlayer: OriginWorker
     //MARK: 属性
     //当前正在播放的音频
     fileprivate(set) var currentAudio: MPAudioProtocol?
+    
     //当前播放列表
     fileprivate(set) var currentPlaylist: MPPlaylistProtocol?
+    
     //当前播放歌曲在播放列表中的位置，如果没有就是-1
     fileprivate(set) var currentIndex: Int = -1
+    
     //随机播放模式下保存的播放列表歌曲序号列表
     fileprivate var playlistIndexArray: [Int] = []
+    
     //如果用户点了下一首播放，那么记住这个位置，不管何种播放模式，都会按最新到最旧的加入顺序播放下一首
     fileprivate var indexsOfIfNextPlay: [Int] = []
+    
     //一个播放列表的中已播放歌曲列表，当切换播放列表时被清空
     fileprivate var elapsedAudioArray: [MPAudioProtocol] = []
     
-    //播放模式，默认顺序播放
+    //播放模式，默认顺序播
     var playMode: PlayMode = .sequence
     
     //播放速率，默认1.0，可设置为0.0～3.0
@@ -386,6 +391,26 @@ extension MPPlayer: InternalType
 //外部接口
 extension MPPlayer: ExternalInterface
 {
+    ///音量
+    var volume: Float {
+        get {
+            player.volume
+        }
+        set {
+            player.volume = newValue
+        }
+    }
+    
+    ///静音
+    var silence: Bool {
+        get {
+            player.isMuted
+        }
+        set {
+            player.isMuted = newValue
+        }
+    }
+    
     ///是否在播放
     var isPlaying: Bool {
         player.timeControlStatus == .playing && self.currentAudio != nil

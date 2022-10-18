@@ -117,7 +117,6 @@ struct IADocumentSearchResult {
         self.size = info.value(forAttribute: NSMetadataItemFSSizeKey) as? Int64
         self.createDate = info.value(forAttribute: NSMetadataItemFSCreationDateKey) as! Date
         self.changeDate = info.value(forAttribute: NSMetadataItemFSContentChangeDateKey) as! Date
-        self.path = info.value(forAttribute: NSMetadataItemPathKey) as! String
         self.contentType = info.value(forAttribute: NSMetadataItemContentTypeKey) as! String
         self.contentTypeTree = info.value(forAttribute: NSMetadataItemContentTypeTreeKey) as? [String]
         self.isUbiquitous = info.value(forAttribute: NSMetadataItemIsUbiquitousKey) as! Bool

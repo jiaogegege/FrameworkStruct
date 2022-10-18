@@ -17,12 +17,16 @@ class MusicViewController: BasicViewController
     @IBOutlet weak var favoriteBtn: UIButton!
     @IBOutlet weak var songListsBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     fileprivate var mpr = MPManager.shared
     
     fileprivate var libraryArray: [MPSongModel] = []
     fileprivate var favoriteArray: [MPSongModel] = []
     fileprivate var songLists: [MPSonglistModel] = []
+    
+    fileprivate var searchArray: [MPSongModel] = []
+    fileprivate var isSearching: Bool = false
     
     fileprivate var type: ListType = .library
     
@@ -67,34 +71,67 @@ class MusicViewController: BasicViewController
     @IBAction func libraryAction(_ sender: UIButton) {
         if sender != self.currentBtn
         {
+            type = .library
             self.currentBtn?.isSelected = false
             sender.isSelected = true
             self.currentBtn = sender
+            searchArray = []
+            isSearching = false
+            searchBar.text = nil
+            tableView.reloadData()
         }
     }
     
     @IBAction func favoriteAction(_ sender: UIButton) {
         if sender != self.currentBtn
         {
+            type = .favorite
             self.currentBtn?.isSelected = false
             sender.isSelected = true
             self.currentBtn = sender
+            searchArray = []
+            isSearching = false
+            searchBar.text = nil
+            tableView.reloadData()
         }
     }
     
     @IBAction func songListAction(_ sender: UIButton) {
         if sender != self.currentBtn
         {
+            type = .songLists
             self.currentBtn?.isSelected = false
             sender.isSelected = true
             self.currentBtn = sender
+            searchArray = []
+            isSearching = false
+            searchBar.text = nil
+            tableView.reloadData()
         }
+    }
+    
+    //搜索方法
+    fileprivate func search(_ text: String)
+    {
+        let arr = (type == .library ? libraryArray : favoriteArray)
+        if g_validString(text)
+        {
+            //过滤搜索文本
+            self.searchArray = arr.filter({ song in
+                song.name.contains(text)
+            })
+        }
+        else
+        {
+            self.searchArray = arr
+        }
+        tableView.reloadData()
     }
     
 }
 
 
-extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableViewDataSource, MPManagerDelegate
+extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableViewDataSource, MPManagerDelegate, UISearchBarDelegate
 {
     //音乐库初始化完成
     func mpManagerDidInitCompleted() {
@@ -120,37 +157,84 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         
     }
     
+    /**************************************** 搜索代理 Section Begin ***************************************/
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearching = true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        isSearching = g_validString(searchBar.text)
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        search(searchBar.text ?? "")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+        isSearching = false
+        tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        search(searchText)
+    }
+    
+    /**************************************** 搜索代理 Section End ***************************************/
+    
+    /**************************************** tableview代理 Section Begin ***************************************/
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if type == .library
+        if isSearching
         {
-            return libraryArray.count
+            return searchArray.count
         }
-        else if type == .favorite
+        else
         {
-            return favoriteArray.count
+            if type == .library
+            {
+                return libraryArray.count
+            }
+            else if type == .favorite
+            {
+                return favoriteArray.count
+            }
+            else if type == .songLists
+            {
+                return songLists.count
+            }
+            
+            return 0
         }
-        else if type == .songLists
-        {
-            return songLists.count
-        }
-        
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseId, for: indexPath)
         var title: String = ""
-        if type == .library
+         if isSearching
         {
-            title = libraryArray[indexPath.row].name
+            title = searchArray[indexPath.row].name
         }
-        else if type == .favorite
+        else
         {
-            title = favoriteArray[indexPath.row].name
-        }
-        else if type == .songLists
-        {
-            title = songLists[indexPath.row].name
+            if type == .library
+            {
+                title = libraryArray[indexPath.row].name
+            }
+            else if type == .favorite
+            {
+                title = favoriteArray[indexPath.row].name
+            }
+            else if type == .songLists
+            {
+                title = songLists[indexPath.row].name
+            }
         }
         cell.textLabel?.text = title
         
@@ -158,21 +242,31 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if type == .library
+        if isSearching
         {
-            mpr.playSong(libraryArray[indexPath.row], in: .iCloud) { success in
+            mpr.playSong(searchArray[indexPath.row], in: .iCloud) { success in
                 g_toast(text: (success ? "播放成功" : "播放失败"))
             }
         }
-        else if type == .favorite
+        else
         {
-            
-        }
-        else if type == .songLists
-        {
-            
+            if type == .library
+            {
+                mpr.playSong(libraryArray[indexPath.row], in: .iCloud) { success in
+                    g_toast(text: (success ? "播放成功" : "播放失败"))
+                }
+            }
+            else if type == .favorite
+            {
+                
+            }
+            else if type == .songLists
+            {
+                
+            }
         }
     }
+    /**************************************** tableview代理 Section End ***************************************/
     
 }
 

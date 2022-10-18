@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -1106,7 +1106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUu-p8-WAP">
-                                <rect key="frame" x="0.0" y="44" width="428" height="50"/>
+                                <rect key="frame" x="0.0" y="88" width="428" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLh-XB-7q5">
                                         <rect key="frame" x="0.0" y="0.0" width="142.66666666666666" height="50"/>
@@ -1159,22 +1159,35 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XNu-gl-5YV">
-                                <rect key="frame" x="0.0" y="94" width="428" height="798"/>
+                                <rect key="frame" x="0.0" y="138" width="428" height="754"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="TGg-sG-pTs" id="YLw-P8-g84"/>
                                     <outlet property="delegate" destination="TGg-sG-pTs" id="wIf-fe-KyF"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="搜索您喜欢的歌曲" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JqJ-KR-9lR">
+                                <rect key="frame" x="0.0" y="44" width="428" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="vkB-7l-Wdz"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TGg-sG-pTs" id="qhR-HA-UbU"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sM5-Nl-hqc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="JqJ-KR-9lR" firstAttribute="leading" secondItem="sM5-Nl-hqc" secondAttribute="leading" id="2Od-v3-CFL"/>
                             <constraint firstItem="bUu-p8-WAP" firstAttribute="leading" secondItem="sM5-Nl-hqc" secondAttribute="leading" id="3uD-Nd-PPo"/>
                             <constraint firstItem="XNu-gl-5YV" firstAttribute="top" secondItem="bUu-p8-WAP" secondAttribute="bottom" id="AzV-Wc-qLw"/>
                             <constraint firstItem="sM5-Nl-hqc" firstAttribute="trailing" secondItem="bUu-p8-WAP" secondAttribute="trailing" id="HsZ-me-kDg"/>
+                            <constraint firstItem="JqJ-KR-9lR" firstAttribute="top" secondItem="sM5-Nl-hqc" secondAttribute="top" id="NJm-7s-FfP"/>
                             <constraint firstItem="sM5-Nl-hqc" firstAttribute="trailing" secondItem="XNu-gl-5YV" secondAttribute="trailing" id="PP9-Uw-oIl"/>
-                            <constraint firstItem="bUu-p8-WAP" firstAttribute="top" secondItem="sM5-Nl-hqc" secondAttribute="top" id="Psy-r1-UaL"/>
+                            <constraint firstItem="bUu-p8-WAP" firstAttribute="top" secondItem="JqJ-KR-9lR" secondAttribute="bottom" id="UHL-k3-QBm"/>
+                            <constraint firstItem="JqJ-KR-9lR" firstAttribute="trailing" secondItem="sM5-Nl-hqc" secondAttribute="trailing" id="eYY-m6-MX5"/>
                             <constraint firstItem="sM5-Nl-hqc" firstAttribute="bottom" secondItem="XNu-gl-5YV" secondAttribute="bottom" id="kBs-Ey-5Ei"/>
                             <constraint firstItem="XNu-gl-5YV" firstAttribute="leading" secondItem="sM5-Nl-hqc" secondAttribute="leading" id="uOt-DL-PV6"/>
                         </constraints>
@@ -1182,6 +1195,7 @@
                     <connections>
                         <outlet property="favoriteBtn" destination="npZ-Ol-RqL" id="gn7-mk-hBF"/>
                         <outlet property="libraryBtn" destination="JLh-XB-7q5" id="kPw-ea-9G9"/>
+                        <outlet property="searchBar" destination="JqJ-KR-9lR" id="49m-Ac-sND"/>
                         <outlet property="songListsBtn" destination="QCZ-ei-mxy" id="ifk-GE-rWf"/>
                         <outlet property="tableView" destination="XNu-gl-5YV" id="Gpe-qf-PtR"/>
                     </connections>
