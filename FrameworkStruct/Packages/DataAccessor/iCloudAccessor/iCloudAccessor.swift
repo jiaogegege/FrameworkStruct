@@ -44,6 +44,7 @@ class iCloudAccessor: OriginAccessor {
     fileprivate lazy var fileQuery: NSMetadataQuery = {
         let query = NSMetadataQuery()
         query.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]      //默认搜索icloud的Documents目录
+        query.sortDescriptors = [IASearchSort.displayName(true).getSort()]   //默认按文件名升序，似乎没什么卵用，确实没什么卵用
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .background
@@ -54,8 +55,8 @@ class iCloudAccessor: OriginAccessor {
         return query
     }()
     
-    ///搜索结果排序规则，默认按文件名升序
-    fileprivate(set) var querySort: IASearchResultSort = .name(true)
+    ///搜索结果排序规则，可以对搜索完成后的结果再次进行排序，进行一次排序后，该变量被清空，下一次搜索需要再次设置
+    var queryResultSort: IASearchSort? = .displayName(true)
     
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
     fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentSearchResult]) -> Void)] = []
@@ -164,8 +165,10 @@ extension iCloudAccessor: DelegateProtocol
             fileArray.append(st)
         }
         //排序
-        fileArray.sort { (lhs, rhs) in
-            self.querySort.compare(lhs: lhs, rhs: rhs)
+        if let retSort = queryResultSort {
+            fileArray.sort { (lhs, rhs) in
+                retSort.compare(lhs: lhs, rhs: rhs)
+            }
         }
         g_async {
             for cb in self.queryDocumentsCallbacks
@@ -215,21 +218,63 @@ extension iCloudAccessor: InternalType
     }
     
     ///搜索结果排序规则，绑定的值是是否升序，更多排序规则根据实际需求添加
-    enum IASearchResultSort {
+    enum IASearchSort {
         case name(Bool)
+        case displayName(Bool)
         case createDate(Bool)
         case changeDate(Bool)
+        case size(Bool)
+        case type(Bool)
         
-        //返回排序结果
+        //返回排序对象
+        func getSort() -> NSSortDescriptor
+        {
+            switch self {
+            case .name(let asc):
+                return NSSortDescriptor(key: "kMDItemFSName", ascending: asc)
+            case .displayName(let asc):
+                return NSSortDescriptor(key: "kMDItemDisplayName", ascending: asc)
+            case .createDate(let asc):
+                return NSSortDescriptor(key: "kMDItemFSCreationDate", ascending: asc)
+            case .changeDate(let asc):
+                return NSSortDescriptor(key: "kMDItemFSContentChangeDate", ascending: asc)
+            case .size(let asc):
+                return NSSortDescriptor(key: "kMDItemFSSize", ascending: asc)
+            case .type(let asc):
+                return NSSortDescriptor(key: "kMDItemContentType", ascending: asc)
+            }
+        }
+        
+        //返回一组排序对象
+        static func getSorts(_ sorts: [IASearchSort]) -> [NSSortDescriptor]
+        {
+            var arr = [NSSortDescriptor]()
+            for sort in sorts
+            {
+                arr.append(sort.getSort())
+            }
+            return arr
+        }
+        
+        //直接使用排序
         func compare(lhs: IADocumentSearchResult, rhs: IADocumentSearchResult) -> Bool
         {
             switch self {
-            case .name(let bool):
-                return bool ? lhs.name < rhs.name : lhs.name > rhs.name
-            case .createDate(let bool):
-                return bool ? lhs.createDate < rhs.createDate : lhs.createDate > rhs.createDate
-            case .changeDate(let bool):
-                return bool ? lhs.changeDate < rhs.changeDate : lhs.changeDate > rhs.changeDate
+            case .name(let asc):
+                return asc ? lhs.name < rhs.name : lhs.name > rhs.name
+            case .createDate(let asc):
+                return asc ? lhs.createDate < rhs.createDate : lhs.createDate > rhs.createDate
+            case .changeDate(let asc):
+                return asc ? lhs.changeDate < rhs.changeDate : lhs.changeDate > rhs.changeDate
+            case .displayName(let asc):
+                return asc ? lhs.displayName < rhs.displayName : lhs.displayName > rhs.displayName
+            case .size(let asc):
+                if let lsize = lhs.size, let rsize = rhs.size {
+                    return asc ? lsize < rsize : lsize > rsize
+                }
+                return true
+            case .type(let asc):
+                return asc ? lhs.contentType < rhs.contentType : lhs.contentType > rhs.contentType
             }
         }
     }
@@ -441,9 +486,9 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///设置排序规则
-    func setSort(type: IASearchResultSort)
+    func setSorts(_ sorts: [IASearchSort])
     {
-        self.querySort = type
+        self.fileQuery.sortDescriptors = IASearchSort.getSorts(sorts)
     }
     
     ///获取icloud对应container根目录或者子目录路径，如果目录不存在则创建，不能创建根目录，不能创建`Documents`目录，因为这是系统目录，用户没有权限修改

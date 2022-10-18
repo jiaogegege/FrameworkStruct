@@ -79,14 +79,14 @@ struct IAValueChangeModel {
 
 ///Document查询结果
 struct IADocumentSearchResult {
-    var name: String
-    var displayName: String
+    var name: String            //kMDItemFSName
+    var displayName: String     //kMDItemDisplayName
     var url: URL
     var path: String
-    var size: Int64?
-    var createDate: Date
-    var changeDate: Date
-    var contentType: String
+    var size: Int64?            //kMDItemFSSize
+    var createDate: Date        //kMDItemFSCreationDate
+    var changeDate: Date        //kMDItemFSContentChangeDate
+    var contentType: String     //kMDItemContentType
     var contentTypeTree: [String]?
     var isUbiquitous: Bool
     var hasUnresolvedConflicts: Bool
