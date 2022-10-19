@@ -43,6 +43,8 @@ extension MPEmbellisher: InternalType
 {
     //获取的歌曲元数据，可能有些值没有
     enum SongMetaDataKey: String {
+        case id                             //歌曲的id
+        case url                            //地址
         case title                          //标题
         case creator                        //创建者
         case subject                        //主题
@@ -76,9 +78,11 @@ extension MPEmbellisher: InternalType
 extension MPEmbellisher: ExternalInterface
 {
     ///解析歌曲文件中的元数据
-    func parseSongFile(_ audio: MPAudioProtocol) -> [SongMetaDataKey: Any]
+    func parseSongMeta(_ audio: MPAudioProtocol) -> [SongMetaDataKey: Any]
     {
         var metaDatas = [SongMetaDataKey: Any]()
+        metaDatas[.id] = audio.audioId
+        metaDatas[.url] = audio.audioUrl
         let asset = AVURLAsset(url: audio.audioUrl)
         for format in asset.availableMetadataFormats
         {

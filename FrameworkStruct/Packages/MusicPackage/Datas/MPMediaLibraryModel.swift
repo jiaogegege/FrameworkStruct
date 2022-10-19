@@ -91,6 +91,7 @@ extension MPMediaLibraryModel: InternalType
 extension MPMediaLibraryModel: ExternalInterface
 {
     ///diff songs，返回是否有更新
+    ///需要优化，提高效率
     func diffSongs(_ newSongs: [MPSongModel]) -> Bool
     {
         var hasUpdate = false
@@ -129,7 +130,7 @@ extension MPMediaLibraryModel: ExternalInterface
         }
         //排序，根据name
         self.songs.sort { lhs, rhs in
-            return lhs.name < rhs.name
+            return lhs.name.lowercased() < rhs.name.lowercased()
         }
         return hasUpdate
     }

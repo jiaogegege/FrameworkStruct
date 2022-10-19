@@ -125,37 +125,44 @@ class MPContainer: OriginContainer
     //参数：originLibs：本地库列表；handler：打开的本地库文件句柄
     fileprivate func updateLibrarys()
     {
-        getLibrarys { (libs) in
-            if let libs = libs {
-                for lib in libs {
-                    if lib.type == .iCloud
-                    {
-                        //查询所有iCloud中的歌曲
-                        self.queryAlliCloudSongs {[weak self] songs in
-                            //有新增歌曲则增加，有删除歌曲则减少
-                            let hasUpdate = lib.diffSongs(songs)
-                            //读取文件后先保存到缓存中
-                            self?.mutate(key: MPDataKey.librarys, value: libs)
-                            //如果有数据更新，那么需要更新iCloud库文件
-                            if hasUpdate, let data = ArchiverAdatper.shared.archive(libs as NSCoding), let libDir = self?.libDir, let libFileUrl = self?.ia.getFileUrl(in: libDir, fileName: Self.libraryFileName)
-                            {
-                                self?.ia.openDocument(libFileUrl, completion: { (handler) in
-                                    if let had = handler
-                                    {
-                                        self?.ia.writeDocument(had, data: data, completion: { success in
-                                            //关闭文件
-                                            self?.ia.closeDocument(had)
-                                            //读取文件后先保存到缓存中
-                                            self?.mutate(key: MPDataKey.librarys, value: libs)
-                                            //发出更新完成的通知
-                                            NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
-                                        })
+        g_async(onMain: false) {
+            self.getLibrarys { (libs) in
+                if let libs = libs {
+                    for lib in libs {
+                        if lib.type == .iCloud
+                        {
+                            //查询所有iCloud中的歌曲
+                            self.queryAlliCloudSongs {[weak self] songs in
+                                //有新增歌曲则增加，有删除歌曲则减少
+                                let hasUpdate = lib.diffSongs(songs)
+                                //读取文件后先保存到缓存中
+                                self?.mutate(key: MPDataKey.librarys, value: libs)
+                                //如果有数据更新，那么需要更新iCloud库文件
+                                if hasUpdate, let data = ArchiverAdatper.shared.archive(libs as NSCoding), let libDir = self?.libDir, let libFileUrl = self?.ia.getFileUrl(in: libDir, fileName: Self.libraryFileName)
+                                {
+                                    self?.ia.openDocument(libFileUrl, completion: { (handler) in
+                                        if let had = handler
+                                        {
+                                            self?.ia.writeDocument(had, data: data, completion: { success in
+                                                //关闭文件
+                                                self?.ia.closeDocument(had)
+                                                //读取文件后先保存到缓存中
+                                                self?.mutate(key: MPDataKey.librarys, value: libs)
+                                                g_async {
+                                                    //发出更新完成的通知
+                                                    NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
+                                else    //如果没有数据更新
+                                {
+                                    g_async {
+                                        //发出更新完成的通知
+                                        NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
                                     }
-                                })
-                            }
-                            else    //如果没有数据更新，目前什么都不做
-                            {
-                                
+                                }
                             }
                         }
                     }

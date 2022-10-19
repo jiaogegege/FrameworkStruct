@@ -25,12 +25,17 @@ class MPSongModel: OriginModel, Archivable
     var tagIds: Array<String>?
     var intro: String?
     
+    //非持久化属性
+    var asset: [MPEmbellisher.SongMetaDataKey: Any]?    //歌曲文件的一些信息
+    
     //MARK: 方法
     //初始化一个新的歌曲信息
     init(name: String, url: URL) {
         self.id = g_uuid()
         self.name = name
         self.url = url
+        super.init()
+        asset = MPEmbellisher.shared.parseSongMeta(self)
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
@@ -44,7 +49,7 @@ class MPSongModel: OriginModel, Archivable
         song.musicbookId = self.musicbookId
         song.tagIds = self.tagIds
         song.intro = self.intro
-        
+        song.asset = MPEmbellisher.shared.parseSongMeta(self)
         return song
     }
     
@@ -62,6 +67,8 @@ class MPSongModel: OriginModel, Archivable
         self.musicbookId = coder.decodeObject(forKey: PropertyKey.musicbook.rawValue) as? String
         self.tagIds = coder.decodeObject(forKey: PropertyKey.tags.rawValue) as? [String]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
+        super.init()
+        asset = MPEmbellisher.shared.parseSongMeta(self)
     }
 
     func encode(with coder: NSCoder) {

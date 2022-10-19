@@ -261,13 +261,13 @@ extension iCloudAccessor: InternalType
         {
             switch self {
             case .name(let asc):
-                return asc ? lhs.name < rhs.name : lhs.name > rhs.name
+                return asc ? lhs.name.lowercased() < rhs.name.lowercased() : lhs.name.lowercased() > rhs.name.lowercased()
             case .createDate(let asc):
                 return asc ? lhs.createDate < rhs.createDate : lhs.createDate > rhs.createDate
             case .changeDate(let asc):
                 return asc ? lhs.changeDate < rhs.changeDate : lhs.changeDate > rhs.changeDate
             case .displayName(let asc):
-                return asc ? lhs.displayName < rhs.displayName : lhs.displayName > rhs.displayName
+                return asc ? lhs.displayName.lowercased() < rhs.displayName.lowercased() : lhs.displayName.lowercased() > rhs.displayName.lowercased()
             case .size(let asc):
                 if let lsize = lhs.size, let rsize = rhs.size {
                     return asc ? lsize < rsize : lsize > rsize

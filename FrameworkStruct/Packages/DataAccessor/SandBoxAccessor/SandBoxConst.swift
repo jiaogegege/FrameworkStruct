@@ -65,6 +65,7 @@ enum FileTypeName: String {
     case php
     //音频
     case aac
+    case m4a
     case caf
     case mp3
     case opus
@@ -111,6 +112,17 @@ enum FileTypeName: String {
     case car
     case gz
     case rz
+    
+    //判断是否音乐文件
+    static func isAudio(_ fileName: String) -> Bool
+    {
+        let fileStr = fileName.lowercased()
+        if fileStr.hasSuffix(Self.mp3.rawValue) || fileStr.hasSuffix(Self.wma.rawValue) || fileStr.hasSuffix(Self.aac.rawValue) || fileStr.hasSuffix(Self.m4a.rawValue) || fileStr.hasSuffix(Self.aiff.rawValue) || fileStr.hasSuffix(Self.aif.rawValue) || fileStr.hasSuffix(Self.wav.rawValue) || fileStr.hasSuffix(Self.flac.rawValue) || fileStr.hasSuffix(Self.ogg.rawValue) || fileStr.hasSuffix(Self.caf.rawValue)
+        {
+            return true
+        }
+        return false
+    }
     
     //根据传入的文件名字返回包含扩展名的文件名
     func fullName(_ name: String) -> String

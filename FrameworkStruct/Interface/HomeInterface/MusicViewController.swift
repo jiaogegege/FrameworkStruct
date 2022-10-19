@@ -18,6 +18,7 @@ class MusicViewController: BasicViewController
     @IBOutlet weak var songListsBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var jumpCurrentBtn: UIButton!
     
     fileprivate var mpr = MPManager.shared
     
@@ -31,6 +32,8 @@ class MusicViewController: BasicViewController
     fileprivate var type: ListType = .library
     
     fileprivate var currentBtn: UIButton?
+    
+    fileprivate var currentSong: MPAudioProtocol?
     
     
     //MARK: 方法
@@ -46,6 +49,10 @@ class MusicViewController: BasicViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ApplicationManager.shared.screenIdle = true
+        if mpr.isPlaying
+        {
+            jumpCurrentAction(jumpCurrentBtn)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,12 +63,18 @@ class MusicViewController: BasicViewController
     override func createUI() {
         super.createUI()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseId)
+        tableView.register(UINib(nibName: MusicSongListCell.className, bundle: nil), forCellReuseIdentifier: MusicSongListCell.reuseId)
         self.currentBtn = self.libraryBtn
+    }
+    
+    override func configUI() {
+        self.jumpCurrentBtn.setImage(.iJumpCurrentSong, for: .normal)
     }
     
     override func initData() {
         super.initData()
         mpr.addDelegate(self)
+        currentSong = mpr.currentSong
         mpr.getAlliCloudSongs(completion: {[weak self] songs in
             self?.libraryArray = songs
             self?.tableView.reloadData()
@@ -110,6 +123,53 @@ class MusicViewController: BasicViewController
         }
     }
     
+    @IBAction func jumpCurrentAction(_ sender: UIButton) {
+        if let currentSong = currentSong {
+            var curIndex = -1
+            if isSearching
+            {
+                for (index ,song) in searchArray.enumerated()
+                {
+                    if song.id == currentSong.audioId
+                    {
+                        curIndex = index
+                        break
+                    }
+                }
+            }
+            else
+            {
+                if type == .library
+                {
+                    for (index, song) in libraryArray.enumerated()
+                    {
+                        if song.id == currentSong.audioId
+                        {
+                            curIndex = index
+                            break
+                        }
+                    }
+                }
+                else if type == .favorite
+                {
+                    for (index, song) in favoriteArray.enumerated()
+                    {
+                        if song.id == currentSong.audioId
+                        {
+                            curIndex = index
+                            break
+                        }
+                    }
+                }
+            }
+            //跳转
+            if curIndex >= 0
+            {
+                tableView.scrollTo(row: curIndex, section: 0)
+            }
+        }
+    }
+    
     //搜索方法
     fileprivate func search(_ text: String)
     {
@@ -118,7 +178,7 @@ class MusicViewController: BasicViewController
         {
             //过滤搜索文本
             self.searchArray = arr.filter({ song in
-                song.name.contains(text)
+                song.name.lowercased().contains(text.lowercased())
             })
         }
         else
@@ -150,7 +210,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     }
     
     func mpManagerSongChange(_ song: MPAudioProtocol) {
-        
+        currentSong = song
+        tableView.reloadData()
+        jumpCurrentAction(jumpCurrentBtn)
     }
     
     func mpManagerProgressChange(_ progress: TimeInterval) {
@@ -187,7 +249,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     
     /**************************************** tableview代理 Section Begin ***************************************/
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        searchBar.resignFirstResponder()
+//        searchBar.resignFirstResponder()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -214,34 +276,69 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isSearching
+        {
+            return 64
+        }
+        else
+        {
+            if type == .library || type == .favorite
+            {
+                return 64
+            }
+            else if type == .songLists
+            {
+                return 44
+            }
+        }
+        return 0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseId, for: indexPath)
-        var title: String = ""
          if isSearching
         {
-            title = searchArray[indexPath.row].name
+             let cell = tableView.dequeueReusableCell(withIdentifier: MusicSongListCell.reuseId, for: indexPath) as! MusicSongListCell
+             cell.number = indexPath.row + 1
+             let song = searchArray[indexPath.row]
+             cell.songData = song
+             cell.currentPlayImgView.isHidden = !(currentSong?.audioId == song.id)
+             cell.updateView()
+             return cell
         }
         else
         {
             if type == .library
             {
-                title = libraryArray[indexPath.row].name
+                let cell = tableView.dequeueReusableCell(withIdentifier: MusicSongListCell.reuseId, for: indexPath) as! MusicSongListCell
+                cell.number = indexPath.row + 1
+                let song = libraryArray[indexPath.row]
+                cell.songData = song
+                cell.currentPlayImgView.isHidden = !(currentSong?.audioId == song.id)
+                cell.updateView()
+                return cell
             }
             else if type == .favorite
             {
-                title = favoriteArray[indexPath.row].name
+                let cell = tableView.dequeueReusableCell(withIdentifier: MusicSongListCell.reuseId, for: indexPath) as! MusicSongListCell
+                cell.number = indexPath.row + 1
+                let song = favoriteArray[indexPath.row]
+                cell.songData = song
+                cell.currentPlayImgView.isHidden = !(currentSong?.audioId == song.id)
+                cell.updateView()
+                return cell
             }
             else if type == .songLists
             {
-                title = songLists[indexPath.row].name
+                return UITableViewCell()
             }
         }
-        cell.textLabel?.text = title
         
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if isSearching
         {
             mpr.playSong(searchArray[indexPath.row], in: .iCloud) { success in
@@ -258,7 +355,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             }
             else if type == .favorite
             {
-                
+                mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) { success in
+                    g_toast(text: (success ? "播放成功" : "播放失败"))
+                }
             }
             else if type == .songLists
             {

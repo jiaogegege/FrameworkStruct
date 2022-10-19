@@ -84,7 +84,16 @@ extension UIImage: ConstantPropertyProtocol
     static var iHealthCodeTravelCard: UIImage? = getPic("health_code_travel_card", ext: "jpg")
     //信息更新
     static var iHealthCodeInfoUpdate: UIImage? = getPic("health_code_info_update", ext: "jpg")
-    
+    //正在播放
+    static let iCurrentPlaySong: UIImage? = UIImage(named: "mp_playing")
+    //未收藏
+    static let iUnfavorite: UIImage? = UIImage(named: "mp_unfavorite")
+    //已收藏
+    static let ifavorite: UIImage? = UIImage(named: "mp_favorite")
+    //添加到歌单
+    static let iSonglist: UIImage? = UIImage(named: "mp_addto_songlist")
+    //跳到正在播放
+    static let iJumpCurrentSong: UIImage? = UIImage(named: "mp_jump_current")
 
 }
 

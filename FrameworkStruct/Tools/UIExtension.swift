@@ -328,6 +328,17 @@ extension UITableView
         self.scrollToRow(at: IndexPath(row: row, section: section), at: .bottom, animated: true)
     }
     
+    ///滚动到指定cell
+    ///position：滚动到tableview的位置，默认在tableview的中间位置
+    func scrollTo(row: Int, section: Int, position: UITableView.ScrollPosition = .middle, animated: Bool = true)
+    {
+        let indexPath = IndexPath(row: row, section: section)
+        self.selectRow(at: indexPath, animated: animated, scrollPosition: .middle)
+        g_after(animated ? 1 : 0) {
+            self.deselectRow(at: indexPath, animated: animated)
+        }
+    }
+    
 }
 
 ///UITableView内部类型

@@ -59,6 +59,9 @@ class MPManager: OriginManager
     //快进快退时间：单位秒
     @LimitNumRange(min: 1.0, max: 99.0) var skipTime: TimeInterval = 10.0
     
+    //上一次播放时中断时的进度，app启动播放时设置一次
+    fileprivate(set) var lastTime: TimeInterval?
+    
     
     //MARK: 方法
     //私有化初始化方法
@@ -67,6 +70,9 @@ class MPManager: OriginManager
         super.init()
         self.libMgr.delegate = self
         self.player.delegate = self
+        if let t = ia.getDouble(.mpProgress) {
+            self.lastTime = t
+        }
         //接受远程控制，不管前台还是后台
         self.addEventControl()
         UIApplication.shared.beginReceivingRemoteControlEvents()
@@ -86,7 +92,7 @@ class MPManager: OriginManager
     fileprivate func addNotification()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(notify:)), name: UIApplication.willResignActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground(notify:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(notify:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(audioSessionInterrupt(notify:)), name: AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(audioSessionOutputChange(notify:)), name: AVAudioSession.routeChangeNotification, object: nil)
     }
@@ -271,7 +277,7 @@ class MPManager: OriginManager
     {
         self.endBackgroundPlay()
         self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-//            self.repeatBackgroundPlay()   //没什么用，所以注释掉
+            self.repeatBackgroundPlay()   //没什么用，所以注释掉
         })
         
         //不停地开启后台任务，实现连续播放
@@ -306,7 +312,7 @@ class MPManager: OriginManager
     fileprivate func showAudioInfoInControlCenter(_ audio: MPAudioProtocol)
     {
         //生成歌曲的资源
-        let info = MPEmbellisher.shared.parseSongFile(audio)
+        let info = MPEmbellisher.shared.parseSongMeta(audio)
         var dict = [String: Any]()
         //标题
         dict[MPMediaItemPropertyTitle] = audio.audioName
@@ -345,6 +351,16 @@ class MPManager: OriginManager
         MPNowPlayingInfoCenter.default().nowPlayingInfo = dict
     }
     
+    ///保存播放进度
+    func savePlaybackProgress(_ time: TimeInterval)
+    {
+        //保存到iCloud，每秒保存性能损耗太大，目前考虑10的整数倍才保存
+        if Int(time) % 10 == 0
+        {
+            ia.saveValue(time, key: .mpProgress)
+        }
+    }
+    
 }
 
 
@@ -358,7 +374,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     }
     
     //app进入前台
-    @objc func applicationWillEnterForeground(notify: Notification)
+    @objc func applicationDidBecomeActive(notify: Notification)
     {
         self.endBackgroundPlay()
     }
@@ -508,6 +524,8 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     }
     
     func mpPlayerPauseToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        //保存进度
+        savePlaybackProgress(player.currentTime)
         //在控制中心显示歌曲信息
         showAudioInfoInControlCenter(audio)
     }
@@ -518,7 +536,8 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     }
     
     func mpPlayerFinishPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
-        
+        //播放完成后，播放进度重置为0
+        savePlaybackProgress(0)
     }
     
     func mpPlayerStopToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
@@ -536,6 +555,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     //播放进度变化
     func mpPlayerTimeChange(_ time: TimeInterval) {
+        savePlaybackProgress(time)
         //将信息传出去
         delegates.compact()
         for i in 0..<delegates.count
@@ -563,7 +583,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
 extension MPManager: InternalType
 {
     //后台任务时长，到这个时间后要结束后台任务，不然会被系统杀掉；然后再开启一个新的后台任务
-    static let backgroundTaskTime: TimeInterval = 30.0
+    static let backgroundTaskTime: TimeInterval = 28.0
     
 }
 
@@ -572,6 +592,7 @@ extension MPManager: InternalType
 extension MPManager: ExternalInterface
 {
     ///执行一个延时任务,播放当前歌曲，如果有的话
+    ///继续播放上一次app运行中断时播放的歌曲
     func performPlayCurrent(_ completion: BoolClosure?)
     {
         //如果是空闲状态，那么执行一个延时操作，播放当前歌曲
@@ -583,6 +604,11 @@ extension MPManager: ExternalInterface
                         if let song = song, let playlist = playlist
                         {
                             self?.player.play(song, playlist: playlist, completion: { (succeed) in
+                                //如果播放成功，那么设置进度
+                                if succeed, let t = self?.lastTime
+                                {
+                                    self?.player.seek(t, success: nil)
+                                }
                                 if let cb = completion
                                 {
                                     cb(succeed)
@@ -651,17 +677,17 @@ extension MPManager: ExternalInterface
         }
     }
     
-    ///获取所有iCloud歌曲
-    func getAlliCloudSongs(completion: @escaping ([MPSongModel]) -> Void)
-    {
-        libMgr.getResource(libraryType: .iCloud, resourceType: .songs) { songs in
-            if let songs = songs {
-                completion(songs as! [MPSongModel])
-            }
-        }
+    /**************************************** 播放音乐相关 Section Begin ***************************************/
+    ///是否正在播放音乐
+    var isPlaying: Bool {
+        player.isPlaying
     }
     
-    /**************************************** 播放音乐相关 Section Begin ***************************************/
+    ///当前正在播放的歌曲
+    var currentSong: MPAudioProtocol? {
+        player.currentAudio
+    }
+    
     ///播放模式
     var playMode: MPPlayer.PlayMode {
         get {
@@ -711,7 +737,21 @@ extension MPManager: ExternalInterface
         }
     }
     
-    ///获取当前播放歌曲，可能为nil
+    
+    /**************************************** 播放音乐相关 Section End ***************************************/
+
+    /**************************************** 音乐资源相关 Section Begin ***************************************/
+    ///获取所有iCloud歌曲
+    func getAlliCloudSongs(completion: @escaping ([MPSongModel]) -> Void)
+    {
+        libMgr.getResource(libraryType: .iCloud, resourceType: .songs) { songs in
+            if let songs = songs {
+                completion(songs as! [MPSongModel])
+            }
+        }
+    }
+    
+    ///获取iCloud中当前播放歌曲，可能为nil
     func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
     {
         libMgr.readCurrentSong { song in
@@ -735,8 +775,6 @@ extension MPManager: ExternalInterface
         }
     }
     
-    
-    /**************************************** 播放音乐相关 Section End ***************************************/
-
+    /**************************************** 音乐资源相关 Section End ***************************************/
     
 }

@@ -70,8 +70,8 @@ class MPPlayer: OriginWorker
     //一个播放列表的中已播放歌曲列表，当切换播放列表时被清空
     fileprivate var elapsedAudioArray: [MPAudioProtocol] = []
     
-    //播放模式，默认顺序播
-    var playMode: PlayMode = .sequence
+    //播放模式
+    var playMode: PlayMode = .random
     
     //播放速率，默认1.0，可设置为0.0～3.0
     @LimitNumRange(min: 0.0, max: 3.0) fileprivate(set) var playRate: Float = 1.0
@@ -504,6 +504,7 @@ extension MPPlayer: ExternalInterface
         if let ob = timeObserver
         {
             player.removeTimeObserver(ob)
+            timeObserver = nil
         }
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.status.rawValue)
         itemAsset = nil

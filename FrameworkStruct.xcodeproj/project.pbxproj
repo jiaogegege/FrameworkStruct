@@ -22,6 +22,8 @@
 		EA06EB6A27674CAD00E6B785 /* SelectThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */; };
 		EA08D61727D9855100D3961F /* DatasChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08D61627D9855100D3961F /* DatasChecker.swift */; };
 		EA08D61927D9C84400D3961F /* CheckerConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08D61827D9C84400D3961F /* CheckerConst.swift */; };
+		EA0951E528FF975800A3D915 /* MusicSongListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0951E328FF975800A3D915 /* MusicSongListCell.swift */; };
+		EA0951E628FF975800A3D915 /* MusicSongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0951E428FF975800A3D915 /* MusicSongListCell.xib */; };
 		EA0A926028CB0CDF0036B339 /* travel_card_nav.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0A925F28CB0CDF0036B339 /* travel_card_nav.jpg */; };
 		EA0A926228CB0CED0036B339 /* travel_card_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0A926128CB0CED0036B339 /* travel_card_head.jpg */; };
 		EA0A926628CB0CFF0036B339 /* travel_card_foot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0A926528CB0CFF0036B339 /* travel_card_foot.jpg */; };
@@ -799,6 +801,8 @@
 		EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectThemeCell.xib; sourceTree = "<group>"; };
 		EA08D61627D9855100D3961F /* DatasChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasChecker.swift; sourceTree = "<group>"; };
 		EA08D61827D9C84400D3961F /* CheckerConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerConst.swift; sourceTree = "<group>"; };
+		EA0951E328FF975800A3D915 /* MusicSongListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSongListCell.swift; sourceTree = "<group>"; };
+		EA0951E428FF975800A3D915 /* MusicSongListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicSongListCell.xib; sourceTree = "<group>"; };
 		EA0A925F28CB0CDF0036B339 /* travel_card_nav.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = travel_card_nav.jpg; sourceTree = "<group>"; };
 		EA0A926128CB0CED0036B339 /* travel_card_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = travel_card_head.jpg; sourceTree = "<group>"; };
 		EA0A926528CB0CFF0036B339 /* travel_card_foot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = travel_card_foot.jpg; sourceTree = "<group>"; };
@@ -4444,6 +4448,8 @@
 				EA06EB6727674CAD00E6B785 /* SelectThemeCell.swift */,
 				EA06EB6827674CAD00E6B785 /* SelectThemeCell.xib */,
 				EA33BF5127F82FB600DBE44D /* DrawingCanvasView.swift */,
+				EA0951E328FF975800A3D915 /* MusicSongListCell.swift */,
+				EA0951E428FF975800A3D915 /* MusicSongListCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4706,6 +4712,7 @@
 				EAA392F428C725B9009438DC /* place_code_tick.jpg in Resources */,
 				EA00C89427C339CA0034C95B /* sound_搞怪.caf in Resources */,
 				EAA392E028C5DCFE009438DC /* health_code_nav.jpg in Resources */,
+				EA0951E628FF975800A3D915 /* MusicSongListCell.xib in Resources */,
 				EAA392E228C6DADB009438DC /* health_code_nucleate.jpg in Resources */,
 				EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */,
 				EA0A926628CB0CFF0036B339 /* travel_card_foot.jpg in Resources */,
@@ -4911,6 +4918,7 @@
 				EA3E8AC427B77CEA006A2715 /* BaseCompositionLayer.swift in Sources */,
 				EA9A758627C7216D00A11FC8 /* YYFrameImage.m in Sources */,
 				EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */,
+				EA0951E528FF975800A3D915 /* MusicSongListCell.swift in Sources */,
 				EAD0B93727FFC88E00DB4949 /* CommunicationAdapter.swift in Sources */,
 				EA8CFD1928EDD76700EE3B73 /* MPTagModel.swift in Sources */,
 				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,

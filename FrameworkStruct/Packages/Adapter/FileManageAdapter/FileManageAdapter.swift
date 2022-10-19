@@ -85,16 +85,39 @@ extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
             //暂时写入Documents文件夹
             let fileName = info.fileUrl.lastPathComponent    //包含扩展名的文件名
 //            let fileExt = info.fileUrl.pathExtension   //扩展名
-//            let absFileName = info.fileUrl.deletingPathExtension().lastPathComponent   //文件名
+//            let displayName = info.fileUrl.deletingPathExtension().lastPathComponent   //文件名
+            //如果是音乐文件，那么保存到iCloud的`Documents/Music/Song`文件夹
             //保存的文件路径
-            let savePath = SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)
-            if let fileData = try? Data(contentsOf: info.fileUrl)
+            if FileTypeName.isAudio(fileName)
             {
-                try? fileData.write(to: URL(fileURLWithPath: savePath))
+                if let songDir = iCloudAccessor.shared.getDir(.MusicSong)
+                {
+                    let fileUrl = songDir.appendingPathComponent(fileName)
+                    if let fileData = try? Data(contentsOf: info.fileUrl)
+                    {
+                        iCloudAccessor.shared.createDocument(fileData, targetUrl: fileUrl) { succeed in
+                            //删除源文件
+                            SandBoxAccessor.shared.deletePath(info.fileUrl.path)
+                            //处理完后清空
+                            self.openInfo = nil
+                        }
+                    }
+                }
+                //处理完后清空
+                self.openInfo = nil
             }
-            
-            //处理完后清空
-            self.openInfo = nil
+            else
+            {
+                let savePath = SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)
+                if let fileData = try? Data(contentsOf: info.fileUrl)
+                {
+                    try? fileData.write(to: URL(fileURLWithPath: savePath))
+                    //删除源文件
+                    SandBoxAccessor.shared.deletePath(info.fileUrl.path)
+                    //处理完后清空
+                    self.openInfo = nil
+                }
+            }
         }
     }
     
@@ -134,6 +157,7 @@ extension FileManageAdapter: InternalType
 extension FileManageAdapter: ExternalInterface
 {
     ///从本地或者其他App打开一个文件，具体处理方法根据实际需求
+    ///从隔空投送接收文件
     func dispatchFileUrl(_ fileUrl: URL, appOptions: [UIApplication.OpenURLOptionsKey : Any]? = nil, sceneOptions: UIScene.OpenURLOptions? = nil)
     {
         self.openInfo = OpenUrlInfo(fileUrl: fileUrl, appOptions: appOptions, sceneOptions: sceneOptions)
