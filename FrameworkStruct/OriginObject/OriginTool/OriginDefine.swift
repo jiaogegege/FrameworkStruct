@@ -128,6 +128,12 @@ typealias BoolClosure = ((Bool) -> Void)
 //返回值为可选Bool的闭包
 typealias OptionalBoolClosure = ((Bool?) -> Void)
 
+//返回值为Data的闭包
+typealias DataClosure = ((Data) -> Void)
+
+//返回值为可选Data的闭包
+typealias OptionalDataClosure = ((Data?) -> Void)
+
 //返回值为String的闭包
 typealias StringClosure = ((String) -> Void)
 

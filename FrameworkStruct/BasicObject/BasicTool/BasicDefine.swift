@@ -32,9 +32,11 @@ protocol Archivable: NSCoding {
     
     //归档
     func archive() -> Data?
+    func archive(completion: @escaping OptionalDataClosure)
     
     //解档
     static func unarchive(_ data: Data) -> AnyType?
+    static func unarchive(_ data: Data, completion: @escaping ((AnyType?) -> Void))
 }
 
 //协议基础实现
@@ -44,9 +46,23 @@ extension Archivable {
         ArchiverAdatper.shared.archive(self)
     }
     
+    func archive(completion: @escaping OptionalDataClosure)
+    {
+        ArchiverAdatper.shared.archive(self) { (data) in
+            completion(data)
+        }
+    }
+    
     static func unarchive(_ data: Data) -> AnyType?
     {
         ArchiverAdatper.shared.unarchive(data) as? AnyType
+    }
+    
+    static func unarchive(_ data: Data, completion: @escaping ((AnyType?) -> Void))
+    {
+        ArchiverAdatper.shared.unarchive(data) { (obj) in
+            completion(obj as? AnyType)
+        }
     }
 }
 

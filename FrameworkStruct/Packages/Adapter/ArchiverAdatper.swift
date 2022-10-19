@@ -51,27 +51,46 @@ extension ArchiverAdatper: ExternalInterface
             return nil
         }
     }
+
+    ///将一个对象归档，返回Data
+    ///secure：是否安全归档，如果为true，那么obj必须支持NSSecureCoding
+    func archive(_ obj: NSCoding, secure: Bool = false, completion: @escaping OptionalDataClosure)
+    {
+        let queue = ThreadManager.shared.currentQueue()
+        g_async(onMain: false) {
+            do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: obj, requiringSecureCoding: secure)
+                queue.async {
+                    completion(data)
+                }
+            } catch {
+                FSLog(error.localizedDescription)
+                queue.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
     
     ///将对象归档到一个文件
     func archiveToFile(_ obj: NSCoding, secure: Bool = false, fileUrl: URL, completion: BoolClosure? = nil)
     {
+        let queue = ThreadManager.shared.currentQueue()
         g_async(onMain: false) {
             do {
-                if let data = self.archive(obj, secure: secure)
+                let data = try NSKeyedArchiver.archivedData(withRootObject: obj, requiringSecureCoding: secure)
+                try data.write(to: fileUrl)
+                if let cb = completion
                 {
-                    try data.write(to: fileUrl)
-                    if let cb = completion
-                    {
-                        g_async {
-                            cb(true)
-                        }
+                    queue.async {
+                        cb(true)
                     }
                 }
             } catch {
                 FSLog(error.localizedDescription)
                 if let cb = completion
                 {
-                    g_async {
+                    queue.async {
                         cb(false)
                     }
                 }
@@ -90,19 +109,55 @@ extension ArchiverAdatper: ExternalInterface
         }
     }
     
-    ///从一个文件中解档为一个对象
-    func unarchiveFromFile(_ fileUrl: URL, completion: @escaping OptionalAnyClosure)
+    ///将Data解档为一个对象
+    func unarchive(_ data: Data, completion: @escaping OptionalAnyClosure)
     {
+        let queue = ThreadManager.shared.currentQueue()
         g_async(onMain: false) {
             do {
-                let data = try Data(contentsOf: fileUrl)
-                let obj = self.unarchive(data)
-                g_async {
-                    completion(obj)
+                if let obj = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+                {
+                    queue.async {
+                        completion(obj)
+                    }
+                }
+                else
+                {
+                    queue.async {
+                        completion(nil)
+                    }
                 }
             } catch {
                 FSLog(error.localizedDescription)
-                g_async {
+                queue.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    ///从一个文件中解档为一个对象
+    func unarchiveFromFile(_ fileUrl: URL, completion: @escaping OptionalAnyClosure)
+    {
+        let queue = ThreadManager.shared.currentQueue()
+        g_async(onMain: false) {
+            do {
+                let data = try Data(contentsOf: fileUrl)
+                if let obj = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+                {
+                    queue.async {
+                        completion(obj)
+                    }
+                }
+                else
+                {
+                    queue.async {
+                        completion(nil)
+                    }
+                }
+            } catch {
+                FSLog(error.localizedDescription)
+                queue.async {
                     completion(nil)
                 }
             }
