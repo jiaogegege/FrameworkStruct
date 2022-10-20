@@ -19,6 +19,7 @@ class MusicSongListCell: UITableViewCell {
     
     var number: Int?        //排序序号，从1开始
     var songData: MPSongModel?
+    var isCurrent: Bool = false
     
 
     override func awakeFromNib() {
@@ -56,6 +57,8 @@ extension MusicSongListCell: ExternalInterface
             artistNameLabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
             self.downloadStateImgView.isHidden = !song.isDownloaded
         }
+        self.currentPlayImgView.isHidden = !isCurrent
+        self.songNameLabel.textColor = isCurrent ? .cAccent : .cBlack_3
     }
     
 }

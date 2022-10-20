@@ -178,7 +178,18 @@ extension MPSongModel: ExternalInterface
     var isDownloaded: Bool {
         if let info = self.fileInfo
         {
-            return info.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusDownloaded || self.fileInfo?.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusCurrent
+            //如果是没有下载的，那么从媒体库更新信息
+            if info.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusNotDownloaded
+            {
+                guard let info = MPEmbellisher.shared.getSongFileInfo(self) else {
+                    return false
+                }
+                return info.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusDownloaded || self.fileInfo?.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusCurrent
+            }
+            else
+            {
+                return info.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusDownloaded || self.fileInfo?.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusCurrent
+            }
         }
         else
         {

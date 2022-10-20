@@ -314,13 +314,13 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          if isSearching
         {
-             let cell = tableView.dequeueReusableCell(withIdentifier: MusicSongListCell.reuseId, for: indexPath) as! MusicSongListCell
-             cell.number = indexPath.row + 1
-             let song = searchArray[indexPath.row]
-             cell.songData = song
-             cell.currentPlayImgView.isHidden = !(currentSong?.audioId == song.id)
-             cell.updateView()
-             return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: MusicSongListCell.reuseId, for: indexPath) as! MusicSongListCell
+            cell.number = indexPath.row + 1
+            let song = searchArray[indexPath.row]
+            cell.songData = song
+            cell.isCurrent = (currentSong?.audioId == song.id)
+            cell.updateView()
+            return cell
         }
         else
         {
@@ -330,7 +330,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 cell.number = indexPath.row + 1
                 let song = libraryArray[indexPath.row]
                 cell.songData = song
-                cell.currentPlayImgView.isHidden = !(currentSong?.audioId == song.id)
+                cell.isCurrent = (currentSong?.audioId == song.id)
                 cell.updateView()
                 return cell
             }
@@ -340,7 +340,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 cell.number = indexPath.row + 1
                 let song = favoriteArray[indexPath.row]
                 cell.songData = song
-                cell.currentPlayImgView.isHidden = !(currentSong?.audioId == song.id)
+                cell.isCurrent = (currentSong?.audioId == song.id)
                 cell.updateView()
                 return cell
             }

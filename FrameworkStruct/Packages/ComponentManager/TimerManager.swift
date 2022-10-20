@@ -61,17 +61,21 @@ extension TimerManager: ExternalInterface
     }
     
     ///延时操作
-    ///参数：interval：延时时间；onMain：是否在主线程；action：要执行的回调；
-    func after(interval: TimeInterval, onMain: Bool = true, action: @escaping VoidClosure)
+    ///参数：interval：延时时间；onMain：是否在主线程，为nil则为当前线程；action：要执行的回调；
+    func after(interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoidClosure)
     {
-        if onMain
+        var queue = ThreadManager.shared.currentQueue()
+        if let onMain = onMain
         {
-            DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: action)
+            queue = onMain ? DispatchQueue.main : DispatchQueue.global()
         }
-        else
-        {
-            DispatchQueue.global().asyncAfter(deadline: .now() + interval, execute: action)
-        }
+        queue.asyncAfter(deadline: .now() + interval, execute: action)
+    }
+    
+    ///在当前线程延时操作
+    func afterInCurrent(interval: TimeInterval, action: @escaping VoidClosure)
+    {
+        
     }
     
     ///NSTimer定时器

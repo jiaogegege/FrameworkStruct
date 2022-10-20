@@ -285,13 +285,14 @@ class MPManager: OriginManager
     fileprivate func repeatBackgroundPlay()
     {
         self.endBackgroundPlay()
-        self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-            self.repeatBackgroundPlay()   //没什么用，所以注释掉
-        })
-        
-        //不停地开启后台任务，实现连续播放
-        g_after(Self.backgroundTaskTime) {
-            self.repeatBackgroundPlay()
+        g_after(1) {
+            self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+                self.repeatBackgroundPlay()   //没什么用，所以注释掉
+            })
+            //不停地开启后台任务，实现连续播放
+            g_after(Self.backgroundTaskTime) {
+                self.repeatBackgroundPlay()
+            }
         }
     }
     
@@ -497,24 +498,32 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         }
         NotificationCenter.default.post(name: FSNotification.mpWaitToPlay.name, object: [FSNotification.mpWaitToPlay.paramKey: audio])
         
-        //如果是iCloud文件，那么先打开
-        if ia.isiCloudFile(audio.audioUrl)
-        {
-            ia.openDocument(audio.audioUrl) {[weak self] id in
-                if let id = id {
-                    self?.ia.closeDocument(id)
-                    //返回成功
-                    success(true)
-                }
-                else
-                {
-                    success(false)
-                }
-            }
-        }
-        else    //其他情况，目前先都返回成功
+        //如果是歌曲文件，那么判断有没有下载，如果已经下载了，那么不需要再次打开
+        if let song = audio as? MPSongModel, song.isDownloaded
         {
             success(true)
+        }
+        else
+        {
+            //如果是iCloud文件，那么先打开
+            if ia.isiCloudFile(audio.audioUrl)
+            {
+                ia.openDocument(audio.audioUrl) {[weak self] id in
+                    if let id = id {
+                        self?.ia.closeDocument(id)
+                        //返回成功
+                        success(true)
+                    }
+                    else
+                    {
+                        success(false)
+                    }
+                }
+            }
+            else    //其他情况，目前先都返回成功
+            {
+                success(true)
+            }
         }
     }
     
@@ -611,7 +620,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
 extension MPManager: InternalType
 {
     //后台任务时长，到这个时间后要结束后台任务，不然会被系统杀掉；然后再开启一个新的后台任务
-    static let backgroundTaskTime: TimeInterval = 28.0
+    static let backgroundTaskTime: TimeInterval = 20.0
     
     //状态管理器的key
     enum StatusKey: SMKeyType {

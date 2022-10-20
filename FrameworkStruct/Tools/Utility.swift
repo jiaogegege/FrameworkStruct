@@ -166,7 +166,7 @@ func g_async(onMain: Bool = true, action: @escaping VoidClosure)
 }
 
 ///延时操作
-func g_after(_ interval: TimeInterval, onMain: Bool = true, action: @escaping VoidClosure)
+func g_after(_ interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoidClosure)
 {
     TimerManager.shared.after(interval: interval, onMain: onMain, action: action)
 }
