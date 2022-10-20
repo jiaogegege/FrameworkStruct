@@ -15,6 +15,7 @@ class MusicSongListCell: UITableViewCell {
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var favoriteBtn: UIButton!
     @IBOutlet weak var songlistBtn: UIButton!
+    @IBOutlet weak var downloadStateImgView: UIImageView!
     
     var number: Int?        //排序序号，从1开始
     var songData: MPSongModel?
@@ -53,6 +54,7 @@ extension MusicSongListCell: ExternalInterface
         if let song = songData, let asset = song.asset {
             songNameLabel.text = song.name
             artistNameLabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
+            self.downloadStateImgView.isHidden = !song.isDownloaded
         }
     }
     

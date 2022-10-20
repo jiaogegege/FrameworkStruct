@@ -265,15 +265,20 @@ func g_alert(title: String,
 }
 
 ///全局文本toast提示
-func g_toast(text: String, hideDelay: TimeInterval = 2.5, completion: ToastManager.CompletionCallback? = nil)
+///interaction:是否能操作后面的UI
+func g_toast(text: String, hideDelay: TimeInterval = 2.5, interaction: Bool = false, completion: ToastManager.CompletionCallback? = nil)
 {
+    ToastManager.shared.hideHUD()
+    ToastManager.shared.interaction = interaction
     ToastManager.shared.wantShowText(text: text, hideDelay: hideDelay, completion: completion)
 }
 
 ///全局加载提示
-func g_loading()
+///interaction:是否能操作后面的UI
+func g_loading(interaction: Bool = false)
 {
     ToastManager.shared.hideHUD()
+    ToastManager.shared.interaction = interaction
     ToastManager.shared.wantShowAnimate()
 }
 

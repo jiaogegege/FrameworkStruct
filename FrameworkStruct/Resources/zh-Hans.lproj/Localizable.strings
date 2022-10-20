@@ -67,7 +67,7 @@ addToBookmark = "添加到书签";
 /**
  * Toast文案
  */
-
+failToPlay = "播放失败";
 /**
  * 通用错误信息
  */

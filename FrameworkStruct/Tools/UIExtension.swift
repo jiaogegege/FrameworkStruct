@@ -339,6 +339,40 @@ extension UITableView
         }
     }
     
+    ///判断某个indexPath是否显示在屏幕中
+    func isVisible(row: Int, secton: Int) -> Bool
+    {
+        var visible = false
+        if let shows = self.indexPathsForVisibleRows
+        {
+            for item in shows
+            {
+                if item.row == row && item.section == secton
+                {
+                    visible = true
+                    break
+                }
+            }
+        }
+        return visible
+    }
+    
+    ///判断某个cell是否显示在屏幕上
+    func isVisibleCell(_ cell: UITableViewCell) -> Bool
+    {
+        var visible = false
+        let cells = self.visibleCells
+        for cel in cells
+        {
+            if cel.isEqual(cell)
+            {
+                visible = true
+                break
+            }
+        }
+        return visible
+    }
+    
 }
 
 ///UITableView内部类型

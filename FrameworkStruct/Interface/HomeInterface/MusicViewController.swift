@@ -162,10 +162,13 @@ class MusicViewController: BasicViewController
                     }
                 }
             }
-            //跳转
-            if curIndex >= 0
+            if !tableView.isVisible(row: curIndex, secton: 0)
             {
-                tableView.scrollTo(row: curIndex, section: 0)
+                //跳转
+                if curIndex >= 0
+                {
+                    tableView.scrollTo(row: curIndex, section: 0)
+                }
             }
         }
     }
@@ -178,7 +181,7 @@ class MusicViewController: BasicViewController
         {
             //过滤搜索文本
             self.searchArray = arr.filter({ song in
-                song.name.lowercased().contains(text.lowercased())
+                song.fullDescription.lowercased().contains(text.lowercased())
             })
         }
         else
@@ -193,6 +196,7 @@ class MusicViewController: BasicViewController
 
 extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableViewDataSource, MPManagerDelegate, UISearchBarDelegate
 {
+    /**************************************** MPManager代理 Section Begin ***************************************/
     //音乐库初始化完成
     func mpManagerDidInitCompleted() {
         mpr.getAlliCloudSongs(completion: {[weak self] songs in
@@ -209,15 +213,27 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         })
     }
     
-    func mpManagerSongChange(_ song: MPAudioProtocol) {
+    func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
+        g_loading(interaction: true)
+    }
+    
+    func mpManagerStartPlay(_ song: MPAudioProtocol) {
+        g_endLoading()
         currentSong = song
         tableView.reloadData()
         jumpCurrentAction(jumpCurrentBtn)
     }
     
+    func mpManagerFailedPlay(_ song: MPAudioProtocol) {
+        g_endLoading()
+        g_toast(text: "歌曲：\(song.audioName) " + String.failToPlay)
+    }
+    
     func mpManagerProgressChange(_ progress: TimeInterval) {
         
     }
+    
+    /**************************************** MPManager代理 Section End ***************************************/
     
     /**************************************** 搜索代理 Section Begin ***************************************/
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

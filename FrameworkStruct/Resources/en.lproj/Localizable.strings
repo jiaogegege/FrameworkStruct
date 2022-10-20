@@ -68,7 +68,7 @@ addToBookmark = "Add To Bookmark";
 /**
  * Toast文案
  */
-
+failToPlay = "Fail To Play";
 /**
  * 通用错误信息
  */

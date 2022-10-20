@@ -103,8 +103,13 @@ extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
                         }
                     }
                 }
-                //处理完后清空
-                self.openInfo = nil
+                else
+                {
+                    //删除源文件
+                    SandBoxAccessor.shared.deletePath(info.fileUrl.path)
+                    //处理完后清空
+                    self.openInfo = nil
+                }
             }
             else
             {

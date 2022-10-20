@@ -260,4 +260,13 @@ extension MPEmbellisher: ExternalInterface
         return metaDatas
     }
     
+    ///获取某一首歌曲的原始文件信息
+    func getSongFileInfo(_ song: MPSongModel) -> IADocumentSearchResult?
+    {
+        guard let info = MPContainer.shared.getSongFileInfo(song) else { return nil }
+        
+        song.fileInfo = info
+        return info
+    }
+    
 }

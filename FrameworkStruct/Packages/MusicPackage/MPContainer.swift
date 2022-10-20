@@ -214,6 +214,12 @@ class MPContainer: OriginContainer
         ia.setFilter(files: FMUTIs.audioGroup, dirs: [.MusicSong])
         ia.queryDocuments { files in
             g_async(onMain: false) {
+                //先将原始文件信息保存到内存中
+                let meta = DataModelMeta()
+                meta.needCopy = false
+                meta.canCommit = false
+                self.mutate(key: MPDataKey.iCloudSongFileInfo, value: files, meta: meta)
+                //转换文件为歌曲信息
                 let songs = files.map { file in
                     MPSongModel(name: file.displayName, url: file.url)
                 }
@@ -294,8 +300,7 @@ class MPContainer: OriginContainer
         if let k = key as? MPDataKey, let val = value as? NSCoding
         {
             ArchiverAdatper.shared.archive(val, completion: {[weak self] (data) in
-                if let data = data {
-                    let fileName = k.getiCloudFileName()
+                if let data = data, let fileName = k.getiCloudFileName() {
                     //尝试打开文件
                     self?.openFileFromiCloud(fileName) {fileId in
                         if let fileId = fileId {
@@ -374,14 +379,15 @@ extension MPContainer: InternalType
     //数据对象的key
     enum MPDataKey: String {
         case librarys                       //媒体库列表
-        
         case currentSong                    //当前播放歌曲
         case currentPlaylist                //当前播放列表
         case historySongs                   //历史播放歌曲
         case historyPlaylists               //历史播放列表
         
-        //获取key对应的在iCloud中的文件名
-        func getiCloudFileName() -> String
+        case iCloudSongFileInfo             //所有iCloud歌曲原始文件信息，只存在内存中
+        
+        //获取key对应的在iCloud中的文件名，并非所有key都有文件名
+        func getiCloudFileName() -> String?
         {
             switch self {
             case .librarys:
@@ -394,6 +400,8 @@ extension MPContainer: InternalType
                 return MPContainer.historySongsFileName
             case .historyPlaylists:
                 return MPContainer.historyPlaylistsFileName
+            default:
+                return nil
             }
         }
     }
@@ -607,7 +615,20 @@ extension MPContainer: ExternalInterface
         }
     }
     
-    
+    ///获取某一首歌曲的原始文件信息
+    func getSongFileInfo(_ song: MPSongModel) -> IADocumentSearchResult?
+    {
+        if let results = get(key: MPDataKey.iCloudSongFileInfo) as? [IADocumentSearchResult]
+        {
+            for result in results {
+                if result.url.absoluteString == song.url.absoluteString
+                {
+                    return result
+                }
+            }
+        }
+        return nil
+    }
     
     
     

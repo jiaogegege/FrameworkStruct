@@ -3032,9 +3032,9 @@
 			children = (
 				EA8CFC9828EDC20900EE3B73 /* README.md */,
 				EA8CFC9928EDC39100EE3B73 /* MPManager.swift */,
+				EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */,
 				EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */,
 				EA8CFCA428EDCA4400EE3B73 /* MPLibraryManager.swift */,
-				EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */,
 				EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */,
 				EA8CFD4028EE606C00EE3B73 /* MPConst.swift */,
 				EA8CFCA728EDCD0600EE3B73 /* Datas */,

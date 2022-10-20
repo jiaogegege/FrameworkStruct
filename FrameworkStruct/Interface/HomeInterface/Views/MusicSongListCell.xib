@@ -76,12 +76,21 @@
                             <action selector="favoriteAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kpp-mO-5XE"/>
                         </connections>
                     </button>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mp_downloaded" translatesAutoresizingMaskIntoConstraints="NO" id="55Z-Or-JL7">
+                        <rect key="frame" x="31" y="42.5" width="11" height="11"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="11" id="TYJ-bz-LAv"/>
+                            <constraint firstAttribute="height" constant="11" id="nho-5v-lm4"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="dzK-w8-DKG" firstAttribute="centerY" secondItem="55Z-Or-JL7" secondAttribute="centerY" id="1lg-Pp-I6u"/>
                     <constraint firstItem="LHh-aw-Vn8" firstAttribute="leading" secondItem="QSY-7m-DSq" secondAttribute="trailing" constant="8" id="BAa-k6-f7S"/>
                     <constraint firstItem="UeV-we-66K" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MXl-Eq-9en"/>
                     <constraint firstItem="4nj-A5-rsZ" firstAttribute="leading" secondItem="Int-S1-6jS" secondAttribute="trailing" constant="6" id="OkT-1g-em5"/>
                     <constraint firstItem="LHh-aw-Vn8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Oof-ZR-J0m"/>
+                    <constraint firstItem="55Z-Or-JL7" firstAttribute="leading" secondItem="LHh-aw-Vn8" secondAttribute="leading" constant="1" id="QeJ-Pq-s71"/>
                     <constraint firstItem="dzK-w8-DKG" firstAttribute="trailing" secondItem="Int-S1-6jS" secondAttribute="trailing" id="UCI-v7-qGJ"/>
                     <constraint firstItem="QSY-7m-DSq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="YxE-tp-us0"/>
                     <constraint firstItem="QSY-7m-DSq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bAc-Eo-8fB"/>
@@ -99,6 +108,7 @@
             <connections>
                 <outlet property="artistNameLabel" destination="dzK-w8-DKG" id="w2o-Xd-kzf"/>
                 <outlet property="currentPlayImgView" destination="QSY-7m-DSq" id="fYq-q7-YF5"/>
+                <outlet property="downloadStateImgView" destination="55Z-Or-JL7" id="C2M-Wa-sWC"/>
                 <outlet property="favoriteBtn" destination="4nj-A5-rsZ" id="S3a-E9-bqU"/>
                 <outlet property="numberLabel" destination="LHh-aw-Vn8" id="i24-Kv-tGJ"/>
                 <outlet property="songNameLabel" destination="Int-S1-6jS" id="b0q-d1-MN2"/>
@@ -109,6 +119,7 @@
     </objects>
     <resources>
         <image name="mp_addto_songlist" width="24" height="22"/>
+        <image name="mp_downloaded" width="11" height="11"/>
         <image name="mp_favorite" width="22" height="19"/>
         <image name="mp_playing" width="14" height="16"/>
         <image name="mp_unfavorite" width="23" height="21"/>

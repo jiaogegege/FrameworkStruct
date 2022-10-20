@@ -19,16 +19,24 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerDidInitCompleted()
     ///更新完成
     func mpManagerDidUpdated()
-    //播放歌曲变化
-    func mpManagerSongChange(_ song: MPAudioProtocol)
-    //播放进度变化，每秒变化
+    ///加载歌曲，缓冲
+    func mpManagerWaitToPlay(_ song: MPAudioProtocol)
+    ///开始播放歌曲
+    func mpManagerStartPlay(_ song: MPAudioProtocol)
+    ///播放歌曲失败
+    func mpManagerFailedPlay(_ song: MPAudioProtocol)
+    ///播放进度变化，每秒变化
     func mpManagerProgressChange(_ progress: TimeInterval)
 }
 
 
 extension FSNotification {
-    //播放歌曲变化
-    static let mpSongChange = FSNotification(value: "mpSongChange", paramKey: "MPAudioProtocol")
+    //加载歌曲，缓冲
+    static let mpWaitToPlay = FSNotification(value: "mpWaitToPlay", paramKey: "MPAudioProtocol")
+    //开始播放歌曲
+    static let mpStartPlay = FSNotification(value: "mpStartPlay", paramKey: "MPAudioProtocol")
+    //播放歌曲失败
+    static let mpFailedPlay = FSNotification(value: "mpFailedPlay", paramKey: "MPAudioProtocol")
     //播放进度改变，每秒变化
     static let mpProgressChange = FSNotification(value: "mpProgressChange", paramKey: "TImeInterval")
 }
@@ -68,6 +76,7 @@ class MPManager: OriginManager
     private override init()
     {
         super.init()
+        self.stMgr.set(false, key: StatusKey.isInited)
         self.libMgr.delegate = self
         self.player.delegate = self
         if let t = ia.getDouble(.mpProgress) {
@@ -266,7 +275,7 @@ class MPManager: OriginManager
             
             /* 可以后台连续播放，但是经测试发现有时后台时间久了会失效，因为有些app会把自己设置成`firstResponder`考虑用`repeatBackgroundPlay()` */
             ApplicationManager.shared.appDelegate.becomeFirstResponder()
-//            self.repeatBackgroundPlay()
+            self.repeatBackgroundPlay()
         } catch {
             FSLog(error.localizedDescription)
         }
@@ -445,6 +454,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     /**************************************** 媒体库管理器代理 Section Begin ***************************************/
     //媒体库管理器初始化完成
     func mpLibraryManagerDidInitCompleted() {
+        stMgr.set(true, key: StatusKey.isInited)
         delegates.compact()
         for i in 0..<delegates.count
         {
@@ -477,6 +487,16 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     /**************************************** MPPlayer代理方法 Section Begin ***************************************/
     func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping (Bool) -> Void) {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerWaitToPlay(audio)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpWaitToPlay.name, object: [FSNotification.mpWaitToPlay.paramKey: audio])
+        
         //如果是iCloud文件，那么先打开
         if ia.isiCloudFile(audio.audioUrl)
         {
@@ -506,16 +526,16 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         //目前只有歌曲
         libMgr.saveCurrent(audio as! MPSongModel, in: playlist as! MPPlaylistModel)
         
-        //将信息传出去
+        //将播放信息传出去
         delegates.compact()
         for i in 0..<delegates.count
         {
             if let delegate = delegates.object(at: i) as? MPManagerDelegate
             {
-                delegate.mpManagerSongChange(audio)
+                delegate.mpManagerStartPlay(audio)
             }
         }
-        NotificationCenter.default.post(name: FSNotification.mpSongChange.name, object: nil, userInfo: [FSNotification.mpSongChange.paramKey: audio])
+        NotificationCenter.default.post(name: FSNotification.mpStartPlay.name, object: nil, userInfo: [FSNotification.mpStartPlay.paramKey: audio])
     }
     
     //正在等待加载资源
@@ -545,7 +565,15 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     }
     
     func mpPlayerFailToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
-        
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerFailedPlay(audio)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpFailedPlay.name, object: nil, userInfo: [FSNotification.mpFailedPlay.paramKey: audio])
     }
     
     func mpPlayerPlaylistChanged(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
@@ -585,12 +613,22 @@ extension MPManager: InternalType
     //后台任务时长，到这个时间后要结束后台任务，不然会被系统杀掉；然后再开启一个新的后台任务
     static let backgroundTaskTime: TimeInterval = 28.0
     
+    //状态管理器的key
+    enum StatusKey: SMKeyType {
+        case isInited                   //是否完成了初始化
+    }
+    
 }
 
 
 //外部接口
 extension MPManager: ExternalInterface
 {
+    ///是否完成了初始化，指读取了媒体库
+    var isInited: Bool {
+        stMgr.status(StatusKey.isInited) as? Bool ?? false
+    }
+    
     ///执行一个延时任务,播放当前歌曲，如果有的话
     ///继续播放上一次app运行中断时播放的歌曲
     func performPlayCurrent(_ completion: BoolClosure?)
@@ -624,6 +662,11 @@ extension MPManager: ExternalInterface
                         }
                     })
                 })
+            }
+            //如果已经初始化了，那么直接执行
+            if isInited
+            {
+                performInitOrUpdateCallback()
             }
         }
         else if player.isPaused //暂停状态则恢复播放

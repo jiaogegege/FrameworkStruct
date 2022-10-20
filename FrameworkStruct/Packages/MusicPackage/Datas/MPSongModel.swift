@@ -23,10 +23,12 @@ class MPSongModel: OriginModel, Archivable
     var lyricId: String?
     var musicbookId: String?
     var tagIds: Array<String>?
-    var intro: String?
+    var intro: String?          //详细介绍
     
     //非持久化属性
     var asset: [MPEmbellisher.SongMetaDataKey: Any]?    //歌曲文件的一些信息
+    var fileInfo: IADocumentSearchResult?       //文件系统信息
+    
     
     //MARK: 方法
     //初始化一个新的歌曲信息
@@ -35,7 +37,7 @@ class MPSongModel: OriginModel, Archivable
         self.name = name
         self.url = url
         super.init()
-        asset = MPEmbellisher.shared.parseSongMeta(self)
+        self.asset = MPEmbellisher.shared.parseSongMeta(self)
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
@@ -159,6 +161,32 @@ extension MPSongModel: InternalType
         case musicbook
         case tags
         case intro
+    }
+    
+}
+
+
+//接口方法
+extension MPSongModel: ExternalInterface
+{
+    ///组合了歌曲名/艺术家名/专辑名的字符串，用于搜索
+    var fullDescription: String {
+        self.name + (self.asset?[.artist] as? String ?? "") + (self.asset?[.albumName] as? String ?? "") + (self.intro ?? "")
+    }
+    
+    ///是否已经下载
+    var isDownloaded: Bool {
+        if let info = self.fileInfo
+        {
+            return info.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusDownloaded || self.fileInfo?.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusCurrent
+        }
+        else
+        {
+            guard let info = MPEmbellisher.shared.getSongFileInfo(self) else {
+                return false
+            }
+            return info.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusDownloaded || self.fileInfo?.downloadingStatus == NSMetadataUbiquitousItemDownloadingStatusCurrent
+        }
     }
     
 }

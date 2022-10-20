@@ -397,6 +397,11 @@ extension ApplicationManager: ExternalInterface
     
     /**************************************** AppDelegate和SceneDelegate适配方法 Section End ****************************************/
     
+    ///获取app当前状态，前台或后台
+    var appState: AMAppState {
+        stMgr.status(AMStatusKey.appState) as! AMAppState
+    }
+    
     ///是否安装或者更新后第一次启动app
     var isFirstLaunch: Bool {
         let lastVersion = ud.readString(key: .lastRunVersion)

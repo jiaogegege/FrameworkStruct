@@ -342,6 +342,8 @@ extension String
     static let addToBookmark = localized("addToBookmark")
     
     //MARK: Toast文案
+    //播放失败
+    static let failToPlay = localized("failToPlay")
     
     //MARK: 通用错误信息
     //未知错误
