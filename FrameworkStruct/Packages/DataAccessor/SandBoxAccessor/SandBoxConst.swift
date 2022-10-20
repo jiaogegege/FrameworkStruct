@@ -112,6 +112,9 @@ enum FileTypeName: String {
     case car
     case gz
     case rz
+    //数据库
+    case sqlite
+    case db
     
     //判断是否音乐文件
     static func isAudio(_ fileName: String) -> Bool
@@ -135,5 +138,63 @@ enum FileTypeName: String {
         {
             return String(format: "%@.%@", name, self.rawValue)
         }
+    }
+}
+
+
+//文件信息
+struct SBFileAttributes {
+    var type: FileAttributeType?     //typeDirectory/typeRegular/typeSymbolicLink/typeSocket/typeCharacterSpecial/typeBlockSpecial/typeUnknown
+    var size: UInt64?
+    var modificationDate: Date?
+    var referenceCount: Int?
+    var deviceIdentifier: String?
+    var ownerAccountName: String?
+    var groupOwnerAccountName: String?
+    var posixPermissions: Int?
+    var systemNumber: Int?
+    var systemFileNumber: Int?
+    var extensionHidden: Bool?
+    var hfsCreatorCode: OSType?
+    var hfsTypeCode: OSType?
+    var immutable: Bool?
+    var appendOnly: Bool?
+    var creationDate: Date?
+    var ownerAccountID: NSNumber?
+    var groupOwnerAccountID: NSNumber?
+    var busy: Bool?
+    var protectionKey: FileProtectionType?
+    var systemSize: UInt64?
+    var systemFreeSize: UInt64?
+    var systemNodes: String?
+    var systemFreeNodes: String?
+    
+    //从一个文件属性初始化
+    init(fileAttrs: [FileAttributeKey : Any])
+    {
+        self.size = fileAttrs[.size] as? UInt64
+        self.type = fileAttrs[.type] as? FileAttributeType
+        self.modificationDate = fileAttrs[.modificationDate] as? Date
+        self.referenceCount = fileAttrs[.referenceCount] as? Int
+        self.deviceIdentifier = fileAttrs[.deviceIdentifier] as? String
+        self.ownerAccountName = fileAttrs[.ownerAccountName] as? String
+        self.groupOwnerAccountName = fileAttrs[.groupOwnerAccountName] as? String
+        self.posixPermissions = fileAttrs[.posixPermissions] as? Int
+        self.systemNumber = fileAttrs[.systemNumber] as? Int
+        self.systemFileNumber = fileAttrs[.systemFileNumber] as? Int
+        self.extensionHidden = fileAttrs[.extensionHidden] as? Bool
+        self.hfsCreatorCode = fileAttrs[.hfsCreatorCode] as? OSType
+        self.hfsTypeCode = fileAttrs[.hfsTypeCode] as? OSType
+        self.immutable = fileAttrs[.immutable] as? Bool
+        self.appendOnly = fileAttrs[.appendOnly] as? Bool
+        self.creationDate = fileAttrs[.creationDate] as? Date
+        self.ownerAccountID = fileAttrs[.ownerAccountID] as? NSNumber
+        self.groupOwnerAccountID = fileAttrs[.groupOwnerAccountID] as? NSNumber
+        self.busy = fileAttrs[.busy] as? Bool
+        self.protectionKey = fileAttrs[.protectionKey] as? FileProtectionType
+        self.systemSize = fileAttrs[.systemSize] as? UInt64
+        self.systemFreeSize = fileAttrs[.systemFreeSize] as? UInt64
+        self.systemNodes = fileAttrs[.systemNodes] as? String
+        self.systemFreeNodes = fileAttrs[.systemFreeNodes] as? String
     }
 }

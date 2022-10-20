@@ -106,6 +106,17 @@ extension ThreadManager: ExternalInterface
         }
     }
     
+    ///在线程中异步执行代码，并在执行完后在原来调用的线程中返回
+    ///queue：调用该方法时所在的队列
+    func async(onMain: Bool = false, action: @escaping ((_ queue: DispatchQueue) -> Void))
+    {
+        let currentQueue = self.currentQueue()
+        let queue = onMain ? DispatchQueue.main : DispatchQueue.global()
+        queue.async {
+            action(currentQueue)
+        }
+    }
+    
     ///在线程中同步执行代码
     ///注意：一般不会这么使用
     func sync(onMain: Bool = true, action: @escaping VoidClosure)

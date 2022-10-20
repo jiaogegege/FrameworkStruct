@@ -124,6 +124,91 @@ extension SandBoxAccessor: ExternalInterface
         fileUrl.hasPrefix(sdFilePrefix)
     }
     
+    ///获取一个目录中的所有文件，返回文件绝对路径数组
+    ///参数：excludeDir：是否排除目录，默认不排除；excludeFile：是否排除文件，默认不排除；
+    ///fileExts：搜索特定扩展名的文件，该参数和前面两个参数是互斥的；excludefileExts：是否排除特定扩展名的文件，该参数和`fileExts`配合使用
+    func getPathList(in dir: String,
+                     excludeDir: Bool = false,
+                     excludeFile: Bool = false,
+                     fileExts: [FileTypeName]? = nil,
+                     excludefileExts: Bool = false, completion: @escaping (([String]) -> Void))
+    {
+        ThreadManager.shared.async { queue in
+            var files = [String]()
+            if let en = FileManager.default.enumerator(atPath: dir)
+            {
+                for path in en
+                {
+                    let absPath = (dir as NSString).appendingPathComponent((path as! String))
+                    if let fileExts = fileExts
+                    {
+                        if excludefileExts  //排除特定扩展名
+                        {
+                            var shouldAdd = true
+                            for ext in fileExts {
+                                if (absPath as NSString).pathExtension == ext.rawValue
+                                {
+                                    shouldAdd = false
+                                    break
+                                }
+                            }
+                            if shouldAdd == true && self.isFile(absPath)
+                            {
+                                files.append(absPath)
+                            }
+                        }
+                        else    //指定特定扩展名
+                        {
+                            for ext in fileExts {
+                                if (absPath as NSString).pathExtension == ext.rawValue
+                                {
+                                    files.append(absPath)
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if excludeDir   //排除目录
+                        {
+                            if self.isFile(absPath)
+                            {
+                                files.append(absPath)
+                            }
+                        }
+                        else if excludeFile //排除文件
+                        {
+                            if self.isDir(absPath)
+                            {
+                                files.append(absPath)
+                            }
+                        }
+                        else
+                        {
+                            files.append(absPath)
+                        }
+                    }
+                }
+            }
+            queue.async {
+                completion(files)
+            }
+        }
+    }
+    
+    ///获取文件属性
+    func getFileAttrs(at path: String) -> SBFileAttributes?
+    {
+        do {
+            let attrs = try fileMgr.attributesOfItem(atPath: path)
+            return SBFileAttributes(fileAttrs: attrs)
+        } catch {
+            FSLog(error.localizedDescription)
+            return nil
+        }
+    }
+    
     /**************************************** 文件和目录操作 Section End ****************************************/
     
     //MARK: 文件夹路径访问
