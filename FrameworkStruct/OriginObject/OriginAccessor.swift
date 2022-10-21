@@ -36,7 +36,7 @@ class OriginAccessor: NSObject
     fileprivate(set) weak var monitor: AccessorMonitor!
     
     //状态管理器
-    var stMgr: StatusManager = StatusManager(capacity: originStatusStep)
+    fileprivate(set) lazy var stMgr: StatusManager = StatusManager(capacity: originStatusStep)
     
     
     override init()

@@ -86,6 +86,7 @@ extension MPLibraryManager: DelegateProtocol
 //外部接口
 extension MPLibraryManager: ExternalInterface
 {
+    /**************************************** 播放资源操作 Section Begin ***************************************/
     ///获取某个资源
     func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: @escaping (([Any]?) -> Void))
     {
@@ -101,7 +102,6 @@ extension MPLibraryManager: ExternalInterface
         }
     }
     
-    /**************************************** 播放资源操作 Section Begin ***************************************/
     ///读取当前播放歌曲，可能为nil
     func readCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
     {
@@ -176,6 +176,17 @@ extension MPLibraryManager: ExternalInterface
             }
         }
         return songs
+    }
+    
+    ///修改歌曲的下载状态
+    func setSongDownloadStatus(_ downloaded: Bool, song: MPSongModel)
+    {
+        if let file = container.getSongFileInfo(song)
+        {
+            var newFile = file
+            newFile.downloadingStatus = downloaded ? NSMetadataUbiquitousItemDownloadingStatusCurrent : NSMetadataUbiquitousItemDownloadingStatusNotDownloaded
+            container.setSongFileInfo(newFile)
+        }
     }
     
     ///根据艺术家id返回艺术家对象

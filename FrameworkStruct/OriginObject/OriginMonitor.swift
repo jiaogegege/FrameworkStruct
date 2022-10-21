@@ -54,7 +54,7 @@ class OriginMonitor: NSObject
     fileprivate var container: FSVector = FSVector<NSObject>()
     
     //状态管理器，建议有复杂变化的状态都通过状态管理器管理
-    let stMgr: StatusManager = StatusManager(capacity: originStatusStep)
+    fileprivate(set) lazy var stMgr: StatusManager = StatusManager(capacity: originStatusStep)
 
 }
 

@@ -76,7 +76,9 @@ class MPManager: OriginManager
     private override init()
     {
         super.init()
-        self.stMgr.set(false, key: StatusKey.isInited)
+        self.stMgr.set(MPStatus.isIniting, key: StatusKey.currentStatus)
+        self.stMgr.set(false, key: StatusKey.updated)
+        self.stMgr.set(false, key: StatusKey.inBackground)
         self.libMgr.delegate = self
         self.player.delegate = self
         if let t = ia.getDouble(.mpProgress) {
@@ -114,15 +116,23 @@ class MPManager: OriginManager
         let playCmd = cmdCenter.playCommand
         playCmd.isEnabled = true
         playCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.player.resume()
-            return .success
+            if self?.currentStatus == .paused
+            {
+                self?.player.resume()
+                return .success
+            }
+            return .commandFailed
         }
         //暂停
         let pauseCmd = cmdCenter.pauseCommand
         pauseCmd.isEnabled = true
         pauseCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.player.pause()
-            return .success
+            if self?.currentStatus == .playing
+            {
+                self?.player.pause()
+                return .success
+            }
+            return .commandFailed
         }
         //停止
         let stopCmd = cmdCenter.stopCommand
@@ -156,37 +166,53 @@ class MPManager: OriginManager
         let nextCmd = cmdCenter.nextTrackCommand
         nextCmd.isEnabled = true
         nextCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.player.next()
-            return .success
+            if self?.currentStatus != .loading && self?.currentStatus != .waiting
+            {
+                self?.player.next()
+                return .success
+            }
+            return .commandFailed
         }
         //上一首
         let previousCmd = cmdCenter.previousTrackCommand
         previousCmd.isEnabled = true
         previousCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            self?.player.previous()
-            return .success
+            if self?.currentStatus != .loading && self?.currentStatus != .waiting
+            {
+                self?.player.previous()
+                return .success
+            }
+            return .commandFailed
         }
         //向前跳过几秒
         let skipForwardCmd = cmdCenter.skipForwardCommand
         skipForwardCmd.isEnabled = false
         skipForwardCmd.preferredIntervals = [NSNumber(value: skipTime)]
         skipForwardCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            let forwardEvent = event as! MPSkipIntervalCommandEvent
-            self?.player.skip(forwardEvent.interval, success: { (succeed) in
-                
-            })
-            return .success
+            if self?.currentStatus == .playing || self?.currentStatus == .paused
+            {
+                let forwardEvent = event as! MPSkipIntervalCommandEvent
+                self?.player.skip(forwardEvent.interval, success: { (succeed) in
+                    
+                })
+                return .success
+            }
+            return .commandFailed
         }
         //向后跳过几秒
         let skipBackwardCmd = cmdCenter.skipBackwardCommand
         skipBackwardCmd.isEnabled = false
         skipBackwardCmd.preferredIntervals = [NSNumber(value: skipTime)]
         skipBackwardCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            let backwardEvent = event as! MPSkipIntervalCommandEvent
-            self?.player.skip(backwardEvent.interval, backward: true, success: { (succeed) in
-                
-            })
-            return .success
+            if self?.currentStatus == .playing || self?.currentStatus == .paused
+            {
+                let backwardEvent = event as! MPSkipIntervalCommandEvent
+                self?.player.skip(backwardEvent.interval, backward: true, success: { (succeed) in
+                    
+                })
+                return .success
+            }
+            return .commandFailed
         }
         //向前跳，具体功能不知
         let seekForwardCmd = cmdCenter.seekForwardCommand
@@ -204,12 +230,16 @@ class MPManager: OriginManager
         let progressCmd = cmdCenter.changePlaybackPositionCommand
         progressCmd.isEnabled = true
         progressCmd.addTarget {[weak self] (event) -> MPRemoteCommandHandlerStatus in
-            let playbackPositionEvent = event as! MPChangePlaybackPositionCommandEvent
-            let time = playbackPositionEvent.positionTime
-            self?.player.seek(time) { (succeed) in
-                
+            if self?.currentStatus == .playing || self?.currentStatus == .paused
+            {
+                let playbackPositionEvent = event as! MPChangePlaybackPositionCommandEvent
+                let time = playbackPositionEvent.positionTime
+                self?.player.seek(time) { (succeed) in
+                    
+                }
+                return .success
             }
-            return .success
+            return .commandFailed
         }
         //评分
         let rateCmd = cmdCenter.ratingCommand
@@ -380,12 +410,14 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     //app即将进入后台
     @objc func applicationWillResignActive(notify: Notification)
     {
+        stMgr.set(true, key: StatusKey.inBackground)
         self.startBackgroundPlay()
     }
     
     //app进入前台
     @objc func applicationDidBecomeActive(notify: Notification)
     {
+        stMgr.set(false, key: StatusKey.inBackground)
         self.endBackgroundPlay()
     }
     
@@ -455,7 +487,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     /**************************************** 媒体库管理器代理 Section Begin ***************************************/
     //媒体库管理器初始化完成
     func mpLibraryManagerDidInitCompleted() {
-        stMgr.set(true, key: StatusKey.isInited)
+        stMgr.set(MPStatus.isInited, key: StatusKey.currentStatus)
         delegates.compact()
         for i in 0..<delegates.count
         {
@@ -471,6 +503,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     //媒体库管理器更新
     func mpLibraryManagerDidUpdated() {
+        stMgr.set(true, key: StatusKey.updated)
         delegates.compact()
         for i in 0..<delegates.count
         {
@@ -487,7 +520,9 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     /**************************************** 媒体库管理器代理 Section End ***************************************/
     
     /**************************************** MPPlayer代理方法 Section Begin ***************************************/
+    //处理和加载播放资源
     func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping (Bool) -> Void) {
+        stMgr.set(MPStatus.loading, key: StatusKey.currentStatus)
         delegates.compact()
         for i in 0..<delegates.count
         {
@@ -513,6 +548,11 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                         self?.ia.closeDocument(id)
                         //返回成功
                         success(true)
+                        //打开成功说明下载成功了，那么修改歌曲下载信息为已下载
+                        if let song = audio as? MPSongModel
+                        {
+                            self?.libMgr.setSongDownloadStatus(true, song: song)
+                        }
                     }
                     else
                     {
@@ -529,6 +569,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     //开始播放音乐，记录一些信息
     func mpPlayerStartToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        stMgr.set(MPStatus.playing, key: StatusKey.currentStatus)
         //在控制中心显示歌曲信息
         showAudioInfoInControlCenter(audio)
         //播放成功，那么保存当前播放歌曲和当前播放列表
@@ -547,12 +588,13 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         NotificationCenter.default.post(name: FSNotification.mpStartPlay.name, object: nil, userInfo: [FSNotification.mpStartPlay.paramKey: audio])
     }
     
-    //正在等待加载资源
-    func mpPlayerLoadingToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
-        
+    //正在等待播放资源
+    func mpPlayerWaitToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        stMgr.set(MPStatus.waiting, key: StatusKey.currentStatus)
     }
     
     func mpPlayerPauseToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        stMgr.set(MPStatus.paused, key: StatusKey.currentStatus)
         //保存进度
         savePlaybackProgress(player.currentTime)
         //在控制中心显示歌曲信息
@@ -565,15 +607,19 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     }
     
     func mpPlayerFinishPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        stMgr.set(MPStatus.playFinished, key: StatusKey.currentStatus)
         //播放完成后，播放进度重置为0
         savePlaybackProgress(0)
+        //设置控制中心内容
+        showAudioInfoInControlCenter(audio)
     }
     
     func mpPlayerStopToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
-        
+        stMgr.set(MPStatus.stopped, key: StatusKey.currentStatus)
     }
     
     func mpPlayerFailToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        stMgr.set(MPStatus.stopped, key: StatusKey.currentStatus)
         delegates.compact()
         for i in 0..<delegates.count
         {
@@ -583,6 +629,8 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             }
         }
         NotificationCenter.default.post(name: FSNotification.mpFailedPlay.name, object: nil, userInfo: [FSNotification.mpFailedPlay.paramKey: audio])
+        //尝试播放下一首
+        player.next()
     }
     
     func mpPlayerPlaylistChanged(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
@@ -624,7 +672,20 @@ extension MPManager: InternalType
     
     //状态管理器的key
     enum StatusKey: SMKeyType {
-        case isInited                   //是否完成了初始化
+        case currentStatus              //MP当前状态：`MPStatus`
+        case inBackground               //是否在后台：`Bool`
+        case updated                    //是否更新过，会多次发生更新：Bool
+    }
+    
+    enum MPStatus {
+        case isIniting                  //正在初始化
+        case isInited                   //初始化完成
+        case waiting                    //正在等待播放资源
+        case loading                    //正在加载播放资源
+        case playing                    //正在播放歌曲
+        case paused                     //暂停状态
+        case playFinished               //播放完成
+        case stopped                    //停止状态
     }
     
 }
@@ -633,9 +694,14 @@ extension MPManager: InternalType
 //外部接口
 extension MPManager: ExternalInterface
 {
+    ///MPManager当前状态
+    var currentStatus: MPStatus {
+        stMgr.status(StatusKey.currentStatus) as! MPStatus
+    }
+    
     ///是否完成了初始化，指读取了媒体库
     var isInited: Bool {
-        stMgr.status(StatusKey.isInited) as? Bool ?? false
+        currentStatus == .isInited
     }
     
     ///执行一个延时任务,播放当前歌曲，如果有的话
@@ -691,7 +757,7 @@ extension MPManager: ExternalInterface
         delegates.compact()
     }
     
-    ///控制中心操作,已废弃
+    ///控制中心操作，可在AppDelegate中使用，已废弃
     @available(*, deprecated, message: "Don't use this anymore")
 //    @available(iOS, introduced: 1.0, deprecated: 1.0, message: "use `MPRemoteCommandCenter`")
     func remoteControl(_ event: UIEvent.EventSubtype)

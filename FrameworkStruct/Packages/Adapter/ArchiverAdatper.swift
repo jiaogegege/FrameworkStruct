@@ -56,8 +56,7 @@ extension ArchiverAdatper: ExternalInterface
     ///secure：是否安全归档，如果为true，那么obj必须支持NSSecureCoding
     func archive(_ obj: NSCoding, secure: Bool = false, completion: @escaping OptionalDataClosure)
     {
-        let queue = ThreadManager.shared.currentQueue()
-        g_async(onMain: false) {
+        g_async { queue in
             do {
                 let data = try NSKeyedArchiver.archivedData(withRootObject: obj, requiringSecureCoding: secure)
                 queue.async {
@@ -75,8 +74,7 @@ extension ArchiverAdatper: ExternalInterface
     ///将对象归档到一个文件
     func archiveToFile(_ obj: NSCoding, secure: Bool = false, fileUrl: URL, completion: BoolClosure? = nil)
     {
-        let queue = ThreadManager.shared.currentQueue()
-        g_async(onMain: false) {
+        g_async { queue in
             do {
                 let data = try NSKeyedArchiver.archivedData(withRootObject: obj, requiringSecureCoding: secure)
                 try data.write(to: fileUrl)
@@ -112,8 +110,7 @@ extension ArchiverAdatper: ExternalInterface
     ///将Data解档为一个对象
     func unarchive(_ data: Data, completion: @escaping OptionalAnyClosure)
     {
-        let queue = ThreadManager.shared.currentQueue()
-        g_async(onMain: false) {
+        g_async { queue in
             do {
                 if let obj = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
                 {
@@ -139,8 +136,7 @@ extension ArchiverAdatper: ExternalInterface
     ///从一个文件中解档为一个对象
     func unarchiveFromFile(_ fileUrl: URL, completion: @escaping OptionalAnyClosure)
     {
-        let queue = ThreadManager.shared.currentQueue()
-        g_async(onMain: false) {
+        g_async { queue in
             do {
                 let data = try Data(contentsOf: fileUrl)
                 if let obj = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)

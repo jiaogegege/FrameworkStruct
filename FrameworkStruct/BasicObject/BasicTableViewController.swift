@@ -98,7 +98,7 @@ class BasicTableViewController: UITableViewController
     
     /**************************************** 内部属性 Section Begin ***************************************/
     //状态管理器，只能在本类中修改，外部和子类仅访问
-    fileprivate(set) var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
+    fileprivate(set) lazy var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
     
     //当前主题，只能在本类中修改，外部和子类仅访问
     fileprivate(set) lazy var theme = ThemeManager.shared.getCurrentOrDark()

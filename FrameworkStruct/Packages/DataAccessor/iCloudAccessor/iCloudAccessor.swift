@@ -58,10 +58,11 @@ class iCloudAccessor: OriginAccessor {
     ///搜索结果排序规则，可以对搜索完成后的结果再次进行排序，进行一次排序后，该变量被清空，下一次搜索需要再次设置
     var queryResultSort: IASearchSort? = .displayName(true)
     
-    //执行查询时候外部调用所在的queue
-    fileprivate var callbackQueue: DispatchQueue?
+    /* 以下两个数组中的内容应始终保持一一对应 */
+    //执行查询时候外部调用所在的queue，保存每次查询请求所在的queue
+    fileprivate lazy var queryCallbackQueues: [DispatchQueue] = []
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
-    fileprivate lazy var queryDocumentsCallbacks: [(([IADocumentSearchResult]) -> Void)] = []
+    fileprivate lazy var queryDocumentsCallbacks: [([IADocumentSearchResult]) -> Void] = []
     
     //正在操作的文件句柄dict
     fileprivate var handledFiles: [IADocumentHandlerType: iCloudDocument] = [:]
@@ -172,15 +173,18 @@ extension iCloudAccessor: DelegateProtocol
                 retSort.compare(lhs: lhs, rhs: rhs)
             }
         }
-        let queue = self.callbackQueue ?? DispatchQueue.main
-        queue.async {
-            for cb in self.queryDocumentsCallbacks
-            {
-                cb(fileArray)
+        
+        //如果有外部执行队列，则在其中执行
+        for (index, callback) in queryDocumentsCallbacks.enumerated()
+        {
+            let queue = queryCallbackQueues[index]
+            queue.async {
+                callback(fileArray)
             }
-            //完毕之后，清理回调
-            self.queryDocumentsCallbacks.removeAll()
         }
+        //完毕之后，清理回调
+        self.queryDocumentsCallbacks.removeAll()
+        self.queryCallbackQueues.removeAll()
     }
     
 }
@@ -557,7 +561,7 @@ extension iCloudAccessor: ExternalInterface
     ///查询icloud文件信息
     func queryDocuments(_ callback: @escaping ([IADocumentSearchResult]) -> Void)
     {
-        self.callbackQueue = ThreadManager.shared.currentQueue()
+        self.queryCallbackQueues.append(ThreadManager.shared.currentQueue())
         self.queryDocumentsCallbacks.append(callback)
         if !self.fileQuery.isStarted || self.fileQuery.isStopped    //如果还未开始查询，那么开始查询
         {
@@ -566,8 +570,7 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///是否在查询中
-    func isQuerying() -> Bool
-    {
+    var isQuerying: Bool {
         !self.fileQuery.isStopped
     }
     
@@ -575,6 +578,8 @@ extension iCloudAccessor: ExternalInterface
     func stopQuery()
     {
         self.fileQuery.stop()
+        self.queryDocumentsCallbacks.removeAll()
+        self.queryCallbackQueues.removeAll()
     }
     
     ///在iCloud中创建一个文件并传入数据，没有数据为什么要创建文件呢
@@ -699,8 +704,7 @@ extension iCloudAccessor: ExternalInterface
             }
         }
         //读写文件较慢，所以异步操作
-        let queue = ThreadManager.shared.currentQueue()
-        g_async(onMain: false) {
+        g_async { queue in
             //读取本地文件data
             if let data = self.fileMgr.contents(atPath: source)
             {

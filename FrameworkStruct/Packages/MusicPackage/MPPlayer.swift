@@ -18,8 +18,8 @@ protocol MPPlayerDelegate: NSObjectProtocol {
     ///audio：要播放的音频；success：外部管理器处理完后执行是否成功的回调，如果成功，player将尝试播放该音频
     func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping BoolClosure)
     
-    ///等待播放某个音频，加载中
-    func mpPlayerLoadingToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
+    ///等待播放某个音频
+    func mpPlayerWaitToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
     
     ///开始播放某个音频
     func mpPlayerStartToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
@@ -118,6 +118,7 @@ class MPPlayer: OriginWorker
     //准备播放
     fileprivate func prepareToPlay(_ audio: MPAudioProtocol)
     {
+        FSLog("prepare to play")
         //准备播放
         if let delegate = self.delegate {
             delegate.mpPlayerPrepareToPlay(audio) {[weak self] succeed in
@@ -144,6 +145,7 @@ class MPPlayer: OriginWorker
     //执行播放
     fileprivate func performPlay(_ audio: MPAudioProtocol)
     {
+        FSLog("perform play")
         stop()
         
         itemAsset = AVURLAsset(url: audio.audioUrl)
@@ -156,6 +158,7 @@ class MPPlayer: OriginWorker
     //执行播放是否成功的回调
     fileprivate func performPlayCallback(_ result: Bool)
     {
+        FSLog("perform play callback")
         if let cb = playResultCallback
         {
             cb(result)
@@ -166,6 +169,7 @@ class MPPlayer: OriginWorker
     ///播放下一首乐曲，根据不同的播放模式
     fileprivate func playNextByMode()
     {
+        FSLog("play next by mode")
         //先获取下一首乐曲
         self.currentAudio = self.getNextAudioByMode()
         //准备播放
@@ -328,6 +332,7 @@ extension MPPlayer: DelegateProtocol
                 let status = playerItem.status
                 if status == .readyToPlay   //准备播放
                 {
+                    FSLog("start to play")
                     //添加播放进度观察
                     self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1.0, preferredTimescale: itemAsset!.duration.timescale), queue: nil) {[weak self] cmtime in
                         //计算已播放时间
@@ -353,13 +358,13 @@ extension MPPlayer: DelegateProtocol
                         del.mpPlayerFailToPlay(currentAudio!, playlist: currentPlaylist!)
                     }
                 }
-                else if status == .unknown  //未知，可能在加载网络资源
+                else if status == .unknown  //未知，没有在加载播放资源
                 {
                     FSLog("player status unknown")
 //                    self.performPlayCallback(false)
                     if let del = self.delegate
                     {
-                        del.mpPlayerLoadingToPlay(currentAudio!, playlist: currentPlaylist!)
+                        del.mpPlayerWaitToPlay(currentAudio!, playlist: currentPlaylist!)
                     }
                 }
             }
@@ -477,6 +482,7 @@ extension MPPlayer: ExternalInterface
         if isPaused
         {
             player.play()
+            FSLog("really to play")
             if let delegate = self.delegate
             {
                 delegate.mpPlayerResumeToPlay(currentAudio!, playlist: currentPlaylist!)
@@ -490,6 +496,7 @@ extension MPPlayer: ExternalInterface
         if isPlaying
         {
             player.pause()
+            FSLog("really to pause")
             if let delegate = self.delegate
             {
                 delegate.mpPlayerPauseToPlay(currentAudio!, playlist: currentPlaylist!)
@@ -500,6 +507,7 @@ extension MPPlayer: ExternalInterface
     ///停止播放，清理播放资源，保留播放器
     func stop()
     {
+        FSLog("really to stop")
         player.pause()
         if let ob = timeObserver
         {
@@ -507,9 +515,9 @@ extension MPPlayer: ExternalInterface
             timeObserver = nil
         }
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.status.rawValue)
-        itemAsset = nil
-        playerItem = nil
         player.replaceCurrentItem(with: nil)
+        playerItem = nil
+        itemAsset = nil
         
         if let delegate = self.delegate, currentAudio != nil
         {
@@ -560,7 +568,8 @@ extension MPPlayer: ExternalInterface
     {
         if !isFree
         {
-            player.seek(to: CMTimeMakeWithSeconds(to, preferredTimescale: itemAsset!.duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero) {[weak self] (succeed) in
+            //将时间限制在歌曲总时长内
+            player.seek(to: CMTimeMakeWithSeconds(limitIn(to, min: 0, max: totalTime - 1), preferredTimescale: itemAsset!.duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero) {[weak self] (succeed) in
                 if let delegate = self?.delegate
                 {
                     delegate.mpPlayerTimeChange(self?.currentTime ?? 0)

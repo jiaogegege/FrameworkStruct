@@ -165,6 +165,12 @@ func g_async(onMain: Bool = true, action: @escaping VoidClosure)
     ThreadManager.shared.async(onMain: onMain, action: action)
 }
 
+///在后台线程中执行任务并在当前线程中返回，不一定是主线程
+func g_async(action: @escaping ((_ queue: DispatchQueue) -> Void))
+{
+    ThreadManager.shared.async(onMain: false, action: action)
+}
+
 ///延时操作
 func g_after(_ interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoidClosure)
 {

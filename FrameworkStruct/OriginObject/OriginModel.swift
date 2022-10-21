@@ -74,5 +74,11 @@ class DataModelMeta: NSObject {
      */
     var canCommit: Bool = true
     
+    init(needCopy: Bool = true, canCommit: Bool = true)
+    {
+        self.needCopy = needCopy
+        self.canCommit = canCommit
+    }
+    
 }
 
