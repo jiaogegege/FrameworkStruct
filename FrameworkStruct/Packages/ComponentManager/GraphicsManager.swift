@@ -380,10 +380,67 @@ extension GraphicsManager: ExternalInterface
         
     }
     
-    ///绘制图像
-    func drawImage(context: CGContext)
+    ///提供一个绘图上下文，在回调中绘制图片或文字，最后返回一个图片
+    func drawContent(in boundary: CGSize, action: ((CGContext?) -> Void)) -> UIImage?
     {
-        
+        //设置画布尺寸
+        UIGraphicsBeginImageContext(boundary)
+        action(UIGraphicsGetCurrentContext())
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImg
+    }
+    
+    ///绘制一组图像，并指定rect
+    ///参数：images：要绘制的图像；rects：指定这些图像的rect；这两个参数必须一一对应；keepRatio：是否保持长宽比，为true则保持长宽比并按照rects指定最大尺寸绘制，位置由rects指定
+    func drawImages(_ images: [UIImage], rects: [CGRect], keepRatio: Bool = false)
+    {
+        guard images.count == rects.count else {
+            return       //假设图片数量和rect数量必须一一对应
+        }
+        for (index, img) in images.enumerated()
+        {
+            let rect = rects[index]
+            var size = rect.size
+            if keepRatio    //如果保持长宽比，那么计算保持长宽比条件下最大尺寸
+            {
+                let imgRatio = img.size.width / img.size.height     //图片实际长宽比
+                let sizeRatio = size.width / size.height        //指定尺寸的长宽比
+                size = sizeRatio > imgRatio ? CGSize(width: size.height * imgRatio, height: size.height) : CGSize(width: size.width, height: size.width / imgRatio)
+            }
+            img.draw(in: CGRect(origin: rect.origin, size: size))
+        }
+    }
+    
+    ///将多个包含特定rect的图像绘制到同一个图像中
+    ///参数：boundary：整体边界；images：要绘制的图像；rects：指定这些图像的rect；这两个参数必须一一对应；keepRatio：是否保持长宽比，为true则保持长宽比并按照rects指定最大尺寸绘制，位置由rects指定
+    ///additionalDraw：另外的绘制命令，比如绘制一些文字，可以在这个闭包中执行
+    func drawImages(in boundary: CGSize, images: [UIImage], rects: [CGRect], keepRatio: Bool = false, additionalDraw: ((CGContext?) -> Void)? = nil) -> UIImage?
+    {
+        guard images.count == rects.count else {
+            return nil      //假设图片数量和rect数量必须一一对应
+        }
+        //设置画布尺寸
+        UIGraphicsBeginImageContext(boundary)
+        for (index, img) in images.enumerated()
+        {
+            let rect = rects[index]
+            var size = rect.size
+            if keepRatio    //如果保持长宽比，那么计算保持长宽比条件下最大尺寸
+            {
+                let imgRatio = img.size.width / img.size.height     //图片实际长宽比
+                let sizeRatio = size.width / size.height        //指定尺寸的长宽比
+                size = sizeRatio > imgRatio ? CGSize(width: size.height * imgRatio, height: size.height) : CGSize(width: size.width, height: size.width / imgRatio)
+            }
+            img.draw(in: CGRect(origin: rect.origin, size: size))
+        }
+        if let cl = additionalDraw
+        {
+            cl(UIGraphicsGetCurrentContext())
+        }
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImg
     }
     
     ///绘制一组图像并返回一个大图，就是将多个图片组合在一起
@@ -464,7 +521,7 @@ extension GraphicsManager: ExternalInterface
     ///绘制文字
     ///参数：
     ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制
-    func drawText(context: CGContext, text: String, font: UIFont, color: UIColor, position: CGPoint, areaSize: CGSize?)
+    func drawText(context: CGContext?, text: String, font: UIFont, color: UIColor, position: CGPoint, areaSize: CGSize?)
     {
         let attrs = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color]
         if let areaSize = areaSize
@@ -480,7 +537,7 @@ extension GraphicsManager: ExternalInterface
     ///绘制属性文字
     ///参数：
     ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制
-    func drawAttrText(context: CGContext, attrStr: NSAttributedString, position: CGPoint, areaSize: CGSize?)
+    func drawAttrText(context: CGContext?, attrStr: NSAttributedString, position: CGPoint, areaSize: CGSize?)
     {
         if let areaSize = areaSize
         {
