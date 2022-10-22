@@ -613,6 +613,8 @@
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
+		EABAA0D629038171004E0FA4 /* OriginUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABAA0D529038171004E0FA4 /* OriginUtility.swift */; };
+		EABAA0D82903E319004E0FA4 /* MusicPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABAA0D72903E319004E0FA4 /* MusicPlayViewController.swift */; };
 		EABB3C9727ED7122005B98E3 /* GuideManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABB3C9627ED7122005B98E3 /* GuideManager.swift */; };
 		EABF5ED328F7A30E00D10D9F /* place_code_nucleate_result.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABF5ED228F7A30E00D10D9F /* place_code_nucleate_result.jpg */; };
 		EAC4E6D027B0C71B00654EE6 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4E6CF27B0C71B00654EE6 /* TimerManager.swift */; };
@@ -1658,6 +1660,8 @@
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
+		EABAA0D529038171004E0FA4 /* OriginUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginUtility.swift; sourceTree = "<group>"; };
+		EABAA0D72903E319004E0FA4 /* MusicPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayViewController.swift; sourceTree = "<group>"; };
 		EABB3C9627ED7122005B98E3 /* GuideManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideManager.swift; sourceTree = "<group>"; };
 		EABF5ED228F7A30E00D10D9F /* place_code_nucleate_result.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_nucleate_result.jpg; sourceTree = "<group>"; };
 		EAC4E6CE27B0C25C00654EE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -3090,6 +3094,7 @@
 			children = (
 				EA92255A276AD66200192E2E /* README.md */,
 				EADB009D27623C76001B7223 /* OriginDefine.swift */,
+				EABAA0D529038171004E0FA4 /* OriginUtility.swift */,
 				EA92255B276ADE2200192E2E /* FSQueue.swift */,
 				EA6CF268278D85AE003A1E43 /* FSStack.swift */,
 				EA92255D276AE48700192E2E /* FSVector.swift */,
@@ -4489,6 +4494,7 @@
 				EAAC7A5928E2A52E009F4B56 /* iCloudFileViewController.swift */,
 				EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */,
 				EAF0986228F4151E00AB487E /* MusicViewController.swift */,
+				EABAA0D72903E319004E0FA4 /* MusicPlayViewController.swift */,
 			);
 			path = HomeInterface;
 			sourceTree = "<group>";
@@ -4760,6 +4766,7 @@
 				EADE522827F6F554005417BE /* SocializeActivity.swift in Sources */,
 				EA92255E276AE48700192E2E /* FSVector.swift in Sources */,
 				EA3E8B0F27B77CEA006A2715 /* Trim.swift in Sources */,
+				EABAA0D82903E319004E0FA4 /* MusicPlayViewController.swift in Sources */,
 				EA1AE481277819E600D028F9 /* ConstraintView.swift in Sources */,
 				EA8CFD0928EDD70B00EE3B73 /* MPArtistModel.swift in Sources */,
 				EA1AE47E277819E600D028F9 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
@@ -5301,6 +5308,7 @@
 				EADB00EB2762416E001B7223 /* JCollectionViewController.swift in Sources */,
 				EA9A75AD27C731EB00A11FC8 /* mztools.c in Sources */,
 				EA3E8ACC27B77CEA006A2715 /* KeyframeGroup+exactlyOneKeyframe.swift in Sources */,
+				EABAA0D629038171004E0FA4 /* OriginUtility.swift in Sources */,
 				EAACA84627FEBF72008EA586 /* MenuInteractionManager.swift in Sources */,
 				EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */,
 				EAA392EA28C6F573009438DC /* PlaceCodeViewController.swift in Sources */,

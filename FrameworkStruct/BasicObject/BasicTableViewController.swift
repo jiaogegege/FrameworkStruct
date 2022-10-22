@@ -362,7 +362,7 @@ class BasicTableViewController: UITableViewController
     //MARK: 可被子类覆写的方法
     //返回按钮事件
     //子类可以覆写这个方法
-    @objc func backAction(sender: UIBarButtonItem)
+    @objc func backAction(sender: Any?)
     {
         self.navigationController?.popViewController(animated: true)
     }

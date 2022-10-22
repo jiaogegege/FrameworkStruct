@@ -40,7 +40,7 @@ class ViewController: BasicViewController
     //创建界面
     override func createUI() {
         super.createUI()
-        
+        push(MusicPlayViewController.getViewController())
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

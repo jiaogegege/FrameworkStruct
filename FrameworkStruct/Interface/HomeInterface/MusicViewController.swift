@@ -233,6 +233,10 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         
     }
     
+    func mpManagerBufferProgressChange(_ progress: TimeInterval) {
+        
+    }
+    
     /**************************************** MPManager代理 Section End ***************************************/
     
     /**************************************** 搜索代理 Section Begin ***************************************/
@@ -357,22 +361,25 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
         if isSearching
         {
-            mpr.playSong(searchArray[indexPath.row], in: .iCloud) { success in
+            mpr.playSong(searchArray[indexPath.row], in: .iCloud) {[weak self] success in
                 g_toast(text: (success ? "播放成功" : "播放失败"))
+                self?.push(MusicPlayViewController.getViewController())
             }
         }
         else
         {
             if type == .library
             {
-                mpr.playSong(libraryArray[indexPath.row], in: .iCloud) { success in
+                mpr.playSong(libraryArray[indexPath.row], in: .iCloud) {[weak self] success in
                     g_toast(text: (success ? "播放成功" : "播放失败"))
+                    self?.push(MusicPlayViewController.getViewController())
                 }
             }
             else if type == .favorite
             {
-                mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) { success in
+                mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) {[weak self] success in
                     g_toast(text: (success ? "播放成功" : "播放失败"))
+                    self?.push(MusicPlayViewController.getViewController())
                 }
             }
             else if type == .songLists

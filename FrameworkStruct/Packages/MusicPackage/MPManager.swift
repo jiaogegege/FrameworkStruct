@@ -27,6 +27,8 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerFailedPlay(_ song: MPAudioProtocol)
     ///播放进度变化，每秒变化
     func mpManagerProgressChange(_ progress: TimeInterval)
+    ///缓冲进度变化
+    func mpManagerBufferProgressChange(_ progress: TimeInterval)
 }
 
 
@@ -38,7 +40,9 @@ extension FSNotification {
     //播放歌曲失败
     static let mpFailedPlay = FSNotification(value: "mpFailedPlay", paramKey: "MPAudioProtocol")
     //播放进度改变，每秒变化
-    static let mpProgressChange = FSNotification(value: "mpProgressChange", paramKey: "TImeInterval")
+    static let mpProgressChange = FSNotification(value: "mpProgressChange", paramKey: "TimeInterval")
+    //缓冲进度改变，每秒变化
+    static let mpBufferProgressChange = FSNotification(value: "mpBufferProgressChange", paramKey: "TimeInterval")
 }
 
 
@@ -545,14 +549,19 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             {
                 ia.openDocument(audio.audioUrl) {[weak self] id in
                     if let id = id {
-                        self?.ia.closeDocument(id)
-                        //返回成功
-                        success(true)
-                        //打开成功说明下载成功了，那么修改歌曲下载信息为已下载
-                        if let song = audio as? MPSongModel
-                        {
-                            self?.libMgr.setSongDownloadStatus(true, song: song)
-                        }
+                        self?.ia.closeDocument(id, completion: { succeed in
+                            if succeed
+                            {
+                                //打开成功说明下载成功了，那么修改歌曲文件信息和下载信息为已下载
+                                if let song = audio as? MPSongModel
+                                {
+                                    song.updateAsset()
+                                    self?.libMgr.setSongDownloadStatus(true, song: song)
+                                }
+                            }
+                            //返回成功
+                            success(succeed)
+                        })
                     }
                     else
                     {
@@ -602,6 +611,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     }
     
     func mpPlayerResumeToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
+        stMgr.set(MPStatus.playing, key: StatusKey.currentStatus)
         //在控制中心显示歌曲信息
         showAudioInfoInControlCenter(audio)
     }
@@ -651,6 +661,19 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             }
         }
         NotificationCenter.default.post(name: FSNotification.mpProgressChange.name, object: nil, userInfo: [FSNotification.mpProgressChange.paramKey: time])
+    }
+    
+    //缓冲进度变化
+    func mpPlayerBufferTimeChange(_ time: TimeInterval) {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerBufferProgressChange(time)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpBufferProgressChange.name, object: nil, userInfo: [FSNotification.mpBufferProgressChange.paramKey: time])
     }
     
     //播放速率变化

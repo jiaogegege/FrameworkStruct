@@ -174,6 +174,12 @@ extension MPSongModel: ExternalInterface
         self.name + (self.asset?[.artist] as? String ?? "") + (self.asset?[.albumName] as? String ?? "") + (self.intro ?? "")
     }
     
+    ///更新mp3文件信息
+    func updateAsset()
+    {
+        self.asset = MPEmbellisher.shared.parseSongMeta(self)
+    }
+    
     ///是否已经下载
     var isDownloaded: Bool {
         if let info = self.fileInfo

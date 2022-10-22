@@ -86,13 +86,14 @@ class MPContainer: OriginContainer
                                     //读取文件后先保存到缓存中
                                     self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
                                     //关闭文件
-                                    self?.ia.closeDocument(had)
-                                    queue.async {
-                                        //发出初始化完成的通知
-                                        NotificationCenter.default.post(name: FSNotification.mpContainerInitFinished.name, object: nil)
-                                    }
-                                    //尝试更新媒体库，目前只有iCloud
-                                    self?.updateLibrarys()
+                                    self?.ia.closeDocument(had, completion: { succeed in
+                                        queue.async {
+                                            //发出初始化完成的通知
+                                            NotificationCenter.default.post(name: FSNotification.mpContainerInitFinished.name, object: nil)
+                                        }
+                                        //尝试更新媒体库，目前只有iCloud
+                                        self?.updateLibrarys()
+                                    })
                                 }
                             }
                         }
@@ -159,13 +160,14 @@ class MPContainer: OriginContainer
                                                     {
                                                         self?.ia.writeDocument(had, data: data, completion: { success in
                                                             //关闭文件
-                                                            self?.ia.closeDocument(had)
-                                                            //读取文件后先保存到缓存中
-                                                            self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
-                                                            queue.async {
-                                                                //发出更新完成的通知
-                                                                NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
-                                                            }
+                                                            self?.ia.closeDocument(had, completion: { succeed in
+                                                                //读取文件后先保存到缓存中
+                                                                self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                                                queue.async {
+                                                                    //发出更新完成的通知
+                                                                    NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
+                                                                }
+                                                            })
                                                         })
                                                     }
                                                 })

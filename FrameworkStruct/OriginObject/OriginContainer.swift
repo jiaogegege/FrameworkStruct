@@ -97,6 +97,8 @@ class OriginContainer: NSObject
     
     //数据容器；key是数据对象的key，value是具体的数据模型
     fileprivate var container: Dictionary<AnyHashable, ContainerDataStruct> = Dictionary()
+    //数据容器锁，在所有对container进行访问的地方都进行加锁
+    fileprivate(set) lazy var containerLock: NSRecursiveLock = NSRecursiveLock()
     
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
@@ -147,11 +149,14 @@ class OriginContainer: NSObject
  */
 extension OriginContainer: ContainerProtocol
 {
+    //不建议覆写这个方法
     @objc func get(key: AnyHashable) -> Any? {
+        containerLock.lock()
         guard let dataStruct = self.container[key] else {
+            containerLock.unlock()
             return nil
         }
-        
+        containerLock.unlock()
         let data = dataStruct.data
         let meta = dataStruct.meta
         return meta.needCopy ? self.getCopy(data) : data
@@ -164,9 +169,10 @@ extension OriginContainer: ContainerProtocol
     
     //不建议覆写这个方法
     @objc func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta()) {
+        containerLock.lock()
         let dataStruct = ContainerDataStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
         self.container[key] = dataStruct
-        
+        containerLock.unlock()
         //提交数据的时候，要对所有订阅对象发出通知
         self.dispatch(key: key, value: self.get(key: key) as Any)
     }
@@ -207,8 +213,9 @@ extension OriginContainer: ContainerProtocol
     
     //不建议覆写这个方法
     @objc func clear(key: AnyHashable) {
+        containerLock.lock()
         self.container.removeValue(forKey: key)
-        
+        containerLock.unlock()
         //清空数据的时候，要对所有订阅对象发出通知
         let array = self.delegates[key]
         array?.addPointer(nil)

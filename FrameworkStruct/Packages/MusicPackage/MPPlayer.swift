@@ -45,6 +45,9 @@ protocol MPPlayerDelegate: NSObjectProtocol {
     ///播放进度改变
     func mpPlayerTimeChange(_ time: TimeInterval)
     
+    ///缓冲进度变化
+    func mpPlayerBufferTimeChange(_ time: TimeInterval)
+    
     ///播放速率改变
     func mpPlayerRateChange(_ rage: Float)
 }
@@ -148,11 +151,16 @@ class MPPlayer: OriginWorker
         FSLog("perform play")
         stop()
         
-        itemAsset = AVURLAsset(url: audio.audioUrl)
+        //options:AVURLAssetPreferPreciseDurationAndTimingKey/AVURLAssetReferenceRestrictionsKey/AVURLAssetHTTPCookiesKey/AVURLAssetAllowsCellularAccessKey/AVURLAssetAllowsExpensiveNetworkAccessKey/AVURLAssetAllowsConstrainedNetworkAccessKey/AVURLAssetURLRequestAttributionKey
+        //隐藏 option：AVURLAssetHTTPHeaderFieldsKey:[headers setObject:@"yourHeader"forKey:@"User-Agent"]
+        itemAsset = AVURLAsset(url: audio.audioUrl, options: nil)
         playerItem = AVPlayerItem(asset: itemAsset!)
         player.replaceCurrentItem(with: playerItem)
-        //监听播放状态
+        //监听播放状态和缓冲
         playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.status.rawValue, options: .new, context: nil)
+        playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.loadedTimeRanges.rawValue, options: .new, context: nil)
+        playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.playbackBufferEmpty.rawValue, options: .new, context: nil)
+        playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.playbackLikelyToKeepUp.rawValue, options: .new, context: nil)
     }
     
     //执行播放是否成功的回调
@@ -327,7 +335,7 @@ extension MPPlayer: DelegateProtocol
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let playerItem = object as? AVPlayerItem, playerItem.isEqual(self.playerItem)    //必须是监听的那个PlayerItem
         {
-            if keyPath == PlayerKeyPath.status.rawValue
+            if keyPath == PlayerKeyPath.status.rawValue     //播放状态改变
             {
                 let status = playerItem.status
                 if status == .readyToPlay   //准备播放
@@ -368,6 +376,32 @@ extension MPPlayer: DelegateProtocol
                     }
                 }
             }
+            else if keyPath == PlayerKeyPath.loadedTimeRanges.rawValue      //缓冲进度变化
+            {
+                let loadedTimes = playerItem.loadedTimeRanges
+                if let timeRange = loadedTimes.first?.timeRangeValue
+                {
+                    let startSeconds = CMTimeGetSeconds(timeRange.start)
+                    let durationSeconds = CMTimeGetSeconds(timeRange.duration)
+                    let buffTime = startSeconds + durationSeconds
+                    if let del = self.delegate
+                    {
+                        del.mpPlayerBufferTimeChange(buffTime)
+                    }
+                }
+            }
+            else if keyPath == PlayerKeyPath.playbackBufferEmpty.rawValue       //缓存不足，播放自动暂停
+            {
+                
+            }
+            else if keyPath == PlayerKeyPath.playbackLikelyToKeepUp.rawValue    //缓存充足，手动继续播放
+            {
+                self.resume()
+            }
+            else
+            {
+                
+            }
         }
     }
     
@@ -379,8 +413,10 @@ extension MPPlayer: InternalType
 {
     //keypath
     enum PlayerKeyPath: String {
-        case status                 //AVPlayerItem.status
-        
+        case status                         //AVPlayerItem.status
+        case loadedTimeRanges               //AVPlayerItem.loadedTimeRanges
+        case playbackBufferEmpty            //AVPlayerItem.playbackBufferEmpty      //缓存不足
+        case playbackLikelyToKeepUp         //AVPlayerItem.playbackLikelyToKeepUp   //缓冲充足
     }
     
     //播放模式
@@ -504,7 +540,7 @@ extension MPPlayer: ExternalInterface
         }
     }
     
-    ///停止播放，清理播放资源，保留播放器
+    ///停止播放，清理播放资源，保留播放器和播放列表
     func stop()
     {
         FSLog("really to stop")
@@ -515,6 +551,9 @@ extension MPPlayer: ExternalInterface
             timeObserver = nil
         }
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.status.rawValue)
+        playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.loadedTimeRanges.rawValue)
+        playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.playbackBufferEmpty.rawValue)
+        playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.playbackLikelyToKeepUp.rawValue)
         player.replaceCurrentItem(with: nil)
         playerItem = nil
         itemAsset = nil
