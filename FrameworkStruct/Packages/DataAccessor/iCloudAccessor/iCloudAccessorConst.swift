@@ -38,6 +38,7 @@ enum IAValueKey: String, CaseIterable {
     case appName
     case appVersion
     case mpProgress             //音乐播放器当前播放进度`TimeInterval`
+    case mpPlayMode             //音乐播放器当前播放模式`Int`
     
     ///获取value，提供一种只能获得key的情况下快速获取value的方法，比如通知
     func getValue() -> Any?

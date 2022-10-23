@@ -175,17 +175,18 @@ class MPPlayer: OriginWorker
     }
     
     ///播放下一首乐曲，根据不同的播放模式
-    fileprivate func playNextByMode()
+    ///参数：auto：是否自动跳下一首，如果是用户手动点击的，那么按顺序播放
+    fileprivate func playNextByMode(auto: Bool = true)
     {
         FSLog("play next by mode")
         //先获取下一首乐曲
-        self.currentAudio = self.getNextAudioByMode()
+        self.currentAudio = self.getNextAudioByMode(auto: auto)
         //准备播放
         self.prepareToPlay(currentAudio!)
     }
     
     //获取下一首乐曲，处理index
-    fileprivate func getNextAudioByMode() -> MPAudioProtocol
+    fileprivate func getNextAudioByMode(auto: Bool = true) -> MPAudioProtocol
     {
         switch playMode {
         case .sequence:     //顺序播放
@@ -203,16 +204,19 @@ class MPPlayer: OriginWorker
             }
             return currentPlaylist!.playlistAudios[currentIndex]
         case .singleCycle:  //单曲循环
-            if indexsOfIfNextPlay.count > 0
+            if !auto
             {
-                currentIndex = indexsOfIfNextPlay.popLast()!
-            }
-            else
-            {
-                currentIndex += 1
-                if currentIndex >= currentPlaylist!.playlistAudios.count
+                if indexsOfIfNextPlay.count > 0
                 {
-                    currentIndex = 0
+                    currentIndex = indexsOfIfNextPlay.popLast()!
+                }
+                else
+                {
+                    currentIndex += 1
+                    if currentIndex >= currentPlaylist!.playlistAudios.count
+                    {
+                        currentIndex = 0
+                    }
                 }
             }
             return currentPlaylist!.playlistAudios[currentIndex]
@@ -240,16 +244,16 @@ class MPPlayer: OriginWorker
     }
     
     ///播放上一首乐曲，根据不同的播放模式
-    fileprivate func playPreviousByMode()
+    fileprivate func playPreviousByMode(auto: Bool = true)
     {
         //先获取上一首乐曲
-        self.currentAudio = self.getPreviousAudioByMode()
+        self.currentAudio = self.getPreviousAudioByMode(auto: auto)
         //准备播放
         self.prepareToPlay(currentAudio!)
     }
     
     ///获取上一首乐曲
-    fileprivate func getPreviousAudioByMode() -> MPAudioProtocol
+    fileprivate func getPreviousAudioByMode(auto: Bool = true) -> MPAudioProtocol
     {
         switch playMode {
         case .sequence:
@@ -420,7 +424,7 @@ extension MPPlayer: InternalType
     }
     
     //播放模式
-    enum PlayMode {
+    enum PlayMode: Int {
         case sequence               //列表顺序，播放完毕后从头开始
         case singleCycle            //单曲循环
         case random                 //列表随机，在一次列表随机中，保证每一首乐曲都能播放一次，然后重新随机
@@ -571,7 +575,7 @@ extension MPPlayer: ExternalInterface
         {
             //保存已经播放的歌曲
             self.elapsedAudioArray.append(self.currentAudio!)
-            self.playNextByMode()
+            self.playNextByMode(auto: false)
         }
     }
     

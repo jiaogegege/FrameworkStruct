@@ -96,6 +96,24 @@ extension UIImage: ConstantPropertyProtocol
     static let iJumpCurrentSong: UIImage? = UIImage(named: "mp_jump_current")
     //唱片图
     static let iDiscImage: UIImage? = UIImage(named: "mp_disc_img")
+    //播放
+    static let iPlayBtn: UIImage? = UIImage(named: "mp_play_btn")
+    //暂停
+    static let iPauseBtn: UIImage? = UIImage(named: "mp_pause_btn")
+    //下一首
+    static let iNextBtn: UIImage? = UIImage(named: "mp_play_next_btn")
+    //上一首
+    static let iPreviousBtn: UIImage? = UIImage(named: "mp_play_previous_btn")
+    //随机播放
+    static let iRandomBtn: UIImage? = UIImage(named: "mp_play_random_btn")
+    //顺序播放
+    static let iSequenceBtn: UIImage? = UIImage(named: "mp_play_sequence_btn")
+    //单曲循环
+    static let iSingleBtn = UIImage(named: "mp_play_single_btn")
+    //播放列表
+    static let iPlaylistBtn = UIImage(named: "mp_playlist_btn")
+    //进度按钮
+    static let iPlayProgressBtn = UIImage(named: "mp_progress_icon")
 
 }
 

@@ -214,7 +214,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     }
     
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
-        g_loading(interaction: true)
+//        g_loading(interaction: true)
     }
     
     func mpManagerStartPlay(_ song: MPAudioProtocol) {
@@ -361,25 +361,46 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
         if isSearching
         {
-            mpr.playSong(searchArray[indexPath.row], in: .iCloud) {[weak self] success in
-                g_toast(text: (success ? "播放成功" : "播放失败"))
-                self?.push(MusicPlayViewController.getViewController())
+            if mpr.currentSong?.audioId != searchArray[indexPath.row].id
+            {
+                mpr.playSong(searchArray[indexPath.row], in: .iCloud) {[weak self] success in
+    //                g_toast(text: (success ? "播放成功" : "播放失败"))
+                    self?.push(MusicPlayViewController.getViewController())
+                }
+            }
+            else
+            {
+                push(MusicPlayViewController.getViewController())
             }
         }
         else
         {
             if type == .library
             {
-                mpr.playSong(libraryArray[indexPath.row], in: .iCloud) {[weak self] success in
-                    g_toast(text: (success ? "播放成功" : "播放失败"))
-                    self?.push(MusicPlayViewController.getViewController())
+                if mpr.currentSong?.audioId != libraryArray[indexPath.row].id
+                {
+                    mpr.playSong(libraryArray[indexPath.row], in: .iCloud) {[weak self] success in
+    //                    g_toast(text: (success ? "播放成功" : "播放失败"))
+                        self?.push(MusicPlayViewController.getViewController())
+                    }
+                }
+                else
+                {
+                    push(MusicPlayViewController.getViewController())
                 }
             }
             else if type == .favorite
             {
-                mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) {[weak self] success in
-                    g_toast(text: (success ? "播放成功" : "播放失败"))
-                    self?.push(MusicPlayViewController.getViewController())
+                if mpr.currentSong?.audioId != favoriteArray[indexPath.row].id
+                {
+                    mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) {[weak self] success in
+    //                    g_toast(text: (success ? "播放成功" : "播放失败"))
+                        self?.push(MusicPlayViewController.getViewController())
+                    }
+                }
+                else
+                {
+                    push(MusicPlayViewController.getViewController())
                 }
             }
             else if type == .songLists

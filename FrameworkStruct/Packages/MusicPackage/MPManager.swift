@@ -73,6 +73,8 @@ class MPManager: OriginManager
     
     //上一次播放时中断时的进度，app启动播放时设置一次
     fileprivate(set) var lastTime: TimeInterval?
+    //播放模式
+    fileprivate(set) var lastPlayMode: MPPlayer.PlayMode?
     
     
     //MARK: 方法
@@ -87,6 +89,9 @@ class MPManager: OriginManager
         self.player.delegate = self
         if let t = ia.getDouble(.mpProgress) {
             self.lastTime = t
+        }
+        if let mode = ia.getInt(.mpPlayMode) {
+            self.lastPlayMode = MPPlayer.PlayMode(rawValue: mode)
         }
         //接受远程控制，不管前台还是后台
         self.addEventControl()
@@ -492,6 +497,9 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     //媒体库管理器初始化完成
     func mpLibraryManagerDidInitCompleted() {
         stMgr.set(MPStatus.isInited, key: StatusKey.currentStatus)
+        if let last = self.lastPlayMode {
+            player.playMode = last
+        }
         delegates.compact()
         for i in 0..<delegates.count
         {
@@ -821,12 +829,33 @@ extension MPManager: ExternalInterface
     /**************************************** 播放音乐相关 Section Begin ***************************************/
     ///是否正在播放音乐
     var isPlaying: Bool {
-        player.isPlaying
+        (stMgr.status(StatusKey.currentStatus) as? MPStatus) == .playing
     }
     
     ///当前正在播放的歌曲
     var currentSong: MPAudioProtocol? {
         player.currentAudio
+    }
+    
+    ///当前歌曲总时间
+    var currentTotalTime: TimeInterval {
+        player.totalTime
+    }
+    
+    ///当前歌曲已经播放时间
+    var currentPastTime: TimeInterval {
+        player.currentTime
+    }
+    
+    ///设置当前播放时间
+    func setCurrentTime(_ time: TimeInterval, completion: BoolClosure?)
+    {
+        player.seek(time) { (succeed) in
+            if let cb = completion
+            {
+                cb(succeed)
+            }
+        }
     }
     
     ///播放模式
@@ -836,6 +865,8 @@ extension MPManager: ExternalInterface
         }
         set {
             player.playMode = newValue
+            //保存到iCloud
+            ia.saveValue(player.playMode.rawValue, key: .mpPlayMode)
         }
     }
     
@@ -864,6 +895,7 @@ extension MPManager: ExternalInterface
                     //播放音乐
                     self?.player.play(song, playlist: playlist, completion: { success in
                         completion(success)
+                        
                     })
                 }
                 else    //没有查询到媒体库，播放失败
@@ -876,6 +908,30 @@ extension MPManager: ExternalInterface
         {
             
         }
+    }
+    
+    ///播放下一首
+    func playNext()
+    {
+        player.next()
+    }
+    
+    ///上一首
+    func playPrevious()
+    {
+        player.previous()
+    }
+    
+    ///暂停
+    func pause()
+    {
+        player.pause()
+    }
+    
+    ///继续
+    func resume()
+    {
+        player.resume()
     }
     
     
