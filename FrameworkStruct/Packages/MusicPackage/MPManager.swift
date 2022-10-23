@@ -953,13 +953,19 @@ extension MPManager: ExternalInterface
     ///播放下一首
     func playNext()
     {
-        player.next()
+        if self.currentStatus != .loading && self.currentStatus != .waiting
+        {
+            self.player.next()
+        }
     }
     
     ///上一首
     func playPrevious()
     {
-        player.previous()
+        if self.currentStatus != .loading && self.currentStatus != .waiting
+        {
+            self.player.previous()
+        }
     }
     
     ///暂停

@@ -111,7 +111,10 @@ extension AnimationManager: ExternalInterface
     ///repeatCount:动画重复次数
     ///autoReverse:是否反转动画，如果为true，动画执行到toValue后再回到fromValue，和repeatCount/isLoop配合使用
     ///host:需要做动画的view或者layer
+    ///startBlock:动画开始的回调
+    ///reachToBlock：动画到达`toValue`后调用
     ///completion:动画完成后执行的动作
+    ///返回动画的id
     func popBasic(propertyName: String,
                   fromValue: Any? = nil,
                   toValue: Any,
@@ -121,7 +124,9 @@ extension AnimationManager: ExternalInterface
                   repeatCount: Int = 1,
                   autoReverse: Bool = false,
                   host: AnyObject,
-                  completion: VoidClosure? = nil)
+                  startBlock: VoidClosure? = nil,
+                  reachToBlock: VoidClosure? = nil,
+                  completion: BoolClosure? = nil) -> String
     {
         let ani = POPBasicAnimation(propertyNamed: propertyName)
         ani?.timingFunction = CAMediaTimingFunction(name: timingFuncName)
@@ -138,16 +143,26 @@ extension AnimationManager: ExternalInterface
         let key = "POPBasicAnimation" + propertyName + g_uuid()
         ani?.name = key
         host.pop_add(ani, forKey: key)
+        if let startCb = startBlock
+        {
+            ani?.animationDidStartBlock = {(anim: POPAnimation!) in
+                startCb()
+            }
+        }
+        if let reachCb = reachToBlock
+        {
+            ani?.animationDidReachToValueBlock = {(anim: POPAnimation!) in
+                reachCb()
+            }
+        }
         //保存完成的回调
         if let comp = completion
         {
             ani?.completionBlock = {(anim: POPAnimation!, finished: Bool) in
-                if finished
-                {
-                    comp()
-                }
+                comp(finished)
             }
         }
+        return key
     }
     
     ///pop弹性动画

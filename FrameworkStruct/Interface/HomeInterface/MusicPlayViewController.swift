@@ -30,6 +30,11 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var progressBar: UISlider!      //进度条
     fileprivate var pastTimeLabel: UILabel!     //经过时间
     fileprivate var totalTimeLabel: UILabel!    //所有时间
+    
+    fileprivate var albumAnimationId: String?       //专辑图片旋转动画id
+    fileprivate var albumAnimationTimer: DispatchSourceTimer?     //专辑图片旋转动画定时器
+    fileprivate var albumAnimationFromValue: Double = 0.0           //动画起始值
+    fileprivate var albumAnimationToValue: Double = Double.pi * 2.0       //动画终点值
 
     //MARK: 方法
     override func viewDidLoad() {
@@ -270,6 +275,7 @@ class MusicPlayViewController: BasicViewController {
         //控制界面显示状态
         self.playPauseBtn.isSelected = mpr.isPlaying
         self.playModeBtn.setImage(getPlayModeImage(), for: .normal)
+        startRotateAnimation()
     }
     
     //根据播放模式获取图片
@@ -340,6 +346,44 @@ class MusicPlayViewController: BasicViewController {
         }
     }
     
+    //播放时专辑图旋转动画
+    fileprivate func startRotateAnimation()
+    {
+        stopRotateAnimation()
+        albumAnimationId = AnimationManager.shared.popBasic(propertyName: kPOPLayerRotation, fromValue: albumAnimationFromValue, toValue: albumAnimationToValue, timingFuncName: .linear, duration: Self.albumAnimationTime, isLoop: true, host: self.albumImgView.layer, startBlock: {[weak self] in
+            self?.startAnimationTimer()
+        }, reachToBlock: {[weak self] in
+            self?.albumAnimationFromValue = 0.0
+            self?.albumAnimationToValue = Double.pi * 2.0
+        })
+    }
+    
+    //开启动画定时器
+    fileprivate func startAnimationTimer()
+    {
+        let sliceValue = Double.pi * 2.0 / (Self.albumAnimationTime / 0.1)
+        self.albumAnimationTimer = TimerManager.shared.dispatchTimer(interval: 0.1, exact: true, host: self, action: {[weak self] in
+            self?.albumAnimationFromValue += sliceValue
+            self?.albumAnimationToValue += sliceValue
+            if self?.albumAnimationFromValue ?? 0.0 > Double.pi * 2.0
+            {
+                self?.albumAnimationFromValue -= Double.pi * 2.0
+                self?.albumAnimationToValue -= Double.pi * 2.0
+            }
+        })
+    }
+    
+    //停止旋转动画
+    fileprivate func stopRotateAnimation()
+    {
+        albumAnimationTimer?.cancel()
+        albumAnimationTimer = nil
+        if let id = albumAnimationId
+        {
+            albumImgView.layer.pop_removeAnimation(forKey: id)
+        }
+    }
+    
 }
 
 
@@ -364,14 +408,17 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
     
     func mpManagerPausePlay(_ song: MPAudioProtocol) {
         playPauseBtn.isSelected = false
+        stopRotateAnimation()
     }
     
     func mpManagerResumePlay(_ song: MPAudioProtocol) {
         playPauseBtn.isSelected = true
+        startRotateAnimation()
     }
     
     func mpManagerFailedPlay(_ song: MPAudioProtocol) {
-        
+        playPauseBtn.isSelected = false
+        stopRotateAnimation()
     }
     
     func mpManagerProgressChange(_ progress: TimeInterval) {
@@ -383,5 +430,13 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
         
     }
     
+    
+}
+
+
+extension MusicPlayViewController: InternalType
+{
+    //专辑旋转动画时长
+    static let albumAnimationTime: TimeInterval = 32.0
     
 }
