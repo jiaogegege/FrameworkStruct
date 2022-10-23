@@ -23,6 +23,10 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerWaitToPlay(_ song: MPAudioProtocol)
     ///开始播放歌曲
     func mpManagerStartPlay(_ song: MPAudioProtocol)
+    ///暂停
+    func mpManagerPausePlay(_ song: MPAudioProtocol)
+    ///继续
+    func mpManagerResumePlay(_ song: MPAudioProtocol)
     ///播放歌曲失败
     func mpManagerFailedPlay(_ song: MPAudioProtocol)
     ///播放进度变化，每秒变化
@@ -37,6 +41,10 @@ extension FSNotification {
     static let mpWaitToPlay = FSNotification(value: "mpWaitToPlay", paramKey: "MPAudioProtocol")
     //开始播放歌曲
     static let mpStartPlay = FSNotification(value: "mpStartPlay", paramKey: "MPAudioProtocol")
+    //暂停
+    static let mpPausePlay = FSNotification(value: "mpPausePlay", paramKey: "MPAudioProtocol")
+    //继续
+    static let mpResumePlay = FSNotification(value: "mpResumePlay", paramKey: "MPAudioProtocol")
     //播放歌曲失败
     static let mpFailedPlay = FSNotification(value: "mpFailedPlay", paramKey: "MPAudioProtocol")
     //播放进度改变，每秒变化
@@ -437,7 +445,19 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         {
             if type == 1   //打断开始
             {
-                
+                if player.isPlaying
+                {
+                    //暂停
+                    delegates.compact()
+                    for i in 0..<delegates.count
+                    {
+                        if let delegate = delegates.object(at: i) as? MPManagerDelegate
+                        {
+                            delegate.mpManagerPausePlay(currentSong!)
+                        }
+                    }
+                    NotificationCenter.default.post(name: FSNotification.mpPausePlay.name, object: nil, userInfo: [FSNotification.mpPausePlay.paramKey: currentSong!])
+                }
             }
             else if type == 0  //打断结束，恢复播放
             {
@@ -616,12 +636,32 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         savePlaybackProgress(player.currentTime)
         //在控制中心显示歌曲信息
         showAudioInfoInControlCenter(audio)
+        
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerPausePlay(currentSong!)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpPausePlay.name, object: nil, userInfo: [FSNotification.mpPausePlay.paramKey: currentSong!])
     }
     
     func mpPlayerResumeToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         stMgr.set(MPStatus.playing, key: StatusKey.currentStatus)
         //在控制中心显示歌曲信息
         showAudioInfoInControlCenter(audio)
+        
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerResumePlay(currentSong!)
+            }
+        }
+        NotificationCenter.default.post(name: FSNotification.mpResumePlay.name, object: nil, userInfo: [FSNotification.mpResumePlay.paramKey: currentSong!])
     }
     
     func mpPlayerFinishPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {

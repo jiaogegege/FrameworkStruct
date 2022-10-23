@@ -115,7 +115,7 @@ class MusicPlayViewController: BasicViewController {
         albumImgView = UIImageView()
         discImgView.addSubview(albumImgView)
         albumImgView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(fitX(222))
+            make.width.height.equalTo(fitX(224))
             make.centerX.centerY.equalToSuperview()
         }
         //底部容器
@@ -258,6 +258,7 @@ class MusicPlayViewController: BasicViewController {
             pastTimeLabel.text = TimeEmbellisher.shared.convertSecondsToMinute(Int(mpr.currentPastTime))
             progressBar.minimumValue = 0.0
             progressBar.maximumValue = Float(mpr.currentTotalTime)
+            progressBar.setValue(Float(mpr.currentPastTime), animated: false)
             if let albumImg = asset[.artwork] as? UIImage {
                 albumImgView.image = albumImg
             }
@@ -359,6 +360,14 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
     func mpManagerStartPlay(_ song: MPAudioProtocol) {
         self.song = song
         updateUI()
+    }
+    
+    func mpManagerPausePlay(_ song: MPAudioProtocol) {
+        playPauseBtn.isSelected = false
+    }
+    
+    func mpManagerResumePlay(_ song: MPAudioProtocol) {
+        playPauseBtn.isSelected = true
     }
     
     func mpManagerFailedPlay(_ song: MPAudioProtocol) {

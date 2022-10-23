@@ -224,6 +224,14 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         jumpCurrentAction(jumpCurrentBtn)
     }
     
+    func mpManagerPausePlay(_ song: MPAudioProtocol) {
+        
+    }
+    
+    func mpManagerResumePlay(_ song: MPAudioProtocol) {
+        
+    }
+    
     func mpManagerFailedPlay(_ song: MPAudioProtocol) {
         g_endLoading()
         g_toast(text: "歌曲：\(song.audioName) " + String.failToPlay)
