@@ -218,7 +218,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     }
     
     func mpManagerStartPlay(_ song: MPAudioProtocol) {
-        g_endLoading()
+//        g_endLoading()
         currentSong = song
         tableView.reloadData()
         jumpCurrentAction(jumpCurrentBtn)

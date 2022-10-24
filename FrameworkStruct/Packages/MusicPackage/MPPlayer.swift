@@ -592,7 +592,8 @@ extension MPPlayer: ExternalInterface
     var totalTime: TimeInterval {
         if let item = playerItem
         {
-            return CMTimeGetSeconds(item.duration)
+            let time = CMTimeGetSeconds(item.duration)
+            return time.isNaN ? 0.0 : time
         }
         return 0
     }
@@ -601,7 +602,8 @@ extension MPPlayer: ExternalInterface
     var currentTime: TimeInterval {
         if let time = playerItem?.currentTime()
         {
-            return CMTimeGetSeconds(time)
+            let t = CMTimeGetSeconds(time)
+            return t.isNaN ? 0.0 : t
         }
         return 0.0
     }

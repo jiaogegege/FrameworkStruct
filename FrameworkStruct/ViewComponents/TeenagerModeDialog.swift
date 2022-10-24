@@ -152,6 +152,6 @@ class TeenagerModeDialog: FSDialog
         } completion: { finished in
             
         }
-
     }
+    
 }

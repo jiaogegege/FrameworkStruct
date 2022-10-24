@@ -135,7 +135,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
             let vc = SimpleTableViewController.getViewController()
             vc.hidesBottomBarWhenPushed = true
             push(vc)
-            
         }
         else if indexPath.row == 9  //阴影测试
         {

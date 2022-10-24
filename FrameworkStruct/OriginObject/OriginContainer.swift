@@ -40,6 +40,9 @@ protocol ContainerProtocol: NSObjectProtocol
     //同步提交数据，将数据写入本地数据源
     func commit(key: AnyHashable, value: Any)
     
+    //获取所有已保存的key
+    func getAllKeys() -> [AnyHashable]
+    
     //异步提交数据，将数据写入本地数据源或远程数据源
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
     func commit(key: AnyHashable, value: Any, success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure)
@@ -179,6 +182,13 @@ extension OriginContainer: ContainerProtocol
     
     @objc func commit(key: AnyHashable, value: Any) {
         //子类实现和具体存取器的交互
+    }
+    
+    //获取所有已保存的key，不建议子类覆写该方法
+    func getAllKeys() -> [AnyHashable] {
+        container.keys.map { key in
+            key as AnyHashable
+        }
     }
     
     @objc func commit(key: AnyHashable, value: Any, success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure) {

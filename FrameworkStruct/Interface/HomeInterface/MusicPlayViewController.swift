@@ -362,10 +362,11 @@ class MusicPlayViewController: BasicViewController {
     fileprivate func startAnimationTimer()
     {
         let sliceValue = Double.pi * 2.0 / (Self.albumAnimationTime / 0.1)
+        let originValue = self.albumAnimationFromValue      //记录动画开始时的位置
         self.albumAnimationTimer = TimerManager.shared.dispatchTimer(interval: 0.1, exact: true, host: self, action: {[weak self] in
             self?.albumAnimationFromValue += sliceValue
             self?.albumAnimationToValue += sliceValue
-            if self?.albumAnimationFromValue ?? 0.0 > Double.pi * 2.0
+            if self?.albumAnimationFromValue ?? 0.0 > Double.pi * 2.0 + originValue
             {
                 self?.albumAnimationFromValue -= Double.pi * 2.0
                 self?.albumAnimationToValue -= Double.pi * 2.0
