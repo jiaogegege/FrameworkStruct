@@ -350,11 +350,11 @@ class MusicPlayViewController: BasicViewController {
     fileprivate func startRotateAnimation()
     {
         stopRotateAnimation()
-        albumAnimationId = AnimationManager.shared.popBasic(propertyName: kPOPLayerRotation, fromValue: albumAnimationFromValue, toValue: albumAnimationToValue, timingFuncName: .linear, duration: Self.albumAnimationTime, isLoop: true, host: self.albumImgView.layer, startBlock: {[weak self] in
-            self?.startAnimationTimer()
-        }, reachToBlock: {[weak self] in
-            self?.albumAnimationFromValue = 0.0
-            self?.albumAnimationToValue = Double.pi * 2.0
+        startAnimationTimer()
+        albumAnimationId = AnimationManager.shared.popBasic(propertyName: kPOPLayerRotation, fromValue: albumAnimationFromValue, toValue: albumAnimationToValue, timingFuncName: .linear, duration: Self.albumAnimationTime, isLoop: true, host: self.albumImgView.layer, startBlock: {
+            
+        }, reachToBlock: {
+            
         })
     }
     
@@ -379,6 +379,11 @@ class MusicPlayViewController: BasicViewController {
     {
         albumAnimationTimer?.cancel()
         albumAnimationTimer = nil
+        if albumAnimationFromValue > Double.pi * 2.0
+        {
+            albumAnimationFromValue -= Double.pi * 2.0
+            albumAnimationToValue -= Double.pi * 2.0
+        }
         if let id = albumAnimationId
         {
             albumImgView.layer.pop_removeAnimation(forKey: id)
