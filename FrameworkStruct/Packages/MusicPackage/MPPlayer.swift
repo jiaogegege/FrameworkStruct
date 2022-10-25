@@ -100,6 +100,7 @@ class MPPlayer: OriginWorker
         //初始化一个空的播放器
         self.player = AVPlayer(playerItem: nil)
         super.init()
+        self.player.addObserver(self, forKeyPath: PlayerKeyPath.timeControlStatus.rawValue, options: .new, context: nil)
         self.addNotification()
     }
     
@@ -158,6 +159,7 @@ class MPPlayer: OriginWorker
         player.replaceCurrentItem(with: playerItem)
         //监听播放状态和缓冲
         playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.status.rawValue, options: .new, context: nil)
+        player.addObserver(self, forKeyPath: PlayerKeyPath.timeControlStatus.rawValue, options: .new, context: nil)
         playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.loadedTimeRanges.rawValue, options: .new, context: nil)
         playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.playbackBufferEmpty.rawValue, options: .new, context: nil)
         playerItem?.addObserver(self, forKeyPath: PlayerKeyPath.playbackLikelyToKeepUp.rawValue, options: .new, context: nil)
@@ -337,11 +339,33 @@ extension MPPlayer: DelegateProtocol
     
     //播放器状态变化
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let playerItem = object as? AVPlayerItem, playerItem.isEqual(self.playerItem)    //必须是监听的那个PlayerItem
+        if let player = object as? AVPlayer, player.isEqual(self.player)        //必须是监听的那个player
+        {
+            if keyPath == PlayerKeyPath.timeControlStatus.rawValue     //播放状态变化
+            {
+                let playStatus = player.timeControlStatus
+                if playStatus == .playing
+                {
+                    if let del = self.delegate
+                    {
+                        del.mpPlayerResumeToPlay(currentAudio!, playlist: currentPlaylist!)
+                    }
+                }
+                else if playStatus == .paused
+                {
+                    if let del = self.delegate
+                    {
+                        del.mpPlayerPauseToPlay(currentAudio!, playlist: currentPlaylist!)
+                    }
+                }
+            }
+        }
+        else if let playerItem = object as? AVPlayerItem, playerItem.isEqual(self.playerItem)    //必须是监听的那个PlayerItem
         {
             if keyPath == PlayerKeyPath.status.rawValue     //播放状态改变
             {
                 let status = playerItem.status
+                FSLog("observe status change: \(status.rawValue)")
                 if status == .readyToPlay   //准备播放
                 {
                     FSLog("start to play")
@@ -418,6 +442,7 @@ extension MPPlayer: InternalType
     //keypath
     enum PlayerKeyPath: String {
         case status                         //AVPlayerItem.status
+        case timeControlStatus              //AVPlayerItem.timeControlStatus        //播放状态
         case loadedTimeRanges               //AVPlayerItem.loadedTimeRanges
         case playbackBufferEmpty            //AVPlayerItem.playbackBufferEmpty      //缓存不足
         case playbackLikelyToKeepUp         //AVPlayerItem.playbackLikelyToKeepUp   //缓冲充足
@@ -519,14 +544,15 @@ extension MPPlayer: ExternalInterface
     ///恢复播放，前提是暂停状态
     func resume()
     {
+        FSLog("resume")
         if isPaused
         {
             player.play()
             FSLog("really to play")
-            if let delegate = self.delegate
-            {
-                delegate.mpPlayerResumeToPlay(currentAudio!, playlist: currentPlaylist!)
-            }
+//            if let delegate = self.delegate
+//            {
+//                delegate.mpPlayerResumeToPlay(currentAudio!, playlist: currentPlaylist!)
+//            }
         }
     }
     
@@ -537,10 +563,10 @@ extension MPPlayer: ExternalInterface
         {
             player.pause()
             FSLog("really to pause")
-            if let delegate = self.delegate
-            {
-                delegate.mpPlayerPauseToPlay(currentAudio!, playlist: currentPlaylist!)
-            }
+//            if let delegate = self.delegate
+//            {
+//                delegate.mpPlayerPauseToPlay(currentAudio!, playlist: currentPlaylist!)
+//            }
         }
     }
     
@@ -555,6 +581,7 @@ extension MPPlayer: ExternalInterface
             timeObserver = nil
         }
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.status.rawValue)
+        player.removeObserver(self, forKeyPath: PlayerKeyPath.timeControlStatus.rawValue)
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.loadedTimeRanges.rawValue)
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.playbackBufferEmpty.rawValue)
         playerItem?.removeObserver(self, forKeyPath: PlayerKeyPath.playbackLikelyToKeepUp.rawValue)

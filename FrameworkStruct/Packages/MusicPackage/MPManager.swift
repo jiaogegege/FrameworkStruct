@@ -84,6 +84,9 @@ class MPManager: OriginManager
     //播放模式
     fileprivate(set) var lastPlayMode: MPPlayer.PlayMode?
     
+    //打开文件超时定时器，当MPPlayer尝试播放一首icloud歌曲时，如果打开文件超时，那么直接返回失败
+    fileprivate var openFileTimeoutTimer: Timer?
+    
     
     //MARK: 方法
     //私有化初始化方法
@@ -448,15 +451,16 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 if player.isPlaying
                 {
                     //暂停
-                    delegates.compact()
-                    for i in 0..<delegates.count
-                    {
-                        if let delegate = delegates.object(at: i) as? MPManagerDelegate
-                        {
-                            delegate.mpManagerPausePlay(currentSong!)
-                        }
-                    }
-                    NotificationCenter.default.post(name: FSNotification.mpPausePlay.name, object: nil, userInfo: [FSNotification.mpPausePlay.paramKey: currentSong!])
+//                    delegates.compact()
+//                    for i in 0..<delegates.count
+//                    {
+//                        if let delegate = delegates.object(at: i) as? MPManagerDelegate
+//                        {
+//                            delegate.mpManagerPausePlay(currentSong!)
+//                        }
+//                    }
+//                    NotificationCenter.default.post(name: FSNotification.mpPausePlay.name, object: nil, userInfo: [FSNotification.mpPausePlay.paramKey: currentSong!])
+//                    stMgr.set(MPStatus.paused, key: StatusKey.currentStatus)
                 }
             }
             else if type == 0  //打断结束，恢复播放
@@ -483,7 +487,6 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 case 1: //newDeviceAvailable
                     if newOutput == .headphones || newOutput == .bluetoothA2DP  //耳机或蓝牙音箱连上了，尝试恢复
                     {
-                        
                         player.resume()
                     }
                     break
@@ -575,25 +578,39 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             //如果是iCloud文件，那么先打开
             if ia.isiCloudFile(audio.audioUrl)
             {
-                ia.openDocument(audio.audioUrl) {[weak self] id in
-                    if let id = id {
-                        self?.ia.closeDocument(id, completion: { succeed in
-                            if succeed
-                            {
-                                //打开成功说明下载成功了，那么修改歌曲文件信息和下载信息为已下载
-                                if let song = audio as? MPSongModel
-                                {
-                                    song.updateAsset()
-                                    self?.libMgr.setSongDownloadStatus(true, song: song)
-                                }
-                            }
-                            //返回成功
-                            success(succeed)
-                        })
-                    }
-                    else
+                //设定一个定时器，如果超时，那么认为播放失败
+                openFileTimeoutTimer?.invalidate()
+                openFileTimeoutTimer = nil
+                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, host: self, action: {[weak self] timer in
+                    if self?.openFileTimeoutTimer != nil    //如果定时器还在说明超时了，那么取消定时器并返回false
                     {
+                        self?.openFileTimeoutTimer?.invalidate()
+                        self?.openFileTimeoutTimer = nil
                         success(false)
+                    }
+                })
+                ia.openDocument(audio.audioUrl) {[weak self] id in
+                    if let timer = self?.openFileTimeoutTimer   //如果打开定时器还在，说明，还没有超时，那么执行下面的代码
+                    {
+                        timer.invalidate()
+                        self?.openFileTimeoutTimer = nil
+                        //打开成功说明下载成功了，那么修改歌曲文件信息和下载信息为已下载
+                        if let song = audio as? MPSongModel
+                        {
+                            song.updateAsset()
+                            self?.libMgr.setSongDownloadStatus(true, song: song)
+                        }
+                        if let id = id {
+                            //关闭文件
+                            self?.ia.closeDocument(id, completion: { succeed in
+                                //只要文件打开成功就返回true，不管关闭是否成功
+                                success(true)
+                            })
+                        }
+                        else
+                        {
+                            success(false)
+                        }
                     }
                 }
             }
