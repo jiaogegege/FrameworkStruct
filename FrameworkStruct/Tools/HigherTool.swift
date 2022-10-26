@@ -46,13 +46,13 @@ func _before(_ n: UInt, fn: @escaping OptionalAnyReturnClosure) -> OptionalAnyRe
 ///参数：
 ///wait：等待多少时间后可以再次执行fn
 ///before：在等待时间之前还是之后执行fn，如果为true，那么第一次调用闭包会立即执行一次fn，之后，都要等待上一次执行fn完毕之后的wait时间之后才能再次执行fn；如果为false，那么在调用闭包之后的wait时间之后会执行一次fn
-var debounceTimer: DispatchSourceTimer?
+var _debounceTimer: DispatchSourceTimer?
 func _debounce(wait interval: TimeInterval, before: Bool = true, fn: @escaping VoidClosure) -> VoidClosure
 {
     var canPerform: Bool = before    //是否可以执行fn
     func closure() {
         //如果之前有定时器，那么取消掉
-        if let ti = debounceTimer {
+        if let ti = _debounceTimer {
             ti.cancel()
         }
         if canPerform && before
@@ -61,7 +61,7 @@ func _debounce(wait interval: TimeInterval, before: Bool = true, fn: @escaping V
             canPerform = false
         }
         //创建定时器，重新开始计时
-        debounceTimer = TimerManager.shared.dispatchTimer(interval: interval, repeats: false, preExec: false, onMain: nil, exact: true) {
+        _debounceTimer = TimerManager.shared.dispatchTimer(interval: interval, repeats: false, preExec: false, onMain: nil, exact: true) {[weak _debounceTimer] in
             if before == false
             {
                 fn()
@@ -71,8 +71,8 @@ func _debounce(wait interval: TimeInterval, before: Bool = true, fn: @escaping V
             {
                 canPerform = true
             }
-            debounceTimer?.cancel()
-            debounceTimer = nil
+            _debounceTimer?.cancel()
+            _debounceTimer = nil
         }
     }
     return closure
