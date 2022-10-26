@@ -1,5 +1,5 @@
 //
-//  ArchiverAdatper.swift
+//  ArchiverAdapter.swift
 //  FrameworkStruct
 //
 //  Created by 蒋雪姣 on 2022/10/6.
@@ -11,10 +11,10 @@
  */
 import UIKit
 
-class ArchiverAdatper: OriginAdapter {
+class ArchiverAdapter: OriginAdapter {
     //MARK: 属性
     //单例
-    static let shared = ArchiverAdatper()
+    static let shared = ArchiverAdapter()
     
     
     //MARK: 方法
@@ -38,7 +38,7 @@ class ArchiverAdatper: OriginAdapter {
 
 
 //接口方法
-extension ArchiverAdatper: ExternalInterface
+extension ArchiverAdapter: ExternalInterface
 {
     ///将一个对象归档，返回Data
     ///secure：是否安全归档，如果为true，那么obj必须支持NSSecureCoding

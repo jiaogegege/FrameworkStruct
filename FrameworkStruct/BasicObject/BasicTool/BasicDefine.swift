@@ -43,24 +43,24 @@ protocol Archivable: NSCoding {
 extension Archivable {
     func archive() -> Data?
     {
-        ArchiverAdatper.shared.archive(self)
+        ArchiverAdapter.shared.archive(self)
     }
     
     func archive(completion: @escaping OptionalDataClosure)
     {
-        ArchiverAdatper.shared.archive(self) { (data) in
+        ArchiverAdapter.shared.archive(self) { (data) in
             completion(data)
         }
     }
     
     static func unarchive(_ data: Data) -> AnyType?
     {
-        ArchiverAdatper.shared.unarchive(data) as? AnyType
+        ArchiverAdapter.shared.unarchive(data) as? AnyType
     }
     
     static func unarchive(_ data: Data, completion: @escaping ((AnyType?) -> Void))
     {
-        ArchiverAdatper.shared.unarchive(data) { (obj) in
+        ArchiverAdapter.shared.unarchive(data) { (obj) in
             completion(obj as? AnyType)
         }
     }

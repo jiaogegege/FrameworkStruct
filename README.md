@@ -255,6 +255,7 @@ iOS App基础架构设计
 
 * `OriginTool`
 	* OriginDefine：最初的定义和常量
+    * OriginUtility：Origin常用全局方法
 	* FSQueue：队列容器，先进先出
 	* FSStack：栈容器
 	* FSVector：向量容器
@@ -333,17 +334,17 @@ iOS App基础架构设计
 全局通用的视图组件，一般是针对本项目的自定义通用组件
 
 * `Base`：此处放置可作为基类的视图组件
-* FSDialog：通用弹窗基类
+    * FSDialog：通用弹窗基类
 * FSAlertView：通用弹框
 * FSActionSheet：通用底部菜单
 * FSLabel：带有长按弹出工具条的Label
 * FSImageView：带有长按复制图片的ImageView
 * FSGuideView：新手引导组件
-* SimpleTableView：简单表格
 * FSTextField：自定义文本输入框
 * FSTextField+ChangeBlock：自定义文本输入框扩展
 * CountDownButton：倒计时按钮
 * UIButton+ButtonBlock：为UIButton添加block点击事件
+* SimpleTableView：简单表格
 * DemoTopSelectBar：测试用顶部选择条
 * TeenagerModeDialog：青少年模式弹窗
 
@@ -388,8 +389,8 @@ iOS App基础架构设计
     * UrlSchemeAdapter：urlscheme适配器
 	* BluetoothAdpater：蓝牙适配器
     * SocializeAdapter：社会化适配器
-    * iCloudAdapter：iCloud适配器
     * FileManageAdapter：文件管理适配器
+    * ArchiverAdapter：归解档适配器
 	* NotificationAdapter：系统推送通知适配器
 	* CalendarAdapter：系统日历和提醒事项适配器
     * ClipboardAdapter：剪贴板适配器
@@ -403,14 +404,23 @@ iOS App基础架构设计
     * DatasChecker：数据校验器
     * CheckerConst：校验器常量定义
 * `DataAccessor`
+    * iCloudAccessor：iCloud存取器
 	* PlistAccessor：plist文件存取器
+    * UserDefaultsAccessor：UserDefaults存取器
 	* SandBoxAccessor：沙盒文件存取器
-	* UserDefaultsAccessor：UserDefaults存取器
 	* DatabaseAccessor：数据库存取器
     * KeychainAccessor：钥匙串存取器
 * `Datas`
 	* UserInfoModel：用户信息数据模型
 	* HomeDataModel：首页数据模型
+    ...
+* `MusicPackage`
+    * MPManager：音乐管理器
+    * MPEmbellisher：音乐修饰器
+    * MPPlayer：音乐播放器
+    * MPLibraryManager：音乐库管理器
+    * MPContainer：音乐容器
+    * MPConst：音乐包常亮定义
 * `ThemePackage`：主题功能包
     * ThemeManager：主题管理器
     * ThemeContainer：主题容器
@@ -437,7 +447,8 @@ iOS App基础架构设计
 #### Tools
 工具集
 
-* Utility：通用工具集，一般是将调用较麻烦的方法缩短，提供更加便利的调用方式。
+* Utility：通用工具集，一般是将调用较麻烦的方法缩短，提供更加便利的调用方式
+* HigherTool：高阶函数工具
 * NumberTool：数字工具集
 * TimeTool：时间日期工具集
 * DeviceTool：设备相关工具集

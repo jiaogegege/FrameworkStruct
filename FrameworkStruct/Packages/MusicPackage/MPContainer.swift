@@ -80,7 +80,7 @@ class MPContainer: OriginContainer
                         if let data = self?.ia.readDocument(had)
                         {
                             //序列化data为MPMediaLibraryModel数组
-                            ArchiverAdatper.shared.unarchive(data) { (obj) in
+                            ArchiverAdapter.shared.unarchive(data) { (obj) in
                                 if let libs = obj as? [MPMediaLibraryModel]
                                 {
                                     //读取文件后先保存到缓存中
@@ -119,7 +119,7 @@ class MPContainer: OriginContainer
                     let iCloudLib = MPMediaLibraryModel(type: .iCloud, songs: songs, albums: [], artists: [], lyrics: [], musicbooks: [])
                     self?.mutate(key: MPDataKey.librarys, value: [iCloudLib], meta: DataModelMeta(needCopy: false, canCommit: false))
                     //写入iCloud文件
-                    ArchiverAdatper.shared.archive([iCloudLib] as NSCoding) { (data) in
+                    ArchiverAdapter.shared.archive([iCloudLib] as NSCoding) { (data) in
                         if let data = data {
                             self?.ia.createDocument(data, targetUrl: libFileUrl)
                             queue.async {
@@ -153,7 +153,7 @@ class MPContainer: OriginContainer
                                     //如果有数据更新，那么需要更新iCloud库文件
                                     if hasUpdate, let libDir = self?.libDir, let libFileUrl = self?.ia.getFileUrl(in: libDir, fileName: Self.libraryFileName)
                                     {
-                                        ArchiverAdatper.shared.archive(libs as NSCoding) { (data) in
+                                        ArchiverAdapter.shared.archive(libs as NSCoding) { (data) in
                                             if let data = data {
                                                 self?.ia.openDocument(libFileUrl, completion: { (handler) in
                                                     if let had = handler
@@ -295,7 +295,7 @@ class MPContainer: OriginContainer
     override func commit(key: AnyHashable, value: Any, success: @escaping (Any?) -> Void, failure: @escaping (NSError) -> Void) {
         if let k = key as? MPDataKey, let val = value as? NSCoding
         {
-            ArchiverAdatper.shared.archive(val, completion: {[weak self] (data) in
+            ArchiverAdapter.shared.archive(val, completion: {[weak self] (data) in
                 if let data = data, let fileName = k.getiCloudFileName() {
                     //尝试打开文件
                     self?.openFileFromiCloud(fileName) {fileId in
@@ -580,7 +580,7 @@ extension MPContainer: ExternalInterface
         {
             readFileFromiCloud(Self.historyPlaylistsFileName) { [weak self] data in
                 if let data = data {
-                    ArchiverAdatper.shared.unarchive(data) { (obj) in
+                    ArchiverAdapter.shared.unarchive(data) { (obj) in
                         if let playlists = obj as? [MPHistoryPlaylistModel] {
                             self?.mutate(key: MPDataKey.historyPlaylists, value: playlists, meta: DataModelMeta(needCopy: false, canCommit: false))
                             completion(playlists)

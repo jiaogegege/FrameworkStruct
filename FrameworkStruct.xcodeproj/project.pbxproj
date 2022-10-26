@@ -390,7 +390,7 @@
 		EA8CFD3928EDD7CF00EE3B73 /* MPHistoryAudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3828EDD7CF00EE3B73 /* MPHistoryAudioModel.swift */; };
 		EA8CFD3D28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */; };
 		EA8CFD4128EE606C00EE3B73 /* MPConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD4028EE606C00EE3B73 /* MPConst.swift */; };
-		EA8CFD5928EE844300EE3B73 /* ArchiverAdatper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */; };
+		EA8CFD5928EE844300EE3B73 /* ArchiverAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD5828EE844300EE3B73 /* ArchiverAdapter.swift */; };
 		EA8CFD5F28EFC43A00EE3B73 /* MPContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */; };
 		EA8CFD6228EFCCDC00EE3B73 /* MPMediaLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8CFD6128EFCCDC00EE3B73 /* MPMediaLibraryModel.swift */; };
 		EA91D17B27C2027500DD1BE1 /* NotificationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */; };
@@ -1252,7 +1252,7 @@
 		EA8CFD3828EDD7CF00EE3B73 /* MPHistoryAudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistoryAudioModel.swift; sourceTree = "<group>"; };
 		EA8CFD3C28EDD7DF00EE3B73 /* MPHistoryPlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHistoryPlaylistModel.swift; sourceTree = "<group>"; };
 		EA8CFD4028EE606C00EE3B73 /* MPConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPConst.swift; sourceTree = "<group>"; };
-		EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverAdatper.swift; sourceTree = "<group>"; };
+		EA8CFD5828EE844300EE3B73 /* ArchiverAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiverAdapter.swift; sourceTree = "<group>"; };
 		EA8CFD5E28EFC43A00EE3B73 /* MPContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPContainer.swift; sourceTree = "<group>"; };
 		EA8CFD6128EFCCDC00EE3B73 /* MPMediaLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMediaLibraryModel.swift; sourceTree = "<group>"; };
 		EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAdapter.swift; sourceTree = "<group>"; };
@@ -3852,7 +3852,7 @@
 				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
 				EADE522527F6F50D005417BE /* SocializeAdapter */,
 				EAA60BC728DEDD8700E1AF0C /* FileManageAdapter */,
-				EA8CFD5828EE844300EE3B73 /* ArchiverAdatper.swift */,
+				EA8CFD5828EE844300EE3B73 /* ArchiverAdapter.swift */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
 				EADE522327F6F470005417BE /* ClipboardAdapter.swift */,
@@ -5083,7 +5083,7 @@
 				EA9A756C27C7210200A11FC8 /* TYImageCache.m in Sources */,
 				EA9A75E527C739DF00A11FC8 /* SRSecurityPolicy.m in Sources */,
 				EAC8A75227625B450088293F /* AFSecurityPolicy.m in Sources */,
-				EA8CFD5928EE844300EE3B73 /* ArchiverAdatper.swift in Sources */,
+				EA8CFD5928EE844300EE3B73 /* ArchiverAdapter.swift in Sources */,
 				EA3E8AFF27B77CEA006A2715 /* NodeProperty.swift in Sources */,
 				EA3E8AB427B77CEA006A2715 /* ColorValueProvider.swift in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
