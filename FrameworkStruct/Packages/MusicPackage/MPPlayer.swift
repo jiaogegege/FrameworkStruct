@@ -365,10 +365,9 @@ extension MPPlayer: DelegateProtocol
             if keyPath == PlayerKeyPath.status.rawValue     //播放状态改变
             {
                 let status = playerItem.status
-                FSLog("observe status change: \(status.rawValue)")
                 if status == .readyToPlay   //准备播放
                 {
-                    FSLog("start to play")
+                    FSLog("status change :\(status.rawValue) start to play")
                     //添加播放进度观察
                     self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1.0, preferredTimescale: itemAsset!.duration.timescale), queue: nil) {[weak self] cmtime in
                         //计算已播放时间
@@ -420,11 +419,14 @@ extension MPPlayer: DelegateProtocol
             }
             else if keyPath == PlayerKeyPath.playbackBufferEmpty.rawValue       //缓存不足，播放自动暂停
             {
-                
+                self.pause()
             }
             else if keyPath == PlayerKeyPath.playbackLikelyToKeepUp.rawValue    //缓存充足，手动继续播放
             {
-                self.resume()
+                if isPaused && playerItem.status == .readyToPlay
+                {
+                    self.resume()
+                }
             }
             else
             {

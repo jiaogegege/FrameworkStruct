@@ -758,6 +758,7 @@
 		EADB015B27624B4D001B7223 /* BlueTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015827624B4C001B7223 /* BlueTheme.plist */; };
 		EADB015C27624B4D001B7223 /* RedTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015927624B4C001B7223 /* RedTheme.plist */; };
 		EADB015D27624B4D001B7223 /* PinkTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = EADB015A27624B4D001B7223 /* PinkTheme.plist */; };
+		EADB74FE2908DD9F003BDBC2 /* HigherTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADB74FD2908DD9F003BDBC2 /* HigherTool.swift */; };
 		EADE521B27F6A105005417BE /* UrlSchemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */; };
 		EADE521E27F6C932005417BE /* UrlSchemeConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521D27F6C932005417BE /* UrlSchemeConst.swift */; };
 		EADE522027F6F04A005417BE /* SocializeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE521F27F6F04A005417BE /* SocializeAdapter.swift */; };
@@ -1981,6 +1982,7 @@
 		EADB015827624B4C001B7223 /* BlueTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BlueTheme.plist; sourceTree = "<group>"; };
 		EADB015927624B4C001B7223 /* RedTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RedTheme.plist; sourceTree = "<group>"; };
 		EADB015A27624B4D001B7223 /* PinkTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PinkTheme.plist; sourceTree = "<group>"; };
+		EADB74FD2908DD9F003BDBC2 /* HigherTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherTool.swift; sourceTree = "<group>"; };
 		EADE521A27F6A105005417BE /* UrlSchemeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchemeAdapter.swift; sourceTree = "<group>"; };
 		EADE521D27F6C932005417BE /* UrlSchemeConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSchemeConst.swift; sourceTree = "<group>"; };
 		EADE521F27F6F04A005417BE /* SocializeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocializeAdapter.swift; sourceTree = "<group>"; };
@@ -4368,6 +4370,7 @@
 			children = (
 				EADB0147276243D3001B7223 /* README.md */,
 				EADB0146276243D3001B7223 /* Utility.swift */,
+				EADB74FD2908DD9F003BDBC2 /* HigherTool.swift */,
 				EACAD4E8277D82C800FBE2DA /* NumberTool.swift */,
 				EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */,
 				EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */,
@@ -5255,6 +5258,7 @@
 				EAC8A87827625D490088293F /* SDWebImageDefine.m in Sources */,
 				EAC8A74F27625B450088293F /* AFURLSessionManager.m in Sources */,
 				EAC8A76D27625BA70088293F /* MJProperty.m in Sources */,
+				EADB74FE2908DD9F003BDBC2 /* HigherTool.swift in Sources */,
 				EADB00A927623C76001B7223 /* OriginDefine.swift in Sources */,
 				EA3E8B2827B77CEA006A2715 /* KeyframeGroup.swift in Sources */,
 				EA3E8B1127B77CEA006A2715 /* Shape.swift in Sources */,

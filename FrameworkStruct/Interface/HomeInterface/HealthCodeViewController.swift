@@ -475,7 +475,7 @@ class HealthCodeViewController: BasicViewController {
     func startTimer()
     {
         endTimer()
-        timer = TimerManager.shared.timer(interval: 1.0, repeats: true, mode: .common, host: self, action: {[weak self] (timer) in
+        timer = TimerManager.shared.timer(interval: 1.0, repeats: true, mode: .common, hostId: self.className, action: {[weak self] (timer) in
             self?.codeTimeLabel.text = currentTimeString(format: .dashMonthDayHourMinSec)
         })
     }

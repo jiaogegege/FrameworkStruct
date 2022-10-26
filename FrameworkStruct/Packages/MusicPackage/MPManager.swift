@@ -325,7 +325,7 @@ class MPManager: OriginManager
             
             /* 可以后台连续播放，但是经测试发现有时后台时间久了会失效，因为有些app会把自己设置成`firstResponder`考虑用`repeatBackgroundPlay()` */
             ApplicationManager.shared.appDelegate.becomeFirstResponder()
-//            self.repeatBackgroundPlay()
+            self.repeatBackgroundPlay()
         } catch {
             FSLog(error.localizedDescription)
         }
@@ -337,11 +337,14 @@ class MPManager: OriginManager
         self.endBackgroundPlay()
         g_after(1) {
             self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-                self.repeatBackgroundPlay()   //没什么用，所以注释掉
+                self.endBackgroundPlay()   //没什么用，所以注释掉
             })
             //不停地开启后台任务，实现连续播放
             g_after(Self.backgroundTaskTime) {
-                self.repeatBackgroundPlay()
+                if self.backgroundTaskId != .invalid
+                {
+                    self.repeatBackgroundPlay()
+                }
             }
         }
     }
@@ -349,8 +352,6 @@ class MPManager: OriginManager
     //结束后台播放
     fileprivate func endBackgroundPlay()
     {
-        ApplicationManager.shared.appDelegate.resignFirstResponder()
-        
         if self.backgroundTaskId != .invalid
         {
             UIApplication.shared.endBackgroundTask(self.backgroundTaskId)
@@ -581,7 +582,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 //设定一个定时器，如果超时，那么认为播放失败
                 openFileTimeoutTimer?.invalidate()
                 openFileTimeoutTimer = nil
-                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, host: self, action: {[weak self] timer in
+                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, hostId: self.className, action: {[weak self] timer in
                     if self?.openFileTimeoutTimer != nil    //如果定时器还在说明超时了，那么取消定时器并返回false
                     {
                         self?.openFileTimeoutTimer?.invalidate()
@@ -590,7 +591,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                     }
                 })
                 ia.openDocument(audio.audioUrl) {[weak self] id in
-                    if let timer = self?.openFileTimeoutTimer   //如果打开定时器还在，说明，还没有超时，那么执行下面的代码
+                    if let timer = self?.openFileTimeoutTimer   //如果打开定时器还在说明，还没有超时，那么执行下面的代码
                     {
                         timer.invalidate()
                         self?.openFileTimeoutTimer = nil
