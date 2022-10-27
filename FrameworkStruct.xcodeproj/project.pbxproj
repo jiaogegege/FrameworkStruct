@@ -335,6 +335,7 @@
 		EA3E8C3227B782C4006A2715 /* POPLayerExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA3E8C1A27B782C4006A2715 /* POPLayerExtras.mm */; };
 		EA3E8C3327B782C4006A2715 /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA3E8C1B27B782C4006A2715 /* POPVector.mm */; };
 		EA3E8C3627B784C7006A2715 /* BLE_img_gear.json in Resources */ = {isa = PBXBuildFile; fileRef = EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */; };
+		EA417F85290A8A2F003E70EF /* InfiniteRotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */; };
 		EA44FD3E28921DFF00977943 /* SafariServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA44FD3D28921DFF00977943 /* SafariServiceAdapter.swift */; };
 		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
@@ -1169,6 +1170,7 @@
 		EA3E8C1E27B782C4006A2715 /* POPAnimationTracer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationTracer.h; sourceTree = "<group>"; };
 		EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BLE_img_gear.json; sourceTree = "<group>"; };
 		EA3E8C3727B784E1006A2715 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteRotateView.swift; sourceTree = "<group>"; };
 		EA44FD3D28921DFF00977943 /* SafariServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceAdapter.swift; sourceTree = "<group>"; };
 		EA4AF3BE28BC5DC400AF9EF8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA52493D27A3E44B002E3616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -4370,11 +4372,11 @@
 			children = (
 				EADB0147276243D3001B7223 /* README.md */,
 				EADB0146276243D3001B7223 /* Utility.swift */,
-				EADB74FD2908DD9F003BDBC2 /* HigherTool.swift */,
 				EACAD4E8277D82C800FBE2DA /* NumberTool.swift */,
 				EACAD4EE277DAFC000FBE2DA /* TimeTool.swift */,
 				EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */,
 				EAFC601A27E20B430019CDEF /* UnitTool.swift */,
+				EADB74FD2908DD9F003BDBC2 /* HigherTool.swift */,
 				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
 				EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */,
 			);
@@ -4402,6 +4404,7 @@
 				EA283F572795465A001A2710 /* SimpleTableView.swift */,
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
+				EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -5460,6 +5463,7 @@
 				EA3E8AC527B77CEA006A2715 /* CALayer+setupLayerHierarchy.swift in Sources */,
 				EA3E8AD227B77CEA006A2715 /* StrokeAnimation.swift in Sources */,
 				EA9A75E327C739DF00A11FC8 /* NSRunLoop+SRWebSocket.m in Sources */,
+				EA417F85290A8A2F003E70EF /* InfiniteRotateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

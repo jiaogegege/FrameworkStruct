@@ -443,6 +443,6 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
 extension MusicPlayViewController: InternalType
 {
     //专辑旋转动画时长
-    static let albumAnimationTime: TimeInterval = 32.0
+    static let albumAnimationTime: TimeInterval = 36.0
     
 }
