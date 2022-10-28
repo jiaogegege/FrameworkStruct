@@ -3042,6 +3042,7 @@
 			children = (
 				EA8CFC9828EDC20900EE3B73 /* README.md */,
 				EA8CFC9928EDC39100EE3B73 /* MPManager.swift */,
+				EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */,
 				EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */,
 				EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */,
 				EA8CFCA428EDCA4400EE3B73 /* MPLibraryManager.swift */,
@@ -4407,7 +4408,6 @@
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */,
-				EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";

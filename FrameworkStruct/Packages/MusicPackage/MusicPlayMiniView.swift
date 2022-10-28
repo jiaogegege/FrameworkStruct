@@ -133,29 +133,14 @@ class MusicPlayMiniView: UIView
     
     @objc func playPauseAction(sender: UIButton)
     {
-        if playPauseBtn.isSelected
+        if playPauseBtn.isSelected  //暂停
         {
             mpr.pause()
         }
-        else
+        else    //开始或继续播放
         {
-            if mpr.isFree
-            {
-                mpr.getCurrentSong {[weak self] song in
-                    if let song = song {
-                        self?.mpr.getCurrentPlaylist { playlist in
-                            if let playlist = playlist {
-                                self?.mpr.playSong(song, in: playlist, completion: { succeed in
-                                    FSLog("\(succeed)")
-                                })
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                mpr.resume()
+            mpr.performPlayCurrent { (succeed) in
+//                g_toast(text: succeed ? "播放成功" : "播放失败")
             }
         }
     }
@@ -172,7 +157,7 @@ extension MusicPlayMiniView: DelegateProtocol, MPManagerDelegate
 {
     func mpManagerDidInitCompleted() {
         //初始化完成则尝试显示当前播放歌曲，不一定有，也不一定会调用
-        mpr.getCurrentSong {[weak self] song in
+        mpr.getLastSong {[weak self] song in
             if let song = song {
                 self?.currentSong = song
                 self?.updateView()
@@ -284,7 +269,7 @@ extension MusicPlayMiniView: ExternalInterface
     {
         //做一个从屏幕底部往上弹的动画
         self.isHidden = false
-        self.y = kScreenHeight
+        self.y = kScreenHeight + 12
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
             self.y = kScreenHeight - self.height
         } completion: { finished in
@@ -298,7 +283,7 @@ extension MusicPlayMiniView: ExternalInterface
     {
         //做一个从底部消失的动画
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
-            self.y = kScreenHeight
+            self.y = kScreenHeight + 12
         } completion: { finished in
             self.isHidden = true
         }

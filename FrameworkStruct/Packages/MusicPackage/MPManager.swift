@@ -808,8 +808,8 @@ extension MPManager: ExternalInterface
         if player.isFree
         {
             self.initOrUpdateCallback = {[weak self] in
-                self?.getCurrentSong({ (song) in
-                    self?.getCurrentPlaylist({ (playlist) in
+                self?.getLastSong({ (song) in
+                    self?.getLastPlaylist({ (playlist) in
                         if let song = song, let playlist = playlist
                         {
                             self?.player.play(song, playlist: playlist, completion: { (succeed) in
@@ -890,6 +890,21 @@ extension MPManager: ExternalInterface
             break
         }
     }
+    
+    /**************************************** UI播放器 Section Begin ****************************************/
+    ///显示迷你播放器
+    func showMiniPlayer()
+    {
+        miniPlayView.show()
+    }
+    
+    ///隐藏迷你播放器
+    func hideMiniPlayer()
+    {
+        miniPlayView.hide()
+    }
+    
+    /**************************************** UI播放器 Section End ****************************************/
     
     /**************************************** 播放音乐相关 Section Begin ***************************************/
     ///是否正在播放音乐
@@ -1031,16 +1046,16 @@ extension MPManager: ExternalInterface
         }
     }
     
-    ///获取iCloud中当前播放歌曲，可能为nil
-    func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    ///获取iCloud中上一次播放歌曲，可能为nil
+    func getLastSong(_ completion: @escaping (MPSongModel?) -> Void)
     {
         libMgr.readCurrentSong { song in
             completion(song)
         }
     }
     
-    ///获取当前播放列表
-    func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    ///获取iCloud中上一次播放列表
+    func getLastPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
     {
         libMgr.readCurrentPlaylist { playlist in
             completion(playlist)

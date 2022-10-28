@@ -602,6 +602,8 @@ extension MPPlayer: ExternalInterface
     {
         if currentPlaylist?.playlistAudios.count ?? 0 > 0
         {
+            //先暂停
+            self.pause()
             //保存已经播放的歌曲
             self.elapsedAudioArray.append(self.currentAudio!)
             self.playNextByMode(auto: false)

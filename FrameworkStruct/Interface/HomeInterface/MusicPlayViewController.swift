@@ -40,7 +40,7 @@ class MusicPlayViewController: BasicViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ApplicationManager.shared.screenIdle = true
-        mpr.miniPlayView.hide()
+        mpr.hideMiniPlayer()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

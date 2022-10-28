@@ -55,7 +55,7 @@ class MusicViewController: BasicViewController
         {
             jumpCurrentAction(jumpCurrentBtn)
         }
-        mpr.miniPlayView.show()
+        mpr.showMiniPlayer()
         tableViewBottom.constant = 48
         jumpBtnBottom.constant = 26 + 48
     }
