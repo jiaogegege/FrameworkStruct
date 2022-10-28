@@ -31,6 +31,7 @@
 		EA0A926A28CB0D340036B339 /* TravelCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0A926928CB0D340036B339 /* TravelCardViewController.swift */; };
 		EA0A926C28CB0DCB0036B339 /* travel_card_sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0A926B28CB0DCB0036B339 /* travel_card_sign.jpg */; };
 		EA0A927028CB13B20036B339 /* travel_card_content_head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0A926F28CB13B20036B339 /* travel_card_content_head.jpg */; };
+		EA0D1841290BB2C900D1B6F6 /* MusicPlayMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */; };
 		EA0E67AD27B49F8B00A11C20 /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67A627B49F8B00A11C20 /* NSString+Encrypt.m */; };
 		EA0E67AE27B49F8B00A11C20 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67AB27B49F8B00A11C20 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EA0E67AF27B49F8B00A11C20 /* NSData+DataToHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0E67AC27B49F8B00A11C20 /* NSData+DataToHexString.m */; };
@@ -814,6 +815,7 @@
 		EA0A926928CB0D340036B339 /* TravelCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelCardViewController.swift; sourceTree = "<group>"; };
 		EA0A926B28CB0DCB0036B339 /* travel_card_sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = travel_card_sign.jpg; sourceTree = "<group>"; };
 		EA0A926F28CB13B20036B339 /* travel_card_content_head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = travel_card_content_head.jpg; sourceTree = "<group>"; };
+		EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayMiniView.swift; sourceTree = "<group>"; };
 		EA0E67A627B49F8B00A11C20 /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
 		EA0E67A727B49F8B00A11C20 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		EA0E67A827B49F8B00A11C20 /* NSData+DataToHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+DataToHexString.h"; sourceTree = "<group>"; };
@@ -4405,6 +4407,7 @@
 				EA75BB1E2792646C00910B4C /* TeenagerModeDialog.swift */,
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */,
+				EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -4831,6 +4834,7 @@
 				EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */,
 				EAC8A84827625D490088293F /* SDImageCoder.m in Sources */,
 				EAC8A86027625D490088293F /* SDWebImageError.m in Sources */,
+				EA0D1841290BB2C900D1B6F6 /* MusicPlayMiniView.swift in Sources */,
 				EA99373927994F6100480147 /* TABComponentLayerDropSerializationImpl.m in Sources */,
 				EAC8A86927625D490088293F /* SDImageCache.m in Sources */,
 				EA9A78BB27C756C900A11FC8 /* MPITextSentinel.m in Sources */,

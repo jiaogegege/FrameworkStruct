@@ -114,6 +114,16 @@ extension UIImage: ConstantPropertyProtocol
     static let iPlaylistBtn = UIImage(named: "mp_playlist_btn")
     //进度按钮
     static let iPlayProgressBtn = UIImage(named: "mp_progress_icon")
+    //mini唱片
+    static let iMiniDiscBg = UIImage(named: "mp_mini_disc")
+    //mini下一首
+    static let iMiniNextBtn = UIImage(named: "mp_mini_next")
+    //mini暂停
+    static let iMiniPauseBtn = UIImage(named: "mp_mini_pause")
+    //mini播放
+    static let iMiniPlayBtn = UIImage(named: "mp_mini_play")
+    //mini播放列表
+    static let iMiniPlaylistBtn = UIImage(named: "mp_mini_playlist")
 
 }
 

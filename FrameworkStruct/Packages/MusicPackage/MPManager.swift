@@ -87,6 +87,13 @@ class MPManager: OriginManager
     //打开文件超时定时器，当MPPlayer尝试播放一首icloud歌曲时，如果打开文件超时，那么直接返回失败
     fileprivate var openFileTimeoutTimer: Timer?
     
+    //迷你播放器器
+    fileprivate(set) lazy var miniPlayView: MusicPlayMiniView = {
+        let mini = MusicPlayMiniView()
+        ApplicationManager.shared.window.addSubview(mini)
+        return mini
+    }()
+    
     
     //MARK: 方法
     //私有化初始化方法
@@ -890,6 +897,11 @@ extension MPManager: ExternalInterface
         (stMgr.status(StatusKey.currentStatus) as? MPStatus) == .playing
     }
     
+    ///当前是否空闲，一般是刚初始化还没有播放任何歌曲
+    var isFree: Bool {
+        (stMgr.status(StatusKey.currentStatus) as? MPStatus) == .isInited
+    }
+    
     ///当前正在播放的歌曲
     var currentSong: MPAudioProtocol? {
         player.currentAudio
@@ -953,7 +965,6 @@ extension MPManager: ExternalInterface
                     //播放音乐
                     self?.player.play(song, playlist: playlist, completion: { success in
                         completion(success)
-                        
                     })
                 }
                 else    //没有查询到媒体库，播放失败
@@ -965,6 +976,14 @@ extension MPManager: ExternalInterface
         else    //其他媒体库，暂时不开发
         {
             
+        }
+    }
+    
+    ///播放一首播放列表中的歌曲
+    func playSong(_ song: MPSongModel, in playlist: MPPlaylistModel, completion: @escaping BoolClosure)
+    {
+        player.play(song, playlist: playlist) { succeed in
+            completion(succeed)
         }
     }
     

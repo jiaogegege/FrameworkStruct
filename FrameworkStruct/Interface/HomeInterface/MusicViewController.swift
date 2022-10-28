@@ -19,6 +19,8 @@ class MusicViewController: BasicViewController
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var jumpCurrentBtn: UIButton!
+    @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var jumpBtnBottom: NSLayoutConstraint!
     
     fileprivate var mpr = MPManager.shared
     
@@ -53,6 +55,9 @@ class MusicViewController: BasicViewController
         {
             jumpCurrentAction(jumpCurrentBtn)
         }
+        mpr.miniPlayView.show()
+        tableViewBottom.constant = 48
+        jumpBtnBottom.constant = 26 + 48
     }
     
     override func viewWillDisappear(_ animated: Bool) {

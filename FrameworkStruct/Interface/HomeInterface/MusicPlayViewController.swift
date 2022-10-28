@@ -19,8 +19,7 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var backBtn: UIButton!      //返回按钮
     fileprivate var songNameLabel: UILabel!     //歌曲名
     fileprivate var artistLabel: UILabel!       //艺术家和专辑名字
-    fileprivate var discImgView: UIImageView!       //圆形唱片图案
-    fileprivate var albumImgView: UIImageView!  //专辑图片
+    fileprivate var albumView: InfiniteRotateView!      //专辑旋转动画
     fileprivate var bottomContainerView: UIView!        //底部控制组件容器
     fileprivate var playPauseBtn: UIButton!     //播放暂停按钮
     fileprivate var previousBtn: UIButton!      //上一首
@@ -31,21 +30,17 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var pastTimeLabel: UILabel!     //经过时间
     fileprivate var totalTimeLabel: UILabel!    //所有时间
     
-    fileprivate var albumAnimationId: String?       //专辑图片旋转动画id
-    fileprivate var albumAnimationTimer: DispatchSourceTimer?     //专辑图片旋转动画定时器
-    fileprivate var albumAnimationFromValue: Double = 0.0           //动画起始值
-    fileprivate var albumAnimationToValue: Double = Double.pi * 2.0       //动画终点值
-
     //MARK: 方法
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ApplicationManager.shared.screenIdle = true
+        mpr.miniPlayView.hide()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,23 +101,9 @@ class MusicPlayViewController: BasicViewController {
             make.centerX.equalToSuperview()
             make.left.right.equalTo(songNameLabel)
         }
-        //唱片图
-        discImgView = UIImageView()
-        view.addSubview(discImgView)
-        discImgView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.left.equalTo(fitX(30))
-            make.right.equalTo(fitX(-30))
-            make.width.equalTo(discImgView.snp.height)
-            make.top.equalTo(artistLabel.snp.bottom).offset(fitX(100))
-        }
         //专辑图
-        albumImgView = UIImageView()
-        discImgView.addSubview(albumImgView)
-        albumImgView.snp.makeConstraints { (make) in
-            make.width.height.equalTo(fitX(224))
-            make.centerX.centerY.equalToSuperview()
-        }
+        albumView = InfiniteRotateView(frame: CGRect(x: fitX(30), y: artistLabel.y + artistLabel.height + fitX(150), width: kScreenWidth - fitX(30 * 2), height: kScreenWidth - fitX(30 * 2)), bgImage: .iDiscImage, contentImage: .iMiku_0)
+        view.addSubview(albumView)
         //底部容器
         bottomContainerView = UIView()
         view.addSubview(bottomContainerView)
@@ -216,10 +197,9 @@ class MusicPlayViewController: BasicViewController {
         artistLabel.textAlignment = .center
         artistLabel.font = .systemFont(ofSize: fitX(12))
         
-        discImgView.image = .iDiscImage
-        albumImgView.image = .iMiku_0
-        albumImgView.layer.cornerRadius = fitX(222.0 / 2.0)
-        albumImgView.clipsToBounds = true
+        albumView.clickCallback = {
+            
+        }
         
         playPauseBtn.setImage(.iPlayBtn, for: .normal)
         playPauseBtn.setImage(.iPauseBtn, for: .selected)
@@ -265,12 +245,13 @@ class MusicPlayViewController: BasicViewController {
             progressBar.maximumValue = Float(mpr.currentTotalTime)
             progressBar.setValue(Float(mpr.currentPastTime), animated: false)
             if let albumImg = asset[.artwork] as? UIImage {
-                albumImgView.image = albumImg
+                albumView.contentImage = albumImg
             }
             else
             {
-                albumImgView.image = .iMiku_0
+                albumView.contentImage = .iMiku_0
             }
+            albumView.updateView()
         }
         //控制界面显示状态
         self.playPauseBtn.isSelected = mpr.isPlaying
@@ -349,45 +330,13 @@ class MusicPlayViewController: BasicViewController {
     //播放时专辑图旋转动画
     fileprivate func startRotateAnimation()
     {
-        stopRotateAnimation()
-        startAnimationTimer()
-        albumAnimationId = AnimationManager.shared.popBasic(propertyName: kPOPLayerRotation, fromValue: albumAnimationFromValue, toValue: albumAnimationToValue, timingFuncName: .linear, duration: Self.albumAnimationTime, isLoop: true, host: self.albumImgView.layer, startBlock: {
-            
-        }, reachToBlock: {
-            
-        })
-    }
-    
-    //开启动画定时器
-    fileprivate func startAnimationTimer()
-    {
-        let sliceValue = Double.pi * 2.0 / (Self.albumAnimationTime / 0.1)
-        let originValue = self.albumAnimationFromValue      //记录动画开始时的位置
-        self.albumAnimationTimer = TimerManager.shared.dispatchTimer(interval: 0.1, onMain: true, exact: true, hostId: self.className, action: {[weak self] in
-            self?.albumAnimationFromValue += sliceValue
-            self?.albumAnimationToValue += sliceValue
-            if self?.albumAnimationFromValue ?? 0.0 > Double.pi * 2.0 + originValue
-            {
-                self?.albumAnimationFromValue -= Double.pi * 2.0
-                self?.albumAnimationToValue -= Double.pi * 2.0
-            }
-        })
+        albumView.startAnimation()
     }
     
     //停止旋转动画
     fileprivate func stopRotateAnimation()
     {
-        albumAnimationTimer?.cancel()
-        albumAnimationTimer = nil
-        if albumAnimationFromValue > Double.pi * 2.0
-        {
-            albumAnimationFromValue -= Double.pi * 2.0
-            albumAnimationToValue -= Double.pi * 2.0
-        }
-        if let id = albumAnimationId
-        {
-            albumImgView.layer.pop_removeAnimation(forKey: id)
-        }
+        albumView.stopAnimation()
     }
     
 }
@@ -436,13 +385,5 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
         
     }
     
-    
-}
-
-
-extension MusicPlayViewController: InternalType
-{
-    //专辑旋转动画时长
-    static let albumAnimationTime: TimeInterval = 36.0
     
 }

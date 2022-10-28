@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -1223,11 +1223,13 @@
                     </view>
                     <connections>
                         <outlet property="favoriteBtn" destination="npZ-Ol-RqL" id="gn7-mk-hBF"/>
+                        <outlet property="jumpBtnBottom" destination="5OT-8c-lOc" id="K0I-MX-DBk"/>
                         <outlet property="jumpCurrentBtn" destination="ShA-ko-AaV" id="Q2r-MN-OWc"/>
                         <outlet property="libraryBtn" destination="JLh-XB-7q5" id="kPw-ea-9G9"/>
                         <outlet property="searchBar" destination="JqJ-KR-9lR" id="49m-Ac-sND"/>
                         <outlet property="songListsBtn" destination="QCZ-ei-mxy" id="ifk-GE-rWf"/>
                         <outlet property="tableView" destination="XNu-gl-5YV" id="Gpe-qf-PtR"/>
+                        <outlet property="tableViewBottom" destination="kBs-Ey-5Ei" id="c4B-Mq-Xip"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tY-Bm-hYB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

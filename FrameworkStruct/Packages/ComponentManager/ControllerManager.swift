@@ -92,6 +92,11 @@ extension ControllerManager: ExternalInterface
         }
     }
     
+    ///tabbar是否隐藏，如果没有值，认为隐藏
+    var isTabbarHidden: Bool {
+        self.tabbarVC?.tabBar.isHidden ?? true
+    }
+    
     //当一个控制器被创建的时候，调用这个方法并传入self，记录一次
     //建议在viewDidLoad方法中调用
     func recordController(_ controller: UIViewController)
