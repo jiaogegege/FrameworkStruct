@@ -520,32 +520,57 @@ extension GraphicsManager: ExternalInterface
     
     ///绘制文字
     ///参数：
-    ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制
-    func drawText(context: CGContext?, text: String, font: UIFont, color: UIColor, position: CGPoint, areaSize: CGSize?)
+    ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制；lineSpace：行距；lineBreak：文本超出范围的显示方式
+    func drawText(context: CGContext?, text: String, font: UIFont, color: UIColor, position: CGPoint, areaSize: CGSize?, lineSpace: CGFloat = 4.0, lineBreak: NSLineBreakMode? = nil)
     {
-        let attrs = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color]
-        if let areaSize = areaSize
-        {
-            (text as NSString).draw(in: CGRect(origin: position, size: areaSize), withAttributes: attrs)
+        let para = NSMutableParagraphStyle()
+        para.lineSpacing = lineSpace
+        let attrs = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.paragraphStyle: para]
+        //如果设置了文本截断方式，并且设置了绘制区域范围，那么用UILabel绘制文字
+        if let lineBreak = lineBreak, let areaSize = areaSize {
+            let label = UILabel()
+            label.attributedText = NSAttributedString(string: text, attributes: attrs)
+            label.lineBreakMode = lineBreak
+            label.numberOfLines = 0
+            label.drawText(in: CGRect(origin: position, size: areaSize))
         }
         else
         {
-            (text as NSString).draw(at: position, withAttributes: attrs)
+            if let areaSize = areaSize
+            {
+                (text as NSString).draw(in: CGRect(origin: position, size: areaSize), withAttributes: attrs)
+            }
+            else
+            {
+                (text as NSString).draw(at: position, withAttributes: attrs)
+            }
         }
     }
     
     ///绘制属性文字
     ///参数：
     ///position：在画布中的位置，左上角；areaSize：绘制区域大小,如果不指定，那么文字为一行，并且无长度限制
-    func drawAttrText(context: CGContext?, attrStr: NSAttributedString, position: CGPoint, areaSize: CGSize?)
+    ///lineBreak：文本超出范围的显示方式，该属性不要在attrStr中指定，无效
+    func drawAttrText(context: CGContext?, attrStr: NSAttributedString, position: CGPoint, areaSize: CGSize?, lineBreak: NSLineBreakMode? = nil)
     {
-        if let areaSize = areaSize
-        {
-            attrStr.draw(in: CGRect(origin: position, size: areaSize))
+        //如果设置了文本截断方式，并且设置了绘制区域范围，那么用UILabel绘制文字
+        if let lineBreak = lineBreak, let areaSize = areaSize {
+            let label = UILabel()
+            label.attributedText = attrStr
+            label.lineBreakMode = lineBreak
+            label.numberOfLines = 0
+            label.drawText(in: CGRect(origin: position, size: areaSize))
         }
         else
         {
-            attrStr.draw(at: position)
+            if let areaSize = areaSize
+            {
+                attrStr.draw(in: CGRect(origin: position, size: areaSize))
+            }
+            else
+            {
+                attrStr.draw(at: position)
+            }
         }
     }
     
