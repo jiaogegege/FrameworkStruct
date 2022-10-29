@@ -251,7 +251,7 @@ extension MusicPlayMiniView: ExternalInterface
             }
             else
             {
-                albumView.contentImage = .iMiku_0
+                albumView.contentImage = .iDefaultDisc
             }
             albumView.updateView()
             //歌名和歌手名

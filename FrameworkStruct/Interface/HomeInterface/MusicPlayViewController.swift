@@ -103,7 +103,7 @@ class MusicPlayViewController: BasicViewController {
             make.left.right.equalTo(songNameLabel)
         }
         //专辑图
-        albumView = InfiniteRotateView(frame: CGRect(x: fitX(30), y: artistLabel.y + artistLabel.height + fitX(150), width: kScreenWidth - fitX(30 * 2), height: kScreenWidth - fitX(30 * 2)), bgImage: .iDiscImage, contentImage: .iMiku_0)
+        albumView = InfiniteRotateView(frame: CGRect(x: fitX(30), y: artistLabel.y + artistLabel.height + fitX(150), width: kScreenWidth - fitX(30 * 2), height: kScreenWidth - fitX(30 * 2)), bgImage: .iDiscImage, contentImage: .iDefaultDisc)
         view.addSubview(albumView)
         //底部容器
         bottomContainerView = UIView()
@@ -258,7 +258,7 @@ class MusicPlayViewController: BasicViewController {
             }
             else
             {
-                albumView.contentImage = .iMiku_0
+                albumView.contentImage = .iDefaultDisc
             }
             albumView.updateView()
         }

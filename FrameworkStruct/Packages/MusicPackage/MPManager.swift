@@ -398,7 +398,7 @@ class MPManager: OriginManager
         //播放倍速
         dict[MPNowPlayingInfoPropertyPlaybackRate] = playRate
         //封面图片，获取一个正方形
-        let originImg = info[.artwork] != nil ? info[.artwork] as! UIImage : UIImage.iMiku_0!
+        let originImg = info[.artwork] != nil ? info[.artwork] as! UIImage : UIImage.iDefaultDisc!
         let rect = CGRect(origin: .zero, size: originImg.size)
         dict[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: rect.size, requestHandler: { (size) -> UIImage in
             if let img = originImg.getImageInRect(rect)

@@ -94,6 +94,8 @@ extension UIImage: ConstantPropertyProtocol
     static let iSonglist: UIImage? = UIImage(named: "mp_addto_songlist")
     //跳到正在播放
     static let iJumpCurrentSong: UIImage? = UIImage(named: "mp_jump_current")
+    //默认唱片底图
+    static let iDefaultDisc: UIImage? = UIImage(named: "mp_default_disc")
     //唱片图
     static let iDiscImage: UIImage? = UIImage(named: "mp_disc_img")
     //播放
