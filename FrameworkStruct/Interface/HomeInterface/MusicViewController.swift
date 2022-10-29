@@ -378,7 +378,10 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             {
                 mpr.playSong(searchArray[indexPath.row], in: .iCloud) {[weak self] success in
     //                g_toast(text: (success ? "播放成功" : "播放失败"))
-                    self?.push(MusicPlayViewController.getViewController())
+                    if success
+                    {
+                        self?.push(MusicPlayViewController.getViewController())
+                    }
                 }
             }
             else
@@ -394,7 +397,10 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 {
                     mpr.playSong(libraryArray[indexPath.row], in: .iCloud) {[weak self] success in
     //                    g_toast(text: (success ? "播放成功" : "播放失败"))
-                        self?.push(MusicPlayViewController.getViewController())
+                        if success
+                        {
+                            self?.push(MusicPlayViewController.getViewController())
+                        }
                     }
                 }
                 else
@@ -408,7 +414,10 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 {
                     mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) {[weak self] success in
     //                    g_toast(text: (success ? "播放成功" : "播放失败"))
-                        self?.push(MusicPlayViewController.getViewController())
+                        if success
+                        {
+                            self?.push(MusicPlayViewController.getViewController())
+                        }
                     }
                 }
                 else

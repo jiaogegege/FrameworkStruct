@@ -84,9 +84,6 @@ class MPManager: OriginManager
     //播放模式
     fileprivate(set) var lastPlayMode: MPPlayer.PlayMode?
     
-    //打开文件超时定时器，当MPPlayer尝试播放一首icloud歌曲时，如果打开文件超时，那么直接返回失败
-    fileprivate var openFileTimeoutTimer: Timer?
-    
     //迷你播放器器
     fileprivate(set) lazy var miniPlayView: MusicPlayMiniView = {
         let mini = MusicPlayMiniView()
@@ -587,21 +584,21 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             if ia.isiCloudFile(audio.audioUrl)
             {
                 //设定一个定时器，如果超时，那么认为播放失败
-                openFileTimeoutTimer?.invalidate()
-                openFileTimeoutTimer = nil
-                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, hostId: self.className, action: {[weak self] timer in
-                    if self?.openFileTimeoutTimer != nil    //如果定时器还在说明超时了，那么取消定时器并返回false
+                var openFileTimeoutTimer: Timer?
+                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, hostId: self.className, action: { timer in
+                    FSLog("prepare timeout")
+                    if openFileTimeoutTimer != nil    //如果定时器还在说明超时了，那么取消定时器并返回false
                     {
-                        self?.openFileTimeoutTimer?.invalidate()
-                        self?.openFileTimeoutTimer = nil
+                        openFileTimeoutTimer?.invalidate()
+                        openFileTimeoutTimer = nil
                         success(false)
                     }
                 })
                 ia.openDocument(audio.audioUrl) {[weak self] id in
-                    if let timer = self?.openFileTimeoutTimer   //如果打开定时器还在说明，还没有超时，那么执行下面的代码
+                    if let timer = openFileTimeoutTimer   //如果打开定时器还在说明，还没有超时，那么执行下面的代码
                     {
                         timer.invalidate()
-                        self?.openFileTimeoutTimer = nil
+                        openFileTimeoutTimer = nil
                         //打开成功说明下载成功了，那么修改歌曲文件信息和下载信息为已下载
                         if let song = audio as? MPSongModel
                         {
@@ -615,10 +612,14 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                                 success(true)
                             })
                         }
-                        else
+                        else    //打开失败
                         {
                             success(false)
                         }
+                    }
+                    else    //已经超时了，已经执行过回调了，什么都不做
+                    {
+                        
                     }
                 }
             }
@@ -713,7 +714,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         }
         NotificationCenter.default.post(name: FSNotification.mpFailedPlay.name, object: nil, userInfo: [FSNotification.mpFailedPlay.paramKey: audio])
         //尝试播放下一首
-        player.next()
+        self.playNext()
     }
     
     func mpPlayerPlaylistChanged(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
@@ -764,6 +765,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
 extension MPManager: InternalType
 {
     //后台任务时长，到这个时间后要结束后台任务，不然会被系统杀掉；然后再开启一个新的后台任务
+    //也是打开歌曲文件超时时长
     static let backgroundTaskTime: TimeInterval = 20.0
     
     //状态管理器的key
@@ -842,7 +844,7 @@ extension MPManager: ExternalInterface
         }
         else if player.isPaused //暂停状态则恢复播放
         {
-            player.resume()
+            self.resume()
         }
     }
     
@@ -935,10 +937,13 @@ extension MPManager: ExternalInterface
     ///设置当前播放时间
     func setCurrentTime(_ time: TimeInterval, completion: BoolClosure?)
     {
-        player.seek(time) { (succeed) in
-            if let cb = completion
-            {
-                cb(succeed)
+        if currentStatus != .loading && currentStatus != .waiting
+        {
+            player.seek(time) { (succeed) in
+                if let cb = completion
+                {
+                    cb(succeed)
+                }
             }
         }
     }
@@ -1023,13 +1028,19 @@ extension MPManager: ExternalInterface
     ///暂停
     func pause()
     {
-        player.pause()
+        if currentStatus != .loading && currentStatus != .waiting
+        {
+            player.pause()
+        }
     }
     
     ///继续
     func resume()
     {
-        player.resume()
+        if currentStatus != .loading && currentStatus != .waiting
+        {
+            player.resume()
+        }
     }
     
     

@@ -443,6 +443,12 @@ extension GraphicsManager: ExternalInterface
         return newImg
     }
     
+    ///将一个图片绘制到画布上然后截取
+    func drawImage(_ image: UIImage, in rect: CGRect) -> UIImage?
+    {
+        self.drawImages(in: rect.size, images: [image], rects: [rect], keepRatio: false, additionalDraw: nil)
+    }
+    
     ///绘制一组图像并返回一个大图，就是将多个图片组合在一起
     ///参数：
     ///images：图片数组；

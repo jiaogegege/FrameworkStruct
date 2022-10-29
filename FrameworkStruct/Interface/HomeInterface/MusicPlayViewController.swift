@@ -24,6 +24,7 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var playPauseBtn: UIButton!     //播放暂停按钮
     fileprivate var previousBtn: UIButton!      //上一首
     fileprivate var nextBtn: UIButton!  //下一首
+    fileprivate var loadingView: UIActivityIndicatorView!       //正在加载提示
     fileprivate var playModeBtn: UIButton!      //播放模式
     fileprivate var playlistBtn: UIButton!      //播放列表
     fileprivate var progressBar: UISlider!      //进度条
@@ -119,6 +120,12 @@ class MusicPlayViewController: BasicViewController {
             make.centerX.centerY.equalToSuperview()
             make.width.height.equalTo(fitX(60))
         }
+        //加载提示
+        loadingView = UIActivityIndicatorView(style: .large)
+        bottomContainerView.addSubview(loadingView)
+        loadingView.snp.makeConstraints { (make) in
+            make.left.right.bottom.top.equalTo(playPauseBtn)
+        }
         //下一首
         nextBtn = UIButton(type: .custom)
         bottomContainerView.addSubview(nextBtn)
@@ -205,6 +212,8 @@ class MusicPlayViewController: BasicViewController {
         playPauseBtn.setImage(.iPauseBtn, for: .selected)
         playPauseBtn.addTarget(self, action: #selector(playPauseAction(sender:)), for: .touchUpInside)
         
+        loadingView.color = .white
+        
         nextBtn.setImage(.iNextBtn, for: .normal)
         nextBtn.addTarget(self, action: #selector(nextAction(sender:)), for: .touchUpInside)
         previousBtn.setImage(.iPreviousBtn, for: .normal)
@@ -254,9 +263,24 @@ class MusicPlayViewController: BasicViewController {
             albumView.updateView()
         }
         //控制界面显示状态
-        self.playPauseBtn.isSelected = mpr.isPlaying
+        playPauseBtn.isSelected = mpr.isPlaying
+        if mpr.isPlaying
+        {
+            albumView.startAnimation()
+        }
+        else
+        {
+            albumView.stopAnimation()
+        }
         self.playModeBtn.setImage(getPlayModeImage(), for: .normal)
-        startRotateAnimation()
+        if mpr.isPlaying
+        {
+            startRotateAnimation()
+        }
+        else
+        {
+            stopRotateAnimation()
+        }
     }
     
     //根据播放模式获取图片
@@ -278,12 +302,12 @@ class MusicPlayViewController: BasicViewController {
         if playPauseBtn.isSelected
         {
             mpr.pause()
-            playPauseBtn.isSelected = false
         }
         else
         {
-            mpr.resume()
-            playPauseBtn.isSelected = true
+            mpr.performPlayCurrent { (succeed) in
+                
+            }
         }
     }
     
@@ -353,12 +377,17 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
     }
     
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
-        
+        self.song = song
+        updateUI()
+        loadingView.startAnimating()
+        playPauseBtn.isHidden = true
     }
     
     func mpManagerStartPlay(_ song: MPAudioProtocol) {
         self.song = song
         updateUI()
+        loadingView.stopAnimating()
+        playPauseBtn.isHidden = false
     }
     
     func mpManagerPausePlay(_ song: MPAudioProtocol) {
@@ -374,6 +403,8 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
     func mpManagerFailedPlay(_ song: MPAudioProtocol) {
         playPauseBtn.isSelected = false
         stopRotateAnimation()
+        loadingView.stopAnimating()
+        playPauseBtn.isHidden = false
     }
     
     func mpManagerProgressChange(_ progress: TimeInterval) {

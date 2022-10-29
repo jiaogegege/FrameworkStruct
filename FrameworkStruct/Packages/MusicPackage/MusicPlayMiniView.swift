@@ -27,13 +27,14 @@ class MusicPlayMiniView: UIView
     //UI
     fileprivate var bgImgView: UIImageView!     //底图
     fileprivate var albumView: InfiniteRotateView!  //唱片专辑动图
-    fileprivate var textContainerView: UIView!      //歌名文本容器
+    fileprivate var textContainerView: ScrollAnimationView!      //歌名文本容器
     fileprivate var textScrollView: UIView!     //文本滚动view
     fileprivate var songLabel: UILabel!         //歌名label
     fileprivate var artistlabel: UILabel!       //歌手和专辑
     fileprivate var playlistBtn: UIButton!      //播放列表按钮
     fileprivate var nextBtn: UIButton!      //下一首按钮
     fileprivate var playPauseBtn: UIButton!     //播放暂停按钮
+    fileprivate var loadingView: UIActivityIndicatorView!       //加载提示
     fileprivate var progressBar: UIProgressView!        //进度
     
     //MARK: 方法
@@ -66,14 +67,18 @@ class MusicPlayMiniView: UIView
         playPauseBtn.frame = CGRect(x: nextBtn.x - 20 - 33, y: (self.height - 33) / 2.0, width: 33, height: 33)
         addSubview(playPauseBtn)
         
+        loadingView = UIActivityIndicatorView(style: .medium)
+        loadingView.frame = CGRect(x: nextBtn.x - 20 - 33, y: (self.height - 33) / 2.0, width: 33, height: 33)
+        addSubview(loadingView)
+        
         albumView = InfiniteRotateView(frame: CGRect(x: 9, y: -12, width: 55, height: 55), bgImage: .iMiniDiscBg, contentImage: nil)
         addSubview(albumView)
         
-        textContainerView = UIView(frame: CGRect(x: 9 + 55 + 10, y: 0, width: playPauseBtn.x - (9 + 55 + 10) - 8, height: self.height))
+        textContainerView = ScrollAnimationView(frame: CGRect(x: 9 + 55 + 10, y: 0, width: playPauseBtn.x - (9 + 55 + 10) - 8, height: self.height))
         addSubview(textContainerView)
         
         textScrollView = UIView(frame: textContainerView.bounds)
-        textContainerView.addSubview(textScrollView)
+//        textContainerView.addSubview(textScrollView)
         
         songLabel = UILabel(frame: CGRect(x: 0, y: 6, width: 0, height: 15))
         textScrollView.addSubview(songLabel)
@@ -87,6 +92,7 @@ class MusicPlayMiniView: UIView
     
     override func configView() {
         self.backgroundColor = bgColor
+        self.addPathShadow(color: .cBlack_5, opacity: 0.3)
         
         if let img = bgImage {
             bgImgView.image = img
@@ -102,13 +108,14 @@ class MusicPlayMiniView: UIView
         playPauseBtn.setImage(.iMiniPauseBtn, for: .selected)
         playPauseBtn.addTarget(self, action: #selector(playPauseAction(sender:)), for: .touchUpInside)
         
+        loadingView.color = .cBlack_5
+        
         albumView.animationTime = 60.0
         albumView.ratio = 0.818
         albumView.clickCallback = {[weak self] in
             self?.gotoMusicPlayVC()
         }
         
-        textContainerView.clipsToBounds = true
         songLabel.numberOfLines = 1
         songLabel.font = .systemFont(ofSize: 14)
         songLabel.textColor = .cBlack_5
@@ -140,7 +147,7 @@ class MusicPlayMiniView: UIView
         else    //开始或继续播放
         {
             mpr.performPlayCurrent { (succeed) in
-//                g_toast(text: succeed ? "播放成功" : "播放失败")
+                
             }
         }
     }
@@ -173,6 +180,8 @@ extension MusicPlayMiniView: DelegateProtocol, MPManagerDelegate
         if let song = song as? MPSongModel {
             currentSong = song
             updateView()
+            loadingView.startAnimating()
+            playPauseBtn.isHidden = true
         }
     }
     
@@ -180,6 +189,8 @@ extension MusicPlayMiniView: DelegateProtocol, MPManagerDelegate
         if let song = song as? MPSongModel {
             currentSong = song
             updateView()
+            loadingView.stopAnimating()
+            playPauseBtn.isHidden = false
         }
     }
     
@@ -201,11 +212,13 @@ extension MusicPlayMiniView: DelegateProtocol, MPManagerDelegate
         if let song = song as? MPSongModel {
             currentSong = song
             updateView()
+            loadingView.stopAnimating()
+            playPauseBtn.isHidden = false
         }
     }
     
     func mpManagerProgressChange(_ progress: TimeInterval) {
-        progressBar.setProgress(Float(progress / mpr.currentTotalTime), animated: true)
+        progressBar.setProgress(Float(progress / mpr.currentTotalTime), animated: false)
     }
     
     func mpManagerBufferProgressChange(_ progress: TimeInterval) {
@@ -246,6 +259,9 @@ extension MusicPlayMiniView: ExternalInterface
             songLabel.sizeToFit()
             artistlabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
             artistlabel.sizeToFit()
+            textScrollView.width = maxBetween(songLabel.width, artistlabel.width)
+            textContainerView.slotView = textScrollView
+            textContainerView.updateView()
             //设置播放
             playPauseBtn.isSelected = mpr.isPlaying
             if mpr.isPlaying

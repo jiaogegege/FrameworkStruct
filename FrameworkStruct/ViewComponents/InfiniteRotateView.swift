@@ -89,7 +89,7 @@ class InfiniteRotateView: UIView
             bgImgView.image = bgImage
         }
         if let contentImage = contentImage {
-            contentImgView.image = contentImage
+            contentImgView.image = GraphicsManager.shared.drawImage(contentImage, in: CGRect(x: 0, y: 0, width: contentImgView.width * 3, height: contentImgView.width * 3))
         }
     }
     

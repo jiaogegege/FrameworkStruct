@@ -140,6 +140,15 @@ extension UIView
         
     }
     
+    ///删除所有子view
+    func removeAllSubviews()
+    {
+        for sub in self.subviews
+        {
+            sub.removeFromSuperview()
+        }
+    }
+    
     /**
      * 切圆角
      * - Parameters:
