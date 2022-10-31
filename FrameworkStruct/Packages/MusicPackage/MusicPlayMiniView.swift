@@ -42,6 +42,10 @@ class MusicPlayMiniView: UIView
     init() {
         super.init(frame: CGRect(x: 0, y: kScreenHeight, width: Self.vWidth, height: Self.vHeight))
         self.mpr.addDelegate(self)
+        if mpr.isPlaying
+        {
+            self.currentSong = mpr.currentSong as? MPSongModel
+        }
         createView()
         configView()
         updateView()

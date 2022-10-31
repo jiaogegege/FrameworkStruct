@@ -35,7 +35,6 @@ class ViewController: BasicViewController
         self.hideNavBar = false
         self.navBackgroundColor = self.theme.mainColor
         self.navTitleColor = .white
-        MPManager.shared.hideMiniPlayer()
     }
     
     //创建界面

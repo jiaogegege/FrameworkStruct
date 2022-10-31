@@ -63,6 +63,7 @@ class MusicViewController: BasicViewController
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         ApplicationManager.shared.screenIdle = false
+        mpr.hideMiniPlayer()
     }
     
     override func createUI() {
@@ -226,7 +227,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
 //        g_endLoading()
         currentSong = song
         tableView.reloadData()
-        jumpCurrentAction(jumpCurrentBtn)
+//        jumpCurrentAction(jumpCurrentBtn)
     }
     
     func mpManagerPausePlay(_ song: MPAudioProtocol) {
