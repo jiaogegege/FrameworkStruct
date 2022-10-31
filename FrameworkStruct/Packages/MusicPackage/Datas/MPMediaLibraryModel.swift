@@ -106,10 +106,25 @@ extension MPMediaLibraryModel: ExternalInterface
                     exist = true
                     break
                 }
-                //计算要插入的位置，放在当前比较歌曲的下一个位置
-                if newSong.name.lowercased() >= oldSong.name.lowercased() && newSong.name.lowercased() < self.songs[index + 1].name.lowercased()
+                
+                //计算要插入的位置，如果已经设置过值了，那么不再设置
+                if insertIndex < 0
                 {
-                    insertIndex = index + 1
+                    //如果是第一个，并且新歌曲小于当前旧歌曲，那么放在第一个位置
+                    if (index <= 0) && (newSong.name.lowercased() <= oldSong.name.lowercased())
+                    {
+                        insertIndex = index
+                    }
+                    //如果是最后一个了，那么放在最后
+                    else if (index >= self.songs.count - 1) && (newSong.name.lowercased() >= oldSong.name.lowercased())
+                    {
+                        insertIndex = index + 1
+                    }
+                    //不是最后一个，那么放在匹配的后一个位置
+                    else if newSong.name.lowercased() >= oldSong.name.lowercased() && newSong.name.lowercased() < self.songs[index + 1].name.lowercased()
+                    {
+                        insertIndex = index + 1
+                    }
                 }
             }
             if exist == false && insertIndex >= 0
