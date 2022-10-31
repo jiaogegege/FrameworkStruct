@@ -98,17 +98,23 @@ extension MPMediaLibraryModel: ExternalInterface
         //检查新增
         for newSong in newSongs {
             var exist = false   //新歌曲是否存在，如果在旧列表中不存在，那么添加到列表中
-            for oldSong in self.songs {
+            var insertIndex = -1    //如果不存在，那么设置要插入的位置
+            for (index, oldSong) in self.songs.enumerated() {
                 if oldSong.url.absoluteString == newSong.url.absoluteString
                 {
                     //如果已经存在了，那么不需要添加，直接跳过
                     exist = true
                     break
                 }
+                //计算要插入的位置，放在当前比较歌曲的下一个位置
+                if newSong.name.lowercased() >= oldSong.name.lowercased() && newSong.name.lowercased() < self.songs[index + 1].name.lowercased()
+                {
+                    insertIndex = index + 1
+                }
             }
-            if exist == false
+            if exist == false && insertIndex >= 0
             {
-                self.songs.append(newSong)
+                self.songs.insert(newSong, at: insertIndex)
                 hasUpdate = true
             }
         }
@@ -129,9 +135,12 @@ extension MPMediaLibraryModel: ExternalInterface
             }
         }
         //排序，根据name
-        self.songs.sort { lhs, rhs in
-            return lhs.name.lowercased() < rhs.name.lowercased()
-        }
+//        if hasUpdate
+//        {
+//            self.songs.sort { lhs, rhs in
+//                return lhs.name.lowercased() < rhs.name.lowercased()
+//            }
+//        }
         return hasUpdate
     }
     

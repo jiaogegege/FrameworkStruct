@@ -22,7 +22,7 @@ class MusicViewController: BasicViewController
     @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var jumpBtnBottom: NSLayoutConstraint!
     
-    fileprivate var mpr = MPManager.shared
+    fileprivate unowned var mpr = MPManager.shared
     
     fileprivate var libraryArray: [MPSongModel] = []
     fileprivate var favoriteArray: [MPSongModel] = []

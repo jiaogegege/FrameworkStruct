@@ -22,7 +22,7 @@ class MusicPlayMiniView: UIView
     
     fileprivate(set) weak var currentSong: MPSongModel?      //当前播放歌曲
     
-    fileprivate lazy var mpr: MPManager = MPManager.shared
+    fileprivate unowned var mpr: MPManager = MPManager.shared
     
     //UI
     fileprivate var bgImgView: UIImageView!     //底图
@@ -56,25 +56,25 @@ class MusicPlayMiniView: UIView
         addSubview(bgImgView)
         
         playlistBtn = UIButton(type: .custom)
-        playlistBtn.frame = CGRect(x: self.width - 12 - 24, y: (self.height - 22) / 2.0, width: 24, height: 22)
+        playlistBtn.frame = CGRect(x: self.width - 10 - 35, y: (self.height - 35) / 2.0, width: 35, height: 35)
         addSubview(playlistBtn)
         
         nextBtn = UIButton(type: .custom)
-        nextBtn.frame = CGRect(x: playlistBtn.x - 20 - 17.6, y: (self.height - 22.4) / 2.0, width: 17.6, height: 22.4)
+        nextBtn.frame = CGRect(x: playlistBtn.x - 4 - 35, y: (self.height - 35) / 2.0, width: 35, height: 35)
         addSubview(nextBtn)
         
         playPauseBtn = UIButton(type: .custom)
-        playPauseBtn.frame = CGRect(x: nextBtn.x - 20 - 33, y: (self.height - 33) / 2.0, width: 33, height: 33)
+        playPauseBtn.frame = CGRect(x: nextBtn.x - 6 - 35, y: (self.height - 35) / 2.0, width: 35, height: 35)
         addSubview(playPauseBtn)
         
         loadingView = UIActivityIndicatorView(style: .medium)
-        loadingView.frame = CGRect(x: nextBtn.x - 20 - 33, y: (self.height - 33) / 2.0, width: 33, height: 33)
+        loadingView.frame = playPauseBtn.frame
         addSubview(loadingView)
         
-        albumView = InfiniteRotateView(frame: CGRect(x: 9, y: -12, width: 55, height: 55), bgImage: .iMiniDiscBg, contentImage: nil)
+        albumView = InfiniteRotateView(frame: CGRect(x: 8, y: -12, width: 55, height: 55), bgImage: .iMiniDiscBg, contentImage: nil)
         addSubview(albumView)
         
-        textContainerView = ScrollAnimationView(frame: CGRect(x: 9 + 55 + 10, y: 0, width: playPauseBtn.x - (9 + 55 + 10) - 8, height: self.height))
+        textContainerView = ScrollAnimationView(frame: CGRect(x: 8 + 55 + 10, y: 0, width: playPauseBtn.x - (8 + 55 + 10) - 8, height: self.height))
         addSubview(textContainerView)
         
         textScrollView = UIView(frame: textContainerView.bounds)
@@ -146,8 +146,9 @@ class MusicPlayMiniView: UIView
         }
         else    //开始或继续播放
         {
+            sender.isEnabled = false
             mpr.performPlayCurrent { (succeed) in
-                
+                sender.isEnabled = true
             }
         }
     }

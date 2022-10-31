@@ -11,7 +11,7 @@ class MusicPlayViewController: BasicViewController {
     //MARK: 属性
     var song: MPAudioProtocol?
     
-    fileprivate var mpr = MPManager.shared
+    fileprivate unowned var mpr = MPManager.shared
     
     //UI组件
     fileprivate var bgImgView: UIImageView!         //背景图

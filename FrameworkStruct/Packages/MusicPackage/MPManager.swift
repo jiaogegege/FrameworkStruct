@@ -845,6 +845,15 @@ extension MPManager: ExternalInterface
         else if player.isPaused //暂停状态则恢复播放
         {
             self.resume()
+            if let completion = completion {
+                completion(true)
+            }
+        }
+        else
+        {
+            if let completion = completion {
+                completion(true)
+            }
         }
     }
     
@@ -1010,7 +1019,15 @@ extension MPManager: ExternalInterface
     ///播放下一首
     func playNext()
     {
-        if self.currentStatus != .loading && self.currentStatus != .waiting
+        if self.currentStatus == .isInited  //如果刚初始化完成，还没有播放任何歌曲，却要求播放下一首，那么先播放当前，然后迅速播放下一首
+        {
+            self.performPlayCurrent {[weak self] succeed in
+                if succeed {
+                    self?.player.next()
+                }
+            }
+        }
+        else if self.currentStatus != .loading && self.currentStatus != .waiting    //正常播放期间，不是在等待或加载资源的时候才可以播放下一首
         {
             self.player.next()
         }

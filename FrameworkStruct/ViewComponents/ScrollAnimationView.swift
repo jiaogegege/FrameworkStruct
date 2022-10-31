@@ -18,6 +18,10 @@ class ScrollAnimationView: UIView
     
     //滚动方向
     var scrollDirection: ScrollDirection = .auto
+    
+    //滚动速度，每秒滚动多少px
+    var scrollSpeed: CGFloat = 15.0
+    
     //根据计算当前实际的滚动方向
     fileprivate(set) var realScrollDirection: ScrollDirection = .auto
     //滚动距离，为0则不滚动
@@ -90,7 +94,7 @@ class ScrollAnimationView: UIView
         if scrollDistance > 0
         {
             //计算动画时长，10px 1s
-            animationTime = TimeInterval((scrollDistance + 5.0) / 10.0 * 1)
+            animationTime = TimeInterval((scrollDistance + 5.0) / scrollSpeed * 1)
             let fromValue = CGRect(x: realScrollDirection == .horizontal ? 5 : 0, y: realScrollDirection == .vertical ? 5 : 0, width: scrollView.width, height: scrollView.height)
             let toValue = CGRect(x: realScrollDirection == .horizontal ? -scrollDistance - 5 : 0, y: realScrollDirection == .vertical ? -scrollDistance - 5 : 0, width: scrollView.width, height: scrollView.height)
             animationId = AnimationManager.shared.popBasic(propertyName: kPOPViewFrame, fromValue: fromValue, toValue: toValue, timingFuncName: .linear, duration: animationTime, isLoop: true, repeatCount: 1, autoReverse: true, host: scrollView, startBlock: {
