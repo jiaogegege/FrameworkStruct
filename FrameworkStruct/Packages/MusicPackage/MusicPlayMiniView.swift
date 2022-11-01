@@ -181,6 +181,10 @@ extension MusicPlayMiniView: DelegateProtocol, MPManagerDelegate
         
     }
     
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
+        
+    }
+    
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
         if let song = song as? MPSongModel {
             currentSong = song

@@ -25,6 +25,7 @@ class MusicViewController: BasicViewController
     fileprivate unowned var mpr = MPManager.shared
     
     fileprivate var libraryArray: [MPSongModel] = []
+    fileprivate var favoriteSongs: MPFavoriteModel?
     fileprivate var favoriteArray: [MPSongModel] = []
     fileprivate var songLists: [MPSonglistModel] = []
     
@@ -83,8 +84,21 @@ class MusicViewController: BasicViewController
         currentSong = mpr.currentSong
         mpr.getAlliCloudSongs(completion: {[weak self] songs in
             self?.libraryArray = songs
-            self?.tableView.reloadData()
+            if self?.type == .library
+            {
+                self?.tableView.reloadData()
+            }
         })
+        mpr.getFavroiteSongs { [weak self] favorite in
+            self?.favoriteSongs = favorite
+            if let songs = favorite?.audios as? [MPSongModel] {
+                self?.favoriteArray = songs
+                if self?.type == .favorite
+                {
+                    self?.tableView.reloadData()
+                }
+            }
+        }
     }
     
     @IBAction func libraryAction(_ sender: UIButton) {
@@ -219,6 +233,16 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
         })
     }
     
+    //我喜欢更新
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
+        self.favoriteSongs = favoriteSongs
+        favoriteArray = favoriteSongs.audios as? [MPSongModel] ?? []
+        if type == .favorite
+        {
+            tableView.reloadData()
+        }
+    }
+    
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
 //        g_loading(interaction: true)
     }
@@ -337,6 +361,15 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             let song = searchArray[indexPath.row]
             cell.songData = song
             cell.isCurrent = (currentSong?.audioId == song.id)
+             cell.favoriteCallback = {[weak self] song in
+                 self?.mpr.setFavoriteSong(!song.isFavorite, song: song) { succeed in
+                     //保存成功则刷新列表
+                     if succeed
+                     {
+                         self?.tableView.reloadData()
+                     }
+                 }
+             }
             cell.updateView()
             return cell
         }
@@ -349,6 +382,15 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 let song = libraryArray[indexPath.row]
                 cell.songData = song
                 cell.isCurrent = (currentSong?.audioId == song.id)
+                cell.favoriteCallback = {[weak self] song in
+                    self?.mpr.setFavoriteSong(!song.isFavorite, song: song) { succeed in
+                        //保存成功则刷新列表
+                        if succeed
+                        {
+                            self?.tableView.reloadData()
+                        }
+                    }
+                }
                 cell.updateView()
                 return cell
             }
@@ -359,6 +401,15 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 let song = favoriteArray[indexPath.row]
                 cell.songData = song
                 cell.isCurrent = (currentSong?.audioId == song.id)
+                cell.favoriteCallback = {[weak self] song in
+                    self?.mpr.setFavoriteSong(!song.isFavorite, song: song) { succeed in
+                        //保存成功则刷新列表
+                        if succeed
+                        {
+                            self?.tableView.reloadData()
+                        }
+                    }
+                }
                 cell.updateView()
                 return cell
             }
@@ -413,7 +464,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             {
                 if mpr.currentSong?.audioId != favoriteArray[indexPath.row].id
                 {
-                    mpr.playSong(favoriteArray[indexPath.row], in: .iCloud) {[weak self] success in
+                    mpr.playSong(favoriteArray[indexPath.row], in: favoriteSongs!) {[weak self] success in
     //                    g_toast(text: (success ? "播放成功" : "播放失败"))
                         if success
                         {

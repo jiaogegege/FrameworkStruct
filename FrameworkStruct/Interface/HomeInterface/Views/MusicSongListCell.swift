@@ -20,6 +20,7 @@ class MusicSongListCell: UITableViewCell {
     var number: Int?        //排序序号，从1开始
     var songData: MPSongModel?
     var isCurrent: Bool = false
+    var favoriteCallback: ((MPSongModel) -> Void)?  //点击收藏按钮
     
 
     override func awakeFromNib() {
@@ -37,7 +38,9 @@ class MusicSongListCell: UITableViewCell {
     }
     
     @IBAction func favoriteAction(_ sender: UIButton) {
-        
+        if let cb = favoriteCallback, let song = songData {
+            cb(song)
+        }
     }
     @IBAction func songlistAction(_ sender: UIButton) {
         
@@ -56,6 +59,7 @@ extension MusicSongListCell: ExternalInterface
             songNameLabel.text = song.name
             artistNameLabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
             self.downloadStateImgView.isHidden = !song.isDownloaded
+            favoriteBtn.isSelected = song.isFavorite
         }
         self.currentPlayImgView.isHidden = !isCurrent
         self.songNameLabel.textColor = isCurrent ? .cAccent : .cBlack_3

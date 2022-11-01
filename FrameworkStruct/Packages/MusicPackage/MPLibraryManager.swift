@@ -16,7 +16,8 @@ protocol MPLibraryManagerDelegate: NSObjectProtocol {
     func mpLibraryManagerDidInitCompleted()
     ///媒体库更新完成
     func mpLibraryManagerDidUpdated()
-    
+    ///我喜欢歌曲列表更新
+    func mpLibraryManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel)
 }
 
 class MPLibraryManager: OriginManager
@@ -36,6 +37,7 @@ class MPLibraryManager: OriginManager
     private override init()
     {
         super.init()
+        self.container.subscribe(key: MPContainer.MPDataKey.favoriteSongs, delegate: self)
         self.addNotification()
     }
     
@@ -58,7 +60,7 @@ class MPLibraryManager: OriginManager
 }
 
 
-extension MPLibraryManager: DelegateProtocol
+extension MPLibraryManager: DelegateProtocol, ContainerServices
 {
     //媒体库初始化完成
     @objc func containerDidInitCompleted(notify: Notification)
@@ -78,6 +80,23 @@ extension MPLibraryManager: DelegateProtocol
         {
             del.mpLibraryManagerDidUpdated()
         }
+    }
+    
+    func containerDidUpdateData(key: AnyHashable, value: Any) {
+        if let k = key as? MPContainer.MPDataKey
+        {
+            if k == .favoriteSongs, let fav = value as? MPFavoriteModel  //我喜欢列表更新
+            {
+                if let del = self.delegate
+                {
+                    del.mpLibraryManagerDidUpdateFavoriteSongs(fav)
+                }
+            }
+        }
+    }
+    
+    func containerDidClearData(key: AnyHashable) {
+        
     }
     
 }
@@ -126,6 +145,14 @@ extension MPLibraryManager: ExternalInterface
         }
     }
     
+    ///读取我喜欢歌曲
+    func readFavoriteSongs(_ completion: @escaping (MPFavoriteModel?) -> Void)
+    {
+        container.getFavoriteSongs { favorite in
+            completion(favorite)
+        }
+    }
+    
     ///保存当前播放歌曲和播放列表
     func saveCurrent(_ song: MPSongModel, in playlist: MPPlaylistModel)
     {
@@ -151,6 +178,61 @@ extension MPLibraryManager: ExternalInterface
         }
         
         //处理历史播放列表记录
+        
+    }
+    
+    ///保存iCloud库
+    func saveiCloudSongs(_ songs: [MPSongModel], success: @escaping BoolClosure)
+    {
+        container.getiCloudLibrary {[weak self] lib in
+            if let lib = lib {
+                lib.songs = songs
+                self?.container.setiCloudLibrary(lib, success: { succeed in
+                    success(succeed)
+                })
+            }
+            else
+            {
+                success(false)
+            }
+        }
+    }
+    
+    ///我喜欢列表新增或删除一首歌曲
+    ///参数：favorite：收藏/取消收藏
+    func saveSongToFavorite(_ song: MPSongModel, favorite: Bool, success: @escaping BoolClosure)
+    {
+        //先读取我喜欢列表
+        container.getFavoriteSongs {[weak self] favoriteSongs in
+            if let favoriteSongs = favoriteSongs {
+                let ret = favorite ? favoriteSongs.addAudio(song) : favoriteSongs.deleteAudio(song)
+                if ret  //添加成功，保存到icloud
+                {
+                    self?.container.setFavoriteSongs(favoriteSongs, success: { succeed in
+                        success(succeed)
+                    })
+                }
+                else
+                {
+                    success(false)
+                }
+            }
+            else    //如果还没有我喜欢列表，那么创建一个新的
+            {
+                let favoriteSongs = MPFavoriteModel(name: String.iLike, audioType: .song)
+                let ret = favorite ? favoriteSongs.addAudio(song) : favoriteSongs.deleteAudio(song)
+                if ret
+                {
+                    self?.container.setFavoriteSongs(favoriteSongs, success: { succeed in
+                        success(succeed)
+                    })
+                }
+                else
+                {
+                    success(false)
+                }
+            }
+        }
         
     }
     

@@ -64,6 +64,7 @@ playMusic = "Play Music";
 like = "Like";
 dislike = "Dislike";
 addToBookmark = "Add To Bookmark";
+iLike = "I Like";
 
 /**
  * Toast文案

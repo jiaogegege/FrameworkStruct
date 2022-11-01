@@ -24,12 +24,12 @@ class MPFavoriteModel: OriginModel, Archivable
     
     //MARK: 方法
     //创建一个空收藏列表
-    init(name: String, mediaType: MPAudioType) {
+    init(name: String, audioType: MPAudioType) {
         self.id = g_uuid()
         self.name = name
         self.audios = []
         self.type = .favorite
-        self.audioType = mediaType
+        self.audioType = audioType
     }
     
     required init?(coder: NSCoder) {
@@ -134,6 +134,63 @@ extension MPFavoriteModel: InternalType
         case audioType
         case images
         case intro
+    }
+    
+}
+
+
+//外部接口
+extension MPFavoriteModel: ExternalInterface
+{
+    ///新增一个音频，返回是否添加成功，如果已经存在返回false
+    func addAudio(_ audio: MPAudioProtocol) -> Bool
+    {
+        let index = self.getIndexOf(audio: audio)
+        if index < 0   //不存在才加入，存在不做任何修改
+        {
+            self.audios.insert(audio, at: 0)
+        }
+        return index < 0
+    }
+    
+    ///删除一个音频，返回删除是否成功，如果不存在返回false
+    func deleteAudio(_ audio: MPAudioProtocol) -> Bool
+    {
+        let index = self.getIndexOf(audio: audio)
+        if index >= 0    //存在才删除
+        {
+            self.audios.remove(at: index)
+        }
+        return index >= 0
+    }
+    
+    ///diff歌曲对象，已经存在库中则替换，没有则标记为不可用
+    func updateAudios(_ audios: [MPAudioProtocol])
+    {
+        let libAudioIds = audios.map { audio in
+            audio.audioId
+        }
+        let playlistAudioIds = self.audios.map { audio in
+            audio.audioId
+        }
+        for (index, audioId) in playlistAudioIds.enumerated()
+        {
+            if libAudioIds.contains(audioId) //如果库中存在该歌曲，那么用库中的歌曲替换
+            {
+                if let libIndex = libAudioIds.firstIndex(of: audioId), libIndex >= 0, libIndex < audios.count
+                {
+                    self.audios[index] = audios[libIndex]
+                }
+                else    //没找到则标记为不可用
+                {
+                    self.audios[index].isAvailable = false
+                }
+            }
+            else    //不存在，则标记为不可用
+            {
+                self.audios[index].isAvailable = false
+            }
+        }
     }
     
 }

@@ -94,7 +94,7 @@ enum MPPlaylistType: Int {
     case playlist = 0               //标准播放列表
     
     case songlist = 1               //歌单
-    case favorite = 2               //我的收藏
+    case favorite = 2               //我喜欢
     case album = 3                  //专辑
     case podcast = 4                //播客
     case stage = 5                  //场景

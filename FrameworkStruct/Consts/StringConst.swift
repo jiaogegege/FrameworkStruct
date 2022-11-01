@@ -340,6 +340,8 @@ extension String
     static let dislike = localized("dislike")
     //添加到书签
     static let addToBookmark = localized("addToBookmark")
+    //我喜欢
+    static let iLike = localized("iLike")
     
     //MARK: Toast文案
     //播放失败

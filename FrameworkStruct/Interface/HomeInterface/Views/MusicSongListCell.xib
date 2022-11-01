@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Int-S1-6jS">
-                        <rect key="frame" x="60" y="13" width="185" height="18"/>
+                        <rect key="frame" x="60" y="13" width="186" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="x7E-p7-dJi"/>
                         </constraints>
@@ -43,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzK-w8-DKG">
-                        <rect key="frame" x="60" y="39" width="185" height="12"/>
+                        <rect key="frame" x="60" y="39" width="186" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="eCv-Di-udD"/>
                         </constraints>
@@ -52,10 +52,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UeV-we-66K">
-                        <rect key="frame" x="284" y="21" width="24" height="22"/>
+                        <rect key="frame" x="284" y="16" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="fXa-ho-Hw6"/>
-                            <constraint firstAttribute="height" constant="22" id="xB6-4m-07G"/>
+                            <constraint firstAttribute="width" constant="32" id="fXa-ho-Hw6"/>
+                            <constraint firstAttribute="height" constant="32" id="xB6-4m-07G"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" image="mp_addto_songlist"/>
@@ -64,10 +64,10 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nj-A5-rsZ">
-                        <rect key="frame" x="251" y="21.5" width="23" height="21"/>
+                        <rect key="frame" x="250" y="16" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="IcA-1T-M1X"/>
-                            <constraint firstAttribute="width" constant="23" id="MhM-ow-70Q"/>
+                            <constraint firstAttribute="height" constant="32" id="IcA-1T-M1X"/>
+                            <constraint firstAttribute="width" constant="32" id="MhM-ow-70Q"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" image="mp_unfavorite"/>
@@ -88,7 +88,7 @@
                     <constraint firstItem="dzK-w8-DKG" firstAttribute="centerY" secondItem="55Z-Or-JL7" secondAttribute="centerY" id="1lg-Pp-I6u"/>
                     <constraint firstItem="LHh-aw-Vn8" firstAttribute="leading" secondItem="QSY-7m-DSq" secondAttribute="trailing" constant="8" id="BAa-k6-f7S"/>
                     <constraint firstItem="UeV-we-66K" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MXl-Eq-9en"/>
-                    <constraint firstItem="4nj-A5-rsZ" firstAttribute="leading" secondItem="Int-S1-6jS" secondAttribute="trailing" constant="6" id="OkT-1g-em5"/>
+                    <constraint firstItem="4nj-A5-rsZ" firstAttribute="leading" secondItem="Int-S1-6jS" secondAttribute="trailing" constant="4" id="OkT-1g-em5"/>
                     <constraint firstItem="LHh-aw-Vn8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-6" id="Oof-ZR-J0m"/>
                     <constraint firstItem="55Z-Or-JL7" firstAttribute="leading" secondItem="LHh-aw-Vn8" secondAttribute="leading" constant="1" id="QeJ-Pq-s71"/>
                     <constraint firstItem="dzK-w8-DKG" firstAttribute="trailing" secondItem="Int-S1-6jS" secondAttribute="trailing" id="UCI-v7-qGJ"/>
@@ -98,8 +98,8 @@
                     <constraint firstItem="4nj-A5-rsZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dbt-xA-YLZ"/>
                     <constraint firstItem="UeV-we-66K" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hJj-eA-mQU"/>
                     <constraint firstItem="Int-S1-6jS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="k4T-VU-fvr"/>
-                    <constraint firstItem="UeV-we-66K" firstAttribute="leading" secondItem="4nj-A5-rsZ" secondAttribute="trailing" constant="10" id="n07-mM-kuz"/>
-                    <constraint firstAttribute="trailing" secondItem="UeV-we-66K" secondAttribute="trailing" constant="12" id="o7f-gt-plh"/>
+                    <constraint firstItem="UeV-we-66K" firstAttribute="leading" secondItem="4nj-A5-rsZ" secondAttribute="trailing" constant="2" id="n07-mM-kuz"/>
+                    <constraint firstAttribute="trailing" secondItem="UeV-we-66K" secondAttribute="trailing" constant="4" id="o7f-gt-plh"/>
                     <constraint firstItem="dzK-w8-DKG" firstAttribute="top" secondItem="Int-S1-6jS" secondAttribute="bottom" constant="8" id="xP7-8H-a5I"/>
                     <constraint firstItem="dzK-w8-DKG" firstAttribute="leading" secondItem="Int-S1-6jS" secondAttribute="leading" id="zvN-M2-0xe"/>
                 </constraints>

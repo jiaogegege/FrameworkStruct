@@ -376,6 +376,10 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
         
     }
     
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
+        
+    }
+    
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
         self.song = song
         updateUI()

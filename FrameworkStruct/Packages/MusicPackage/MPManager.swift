@@ -19,6 +19,8 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerDidInitCompleted()
     ///更新完成
     func mpManagerDidUpdated()
+    ///我喜欢歌曲列表更新
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel)
     ///加载歌曲，缓冲
     func mpManagerWaitToPlay(_ song: MPAudioProtocol)
     ///开始播放歌曲
@@ -557,6 +559,17 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         performInitOrUpdateCallback()
     }
     
+    func mpLibraryManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerDidUpdateFavoriteSongs(favoriteSongs)
+            }
+        }
+    }
+    
     /**************************************** 媒体库管理器代理 Section End ***************************************/
     
     /**************************************** MPPlayer代理方法 Section Begin ***************************************/
@@ -902,7 +915,7 @@ extension MPManager: ExternalInterface
         }
     }
     
-    /**************************************** UI播放器 Section Begin ****************************************/
+    /**************************************** Mini播放器 Section Begin ****************************************/
     ///显示迷你播放器
     func showMiniPlayer()
     {
@@ -915,7 +928,7 @@ extension MPManager: ExternalInterface
         miniPlayView.hide()
     }
     
-    /**************************************** UI播放器 Section End ****************************************/
+    /**************************************** Mini播放器 Section End ****************************************/
     
     /**************************************** 播放音乐相关 Section Begin ***************************************/
     ///是否正在播放音乐
@@ -1009,9 +1022,9 @@ extension MPManager: ExternalInterface
     }
     
     ///播放一首播放列表中的歌曲
-    func playSong(_ song: MPSongModel, in playlist: MPPlaylistModel, completion: @escaping BoolClosure)
+    func playSong(_ song: MPSongModel, in playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
     {
-        player.play(song, playlist: playlist) { succeed in
+        player.play(song, playlist: playlist.getPlaylist()) { succeed in
             completion(succeed)
         }
     }
@@ -1095,6 +1108,60 @@ extension MPManager: ExternalInterface
     {
         libMgr.readHistorySongs { historySongs in
             completion(historySongs)
+        }
+    }
+    
+    ///获取我喜欢歌曲列表
+    func getFavroiteSongs(_ completion: @escaping (MPFavoriteModel?) ->Void)
+    {
+        libMgr.readFavoriteSongs { favoriteSongs in
+            completion(favoriteSongs)
+        }
+    }
+    
+    ///收藏一首歌曲到我喜欢列表，返回是否成功，如果已经收藏过了，那么再次收藏则失败
+    ///参数：favorite：收藏/取消收藏；song：要收藏的歌曲
+    func setFavoriteSong(_ favorite: Bool, song: MPSongModel, success: @escaping BoolClosure)
+    {
+        //因为内存中所有列表中的歌曲都共享内存，所以只需要修改歌曲的收藏状态然后保存到iCloud即可
+        if song.isFavorite != favorite
+        {
+            song.isFavorite = favorite
+            //获取iCloud歌曲
+            libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] songs in
+                if var songs = songs as? [MPSongModel] {
+                    for (index, item) in songs.enumerated()
+                    {
+                        if song.id == item.id
+                        {
+                            songs[index] = song
+                            break
+                        }
+                    }
+                    //保存icloud songs
+                    self?.libMgr.saveiCloudSongs(songs, success: { succeed in
+                        if succeed  //icloud保存成功则保存我喜欢列表
+                        {
+                            //保存我喜欢列表
+                            self?.libMgr.saveSongToFavorite(song, favorite: favorite, success: { succeed in
+                                success(succeed)
+                            })
+                        }
+                        else
+                        {
+                            success(false)
+                        }
+                    })
+                }
+                else
+                {
+                    success(false)
+                }
+            }
+        }
+        else
+        {
+            success(false)
         }
     }
     

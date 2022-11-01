@@ -367,6 +367,8 @@ extension MPContainer: InternalType
     static let currentPlaylistFileName = "currentPlaylist.dat"
     //历史播放歌曲列表文件
     static let historySongsFileName = "historySongs.dat"
+    //我喜欢歌曲列表文件
+    static let favoriteSongsFileName = "favoriteSongs.dat"
     //历史播放列表列表文件
     static let historyPlaylistsFileName = "historyPlaylists.dat"
  
@@ -376,6 +378,7 @@ extension MPContainer: InternalType
         case currentSong                    //当前播放歌曲
         case currentPlaylist                //当前播放列表
         case historySongs                   //历史播放歌曲
+        case favoriteSongs                  //我喜欢歌曲列表
         case historyPlaylists               //历史播放列表
         
         case iCloudSongFileInfo             //所有iCloud歌曲原始文件信息，只存在内存中
@@ -392,6 +395,8 @@ extension MPContainer: InternalType
                 return MPContainer.currentPlaylistFileName
             case .historySongs:
                 return MPContainer.historySongsFileName
+            case .favoriteSongs:
+                return MPContainer.favoriteSongsFileName
             case .historyPlaylists:
                 return MPContainer.historyPlaylistsFileName
             default:
@@ -436,6 +441,42 @@ extension MPContainer: ExternalInterface
         else
         {
             completion(nil)
+        }
+    }
+    
+    ///保存iCloud库
+    func setiCloudLibrary(_ iCloudLib: MPMediaLibraryModel, success: BoolClosure? = nil)
+    {
+        getLibrarys {[weak self] libs in
+            if var libs = libs {
+                for (index, lib) in libs.enumerated()
+                {
+                    if lib.type == .iCloud
+                    {
+                        libs[index] = iCloudLib
+                        break
+                    }
+                }
+                //保存到内存
+                self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                //保存到iCloud
+                self?.commit(key: MPDataKey.librarys, value: libs, success: { obj in
+                    if let success = success {
+                        success(true)
+                    }
+                }, failure: { error in
+                    FSLog("MPContainer save icloud library : \(error.localizedDescription)")
+                    if let success = success {
+                        success(false)
+                    }
+                })
+            }
+            else
+            {
+                if let success = success {
+                    success(false)
+                }
+            }
         }
     }
     
@@ -556,20 +597,16 @@ extension MPContainer: ExternalInterface
                                 if let songs = lib?.songs {
                                     //做diff，用媒体库中的歌曲对象替换播放列表中的，节省内存
                                     playlist.updateAudios(songs)
-                                    //更新完成后保存到缓存中，此时，playlist中的歌曲都是iCloud歌曲库的引用
-                                    self?.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    //更新完成后保存到缓存中，此时，historySongs中的歌曲都是iCloud歌曲库的引用
+                                    self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
                                     completion(playlist)
                                 }
                                 else    //如果没有查询到，直接保存，应该不会出现这种情况，一定会有iCloud库
                                 {
-                                    self?.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
                                     completion(playlist)
                                 }
                             })
-                            
-                            
-                            self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
-                            completion(playlist)
                         }
                         else
                         {
@@ -594,6 +631,66 @@ extension MPContainer: ExternalInterface
             
         } failure: { error in
             FSLog("MPContainer save historySongs : \(error.localizedDescription)")
+        }
+    }
+    
+    ///获取我喜欢歌曲列表
+    func getFavoriteSongs(_ completion: @escaping (MPFavoriteModel?) -> Void)
+    {
+        if let favorite = self.get(key: MPDataKey.favoriteSongs) as? MPFavoriteModel
+        {
+            completion(favorite)
+        }
+        else    //如果缓存中没有，那么尝试从iCloud获取
+        {
+            readFileFromiCloud(Self.favoriteSongsFileName) { [weak self] data in
+                if let data = data {
+                    MPFavoriteModel.unarchive(data) { obj in
+                        if let favoriteSongs = obj {
+                            //查询缓存中iCloud中所有歌曲，做diff
+                            self?.getiCloudLibrary({ lib in
+                                if let songs = lib?.songs {
+                                    //做diff，用媒体库中的歌曲对象替换播放列表中的，节省内存
+                                    favoriteSongs.updateAudios(songs)
+                                    //更新完成后保存到缓存中，此时，favoriteSongs中的歌曲都是iCloud歌曲库的引用
+                                    self?.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    completion(favoriteSongs)
+                                }
+                                else    //如果没有查询到，直接保存，应该不会出现这种情况，一定会有iCloud库
+                                {
+                                    self?.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    completion(favoriteSongs)
+                                }
+                            })
+                        }
+                        else
+                        {
+                            completion(nil)
+                        }
+                    }
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    ///保存我喜欢歌曲列表
+    func setFavoriteSongs(_ favoriteSongs: MPFavoriteModel, success: BoolClosure? = nil)
+    {
+        self.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+        //保存到iCloud
+        self.commit(key: MPDataKey.favoriteSongs, value: favoriteSongs) { obj in
+            if let success = success {
+                success(true)
+            }
+        } failure: { error in
+            FSLog("MPContainer save favoriteSongs : \(error.localizedDescription)")
+            if let success = success {
+                success(false)
+            }
         }
     }
     

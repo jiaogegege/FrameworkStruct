@@ -17,7 +17,7 @@ class MPSongModel: OriginModel, Archivable
     var name: String                        //歌曲名
     var url: URL                            //歌曲地址
     var isFavorite: Bool                    //是否收藏
-    var isValid: Bool                       //是否可用
+    var isExist: Bool                       //是否存在
     var artistIds: Array<String>?           //艺术家ids
     var albumId: String?                    //专辑id
     var artistImgs: Array<URL>?             //艺术家头像地址
@@ -39,7 +39,7 @@ class MPSongModel: OriginModel, Archivable
         self.name = name
         self.url = url
         self.isFavorite = false
-        self.isValid = true
+        self.isExist = true
         super.init()
         self.asset = MPEmbellisher.shared.parseSongMeta(self)
     }
@@ -48,7 +48,7 @@ class MPSongModel: OriginModel, Archivable
         let song = MPSongModel(name: self.name, url: self.url)
         song.id = self.id
         song.isFavorite = self.isFavorite
-        song.isValid = self.isValid
+        song.isExist = self.isExist
         song.artistIds = self.artistIds
         song.albumId = self.albumId
         song.artistImgs = self.artistImgs
@@ -68,7 +68,7 @@ class MPSongModel: OriginModel, Archivable
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.url = coder.decodeObject(forKey: PropertyKey.url.rawValue) as! URL
         self.isFavorite = coder.decodeBool(forKey: PropertyKey.isFavorite.rawValue)
-        self.isValid = coder.decodeBool(forKey: PropertyKey.isValid.rawValue)
+        self.isExist = coder.decodeBool(forKey: PropertyKey.isExist.rawValue)
         self.artistIds = coder.decodeObject(forKey: PropertyKey.artists.rawValue) as? [String]
         self.albumId = coder.decodeObject(forKey: PropertyKey.album.rawValue) as? String
         self.artistImgs = coder.decodeObject(forKey: PropertyKey.artistImgs.rawValue) as? Array<URL>
@@ -86,7 +86,7 @@ class MPSongModel: OriginModel, Archivable
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.url, forKey: PropertyKey.url.rawValue)
         coder.encode(self.isFavorite, forKey: PropertyKey.isFavorite.rawValue)
-        coder.encode(self.isValid, forKey: PropertyKey.isValid.rawValue)
+        coder.encode(self.isExist, forKey: PropertyKey.isExist.rawValue)
         coder.encode(self.artistIds, forKey: PropertyKey.artists.rawValue)
         coder.encode(self.albumId, forKey: PropertyKey.album.rawValue)
         coder.encode(self.artistImgs, forKey: PropertyKey.artistImgs.rawValue)
@@ -117,10 +117,10 @@ extension MPSongModel: MPAudioProtocol
     
     var isAvailable: Bool {
         get {
-            isValid
+            isExist
         }
         set {
-            isValid = newValue
+            isExist = newValue
         }
     }
     
@@ -173,7 +173,7 @@ extension MPSongModel: InternalType
         case name
         case url
         case isFavorite
-        case isValid
+        case isExist
         case artists
         case album
         case artistImgs
