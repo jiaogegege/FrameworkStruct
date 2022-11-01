@@ -46,7 +46,7 @@ class FileManageAdapter: OriginAdapter
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification(notification:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    //处理从文件App打开文件，此处示例为暂时保存到Documents文件夹
+    //处理主动从文件App打开文件，此处示例为暂时保存到Documents文件夹
     fileprivate func processOpenFile(_ fileUrl: URL)
     {
         var fileData: Data?
@@ -82,12 +82,11 @@ extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
         //处理fileUrl，如果有的话
         if let info = self.openInfo
         {
-            //暂时写入Documents文件夹
             let fileName = info.fileUrl.lastPathComponent    //包含扩展名的文件名
-//            let fileExt = info.fileUrl.pathExtension   //扩展名
 //            let displayName = info.fileUrl.deletingPathExtension().lastPathComponent   //文件名
+//            let fileExt = info.fileUrl.pathExtension   //扩展名
+            
             //如果是音乐文件，那么保存到iCloud的`Documents/Music/Song`文件夹
-            //保存的文件路径
             if FileTypeName.isAudio(fileName)
             {
                 if let songDir = iCloudAccessor.shared.getDir(.MusicSong)
@@ -111,14 +110,14 @@ extension FileManageAdapter: DelegateProtocol, UIDocumentPickerDelegate
                     self.openInfo = nil
                 }
             }
-            else
+            else    //其他文件目前先保存到本地`Documents`文件夹
             {
                 let savePath = SandBoxAccessor.shared.getDocumentDir().appendingPathComponent(fileName)
                 if let fileData = try? Data(contentsOf: info.fileUrl)
                 {
                     try? fileData.write(to: URL(fileURLWithPath: savePath))
                     //删除源文件
-                    SandBoxAccessor.shared.deletePath(info.fileUrl.path)
+//                    SandBoxAccessor.shared.deletePath(info.fileUrl.path)
                     //处理完后清空
                     self.openInfo = nil
                 }

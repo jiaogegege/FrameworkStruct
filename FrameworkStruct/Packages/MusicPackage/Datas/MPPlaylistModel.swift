@@ -17,29 +17,32 @@ class MPPlaylistModel: OriginModel, Archivable
     var name: String
     var audios: Array<MPAudioProtocol>
     var type: MPPlaylistType
+    var audioType: MPAudioType
     var tagIds: Array<String>?
     var intro: String?
     
     //MARK:  方法
     //创建一个新的空播放列表
-    init(name: String) {
+    init(name: String, audioType: MPAudioType) {
         self.id = g_uuid()
         self.name = name
         self.audios = []
         self.type = .playlist
+        self.audioType = audioType
     }
     
     //根据现有数据创建一个播放列表，通常是从其他类型的列表转换为播放列表
-    init(name: String, audios: Array<MPAudioProtocol>, type: MPPlaylistType, intro: String?) {
+    init(name: String, audios: Array<MPAudioProtocol>, type: MPPlaylistType, audioType: MPAudioType, intro: String?) {
         self.id = g_uuid()
         self.name = name
         self.audios = audios
         self.type = type
+        self.audioType = audioType
         self.intro = intro
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
-        let playlist = MPPlaylistModel(name: self.name)
+        let playlist = MPPlaylistModel(name: self.name, audioType: self.audioType)
         playlist.id = self.id
         playlist.audios = self.audios
         playlist.type = self.type
@@ -56,6 +59,7 @@ class MPPlaylistModel: OriginModel, Archivable
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPAudioProtocol]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
+        self.audioType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.audioType.rawValue))!
         self.tagIds = coder.decodeObject(forKey: PropertyKey.tagIds.rawValue) as? [String]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
     }
@@ -65,6 +69,7 @@ class MPPlaylistModel: OriginModel, Archivable
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.audios, forKey: PropertyKey.audios.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
+        coder.encode(self.audioType.rawValue, forKey: PropertyKey.audioType.rawValue)
         coder.encode(self.tagIds, forKey: PropertyKey.tagIds.rawValue)
         coder.encode(self.intro, forKey: PropertyKey.intro.rawValue)
     }
@@ -146,8 +151,44 @@ extension MPPlaylistModel: InternalType
         case name
         case audios
         case type
+        case audioType
         case tagIds
         case intro
+    }
+    
+}
+
+
+//外部接口
+extension MPPlaylistModel: ExternalInterface
+{
+    ///diff歌曲对象，已经存在库中则替换，没有则标记为不可用
+    func updateAudios(_ audios: [MPAudioProtocol])
+    {
+        let libAudioIds = audios.map { audio in
+            audio.audioId
+        }
+        let playlistAudioIds = self.audios.map { audio in
+            audio.audioId
+        }
+        for (index, audioId) in playlistAudioIds.enumerated()
+        {
+            if libAudioIds.contains(audioId) //如果库中存在该歌曲，那么用库中的歌曲替换
+            {
+                if let libIndex = libAudioIds.firstIndex(of: audioId), libIndex >= 0, libIndex < audios.count
+                {
+                    self.audios[index] = audios[libIndex]
+                }
+                else    //没找到则标记为不可用
+                {
+                    self.audios[index].isAvailable = false
+                }
+            }
+            else    //不存在，则标记为不可用
+            {
+                self.audios[index].isAvailable = false
+            }
+        }
     }
     
 }

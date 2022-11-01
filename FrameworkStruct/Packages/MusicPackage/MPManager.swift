@@ -990,7 +990,7 @@ extension MPManager: ExternalInterface
             libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] items in
                 if let songs = items as? [MPSongModel] {
                     //生成一个播放列表
-                    let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, intro: nil)
+                    let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: nil)
                     //播放音乐
                     self?.player.play(song, playlist: playlist, completion: { success in
                         completion(success)

@@ -17,6 +17,7 @@ class MPPodcastModel: OriginModel, Archivable
     var id: String
     var name: String
     var url: URL
+    var isValid: Bool
     var artistIds: Array<String>?
     var artistImgs: Array<URL>?
     var podcastImgs: Array<URL>?
@@ -26,11 +27,12 @@ class MPPodcastModel: OriginModel, Archivable
     var detail: String?
     
     //MARK: 方法
-    //初始化一个新的歌曲信息
+    //初始化一个新的播客信息
     init(name: String, url: URL) {
         self.id = g_uuid()
         self.name = name
         self.url = url
+        self.isValid = true
     }
     
     required init?(coder: NSCoder) {
@@ -39,6 +41,7 @@ class MPPodcastModel: OriginModel, Archivable
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.url = coder.decodeObject(forKey: PropertyKey.url.rawValue) as! URL
+        self.isValid = coder.decodeBool(forKey: PropertyKey.isValid.rawValue)
         self.artistIds = coder.decodeObject(forKey: PropertyKey.artists.rawValue) as? [String]
         self.artistImgs = coder.decodeObject(forKey: PropertyKey.artistImgs.rawValue) as? [URL]
         self.podcastImgs = coder.decodeObject(forKey: PropertyKey.podcastImgs.rawValue) as? [URL]
@@ -52,6 +55,7 @@ class MPPodcastModel: OriginModel, Archivable
         coder.encode(self.id, forKey: PropertyKey.id.rawValue)
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.url, forKey: PropertyKey.url.rawValue)
+        coder.encode(self.isValid, forKey: PropertyKey.isValid.rawValue)
         coder.encode(self.artistIds, forKey: PropertyKey.artists.rawValue)
         coder.encode(self.artistImgs, forKey: PropertyKey.artistImgs.rawValue)
         coder.encode(self.podcastImgs, forKey: PropertyKey.podcastImgs.rawValue)
@@ -77,6 +81,15 @@ extension MPPodcastModel: MPAudioProtocol
     
     var audioUrl: URL {
         url
+    }
+    
+    var isAvailable: Bool {
+        get {
+            isValid
+        }
+        set {
+            isValid = newValue
+        }
     }
     
     var audioArtists: Array<MPArtistModel>? {
@@ -125,6 +138,7 @@ extension MPPodcastModel: InternalType
         case id
         case name
         case url
+        case isValid
         case artists
         case artistImgs
         case podcastImgs

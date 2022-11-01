@@ -131,15 +131,10 @@ extension ThreadManager: ExternalInterface
         }
     }
     
-    ///获得当前queue
+    ///获得当前queue，如果没有，返回main
     func currentQueue() -> DispatchQueue
     {
-        let currentQueue = OperationQueue.current?.underlyingQueue  //记录当前queue
-        var queue: DispatchQueue = .main
-        if let currentQueue = currentQueue {
-            queue = currentQueue
-        }
-        return queue
+        OperationQueue.current?.underlyingQueue ?? .main
     }
     
     ///一个操作队列中包含多个异步操作，要等所有异步操作完成之后再执行一个动作，一般用于多个网络请求

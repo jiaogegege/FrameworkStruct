@@ -18,7 +18,7 @@ class MPFavoriteModel: OriginModel, Archivable
     var name: String    //`我喜欢`、`我的收藏`或者其他
     var audios: Array<MPAudioProtocol>
     var type: MPPlaylistType
-    var mediaType: MPAudioType
+    var audioType: MPAudioType
     var images: Array<URL>?
     var intro: String?
     
@@ -29,7 +29,7 @@ class MPFavoriteModel: OriginModel, Archivable
         self.name = name
         self.audios = []
         self.type = .favorite
-        self.mediaType = mediaType
+        self.audioType = mediaType
     }
     
     required init?(coder: NSCoder) {
@@ -39,7 +39,7 @@ class MPFavoriteModel: OriginModel, Archivable
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPSongModel]
         self.type = MPPlaylistType(rawValue: coder.decodeInteger(forKey: PropertyKey.type.rawValue))!
-        self.mediaType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
+        self.audioType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.audioType.rawValue))!
         self.images = coder.decodeObject(forKey: PropertyKey.images.rawValue) as? [URL]
         self.intro = coder.decodeObject(forKey: PropertyKey.intro.rawValue) as? String
     }
@@ -49,7 +49,7 @@ class MPFavoriteModel: OriginModel, Archivable
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.audios, forKey: PropertyKey.audios.rawValue)
         coder.encode(self.type.rawValue, forKey: PropertyKey.type.rawValue)
-        coder.encode(self.mediaType.rawValue, forKey: PropertyKey.mediaType.rawValue)
+        coder.encode(self.audioType.rawValue, forKey: PropertyKey.audioType.rawValue)
         coder.encode(self.images, forKey: PropertyKey.images.rawValue)
         coder.encode(self.intro, forKey: PropertyKey.intro.rawValue)
     }
@@ -116,7 +116,7 @@ extension MPFavoriteModel: MPPlaylistProtocol
     }
     
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, audios: playlistAudios, type: type, intro: intro)
+        MPPlaylistModel(name: name, audios: playlistAudios, type: type, audioType: audioType, intro: intro)
     }
     
 }
@@ -131,7 +131,7 @@ extension MPFavoriteModel: InternalType
         case name
         case audios
         case type
-        case mediaType
+        case audioType
         case images
         case intro
     }

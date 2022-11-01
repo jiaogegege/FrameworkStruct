@@ -123,7 +123,7 @@ extension MPAlbumModel: MPPlaylistProtocol
     }
     
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, audios: playlistAudios, type: type, intro: title)
+        MPPlaylistModel(name: name, audios: playlistAudios, type: type, audioType: .song, intro: title)
     }
     
 }

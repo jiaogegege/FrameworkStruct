@@ -24,6 +24,9 @@ protocol MPAudioProtocol {
     //url或文件路径
     var audioUrl: URL {get}
     
+    //是否可用
+    var isAvailable: Bool {get set}
+    
     //艺术家/创作者
     var audioArtists: Array<MPArtistModel>? {get}
     

@@ -100,4 +100,33 @@ extension MPHistoryAudioModel: ExternalInterface
         self.audios.insert(audio, at: 0)
     }
     
+    ///diff歌曲对象，已经存在库中则替换，没有则标记为不可用
+    func updateAudios(_ audios: [MPAudioProtocol])
+    {
+        let libAudioIds = audios.map { audio in
+            audio.audioId
+        }
+        let playlistAudioIds = self.audios.map { audio in
+            audio.audioId
+        }
+        for (index, audioId) in playlistAudioIds.enumerated()
+        {
+            if libAudioIds.contains(audioId) //如果库中存在该歌曲，那么用库中的歌曲替换
+            {
+                if let libIndex = libAudioIds.firstIndex(of: audioId), libIndex >= 0, libIndex < audios.count
+                {
+                    self.audios[index] = audios[libIndex]
+                }
+                else    //没找到则标记为不可用
+                {
+                    self.audios[index].isAvailable = false
+                }
+            }
+            else    //不存在，则标记为不可用
+            {
+                self.audios[index].isAvailable = false
+            }
+        }
+    }
+    
 }
