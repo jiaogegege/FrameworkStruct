@@ -30,6 +30,7 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var progressBar: UISlider!      //进度条
     fileprivate var pastTimeLabel: UILabel!     //经过时间
     fileprivate var totalTimeLabel: UILabel!    //所有时间
+    fileprivate var favoriteBtn: UIButton!      //我喜欢按钮
     
     //MARK: 方法
     override func viewDidLoad() {
@@ -184,6 +185,15 @@ class MusicPlayViewController: BasicViewController {
             make.height.equalTo(fitX(13))
             make.centerY.equalTo(pastTimeLabel)
         }
+        //我喜欢按钮
+        favoriteBtn = UIButton(type: .custom)
+        view.addSubview(favoriteBtn)
+        favoriteBtn.snp.makeConstraints { make in
+            make.left.equalTo(progressBar.snp.left).offset(fitX(-10))
+            make.bottom.equalTo(progressBar.snp.top).offset(fitX(-20))
+            make.width.equalTo(fitX(39))
+            make.height.equalTo(fitX(35))
+        }
         
     }
     
@@ -241,6 +251,10 @@ class MusicPlayViewController: BasicViewController {
         progressBar.maximumTrackTintColor = .gray
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpInside)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpOutside)
+        
+        favoriteBtn.setImage(.iPlayUnfavoriteBtn, for: .normal)
+        favoriteBtn.setImage(.iPlayFavoriteBtn, for: .selected)
+        favoriteBtn.addTarget(self, action: #selector(favoriteAction(sender:)), for: .touchUpInside)
     }
     
     override func updateUI() {
@@ -248,6 +262,7 @@ class MusicPlayViewController: BasicViewController {
         if let song = song as? MPSongModel, let asset = song.asset {
             songNameLabel.text = song.name
             artistLabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
+            favoriteBtn.isSelected = song.isFavorite
             totalTimeLabel.text = TimeEmbellisher.shared.convertSecondsToMinute(Int(mpr.currentTotalTime))
             pastTimeLabel.text = TimeEmbellisher.shared.convertSecondsToMinute(Int(mpr.currentPastTime))
             progressBar.minimumValue = 0.0
@@ -341,6 +356,20 @@ class MusicPlayViewController: BasicViewController {
             mpr.playMode = .random
         }
         playModeBtn.setImage(getPlayModeImage(), for: .normal)
+    }
+    
+    //收藏按钮
+    @objc func favoriteAction(sender: UIButton)
+    {
+        if let song = song as? MPSongModel {
+            mpr.setFavoriteSong(!song.isFavorite, song: song) { succeed in
+                //保存成功则刷新列表
+                if succeed
+                {
+                    self.favoriteBtn.isSelected = !self.favoriteBtn.isSelected
+                }
+            }
+        }
     }
 
     //进度条拖动
