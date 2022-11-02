@@ -79,6 +79,7 @@ class MPPlaylistContainerView: FSDialog {
         containerView.backgroundColor = .clear
         
         pageControl.numberOfPages = 2
+        pageControl.isEnabled = false
         
         scrollView.delegate = self
         
@@ -154,7 +155,7 @@ class MPPlaylistContainerView: FSDialog {
             {
                 canScrollPage = true
             }
-            realOffsetX = CGFloat(currentPage) * Self.playlistWidth
+            realOffsetX = CGFloat(currentPage) * (Self.playlistWidth + Self.whiteSpace)
             UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
                 self.scrollView.contentOffset = CGPoint(x: realOffsetX, y: 0)
             } completion: { finished in
