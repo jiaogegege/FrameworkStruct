@@ -21,8 +21,13 @@ class PlaceCodeViewController: BasicViewController {
     @IBOutlet weak var areaField: UITextField!  //区域
     @IBOutlet weak var timeLabel: UILabel!  //当前时间
     @IBOutlet weak var sampTimeLabel: UILabel!  //采样时间
+    @IBOutlet weak var sampDescLabel: UILabel!
     @IBOutlet weak var detectionTimeLabel: UILabel! //检测时间
+    @IBOutlet weak var detectionDescLabel: UILabel!
+    @IBOutlet weak var digitalBtn: UIButton!    //进入数字门牌
     
+    @IBOutlet weak var headViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var digitalBtnBottom: NSLayoutConstraint!
     
     override class func getViewController() -> Self {
         getVC(from: gMainSB)
@@ -40,8 +45,21 @@ class PlaceCodeViewController: BasicViewController {
 
     override func updateUI() {
         timeLabel.text = currentTimeString(format: .localYearMonthDay) + " " + currentTimeString(format: .hourMinSec)
+        if smallerThanIphone8()
+        {
+            sampTimeLabel.font = UIFont.systemFont(ofSize: fit8(15), weight: .semibold)
+            sampDescLabel.font = UIFont.systemFont(ofSize: fit8(15), weight: .semibold)
+            detectionTimeLabel.font = UIFont.systemFont(ofSize: fit8(15), weight: .semibold)
+            detectionDescLabel.font = UIFont.systemFont(ofSize: fit8(15), weight: .semibold)
+        }
         sampTimeLabel.text = getTimeString(date: nowAfter(isTodaySamp ? 0 : -tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
         detectionTimeLabel.text = getTimeString(date: nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
+    }
+    
+    @IBAction func digitalAction(_ sender: UIButton) {
+        sender.isHidden = true
+        headViewHeight.constant = 92
+        digitalBtnBottom.constant = 0
     }
     
 }

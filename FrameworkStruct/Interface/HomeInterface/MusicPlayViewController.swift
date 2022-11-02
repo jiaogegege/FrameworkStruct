@@ -58,7 +58,18 @@ class MusicPlayViewController: BasicViewController {
     override func initData() {
         super.initData()
         mpr.addDelegate(self)
-        self.song = mpr.currentSong
+        if mpr.isPlaying
+        {
+            self.song = mpr.currentSong
+        }
+        else
+        {
+            mpr.getLastSong {[weak self] song in
+                if let song = song {
+                    self?.song = song
+                }
+            }
+        }
     }
     
     override func createUI() {
@@ -398,7 +409,13 @@ class MusicPlayViewController: BasicViewController {
 extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
 {
     func mpManagerDidInitCompleted() {
-        
+        //初始化完成则尝试显示当前播放歌曲，不一定有，也不一定会调用
+        mpr.getLastSong {[weak self] song in
+            if let song = song {
+                self?.song = song
+                self?.updateUI()
+            }
+        }
     }
     
     func mpManagerDidUpdated() {

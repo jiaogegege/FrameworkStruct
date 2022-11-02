@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -528,6 +528,9 @@
                                                                 <integer key="value" value="4"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="digitalAction:" destination="vdV-DR-5XW" eventType="touchUpInside" id="R57-1n-ZCy"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -808,8 +811,13 @@
                     </view>
                     <connections>
                         <outlet property="areaField" destination="pzf-7e-tj5" id="VqZ-f1-FHk"/>
+                        <outlet property="detectionDescLabel" destination="Jg2-wS-u1B" id="aWJ-Jj-D9p"/>
                         <outlet property="detectionTimeLabel" destination="5Cq-kV-BwF" id="zWT-fL-rbI"/>
+                        <outlet property="digitalBtn" destination="cBr-kV-Ayr" id="cW1-LR-P1c"/>
+                        <outlet property="digitalBtnBottom" destination="Vwv-Tq-ANc" id="4nZ-XY-0e8"/>
+                        <outlet property="headViewHeight" destination="RGv-8q-ffS" id="8Um-Nz-A9h"/>
                         <outlet property="placeField" destination="zQo-0y-N8K" id="9Cz-zW-4MI"/>
+                        <outlet property="sampDescLabel" destination="gF5-eL-Ud8" id="gWm-cz-jo9"/>
                         <outlet property="sampTimeLabel" destination="u1x-Po-r2K" id="yev-Zp-zBz"/>
                         <outlet property="timeLabel" destination="tQm-gs-oSK" id="mv2-ri-QWb"/>
                     </connections>

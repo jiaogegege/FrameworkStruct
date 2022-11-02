@@ -503,12 +503,15 @@ extension MPPlayer: ExternalInterface
     ///参数：audio：歌曲对象；playlist：所在播放列表；completion：播放是否成功
     func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
     {
+        //先暂停
+        self.pause()
         self.playResultCallback = completion
         self.currentAudio = audio
         if playlist.playlistId != currentPlaylist?.playlistId
         {
             self.currentPlaylist = playlist
         }
+        //记录当前歌曲在播放列表中的index
         self.currentIndex = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
         self.playlistIndexArray.removeAll()
         for index in 0..<self.currentPlaylist!.playlistAudios.count

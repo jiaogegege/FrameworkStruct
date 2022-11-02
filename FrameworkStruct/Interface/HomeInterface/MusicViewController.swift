@@ -237,7 +237,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
         self.favoriteSongs = favoriteSongs
         favoriteArray = favoriteSongs.audios as? [MPSongModel] ?? []
-        if type == .favorite
+        if type == .favorite || type == .library
         {
             tableView.reloadData()
         }
