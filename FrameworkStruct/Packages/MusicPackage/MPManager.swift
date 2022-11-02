@@ -1003,7 +1003,7 @@ extension MPManager: ExternalInterface
             libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] items in
                 if let songs = items as? [MPSongModel] {
                     //生成一个播放列表
-                    let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: nil)
+                    let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: String.iCloud + String.musicLibrary)
                     //播放音乐
                     self?.player.play(song, playlist: playlist, completion: { success in
                         completion(success)
@@ -1097,6 +1097,14 @@ extension MPManager: ExternalInterface
     
     ///获取iCloud中上一次播放列表
     func getLastPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    {
+        libMgr.readCurrentPlaylist { playlist in
+            completion(playlist)
+        }
+    }
+    
+    ///获取当前播放列表
+    func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
     {
         libMgr.readCurrentPlaylist { playlist in
             completion(playlist)

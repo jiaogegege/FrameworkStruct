@@ -77,6 +77,9 @@ protocol MPPlaylistProtocol {
     //在播放列表中插入一首歌曲，有index则插入指定的index，不能超过范围；如果没有则插入到最末尾；返回实际插入的index；返回-1表示插入不成功
     func insertAudio(audio: MPAudioProtocol, index: Int?) -> Int
     
+    //删除播放列表中的一首歌曲，没有则什么都不做，返回是否删除成功
+    func deleteAudio(_ audio: MPAudioProtocol) -> Bool
+    
     //获取标准播放列表
     func getPlaylist() -> MPPlaylistModel
 }

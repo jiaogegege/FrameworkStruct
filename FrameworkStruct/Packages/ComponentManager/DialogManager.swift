@@ -253,4 +253,11 @@ extension DialogManager: ExternalInterface
         self.wantShow(vi: v)
     }
     
+    ///想要显示播放列表界面
+    func wantShowPlaylist()
+    {
+        let v = MPPlaylistContainerView()
+        self.wantShow(vi: v)
+    }
+    
 }

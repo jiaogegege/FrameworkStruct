@@ -332,6 +332,8 @@ extension String
     static let musicLibrary = localized("musicLibrary")
     //历史播放
     static let historyPlay = localized("historyPlay")
+    //当前播放
+    static let currentPlay = localized("currentPlay")
     //播放音乐
     static let playMusic = localized("playMusic")
     //喜欢

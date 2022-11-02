@@ -59,6 +59,7 @@ changeTheme = "Change Theme";
 icloudFile = "iCloud File";
 musicLibrary = "Music Library";
 historyPlay = "History Play";
+currentPlay = "Current Play";
 saveToiCloudError = "Save To iCloud Error";
 playMusic = "Play Music";
 like = "Like";

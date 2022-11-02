@@ -31,6 +31,13 @@ class FSDialog: UIView, DialogManagerProtocol
         }
     }
     
+    //是否可以点击背景蒙层关闭view
+    var isTapDismissEnabled: Bool = false {
+        willSet {
+            self.tapGesture.isEnabled = newValue
+        }
+    }
+    
     //宿主view，默认全局UIWindow，如果在`show()`的时候指定了hostView，那么该属性不起作用
     var hostView: UIView = g_window()
     
@@ -49,6 +56,8 @@ class FSDialog: UIView, DialogManagerProtocol
     ///UI组件
     fileprivate var bgView: UIView! //背景蒙层，一般是半透明
     var containerView: UIView!  //放置内容部分的容器视图
+    
+    fileprivate var tapGesture: UITapGestureRecognizer!     //背景点击手势
     
 
     //MARK: 方法
@@ -76,6 +85,10 @@ class FSDialog: UIView, DialogManagerProtocol
         
         self.containerView = UIView()
         self.addSubview(containerView)
+        
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(bgTapAction(sender:)))
+        tapGesture.isEnabled = self.isTapDismissEnabled
+        self.bgView.addGestureRecognizer(tapGesture)
     }
     
     //配置view
@@ -90,6 +103,12 @@ class FSDialog: UIView, DialogManagerProtocol
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //手势点击动作
+    @objc func bgTapAction(sender: UIGestureRecognizer)
+    {
+        self.dismiss()
     }
     
     //设置成初始状态，隐藏containerView并根据需要调整位置和大小，bgView透明度0
@@ -212,14 +231,14 @@ class FSDialog: UIView, DialogManagerProtocol
         {
             callback()
         }
-        FSLog("FSDialog: dealloc")
+        FSLog("\(self.className) dealloc")
     }
     
 }
 
 
 //内部类型
-extension FSDialog: InternalType
+extension FSDialog
 {
     //显示类型，主要控制显示和消失的动画效果
     //子类可以自定义动画效果，自定义动画效果优先级高于该属性

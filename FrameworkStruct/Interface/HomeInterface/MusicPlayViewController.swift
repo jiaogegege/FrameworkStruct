@@ -352,7 +352,7 @@ class MusicPlayViewController: BasicViewController {
     //播放列表
     @objc func playlistAction(sender: UIButton)
     {
-        
+        DialogManager.shared.wantShowPlaylist()
     }
 
     //播放模式

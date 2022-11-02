@@ -117,6 +117,17 @@ extension MPSonglistModel: MPPlaylistProtocol
         return lastIndex
     }
     
+    func deleteAudio(_ audio: MPAudioProtocol) -> Bool {
+        var ret = false
+        let index = self.getIndexOf(audio: audio)
+        if index >= 0   //找到了，可以删除
+        {
+            self.songs.remove(at: index)
+            ret = true
+        }
+        return ret
+    }
+    
     func getPlaylist() -> MPPlaylistModel {
         MPPlaylistModel(name: name, audios: playlistAudios, type: type, audioType: .song, intro: intro)
     }

@@ -117,6 +117,9 @@
 		EA1AE49727782A0B00D028F9 /* ConstraintTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */; };
 		EA1AE49A27782A6A00D028F9 /* DemoTopSelectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */; };
 		EA1B60C827784CE00045C9F2 /* SandBoxAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */; };
+		EA1E140629120E0B000E818F /* MPPlaylistContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1E140529120E0B000E818F /* MPPlaylistContainerView.swift */; };
+		EA1E140829121218000E818F /* MPPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1E140729121218000E818F /* MPPlaylistView.swift */; };
+		EA1E140A29121319000E818F /* MPPlaylistSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1E140929121319000E818F /* MPPlaylistSongCell.swift */; };
 		EA1EAFA427EC411B002B4997 /* FSGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1EAFA327EC411B002B4997 /* FSGuideView.swift */; };
 		EA20865327C4ADBF00B63C8E /* AudioConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865227C4ADBF00B63C8E /* AudioConst.swift */; };
 		EA20865727C4B16900B63C8E /* VideoConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA20865627C4B16900B63C8E /* VideoConst.swift */; };
@@ -915,6 +918,9 @@
 		EA1AE49627782A0A00D028F9 /* ConstraintTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintTestViewController.swift; sourceTree = "<group>"; };
 		EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTopSelectBar.swift; sourceTree = "<group>"; };
 		EA1B60C727784CE00045C9F2 /* SandBoxAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxAccessor.swift; sourceTree = "<group>"; };
+		EA1E140529120E0B000E818F /* MPPlaylistContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlaylistContainerView.swift; sourceTree = "<group>"; };
+		EA1E140729121218000E818F /* MPPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlaylistView.swift; sourceTree = "<group>"; };
+		EA1E140929121319000E818F /* MPPlaylistSongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlaylistSongCell.swift; sourceTree = "<group>"; };
 		EA1EAFA327EC411B002B4997 /* FSGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSGuideView.swift; sourceTree = "<group>"; };
 		EA20865227C4ADBF00B63C8E /* AudioConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioConst.swift; sourceTree = "<group>"; };
 		EA20865627C4B16900B63C8E /* VideoConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoConst.swift; sourceTree = "<group>"; };
@@ -3043,7 +3049,6 @@
 			isa = PBXGroup;
 			children = (
 				EA8CFC9828EDC20900EE3B73 /* README.md */,
-				EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */,
 				EA8CFC9928EDC39100EE3B73 /* MPManager.swift */,
 				EAC79EDE28FD46C40059EA77 /* MPEmbellisher.swift */,
 				EA8CFC9C28EDC41300EE3B73 /* MPPlayer.swift */,
@@ -4411,6 +4416,7 @@
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */,
 				EA66D31E290CC1270096D2AF /* ScrollAnimationView.swift */,
+				EA0D1840290BB2C900D1B6F6 /* MusicPlayMiniView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -4467,6 +4473,9 @@
 				EA33BF5127F82FB600DBE44D /* DrawingCanvasView.swift */,
 				EA0951E328FF975800A3D915 /* MusicSongListCell.swift */,
 				EA0951E428FF975800A3D915 /* MusicSongListCell.xib */,
+				EA1E140929121319000E818F /* MPPlaylistSongCell.swift */,
+				EA1E140729121218000E818F /* MPPlaylistView.swift */,
+				EA1E140529120E0B000E818F /* MPPlaylistContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5004,6 +5013,7 @@
 				EAFDF36A28F15D260026F0F3 /* MPAudioBookModel.swift in Sources */,
 				EADB00D827624012001B7223 /* NSObject+PropertyListing.m in Sources */,
 				EA3E8B0127B77CEA006A2715 /* NodePropertyMap.swift in Sources */,
+				EA1E140629120E0B000E818F /* MPPlaylistContainerView.swift in Sources */,
 				EA99373B27994F6100480147 /* TABDropAnimation.m in Sources */,
 				EA75BB3A2792AA7C00910B4C /* FMResultSet.m in Sources */,
 				EA3E8B2A27B77CEA006A2715 /* TextDocument.swift in Sources */,
@@ -5422,6 +5432,7 @@
 				EA9A78D627C756C900A11FC8 /* MPITextTailTruncater.m in Sources */,
 				EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */,
 				EA11126F27B3BE2C006D0B83 /* ServerTrustEvaluation.swift in Sources */,
+				EA1E140829121218000E818F /* MPPlaylistView.swift in Sources */,
 				EA3E8AD427B77CEA006A2715 /* StarAnimation.swift in Sources */,
 				EA11128227B3BE2C006D0B83 /* Combine.swift in Sources */,
 				EAC8A87E27625D490088293F /* SDWebImageDownloaderRequestModifier.m in Sources */,
@@ -5446,6 +5457,7 @@
 				EA9A757027C7210200A11FC8 /* TYTextContainer.m in Sources */,
 				EA11126827B3BE2C006D0B83 /* Concurrency.swift in Sources */,
 				EA3E8AC627B77CEA006A2715 /* BaseAnimationLayer.swift in Sources */,
+				EA1E140A29121319000E818F /* MPPlaylistSongCell.swift in Sources */,
 				EA9A78EF27C75DA900A11FC8 /* WKWebViewJavascriptBridge.m in Sources */,
 				EA3E8C2B27B782C4006A2715 /* POPGeometry.mm in Sources */,
 				EA3E8AA727B77CEA006A2715 /* AnimationSubview.swift in Sources */,

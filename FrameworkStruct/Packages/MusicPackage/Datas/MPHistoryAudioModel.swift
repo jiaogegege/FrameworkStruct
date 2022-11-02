@@ -18,20 +18,20 @@ class MPHistoryAudioModel: OriginModel, Archivable
     var id: String
     var name: String
     var audios: Array<MPAudioProtocol>
-    var mediaType: MPAudioType
+    var audioType: MPAudioType
     var capacity: Int
     
     //MARK: 方法
-    init(name: String, mediaType: MPAudioType) {
+    init(name: String, audioType: MPAudioType) {
         self.id = g_uuid()
         self.name = name
         self.audios = []
-        self.mediaType = mediaType
+        self.audioType = audioType
         self.capacity = MPMaxHistorySongCount
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
-        let model = MPHistoryAudioModel(name: self.name, mediaType: self.mediaType)
+        let model = MPHistoryAudioModel(name: self.name, audioType: self.audioType)
         model.id = self.id
         model.audios = self.audios
         model.capacity = self.capacity
@@ -44,7 +44,7 @@ class MPHistoryAudioModel: OriginModel, Archivable
         self.id = id
         self.name = coder.decodeObject(forKey: PropertyKey.name.rawValue) as! String
         self.audios = coder.decodeObject(forKey: PropertyKey.audios.rawValue) as! [MPAudioProtocol]
-        self.mediaType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.mediaType.rawValue))!
+        self.audioType = MPAudioType(rawValue: coder.decodeInteger(forKey: PropertyKey.audioType.rawValue))!
         self.capacity = coder.decodeInteger(forKey: PropertyKey.capacity.rawValue)
     }
     
@@ -52,9 +52,86 @@ class MPHistoryAudioModel: OriginModel, Archivable
         coder.encode(self.id, forKey: PropertyKey.id.rawValue)
         coder.encode(self.name, forKey: PropertyKey.name.rawValue)
         coder.encode(self.audios, forKey: PropertyKey.audios.rawValue)
-        coder.encode(self.mediaType.rawValue, forKey: PropertyKey.mediaType.rawValue)
+        coder.encode(self.audioType.rawValue, forKey: PropertyKey.audioType.rawValue)
         coder.encode(self.capacity, forKey: PropertyKey.capacity.rawValue)
     }
+    
+}
+
+
+extension MPHistoryAudioModel: DelegateProtocol, MPPlaylistProtocol
+{
+    var playlistId: String {
+        id
+    }
+    
+    var playlistName: String {
+        name
+    }
+    
+    var playlistAudios: Array<MPAudioProtocol> {
+        audios
+    }
+    
+    var playlistType: MPPlaylistType {
+        .playlist
+    }
+    
+    var playlistIntro: String? {
+        name
+    }
+    
+    func getIndexOf(audio: MPAudioProtocol?) -> Int {
+        guard let au = audio else { return -1 }
+        
+        for (index, item) in self.audios.enumerated()
+        {
+            if item.audioId == au.audioId
+            {
+                return index
+            }
+        }
+        
+        return -1
+    }
+    
+    func insertAudio(audio: MPAudioProtocol, index: Int?) -> Int {
+        var lastIndex: Int
+        if let ind = index
+        {
+            if ind > audios.count
+            {
+                lastIndex = audios.count
+            }
+            else
+            {
+                lastIndex = ind
+            }
+            audios.insert(audio, at: lastIndex)
+        }
+        else
+        {
+            audios.append(audio)
+            lastIndex = audios.count - 1
+        }
+        return lastIndex
+    }
+    
+    func deleteAudio(_ audio: MPAudioProtocol) -> Bool {
+        var ret = false
+        let index = self.getIndexOf(audio: audio)
+        if index >= 0   //找到了，可以删除
+        {
+            self.audios.remove(at: index)
+            ret = true
+        }
+        return ret
+    }
+    
+    func getPlaylist() -> MPPlaylistModel {
+        MPPlaylistModel(name: name, audios: audios, type: playlistType, audioType: audioType, intro: playlistIntro)
+    }
+    
     
 }
 
@@ -67,7 +144,7 @@ extension MPHistoryAudioModel: InternalType
         case id
         case name
         case audios
-        case mediaType
+        case audioType
         case capacity
     }
     

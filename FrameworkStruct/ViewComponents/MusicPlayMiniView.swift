@@ -134,7 +134,7 @@ class MusicPlayMiniView: UIView
     
     @objc func playlistAction(sender: UIButton)
     {
-        
+        DialogManager.shared.wantShowPlaylist()
     }
     
     @objc func nextAction(sender: UIButton)

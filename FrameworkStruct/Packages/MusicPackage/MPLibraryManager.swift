@@ -170,7 +170,7 @@ extension MPLibraryManager: ExternalInterface
             }
             else    //如果还没有历史歌曲记录，创建一个历史记录列表，就是个播放列表
             {
-                let history = MPHistoryAudioModel(name: String.historyPlay, mediaType: .song)
+                let history = MPHistoryAudioModel(name: String.historyPlay, audioType: .song)
                 history.addAudio(song)
                 //写入文件
                 self?.container.setHistorySongs(history)
