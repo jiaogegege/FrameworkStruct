@@ -34,22 +34,24 @@ class MPPlaylistSongCell: UITableViewCell {
             else
             {
                 self.playingImgView.isHidden = true
-                self.songNameLabel.textColor = .cBlack_3
+                self.songNameLabel.textColor = .cBlack_4
             }
         }
     }
     
-    //位置，暂不显示
+    //位置
     var number: Int? {
         willSet {
-            
+            if let num = newValue {
+                self.numberLabel.text = "\(num)"
+            }
         }
     }
     
     //删除回调
     var deleteCallback: ((MPAudioProtocol) -> Void)?
     
-    fileprivate var numberLabel: UILabel!       //位置序号,暂不显示
+    fileprivate var numberLabel: UILabel!       //位置序号
     fileprivate var playingImgView: UIImageView!    //正在播放标志
     fileprivate var songNameLabel: UILabel!     //歌曲名
     fileprivate var artistLabel: UILabel!       //艺术家和专辑信息
@@ -68,6 +70,14 @@ class MPPlaylistSongCell: UITableViewCell {
     }
     
     override func createView() {
+        numberLabel = UILabel()
+        contentView.addSubview(numberLabel)
+        numberLabel.snp.makeConstraints { make in
+            make.left.equalTo(fitX(8))
+            make.top.equalTo(fitX(4))
+            make.height.equalTo(fitX(8))
+        }
+        
         playingImgView = UIImageView()
         contentView.addSubview(playingImgView)
         playingImgView.snp.makeConstraints { make in
@@ -106,8 +116,13 @@ class MPPlaylistSongCell: UITableViewCell {
     override func configView() {
         self.selectionStyle = .none
         
-        songNameLabel.textColor = .cBlack_3
-        songNameLabel.font = .systemFont(ofSize: fitX(18))
+        numberLabel.textColor = .lightGray
+        numberLabel.font = .systemFont(ofSize: fitX(8))
+        
+        playingImgView.isHidden = true
+        
+        songNameLabel.textColor = .cBlack_4
+        songNameLabel.font = .systemFont(ofSize: fitX(17))
         
         deleteBtn.setImage(.iPlaylistDeleteBtn, for: .normal)
         deleteBtn.addTarget(self, action: #selector(deleteAction(sender:)), for: .touchUpInside)

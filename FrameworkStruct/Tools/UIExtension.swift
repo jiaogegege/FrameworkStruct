@@ -385,7 +385,7 @@ extension UITableView
 }
 
 ///UITableView内部类型
-extension UITableView: InternalType
+extension UITableView
 {
     ///UITableView的section、row的位置标记
     ///用来替代indexPath的section和row的数字写法，改成枚举绑定数字，绑定的值就是那一行在tableview中的位置
@@ -594,7 +594,7 @@ extension UIColor
 }
 
 //UIColor内部类型
-extension UIColor: InternalType
+extension UIColor
 {
     //暗黑模式级别
     enum DarkModeLevel {

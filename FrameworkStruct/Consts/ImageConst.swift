@@ -131,6 +131,8 @@ extension UIImage: ConstantPropertyProtocol
     static let iMiniPlaylistBtn = UIImage(named: "mp_mini_playlist")
     //播放列表删除歌曲
     static let iPlaylistDeleteBtn = UIImage(named: "mp_playlist_delete_btn")
+    //播放列表定位按钮
+    static let iPlaylistLocationBtn = UIImage(named: "mp_playlist_location_btn")
 
 }
 

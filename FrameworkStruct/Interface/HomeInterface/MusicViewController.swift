@@ -47,6 +47,8 @@ class MusicViewController: BasicViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        mpr.addDelegate(self)
+        currentSong = mpr.currentSong
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,23 +81,23 @@ class MusicViewController: BasicViewController
     }
     
     override func initData() {
-        super.initData()
-        mpr.addDelegate(self)
-        currentSong = mpr.currentSong
-        mpr.getAlliCloudSongs(completion: {[weak self] songs in
-            self?.libraryArray = songs
-            if self?.type == .library
-            {
-                self?.tableView.reloadData()
-            }
-        })
-        mpr.getFavroiteSongs { [weak self] favorite in
-            self?.favoriteSongs = favorite
-            if let songs = favorite?.audios as? [MPSongModel] {
-                self?.favoriteArray = songs
-                if self?.type == .favorite
+        if mpr.isInited     //如果初始化完成了才获取数据，不然获取不到
+        {
+            mpr.getAlliCloudSongs(completion: {[weak self] songs in
+                self?.libraryArray = songs
+                if self?.type == .library
                 {
                     self?.tableView.reloadData()
+                }
+            })
+            mpr.getFavroiteSongs { [weak self] favorite in
+                self?.favoriteSongs = favorite
+                if let songs = favorite?.audios as? [MPSongModel] {
+                    self?.favoriteArray = songs
+                    if self?.type == .favorite
+                    {
+                        self?.tableView.reloadData()
+                    }
                 }
             }
         }
@@ -219,28 +221,12 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     /**************************************** MPManager代理 Section Begin ***************************************/
     //音乐库初始化完成
     func mpManagerDidInitCompleted() {
-        mpr.getAlliCloudSongs(completion: {[weak self] songs in
-            self?.libraryArray = songs
-            self?.tableView.reloadData()
-        })
+        initData()
     }
     
     //音乐库更新
     func mpManagerDidUpdated() {
-        mpr.getAlliCloudSongs(completion: {[weak self] songs in
-            self?.libraryArray = songs
-            self?.tableView.reloadData()
-        })
-    }
-    
-    //我喜欢更新
-    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
-        self.favoriteSongs = favoriteSongs
-        favoriteArray = favoriteSongs.audios as? [MPSongModel] ?? []
-        if type == .favorite || type == .library
-        {
-            tableView.reloadData()
-        }
+        initData()
     }
     
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
@@ -272,6 +258,24 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     }
     
     func mpManagerBufferProgressChange(_ progress: TimeInterval) {
+        
+    }
+    
+    //我喜欢更新
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
+        self.favoriteSongs = favoriteSongs
+        favoriteArray = favoriteSongs.audios as? [MPSongModel] ?? []
+        if type == .favorite || type == .library
+        {
+            tableView.reloadData()
+        }
+    }
+    
+    func mpManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel) {
+        
+    }
+    
+    func mpManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel) {
         
     }
     

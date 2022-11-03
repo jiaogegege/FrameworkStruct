@@ -74,7 +74,7 @@ extension MPHistoryAudioModel: DelegateProtocol, MPPlaylistProtocol
     }
     
     var playlistType: MPPlaylistType {
-        .playlist
+        .history
     }
     
     var playlistIntro: String? {

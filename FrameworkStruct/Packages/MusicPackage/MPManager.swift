@@ -19,8 +19,6 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerDidInitCompleted()
     ///更新完成
     func mpManagerDidUpdated()
-    ///我喜欢歌曲列表更新
-    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel)
     ///加载歌曲，缓冲
     func mpManagerWaitToPlay(_ song: MPAudioProtocol)
     ///开始播放歌曲
@@ -35,6 +33,12 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerProgressChange(_ progress: TimeInterval)
     ///缓冲进度变化
     func mpManagerBufferProgressChange(_ progress: TimeInterval)
+    ///我喜欢歌曲列表更新
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel)
+    ///当前播放列表更新
+    func mpManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel)
+    ///历史播放记录列表更新
+    func mpManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel)
 }
 
 
@@ -559,6 +563,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         performInitOrUpdateCallback()
     }
     
+    //更新我喜欢列表
     func mpLibraryManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
         delegates.compact()
         for i in 0..<delegates.count
@@ -566,6 +571,30 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             if let delegate = delegates.object(at: i) as? MPManagerDelegate
             {
                 delegate.mpManagerDidUpdateFavoriteSongs(favoriteSongs)
+            }
+        }
+    }
+    
+    //更新当前播放列表
+    func mpLibraryManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel) {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerDidUpdateCurrentPlaylist(currentPlaylist)
+            }
+        }
+    }
+    
+    //更新历史播放记录列表
+    func mpLibraryManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel) {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerDidUpdateHistorySongs(history)
             }
         }
     }
@@ -941,9 +970,14 @@ extension MPManager: ExternalInterface
         (stMgr.status(StatusKey.currentStatus) as? MPStatus) == .isInited
     }
     
-    ///当前正在播放的歌曲
+    ///当前正在播放的歌曲，从player获取
     var currentSong: MPAudioProtocol? {
         player.currentAudio
+    }
+    
+    ///当前正在播放的播放列表，从player获取
+    var currentPlaylist: MPPlaylistProtocol? {
+        player.currentPlaylist
     }
     
     ///当前歌曲总时间
@@ -1024,8 +1058,16 @@ extension MPManager: ExternalInterface
     ///播放一首播放列表中的歌曲
     func playSong(_ song: MPSongModel, in playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
     {
-        player.play(song, playlist: playlist.getPlaylist()) { succeed in
-            completion(succeed)
+        //不是同一个列表中的同一个歌曲才播放
+        if song.id != currentSong?.audioId || playlist.playlistId != player.currentPlaylist?.playlistId
+        {
+            player.play(song, playlist: playlist.getPlaylist()) { succeed in
+                completion(succeed)
+            }
+        }
+        else
+        {
+            completion(true)
         }
     }
     
@@ -1095,7 +1137,7 @@ extension MPManager: ExternalInterface
         }
     }
     
-    ///获取iCloud中上一次播放列表
+    ///获取iCloud中上一次播放列表，只在刚初始化完成还没有播放的时候调用
     func getLastPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
     {
         libMgr.readCurrentPlaylist { playlist in
@@ -1103,7 +1145,15 @@ extension MPManager: ExternalInterface
         }
     }
     
-    ///获取当前播放列表
+    ///获取当前正在播放的歌曲，从缓存获取
+    func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    {
+        libMgr.readCurrentSong { song in
+            completion(song)
+        }
+    }
+    
+    ///获取当前播放列表，从缓存获取
     func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
     {
         libMgr.readCurrentPlaylist { playlist in
@@ -1170,6 +1220,24 @@ extension MPManager: ExternalInterface
         else
         {
             success(false)
+        }
+    }
+    
+    ///删除某个播放列表中的一首歌曲
+    func deleteSong(_ song: MPAudioProtocol, in playlist: MPPlaylistProtocol, success: @escaping BoolClosure)
+    {
+        switch playlist.playlistType
+        {
+            case .playlist:     //当前播放列表
+                libMgr.deleteSongInCurrentPlaylist(song) { succeed in
+                    success(succeed)
+                }
+            case .history:      //历史播放记录列表
+                libMgr.deleteSongInHistory(song) { succeed in
+                    success(succeed)
+                }
+            default:
+                break
         }
     }
     

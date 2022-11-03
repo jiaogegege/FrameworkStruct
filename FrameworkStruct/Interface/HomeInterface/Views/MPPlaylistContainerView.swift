@@ -13,10 +13,6 @@ import UIKit
 class MPPlaylistContainerView: FSDialog {
     //MARK: 属性
     lazy var mpr = MPManager.shared
-    //当前播放列表
-    var currentPlaylist: MPPlaylistModel?
-    //历史播放歌曲
-    var historyPlaySongs: MPHistoryAudioModel?
     
     //当前页
     fileprivate(set) var currentPage: Int = 0
@@ -83,6 +79,7 @@ class MPPlaylistContainerView: FSDialog {
         
         scrollView.delegate = self
         
+        currentPlaylistView.needLocation = true
         currentPlaylistView.clickCallback = {[weak self] (audio, playlist) in
             self?.mpr.playSong(audio as! MPSongModel, in: playlist, completion: { succeed in
                 if succeed == false
@@ -92,8 +89,9 @@ class MPPlaylistContainerView: FSDialog {
             })
         }
         currentPlaylistView.deleteSongCallback = {[weak self] (audio, playlist) in
-            FSLog(audio.audioName)
-            FSLog(playlist.playlistName)
+            self?.mpr.deleteSong(audio, in: playlist, success: { succeed in
+                g_toast(text: (succeed ? String.deleteSucceed : String.deleteFailed))
+            })
         }
         
         historyPlaylistView.clickCallback = {[weak self] (audio, playlist) in
@@ -105,8 +103,9 @@ class MPPlaylistContainerView: FSDialog {
             })
         }
         historyPlaylistView.deleteSongCallback = {[weak self] (audio, playlist) in
-            FSLog(audio.audioName)
-            FSLog(playlist.playlistName)
+            self?.mpr.deleteSong(audio, in: playlist, success: { succeed in
+                g_toast(text: (succeed ? String.deleteSucceed : String.deleteFailed))
+            })
         }
     }
     
@@ -115,14 +114,11 @@ class MPPlaylistContainerView: FSDialog {
             self?.currentPlaylistView.playlist = playlist
             self?.currentPlaylistView.setTitle(String.currentPlay)
             if let song = self?.mpr.currentSong {
-                self?.currentPlaylistView.jumpCurrentPlay(song)
+                self?.currentPlaylistView.currentSong = song
             }
         }
         mpr.getHistorySongs {[weak self] history in
             self?.historyPlaylistView.playlist = history
-            if let song = self?.mpr.currentSong {
-                self?.historyPlaylistView.jumpCurrentPlay(song)
-            }
         }
     }
     
@@ -179,10 +175,6 @@ extension MPPlaylistContainerView: DelegateProtocol, MPManagerDelegate, UIScroll
 //        updateView()
     }
     
-    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
-        
-    }
-    
     func mpManagerWaitToPlay(_ song: MPAudioProtocol) {
         
     }
@@ -210,6 +202,19 @@ extension MPPlaylistContainerView: DelegateProtocol, MPManagerDelegate, UIScroll
     func mpManagerBufferProgressChange(_ progress: TimeInterval) {
         
     }
+    
+    func mpManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel) {
+        
+    }
+    
+    func mpManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel) {
+        updateView()
+    }
+    
+    func mpManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel) {
+        updateView()
+    }
+    
     /**************************************** MPManager 代理 Section End ***************************************/
     
     /**************************************** UIScrollView 代理 Section Begin ***************************************/

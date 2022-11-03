@@ -17,6 +17,19 @@ class MPPlaylistView: UIView {
             updateView()
         }
     }
+    //当前播放歌曲，外部传入
+    var currentSong: MPAudioProtocol? {
+        didSet {
+            if let song = currentSong {
+                //定位到当前
+                self.jumpCurrentPlay(song)
+            }
+        }
+    }
+    
+    //是否需要定位正在播放的歌曲，一般只有当前正在播放的播放列表才需要定位到当前歌曲
+    var needLocation: Bool = false
+    
     
     //点击歌曲的回调，回传播放列表和点击的歌曲
     var clickCallback: ((MPAudioProtocol, MPPlaylistProtocol) -> Void)?
@@ -29,6 +42,7 @@ class MPPlaylistView: UIView {
     fileprivate var titleLabel: UILabel!        //播放列表标题
     fileprivate var countLabel: UILabel!    //歌曲总数
     fileprivate var detailLabel: UILabel!       //详细描述
+    fileprivate var locationBtn: UIButton!      //定位到当前按钮
     fileprivate var tableView: UITableView!     //歌曲列表
     
     //MARK: 方法
@@ -81,6 +95,14 @@ class MPPlaylistView: UIView {
             make.height.equalTo(fitX(15))
         }
         
+        locationBtn = UIButton(type: .custom)
+        headView.addSubview(locationBtn)
+        locationBtn.snp.makeConstraints { make in
+            make.right.equalTo(fitX(-12))
+            make.bottom.equalTo(fitX(-6))
+            make.width.height.equalTo(fitX(28))
+        }
+        
         tableView = UITableView()
         bgView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -103,10 +125,21 @@ class MPPlaylistView: UIView {
         detailLabel.textColor = .lightGray
         detailLabel.font = .systemFont(ofSize: fitX(15))
         
+        locationBtn.setImage(.iPlaylistLocationBtn, for: .normal)
+        locationBtn.addTarget(self, action: #selector(locationAction(sender:)), for: .touchUpInside)
+        
         tableView.register(MPPlaylistSongCell.self, forCellReuseIdentifier: MPPlaylistSongCell.reuseId)
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    //定位按钮
+    @objc func locationAction(sender: UIButton)
+    {
+        if let currentSong = currentSong {
+            jumpCurrentPlay(currentSong)
+        }
     }
     
 }
@@ -125,7 +158,10 @@ extension MPPlaylistView: DelegateProtocol, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MPPlaylistSongCell.reuseId, for: indexPath) as! MPPlaylistSongCell
         cell.song = playlist?.playlistAudios[indexPath.row]
-        cell.currentSong = MPManager.shared.currentSong
+        if needLocation
+        {
+            cell.currentSong = currentSong
+        }
         cell.number = indexPath.row + 1
         cell.deleteCallback = {[weak self] audio in
             if let cb = self?.deleteSongCallback {
@@ -150,7 +186,7 @@ extension MPPlaylistView: ExternalInterface
         if let pl = playlist {
             self.titleLabel.text = pl.playlistName
             self.countLabel.text = "(\(pl.playlistAudios.count))"
-            self.detailLabel.text = pl.playlistIntro ?? pl.playlistName
+            self.detailLabel.text = "来自：\(pl.playlistIntro ?? pl.playlistName)"
             self.tableView.reloadData()
         }
     }
@@ -163,6 +199,9 @@ extension MPPlaylistView: ExternalInterface
     //跳转到正在播放
     func jumpCurrentPlay(_ audio: MPAudioProtocol)
     {
+        guard needLocation else {
+            return
+        }
         g_after(0.01) {
             if let audios = self.playlist?.playlistAudios {
                 for (index, item) in audios.enumerated()

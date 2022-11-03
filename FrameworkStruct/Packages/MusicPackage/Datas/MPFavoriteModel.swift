@@ -115,6 +115,17 @@ extension MPFavoriteModel: MPPlaylistProtocol
         return lastIndex
     }
     
+    ///删除一个音频，返回删除是否成功，如果不存在返回false
+    func deleteAudio(_ audio: MPAudioProtocol) -> Bool
+    {
+        let index = self.getIndexOf(audio: audio)
+        if index >= 0    //存在才删除
+        {
+            self.audios.remove(at: index)
+        }
+        return index >= 0
+    }
+    
     func getPlaylist() -> MPPlaylistModel {
         MPPlaylistModel(name: name, audios: playlistAudios, type: type, audioType: audioType, intro: intro)
     }
@@ -151,17 +162,6 @@ extension MPFavoriteModel: ExternalInterface
             self.audios.insert(audio, at: 0)
         }
         return index < 0
-    }
-    
-    ///删除一个音频，返回删除是否成功，如果不存在返回false
-    func deleteAudio(_ audio: MPAudioProtocol) -> Bool
-    {
-        let index = self.getIndexOf(audio: audio)
-        if index >= 0    //存在才删除
-        {
-            self.audios.remove(at: index)
-        }
-        return index >= 0
     }
     
     ///diff歌曲对象，已经存在库中则替换，没有则标记为不可用

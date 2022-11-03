@@ -18,6 +18,10 @@ protocol MPLibraryManagerDelegate: NSObjectProtocol {
     func mpLibraryManagerDidUpdated()
     ///我喜欢歌曲列表更新
     func mpLibraryManagerDidUpdateFavoriteSongs(_ favoriteSongs: MPFavoriteModel)
+    ///当前播放列表更新
+    func mpLibraryManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel)
+    ///历史播放记录列表更新
+    func mpLibraryManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel)
 }
 
 class MPLibraryManager: OriginManager
@@ -38,6 +42,8 @@ class MPLibraryManager: OriginManager
     {
         super.init()
         self.container.subscribe(key: MPContainer.MPDataKey.favoriteSongs, delegate: self)
+        self.container.subscribe(key: MPContainer.MPDataKey.currentPlaylist, delegate: self)
+        self.container.subscribe(key: MPContainer.MPDataKey.historySongs, delegate: self)
         self.addNotification()
     }
     
@@ -82,7 +88,8 @@ extension MPLibraryManager: DelegateProtocol, ContainerServices
         }
     }
     
-    func containerDidUpdateData(key: AnyHashable, value: Any) {
+    func containerDidUpdateData(key: AnyHashable, value: Any)
+    {
         if let k = key as? MPContainer.MPDataKey
         {
             if k == .favoriteSongs, let fav = value as? MPFavoriteModel  //我喜欢列表更新
@@ -90,6 +97,20 @@ extension MPLibraryManager: DelegateProtocol, ContainerServices
                 if let del = self.delegate
                 {
                     del.mpLibraryManagerDidUpdateFavoriteSongs(fav)
+                }
+            }
+            else if k == .currentPlaylist, let pl = value as? MPPlaylistModel   //当前播放列表更新
+            {
+                if let de = self.delegate
+                {
+                    de.mpLibraryManagerDidUpdateCurrentPlaylist(pl)
+                }
+            }
+            else if k == .historySongs, let his = value as? MPHistoryAudioModel     //历史播放记录列表更新
+            {
+                if let de = self.delegate
+                {
+                    de.mpLibraryManagerDidUpdateHistorySongs(his)
                 }
             }
         }
@@ -233,7 +254,44 @@ extension MPLibraryManager: ExternalInterface
                 }
             }
         }
-        
+    }
+    
+    ///在当前播放列表中删除一首歌
+    func deleteSongInCurrentPlaylist(_ song: MPAudioProtocol, success: @escaping BoolClosure)
+    {
+        readCurrentPlaylist {[weak self] playlist in
+            if let playlist = playlist {
+                let ret = playlist.deleteAudio(song)
+                if ret  //删除成功则更新缓存和icloud文件
+                {
+                    self?.container.setCurrentPlaylist(playlist)
+                }
+                success(ret)
+            }
+            else
+            {
+                success(false)
+            }
+        }
+    }
+    
+    ///在历史列表中删除一首歌
+    func deleteSongInHistory(_ song: MPAudioProtocol, success: @escaping BoolClosure)
+    {
+        readHistorySongs { [weak self] history in
+            if let his = history {
+                let ret = his.deleteAudio(song)
+                if ret  //删除成功则更新缓存和iCloud文件
+                {
+                    self?.container.setHistorySongs(his)
+                }
+                success(ret)
+            }
+            else
+            {
+                success(false)
+            }
+        }
     }
     
     

@@ -102,6 +102,7 @@ enum MPPlaylistType: Int {
     case podcast = 4                //播客
     case stage = 5                  //场景
     case mood = 6                   //心情
+    case history = 7                //历史记录
 }
 
 ///媒体类型，比如音乐、播客、有声书等

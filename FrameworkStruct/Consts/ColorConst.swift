@@ -29,6 +29,8 @@ extension UIColor: ConstantPropertyProtocol
     @objc static var cAccent = UIColor(named: "AccentColor")
     //黑色333333
     @objc static let cBlack_3 = UIColor.colorFromHex(0x333333)
+    //黑色444444
+    @objc static let cBlack_4 = UIColor.colorFromHex(0x444444)
     //黑色555555
     @objc static let cBlack_5 = UIColor.colorFromHex(0x555555)
     //黑色666666

@@ -70,6 +70,8 @@ iLike = "我喜欢";
  * Toast文案
  */
 failToPlay = "播放失败";
+deleteSucceed = "删除成功";
+deleteFailed = "删除失败";
 /**
  * 通用错误信息
  */

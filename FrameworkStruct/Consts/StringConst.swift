@@ -348,6 +348,10 @@ extension String
     //MARK: Toast文案
     //播放失败
     static let failToPlay = localized("failToPlay")
+    //删除成功
+    static let deleteSucceed = localized("deleteSucceed")
+    //删除失败
+    static let deleteFailed = localized("deleteFailed")
     
     //MARK: 通用错误信息
     //未知错误
