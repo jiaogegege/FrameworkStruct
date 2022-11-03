@@ -67,8 +67,8 @@ class MPPlayer: OriginWorker
     //随机播放模式下保存的播放列表歌曲序号列表
     fileprivate var playlistIndexArray: [Int] = []
     
-    //如果用户点了下一首播放，那么记住这个位置，不管何种播放模式，都会按最新到最旧的加入顺序播放下一首
-    fileprivate var indexsOfIfNextPlay: [Int] = []
+    //如果用户点了下一首播放，那么记住这首歌，不管何种播放模式，都会按最新到最旧的加入顺序播放下一首
+    fileprivate var audiosIfNextPlay: [MPAudioProtocol] = []
     
     //一个播放列表的中已播放歌曲列表，当切换播放列表时被清空
     fileprivate var elapsedAudioArray: [MPAudioProtocol] = []
@@ -193,11 +193,25 @@ class MPPlayer: OriginWorker
     {
         switch playMode {
         case .sequence:     //顺序播放
-            if indexsOfIfNextPlay.count > 0
+            if audiosIfNextPlay.count > 0   //如果下一首播放列表中有数据
             {
-                currentIndex = indexsOfIfNextPlay.popLast()!
+                let audio = audiosIfNextPlay.popLast()!
+                let index = currentPlaylist!.getIndexOf(audio: audio)
+                //如果存在
+                if index >= 0
+                {
+                    currentIndex = index
+                }
+                else    //如果不存在，那么播放当前播放列表的下一首
+                {
+                    currentIndex += 1
+                    if currentIndex >= currentPlaylist!.playlistAudios.count
+                    {
+                        currentIndex = 0
+                    }
+                }
             }
-            else
+            else    //没有下一首播放，那么播放当前播放列表的下一首
             {
                 currentIndex += 1
                 if currentIndex >= currentPlaylist!.playlistAudios.count
@@ -209,9 +223,23 @@ class MPPlayer: OriginWorker
         case .singleCycle:  //单曲循环
             if !auto
             {
-                if indexsOfIfNextPlay.count > 0
+                if audiosIfNextPlay.count > 0
                 {
-                    currentIndex = indexsOfIfNextPlay.popLast()!
+                    let audio = audiosIfNextPlay.popLast()!
+                    let index = currentPlaylist!.getIndexOf(audio: audio)
+                    //如果存在
+                    if index >= 0
+                    {
+                        currentIndex = index
+                    }
+                    else    //如果不存在，那么播放当前播放列表的下一首
+                    {
+                        currentIndex += 1
+                        if currentIndex >= currentPlaylist!.playlistAudios.count
+                        {
+                            currentIndex = 0
+                        }
+                    }
                 }
                 else
                 {
@@ -224,9 +252,29 @@ class MPPlayer: OriginWorker
             }
             return currentPlaylist!.playlistAudios[currentIndex]
         case .random:       //随机播放
-            if indexsOfIfNextPlay.count > 0
+            if audiosIfNextPlay.count > 0
             {
-                currentIndex = indexsOfIfNextPlay.popLast()!
+                let audio = audiosIfNextPlay.popLast()!
+                let index = currentPlaylist!.getIndexOf(audio: audio)
+                //如果存在
+                if index >= 0
+                {
+                    currentIndex = index
+                }
+                else    //如果不存在，那么随机播放当前播放列表的下一首
+                {
+                    let indexOfIndex = Int(randomIn(0, UInt(playlistIndexArray.count - 1)))
+                    currentIndex = playlistIndexArray[indexOfIndex]     //随机获取一个index
+                    playlistIndexArray.remove(at: indexOfIndex)     //从序号数组中删除获取的这个序号
+                    //如果序号数组剩余0个，说明所有歌曲都随机了一遍，那么重新生成序号数组
+                    if playlistIndexArray.count <= 0
+                    {
+                        for index in 0..<self.currentPlaylist!.playlistAudios.count
+                        {
+                            self.playlistIndexArray.append(index)
+                        }
+                    }
+                }
             }
             else
             {
@@ -511,8 +559,7 @@ extension MPPlayer: ExternalInterface
         {
             self.currentPlaylist = playlist
         }
-        //记录当前歌曲在播放列表中的index
-        self.currentIndex = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
+        
         self.playlistIndexArray.removeAll()
         for index in 0..<self.currentPlaylist!.playlistAudios.count
         {
@@ -526,8 +573,17 @@ extension MPPlayer: ExternalInterface
                 self.playlistIndexArray.append(index)
             }
         }
+        
+        //记录当前歌曲在播放列表中的index
+        let index = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
+        //如果没有找到，那么根据规则找到下一首
+        if index < 0
+        {
+            self.currentAudio = getNextAudioByMode()
+        }
+        
         self.elapsedAudioArray.removeAll()      //每次开始一个新的播放列表时，都清空原来的临时播放记录
-        self.indexsOfIfNextPlay.removeAll()     //每次开始一个新的播放列表时，都清空下一首播放列表
+        self.audiosIfNextPlay.removeAll()     //每次开始一个新的播放列表时，都清空下一首播放列表
         self.prepareToPlay(audio)
     }
     
@@ -539,10 +595,39 @@ extension MPPlayer: ExternalInterface
         {
             var index = currentIndex + 1
             index = playlist.insertAudio(audio: audio, index: index)
-            indexsOfIfNextPlay.append(index)   //记录下一首播放的index
+            audiosIfNextPlay.append(audio)   //记录下一首播放的歌曲
             if let del = self.delegate
             {
                 del.mpPlayerPlaylistChanged(self.currentAudio!, playlist: self.currentPlaylist!)
+            }
+        }
+    }
+    
+    ///播放列表更新，可能是新增或删除了其中的歌曲
+    func updatePlaylist(_ playlist: MPPlaylistProtocol)
+    {
+        if !isFree  //不空闲的时候才更新播放列表
+        {
+            //主要是更新index列表，并且是同一个播放列表
+            if playlist.playlistId == currentPlaylist?.playlistId
+            {
+                self.playlistIndexArray.removeAll()
+                for index in 0..<self.currentPlaylist!.playlistAudios.count
+                {
+                    self.playlistIndexArray.append(index)
+                }
+                //如果当前播放的歌曲已经不在新的播放列表中了，那么播放下一首
+                if let au = currentAudio
+                {
+                    if playlist.getIndexOf(audio: au) < 0
+                    {
+                        currentIndex -= 1   //修正index，因为正在播放的歌曲被删除了，所以index - 1
+                        if isPlaying
+                        {
+                            next()
+                        }
+                    }
+                }
             }
         }
     }

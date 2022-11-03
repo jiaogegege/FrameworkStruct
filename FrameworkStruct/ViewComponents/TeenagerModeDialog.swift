@@ -50,6 +50,7 @@ class TeenagerModeDialog: FSDialog
     override func configView() {
         super.configView()
         
+        containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 5.0
         containerView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

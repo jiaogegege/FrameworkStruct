@@ -65,6 +65,7 @@ like = "喜欢";
 dislike = "不喜欢";
 addToBookmark = "添加到书签";
 iLike = "我喜欢";
+sureDelete = "确定删除？";
 
 /**
  * Toast文案

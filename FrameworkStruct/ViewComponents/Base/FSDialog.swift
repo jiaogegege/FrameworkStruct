@@ -98,7 +98,6 @@ class FSDialog: UIView, DialogManagerProtocol
         bgView.frame = self.bounds
         bgView.backgroundColor = self.bgColor
         
-        containerView.backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {

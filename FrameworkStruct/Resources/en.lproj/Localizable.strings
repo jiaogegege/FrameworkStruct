@@ -66,6 +66,7 @@ like = "Like";
 dislike = "Dislike";
 addToBookmark = "Add To Bookmark";
 iLike = "I Like";
+sureDelete = "Sure To Delete?";
 
 /**
  * Toast文案

@@ -344,6 +344,8 @@ extension String
     static let addToBookmark = localized("addToBookmark")
     //我喜欢
     static let iLike = localized("iLike")
+    //确定删除？
+    static let sureDelete = localized("sureDelete")
     
     //MARK: Toast文案
     //播放失败

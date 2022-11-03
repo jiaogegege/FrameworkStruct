@@ -577,6 +577,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     //更新当前播放列表
     func mpLibraryManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel) {
+        player.updatePlaylist(currentPlaylist)
         delegates.compact()
         for i in 0..<delegates.count
         {
