@@ -628,7 +628,6 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
                 //设定一个定时器，如果超时，那么认为播放失败
                 var openFileTimeoutTimer: Timer?
                 openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, hostId: self.className, action: { timer in
-                    FSLog("prepare timeout")
                     if openFileTimeoutTimer != nil    //如果定时器还在说明超时了，那么取消定时器并返回false
                     {
                         openFileTimeoutTimer?.invalidate()

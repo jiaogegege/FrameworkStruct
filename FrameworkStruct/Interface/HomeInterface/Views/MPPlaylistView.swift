@@ -30,7 +30,6 @@ class MPPlaylistView: UIView {
     //是否需要定位正在播放的歌曲，一般只有当前正在播放的播放列表才需要定位到当前歌曲
     var needLocation: Bool = false
     
-    
     //点击歌曲的回调，回传播放列表和点击的歌曲
     var clickCallback: ((MPAudioProtocol, MPPlaylistProtocol) -> Void)?
     //删除某一首歌曲的回调
@@ -127,6 +126,7 @@ class MPPlaylistView: UIView {
         
         locationBtn.setImage(.iPlaylistLocationBtn, for: .normal)
         locationBtn.addTarget(self, action: #selector(locationAction(sender:)), for: .touchUpInside)
+        locationBtn.isHidden = true
         
         tableView.register(MPPlaylistSongCell.self, forCellReuseIdentifier: MPPlaylistSongCell.reuseId)
         tableView.separatorStyle = .none
@@ -199,6 +199,7 @@ extension MPPlaylistView: ExternalInterface
     //跳转到正在播放
     func jumpCurrentPlay(_ audio: MPAudioProtocol)
     {
+        locationBtn.isHidden = !needLocation
         guard needLocation else {
             return
         }
