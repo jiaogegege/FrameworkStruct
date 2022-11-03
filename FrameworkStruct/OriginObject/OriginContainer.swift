@@ -37,6 +37,9 @@ protocol ContainerProtocol: NSObjectProtocol
     //同步修改数据，数据保存在容器中修改后通知所有订阅对象刷新数据
     func mutate(key: AnyHashable, value: Any, meta: DataModelMeta)
     
+    //判断该key指定的value是否可以commit
+    func canCommit(key: AnyHashable) -> Bool
+    
     //同步提交数据，将数据写入本地数据源
     func commit(key: AnyHashable, value: Any)
     
@@ -178,6 +181,20 @@ extension OriginContainer: ContainerProtocol
         containerLock.unlock()
         //提交数据的时候，要对所有订阅对象发出通知
         self.dispatch(key: key, value: self.get(key: key) as Any)
+    }
+    
+    //判断该key指定的value是否可以commit
+    //不建议覆写这个方法
+    func canCommit(key: AnyHashable) -> Bool
+    {
+        containerLock.lock()
+        guard let dataStruct = self.container[key] else {
+            containerLock.unlock()
+            return false
+        }
+        containerLock.unlock()
+        let meta = dataStruct.meta
+        return meta.canCommit
     }
     
     @objc func commit(key: AnyHashable, value: Any) {

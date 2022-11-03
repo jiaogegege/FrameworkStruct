@@ -83,7 +83,7 @@ class MPContainer: OriginContainer
                                 if let libs = obj as? [MPMediaLibraryModel]
                                 {
                                     //读取文件后先保存到缓存中
-                                    self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     //关闭文件
                                     self?.ia.closeDocument(had, completion: { succeed in
                                         queue.async {
@@ -116,7 +116,7 @@ class MPContainer: OriginContainer
                 self?.queryAlliCloudSongs { songs in
                     //创建一个iCloud媒体库
                     let iCloudLib = MPMediaLibraryModel(type: .iCloud, songs: songs, albums: [], artists: [], lyrics: [], musicbooks: [])
-                    self?.mutate(key: MPDataKey.librarys, value: [iCloudLib], meta: DataModelMeta(needCopy: false, canCommit: false))
+                    self?.mutate(key: MPDataKey.librarys, value: [iCloudLib], meta: DataModelMeta(needCopy: false, canCommit: true))
                     //写入iCloud文件
                     ArchiverAdapter.shared.archive([iCloudLib] as NSCoding) { (data) in
                         if let data = data {
@@ -148,7 +148,7 @@ class MPContainer: OriginContainer
                                     //有新增歌曲则增加，有删除歌曲则减少
                                     let hasUpdate = lib.diffSongs(songs)
                                     //读取文件后先保存到缓存中
-                                    self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     //如果有数据更新，那么需要更新iCloud库文件
                                     if hasUpdate, let libDir = self?.libDir, let libFileUrl = self?.ia.getFileUrl(in: libDir, fileName: Self.libraryFileName)
                                     {
@@ -161,7 +161,7 @@ class MPContainer: OriginContainer
                                                             //关闭文件
                                                             self?.ia.closeDocument(had, completion: { succeed in
                                                                 //读取文件后先保存到缓存中
-                                                                self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                                                self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: true))
                                                                 queue.async {
                                                                     //发出更新完成的通知
                                                                     NotificationCenter.default.post(name: FSNotification.mpContainerUpdated.name, object: nil)
@@ -291,7 +291,7 @@ class MPContainer: OriginContainer
     
     //提交数据到持久性数据源，目前都保存到iCloud文件
     override func commit(key: AnyHashable, value: Any, success: @escaping (Any?) -> Void, failure: @escaping (NSError) -> Void) {
-        if let k = key as? MPDataKey, let val = value as? NSCoding
+        if let k = key as? MPDataKey, let val = value as? NSCoding, self.canCommit(key: key)
         {
             ArchiverAdapter.shared.archive(val, completion: {[weak self] (data) in
                 if let data = data, let fileName = k.getiCloudFileName() {
@@ -458,7 +458,7 @@ extension MPContainer: ExternalInterface
                     }
                 }
                 //保存到内存
-                self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                self?.mutate(key: MPDataKey.librarys, value: libs, meta: DataModelMeta(needCopy: false, canCommit: true))
                 //保存到iCloud
                 self?.commit(key: MPDataKey.librarys, value: libs, success: { obj in
                     if let success = success {
@@ -494,7 +494,7 @@ extension MPContainer: ExternalInterface
                     MPSongModel.unarchive(data) { (song) in
                         if let song = song {
                             //先保存到缓存
-                            self?.mutate(key: MPDataKey.currentSong, value: song, meta: DataModelMeta(needCopy: false, canCommit: false))
+                            self?.mutate(key: MPDataKey.currentSong, value: song, meta: DataModelMeta(needCopy: false, canCommit: true))
                             //返回song
                             completion(song)
                         }
@@ -515,7 +515,7 @@ extension MPContainer: ExternalInterface
     ///保存当前播放歌曲
     func setCurrentSong(_ song: MPSongModel)
     {
-        self.mutate(key: MPDataKey.currentSong, value: song, meta: DataModelMeta(needCopy: false, canCommit: false))
+        self.mutate(key: MPDataKey.currentSong, value: song, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
         self.commit(key: MPDataKey.currentSong, value: song) { obj in
             
@@ -543,12 +543,12 @@ extension MPContainer: ExternalInterface
                                     //做diff，用媒体库中的歌曲对象替换播放列表中的，节省内存
                                     playlist.updateAudios(songs)
                                     //更新完成后保存到缓存中，此时，playlist中的歌曲都是iCloud歌曲库的引用
-                                    self?.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     completion(playlist)
                                 }
                                 else    //如果没有查询到，直接保存，应该不会出现这种情况，一定会有iCloud库
                                 {
-                                    self?.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     completion(playlist)
                                 }
                             })
@@ -570,7 +570,7 @@ extension MPContainer: ExternalInterface
     ///保存当前播放列表
     func setCurrentPlaylist(_ playlist: MPPlaylistModel)
     {
-        self.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+        self.mutate(key: MPDataKey.currentPlaylist, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
         self.commit(key: MPDataKey.currentPlaylist, value: playlist) { obj in
             
@@ -598,12 +598,12 @@ extension MPContainer: ExternalInterface
                                     //做diff，用媒体库中的歌曲对象替换播放列表中的，节省内存
                                     playlist.updateAudios(songs)
                                     //更新完成后保存到缓存中，此时，historySongs中的歌曲都是iCloud歌曲库的引用
-                                    self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     completion(playlist)
                                 }
                                 else    //如果没有查询到，直接保存，应该不会出现这种情况，一定会有iCloud库
                                 {
-                                    self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.historySongs, value: playlist, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     completion(playlist)
                                 }
                             })
@@ -625,7 +625,7 @@ extension MPContainer: ExternalInterface
     ///保存历史播放歌曲列表
     func setHistorySongs(_ historySongs: MPHistoryAudioModel)
     {
-        self.mutate(key: MPDataKey.historySongs, value: historySongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+        self.mutate(key: MPDataKey.historySongs, value: historySongs, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
         self.commit(key: MPDataKey.historySongs, value: historySongs) { obj in
             
@@ -653,12 +653,12 @@ extension MPContainer: ExternalInterface
                                     //做diff，用媒体库中的歌曲对象替换播放列表中的，节省内存
                                     favoriteSongs.updateAudios(songs)
                                     //更新完成后保存到缓存中，此时，favoriteSongs中的歌曲都是iCloud歌曲库的引用
-                                    self?.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     completion(favoriteSongs)
                                 }
                                 else    //如果没有查询到，直接保存，应该不会出现这种情况，一定会有iCloud库
                                 {
-                                    self?.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+                                    self?.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: true))
                                     completion(favoriteSongs)
                                 }
                             })
@@ -680,7 +680,7 @@ extension MPContainer: ExternalInterface
     ///保存我喜欢歌曲列表
     func setFavoriteSongs(_ favoriteSongs: MPFavoriteModel, success: BoolClosure? = nil)
     {
-        self.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: false))
+        self.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
         self.commit(key: MPDataKey.favoriteSongs, value: favoriteSongs) { obj in
             if let success = success {
@@ -707,7 +707,7 @@ extension MPContainer: ExternalInterface
                 if let data = data {
                     ArchiverAdapter.shared.unarchive(data) { (obj) in
                         if let playlists = obj as? [MPHistoryPlaylistModel] {
-                            self?.mutate(key: MPDataKey.historyPlaylists, value: playlists, meta: DataModelMeta(needCopy: false, canCommit: false))
+                            self?.mutate(key: MPDataKey.historyPlaylists, value: playlists, meta: DataModelMeta(needCopy: false, canCommit: true))
                             completion(playlists)
                         }
                         else
@@ -727,7 +727,7 @@ extension MPContainer: ExternalInterface
     ///保存历史播放列表列表，还未设计好，待定
     func setHistoryPlaylists(_ historyPlaylists: [MPHistoryPlaylistModel])
     {
-        self.mutate(key: MPDataKey.historyPlaylists, value: historyPlaylists, meta: DataModelMeta(needCopy: false, canCommit: false))
+        self.mutate(key: MPDataKey.historyPlaylists, value: historyPlaylists, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
         self.commit(key: MPDataKey.historyPlaylists, value: historyPlaylists) { obj in
             

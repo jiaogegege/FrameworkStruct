@@ -119,6 +119,8 @@ extension UIImage: ConstantPropertyProtocol
     //我喜欢
     static let iPlayUnfavoriteBtn = UIImage(named: "mp_play_unfavorite")
     static let iPlayFavoriteBtn = UIImage(named: "mp_play_favorite")
+    //添加到歌单
+    static let iPlayAddSonglistBtn = UIImage(named: "mp_play_add_songlist")
     //mini唱片
     static let iMiniDiscBg = UIImage(named: "mp_mini_disc")
     //mini下一首

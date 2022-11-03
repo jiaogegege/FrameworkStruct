@@ -105,6 +105,7 @@ class MusicViewController: BasicViewController
                 }
             }
         }
+        print(MPContainer.shared.getAllKeys())
     }
     
     //新增歌单

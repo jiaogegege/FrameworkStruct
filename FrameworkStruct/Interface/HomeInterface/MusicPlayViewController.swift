@@ -31,6 +31,7 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var pastTimeLabel: UILabel!     //经过时间
     fileprivate var totalTimeLabel: UILabel!    //所有时间
     fileprivate var favoriteBtn: UIButton!      //我喜欢按钮
+    fileprivate var addSonglistBtn: UIButton!   //添加到歌单
     
     //MARK: 方法
     override func viewDidLoad() {
@@ -205,6 +206,15 @@ class MusicPlayViewController: BasicViewController {
             make.width.equalTo(fitX(39))
             make.height.equalTo(fitX(35))
         }
+        //添加到歌单
+        addSonglistBtn = UIButton(type: .custom)
+        view.addSubview(addSonglistBtn)
+        addSonglistBtn.snp.makeConstraints { make in
+            make.left.equalTo(favoriteBtn.snp.right).offset(fitX(30))
+            make.centerY.equalTo(favoriteBtn)
+            make.width.equalTo(fitX(37))
+            make.height.equalTo(fitX(36))
+        }
         
     }
     
@@ -266,6 +276,9 @@ class MusicPlayViewController: BasicViewController {
         favoriteBtn.setImage(.iPlayUnfavoriteBtn, for: .normal)
         favoriteBtn.setImage(.iPlayFavoriteBtn, for: .selected)
         favoriteBtn.addTarget(self, action: #selector(favoriteAction(sender:)), for: .touchUpInside)
+        
+        addSonglistBtn.setImage(.iPlayAddSonglistBtn, for: .normal)
+        addSonglistBtn.addTarget(self, action: #selector(addSonglistAction(sender:)), for: .touchUpInside)
     }
     
     override func updateUI() {
@@ -381,6 +394,12 @@ class MusicPlayViewController: BasicViewController {
                 }
             }
         }
+    }
+    
+    //添加歌单
+    @objc func addSonglistAction(sender: UIButton)
+    {
+        
     }
 
     //进度条拖动
