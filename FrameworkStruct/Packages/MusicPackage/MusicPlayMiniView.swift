@@ -271,13 +271,17 @@ extension MusicPlayMiniView: ExternalInterface
             }
             albumView.updateView()
             //歌名和歌手名
-            songLabel.text = song.name
-            songLabel.sizeToFit()
-            artistlabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
-            artistlabel.sizeToFit()
-            textScrollView.width = maxBetween(songLabel.width, artistlabel.width)
-            textContainerView.slotView = textScrollView
-            textContainerView.updateView()
+            let artist = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
+            if songLabel.text != song.name || artistlabel.text != artist
+            {
+                songLabel.text = song.name
+                songLabel.sizeToFit()
+                artistlabel.text = artist
+                artistlabel.sizeToFit()
+                textScrollView.width = maxBetween(songLabel.width, artistlabel.width)
+                textContainerView.slotView = textScrollView
+                textContainerView.updateView()
+            }
             //设置播放
             playPauseBtn.isSelected = mpr.isPlaying
             if mpr.isPlaying

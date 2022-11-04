@@ -628,7 +628,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             {
                 //设定一个定时器，如果超时，那么认为播放失败
                 var openFileTimeoutTimer: Timer?
-                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.backgroundTaskTime, repeats: false, mode: .default, hostId: self.className, action: { timer in
+                openFileTimeoutTimer = TimerManager.shared.timer(interval: Self.openFileTimeoutTime, repeats: false, mode: .default, hostId: self.className, action: { timer in
                     if openFileTimeoutTimer != nil    //如果定时器还在说明超时了，那么取消定时器并返回false
                     {
                         openFileTimeoutTimer?.invalidate()
@@ -807,8 +807,10 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
 extension MPManager: InternalType
 {
     //后台任务时长，到这个时间后要结束后台任务，不然会被系统杀掉；然后再开启一个新的后台任务
-    //也是打开歌曲文件超时时长
     static let backgroundTaskTime: TimeInterval = 20.0
+    
+    //打开歌曲文件超时时长
+    static let openFileTimeoutTime: TimeInterval = 10.0
     
     //状态管理器的key
     enum StatusKey: SMKeyType {
