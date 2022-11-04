@@ -39,6 +39,8 @@ protocol MPManagerDelegate: NSObjectProtocol {
     func mpManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel)
     ///历史播放记录列表更新
     func mpManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel)
+    ///歌单列表更新
+    func mpManagerDidUpdateSonglists(_ songlists: [MPSonglistModel])
 }
 
 
@@ -596,6 +598,18 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
             if let delegate = delegates.object(at: i) as? MPManagerDelegate
             {
                 delegate.mpManagerDidUpdateHistorySongs(history)
+            }
+        }
+    }
+    
+    //更新了歌单列表
+    func mpLibraryManagerDidUpdateSonglists(_ songlists: [MPSonglistModel]) {
+        delegates.compact()
+        for i in 0..<delegates.count
+        {
+            if let delegate = delegates.object(at: i) as? MPManagerDelegate
+            {
+                delegate.mpManagerDidUpdateSonglists(songlists)
             }
         }
     }
@@ -1252,6 +1266,38 @@ extension MPManager: ExternalInterface
                 }
             default:
                 break
+        }
+    }
+    
+    ///创建一个新歌单
+    func createNewSonglist(_ name: String, success: @escaping BoolClosure)
+    {
+        libMgr.createNewSonglist(name) { succeed in
+            success(succeed)
+        }
+    }
+    
+    ///获取所有歌单
+    func getAllSonglists(_ completion: @escaping ([MPSonglistModel]?) -> Void)
+    {
+        libMgr.readSonglists { songlists in
+            completion(songlists)
+        }
+    }
+    
+    ///删除一个歌单
+    func deleteSonglist(_ songlistId: String, success: @escaping BoolClosure)
+    {
+        libMgr.deleteSonglist(songlistId) { succeed in
+            success(succeed)
+        }
+    }
+    
+    ///向某个歌单添加一些歌曲
+    func addSongsToSonglist(_ songs: [MPSongModel], songlistId: String, completion: @escaping (MPLibraryManager.InsertSongToSonglistResult) -> Void)
+    {
+        libMgr.addSongsToSonglist(songs, songlistId: songlistId) { result in
+            completion(result)
         }
     }
     

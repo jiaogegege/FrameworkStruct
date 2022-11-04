@@ -371,6 +371,8 @@ extension MPContainer: InternalType
     static let favoriteSongsFileName = "favoriteSongs.dat"
     //历史播放列表列表文件
     static let historyPlaylistsFileName = "historyPlaylists.dat"
+    //歌单列表
+    static let songlistsFileName = "songlists.dat"
  
     //数据对象的key
     enum MPDataKey: String {
@@ -380,6 +382,7 @@ extension MPContainer: InternalType
         case historySongs                   //历史播放歌曲
         case favoriteSongs                  //我喜欢歌曲列表
         case historyPlaylists               //历史播放列表
+        case songlists                      //歌单列表
         
         case iCloudSongFileInfo             //所有iCloud歌曲原始文件信息，只存在内存中
         
@@ -399,6 +402,8 @@ extension MPContainer: InternalType
                 return MPContainer.favoriteSongsFileName
             case .historyPlaylists:
                 return MPContainer.historyPlaylistsFileName
+            case .songlists:
+                return MPContainer.songlistsFileName
             default:
                 return nil
             }
@@ -688,6 +693,68 @@ extension MPContainer: ExternalInterface
             }
         } failure: { error in
             FSLog("MPContainer save favoriteSongs : \(error.localizedDescription)")
+            if let success = success {
+                success(false)
+            }
+        }
+    }
+    
+    ///获取歌单列表
+    func getSonglists(_ completion: @escaping ([MPSonglistModel]?) -> Void)
+    {
+        if let songlists = self.get(key: MPDataKey.songlists) as? [MPSonglistModel]
+        {
+            completion(songlists)
+        }
+        else //如果缓存中没有，那么尝试从iCloud获取
+        {
+            readFileFromiCloud(Self.songlistsFileName) { [weak self] data in
+                if let data = data {
+                    ArchiverAdapter.shared.unarchive(data) { obj in
+                        if let songlists = obj as? [MPSonglistModel] {
+                            //查询icloud中所有歌曲，做diff
+                            self?.getiCloudLibrary({ lib in
+                                if let songs = lib?.songs {
+                                    //做diff，用媒体库中的歌曲对象替换播放列表中的，节省内存
+                                    for songlist in songlists {
+                                        songlist.updateSongs(songs)
+                                    }
+                                    //更新完成后保存到缓存中，此时，songlists中的歌曲都是iCloud歌曲库的引用
+                                    self?.mutate(key: MPDataKey.songlists, value: songlists, meta: DataModelMeta(needCopy: false, canCommit: true))
+                                    completion(songlists)
+                                }
+                                else    //如果没有查询到，直接保存，应该不会出现这种情况，一定会有iCloud库
+                                {
+                                    self?.mutate(key: MPDataKey.songlists, value: songlists, meta: DataModelMeta(needCopy: false, canCommit: true))
+                                    completion(songlists)
+                                }
+                            })
+                        }
+                        else
+                        {
+                            completion(nil)
+                        }
+                    }
+                }
+                else
+                {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    ///保存歌单列表
+    func setSonglists(_ songlists: [MPSonglistModel], success: BoolClosure? = nil)
+    {
+        self.mutate(key: MPDataKey.songlists, value: songlists, meta: DataModelMeta(needCopy: false, canCommit: true))
+        //保存到iCloud
+        self.commit(key: MPDataKey.songlists, value: songlists) { obj in
+            if let success = success {
+                success(true)
+            }
+        } failure: { error in
+            FSLog("MPContainer save songlists : \(error.localizedDescription)")
             if let success = success {
                 success(false)
             }

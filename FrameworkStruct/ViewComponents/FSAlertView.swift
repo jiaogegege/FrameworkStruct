@@ -104,7 +104,7 @@ extension FSAlertView: ExternalInterface
                     if let text = field.text, g_validString(text) {
                         inputText = text
                     }
-                    else {
+                    else if usePlaceHolder {
                         inputText = field.placeholder
                     }
                 }

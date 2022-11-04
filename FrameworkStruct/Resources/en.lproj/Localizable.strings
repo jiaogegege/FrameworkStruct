@@ -67,6 +67,9 @@ dislike = "Dislike";
 addToBookmark = "Add To Bookmark";
 iLike = "I Like";
 sureDelete = "Sure To Delete?";
+newSonglist = "New Songlist";
+enterSonglistName = "Give a name to the songlist~";
+pleaseEnterName = "Please Enter A Name";
 
 /**
  * Toast文案
@@ -74,6 +77,13 @@ sureDelete = "Sure To Delete?";
 failToPlay = "Fail To Play";
 deleteSucceed = "Delete Succeed";
 deleteFailed = "Delete Failed";
+insertSuccess = "Insert Success";
+insertFailure = "Insert Failure";
+partSongExist = "Part Songs Are Exist";
+songExist = "Songs Are Exist";
+createSuccess = "Create Success";
+createFailure = "Create Failure";
+
 /**
  * 通用错误信息
  */

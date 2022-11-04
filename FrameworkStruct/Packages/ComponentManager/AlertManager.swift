@@ -312,6 +312,7 @@ extension AlertManager: ExternalInterface
      *  - messageAlign:对齐方式
      *  - leftTitle:左边按钮标题，默认·取消·，传nil则不创建按钮
      *  - rightTitle:右边按钮标题，默认·确定·，传nil则不创建按钮
+     *  - usePlaceHolder:如果未输入文本，那么使用placeHolder代替
      */
     func wantPresentAlert(title: String? = nil,
                           message: String? = nil,

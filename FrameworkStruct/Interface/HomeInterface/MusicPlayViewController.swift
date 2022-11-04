@@ -493,4 +493,8 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
         
     }
     
+    func mpManagerDidUpdateSonglists(_ songlists: [MPSonglistModel]) {
+        
+    }
+    
 }

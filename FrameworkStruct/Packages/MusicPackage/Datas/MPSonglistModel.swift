@@ -29,6 +29,8 @@ class MPSonglistModel: OriginModel, Archivable
         self.name = name
         self.songs = []
         self.type = .songlist
+        //随机获取一个图标
+        images = [MPEmbellisher.shared.getSonglistIcon()]
     }
     
     required init?(coder: NSCoder) {
@@ -147,6 +149,40 @@ extension MPSonglistModel: InternalType
         case tagIds
         case images
         case intro
+    }
+    
+}
+
+
+extension MPSonglistModel: ExternalInterface
+{
+    ///diff歌曲对象，已经存在库中则替换，没有则标记为不可用
+    func updateSongs(_ libSongs: [MPSongModel])
+    {
+        let libSongIds = libSongs.map { song in
+            song.audioId
+        }
+        let playlistSongIds = self.songs.map { song in
+            song.id
+        }
+        for (index, songId) in playlistSongIds.enumerated()
+        {
+            if libSongIds.contains(songId) //如果库中存在该歌曲，那么用库中的歌曲替换
+            {
+                if let libIndex = libSongIds.firstIndex(of: songId), libIndex >= 0, libIndex < songs.count
+                {
+                    self.songs[index] = libSongs[libIndex]
+                }
+                else    //没找到则标记为不可用
+                {
+                    self.songs[index].isAvailable = false
+                }
+            }
+            else    //不存在，则标记为不可用
+            {
+                self.songs[index].isAvailable = false
+            }
+        }
     }
     
 }

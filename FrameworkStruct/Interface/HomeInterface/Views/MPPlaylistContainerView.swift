@@ -215,6 +215,10 @@ extension MPPlaylistContainerView: DelegateProtocol, MPManagerDelegate, UIScroll
         updateView()
     }
     
+    func mpManagerDidUpdateSonglists(_ songlists: [MPSonglistModel]) {
+        
+    }
+    
     /**************************************** MPManager 代理 Section End ***************************************/
     
     /**************************************** UIScrollView 代理 Section Begin ***************************************/

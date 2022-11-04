@@ -5,6 +5,9 @@
 //  Created by  蒋 雪姣 on 2022/10/19.
 //
 
+/**
+ 歌曲列表
+ */
 import UIKit
 
 class MusicSongListCell: UITableViewCell {
@@ -21,7 +24,7 @@ class MusicSongListCell: UITableViewCell {
     var songData: MPSongModel?
     var isCurrent: Bool = false
     var favoriteCallback: ((MPSongModel) -> Void)?  //点击收藏按钮
-    
+    var addSonglistCallback: ((MPSongModel) -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,8 +45,12 @@ class MusicSongListCell: UITableViewCell {
             cb(song)
         }
     }
+    
+    //添加到歌单
     @IBAction func songlistAction(_ sender: UIButton) {
-        
+        if let addSonglistCallback = addSonglistCallback, let song = songData {
+            addSonglistCallback(song)
+        }
     }
     
 }

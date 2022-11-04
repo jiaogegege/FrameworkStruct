@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MPSonglistCell" rowHeight="70" id="KGk-i7-Jjw" customClass="MPSonglistCell" customModule="FrameworkStruct" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="405" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="405" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="48R-qW-nuS">
+                        <rect key="frame" x="12" y="5" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="GFy-oI-M1Y"/>
+                            <constraint firstAttribute="height" constant="60" id="HqO-0s-75R"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="歌单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPh-jH-pKo">
+                        <rect key="frame" x="80" y="5" width="37" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="aIM-Vf-Txz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18首" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPO-ZE-PzK">
+                        <rect key="frame" x="80" y="43" width="28" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="c4x-By-VD2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="48R-qW-nuS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="JH4-ty-zzi"/>
+                    <constraint firstItem="48R-qW-nuS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="OIB-qe-Bfy"/>
+                    <constraint firstAttribute="bottom" secondItem="48R-qW-nuS" secondAttribute="bottom" constant="5" id="b7b-HI-nMm"/>
+                    <constraint firstItem="cPh-jH-pKo" firstAttribute="leading" secondItem="48R-qW-nuS" secondAttribute="trailing" constant="8" id="dUg-Yb-sY6"/>
+                    <constraint firstItem="cPh-jH-pKo" firstAttribute="top" secondItem="48R-qW-nuS" secondAttribute="top" id="fPV-Gw-uIh"/>
+                    <constraint firstItem="yPO-ZE-PzK" firstAttribute="leading" secondItem="cPh-jH-pKo" secondAttribute="leading" id="nae-OM-T4d"/>
+                    <constraint firstItem="yPO-ZE-PzK" firstAttribute="top" secondItem="cPh-jH-pKo" secondAttribute="bottom" constant="6" id="oTQ-00-MVs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="9999" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="countLabel" destination="yPO-ZE-PzK" id="Ynv-Xn-191"/>
+                <outlet property="imgView" destination="48R-qW-nuS" id="XKd-FL-ZvC"/>
+                <outlet property="songlistNameLabel" destination="cPh-jH-pKo" id="auk-XU-ES3"/>
+            </connections>
+            <point key="canvasLocation" x="-183.33333333333334" y="-3.3482142857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

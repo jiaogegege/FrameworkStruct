@@ -22,6 +22,8 @@ protocol MPLibraryManagerDelegate: NSObjectProtocol {
     func mpLibraryManagerDidUpdateCurrentPlaylist(_ currentPlaylist: MPPlaylistModel)
     ///历史播放记录列表更新
     func mpLibraryManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel)
+    ///歌单列表更新
+    func mpLibraryManagerDidUpdateSonglists(_ songlists: [MPSonglistModel])
 }
 
 class MPLibraryManager: OriginManager
@@ -44,6 +46,7 @@ class MPLibraryManager: OriginManager
         self.container.subscribe(key: MPContainer.MPDataKey.favoriteSongs, delegate: self)
         self.container.subscribe(key: MPContainer.MPDataKey.currentPlaylist, delegate: self)
         self.container.subscribe(key: MPContainer.MPDataKey.historySongs, delegate: self)
+        self.container.subscribe(key: MPContainer.MPDataKey.songlists, delegate: self)
         self.addNotification()
     }
     
@@ -113,6 +116,13 @@ extension MPLibraryManager: DelegateProtocol, ContainerServices
                     de.mpLibraryManagerDidUpdateHistorySongs(his)
                 }
             }
+            else if k == .songlists, let songlists = value as? [MPSonglistModel]        //歌单列表
+            {
+                if let de = self.delegate
+                {
+                    de.mpLibraryManagerDidUpdateSonglists(songlists)
+                }
+            }
         }
     }
     
@@ -120,6 +130,33 @@ extension MPLibraryManager: DelegateProtocol, ContainerServices
         
     }
     
+}
+
+
+//内部类型
+extension MPLibraryManager: InternalType
+{
+    //插入歌曲的结果
+    enum InsertSongToSonglistResult {
+        case success            //插入成功
+        case exist              //歌曲已经存在
+        case partExist          //部分歌曲已经存在
+        case failure            //插入失败
+        
+        func getDesc() -> String
+        {
+            switch self {
+            case .success:
+                return String.insertSuccess
+            case .exist:
+                return String.songExist
+            case .partExist:
+                return String.partSongExist
+            case .failure:
+                return String.insertFailure
+            }
+        }
+    }
 }
 
 
@@ -294,8 +331,142 @@ extension MPLibraryManager: ExternalInterface
         }
     }
     
-    
     /**************************************** 播放资源操作 Section End ***************************************/
+    
+    /**************************************** 歌单操作 Section Begin ***************************************/
+    ///创建新歌单
+    func createNewSonglist(_ name: String, success: @escaping BoolClosure)
+    {
+        let songlist = MPSonglistModel(name: name)
+        //读取歌单列表
+        container.getSonglists {[weak self] songlists in
+            if var songlists = songlists {
+                //插入到第一个位置
+                songlists.insert(songlist, at: 0)
+                //保存到缓存和iCloud
+                self?.container.setSonglists(songlists, success: { succeed in
+                    success(succeed)
+                })
+            }
+            else    //创建一个新的歌单列表
+            {
+                let songlists = [songlist]
+                //保存到缓存和iCloud
+                self?.container.setSonglists(songlists, success: { succeed in
+                    success(succeed)
+                })
+            }
+        }
+    }
+    
+    ///读取歌单列表
+    func readSonglists(_ completion: @escaping ([MPSonglistModel]?) -> Void)
+    {
+        container.getSonglists { songlists in
+            completion(songlists)
+        }
+    }
+    
+    ///删除某个歌单，包括歌单下所有歌曲
+    func deleteSonglist(_ songlistId: String, success: @escaping BoolClosure)
+    {
+        //先查询歌单列表
+        container.getSonglists { songlists in
+            if var songlists = songlists {
+                var succeed = false //是否删除成功
+                for (index, songlist) in songlists.enumerated()
+                {
+                    if songlist.id == songlistId
+                    {
+                        songlists.remove(at: index)
+                        succeed = true
+                        break
+                    }
+                }
+                success(succeed)
+            }
+            else    //没有读取到歌单，返回删除失败
+            {
+                success(false)
+            }
+        }
+    }
+    
+    ///向歌单中添加一些歌曲
+    func addSongsToSonglist(_ songs: [MPSongModel], songlistId: String, completion: @escaping (InsertSongToSonglistResult) -> Void)
+    {
+        //先查询所有歌单
+        container.getSonglists {[weak self] songlists in
+            if let songlists = songlists {
+                for songlist in songlists {
+                    if songlist.id == songlistId    //找到指定的歌单
+                    {
+                        var insertSuccess = true //插入是否成功，所有插入成功才算成功
+                        var insertFailure = true    //插入是否失败，有一个插入成功就不算失败
+                        var allExist = true     //是否所有歌曲都存在
+                        var partExist = false    //歌曲部分存在，有一个存在就算true
+                        //做diff
+                        for song in songs.reversed() {
+                            //得到歌单中所有歌曲的id
+                            let existSongIds = songlist.songs.map { song in
+                                song.id
+                            }
+                            if !existSongIds.contains(song.id)  //不存在才添加
+                            {
+                                allExist = false
+                                let index = songlist.insertAudio(audio: song, index: 0)  //插入到位置0
+                                if index >= 0   //插入成功
+                                {
+                                    insertFailure = false
+                                }
+                                else    //插入失败
+                                {
+                                    insertSuccess = false
+                                }
+                            }
+                            else    //歌曲已经存在
+                            {
+                                partExist = true
+                            }
+                        }
+                        //只要成功插入一首歌曲，那么保存到缓存和iCloud
+                        if insertFailure == false && allExist == false
+                        {
+                            self?.container.setSonglists(songlists)
+                        }
+                        //插入完成
+                        if insertSuccess
+                        {
+                            completion(.success)
+                        }
+                        else if partExist
+                        {
+                            completion(.partExist)
+                        }
+                        else if allExist
+                        {
+                            completion(.exist)
+                        }
+                        else if insertFailure
+                        {
+                            completion(.failure)
+                        }
+                        else
+                        {
+                            completion(.success)
+                        }
+                        break
+                    }
+                }
+            }
+            else
+            {
+                completion(.failure)
+            }
+        }
+    }
+    
+    /**************************************** 歌单操作 Section End ***************************************/
     
     /**************************************** 基础资源操作 Section Begin ***************************************/
     ///根据歌曲id获取歌曲

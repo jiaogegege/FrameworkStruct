@@ -346,6 +346,12 @@ extension String
     static let iLike = localized("iLike")
     //确定删除？
     static let sureDelete = localized("sureDelete")
+    //新建歌单
+    static let newSonglist = localized("newSonglist")
+    //为歌单取个名字吧
+    static let enterSonglistNameHint = localized("enterSonglistName")
+    //请输入一个名字
+    static let pleaseEnterName = localized("pleaseEnterName")
     
     //MARK: Toast文案
     //播放失败
@@ -354,6 +360,18 @@ extension String
     static let deleteSucceed = localized("deleteSucceed")
     //删除失败
     static let deleteFailed = localized("deleteFailed")
+    //插入成功
+    static let insertSuccess = localized("insertSuccess")
+    //插入失败
+    static let insertFailure = localized("insertFailure")
+    //部分歌曲已存在
+    static let partSongExist = localized("partSongExist")
+    //歌曲已存在
+    static let songExist = localized("songExist")
+    //创建成功
+    static let createSuccess = localized("createSuccess")
+    //创建失败
+    static let createFailure = localized("createFailure")
     
     //MARK: 通用错误信息
     //未知错误

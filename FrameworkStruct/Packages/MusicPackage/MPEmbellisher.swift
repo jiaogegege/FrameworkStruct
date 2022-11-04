@@ -269,4 +269,13 @@ extension MPEmbellisher: ExternalInterface
         return info
     }
     
+    ///随机获取一个歌单的图标文件路径
+    func getSonglistIcon() -> URL
+    {
+        //随机计算文件名
+        let index = randomIn(0, 3)
+        let path = SandBoxAccessor.shared.getBundleFilePath("mp_songlist_icon_\(index)", ext: "jpg")
+        return URL(fileURLWithPath: path!)
+    }
+    
 }

@@ -75,6 +75,7 @@ class MusicViewController: BasicViewController
         super.createUI()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseId)
         tableView.register(UINib(nibName: MusicSongListCell.className, bundle: nil), forCellReuseIdentifier: MusicSongListCell.reuseId)
+        tableView.register(UINib(nibName: MPSonglistCell.className, bundle: nil), forCellReuseIdentifier: MPSonglistCell.reuseId)
         self.currentBtn = self.libraryBtn
         
         newSonglistBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newSonglistAction(sender:)))
@@ -104,13 +105,30 @@ class MusicViewController: BasicViewController
                     }
                 }
             }
+            mpr.getAllSonglists { [weak self] songlists in
+                if let songlists = songlists {
+                    self?.songLists = songlists
+                    if self?.type == .songLists
+                    {
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
         }
     }
     
     //新增歌单
     @objc func newSonglistAction(sender: UIBarButtonItem)
     {
-        
+        AlertManager.shared.wantPresentAlert(title: .newSonglist, needInput: true, inputPlaceHolder: .enterSonglistNameHint, leftTitle: .cancel, leftBlock: {
+            
+        }, rightTitle: .confirm) { name in
+            guard let name = name else {
+                g_alert(message: .pleaseEnterName)
+                return
+            }
+            self.createNewSonglist(name)
+        }
     }
     
     @IBAction func libraryAction(_ sender: UIButton) {
@@ -235,6 +253,14 @@ class MusicViewController: BasicViewController
         tableView.reloadData()
     }
     
+    //创建一个新歌单
+    fileprivate func createNewSonglist(_ name: String)
+    {
+        mpr.createNewSonglist(name) { succeed in
+            g_toast(text: succeed ? String.createSuccess : String.createFailure)
+        }
+    }
+    
 }
 
 
@@ -299,6 +325,15 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     
     func mpManagerDidUpdateHistorySongs(_ history: MPHistoryAudioModel) {
         
+    }
+    
+    //歌单更新
+    func mpManagerDidUpdateSonglists(_ songlists: [MPSonglistModel]) {
+        self.songLists = songlists
+        if type == .songLists
+        {
+            tableView.reloadData()
+        }
     }
     
     /**************************************** MPManager代理 Section End ***************************************/
@@ -373,7 +408,7 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             }
             else if type == .songLists
             {
-                return 44
+                return 70
             }
         }
         return 0
@@ -441,7 +476,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             }
             else if type == .songLists
             {
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: MPSonglistCell.reuseId, for: indexPath) as! MPSonglistCell
+                cell.songlist = songLists[indexPath.row]
+                return cell
             }
         }
         

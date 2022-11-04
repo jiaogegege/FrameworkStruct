@@ -66,6 +66,9 @@ dislike = "不喜欢";
 addToBookmark = "添加到书签";
 iLike = "我喜欢";
 sureDelete = "确定删除？";
+newSonglist = "新建歌单";
+enterSonglistName = "为歌单取个名字吧~";
+pleaseEnterName = "请输入一个名字";
 
 /**
  * Toast文案
@@ -73,6 +76,13 @@ sureDelete = "确定删除？";
 failToPlay = "播放失败";
 deleteSucceed = "删除成功";
 deleteFailed = "删除失败";
+insertSuccess = "插入成功";
+insertFailure = "插入失败";
+partSongExist = "部分歌曲已存在";
+songExist = "歌曲已存在";
+createSuccess = "创建成功";
+createFailure = "创建失败";
+
 /**
  * 通用错误信息
  */

@@ -248,7 +248,7 @@ func g_price(_ fen: Int) -> NSAttributedString
 
 //MARK: 全局提示，toast和alert，加载动画
 ///全局弹框
-func g_alert(title: String,
+func g_alert(title: String? = nil,
              message: String? = nil,
              messageAlign: NSTextAlignment = .center,
              needInput: Bool = false,
@@ -259,11 +259,7 @@ func g_alert(title: String,
              rightTitle: String? = String.confirm,
              rightBlock: OptionalStringClosure? = nil)
 {
-    AlertManager.shared.wantPresentAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: {
-        if let leftBlock = leftBlock {
-            leftBlock()
-        }
-    }, rightTitle: rightTitle) { text in
+    AlertManager.shared.wantPresentAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle) { text in
         if let rightBlock = rightBlock {
             rightBlock(text)
         }
