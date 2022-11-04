@@ -85,7 +85,7 @@ class MusicViewController: BasicViewController
     }
     
     override func initData() {
-        if mpr.isInited     //如果初始化完成了才获取数据，不然获取不到
+        if !mpr.isIniting     //不是正在初始化的时候才更新
         {
             mpr.getAlliCloudSongs(completion: {[weak self] songs in
                 self?.libraryArray = songs
@@ -105,7 +105,6 @@ class MusicViewController: BasicViewController
                 }
             }
         }
-        print(MPContainer.shared.getAllKeys())
     }
     
     //新增歌单

@@ -839,9 +839,9 @@ extension MPManager: ExternalInterface
         stMgr.status(StatusKey.currentStatus) as! MPStatus
     }
     
-    ///是否完成了初始化，指读取了媒体库
-    var isInited: Bool {
-        currentStatus == .isInited
+    ///是否正在初始化过程中
+    var isIniting: Bool {
+        currentStatus == .isIniting
     }
     
     ///执行一个延时任务,播放当前歌曲，如果有的话
@@ -879,7 +879,7 @@ extension MPManager: ExternalInterface
                 })
             }
             //如果已经初始化了，那么直接执行
-            if isInited
+            if currentStatus == .isInited
             {
                 performInitOrUpdateCallback()
             }
@@ -970,6 +970,11 @@ extension MPManager: ExternalInterface
         (stMgr.status(StatusKey.currentStatus) as? MPStatus) == .isInited
     }
     
+    ///当前是否忙碌，指waiting和loading
+    var isBusy: Bool {
+        currentStatus == .loading || currentStatus == .waiting
+    }
+    
     ///当前正在播放的歌曲，从player获取
     var currentSong: MPAudioProtocol? {
         player.currentAudio
@@ -993,7 +998,7 @@ extension MPManager: ExternalInterface
     ///设置当前播放时间
     func setCurrentTime(_ time: TimeInterval, completion: BoolClosure?)
     {
-        if currentStatus != .loading && currentStatus != .waiting
+        if !isBusy
         {
             player.seek(time) { (succeed) in
                 if let cb = completion
@@ -1032,42 +1037,48 @@ extension MPManager: ExternalInterface
     ///说明：会生成一个播放列表，包含媒体库中所有歌曲
     func playSong(_ song: MPSongModel , in library: MPLibraryType, completion: @escaping BoolClosure)
     {
-        if library == .iCloud
+        if !isBusy
         {
-            libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] items in
-                if let songs = items as? [MPSongModel] {
-                    //生成一个播放列表
-                    let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: String.iCloud + String.musicLibrary)
-                    //播放音乐
-                    self?.player.play(song, playlist: playlist, completion: { success in
-                        completion(success)
-                    })
-                }
-                else    //没有查询到媒体库，播放失败
-                {
-                    completion(false)
+            if library == .iCloud
+            {
+                libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] items in
+                    if let songs = items as? [MPSongModel] {
+                        //生成一个播放列表
+                        let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: String.iCloud + String.musicLibrary)
+                        //播放音乐
+                        self?.player.play(song, playlist: playlist, completion: { success in
+                            completion(success)
+                        })
+                    }
+                    else    //没有查询到媒体库，播放失败
+                    {
+                        completion(false)
+                    }
                 }
             }
-        }
-        else    //其他媒体库，暂时不开发
-        {
-            
+            else    //其他媒体库，暂时不开发
+            {
+                
+            }
         }
     }
     
     ///播放一首播放列表中的歌曲
     func playSong(_ song: MPSongModel, in playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
     {
-        //不是同一个列表中的同一个歌曲才播放
-        if song.id != currentSong?.audioId || playlist.playlistId != player.currentPlaylist?.playlistId
+        if !isBusy
         {
-            player.play(song, playlist: playlist.getPlaylist()) { succeed in
-                completion(succeed)
+            //不是同一个列表中的同一个歌曲才播放
+            if song.id != currentSong?.audioId || playlist.playlistId != player.currentPlaylist?.playlistId
+            {
+                player.play(song, playlist: playlist.getPlaylist()) { succeed in
+                    completion(succeed)
+                }
             }
-        }
-        else
-        {
-            completion(true)
+            else
+            {
+                completion(true)
+            }
         }
     }
     
@@ -1082,7 +1093,7 @@ extension MPManager: ExternalInterface
                 }
             }
         }
-        else if self.currentStatus != .loading && self.currentStatus != .waiting    //正常播放期间，不是在等待或加载资源的时候才可以播放下一首
+        else if !isBusy    //正常播放期间，不是在等待或加载资源的时候才可以播放下一首
         {
             self.player.next()
         }
@@ -1091,7 +1102,7 @@ extension MPManager: ExternalInterface
     ///上一首
     func playPrevious()
     {
-        if self.currentStatus != .loading && self.currentStatus != .waiting
+        if !isBusy
         {
             self.player.previous()
         }
@@ -1100,7 +1111,7 @@ extension MPManager: ExternalInterface
     ///暂停
     func pause()
     {
-        if currentStatus != .loading && currentStatus != .waiting
+        if !isBusy
         {
             player.pause()
         }
@@ -1109,7 +1120,7 @@ extension MPManager: ExternalInterface
     ///继续
     func resume()
     {
-        if currentStatus != .loading && currentStatus != .waiting
+        if !isBusy
         {
             player.resume()
         }
