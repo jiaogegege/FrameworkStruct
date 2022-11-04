@@ -115,7 +115,7 @@ extension HomeShortcutManager: InternalType
                 g_pushVC(iCloudFileViewController.getViewController())
             case .playMusic:
                 //尝试播放音乐
-                MPManager.shared.performPlayCurrent { (succeed) in
+                MPManager.shared.wantPlayCurrent { (succeed) in
 //                    FSLog("\(succeed)")
                 }
             }

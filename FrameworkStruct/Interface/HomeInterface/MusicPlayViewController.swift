@@ -344,7 +344,7 @@ class MusicPlayViewController: BasicViewController {
         }
         else
         {
-            mpr.performPlayCurrent { (succeed) in
+            mpr.wantPlayCurrent { (succeed) in
                 
             }
         }

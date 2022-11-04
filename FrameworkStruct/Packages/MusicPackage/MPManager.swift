@@ -848,7 +848,8 @@ extension MPManager: ExternalInterface
     
     ///执行一个延时任务,播放当前歌曲，如果有的话
     ///继续播放上一次app运行中断时播放的歌曲
-    func performPlayCurrent(_ completion: BoolClosure?)
+    ///主要用于从桌面菜单播放歌曲
+    func wantPlayCurrent(_ completion: BoolClosure?)
     {
         //如果是空闲状态，那么执行一个延时操作，播放当前歌曲
         if player.isFree
@@ -1089,7 +1090,7 @@ extension MPManager: ExternalInterface
     {
         if self.currentStatus == .isInited  //如果刚初始化完成，还没有播放任何歌曲，却要求播放下一首，那么先播放当前，然后迅速播放下一首
         {
-            self.performPlayCurrent {[weak self] succeed in
+            self.wantPlayCurrent {[weak self] succeed in
                 if succeed {
                     self?.player.next()
                 }

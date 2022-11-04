@@ -151,7 +151,7 @@ class MusicPlayMiniView: UIView
         else    //开始或继续播放
         {
             sender.isEnabled = false
-            mpr.performPlayCurrent { (succeed) in
+            mpr.wantPlayCurrent { (succeed) in
                 sender.isEnabled = true
             }
         }
