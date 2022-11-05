@@ -134,7 +134,7 @@ extension MPAlbumModel: MPPlaylistProtocol
     }
     
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, audios: playlistAudios, type: type, audioType: .song, intro: title)
+        MPPlaylistModel(id: id, name: name, audios: playlistAudios, type: type, audioType: .song, intro: title)
     }
     
 }

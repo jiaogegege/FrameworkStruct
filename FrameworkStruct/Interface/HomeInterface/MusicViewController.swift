@@ -118,7 +118,7 @@ class MusicViewController: BasicViewController
     }
     
     //新增歌单
-    @objc func newSonglistAction(sender: UIBarButtonItem)
+    @objc func newSonglistAction(sender: UIBarButtonItem?)
     {
         AlertManager.shared.wantPresentAlert(title: .newSonglist, needInput: true, inputPlaceHolder: .enterSonglistNameHint, leftTitle: .cancel, leftBlock: {
             
@@ -258,6 +258,16 @@ class MusicViewController: BasicViewController
     {
         mpr.createNewSonglist(name) { succeed in
             g_toast(text: succeed ? String.createSuccess : String.createFailure)
+        }
+    }
+    
+    //将一首歌添加到歌单
+    fileprivate func addSongToSonglist(_ song: MPSongModel)
+    {
+        mpr.getAllSonglists { songlists in
+            if let songlists = songlists {
+                DialogManager.shared.wantShowAddToSonglist(song: song, songlists: songlists)
+            }
         }
     }
     
@@ -431,6 +441,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                      }
                  }
              }
+             cell.addSonglistCallback = {[weak self] song in
+                 self?.addSongToSonglist(song)
+             }
             cell.updateView()
             return cell
         }
@@ -452,6 +465,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                         }
                     }
                 }
+                cell.addSonglistCallback = {[weak self] song in
+                    self?.addSongToSonglist(song)
+                }
                 cell.updateView()
                 return cell
             }
@@ -470,6 +486,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                             self?.tableView.reloadData()
                         }
                     }
+                }
+                cell.addSonglistCallback = {[weak self] song in
+                    self?.addSongToSonglist(song)
                 }
                 cell.updateView()
                 return cell
@@ -542,7 +561,9 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
             }
             else if type == .songLists      //歌单
             {
-                
+                let vc = SonglistViewController.getViewController()
+                vc.songlist = songLists[indexPath.row]
+                push(vc)
             }
         }
     }
@@ -586,7 +607,18 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
                 }
                 else if type == .songLists
                 {
-                    
+                    let songlist = songLists[indexPath.row]
+                    AlertManager.shared.wantPresentAlert(title: String.sureDelete, message: songlist.name) {
+                        
+                    } rightBlock: {[weak self] _ in
+                        self?.mpr.deleteSonglist(songlist.id, success: { succeed in
+                            if succeed
+                            {
+                                self?.tableView.reloadData()
+                            }
+                        })
+                    }
+
                 }
             }
         }

@@ -129,7 +129,7 @@ extension MPHistoryAudioModel: DelegateProtocol, MPPlaylistProtocol
     }
     
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, audios: audios, type: playlistType, audioType: audioType, intro: playlistIntro)
+        MPPlaylistModel(id: id, name: name, audios: audios, type: playlistType, audioType: audioType, intro: playlistIntro)
     }
     
     

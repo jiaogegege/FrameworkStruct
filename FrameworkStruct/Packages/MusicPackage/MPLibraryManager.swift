@@ -147,16 +147,17 @@ extension MPLibraryManager: InternalType
         {
             switch self {
             case .success:
-                return String.insertSuccess
+                return String.addSuccess
             case .exist:
                 return String.songExist
             case .partExist:
                 return String.partSongExist
             case .failure:
-                return String.insertFailure
+                return String.addFailure
             }
         }
     }
+    
 }
 
 
@@ -367,11 +368,36 @@ extension MPLibraryManager: ExternalInterface
         }
     }
     
+    ///保存歌单
+    func saveSonglist(_ songlist: MPSonglistModel, success: @escaping BoolClosure)
+    {
+        container.getSonglists {[weak self] songlists in
+            if var songlists = songlists {
+                var ret = false
+                for (index, item) in songlists.enumerated() {
+                    if item.id == songlist.id
+                    {
+                        songlists[index] = songlist
+                        //保存
+                        self?.container.setSonglists(songlists)
+                        ret = true
+                        break
+                    }
+                }
+                success(ret)
+            }
+            else
+            {
+                success(false)
+            }
+        }
+    }
+    
     ///删除某个歌单，包括歌单下所有歌曲
     func deleteSonglist(_ songlistId: String, success: @escaping BoolClosure)
     {
         //先查询歌单列表
-        container.getSonglists { songlists in
+        container.getSonglists {[weak self] songlists in
             if var songlists = songlists {
                 var succeed = false //是否删除成功
                 for (index, songlist) in songlists.enumerated()
@@ -379,6 +405,7 @@ extension MPLibraryManager: ExternalInterface
                     if songlist.id == songlistId
                     {
                         songlists.remove(at: index)
+                        self?.container.setSonglists(songlists)
                         succeed = true
                         break
                     }
@@ -426,6 +453,7 @@ extension MPLibraryManager: ExternalInterface
                             }
                             else    //歌曲已经存在
                             {
+                                insertSuccess = false
                                 partExist = true
                             }
                         }
@@ -439,13 +467,13 @@ extension MPLibraryManager: ExternalInterface
                         {
                             completion(.success)
                         }
-                        else if partExist
-                        {
-                            completion(.partExist)
-                        }
                         else if allExist
                         {
                             completion(.exist)
+                        }
+                        else if partExist
+                        {
+                            completion(.partExist)
                         }
                         else if insertFailure
                         {
@@ -462,6 +490,39 @@ extension MPLibraryManager: ExternalInterface
             else
             {
                 completion(.failure)
+            }
+        }
+    }
+    
+    ///删除某个歌单中的歌曲
+    func deleteSongsInSonglist(_ songs: [MPSongModel], songlistId: String, success: @escaping BoolClosure)
+    {
+        container.getSonglists { songlists in
+            if let songlists = songlists {
+                for songlist in songlists {
+                    if songlist.id == songlistId    //找到指定的歌单
+                    {
+                        var result = false  //只要有一个删除成功就算成功
+                        for song in songs {
+                            let index = songlist.getIndexOf(audio: song)
+                            if index >= 0
+                            {
+                                if songlist.deleteAudio(song)   //删除成功
+                                {
+                                    result = true
+                                }
+                            }
+                        }
+                        //删除完成
+                        self.container.setSonglists(songlists)
+                        success(result)
+                        break
+                    }
+                }
+            }
+            else
+            {
+                success(false)
             }
         }
     }

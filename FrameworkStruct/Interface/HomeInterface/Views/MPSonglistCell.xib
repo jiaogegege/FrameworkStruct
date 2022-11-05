@@ -23,6 +23,12 @@
                             <constraint firstAttribute="width" constant="60" id="GFy-oI-M1Y"/>
                             <constraint firstAttribute="height" constant="60" id="HqO-0s-75R"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="歌单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPh-jH-pKo">
                         <rect key="frame" x="80" y="5" width="37" height="32"/>
@@ -66,7 +72,7 @@
                 <outlet property="imgView" destination="48R-qW-nuS" id="XKd-FL-ZvC"/>
                 <outlet property="songlistNameLabel" destination="cPh-jH-pKo" id="auk-XU-ES3"/>
             </connections>
-            <point key="canvasLocation" x="-183.33333333333334" y="-3.3482142857142856"/>
+            <point key="canvasLocation" x="-491" y="4"/>
         </tableViewCell>
     </objects>
 </document>

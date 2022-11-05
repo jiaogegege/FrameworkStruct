@@ -350,8 +350,12 @@ extension String
     static let newSonglist = localized("newSonglist")
     //为歌单取个名字吧
     static let enterSonglistNameHint = localized("enterSonglistName")
+    //为歌单添加简介
+    static let addDescToSonglist = localized("addDescToSonglist")
     //请输入一个名字
     static let pleaseEnterName = localized("pleaseEnterName")
+    //收藏歌曲到歌单
+    static let addSongToSonglist = localized("addSongToSonglist")
     
     //MARK: Toast文案
     //播放失败
@@ -360,10 +364,10 @@ extension String
     static let deleteSucceed = localized("deleteSucceed")
     //删除失败
     static let deleteFailed = localized("deleteFailed")
-    //插入成功
-    static let insertSuccess = localized("insertSuccess")
-    //插入失败
-    static let insertFailure = localized("insertFailure")
+    //添加成功
+    static let addSuccess = localized("addSuccess")
+    //添加失败
+    static let addFailure = localized("addFailure")
     //部分歌曲已存在
     static let partSongExist = localized("partSongExist")
     //歌曲已存在

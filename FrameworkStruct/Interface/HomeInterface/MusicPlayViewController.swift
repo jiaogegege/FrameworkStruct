@@ -386,7 +386,9 @@ class MusicPlayViewController: BasicViewController {
     @objc func favoriteAction(sender: UIButton)
     {
         if let song = song as? MPSongModel {
+            g_loading()
             mpr.setFavoriteSong(!song.isFavorite, song: song) { succeed in
+                g_endLoading()
                 //保存成功则刷新列表
                 if succeed
                 {
@@ -399,7 +401,13 @@ class MusicPlayViewController: BasicViewController {
     //添加歌单
     @objc func addSonglistAction(sender: UIButton)
     {
-        
+        if let song = song as? MPSongModel {
+            mpr.getAllSonglists { songlists in
+                if let songlists = songlists {
+                    DialogManager.shared.wantShowAddToSonglist(song: song, songlists: songlists)
+                }
+            }
+        }
     }
 
     //进度条拖动

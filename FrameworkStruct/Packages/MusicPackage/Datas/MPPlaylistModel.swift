@@ -32,8 +32,8 @@ class MPPlaylistModel: OriginModel, Archivable
     }
     
     //根据现有数据创建一个播放列表，通常是从其他类型的列表转换为播放列表
-    init(name: String, audios: Array<MPAudioProtocol>, type: MPPlaylistType, audioType: MPAudioType, intro: String?) {
-        self.id = g_uuid()
+    init(id: String?, name: String, audios: Array<MPAudioProtocol>, type: MPPlaylistType, audioType: MPAudioType, intro: String?) {
+        self.id = id ?? g_uuid()
         self.name = name
         self.audios = audios
         self.type = type

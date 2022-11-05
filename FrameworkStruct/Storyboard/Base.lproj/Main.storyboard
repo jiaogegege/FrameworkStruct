@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
@@ -1285,27 +1285,32 @@
                                             <constraint firstAttribute="height" constant="20" id="Tra-Hb-mdl"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="简介" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ry-Rv-lPc">
-                                        <rect key="frame" x="128" y="83" width="280" height="15.666666666666671"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="为您的歌单添加简介～" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="uVK-Ei-CAQ">
+                                        <rect key="frame" x="128" y="83" width="280" height="37"/>
+                                        <color key="tintColor" name="AccentColor"/>
+                                        <color key="textColor" systemColor="systemGray5Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="SXP-M6-fJk" id="uaZ-f6-Qog"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="uVK-Ei-CAQ" firstAttribute="bottom" secondItem="igk-51-uN3" secondAttribute="bottom" id="2v7-X1-Ynu"/>
                                     <constraint firstItem="igk-51-uN3" firstAttribute="top" secondItem="xRD-zc-TzC" secondAttribute="top" constant="20" id="33W-iq-Mfq"/>
                                     <constraint firstItem="igk-51-uN3" firstAttribute="leading" secondItem="xRD-zc-TzC" secondAttribute="leading" constant="20" id="6JP-BC-5tT"/>
                                     <constraint firstItem="VsF-mz-EYO" firstAttribute="top" secondItem="igk-51-uN3" secondAttribute="top" id="8l4-Ge-stC"/>
-                                    <constraint firstItem="4Ry-Rv-lPc" firstAttribute="leading" secondItem="VsF-mz-EYO" secondAttribute="leading" id="Frf-sT-uEs"/>
-                                    <constraint firstItem="4Ry-Rv-lPc" firstAttribute="top" secondItem="lFS-bx-gej" secondAttribute="bottom" constant="8" id="FuE-3r-c86"/>
-                                    <constraint firstAttribute="trailing" secondItem="4Ry-Rv-lPc" secondAttribute="trailing" constant="20" id="Y6P-AT-3Jl"/>
+                                    <constraint firstItem="uVK-Ei-CAQ" firstAttribute="top" secondItem="lFS-bx-gej" secondAttribute="bottom" constant="8" symbolic="YES" id="I63-10-tNR"/>
                                     <constraint firstItem="lFS-bx-gej" firstAttribute="top" secondItem="VsF-mz-EYO" secondAttribute="bottom" constant="5" id="e2l-E6-lyb"/>
                                     <constraint firstAttribute="height" constant="160" id="iax-MK-czt"/>
                                     <constraint firstItem="lFS-bx-gej" firstAttribute="leading" secondItem="VsF-mz-EYO" secondAttribute="leading" id="o7c-Kd-vB5"/>
                                     <constraint firstAttribute="trailing" secondItem="lFS-bx-gej" secondAttribute="trailing" constant="20" id="tQu-AS-8ka"/>
                                     <constraint firstAttribute="trailing" secondItem="VsF-mz-EYO" secondAttribute="trailing" constant="20" id="uRe-0B-qyl"/>
                                     <constraint firstItem="VsF-mz-EYO" firstAttribute="leading" secondItem="igk-51-uN3" secondAttribute="trailing" constant="8" id="vfL-Pf-0wn"/>
+                                    <constraint firstItem="uVK-Ei-CAQ" firstAttribute="leading" secondItem="VsF-mz-EYO" secondAttribute="leading" id="xK8-0b-WXy"/>
+                                    <constraint firstItem="uVK-Ei-CAQ" firstAttribute="trailing" secondItem="VsF-mz-EYO" secondAttribute="trailing" id="zjI-US-gVB"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dop-4X-32R">
@@ -1326,8 +1331,8 @@
                                             <action selector="playAllAction:" destination="SXP-M6-fJk" eventType="touchUpInside" id="T3J-Ik-sgY"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(99)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4o-ev-JJt">
-                                        <rect key="frame" x="130" y="0.0" width="27" height="50"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(0)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4o-ev-JJt">
+                                        <rect key="frame" x="130" y="0.0" width="18" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1370,7 +1375,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="descLabel" destination="4Ry-Rv-lPc" id="es7-26-cOa"/>
+                        <outlet property="countLabel" destination="X4o-ev-JJt" id="vvg-6K-dZv"/>
+                        <outlet property="descField" destination="uVK-Ei-CAQ" id="qam-ix-ZQw"/>
+                        <outlet property="headViewTop" destination="Xe1-Qv-0k9" id="6Lc-Sg-RbK"/>
                         <outlet property="imgView" destination="igk-51-uN3" id="HbI-2x-IO7"/>
                         <outlet property="nameLabel" destination="VsF-mz-EYO" id="eEQ-2j-10f"/>
                         <outlet property="playAllBtn" destination="HHz-hv-58G" id="Ter-5a-rh0"/>

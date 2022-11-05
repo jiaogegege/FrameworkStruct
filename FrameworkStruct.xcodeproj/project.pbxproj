@@ -348,6 +348,7 @@
 		EA3E8C3627B784C7006A2715 /* BLE_img_gear.json in Resources */ = {isa = PBXBuildFile; fileRef = EA3E8C3527B784C7006A2715 /* BLE_img_gear.json */; };
 		EA417F85290A8A2F003E70EF /* InfiniteRotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */; };
 		EA44FD3E28921DFF00977943 /* SafariServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA44FD3D28921DFF00977943 /* SafariServiceAdapter.swift */; };
+		EA4DFBC2291609FB0053BC4F /* MPSonglistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4DFBC1291609FB0053BC4F /* MPSonglistsView.swift */; };
 		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
 		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
@@ -1196,6 +1197,7 @@
 		EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteRotateView.swift; sourceTree = "<group>"; };
 		EA44FD3D28921DFF00977943 /* SafariServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceAdapter.swift; sourceTree = "<group>"; };
 		EA4AF3BE28BC5DC400AF9EF8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EA4DFBC1291609FB0053BC4F /* MPSonglistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSonglistsView.swift; sourceTree = "<group>"; };
 		EA52493D27A3E44B002E3616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
@@ -4504,6 +4506,7 @@
 				EA1E140929121319000E818F /* MPPlaylistSongCell.swift */,
 				EA1E140729121218000E818F /* MPPlaylistView.swift */,
 				EA1E140529120E0B000E818F /* MPPlaylistContainerView.swift */,
+				EA4DFBC1291609FB0053BC4F /* MPSonglistsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4957,6 +4960,7 @@
 				EA3E8B2427B77CEA006A2715 /* Mask.swift in Sources */,
 				EA3E8B1527B77CEA006A2715 /* Repeater.swift in Sources */,
 				EAC8A84527625D490088293F /* SDImageHEICCoder.m in Sources */,
+				EA4DFBC2291609FB0053BC4F /* MPSonglistsView.swift in Sources */,
 				EA75BB1F2792646C00910B4C /* TeenagerModeDialog.swift in Sources */,
 				EA3E8B3727B77CEA006A2715 /* AnimationKeypathExtension.swift in Sources */,
 				EAC8A87C27625D490088293F /* UIImage+Metadata.m in Sources */,

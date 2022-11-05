@@ -38,6 +38,11 @@ class MPSonglistCell: UITableViewCell {
             if let path = songlist.images?.first?.path {
                 imgView.image = UIImage(named: (path as NSString).lastPathComponent)
             }
+            //如果有歌曲，那么尝试获取第一个歌曲的专辑图
+            if let img = songlist.songs.first?.asset?[.artwork] as? UIImage
+            {
+                imgView.image = img
+            }
             songlistNameLabel.text = songlist.name
             countLabel.text = "\(songlist.songs.count)首"
         }

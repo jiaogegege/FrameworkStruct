@@ -127,7 +127,7 @@ extension MPFavoriteModel: MPPlaylistProtocol
     }
     
     func getPlaylist() -> MPPlaylistModel {
-        MPPlaylistModel(name: name, audios: playlistAudios, type: type, audioType: audioType, intro: intro)
+        MPPlaylistModel(id: id, name: name, audios: playlistAudios, type: type, audioType: audioType, intro: intro)
     }
     
 }

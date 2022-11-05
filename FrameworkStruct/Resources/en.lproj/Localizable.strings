@@ -69,7 +69,9 @@ iLike = "I Like";
 sureDelete = "Sure To Delete?";
 newSonglist = "New Songlist";
 enterSonglistName = "Give a name to the songlist~";
+addDescToSonglist = "Add Desc To Your Songlist~";
 pleaseEnterName = "Please Enter A Name";
+addSongToSonglist = "Add Song To Songlist";
 
 /**
  * Toast文案
@@ -77,8 +79,8 @@ pleaseEnterName = "Please Enter A Name";
 failToPlay = "Fail To Play";
 deleteSucceed = "Delete Succeed";
 deleteFailed = "Delete Failed";
-insertSuccess = "Insert Success";
-insertFailure = "Insert Failure";
+addSuccess = "Add Success";
+addFailure = "Add Failure";
 partSongExist = "Part Songs Are Exist";
 songExist = "Songs Are Exist";
 createSuccess = "Create Success";

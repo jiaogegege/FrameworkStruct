@@ -349,7 +349,7 @@ class MPManager: OriginManager
         self.endBackgroundPlay()
         g_after(1) {
             self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-                self.endBackgroundPlay()   //没什么用，所以注释掉
+                self.endBackgroundPlay()
             })
             //不停地开启后台任务，实现连续播放
             g_after(Self.backgroundTaskTime) {
@@ -1061,7 +1061,7 @@ extension MPManager: ExternalInterface
                 libMgr.getResource(libraryType: .iCloud, resourceType: .songs) {[weak self] items in
                     if let songs = items as? [MPSongModel] {
                         //生成一个播放列表
-                        let playlist = MPPlaylistModel(name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: String.iCloud + String.musicLibrary)
+                        let playlist = MPPlaylistModel(id: nil, name: String.iCloud, audios: songs, type: .playlist, audioType: .song, intro: String.iCloud + String.musicLibrary)
                         //播放音乐
                         self?.player.play(song, playlist: playlist, completion: { success in
                             completion(success)
@@ -1285,6 +1285,14 @@ extension MPManager: ExternalInterface
         }
     }
     
+    ///保存一个歌单
+    func setSonglist(_ songlist: MPSonglistModel, success: @escaping BoolClosure)
+    {
+        libMgr.saveSonglist(songlist) { succeed in
+            success(succeed)
+        }
+    }
+    
     ///删除一个歌单
     func deleteSonglist(_ songlistId: String, success: @escaping BoolClosure)
     {
@@ -1299,6 +1307,20 @@ extension MPManager: ExternalInterface
         libMgr.addSongsToSonglist(songs, songlistId: songlistId) { result in
             completion(result)
         }
+    }
+    
+    ///删除某个歌单中的一些歌曲
+    func deleteSongsInSonglist(_ songs: [MPSongModel], songlistId: String, success: @escaping BoolClosure)
+    {
+        libMgr.deleteSongsInSonglist(songs, songlistId: songlistId) { succeed in
+            success(succeed)
+        }
+    }
+    
+    ///获取标签s
+    func getTags(_ ids: [String]) -> [MPTagModel]
+    {
+        libMgr.getTags(ids)
     }
     
     /**************************************** 音乐资源相关 Section End ***************************************/
