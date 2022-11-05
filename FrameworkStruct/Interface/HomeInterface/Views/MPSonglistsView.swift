@@ -85,15 +85,36 @@ class MPSonglistsView: FSDialog {
                 return
             }
             self.createNewSonglist(name)
-            self.dismiss()
         }
     }
     
     //创建一个新歌单
     fileprivate func createNewSonglist(_ name: String)
     {
-        mpr.createNewSonglist(name) { succeed in
-            g_toast(text: succeed ? String.createSuccess : String.createFailure)
+        mpr.createNewSonglist(name) {[weak self] songlist in
+            if let songlist = songlist, let so = self?.song {
+                //添加到新歌单中
+                self?.mpr.addSongsToSonglist([so], songlistId: songlist.id, completion: { result in
+                    g_toast(text: result.getDesc())
+                    self?.mpr.getAllSonglists({ songlists in
+                        if let songlists = songlists {
+                            self?.songlists = songlists
+                            self?.tableView.reloadData()
+                            g_after(2) {
+                                self?.dismiss()
+                            }
+                        }
+                        else
+                        {
+                            self?.dismiss()
+                        }
+                    })
+                })
+            }
+            else
+            {
+                g_toast(text: String.createFailure)
+            }
         }
     }
     

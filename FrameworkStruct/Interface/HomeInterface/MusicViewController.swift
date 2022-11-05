@@ -256,8 +256,8 @@ class MusicViewController: BasicViewController
     //创建一个新歌单
     fileprivate func createNewSonglist(_ name: String)
     {
-        mpr.createNewSonglist(name) { succeed in
-            g_toast(text: succeed ? String.createSuccess : String.createFailure)
+        mpr.createNewSonglist(name) { songlist in
+            g_toast(text: songlist != nil ? String.createSuccess : String.createFailure)
         }
     }
     

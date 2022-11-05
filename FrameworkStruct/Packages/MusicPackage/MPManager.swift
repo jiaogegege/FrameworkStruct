@@ -1270,10 +1270,10 @@ extension MPManager: ExternalInterface
     }
     
     ///创建一个新歌单
-    func createNewSonglist(_ name: String, success: @escaping BoolClosure)
+    func createNewSonglist(_ name: String, completion: @escaping ((MPSonglistModel?) -> Void))
     {
-        libMgr.createNewSonglist(name) { succeed in
-            success(succeed)
+        libMgr.createNewSonglist(name) { songlist in
+            completion(songlist)
         }
     }
     

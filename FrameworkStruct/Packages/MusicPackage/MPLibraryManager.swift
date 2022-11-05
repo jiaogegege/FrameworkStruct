@@ -336,7 +336,7 @@ extension MPLibraryManager: ExternalInterface
     
     /**************************************** 歌单操作 Section Begin ***************************************/
     ///创建新歌单
-    func createNewSonglist(_ name: String, success: @escaping BoolClosure)
+    func createNewSonglist(_ name: String, completion: @escaping ((MPSonglistModel?) -> Void))
     {
         let songlist = MPSonglistModel(name: name)
         //读取歌单列表
@@ -346,7 +346,7 @@ extension MPLibraryManager: ExternalInterface
                 songlists.insert(songlist, at: 0)
                 //保存到缓存和iCloud
                 self?.container.setSonglists(songlists, success: { succeed in
-                    success(succeed)
+                    completion(succeed ? songlist : nil)
                 })
             }
             else    //创建一个新的歌单列表
@@ -354,7 +354,7 @@ extension MPLibraryManager: ExternalInterface
                 let songlists = [songlist]
                 //保存到缓存和iCloud
                 self?.container.setSonglists(songlists, success: { succeed in
-                    success(succeed)
+                    completion(succeed ? songlist : nil)
                 })
             }
         }
