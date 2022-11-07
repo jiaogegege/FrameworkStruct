@@ -737,7 +737,7 @@ extension MPPlayer: ExternalInterface
             player.seek(to: CMTimeMakeWithSeconds(limitIn(to, min: 0, max: totalTime - 1), preferredTimescale: itemAsset!.duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero) {[weak self] (succeed) in
                 if let delegate = self?.delegate
                 {
-                    delegate.mpPlayerTimeChange(self?.currentTime ?? 0)
+                    delegate.mpPlayerTimeChange(to)
                 }
                 if let cb = success
                 {

@@ -116,7 +116,7 @@ class MusicPlayViewController: BasicViewController {
         songNameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(kStatusHeight + fitX(4))
-            make.height.equalTo(fitX(16))
+            make.height.equalTo(fitX(18))
             make.left.equalToSuperview().offset(fitX(54))
             make.right.equalToSuperview().offset(fitX(-54))
         }
@@ -125,7 +125,7 @@ class MusicPlayViewController: BasicViewController {
         view.addSubview(artistLabel)
         artistLabel.snp.makeConstraints { make in
             make.top.equalTo(songNameLabel.snp.bottom).offset(fitX(5))
-            make.height.equalTo(fitX(12))
+            make.height.equalTo(fitX(14))
             make.centerX.equalToSuperview()
             make.left.right.equalTo(songNameLabel)
         }
@@ -250,7 +250,7 @@ class MusicPlayViewController: BasicViewController {
         songNameLabel.font = .systemFont(ofSize: fitX(16))
         artistLabel.textColor = .cGray_E7E7E7
         artistLabel.textAlignment = .center
-        artistLabel.font = .systemFont(ofSize: fitX(12))
+        artistLabel.font = .systemFont(ofSize: fitX(13))
         
         albumView.clickCallback = {[weak self] in
             self?.showLyricView()

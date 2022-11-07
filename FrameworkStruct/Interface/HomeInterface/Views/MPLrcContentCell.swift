@@ -137,7 +137,7 @@ extension MPLrcContentCell: ExternalInterface
         //调整样式，非中间显示的cell字体大小统一调小
         let style = distanceToCenter.getAlphaAndFontSize()
         lrcLabel.isHidden = false
-        self.lrcLabel.textColor = .white.withAlphaComponent(style.0)
+        self.lrcLabel.textColor = UIColor.white.withAlphaComponent(style.0)
 //            self.lrcLabel.font = .systemFont(ofSize: style.1)
         AnimationManager.shared.viewScale(x: (style.1 == Self.fontSize ? style.1 : fitX(16)) / Self.fontSize, y: (style.1 == Self.fontSize ? style.1 : fitX(16)) / Self.fontSize, duration: 0.3, delay: 0, on: self.lrcLabel)
     }

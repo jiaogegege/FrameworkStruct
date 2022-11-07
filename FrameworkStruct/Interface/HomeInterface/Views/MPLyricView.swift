@@ -28,6 +28,8 @@ class MPLyricView: UIView {
     fileprivate var footCellIndex: UITableView.IndexPathTag = .rowTag(-1)   //尾部index
     fileprivate var centerPos: CGPoint = .zero     //中心点位置
     fileprivate(set) var currentLrcIndex: Int = 0       //当前播放到的歌词index，头尾各算一个
+    fileprivate var lastLocateTime: TimeInterval?       //上一次拖动歌词定位的时间
+    fileprivate var locateHideTimer: Timer?     //歌词定位按钮显示后倒计时隐藏
     
     //UI组件
     fileprivate var bgView: UIView!
@@ -163,7 +165,9 @@ class MPLyricView: UIView {
     @objc func lrcLocateAction(sender: UIButton)
     {
         if let locateCallback = locateCallback {
-            locateCallback(getCenterPosTime())
+            let time = getCenterPosTime() + 0.5     //avplayer seek后的时间会往回走，所以增加偏移量
+            lastLocateTime = time
+            locateCallback(time)
         }
     }
     
@@ -235,6 +239,8 @@ class MPLyricView: UIView {
     fileprivate func showLocationView()
     {
         //用户开始拖动
+        locateHideTimer?.invalidate()
+        locateHideTimer = nil
         locationView.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.locationView.alpha = 1.0
@@ -246,13 +252,15 @@ class MPLyricView: UIView {
     //隐藏定位view
     fileprivate func hideLocationView()
     {
-        g_after(2.5) {
+        locateHideTimer?.invalidate()
+        locateHideTimer = nil
+        locateHideTimer = TimerManager.shared.timer(interval: 2.5, repeats: false, mode: .default, hostId: self.className, action: {[weak self] (timer) in
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
-                self.locationView.alpha = 0.0
+                self?.locationView.alpha = 0.0
             } completion: { finished in
-                self.locationView.isHidden = true
+                self?.locationView.isHidden = true
             }
-        }
+        })
     }
     
 }
@@ -366,41 +374,45 @@ extension MPLyricView: ExternalInterface
         guard tableView.isTracking == false, tableView.isDragging == false, tableView.isDecelerating == false else {
             return
         }
-        
-        if let model = self.lyricModel
+        if lastLocateTime == nil || (lastLocateTime != nil && time >= lastLocateTime!)
         {
-            var currentIndex = -1
-            //计算当前播放的歌词index
-            for (index, lrc) in model.lyrics.enumerated()
+            if let model = self.lyricModel
             {
-                if index + 1 >= model.lyrics.count
+                var currentIndex = -1
+                //计算当前播放的歌词index
+                for (index, lrc) in model.lyrics.enumerated()
                 {
-                    currentIndex = index
-                    break
-                }
-                else
-                {
-                    if time >= lrc.time && time < model.lyrics[index + 1].time
+                    if index + 1 >= model.lyrics.count
                     {
-                        currentIndex = index + 1
+                        currentIndex = index
                         break
                     }
+                    else
+                    {
+                        if time >= lrc.time && time < model.lyrics[index + 1].time
+                        {
+                            currentIndex = index + 1
+                            break
+                        }
+                    }
                 }
-            }
-            //判断第一个
-            if let firstLrc = model.lyrics.first
-            {
-                if time < firstLrc.time
+                //判断第一个
+                if let firstLrc = model.lyrics.first
                 {
-                    currentIndex = 0
+                    if time < firstLrc.time
+                    {
+                        currentIndex = 0
+                    }
+                }
+                //计算的index和当前index不同的时候才滚动
+                if currentIndex != currentLrcIndex
+                {
+                    currentLrcIndex = currentIndex
+                    tableView.scrollTo(row: currentLrcIndex, section: 0)
                 }
             }
-            //计算的index和当前index不同的时候才滚动
-            if currentIndex != currentLrcIndex
-            {
-                currentLrcIndex = currentIndex
-                tableView.scrollTo(row: currentLrcIndex, section: 0)
-            }
+            
+            lastLocateTime = nil
         }
     }
     
