@@ -122,11 +122,11 @@ class MPPlayer: OriginWorker
     //准备播放
     fileprivate func prepareToPlay(_ audio: MPAudioProtocol)
     {
-        FSLog("prepare to play")
+//        FSLog("prepare to play")
         //准备播放
         if let delegate = self.delegate {
             delegate.mpPlayerPrepareToPlay(audio) {[weak self] succeed in
-                FSLog("prepare result: \(succeed)")
+//                FSLog("prepare result: \(succeed)")
                 if succeed  //准备播放资源成功，尝试播放
                 {
                     self?.performPlay(audio)
@@ -150,7 +150,7 @@ class MPPlayer: OriginWorker
     //执行播放
     fileprivate func performPlay(_ audio: MPAudioProtocol)
     {
-        FSLog("perform play")
+//        FSLog("perform play")
         stop()
         
         //options:AVURLAssetPreferPreciseDurationAndTimingKey/AVURLAssetReferenceRestrictionsKey/AVURLAssetHTTPCookiesKey/AVURLAssetAllowsCellularAccessKey/AVURLAssetAllowsExpensiveNetworkAccessKey/AVURLAssetAllowsConstrainedNetworkAccessKey/AVURLAssetURLRequestAttributionKey
@@ -169,7 +169,7 @@ class MPPlayer: OriginWorker
     //执行播放是否成功的回调
     fileprivate func performPlayCallback(_ result: Bool)
     {
-        FSLog("perform play callback")
+//        FSLog("perform play callback")
         if let cb = playResultCallback
         {
             cb(result)
@@ -181,7 +181,7 @@ class MPPlayer: OriginWorker
     ///参数：auto：是否自动跳下一首，如果是用户手动点击的，那么按顺序播放
     fileprivate func playNextByMode(auto: Bool = true)
     {
-        FSLog("play next by mode")
+//        FSLog("play next by mode")
         //先获取下一首乐曲
         self.currentAudio = self.getNextAudioByMode(auto: auto)
         //准备播放
@@ -414,7 +414,7 @@ extension MPPlayer: DelegateProtocol
             if keyPath == PlayerKeyPath.status.rawValue     //播放状态改变
             {
                 let status = playerItem.status
-                FSLog("play status change :\(status.rawValue)")
+//                FSLog("play status change :\(status.rawValue)")
                 if status == .readyToPlay   //准备播放
                 {
                     //添加播放进度观察
@@ -435,7 +435,7 @@ extension MPPlayer: DelegateProtocol
                 }
                 else if status == .failed   //播放失败
                 {
-                    FSLog("play audio failed")
+//                    FSLog("play audio failed")
                     self.performPlayCallback(false)
                     if let del = self.delegate
                     {
@@ -444,7 +444,7 @@ extension MPPlayer: DelegateProtocol
                 }
                 else if status == .unknown  //未知，没有在加载播放资源
                 {
-                    FSLog("player status unknown")
+//                    FSLog("player status unknown")
 //                    self.performPlayCallback(false)
                     if let del = self.delegate
                     {
@@ -635,11 +635,11 @@ extension MPPlayer: ExternalInterface
     ///恢复播放，前提是暂停状态
     func resume()
     {
-        FSLog("resume")
+//        FSLog("resume")
         if isPaused
         {
             player.play()
-            FSLog("really to play")
+//            FSLog("really to play")
 //            if let delegate = self.delegate
 //            {
 //                delegate.mpPlayerResumeToPlay(currentAudio!, playlist: currentPlaylist!)
@@ -653,7 +653,7 @@ extension MPPlayer: ExternalInterface
         if isPlaying
         {
             player.pause()
-            FSLog("really to pause")
+//            FSLog("really to pause")
 //            if let delegate = self.delegate
 //            {
 //                delegate.mpPlayerPauseToPlay(currentAudio!, playlist: currentPlaylist!)
@@ -664,7 +664,7 @@ extension MPPlayer: ExternalInterface
     ///停止播放，清理播放资源，保留播放器和播放列表
     func stop()
     {
-        FSLog("really to stop")
+//        FSLog("really to stop")
         player.pause()
         if let ob = timeObserver
         {

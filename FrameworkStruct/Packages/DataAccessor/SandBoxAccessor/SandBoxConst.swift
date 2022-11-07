@@ -130,7 +130,7 @@ enum FileTypeName: String {
     //根据传入的文件名字返回包含扩展名的文件名
     func fullName(_ name: String) -> String
     {
-        if let fullName =  (name as NSString).appendingPathExtension(self.rawValue)
+        if let fullName = (name as NSString).appendingPathExtension(self.rawValue)
         {
             return fullName
         }

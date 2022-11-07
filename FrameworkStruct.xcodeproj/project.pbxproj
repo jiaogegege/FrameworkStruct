@@ -788,6 +788,10 @@
 		EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EB282A05AE0053BC85 /* OCUtility.m */; };
 		EAF401EF282A07530053BC85 /* FSException.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EE282A07530053BC85 /* FSException.m */; };
 		EAF5B8EE276778B900D2AAF7 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */; };
+		EAF6D8C829189D7400F808BC /* RegexAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF6D8C729189D7400F808BC /* RegexAdapter.swift */; };
+		EAF6D8CA29189DA200F808BC /* RegexAdapterConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF6D8C929189DA200F808BC /* RegexAdapterConst.swift */; };
+		EAF6D8CC2918AE5200F808BC /* MPLyricView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF6D8CB2918AE5200F808BC /* MPLyricView.swift */; };
+		EAF6D8CE2918B33800F808BC /* MPLrcContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF6D8CD2918B33800F808BC /* MPLrcContentCell.swift */; };
 		EAF85A98277B4AD900676268 /* DocumentMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A97277B4AD900676268 /* DocumentMonitor.swift */; };
 		EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9B277B4BEE00676268 /* OriginHandler.swift */; };
 		EAF85A9F277B4D7500676268 /* HandlerMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */; };
@@ -2031,6 +2035,11 @@
 		EAF401ED282A07530053BC85 /* FSException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSException.h; sourceTree = "<group>"; };
 		EAF401EE282A07530053BC85 /* FSException.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSException.m; sourceTree = "<group>"; };
 		EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
+		EAF6D8C629189D4100F808BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAF6D8C729189D7400F808BC /* RegexAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexAdapter.swift; sourceTree = "<group>"; };
+		EAF6D8C929189DA200F808BC /* RegexAdapterConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexAdapterConst.swift; sourceTree = "<group>"; };
+		EAF6D8CB2918AE5200F808BC /* MPLyricView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLyricView.swift; sourceTree = "<group>"; };
+		EAF6D8CD2918B33800F808BC /* MPLrcContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLrcContentCell.swift; sourceTree = "<group>"; };
 		EAF85A97277B4AD900676268 /* DocumentMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMonitor.swift; sourceTree = "<group>"; };
 		EAF85A9B277B4BEE00676268 /* OriginHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginHandler.swift; sourceTree = "<group>"; };
 		EAF85A9E277B4D7500676268 /* HandlerMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerMonitor.swift; sourceTree = "<group>"; };
@@ -3896,6 +3905,7 @@
 				EAAA4E91276F64E000C45712 /* BluetoothAdapter */,
 				EADE522527F6F50D005417BE /* SocializeAdapter */,
 				EAA60BC728DEDD8700E1AF0C /* FileManageAdapter */,
+				EAF6D8C529189D3200F808BC /* RegexAdapter */,
 				EA8CFD5828EE844300EE3B73 /* ArchiverAdapter.swift */,
 				EA91D17A27C2027500DD1BE1 /* NotificationAdapter.swift */,
 				EA91D17E27C202E800DD1BE1 /* CalendarAdapter.swift */,
@@ -4510,6 +4520,8 @@
 				EA1E140729121218000E818F /* MPPlaylistView.swift */,
 				EA1E140529120E0B000E818F /* MPPlaylistContainerView.swift */,
 				EA4DFBC1291609FB0053BC4F /* MPSonglistsView.swift */,
+				EAF6D8CB2918AE5200F808BC /* MPLyricView.swift */,
+				EAF6D8CD2918B33800F808BC /* MPLrcContentCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4667,6 +4679,16 @@
 				EADE522727F6F554005417BE /* SocializeActivity.swift */,
 			);
 			path = SocializeAdapter;
+			sourceTree = "<group>";
+		};
+		EAF6D8C529189D3200F808BC /* RegexAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				EAF6D8C629189D4100F808BC /* README.md */,
+				EAF6D8C729189D7400F808BC /* RegexAdapter.swift */,
+				EAF6D8C929189DA200F808BC /* RegexAdapterConst.swift */,
+			);
+			path = RegexAdapter;
 			sourceTree = "<group>";
 		};
 		EAF85AA2277B4E9600676268 /* Document */ = {
@@ -5052,6 +5074,7 @@
 				EA3E8B2627B77CEA006A2715 /* KeyedDecodingContainerExtensions.swift in Sources */,
 				EA99374327994F6100480147 /* NSArray+TABAnimatedChain.m in Sources */,
 				EAFDF36A28F15D260026F0F3 /* MPAudioBookModel.swift in Sources */,
+				EAF6D8CA29189DA200F808BC /* RegexAdapterConst.swift in Sources */,
 				EADB00D827624012001B7223 /* NSObject+PropertyListing.m in Sources */,
 				EA3E8B0127B77CEA006A2715 /* NodePropertyMap.swift in Sources */,
 				EA1E140629120E0B000E818F /* MPPlaylistContainerView.swift in Sources */,
@@ -5175,6 +5198,7 @@
 				EA0F14E229150DC40008AC4A /* SonglistViewController.swift in Sources */,
 				EA3E8AF227B77CEA006A2715 /* PathOutputNode.swift in Sources */,
 				EA8CFD6228EFCCDC00EE3B73 /* MPMediaLibraryModel.swift in Sources */,
+				EAF6D8CC2918AE5200F808BC /* MPLyricView.swift in Sources */,
 				EA3E8B1727B77CEA006A2715 /* GradientStroke.swift in Sources */,
 				EA9A75EE27C739DF00A11FC8 /* SRHash.m in Sources */,
 				EA3E8C2127B782C4006A2715 /* POPMath.mm in Sources */,
@@ -5286,6 +5310,7 @@
 				EA99374427994F6100480147 /* UIView+TABControlAnimation.m in Sources */,
 				EA9A756B27C7210200A11FC8 /* NSMutableAttributedString+TY.m in Sources */,
 				EA9A78C827C756C900A11FC8 /* MPITextRendererKey.m in Sources */,
+				EAF6D8CE2918B33800F808BC /* MPLrcContentCell.swift in Sources */,
 				EA8CFD1528EDD75100EE3B73 /* MPMusicbookModel.swift in Sources */,
 				EA3E8AF827B77CEA006A2715 /* StarNode.swift in Sources */,
 				EA9A78C327C756C900A11FC8 /* MPITextBackground.m in Sources */,
@@ -5358,6 +5383,7 @@
 				EA99374727994F6100480147 /* TABCollectionAnimated.m in Sources */,
 				EAF85A9C277B4BEE00676268 /* OriginHandler.swift in Sources */,
 				EA8CFD2928EDD79F00EE3B73 /* MPPodcastModel.swift in Sources */,
+				EAF6D8C829189D7400F808BC /* RegexAdapter.swift in Sources */,
 				EAC8A86327625D490088293F /* NSButton+WebCache.m in Sources */,
 				EA9A78DC27C756C900A11FC8 /* MPITextRenderer.m in Sources */,
 				EA0E67B327B5064400A11C20 /* NetworkConst.swift in Sources */,

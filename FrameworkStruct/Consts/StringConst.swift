@@ -356,6 +356,8 @@ extension String
     static let pleaseEnterName = localized("pleaseEnterName")
     //收藏歌曲到歌单
     static let addSongToSonglist = localized("addSongToSonglist")
+    //暂无歌词
+    static let noLyric = localized("noLyric")
     
     //MARK: Toast文案
     //播放失败

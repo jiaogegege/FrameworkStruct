@@ -95,7 +95,7 @@ class MPSonglistsView: FSDialog {
             if let songlist = songlist, let so = self?.song {
                 //添加到新歌单中
                 self?.mpr.addSongsToSonglist([so], songlistId: songlist.id, completion: { result in
-                    g_toast(text: result.getDesc())
+                    g_toast(text: result.getDesc(), interaction: true)
                     self?.mpr.getAllSonglists({ songlists in
                         if let songlists = songlists {
                             self?.songlists = songlists
@@ -113,7 +113,7 @@ class MPSonglistsView: FSDialog {
             }
             else
             {
-                g_toast(text: String.createFailure)
+                g_toast(text: String.createFailure, interaction: true)
             }
         }
     }

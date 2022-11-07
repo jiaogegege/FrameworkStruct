@@ -71,6 +71,7 @@ enterSonglistName = "为歌单取个名字吧~";
 addDescToSonglist = "为您的歌单添加简介~";
 pleaseEnterName = "请输入一个名字";
 addSongToSonglist = "收藏歌曲到歌单";
+noLyric = "暂无歌词";
 
 /**
  * Toast文案

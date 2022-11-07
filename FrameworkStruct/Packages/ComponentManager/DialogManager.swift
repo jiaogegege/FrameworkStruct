@@ -261,7 +261,7 @@ extension DialogManager: ExternalInterface
     }
     
     ///想要显示添加歌单界面
-    ///参数：song：要添加的歌曲；songlists：所有歌单列表；newSonglistClosure：新建歌单的回调
+    ///参数：song：要添加的歌曲；songlists：所有歌单列表；
     func wantShowAddToSonglist(song: MPSongModel, songlists: [MPSonglistModel])
     {
         let v = MPSonglistsView()

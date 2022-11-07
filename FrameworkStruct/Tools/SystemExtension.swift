@@ -414,6 +414,12 @@ extension String
         return finalStr
     }
     
+    ///是否有效字符串
+    func isValid() -> Bool
+    {
+        DatasChecker.shared.checkValidString(self)
+    }
+    
 }
 
 

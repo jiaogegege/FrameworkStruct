@@ -72,6 +72,7 @@ enterSonglistName = "Give a name to the songlist~";
 addDescToSonglist = "Add Desc To Your Songlist~";
 pleaseEnterName = "Please Enter A Name";
 addSongToSonglist = "Add Song To Songlist";
+noLyric = "No Lyric";
 
 /**
  * Toast文案

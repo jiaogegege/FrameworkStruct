@@ -1323,6 +1323,14 @@ extension MPManager: ExternalInterface
         libMgr.getTags(ids)
     }
     
+    ///获取歌词
+    func getLyric(_ audio: MPAudioProtocol, completion: @escaping ((MPLyricModel?) -> Void))
+    {
+        MPLrcManager.shared.getLyric(audio) { lyric in
+            completion(lyric)
+        }
+    }
+    
     /**************************************** 音乐资源相关 Section End ***************************************/
     
 }

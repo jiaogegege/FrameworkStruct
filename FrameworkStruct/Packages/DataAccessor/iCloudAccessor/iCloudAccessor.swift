@@ -552,6 +552,12 @@ extension iCloudAccessor: ExternalInterface
         getDir(.MusicLibrary, identifier: identifier)
     }
     
+    ///获取iCloud下`Documents/Music/Lyric`目录
+    func getMusicLyricDir(identifier: iCloudContainerIdentifier = .frameworkStruct) -> URL?
+    {
+        getDir(.MusicLyric, identifier: identifier)
+    }
+    
     ///获取icloud下的某个目录下的某个文件的路径，fileName：包括扩展名
     func getFileUrl(in dir: URL, fileName: String) -> URL
     {

@@ -10,6 +10,7 @@ import UIKit
 class MusicPlayViewController: BasicViewController {
     //MARK: 属性
     var song: MPAudioProtocol?
+    var lyric: MPLyricModel?
     
     fileprivate unowned var mpr = MPManager.shared
     
@@ -32,6 +33,18 @@ class MusicPlayViewController: BasicViewController {
     fileprivate var totalTimeLabel: UILabel!    //所有时间
     fileprivate var favoriteBtn: UIButton!      //我喜欢按钮
     fileprivate var addSonglistBtn: UIButton!   //添加到歌单
+    fileprivate lazy var lyricView: MPLyricView = {  //歌词视图
+        let v = MPLyricView()
+        v.isHidden = true
+        v.alpha = 0.0
+        view.addSubview(v)
+        v.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(backBtn.snp.bottom).offset(fitX(30))
+            make.bottom.equalTo(favoriteBtn.snp.top).offset(fitX(-30))
+        }
+        return v
+    }()
     
     //MARK: 方法
     override func viewDidLoad() {
@@ -71,6 +84,7 @@ class MusicPlayViewController: BasicViewController {
                 }
             }
         }
+        self.tryShowLyric() //尝试获取歌词
     }
     
     override func createUI() {
@@ -222,7 +236,10 @@ class MusicPlayViewController: BasicViewController {
         super.configUI()
         view.backgroundColor = .lightGray
         
+        bgImgView.contentMode = .scaleAspectFill
+        bgImgView.clipsToBounds = true
         bgImgView.image = UIImage.iMiku_0
+        
         bgBlurView.alpha = 0.95
         
         backBtn.setImage(UIImage.iBackLightAlways, for: .normal)
@@ -235,8 +252,8 @@ class MusicPlayViewController: BasicViewController {
         artistLabel.textAlignment = .center
         artistLabel.font = .systemFont(ofSize: fitX(12))
         
-        albumView.clickCallback = {
-            
+        albumView.clickCallback = {[weak self] in
+            self?.showLyricView()
         }
         
         playPauseBtn.setImage(.iPlayBtn, for: .normal)
@@ -284,6 +301,7 @@ class MusicPlayViewController: BasicViewController {
     override func updateUI() {
         //更新歌曲显示信息
         if let song = song as? MPSongModel, let asset = song.asset {
+            bgImgView.image = asset[.artwork] as? UIImage ?? UIImage.iMiku_0
             songNameLabel.text = song.name
             artistLabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
             favoriteBtn.isSelected = song.isFavorite
@@ -430,6 +448,66 @@ class MusicPlayViewController: BasicViewController {
         albumView.stopAnimation()
     }
     
+    //尝试获取歌词
+    fileprivate func tryShowLyric()
+    {
+        if let song = song {
+            mpr.getLyric(song) {[weak self] lyric in
+                self?.lyric = lyric
+                if self?.albumView.isHidden ?? false
+                {
+                    self?.lyricView.lyricModel = lyric
+                }
+            }
+        }
+    }
+    
+    //显示歌词view
+    fileprivate func showLyricView()
+    {
+        if lyric == nil
+        {
+            tryShowLyric()
+        }
+        if lyricView.lyricModel == nil
+        {
+            lyricView.lyricModel = lyric
+        }
+        if lyricView.locateCallback == nil
+        {
+            lyricView.locateCallback = {[weak self] time in
+                self?.mpr.setCurrentTime(time, completion: { succeed in
+                    
+                })
+            }
+        }
+        if lyricView.tapCallback == nil
+        {
+            lyricView.tapCallback = {[weak self] in
+                self?.hideLyricView()
+            }
+        }
+        lyricView.isHidden = false
+        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
+            self.albumView.alpha = 0.0
+            self.lyricView.alpha = 1.0
+        } completion: { finished in
+            self.albumView.isHidden = true
+        }
+    }
+    
+    //隐藏歌词view
+    fileprivate func hideLyricView()
+    {
+        albumView.isHidden = false
+        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
+            self.albumView.alpha = 1.0
+            self.lyricView.alpha = 0.0
+        } completion: { finished in
+            self.lyricView.isHidden = true
+        }
+    }
+    
 }
 
 
@@ -454,6 +532,8 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
         updateUI()
         loadingView.startAnimating()
         playPauseBtn.isHidden = true
+        lyric = nil //清除上一首歌词
+        lyricView.lyricModel = nil
     }
     
     func mpManagerStartPlay(_ song: MPAudioProtocol) {
@@ -461,6 +541,7 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
         updateUI()
         loadingView.stopAnimating()
         playPauseBtn.isHidden = false
+        tryShowLyric()
     }
     
     func mpManagerPausePlay(_ song: MPAudioProtocol) {
@@ -483,6 +564,10 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
     func mpManagerProgressChange(_ progress: TimeInterval) {
         pastTimeLabel.text = TimeEmbellisher.shared.convertSecondsToMinute(Int(mpr.currentPastTime))
         progressBar.setValue(Float(progress), animated: false)
+        if albumView.isHidden == true   //如果专辑图隐藏了，说明在显示歌词
+        {
+            lyricView.setCurrentTime(progress)
+        }
     }
     
     func mpManagerBufferProgressChange(_ progress: TimeInterval) {
