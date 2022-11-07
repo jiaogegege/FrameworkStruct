@@ -457,6 +457,9 @@ class MusicPlayViewController: BasicViewController {
                 if self?.albumView.isHidden ?? false
                 {
                     self?.lyricView.lyricModel = lyric
+                    g_after(0.11) {
+                        self?.lyricView.setCurrentTime(self?.mpr.currentPastTime ?? 0)
+                    }
                 }
             }
         }
