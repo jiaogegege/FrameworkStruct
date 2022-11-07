@@ -116,11 +116,15 @@ extension MPLrcManager: ExternalInterface
                         {
                             self?.parseLyricData(data, lrcFileUrl: lrcFileUrl, completion: { lyricModel in
                                 completion(lyricModel)
+                                //关闭文件
+                                self?.ia.closeDocument(handler)
                             })
                         }
                         else
                         {
                             completion(nil)
+                            //关闭文件
+                            self?.ia.closeDocument(handler)
                         }
                     }
                     else
