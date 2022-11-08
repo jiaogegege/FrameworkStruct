@@ -824,7 +824,7 @@ extension MPManager: InternalType
     static let backgroundTaskTime: TimeInterval = 20.0
     
     //打开歌曲文件超时时长
-    static let openFileTimeoutTime: TimeInterval = 10.0
+    static let openFileTimeoutTime: TimeInterval = 15.0
     
     //状态管理器的key
     enum StatusKey: SMKeyType {
@@ -1326,7 +1326,19 @@ extension MPManager: ExternalInterface
     ///获取歌词
     func getLyric(_ audio: MPAudioProtocol, completion: @escaping ((MPLyricModel?) -> Void))
     {
-        MPLrcManager.shared.getLyric(audio) { lyric in
+        MPLrcManager.shared.getLyric(audio) {[weak self] lyric in
+            if lyric?.title == nil
+            {
+                lyric?.title = audio.audioName
+            }
+            if lyric?.artist == nil
+            {
+                lyric?.artist = (self?.currentSong as? MPSongModel)?.asset?[.artist] as? String
+            }
+            if lyric?.album == nil
+            {
+                lyric?.album = (self?.currentSong as? MPSongModel)?.asset?[.albumName] as? String
+            }
             completion(lyric)
         }
     }

@@ -40,8 +40,8 @@ class MusicPlayViewController: BasicViewController {
         view.addSubview(v)
         v.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(backBtn.snp.bottom).offset(fitX(30))
-            make.bottom.equalTo(favoriteBtn.snp.top).offset(fitX(-30))
+            make.top.equalTo(backBtn.snp.bottom).offset(fitX(20))
+            make.bottom.equalTo(favoriteBtn.snp.top).offset(fitX(-20))
         }
         return v
     }()

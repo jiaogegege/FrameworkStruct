@@ -115,6 +115,10 @@ extension MPLrcManager: ExternalInterface
                         if let data = self?.ia.readDocument(handler)
                         {
                             self?.parseLyricData(data, lrcFileUrl: lrcFileUrl, completion: { lyricModel in
+                                if lyricModel?.title == nil
+                                {
+                                    lyricModel?.title = audio.audioName
+                                }
                                 completion(lyricModel)
                                 //关闭文件
                                 self?.ia.closeDocument(handler)

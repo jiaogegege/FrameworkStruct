@@ -99,7 +99,7 @@ class MPLyricView: UIView {
         locationView.addSubview(locateLine)
         locateLine.snp.makeConstraints { make in
             make.left.equalTo(locateBtn.snp.right).offset(fitX(5))
-            make.right.equalTo(locateTimeLabel.snp.left).offset(fitX(-5))
+            make.right.equalTo(locateTimeLabel.snp.left).offset(fitX(-10))
             make.height.equalTo(0.5)
             make.centerY.equalToSuperview()
         }
@@ -129,7 +129,7 @@ class MPLyricView: UIView {
         locateBtn.addTarget(self, action: #selector(lrcLocateAction(sender:)), for: .touchUpInside)
         
         locateTimeLabel.textColor = .white
-        locateTimeLabel.font = .systemFont(ofSize: fitX(-12))
+        locateTimeLabel.font = .systemFont(ofSize: fitX(-10))
         locateTimeLabel.textAlignment = .right
         
         locateLine.backgroundColor = .lightGray
@@ -308,7 +308,7 @@ extension MPLyricView: DelegateProtocol, UITableViewDelegate, UITableViewDataSou
             }
             else if indexPath.row == footCellIndex.position.row     //尾部
             {
-                return self.height
+                return self.height / 2.0
             }
             else    //歌词
             {
@@ -402,6 +402,14 @@ extension MPLyricView: ExternalInterface
                     if time < firstLrc.time
                     {
                         currentIndex = 0
+                    }
+                }
+                //判断最后一个
+                if let lastLrc = model.lyrics.last
+                {
+                    if time >= lastLrc.time
+                    {
+                        currentIndex = model.lyrics.count
                     }
                 }
                 //计算的index和当前index不同的时候才滚动
