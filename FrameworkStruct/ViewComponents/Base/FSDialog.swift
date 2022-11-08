@@ -128,6 +128,10 @@ class FSDialog: UIView, DialogManagerProtocol
         {
             self.containerView.y = self.height
         }
+        else if showType == .bounceTop
+        {
+            self.containerView.y = -containerView.height
+        }
     }
     
     //显示动画
@@ -156,6 +160,15 @@ class FSDialog: UIView, DialogManagerProtocol
             UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
                 weakSelf?.bgView.alpha = 1.0
                 weakSelf?.containerView.y = weakSelf!.height - weakSelf!.containerView.height
+            } completion: { finished in
+                completion()
+            }
+        }
+        else if showType == .bounceTop
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 1.0
+                weakSelf?.containerView.y = 0.0
             } completion: { finished in
                 completion()
             }
@@ -190,7 +203,15 @@ class FSDialog: UIView, DialogManagerProtocol
             } completion: { finished in
                 completion()
             }
-
+        }
+        else if showType == .bounceTop
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 0.0
+                weakSelf?.containerView.y = -(weakSelf?.containerView.height ?? 0.0)
+            } completion: { fninshed in
+                completion()
+            }
         }
     }
     
@@ -214,11 +235,20 @@ class FSDialog: UIView, DialogManagerProtocol
                 completion()
             }
         }
-        else
+        else if showType == .bounce
         {
             UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
                 weakSelf?.bgView.alpha = 0.0
                 weakSelf?.containerView.y = weakSelf!.height
+            } completion: { finished in
+                completion()
+            }
+        }
+        else if showType == .bounceTop
+        {
+            UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
+                weakSelf?.bgView.alpha = 0.0
+                weakSelf?.containerView.y = -(weakSelf?.containerView.height ?? 0.0)
             } completion: { finished in
                 completion()
             }
@@ -245,6 +275,7 @@ extension FSDialog
         case none           //无动画效果
         case gradient       //该类型一般用于显示在屏幕中间，做一个渐显的动画效果
         case bounce         //该类型一般用于显示在屏幕底部，做一个向上弹的动画效果
+        case bounceTop      //该类型一般用于从屏幕顶部向下弹的动画效果
     }
     
 }
