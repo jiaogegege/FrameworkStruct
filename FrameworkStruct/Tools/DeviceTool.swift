@@ -78,10 +78,15 @@ var kDeviceModelName: String {
     case "iPhone13,2":   return "iPhone 12"
     case "iPhone13,3":   return "iPhone 12 Pro"
     case "iPhone13,4":   return "iPhone 12 Pro Max"
-    case "iPhone14,4":   return "iPhone 13 mini"
-    case "iPhone14,5":   return "iPhone 13"
     case "iPhone14,2":   return "iPhone 13 Pro"
     case "iPhone14,3":   return "iPhone 13 Pro Max"
+    case "iPhone14,4":   return "iPhone 13 mini"
+    case "iPhone14,5":   return "iPhone 13"
+    case "iPhone14,6":   return "iPhone SE 3"
+    case "iPhone14,7":   return "iPhone 14"
+    case "iPhone14,8":   return "iPhone 14 Plus"
+    case "iPhone15,2":   return "iPhone 14 Pro"
+    case "iPhone15,3":   return "iPhone 14 Pro Max"
 
     case "iPad1,1":   return "iPad"
     case "iPad1,2":   return "iPad 3G"
@@ -109,6 +114,10 @@ var kDeviceModelName: String {
     case "iPad11,3", "iPad11,4":  return "iPad Air 3"
     case "iPad11,6", "iPad11,7":  return "iPad 8"
     case "iPad13,1", "iPad13,2":  return "iPad Air 4"
+    case "iPad13,16", "iPad13,17":  return "iPad Air 5"
+    case "iPad13,4", "iPad13,5", "iPad13,6", "iPad13,7":  return "iPad Pro 11 3rd"
+    case "iPad13,8", "iPad13,9", "iPad13,10", "iPad13,11":  return "iPad Pro 12.9 5th"
+    case "iPad14,1", "iPad14,2":  return "iPad Mini 6"
         
     case "AppleTV2,1":  return "Apple TV 2"
     case "AppleTV3,1","AppleTV3,2":  return "Apple TV 3"
@@ -157,7 +166,9 @@ let kiPhoneXHeight: CGFloat = 812.0
 var kStatusHeight: CGFloat {
     if #available(iOS 13.0, *)
     {
-        return g_window().windowScene?.statusBarManager?.statusBarFrame.size.height ?? (kScreenHeight >= 812.0 ? 44.0 : 20.0)
+//        return g_window().windowScene?.statusBarManager?.statusBarFrame.size.height ?? (kScreenHeight >= 812.0 ? 44.0 : 20.0)
+        /* 适配灵动岛状态栏高度 */
+        return g_window().safeAreaInsets.top
     }
     else
     {
