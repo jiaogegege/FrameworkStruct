@@ -72,6 +72,8 @@ extension MPLrcContentCell: InternalType
 {
     //原始字体大小
     static let fontSize: CGFloat = fitX(18.0)
+    //较小的字体
+    static let smallFontSize: CGFloat = fitX(15.0)
     
     ///距离中心的位置，越远数值越大，0表示就在中心位置
     enum DistanceToCenter {
@@ -86,9 +88,9 @@ extension MPLrcContentCell: InternalType
                 {
                     return (1.0, MPLrcContentCell.fontSize)
                 }
-                else
+                else    //透明度每级减少0.2，字体固定为fitX(15)
                 {
-                    return (1.0 - CGFloat(int) * 0.2, MPLrcContentCell.fontSize - fitX(CGFloat(int)))
+                    return (1.0 - CGFloat(int) * 0.2, MPLrcContentCell.smallFontSize)
                 }
             }
         }
@@ -139,7 +141,7 @@ extension MPLrcContentCell: ExternalInterface
         lrcLabel.isHidden = false
         self.lrcLabel.textColor = UIColor.white.withAlphaComponent(style.0)
 //            self.lrcLabel.font = .systemFont(ofSize: style.1)
-        AnimationManager.shared.viewScale(x: (style.1 == Self.fontSize ? style.1 : fitX(16)) / Self.fontSize, y: (style.1 == Self.fontSize ? style.1 : fitX(16)) / Self.fontSize, duration: 0.3, delay: 0, on: self.lrcLabel)
+        AnimationManager.shared.viewScale(x: style.1 / Self.fontSize, y: style.1 / Self.fontSize, duration: 0.3, delay: 0, on: self.lrcLabel)
     }
     
 }

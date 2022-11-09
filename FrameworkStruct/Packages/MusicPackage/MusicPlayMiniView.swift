@@ -134,25 +134,34 @@ class MusicPlayMiniView: UIView
     
     @objc func playlistAction(sender: UIButton)
     {
-        DialogManager.shared.wantShowPlaylist()
+        if !mpr.isIniting
+        {
+            DialogManager.shared.wantShowPlaylist()
+        }
     }
     
     @objc func nextAction(sender: UIButton)
     {
-        mpr.playNext()
+        if !mpr.isIniting
+        {
+            mpr.playNext()
+        }
     }
     
     @objc func playPauseAction(sender: UIButton)
     {
-        if playPauseBtn.isSelected  //暂停
+        if !mpr.isIniting   //初始化之后才能做操作
         {
-            mpr.pause()
-        }
-        else    //开始或继续播放
-        {
-            sender.isEnabled = false
-            mpr.wantPlayCurrent { (succeed) in
-                sender.isEnabled = true
+            if playPauseBtn.isSelected  //暂停
+            {
+                mpr.pause()
+            }
+            else    //开始或继续播放
+            {
+                sender.isEnabled = false
+                mpr.wantPlayCurrent { (succeed) in
+                    sender.isEnabled = true
+                }
             }
         }
     }

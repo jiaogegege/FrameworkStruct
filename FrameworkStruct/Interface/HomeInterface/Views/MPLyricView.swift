@@ -378,7 +378,7 @@ extension MPLyricView: ExternalInterface
         {
             if let model = self.lyricModel
             {
-                var currentIndex = -1
+                var currentIndex = 0
                 //计算当前播放的歌词index
                 for (index, lrc) in model.lyrics.enumerated()
                 {

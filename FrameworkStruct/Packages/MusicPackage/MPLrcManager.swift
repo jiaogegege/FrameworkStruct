@@ -89,9 +89,9 @@ extension MPLrcManager: InternalType
     static let titleReg: RegexExpression = "(?<=\\[ti:).*(?=\\])"           //标题
     static let artistReg: RegexExpression = "(?<=\\[ar:).*(?=\\])"          //艺术家
     static let albumReg: RegexExpression = "(?<=\\[al:).*(?=\\])"           //专辑
-    static let timeLrcReg: RegexExpression = "\\[\\d.*\n"                   //时间和歌词的一行
+    static let timeLrcReg: RegexExpression = "\\[\\d.*(\n|\r)"                   //时间和歌词的一行
     static let timeReg: RegexExpression = "(?<=\\[).+(?=\\])"               //时间
-    static let lyricReg: RegexExpression = "(?<=\\]).*(?=\n)"               //歌词
+    static let lyricReg: RegexExpression = "(?<=\\]).*(?=(\n|\r))"               //歌词
     
 }
 
