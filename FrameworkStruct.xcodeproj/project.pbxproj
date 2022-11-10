@@ -784,6 +784,7 @@
 		EAE6A33228E3EA030049E15F /* EditiCloudFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */; };
 		EAE6A33428E41FD30049E15F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE6A33328E41FD30049E15F /* HealthKit.framework */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
+		EAEEF16A291CE6EB006A9B9B /* FSPageIndicatorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEEF169291CE6EB006A9B9B /* FSPageIndicatorBar.swift */; };
 		EAF0986328F4151E00AB487E /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF0986228F4151E00AB487E /* MusicViewController.swift */; };
 		EAF401EC282A05AE0053BC85 /* OCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EB282A05AE0053BC85 /* OCUtility.m */; };
 		EAF401EF282A07530053BC85 /* FSException.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF401EE282A07530053BC85 /* FSException.m */; };
@@ -2029,6 +2030,7 @@
 		EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiCloudFileViewController.swift; sourceTree = "<group>"; };
 		EAE6A33328E41FD30049E15F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
+		EAEEF169291CE6EB006A9B9B /* FSPageIndicatorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSPageIndicatorBar.swift; sourceTree = "<group>"; };
 		EAF0986228F4151E00AB487E /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		EAF401EA282A05AE0053BC85 /* OCUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCUtility.h; sourceTree = "<group>"; };
 		EAF401EB282A05AE0053BC85 /* OCUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCUtility.m; sourceTree = "<group>"; };
@@ -4458,6 +4460,7 @@
 				EA1AE49927782A6A00D028F9 /* DemoTopSelectBar.swift */,
 				EA417F84290A8A2F003E70EF /* InfiniteRotateView.swift */,
 				EA66D31E290CC1270096D2AF /* ScrollAnimationView.swift */,
+				EAEEF169291CE6EB006A9B9B /* FSPageIndicatorBar.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -5294,6 +5297,7 @@
 				EA7F3E0F27BB798200C3E33F /* DatasContainer.swift in Sources */,
 				EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */,
 				EA3E8B3127B77CEA006A2715 /* Asset.swift in Sources */,
+				EAEEF16A291CE6EB006A9B9B /* FSPageIndicatorBar.swift in Sources */,
 				EAC8A88427625D490088293F /* SDInternalMacros.m in Sources */,
 				EA73A15B27BC900E00980C26 /* MineViewController.swift in Sources */,
 				EAC8A86527625D490088293F /* SDDiskCache.m in Sources */,
