@@ -140,7 +140,7 @@ extension MPSonglistsView: DelegateProtocol, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let song = song, let songlist = songlists?[indexPath.row] {
             mpr.addSongsToSonglist([song], songlistId: songlist.id) {[weak self] result in
-                g_toast(text: result.getDesc())
+                g_toast(text: result.getDesc(), interaction: true)
                 self?.dismiss()
             }
         }
