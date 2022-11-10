@@ -27,7 +27,7 @@ class MPSonglistsView: FSDialog {
     override func createView() {
         super.createView()
         
-        containerView.frame = CGRect(x: 0, y: kScreenHeight / 3.0, width: kScreenWidth, height: kScreenHeight / 3.0 * 2.0)
+        containerView.frame = CGRect(x: 0, y: Self.containerHeight, width: kScreenWidth, height: Self.containerHeight)
         
         titleLabel = UILabel(frame: CGRect(x: 12, y: 24, width: kScreenWidth / 2.0, height: 17))
         containerView.addSubview(titleLabel)
@@ -36,7 +36,7 @@ class MPSonglistsView: FSDialog {
         newBtn.frame = CGRect(x: kScreenWidth - 12 - 80, y: 17.5, width: 80, height: 30)
         containerView.addSubview(newBtn)
         
-        tableView = UITableView(frame: CGRect(x: 0, y: titleLabel.y + titleLabel.height + 12, width: self.width, height: kScreenHeight / 3.0 * 2.0 - (titleLabel.y + titleLabel.height + 12)))
+        tableView = UITableView(frame: CGRect(x: 0, y: titleLabel.y + titleLabel.height + 12, width: self.width, height: Self.containerHeight - (titleLabel.y + titleLabel.height + 12)))
         containerView.addSubview(tableView)
     }
     
@@ -145,5 +145,13 @@ extension MPSonglistsView: DelegateProtocol, UITableViewDelegate, UITableViewDat
             }
         }
     }
+    
+}
+
+
+extension MPSonglistsView: InternalType
+{
+    //内容区域高度
+    static let containerHeight: CGFloat = kScreenHeight / 2.0 + fitX(60.0)
     
 }

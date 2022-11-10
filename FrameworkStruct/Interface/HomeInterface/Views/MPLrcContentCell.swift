@@ -88,9 +88,18 @@ extension MPLrcContentCell: InternalType
                 {
                     return (1.0, MPLrcContentCell.fontSize)
                 }
-                else    //透明度每级减少0.2，字体固定为fitX(15)
+                else    //透明度第一级减少0.25，后面每级减少0.15，最小0.1，字体固定为fitX(15)
                 {
-                    return (1.0 - CGFloat(int) * 0.2, MPLrcContentCell.smallFontSize)
+                    var alpha: CGFloat = 1.0
+                    if int == 1
+                    {
+                        alpha = 1.0 - 0.25
+                    }
+                    else
+                    {
+                        alpha = 1.0 - 0.25 - (CGFloat(int) - 1) * 0.15
+                    }
+                    return (limitMin(alpha, min: 0.1), MPLrcContentCell.smallFontSize)
                 }
             }
         }
