@@ -82,7 +82,9 @@ class MusicViewController: BasicViewController
     }
     
     override func configUI() {
-        self.jumpCurrentBtn.setImage(.iJumpCurrentSong, for: .normal)
+        tableView.tableFooterView = UIView()
+        
+        jumpCurrentBtn.setImage(.iJumpCurrentSong, for: .normal)
     }
     
     override func initData() {
