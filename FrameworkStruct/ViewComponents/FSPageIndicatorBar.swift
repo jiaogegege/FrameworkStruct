@@ -23,6 +23,8 @@ class FSPageIndicatorBar: UIView {
             self.bar.backgroundColor = newValue
         }
     }
+    //动画时长
+    var animationTime: TimeInterval = 0.2
     
     //滚动方向
     fileprivate var scrollDirection: ScrollDirection = .horizontal
@@ -30,7 +32,7 @@ class FSPageIndicatorBar: UIView {
     var totalPage: Int = 0 {  //总页数
         willSet {
             let pageWidth: CGFloat = scrollDirection == .horizontal ? self.width / CGFloat(newValue) : self.height / CGFloat(newValue)    //一页的宽度
-            bar.frame = CGRect(x: scrollDirection == .horizontal ? CGFloat(currentPage) * pageWidth : 0, y: scrollDirection == .vertical ? CGFloat(currentPage) * pageWidth : 0, width: scrollDirection == .horizontal ? self.width / CGFloat(self.totalPage) : self.width, height: scrollDirection == .vertical ? self.height / CGFloat(self.totalPage) : self.height)
+            bar.frame = CGRect(x: 0, y: 0, width: scrollDirection == .horizontal ? limitMin(pageWidth, min: self.height) : self.width, height: scrollDirection == .vertical ? limitMin(pageWidth, min: self.width) : self.height)
         }
     }
     
@@ -96,7 +98,7 @@ extension FSPageIndicatorBar: ExternalInterface
         self.currentPage = limitIn(index, min: 0, max: totalPage - 1)
         if animated
         {
-            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
+            UIView.animate(withDuration: animationTime, delay: 0, options: .curveEaseOut) {
                 if self.scrollDirection == .horizontal
                 {
                     self.bar.x = CGFloat(self.currentPage) * (self.width - (self.bar.width > self.width / CGFloat(self.totalPage) ? self.bar.width - self.width / CGFloat(self.totalPage) : 0)) / CGFloat(self.totalPage)
