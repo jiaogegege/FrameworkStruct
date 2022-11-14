@@ -9,7 +9,6 @@
  * 主要对各种系统组件进行扩展
  */
 import Foundation
-import CommonCrypto
 
 //MARK: NSObject
 /**
@@ -371,27 +370,34 @@ extension String
         self.data(using: .utf8)
     }
     
+    ///base64编码
+    var base64: String? {
+        EncryptManager.shared.base64FromString(self)
+    }
+    
+    ///base64解码
+    var base64Decode: String? {
+        EncryptManager.shared.base64DecodeToString(self)
+    }
+    
     ///md5加密
     var md5: String {
-        let str = self.cString(using: String.Encoding.utf8)
-        let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
-        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
-        CC_MD5(str!, strLen, result)
-        let hash = NSMutableString()
-        for i in 0..<digestLen {
-            hash.appendFormat("%02x", result[i])
-        }
-        result.deallocate()
-        return hash as String
+        EncryptManager.shared.md5(self)
     }
     
     ///sha256加密
     var sha256: String {
-        let utf8 = cString(using: .utf8)
-        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
-        CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
-        return digest.reduce(String.sEmpty) { $0 + String(format:"%02x", $1) }
+        EncryptManager.shared.sha256(self)
+    }
+    
+    ///rsa加密
+    var rsa: String {
+        EncryptManager.shared.rsa(self, publicKey: rsa_public_key)
+    }
+    
+    ///rsa解密
+    var rsaDecrypt: String {
+        EncryptManager.shared.rsaDecrypt(self, privateKey: rsa_private_key)
     }
     
     ///如果字符串是url，那么拼接参数，如果value为nil，那么不拼接
@@ -474,6 +480,11 @@ extension Data
             return obj
         }
         return nil
+    }
+    
+    ///base64编码
+    var base64: String {
+        EncryptManager.shared.base64(self)
     }
     
 }

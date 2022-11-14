@@ -98,13 +98,26 @@ extension EncryptManager: ExternalInterface
     ///swift版本md5加密
     func md5(_ originStr: String) -> String
     {
-        return originStr.md5
+        let str = originStr.cString(using: String.Encoding.utf8)
+        let strLen = CUnsignedInt(originStr.lengthOfBytes(using: String.Encoding.utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+        CC_MD5(str!, strLen, result)
+        let hash = NSMutableString()
+        for i in 0..<digestLen {
+            hash.appendFormat("%02x", result[i])
+        }
+        result.deallocate()
+        return hash as String
     }
     
     ///字符串sha256加密
     func sha256(_ originStr: String) -> String
     {
-        return originStr.sha256
+        let utf8 = originStr.cString(using: .utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
+        return digest.reduce(String.sEmpty) { $0 + String(format:"%02x", $1) }
     }
     
     ///base64编码
@@ -140,15 +153,33 @@ extension EncryptManager: ExternalInterface
     }
     
     ///RSA公钥加密
-    func rsa()
+    func rsa(_ str: String, publicKey: String) -> String
     {
-        
+        var reslutStr = ""
+        do{
+            let rsa_publicKey = try PublicKey(pemEncoded: publicKey)
+            let clear = try ClearMessage(string: str, using: .utf8)
+            reslutStr = try clear.encrypted(with: rsa_publicKey, padding: .PKCS1).base64String
+             
+        }catch{
+            FSLog("RSA encrypt failed")
+        }
+        return reslutStr
     }
     
     ///RSA私钥解密
-    func rsaDecrypt()
+    func rsaDecrypt(_ str: String, privateKey: String) -> String
     {
-        
+        var resultStr = ""
+        let enData = Data(base64Encoded: str, options: .ignoreUnknownCharacters)!
+        do {
+            let rsa_privateKey = try PrivateKey(pemEncoded: privateKey)
+            let data = try EncryptedMessage(data: enData).decrypted(with: rsa_privateKey, padding: .PKCS1).data
+            resultStr = String(data: data, encoding: .utf8) ?? ""
+        } catch {
+            FSLog("RSA decrypt failed")
+        }
+        return resultStr
     }
     
     ///AES加密

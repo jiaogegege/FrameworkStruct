@@ -625,6 +625,20 @@
 		EAAEBFFC283B6ADB001C9118 /* IOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFB283B6ADB001C9118 /* IOManager.swift */; };
 		EAAEBFFE283B6B37001C9118 /* IOEmbellisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */; };
 		EAAEC000283B6E98001C9118 /* IOChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAEBFFF283B6E98001C9118 /* IOChecker.swift */; };
+		EAAFDA682921D9D500538CBF /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA582921D9D500538CBF /* PublicKey.swift */; };
+		EAAFDA692921D9D500538CBF /* EncryptedMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA592921D9D500538CBF /* EncryptedMessage.swift */; };
+		EAAFDA6A2921D9D500538CBF /* NSData+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA5A2921D9D500538CBF /* NSData+SHA.m */; };
+		EAAFDA6B2921D9D500538CBF /* ClearMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA5B2921D9D500538CBF /* ClearMessage.swift */; };
+		EAAFDA6C2921D9D500538CBF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA5C2921D9D500538CBF /* Message.swift */; };
+		EAAFDA6D2921D9D500538CBF /* Asn1Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA5D2921D9D500538CBF /* Asn1Parser.swift */; };
+		EAAFDA6E2921D9D500538CBF /* X509Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA5E2921D9D500538CBF /* X509Certificate.swift */; };
+		EAAFDA6F2921D9D500538CBF /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA5F2921D9D500538CBF /* Signature.swift */; };
+		EAAFDA702921D9D500538CBF /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA602921D9D500538CBF /* PrivateKey.swift */; };
+		EAAFDA712921D9D500538CBF /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA612921D9D500538CBF /* Key.swift */; };
+		EAAFDA732921D9D500538CBF /* SwiftyRSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA642921D9D500538CBF /* SwiftyRSA.swift */; };
+		EAAFDA742921D9D500538CBF /* SwiftyRSA+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA652921D9D500538CBF /* SwiftyRSA+ObjC.swift */; };
+		EAAFDA752921D9D500538CBF /* SwiftyRSAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA662921D9D500538CBF /* SwiftyRSAError.swift */; };
+		EAAFDA7A2921DE5900538CBF /* EncrpytConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA792921DE5900538CBF /* EncrpytConst.swift */; };
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
@@ -1693,6 +1707,23 @@
 		EAAEBFFB283B6ADB001C9118 /* IOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOManager.swift; sourceTree = "<group>"; };
 		EAAEBFFD283B6B37001C9118 /* IOEmbellisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOEmbellisher.swift; sourceTree = "<group>"; };
 		EAAEBFFF283B6E98001C9118 /* IOChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOChecker.swift; sourceTree = "<group>"; };
+		EAAFDA572921D9D500538CBF /* SwiftyRSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyRSA.h; sourceTree = "<group>"; };
+		EAAFDA582921D9D500538CBF /* PublicKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicKey.swift; sourceTree = "<group>"; };
+		EAAFDA592921D9D500538CBF /* EncryptedMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedMessage.swift; sourceTree = "<group>"; };
+		EAAFDA5A2921D9D500538CBF /* NSData+SHA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SHA.m"; sourceTree = "<group>"; };
+		EAAFDA5B2921D9D500538CBF /* ClearMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearMessage.swift; sourceTree = "<group>"; };
+		EAAFDA5C2921D9D500538CBF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		EAAFDA5D2921D9D500538CBF /* Asn1Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asn1Parser.swift; sourceTree = "<group>"; };
+		EAAFDA5E2921D9D500538CBF /* X509Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X509Certificate.swift; sourceTree = "<group>"; };
+		EAAFDA5F2921D9D500538CBF /* Signature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
+		EAAFDA602921D9D500538CBF /* PrivateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		EAAFDA612921D9D500538CBF /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		EAAFDA632921D9D500538CBF /* NSData+SHA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SHA.h"; sourceTree = "<group>"; };
+		EAAFDA642921D9D500538CBF /* SwiftyRSA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRSA.swift; sourceTree = "<group>"; };
+		EAAFDA652921D9D500538CBF /* SwiftyRSA+ObjC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftyRSA+ObjC.swift"; sourceTree = "<group>"; };
+		EAAFDA662921D9D500538CBF /* SwiftyRSAError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRSAError.swift; sourceTree = "<group>"; };
+		EAAFDA782921DE2300538CBF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EAAFDA792921DE5900538CBF /* EncrpytConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncrpytConst.swift; sourceTree = "<group>"; };
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
@@ -3206,7 +3237,7 @@
 			children = (
 				EAAA4E81276F3E4900C45712 /* README.md */,
 				EA7F2A2327DAFAAF000E27DF /* UserManager */,
-				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
+				EAAFDA772921DE0E00538CBF /* EncryptManager */,
 				EA00C86E27C213550034C95B /* NotificationManager.swift */,
 				EA5780A827D0A6C900C819E6 /* SettingsManager.swift */,
 				EABB3C9627ED7122005B98E3 /* GuideManager.swift */,
@@ -3960,6 +3991,38 @@
 			path = IOPackage;
 			sourceTree = "<group>";
 		};
+		EAAFDA562921D9D500538CBF /* SwiftyRSA */ = {
+			isa = PBXGroup;
+			children = (
+				EAAFDA572921D9D500538CBF /* SwiftyRSA.h */,
+				EAAFDA582921D9D500538CBF /* PublicKey.swift */,
+				EAAFDA592921D9D500538CBF /* EncryptedMessage.swift */,
+				EAAFDA632921D9D500538CBF /* NSData+SHA.h */,
+				EAAFDA5A2921D9D500538CBF /* NSData+SHA.m */,
+				EAAFDA5B2921D9D500538CBF /* ClearMessage.swift */,
+				EAAFDA5C2921D9D500538CBF /* Message.swift */,
+				EAAFDA5D2921D9D500538CBF /* Asn1Parser.swift */,
+				EAAFDA5E2921D9D500538CBF /* X509Certificate.swift */,
+				EAAFDA5F2921D9D500538CBF /* Signature.swift */,
+				EAAFDA602921D9D500538CBF /* PrivateKey.swift */,
+				EAAFDA612921D9D500538CBF /* Key.swift */,
+				EAAFDA642921D9D500538CBF /* SwiftyRSA.swift */,
+				EAAFDA652921D9D500538CBF /* SwiftyRSA+ObjC.swift */,
+				EAAFDA662921D9D500538CBF /* SwiftyRSAError.swift */,
+			);
+			path = SwiftyRSA;
+			sourceTree = "<group>";
+		};
+		EAAFDA772921DE0E00538CBF /* EncryptManager */ = {
+			isa = PBXGroup;
+			children = (
+				EAAFDA782921DE2300538CBF /* README.md */,
+				EA3A051B27A2714E00A96DE2 /* EncryptManager.swift */,
+				EAAFDA792921DE5900538CBF /* EncrpytConst.swift */,
+			);
+			path = EncryptManager;
+			sourceTree = "<group>";
+		};
 		EAB32C3E27CA71EA000108EA /* UserDefaultsAccessor */ = {
 			isa = PBXGroup;
 			children = (
@@ -4484,6 +4547,7 @@
 				EA99369527994F6000480147 /* TABAnimated */,
 				EA75BB292792AA7B00910B4C /* fmdb */,
 				EA3337D72797E6AA00612DC3 /* SQLCipher */,
+				EAAFDA562921D9D500538CBF /* SwiftyRSA */,
 				EA9F1CBF27916B3C0086E78C /* UIView+Extension */,
 				EA1AE44A277819E600D028F9 /* SnapKit */,
 				EA922570276B3E7C00192E2E /* SVProgressHUD */,
@@ -4840,6 +4904,7 @@
 			files = (
 				EA11127A27B3BE2C006D0B83 /* Notifications.swift in Sources */,
 				EA3E8B2727B77CEA006A2715 /* Bundle.swift in Sources */,
+				EAAFDA6A2921D9D500538CBF /* NSData+SHA.m in Sources */,
 				EA9A785627C7546100A11FC8 /* Date+Manipulations.swift in Sources */,
 				EADB00DD27624012001B7223 /* BasicNavigationController.swift in Sources */,
 				EA9A75EF27C739DF00A11FC8 /* SRError.m in Sources */,
@@ -5016,10 +5081,12 @@
 				EA0951E528FF975800A3D915 /* MusicSongListCell.swift in Sources */,
 				EAD0B93727FFC88E00DB4949 /* CommunicationAdapter.swift in Sources */,
 				EA8CFD1928EDD76700EE3B73 /* MPTagModel.swift in Sources */,
+				EAAFDA752921D9D500538CBF /* SwiftyRSAError.swift in Sources */,
 				EA1387E22764A6D80041AB89 /* SystemExtension.swift in Sources */,
 				EA3E8AF927B77CEA006A2715 /* TextAnimatorNode.swift in Sources */,
 				EA3E8ACA27B77CEA006A2715 /* CALayer+fillBounds.swift in Sources */,
 				EA3E8B3E27B77CEA006A2715 /* PathElement.swift in Sources */,
+				EAAFDA682921D9D500538CBF /* PublicKey.swift in Sources */,
 				EA3E8ABA27B77CEA006A2715 /* TextLayer.swift in Sources */,
 				EAC8A86D27625D490088293F /* SDImageLoadersManager.m in Sources */,
 				EA3E8AE727B77CEA006A2715 /* InvertedMatteLayer.swift in Sources */,
@@ -5032,6 +5099,7 @@
 				EAC8A85627625D490088293F /* SDWebImageCacheSerializer.m in Sources */,
 				EADB00DC27624012001B7223 /* BasicViewController.swift in Sources */,
 				EA3E8B4527B77DC9006A2715 /* AnimationDemoViewController.swift in Sources */,
+				EAAFDA742921D9D500538CBF /* SwiftyRSA+ObjC.swift in Sources */,
 				EAAA4E88276F3EF600C45712 /* ToastManager.swift in Sources */,
 				EAC8A84F27625D490088293F /* SDAnimatedImageView.m in Sources */,
 				EA9A75E827C739DF00A11FC8 /* SRPinningSecurityPolicy.m in Sources */,
@@ -5043,6 +5111,7 @@
 				EA99373A27994F6100480147 /* TABDropAnimationImpl.m in Sources */,
 				EA1AE493277819E600D028F9 /* ConstraintLayoutSupportDSL.swift in Sources */,
 				EA9A785727C7546100A11FC8 /* TimePeriod.swift in Sources */,
+				EAAFDA6C2921D9D500538CBF /* Message.swift in Sources */,
 				EA11127227B3BE2C006D0B83 /* URLEncodedFormEncoder.swift in Sources */,
 				EA3E8AE427B77CEA006A2715 /* LayerFontProvider.swift in Sources */,
 				EA3E8ABE27B77CEA006A2715 /* ImageLayer.swift in Sources */,
@@ -5271,6 +5340,7 @@
 				EA3E8AD127B77CEA006A2715 /* RectangleAnimation.swift in Sources */,
 				EA99371E27994F6100480147 /* TABAnimationMethod.m in Sources */,
 				EA11126C27B3BE2C006D0B83 /* RetryPolicy.swift in Sources */,
+				EAAFDA6F2921D9D500538CBF /* Signature.swift in Sources */,
 				EA99374527994F6100480147 /* UICollectionView+TABControlAnimation.m in Sources */,
 				EA3E8ADE27B77CEA006A2715 /* SolidCompositionLayer.swift in Sources */,
 				EA3E8B1B27B77CEA006A2715 /* SolidLayerModel.swift in Sources */,
@@ -5289,11 +5359,13 @@
 				EA11126327B3BE2C006D0B83 /* NetworkReachabilityManager.swift in Sources */,
 				EA00C86F27C213550034C95B /* NotificationManager.swift in Sources */,
 				EAC8A84D27625D490088293F /* UIImageView+HighlightedWebCache.m in Sources */,
+				EAAFDA6B2921D9D500538CBF /* ClearMessage.swift in Sources */,
 				EA9A78D427C756C900A11FC8 /* MPITextDebugOption.m in Sources */,
 				EA8CFD1128EDD74600EE3B73 /* MPLyricModel.swift in Sources */,
 				EA779522276C68AF00D9707F /* ModalTestViewController.swift in Sources */,
 				EA1AE472277819E600D028F9 /* ConstraintMakerPrioritizable.swift in Sources */,
 				EA3E8ABF27B77CEA006A2715 /* SolidLayer.swift in Sources */,
+				EAAFDA712921D9D500538CBF /* Key.swift in Sources */,
 				EA7F3E0F27BB798200C3E33F /* DatasContainer.swift in Sources */,
 				EA7A7CB92788305200DD2310 /* WeakSet.m in Sources */,
 				EA3E8B3127B77CEA006A2715 /* Asset.swift in Sources */,
@@ -5396,6 +5468,8 @@
 				EAC8A84E27625D490088293F /* SDAnimatedImage.m in Sources */,
 				EA66D31F290CC1270096D2AF /* ScrollAnimationView.swift in Sources */,
 				EA9A78F127C75DA900A11FC8 /* WebViewJavascriptBridge_JS.m in Sources */,
+				EAAFDA732921D9D500538CBF /* SwiftyRSA.swift in Sources */,
+				EAAFDA702921D9D500538CBF /* PrivateKey.swift in Sources */,
 				EA3E8C3027B782C4006A2715 /* POPAnimationRuntime.mm in Sources */,
 				EA3E8B2C27B77CEA006A2715 /* TextAnimator.swift in Sources */,
 				EA9A78C927C756C900A11FC8 /* MPITextInteractiveGestureRecognizer.m in Sources */,
@@ -5415,6 +5489,7 @@
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
 				EA11127827B3BE2C006D0B83 /* RequestTaskMap.swift in Sources */,
 				EA99371F27994F6100480147 /* TABAnimatedInjectionIIIHelper.m in Sources */,
+				EAAFDA7A2921DE5900538CBF /* EncrpytConst.swift in Sources */,
 				EA9A78D727C756C900A11FC8 /* MPITextRenderAttributes.m in Sources */,
 				EA44FD3E28921DFF00977943 /* SafariServiceAdapter.swift in Sources */,
 				EA3E8AF627B77CEA006A2715 /* RectNode.swift in Sources */,
@@ -5449,6 +5524,7 @@
 				EAC8A85227625D490088293F /* SDAnimatedImagePlayer.m in Sources */,
 				EA9A75F227C739DF00A11FC8 /* SRIOConsumer.m in Sources */,
 				EA3E8AEF27B77CEA006A2715 /* FillRenderer.swift in Sources */,
+				EAAFDA6E2921D9D500538CBF /* X509Certificate.swift in Sources */,
 				EAC8A76B27625BA70088293F /* MJPropertyType.m in Sources */,
 				EA99373D27994F6100480147 /* TABShimmerAnimation.m in Sources */,
 				EAF0986328F4151E00AB487E /* MusicViewController.swift in Sources */,
@@ -5515,6 +5591,7 @@
 				EADB011D276242D1001B7223 /* TimeEmbellisher.swift in Sources */,
 				EA9A785C27C7546100A11FC8 /* TimePeriodChain.swift in Sources */,
 				EA8CFD0D28EDD73900EE3B73 /* MPAlbumModel.swift in Sources */,
+				EAAFDA692921D9D500538CBF /* EncryptedMessage.swift in Sources */,
 				EADB01382762433C001B7223 /* ThemeManager.swift in Sources */,
 				EAAE472B28DD5D6700C244C8 /* iCloudAccessorConst.swift in Sources */,
 				EA11128027B3BE2C006D0B83 /* HTTPHeaders.swift in Sources */,
@@ -5552,6 +5629,7 @@
 				EA99373127994F6100480147 /* TABComponentLayerClassicSerializationImpl.m in Sources */,
 				EAACA84027FE7BCB008EA586 /* CopyPasteViewController.swift in Sources */,
 				EA1AE475277819E600D028F9 /* ConstraintViewDSL.swift in Sources */,
+				EAAFDA6D2921D9D500538CBF /* Asn1Parser.swift in Sources */,
 				EA3E8AAC27B77CEA006A2715 /* Interpolatable.swift in Sources */,
 				EA3E8AD027B77CEA006A2715 /* TransformAnimations.swift in Sources */,
 				EA3E8AC527B77CEA006A2715 /* CALayer+setupLayerHierarchy.swift in Sources */,
