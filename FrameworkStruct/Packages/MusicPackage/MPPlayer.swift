@@ -610,15 +610,16 @@ extension MPPlayer: ExternalInterface
     {
         if !isFree  //不空闲的时候才更新播放列表
         {
-            //主要是更新index列表，并且是同一个播放列表
+            //主要是更新index列表，并且是同一个播放列表，将会重置index列表
             if playlist.playlistId == currentPlaylist?.playlistId
             {
                 self.playlistIndexArray.removeAll()
+                //生成新的index数组
                 for index in 0..<self.currentPlaylist!.playlistAudios.count
                 {
                     self.playlistIndexArray.append(index)
                 }
-                
+                //如果当前正在播放歌曲，那么做以下处理
                 if let au = currentAudio
                 {
                     let curIndex = playlist.getIndexOf(audio: au)

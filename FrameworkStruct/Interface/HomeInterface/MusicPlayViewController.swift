@@ -46,6 +46,9 @@ class MusicPlayViewController: BasicViewController {
         return v
     }()
     
+    //是否在拖动进度条，拖动的时候不应该修改进度条数值
+    fileprivate var isDragProgress: Bool = false
+    
     //MARK: 方法
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -286,9 +289,11 @@ class MusicPlayViewController: BasicViewController {
         progressBar.value = 0.0
         progressBar.setThumbImage(.iPlayProgressBtn, for: .normal)
         progressBar.minimumTrackTintColor = .white
-        progressBar.maximumTrackTintColor = .gray.withAlphaComponent(0.5)
+        progressBar.maximumTrackTintColor = .gray.withAlphaComponent(0.4)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpInside)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpOutside)
+        progressBar.addTarget(self, action: #selector(progressBeginDrag(sender:)), for: .touchDown)
+        progressBar.addTarget(self, action: #selector(progressCancelDrag(sender:)), for: .touchCancel)
         
         favoriteBtn.setImage(.iPlayUnfavoriteBtn, for: .normal)
         favoriteBtn.setImage(.iPlayFavoriteBtn, for: .selected)
@@ -443,12 +448,24 @@ class MusicPlayViewController: BasicViewController {
             }
         }
     }
+    
+    //开始拖动进度条
+    @objc func progressBeginDrag(sender: UISlider)
+    {
+        self.isDragProgress = true
+    }
+    
+    //取消拖动进度条
+    @objc func progressCancelDrag(sender: UISlider)
+    {
+        self.isDragProgress = false
+    }
 
     //进度条拖动
     @objc func progressBarAction(sender: UISlider)
     {
-        mpr.setCurrentTime(TimeInterval(sender.value)) { (succeed) in
-            
+        mpr.setCurrentTime(TimeInterval(sender.value)) {[weak self] (succeed) in
+            self?.isDragProgress = false
         }
     }
     
@@ -507,19 +524,21 @@ class MusicPlayViewController: BasicViewController {
             }
         }
         lyricView.isHidden = false
-        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
             self.albumView.alpha = 0.0
             self.lyricView.alpha = 1.0
         } completion: { finished in
             self.albumView.isHidden = true
+            self.albumView.stopAnimation()
         }
     }
     
     //隐藏歌词view
     fileprivate func hideLyricView()
     {
+        albumView.startAnimation()
         albumView.isHidden = false
-        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
             self.albumView.alpha = 1.0
             self.lyricView.alpha = 0.0
         } completion: { finished in
@@ -582,7 +601,10 @@ extension MusicPlayViewController: DelegateProtocol, MPManagerDelegate
     
     func mpManagerProgressChange(_ progress: TimeInterval) {
         pastTimeLabel.text = TimeEmbellisher.shared.convertSecondsToMinute(Int(mpr.currentPastTime))
-        progressBar.setValue(Float(progress), animated: false)
+        if !isDragProgress
+        {
+            progressBar.setValue(Float(progress), animated: false)
+        }
         if albumView.isHidden == true   //如果专辑图隐藏了，说明在显示歌词
         {
             lyricView.setCurrentTime(progress)

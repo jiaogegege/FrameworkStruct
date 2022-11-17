@@ -71,7 +71,7 @@ class MPLrcContentCell: UITableViewCell {
 extension MPLrcContentCell: InternalType
 {
     //原始字体大小
-    static let fontSize: CGFloat = fitX(18.0)
+    static let fontSize: CGFloat = fitX(17.0)
     //较小的字体
     static let smallFontSize: CGFloat = fitX(15.0)
     

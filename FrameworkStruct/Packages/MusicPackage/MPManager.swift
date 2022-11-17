@@ -1024,6 +1024,13 @@ extension MPManager: ExternalInterface
                 }
             }
         }
+        else
+        {
+            if let cb = completion
+            {
+                cb(false)
+            }
+        }
     }
     
     ///播放模式
