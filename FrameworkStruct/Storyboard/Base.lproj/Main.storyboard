@@ -397,7 +397,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="0vH-W0-FYx"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="NotoSansMyanmar-Bold" family="Noto Sans Myanmar" pointSize="29"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

@@ -35,6 +35,8 @@ class HealthCodeViewController: BasicViewController {
     
     fileprivate var scrollView: UIScrollView!
     fileprivate var headView: UIImageView!
+    fileprivate var nameTextField: UITextField!     //姓名
+    fileprivate var idCardField: UITextField!       //身份证
     fileprivate var scrollContentView: UIView!      //滚动横幅
     fileprivate var scrollContainerView: UIView!
     fileprivate var contentLabel: UILabel!          //滚动横幅文字
@@ -199,6 +201,24 @@ class HealthCodeViewController: BasicViewController {
         headView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(headView.snp.width).multipliedBy(100.0 / 375.0)
+        }
+        
+        nameTextField = UITextField()
+        scrollView.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { make in
+            make.left.equalTo(294)
+            make.top.equalTo(19)
+            make.height.equalTo(20)
+            make.right.equalTo(0)
+        }
+        
+        idCardField = UITextField()
+        scrollView.addSubview(idCardField)
+        idCardField.snp.makeConstraints { make in
+            make.top.equalTo(72)
+            make.left.equalTo(230)
+            make.height.equalTo(16)
+            make.right.equalTo(0)
         }
         
         //滚动文字
@@ -391,6 +411,19 @@ class HealthCodeViewController: BasicViewController {
         
         headView.image = UIImage.iHealthCodeHead
         
+        nameTextField.text = "姚五岳"
+        nameTextField.delegate = self
+        nameTextField.textColor = UIColor.colorWithHex("C1F0FF")
+        nameTextField.font = .boldSystemFont(ofSize: 20)
+        nameTextField.returnKeyType = .done
+        
+        idCardField.text = "321******8609"
+        idCardField.delegate = self
+        idCardField.textColor = UIColor.colorWithHex("F5FFFF")
+        idCardField.font = UIFont.init(name: "Arial", size: 21)
+        idCardField.returnKeyType = .done
+        idCardField.isHidden = true
+        
         scrollContentView.backgroundColor = UIColor.colorFromHex(0xfefaf0)
         
         scrollContainerView.clipsToBounds = true
@@ -497,4 +530,14 @@ class HealthCodeViewController: BasicViewController {
         self.canScrollContent = false
         endTimer()
     }
+}
+
+
+extension HealthCodeViewController: DelegateProtocol, UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
