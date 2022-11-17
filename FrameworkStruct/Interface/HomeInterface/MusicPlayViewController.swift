@@ -192,7 +192,7 @@ class MusicPlayViewController: BasicViewController {
             make.left.equalTo(fitX(8))
             make.height.equalTo(fitX(13))
             make.bottom.equalTo(bottomContainerView.snp.top).offset(fitX(-10))
-            make.width.equalTo(fitX(50))
+            make.width.equalTo(fitX(48))
         }
         totalTimeLabel = UILabel()
         view.addSubview(totalTimeLabel)
@@ -200,14 +200,14 @@ class MusicPlayViewController: BasicViewController {
             make.right.equalTo(fitX(-8))
             make.height.equalTo(fitX(13))
             make.centerY.equalTo(pastTimeLabel)
-            make.width.equalTo(fitX(50))
+            make.width.equalTo(fitX(48))
         }
         //进度条
         progressBar = UISlider()
         view.addSubview(progressBar)
         progressBar.snp.makeConstraints { (make) in
-            make.left.equalTo(pastTimeLabel.snp.right).offset(fitX(3))
-            make.right.equalTo(totalTimeLabel.snp.left).offset(fitX(-3))
+            make.left.equalTo(pastTimeLabel.snp.right).offset(fitX(5))
+            make.right.equalTo(totalTimeLabel.snp.left).offset(fitX(-5))
             make.height.equalTo(fitX(13))
             make.centerY.equalTo(pastTimeLabel)
         }
@@ -286,7 +286,7 @@ class MusicPlayViewController: BasicViewController {
         progressBar.value = 0.0
         progressBar.setThumbImage(.iPlayProgressBtn, for: .normal)
         progressBar.minimumTrackTintColor = .white
-        progressBar.maximumTrackTintColor = .gray
+        progressBar.maximumTrackTintColor = .gray.withAlphaComponent(0.5)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpInside)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpOutside)
         
@@ -302,6 +302,22 @@ class MusicPlayViewController: BasicViewController {
         //更新歌曲显示信息
         if let song = song as? MPSongModel, let asset = song.asset {
             bgImgView.image = asset[.artwork] as? UIImage ?? UIImage.iMiku_0
+            //调整模糊图层的色调
+            if let img = asset[.artwork] as? UIImage {
+                img.getMainHue {[weak self] color in
+                    if let color = color {
+                        self?.bgBlurView.backgroundColor = color.withAlphaComponent(0.5)
+                    }
+                    else
+                    {
+                        self?.bgBlurView.backgroundColor = .clear
+                    }
+                }
+            }
+            else
+            {
+                bgBlurView.backgroundColor = .clear
+            }
             songNameLabel.text = song.name
             artistLabel.text = (asset[.artist] as? String ?? "") + " - " + (asset[.albumName] as? String ?? "")
             favoriteBtn.isSelected = song.isFavorite

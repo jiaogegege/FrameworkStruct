@@ -553,11 +553,21 @@ extension MPPlayer: ExternalInterface
     {
         //先暂停
         self.pause()
+        
+        //给基础数据赋值
         self.playResultCallback = completion
         self.currentAudio = audio
         if playlist.playlistId != currentPlaylist?.playlistId
         {
             self.currentPlaylist = playlist
+        }
+        
+        //记录当前歌曲在播放列表中的index
+        self.currentIndex = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
+        //如果没有找到，那么根据规则找到下一首，理论上应该都能找到
+        if self.currentIndex < 0
+        {
+            self.currentAudio = getNextAudioByMode()
         }
         
         self.playlistIndexArray.removeAll()
@@ -572,14 +582,6 @@ extension MPPlayer: ExternalInterface
             {
                 self.playlistIndexArray.append(index)
             }
-        }
-        
-        //记录当前歌曲在播放列表中的index
-        let index = self.currentPlaylist!.getIndexOf(audio: self.currentAudio)
-        //如果没有找到，那么根据规则找到下一首
-        if index < 0
-        {
-            self.currentAudio = getNextAudioByMode()
         }
         
         self.elapsedAudioArray.removeAll()      //每次开始一个新的播放列表时，都清空原来的临时播放记录
@@ -616,15 +618,23 @@ extension MPPlayer: ExternalInterface
                 {
                     self.playlistIndexArray.append(index)
                 }
-                //如果当前播放的歌曲已经不在新的播放列表中了，那么播放下一首
+                
                 if let au = currentAudio
                 {
-                    if playlist.getIndexOf(audio: au) < 0
+                    let curIndex = playlist.getIndexOf(audio: au)
+                    if curIndex < 0   //如果当前播放的歌曲已经不在新的播放列表中了，那么播放下一首
                     {
                         currentIndex -= 1   //修正index，因为正在播放的歌曲被删除了，所以index - 1
                         if isPlaying
                         {
                             next()
+                        }
+                    }
+                    else    //如果当前播放歌曲还在播放列表中，那么从index数组中删除这首歌的index
+                    {
+                        if playMode == .random
+                        {
+                            self.playlistIndexArray.remove(at: curIndex)    //编号和数组序号相同，所以可以这么操作
                         }
                     }
                 }

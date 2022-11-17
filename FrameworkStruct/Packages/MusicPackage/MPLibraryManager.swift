@@ -216,9 +216,18 @@ extension MPLibraryManager: ExternalInterface
     func saveCurrent(_ song: MPSongModel, in playlist: MPPlaylistModel)
     {
         //当前歌曲
-        container.setCurrentSong(song)
+        readCurrentSong({[weak self] curSong in
+            if song.id != curSong?.id {
+                self?.container.setCurrentSong(song)
+            }
+        })
         //当前播放列表
-        container.setCurrentPlaylist(playlist)
+        readCurrentPlaylist { curPlaylist in
+            if curPlaylist?.id != playlist.id || curPlaylist?.audios.count != playlist.audios.count
+            {
+                self.container.setCurrentPlaylist(playlist)
+            }
+        }
         
         //如果历史播放歌曲中还没有这首歌，那么在历史播放歌曲中新增一个，在最前位置
         container.getHistorySongs {[weak self] historySongs in

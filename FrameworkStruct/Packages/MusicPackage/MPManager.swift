@@ -824,7 +824,7 @@ extension MPManager: InternalType
     static let backgroundTaskTime: TimeInterval = 20.0
     
     //打开歌曲文件超时时长
-    static let openFileTimeoutTime: TimeInterval = 15.0
+    static let openFileTimeoutTime: TimeInterval = 12.0
     
     //状态管理器的key
     enum StatusKey: SMKeyType {

@@ -321,6 +321,9 @@ iOS App基础架构设计
         * CopyPasteViewController
         * iCloudFileViewController
         * EditiCloudFileViewController
+        * MusicViewController
+        * SonglistViewController
+        * MusicPlayViewController
         ...
 	* `MineInterface`
 		* `Models`：数据模型目录，`xxxModel`等
@@ -390,6 +393,7 @@ iOS App基础架构设计
 	* BluetoothAdpater：蓝牙适配器
     * SocializeAdapter：社会化适配器
     * FileManageAdapter：文件管理适配器
+    * RegexAdapter：正则表达式适配器
     * ArchiverAdapter：归解档适配器
 	* NotificationAdapter：系统推送通知适配器
 	* CalendarAdapter：系统日历和提醒事项适配器
@@ -415,12 +419,15 @@ iOS App基础架构设计
 	* HomeDataModel：首页数据模型
     ...
 * `MusicPackage`
+    * MusicPlayMiniView：Mini音乐播放器视图
     * MPManager：音乐管理器
+    * MPLrcManager：歌词管理器
     * MPEmbellisher：音乐修饰器
     * MPPlayer：音乐播放器
     * MPLibraryManager：音乐库管理器
     * MPContainer：音乐容器
     * MPConst：音乐包常亮定义
+    * Datas：数据模型
 * `ThemePackage`：主题功能包
     * ThemeManager：主题管理器
     * ThemeContainer：主题容器
@@ -489,14 +496,16 @@ iOS App基础架构设计
 * SocketRocket：socket库
 * CocoaAsyncSocket：socket库
 * YYImage：本地图片加载库
+* iOSPalette：提取图片色调
 * TYAttributedLabel：富文本Label组件
 * pop：pop动画库
 * lottie-ios：lottie动画库
 * NSString+DES：字符串DES加密库
 * BAButton：UIButton扩展
 * TABAnimated：骨架图
-* SQLCipher：数据库加密
 * fmdb：SQLite数据库访问
+* SQLCipher：数据库加密
+* SwiftyRSA：RSA加密解密
 * UIView+Extension：UIView扩展
 * SnapKit：swift代码约束库
 * SVProgressHUD：Toast组件

@@ -681,6 +681,7 @@ extension UIImage
     }
     
     ///将图片编码为base64字符串
+    ///imageType：图片类型，目前支持png和jpg
     func base64(imageType: FileTypeName = .png) -> String?
     {
         guard let data = imageType == .png ? self.pngData() : self.jpegData(compressionQuality: 1) else {
@@ -717,6 +718,26 @@ extension UIImage
         }
         
         return nil
+    }
+    
+    ///提取图片主色调并返回颜色
+    func getMainHue(_ callback: @escaping ((UIColor?) -> Void))
+    {
+        self.getPaletteImageColor { recommendColor, allColors, error in
+            guard error == nil else {
+                FSLog(error!.localizedDescription)
+                callback(nil)
+                return
+            }
+            
+            if let rmdStr = recommendColor?.imageColorString {
+                callback(UIColor.colorWithHex(rmdStr))
+            }
+            else
+            {
+                callback(nil)
+            }
+        }
     }
     
 }

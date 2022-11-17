@@ -795,6 +795,13 @@
 		EADE522427F6F470005417BE /* ClipboardAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522327F6F470005417BE /* ClipboardAdapter.swift */; };
 		EADE522827F6F554005417BE /* SocializeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE522727F6F554005417BE /* SocializeActivity.swift */; };
 		EAE0079427B63DEA008C71B4 /* HomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE0079327B63DEA008C71B4 /* HomeDataModel.m */; };
+		EAE2D0E82925C54B00B76B5F /* PaletteColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0D82925C54B00B76B5F /* PaletteColorUtils.m */; };
+		EAE2D0E92925C54B00B76B5F /* Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0D92925C54B00B76B5F /* Palette.m */; };
+		EAE2D0EA2925C54B00B76B5F /* PaletteSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0DA2925C54B00B76B5F /* PaletteSwatch.m */; };
+		EAE2D0EB2925C54B00B76B5F /* UIImage+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0DD2925C54B00B76B5F /* UIImage+Palette.m */; };
+		EAE2D0EC2925C54B00B76B5F /* PaletteColorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0E42925C54B00B76B5F /* PaletteColorModel.m */; };
+		EAE2D0ED2925C54B00B76B5F /* PriorityBoxArray.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0E52925C54B00B76B5F /* PriorityBoxArray.m */; };
+		EAE2D0EE2925C54B00B76B5F /* PaletteTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2D0E62925C54B00B76B5F /* PaletteTarget.m */; };
 		EAE6A33228E3EA030049E15F /* EditiCloudFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */; };
 		EAE6A33428E41FD30049E15F /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE6A33328E41FD30049E15F /* HealthKit.framework */; };
 		EAEA8BC527858FCD00C22997 /* GraphicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */; };
@@ -2058,6 +2065,21 @@
 		EADE522727F6F554005417BE /* SocializeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocializeActivity.swift; sourceTree = "<group>"; };
 		EAE0079227B63DEA008C71B4 /* HomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDataModel.h; sourceTree = "<group>"; };
 		EAE0079327B63DEA008C71B4 /* HomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDataModel.m; sourceTree = "<group>"; };
+		EAE2D0D82925C54B00B76B5F /* PaletteColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteColorUtils.m; sourceTree = "<group>"; };
+		EAE2D0D92925C54B00B76B5F /* Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Palette.m; sourceTree = "<group>"; };
+		EAE2D0DA2925C54B00B76B5F /* PaletteSwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteSwatch.m; sourceTree = "<group>"; };
+		EAE2D0DB2925C54B00B76B5F /* iOSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSPalette.h; sourceTree = "<group>"; };
+		EAE2D0DC2925C54B00B76B5F /* PriorityBoxArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityBoxArray.h; sourceTree = "<group>"; };
+		EAE2D0DD2925C54B00B76B5F /* UIImage+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Palette.m"; sourceTree = "<group>"; };
+		EAE2D0DE2925C54B00B76B5F /* PaletteTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteTarget.h; sourceTree = "<group>"; };
+		EAE2D0DF2925C54B00B76B5F /* PaletteSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteSwatch.h; sourceTree = "<group>"; };
+		EAE2D0E02925C54B00B76B5F /* Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Palette.h; sourceTree = "<group>"; };
+		EAE2D0E12925C54B00B76B5F /* PaletteColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteColorUtils.h; sourceTree = "<group>"; };
+		EAE2D0E32925C54B00B76B5F /* PaletteColorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteColorModel.h; sourceTree = "<group>"; };
+		EAE2D0E42925C54B00B76B5F /* PaletteColorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteColorModel.m; sourceTree = "<group>"; };
+		EAE2D0E52925C54B00B76B5F /* PriorityBoxArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityBoxArray.m; sourceTree = "<group>"; };
+		EAE2D0E62925C54B00B76B5F /* PaletteTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteTarget.m; sourceTree = "<group>"; };
+		EAE2D0E72925C54B00B76B5F /* UIImage+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Palette.h"; sourceTree = "<group>"; };
 		EAE6A33128E3EA030049E15F /* EditiCloudFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditiCloudFileViewController.swift; sourceTree = "<group>"; };
 		EAE6A33328E41FD30049E15F /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		EAEA8BC427858FCD00C22997 /* GraphicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicsManager.swift; sourceTree = "<group>"; };
@@ -4539,6 +4561,7 @@
 				EA9A75AF27C739DE00A11FC8 /* SocketRocket */,
 				EA9A759527C730C000A11FC8 /* CocoaAsyncSocket */,
 				EA9A757827C7216D00A11FC8 /* YYImage */,
+				EAE2D0D72925C54B00B76B5F /* iOSPalette */,
 				EA9A755227C7210200A11FC8 /* TYAttributedLabel */,
 				EA3E8BE527B782C3006A2715 /* pop */,
 				EA3E89B427B77CE8006A2715 /* lottie-ios */,
@@ -4746,6 +4769,36 @@
 				EADE522727F6F554005417BE /* SocializeActivity.swift */,
 			);
 			path = SocializeAdapter;
+			sourceTree = "<group>";
+		};
+		EAE2D0D72925C54B00B76B5F /* iOSPalette */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2D0DB2925C54B00B76B5F /* iOSPalette.h */,
+				EAE2D0E02925C54B00B76B5F /* Palette.h */,
+				EAE2D0D92925C54B00B76B5F /* Palette.m */,
+				EAE2D0DC2925C54B00B76B5F /* PriorityBoxArray.h */,
+				EAE2D0E52925C54B00B76B5F /* PriorityBoxArray.m */,
+				EAE2D0E72925C54B00B76B5F /* UIImage+Palette.h */,
+				EAE2D0DD2925C54B00B76B5F /* UIImage+Palette.m */,
+				EAE2D0DE2925C54B00B76B5F /* PaletteTarget.h */,
+				EAE2D0E62925C54B00B76B5F /* PaletteTarget.m */,
+				EAE2D0DF2925C54B00B76B5F /* PaletteSwatch.h */,
+				EAE2D0DA2925C54B00B76B5F /* PaletteSwatch.m */,
+				EAE2D0E12925C54B00B76B5F /* PaletteColorUtils.h */,
+				EAE2D0D82925C54B00B76B5F /* PaletteColorUtils.m */,
+				EAE2D0E22925C54B00B76B5F /* Model */,
+			);
+			path = iOSPalette;
+			sourceTree = "<group>";
+		};
+		EAE2D0E22925C54B00B76B5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2D0E32925C54B00B76B5F /* PaletteColorModel.h */,
+				EAE2D0E42925C54B00B76B5F /* PaletteColorModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EAF6D8C529189D3200F808BC /* RegexAdapter */ = {
@@ -4989,6 +5042,7 @@
 				EA3E8AD827B77CEA006A2715 /* VisibilityAnimation.swift in Sources */,
 				EA91D18227C2034200DD1BE1 /* BluetoothAdapter.swift in Sources */,
 				EA99374627994F6100480147 /* TABViewAnimated.m in Sources */,
+				EAE2D0EA2925C54B00B76B5F /* PaletteSwatch.m in Sources */,
 				EAC8A85127625D490088293F /* SDImageAWebPCoder.m in Sources */,
 				EA922562276B1BCF00192E2E /* ContainerMonitor.swift in Sources */,
 				EA3E8AB127B77CEA006A2715 /* LottieLogger.swift in Sources */,
@@ -5114,6 +5168,7 @@
 				EAAFDA6C2921D9D500538CBF /* Message.swift in Sources */,
 				EA11127227B3BE2C006D0B83 /* URLEncodedFormEncoder.swift in Sources */,
 				EA3E8AE427B77CEA006A2715 /* LayerFontProvider.swift in Sources */,
+				EAE2D0E82925C54B00B76B5F /* PaletteColorUtils.m in Sources */,
 				EA3E8ABE27B77CEA006A2715 /* ImageLayer.swift in Sources */,
 				EAC8A86A27625D490088293F /* SDImageGIFCoder.m in Sources */,
 				EA3E8B3427B77CEA006A2715 /* AnimatorNodeDebugging.swift in Sources */,
@@ -5171,6 +5226,7 @@
 				EA9A785D27C7546100A11FC8 /* Date+Comparators.swift in Sources */,
 				EA3E8B0E27B77CEA006A2715 /* Ellipse.swift in Sources */,
 				EA9A786027C7546100A11FC8 /* Integer+DateTools.swift in Sources */,
+				EAE2D0ED2925C54B00B76B5F /* PriorityBoxArray.m in Sources */,
 				EA3E8AA927B77CEA006A2715 /* AnimationTime.swift in Sources */,
 				EA1AE47F277819E600D028F9 /* ConstraintConfig.swift in Sources */,
 				EA1AE48D277819E600D028F9 /* Constraint.swift in Sources */,
@@ -5219,6 +5275,7 @@
 				EA3E8AAA27B77CEA006A2715 /* Vectors.swift in Sources */,
 				EA9A78C727C756C900A11FC8 /* MPITextBackgroundsInfo.m in Sources */,
 				EA9A759B27C730C100A11FC8 /* GCDAsyncUdpSocket.m in Sources */,
+				EAE2D0EB2925C54B00B76B5F /* UIImage+Palette.m in Sources */,
 				EAC8A87227625D490088293F /* UIImageView+WebCache.m in Sources */,
 				EAC8A84C27625D490088293F /* SDImageIOAnimatedCoder.m in Sources */,
 				EADB007B27623B59001B7223 /* AppDelegate.swift in Sources */,
@@ -5245,6 +5302,7 @@
 				EA3E8AB427B77CEA006A2715 /* ColorValueProvider.swift in Sources */,
 				EAC8A85E27625D490088293F /* SDImageAPNGCoder.m in Sources */,
 				EA20865727C4B16900B63C8E /* VideoConst.swift in Sources */,
+				EAE2D0EE2925C54B00B76B5F /* PaletteTarget.m in Sources */,
 				EA92257C276B3E7C00192E2E /* SVProgressAnimatedView.m in Sources */,
 				EAC8A85327625D490088293F /* UIImage+Transform.m in Sources */,
 				EA3E8B3527B77CEA006A2715 /* CGFloatExtensions.swift in Sources */,
@@ -5489,6 +5547,7 @@
 				EAC8A87A27625D490088293F /* UIView+WebCacheOperation.m in Sources */,
 				EA11127827B3BE2C006D0B83 /* RequestTaskMap.swift in Sources */,
 				EA99371F27994F6100480147 /* TABAnimatedInjectionIIIHelper.m in Sources */,
+				EAE2D0EC2925C54B00B76B5F /* PaletteColorModel.m in Sources */,
 				EAAFDA7A2921DE5900538CBF /* EncrpytConst.swift in Sources */,
 				EA9A78D727C756C900A11FC8 /* MPITextRenderAttributes.m in Sources */,
 				EA44FD3E28921DFF00977943 /* SafariServiceAdapter.swift in Sources */,
@@ -5592,6 +5651,7 @@
 				EA9A785C27C7546100A11FC8 /* TimePeriodChain.swift in Sources */,
 				EA8CFD0D28EDD73900EE3B73 /* MPAlbumModel.swift in Sources */,
 				EAAFDA692921D9D500538CBF /* EncryptedMessage.swift in Sources */,
+				EAE2D0E92925C54B00B76B5F /* Palette.m in Sources */,
 				EADB01382762433C001B7223 /* ThemeManager.swift in Sources */,
 				EAAE472B28DD5D6700C244C8 /* iCloudAccessorConst.swift in Sources */,
 				EA11128027B3BE2C006D0B83 /* HTTPHeaders.swift in Sources */,

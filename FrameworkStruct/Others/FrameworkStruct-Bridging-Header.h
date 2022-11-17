@@ -45,6 +45,7 @@
 #import "WebViewJavascriptBridge.h"
 #import "WKWebViewJavascriptBridge.h"
 #import "SwiftyRSA.h"
+#import "iOSPalette.h"
 
 
 #pragma mark - 数据模型
