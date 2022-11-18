@@ -55,11 +55,11 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="804"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="cff-dz-KJZ">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cff-dz-KJZ" id="A7b-Vn-aGK">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="922" y="138"/>
+            <point key="canvasLocation" x="921.02803738317755" y="137.36501079913609"/>
         </scene>
         <!--主题选择-->
         <scene sceneID="OLQ-a9-nhN">
@@ -1319,7 +1319,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHz-hv-58G">
                                         <rect key="frame" x="10" y="0.0" width="120" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="jXk-2x-QKF"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="jXk-2x-QKF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1343,6 +1343,7 @@
                                     <constraint firstItem="X4o-ev-JJt" firstAttribute="top" secondItem="Dop-4X-32R" secondAttribute="top" id="1dV-gB-io6"/>
                                     <constraint firstAttribute="bottom" secondItem="X4o-ev-JJt" secondAttribute="bottom" id="4Fj-7o-74E"/>
                                     <constraint firstItem="X4o-ev-JJt" firstAttribute="leading" secondItem="HHz-hv-58G" secondAttribute="trailing" id="D8P-D9-xsq"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X4o-ev-JJt" secondAttribute="trailing" constant="12" id="DFe-pi-kqm"/>
                                     <constraint firstAttribute="height" constant="50" id="FJ6-1b-5pB"/>
                                     <constraint firstItem="X4o-ev-JJt" firstAttribute="centerY" secondItem="Dop-4X-32R" secondAttribute="centerY" id="FNz-nd-YUI"/>
                                     <constraint firstAttribute="bottom" secondItem="HHz-hv-58G" secondAttribute="bottom" id="cPr-VC-rS1"/>

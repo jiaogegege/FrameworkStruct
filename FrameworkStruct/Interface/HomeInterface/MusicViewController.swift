@@ -516,13 +516,19 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     //                g_toast(text: (success ? "播放成功" : "播放失败"))
                     if success
                     {
-                        self?.push(MusicPlayViewController.getViewController())
+                        if ControllerManager.shared.isTopVC(self)
+                        {
+                            self?.push(MusicPlayViewController.getViewController())
+                        }
                     }
                 }
             }
             else
             {
-                push(MusicPlayViewController.getViewController())
+                if ControllerManager.shared.isTopVC(self)
+                {
+                    push(MusicPlayViewController.getViewController())
+                }
             }
         }
         else
@@ -535,13 +541,19 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     //                    g_toast(text: (success ? "播放成功" : "播放失败"))
                         if success
                         {
-                            self?.push(MusicPlayViewController.getViewController())
+                            if ControllerManager.shared.isTopVC(self)
+                            {
+                                self?.push(MusicPlayViewController.getViewController())
+                            }
                         }
                     }
                 }
                 else
                 {
-                    push(MusicPlayViewController.getViewController())
+                    if ControllerManager.shared.isTopVC(self)
+                    {
+                        push(MusicPlayViewController.getViewController())
+                    }
                 }
             }
             else if type == .favorite   //我喜欢
@@ -552,13 +564,19 @@ extension MusicViewController: DelegateProtocol, UITableViewDelegate, UITableVie
     //                    g_toast(text: (success ? "播放成功" : "播放失败"))
                         if success
                         {
-                            self?.push(MusicPlayViewController.getViewController())
+                            if ControllerManager.shared.isTopVC(self)
+                            {
+                                self?.push(MusicPlayViewController.getViewController())
+                            }
                         }
                     }
                 }
                 else
                 {
-                    push(MusicPlayViewController.getViewController())
+                    if ControllerManager.shared.isTopVC(self)
+                    {
+                        push(MusicPlayViewController.getViewController())
+                    }
                 }
             }
             else if type == .songLists      //歌单

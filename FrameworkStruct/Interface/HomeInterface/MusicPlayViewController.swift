@@ -239,7 +239,7 @@ class MusicPlayViewController: BasicViewController {
         super.configUI()
         view.backgroundColor = .lightGray
         
-        bgImgView.contentMode = .scaleAspectFill
+        bgImgView.contentMode = .scaleToFill
         bgImgView.clipsToBounds = true
         bgImgView.image = UIImage.iMiku_0
         

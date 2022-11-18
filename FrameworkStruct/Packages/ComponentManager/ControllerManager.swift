@@ -148,4 +148,12 @@ extension ControllerManager: ExternalInterface
         self.topVC.present(controller, animated: animated)
     }
     
+    ///判断某个控制器是否在最前面
+    func isTopVC(_ aVC: UIViewController?) -> Bool
+    {
+        guard let avc = aVC else { return false }
+        
+        return avc.isEqual(self.currentVC)
+    }
+    
 }
