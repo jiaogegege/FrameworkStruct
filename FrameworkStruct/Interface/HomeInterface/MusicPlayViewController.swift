@@ -536,7 +536,10 @@ class MusicPlayViewController: BasicViewController {
     //隐藏歌词view
     fileprivate func hideLyricView()
     {
-        albumView.startAnimation()
+        if mpr.isPlaying
+        {
+            albumView.startAnimation()
+        }
         albumView.isHidden = false
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
             self.albumView.alpha = 1.0

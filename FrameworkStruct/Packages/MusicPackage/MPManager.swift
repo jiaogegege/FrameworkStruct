@@ -337,7 +337,7 @@ class MPManager: OriginManager
             
             /* 可以后台连续播放，但是经测试发现有时后台时间久了会失效，因为有些app会把自己设置成`firstResponder`考虑用`repeatBackgroundPlay()` */
             ApplicationManager.shared.appDelegate.becomeFirstResponder()
-            self.repeatBackgroundPlay()
+//            self.repeatBackgroundPlay()
         } catch {
             FSLog(error.localizedDescription)
         }

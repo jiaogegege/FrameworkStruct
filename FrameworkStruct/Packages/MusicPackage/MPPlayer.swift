@@ -472,10 +472,10 @@ extension MPPlayer: DelegateProtocol
             }
             else if keyPath == PlayerKeyPath.playbackLikelyToKeepUp.rawValue    //缓存充足，手动继续播放
             {
-                if isPaused && playerItem.status == .readyToPlay
-                {
-                    self.resume()
-                }
+//                if isPaused && playerItem.status == .readyToPlay
+//                {
+//                    self.resume()
+//                }
             }
             else
             {
