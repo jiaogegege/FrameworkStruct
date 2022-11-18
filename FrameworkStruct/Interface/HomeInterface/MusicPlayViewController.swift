@@ -239,7 +239,7 @@ class MusicPlayViewController: BasicViewController {
         super.configUI()
         view.backgroundColor = .lightGray
         
-        bgImgView.contentMode = .scaleToFill
+        bgImgView.contentMode = .scaleAspectFill
         bgImgView.clipsToBounds = true
         bgImgView.image = UIImage.iMiku_0
         
@@ -289,7 +289,7 @@ class MusicPlayViewController: BasicViewController {
         progressBar.value = 0.0
         progressBar.setThumbImage(.iPlayProgressBtn, for: .normal)
         progressBar.minimumTrackTintColor = .white
-        progressBar.maximumTrackTintColor = .gray.withAlphaComponent(0.4)
+        progressBar.maximumTrackTintColor = UIColor.gray.withAlphaComponent(0.4)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpInside)
         progressBar.addTarget(self, action: #selector(progressBarAction(sender:)), for: .touchUpOutside)
         progressBar.addTarget(self, action: #selector(progressBeginDrag(sender:)), for: .touchDown)
