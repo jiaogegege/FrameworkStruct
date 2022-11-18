@@ -31,8 +31,12 @@ class FSPageIndicatorBar: UIView {
     
     var totalPage: Int = 0 {  //总页数
         willSet {
-            let pageWidth: CGFloat = scrollDirection == .horizontal ? self.width / CGFloat(newValue) : self.height / CGFloat(newValue)    //一页的宽度
-            bar.frame = CGRect(x: 0, y: 0, width: scrollDirection == .horizontal ? limitMin(pageWidth, min: self.height) : self.width, height: scrollDirection == .vertical ? limitMin(pageWidth, min: self.width) : self.height)
+            if newValue != self.totalPage
+            {
+                let pageWidth: CGFloat = scrollDirection == .horizontal ? self.width / CGFloat(newValue) : self.height / CGFloat(newValue)    //一页的宽度
+                bar.frame = CGRect(x: 0, y: 0, width: scrollDirection == .horizontal ? limitMin(pageWidth, min: self.height) : self.width, height: scrollDirection == .vertical ? limitMin(pageWidth, min: self.width) : self.height)
+                self.setCurrentPage(currentPage, animated: false)
+            }
         }
     }
     
