@@ -277,7 +277,7 @@ func g_toast(text: String, hideDelay: TimeInterval = 2.5, interaction: Bool = fa
 
 ///全局加载提示
 ///interaction:是否能操作后面的UI
-func g_loading(interaction: Bool = false)
+func g_loading(_ interaction: Bool = false)
 {
     ToastManager.shared.hideHUD()
     ToastManager.shared.interaction = interaction

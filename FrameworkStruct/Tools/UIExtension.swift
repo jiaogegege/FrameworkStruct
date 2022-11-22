@@ -426,7 +426,7 @@ extension UITableView
         
         ///传入一个枚举类型数组，返回应该显示的section或者row的总数
         ///参数:`itemArray`：总是同一种类型的，比如都是`sectionTag`
-        static func totalCount(itemArray: Array<IndexPathTag>) -> Int
+        static func totalCount(_ itemArray: Array<IndexPathTag>) -> Int
         {
             return itemArray.reduce(0) { count, indexPath in
                 count + indexPath.positionCount
@@ -624,7 +624,7 @@ extension UIImage
 {
     ///根据颜色生成纯色图片
     ///参数：color：传入的颜色；size：生成纯色图片的尺寸，默认屏幕大小
-    class func createImageWithColor(color: UIColor, size: CGSize = .fullScreen) -> UIImage
+    class func createImageWithColor(_ color: UIColor, size: CGSize = .fullScreen) -> UIImage
     {
         let rect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)
         UIGraphicsBeginImageContext(rect.size)
@@ -638,7 +638,7 @@ extension UIImage
     
     ///压缩图片，等比例缩放
     ///参数：zipLength：图片压缩后宽度和高度的最大长度，限制较大的值，另一边按比例缩放
-    func imageByZip(zipLength: CGFloat = 100.0) -> UIImage
+    func imageByZip(_ zipLength: CGFloat = 100.0) -> UIImage
     {
         if self.size.width <= zipLength
         {
@@ -666,7 +666,7 @@ extension UIImage
     
     ///拉伸图片，重复图片中心1*1像素，一般用于内容单纯的小图拉伸为大图填满某个区域
     ///参数：size：指定被拉伸区域距离左边和顶部的距离，单位px
-    func stretch(size: CGSize = .zero) -> UIImage
+    func stretch(_ size: CGSize = .zero) -> UIImage
     {
         if size == .zero    //拉伸中间1px
         {
@@ -682,7 +682,7 @@ extension UIImage
     
     ///将图片编码为base64字符串
     ///imageType：图片类型，目前支持png和jpg
-    func base64(imageType: FileTypeName = .png) -> String?
+    func base64(_ imageType: FileTypeName = .png) -> String?
     {
         guard let data = imageType == .png ? self.pngData() : self.jpegData(compressionQuality: 1) else {
             return nil
