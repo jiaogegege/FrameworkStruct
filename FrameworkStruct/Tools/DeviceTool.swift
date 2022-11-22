@@ -162,7 +162,12 @@ let kiPhone8Height: CGFloat = 667.0
 let kiPhone8pHeight: CGFloat = 736.0
 let kiPhoneXHeight: CGFloat = 812.0
 
-///状态栏高度
+///灵动岛安全高度(状态栏)
+let kDynamicSafeTop: CGFloat = 51.0
+///灵动岛安全底部
+let kDynamicSafeBottom: CGFloat = 31.0
+
+///状态栏高度，包含刘海和灵动岛
 var kStatusHeight: CGFloat {
     if #available(iOS 13.0, *)
     {
@@ -208,6 +213,12 @@ func fit8(_ val: CGFloat) -> CGFloat
 func fitX(_ val: CGFloat) -> CGFloat
 {
     return fitWidth(val: val, base: kiPhoneXWidth)
+}
+
+///判断是否是灵动岛机型
+func isDynamicIsland() -> Bool
+{
+    return kStatusHeight >= kDynamicSafeTop
 }
 
 ///判断是否iPad
