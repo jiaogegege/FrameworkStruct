@@ -33,6 +33,9 @@ protocol ContainerProtocol: NSObjectProtocol
     
     //异步获取数据，优先从容器中获取，如果没有则从数据源获取
     func get(key: AnyHashable, completion: @escaping OptionalAnyClosure)
+    
+    //获取所有已保存的key
+    func getAllKeys() -> [AnyHashable]
         
     //同步修改数据，数据保存在容器中修改后通知所有订阅对象刷新数据
     func mutate(key: AnyHashable, value: Any, meta: DataModelMeta)
@@ -42,9 +45,6 @@ protocol ContainerProtocol: NSObjectProtocol
     
     //同步提交数据，将数据写入本地数据源
     func commit(key: AnyHashable, value: Any)
-    
-    //获取所有已保存的key
-    func getAllKeys() -> [AnyHashable]
     
     //异步提交数据，将数据写入本地数据源或远程数据源
     //参数：success：可能返回接口数据或者什么都不返回，failure：可能返回接口错误或自定义错误
@@ -103,6 +103,7 @@ class OriginContainer: NSObject
     
     //数据容器；key是数据对象的key，value是具体的数据模型
     fileprivate var container: Dictionary<AnyHashable, ContainerDataStruct> = Dictionary()
+    
     //数据容器锁，在所有对container进行访问的地方都进行加锁
     fileprivate(set) lazy var containerLock: NSRecursiveLock = NSRecursiveLock()
     
@@ -173,6 +174,13 @@ extension OriginContainer: ContainerProtocol
         //理论上优先从容器获取，如果没有则从具体的存取器获取
     }
     
+    //获取所有已保存的key，不建议子类覆写该方法
+    func getAllKeys() -> [AnyHashable] {
+        container.keys.map { key in
+            key as AnyHashable
+        }
+    }
+    
     //不建议覆写这个方法
     @objc func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta()) {
         containerLock.lock()
@@ -199,13 +207,6 @@ extension OriginContainer: ContainerProtocol
     
     @objc func commit(key: AnyHashable, value: Any) {
         //子类实现和具体存取器的交互
-    }
-    
-    //获取所有已保存的key，不建议子类覆写该方法
-    func getAllKeys() -> [AnyHashable] {
-        container.keys.map { key in
-            key as AnyHashable
-        }
     }
     
     @objc func commit(key: AnyHashable, value: Any, success: @escaping OptionalAnyClosure, failure: @escaping NSErrorClosure) {
