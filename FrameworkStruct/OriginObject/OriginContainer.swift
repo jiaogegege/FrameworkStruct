@@ -23,6 +23,18 @@ protocol ContainerServices {
 }
 
 /**
+ * 数据容器安全访问协议
+ * 要访问数据容器的对象都要实现该协议
+ * 主要针对修改操作进行安全性验证，防止任意对象修改数据容器中的内容
+ */
+protocol ContainerSecurityProtocol: NSObjectProtocol {
+    //返回一个container生成的token，实现该协议的对象必须保存这个token，之后对数据容器的访问需要验证token
+    func containerGeneratedToken(token: String)
+    //想要访问数据容器的对象需要返回获取的token来通过验证
+    func containerVerifyToken() -> String
+}
+
+/**
  * 数据容器定义的通用接口，如果有通用的功能需要子类实现，那么定义在此处
  * 可以作为类型使用
  */
@@ -107,6 +119,9 @@ class OriginContainer: NSObject
     //数据容器锁，在所有对container进行访问的地方都进行加锁
     fileprivate(set) lazy var containerLock: NSRecursiveLock = NSRecursiveLock()
     
+    //注册安全性访问的对象
+    fileprivate lazy var accessSecurityDict: NSMapTable<NSString, AnyObject> = NSMapTable.strongToWeakObjects()
+    
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
     
@@ -145,6 +160,26 @@ class OriginContainer: NSObject
         {
             return origin
         }
+    }
+    
+    //暂不实现
+    //注册访问验证token
+    func registerAccessToken(_ obj: AnyObject & ContainerSecurityProtocol)
+    {
+        let token = g_uuid()
+        accessSecurityDict.setObject(obj, forKey: (token as NSString))
+        obj.containerGeneratedToken(token: token)
+    }
+    
+    //暂不实现
+    //判断是否可以访问container
+    func canAccess() -> Bool
+    {
+        //0:本方法；1:调用本方法的方法；2:调用本方法的方法的方法
+//        let callStackStr = Thread.callStackSymbols
+        //遍历安全性访问对象字典，找到调用类型信息，往上找5层
+        
+        return true
     }
     
 }
