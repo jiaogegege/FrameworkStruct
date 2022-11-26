@@ -53,7 +53,17 @@ class PlaceCodeViewController: BasicViewController {
             detectionDescLabel.font = UIFont.systemFont(ofSize: fit8(15), weight: .semibold)
         }
         sampTimeLabel.text = getTimeString(date: nowAfter(isTodaySamp ? 0 : -tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
-        detectionTimeLabel.text = getTimeString(date: nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
+        //是否显示今天
+        var isCurrent: Bool = false
+        if isTodaySamp
+        {
+            let period = TimeEmbellisher.shared.getPeriod(Date())
+            if period == .noon || period == .afternoon || period == .evenfall || period == .evening
+            {
+                isCurrent = true
+            }
+        }
+        detectionTimeLabel.text = getTimeString(date: isCurrent ? Date() : nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, hour: nil, min: nil, sec: nil)
     }
     
     @IBAction func digitalAction(_ sender: UIButton) {

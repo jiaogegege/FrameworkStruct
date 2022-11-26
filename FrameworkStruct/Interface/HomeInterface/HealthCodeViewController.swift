@@ -384,7 +384,17 @@ class HealthCodeViewController: BasicViewController {
         resultDateLabel.textColor = .white
         resultDateLabel.font = .systemFont(ofSize: 12)
         resultDateLabel.textAlignment = .center
-        resultDateLabel.text = String(format: "%@核酸检测", getTimeString(date: nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, day: .dayShort, hour: nil, min: nil, sec: nil))
+        //是否显示今天
+        var isCurrent: Bool = false
+        if isTodaySamp
+        {
+            let period = TimeEmbellisher.shared.getPeriod(Date())
+            if period == .noon || period == .afternoon || period == .evenfall || period == .evening
+            {
+                isCurrent = true
+            }
+        }
+        resultDateLabel.text = String(format: "%@核酸检测", getTimeString(date: isCurrent ? Date() : nowAfter(-tSecondsInDay), sepType: .local, year: nil, month: .monthShort, day: .dayShort, hour: nil, min: nil, sec: nil))
         resultRetLabel.textColor = .white
         resultRetLabel.font = .systemFont(ofSize: 12)
         resultRetLabel.textAlignment = .center

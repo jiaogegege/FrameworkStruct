@@ -47,6 +47,45 @@ extension TimeEmbellisher: InternalType
         case year, month, day, hour, minute, second
     }
     
+    ///时间段
+    enum TETimePeriod {
+        case beforeDawn     //凌晨0-5
+        case morning        //早晨5-8
+        case forenoon       //上午8-11
+        case noon           //中午11-13
+        case afternoon      //下午13-16
+        case evenfall       //傍晚16-19
+        case evening        //晚上19-24
+        
+        //根据时间返回时间段
+        static func getPeriod(_ date: Date) -> TETimePeriod
+        {
+            let dateComp = TimeEmbellisher.shared.dateComponents(from: date)
+            var period: Self = .beforeDawn
+            if let hour = dateComp.hour {
+                switch hour {
+                case 0..<5:
+                    period = .beforeDawn
+                case 5..<8:
+                    period = .morning
+                case 8..<11:
+                    period = .forenoon
+                case 11..<13:
+                    period = .noon
+                case 13..<16:
+                    period = .afternoon
+                case 16..<19:
+                    period = evenfall
+                case 19...24:
+                    period = .evening
+                default:
+                    period = .beforeDawn
+                }
+            }
+            return period
+        }
+    }
+    
 }
 
 
@@ -160,6 +199,11 @@ extension TimeEmbellisher: ExternalInterface
         return self.dateByCustom(aDate, year: nil, month: nil, day: nil, hour: 0, minute: 0, second: 0, nanosecond: 0)
     }
     
+    ///获取具体的时间的时间段描述
+    func getPeriod(_ date: Date) -> TETimePeriod
+    {
+        TETimePeriod.getPeriod(date)
+    }
     
     
     
