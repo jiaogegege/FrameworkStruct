@@ -120,7 +120,7 @@ class OriginContainer: NSObject
     fileprivate(set) lazy var containerLock: NSRecursiveLock = NSRecursiveLock()
     
     //注册安全性访问的对象
-    fileprivate lazy var accessSecurityDict: NSMapTable<NSString, AnyObject> = NSMapTable.strongToWeakObjects()
+//    fileprivate lazy var accessSecurityDict: NSMapTable<NSString, AnyObject> = NSMapTable.strongToWeakObjects()
     
     //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
     fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
@@ -166,9 +166,9 @@ class OriginContainer: NSObject
     //注册访问验证token
     func registerAccessToken(_ obj: AnyObject & ContainerSecurityProtocol)
     {
-        let token = g_uuid()
-        accessSecurityDict.setObject(obj, forKey: (token as NSString))
-        obj.containerGeneratedToken(token: token)
+//        let token = g_uuid()
+//        accessSecurityDict.setObject(obj, forKey: (token as NSString))
+//        obj.containerGeneratedToken(token: token)
     }
     
     //暂不实现

@@ -352,6 +352,7 @@
 		EA4DFBC4291658020053BC4F /* MPLrcManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4DFBC3291658020053BC4F /* MPLrcManager.swift */; };
 		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
+		EA5765B32934BC160055F411 /* health_nucleate_info.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA5765B22934BC160055F411 /* health_nucleate_info.jpg */; };
 		EA5780A927D0A6C900C819E6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780A827D0A6C900C819E6 /* SettingsManager.swift */; };
 		EA5780AB27D0A89700C819E6 /* SystemSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */; };
 		EA5843EE28DC5DB90016E6CA /* iCloudAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5843ED28DC5DB90016E6CA /* iCloudAccessor.swift */; };
@@ -1230,6 +1231,7 @@
 		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		EA52494127A3EDEB002E3616 /* 1_0_2.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1_0_2.sql; sourceTree = "<group>"; };
+		EA5765B22934BC160055F411 /* health_nucleate_info.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = health_nucleate_info.jpg; sourceTree = "<group>"; };
 		EA5780A827D0A6C900C819E6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		EA5780AA27D0A89700C819E6 /* SystemSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingViewController.swift; sourceTree = "<group>"; };
 		EA5843ED28DC5DB90016E6CA /* iCloudAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudAccessor.swift; sourceTree = "<group>"; };
@@ -3901,6 +3903,7 @@
 				EAA392E328C6DB72009438DC /* health_code_vaccine.jpg */,
 				EAA392E528C6DB79009438DC /* health_code_travel_card.jpg */,
 				EAA392E728C6E3D6009438DC /* health_code_info_update.jpg */,
+				EA5765B22934BC160055F411 /* health_nucleate_info.jpg */,
 				EAA392EC28C71F71009438DC /* place_code_address.jpg */,
 				EAA392F128C72067009438DC /* place_code_bottom_bar.jpg */,
 				EAA392F328C725B8009438DC /* place_code_tick.jpg */,
@@ -4910,6 +4913,7 @@
 				EA3E8C2627B782C4006A2715 /* pop-tvos-Info.plist in Resources */,
 				EA0A926228CB0CED0036B339 /* travel_card_head.jpg in Resources */,
 				EA0F14E02914F9BA0008AC4A /* MPSonglistCell.xib in Resources */,
+				EA5765B32934BC160055F411 /* health_nucleate_info.jpg in Resources */,
 				EA0F14DB2914F7FA0008AC4A /* mp_songlist_icon_2.jpg in Resources */,
 				EA3337DF2797E6AA00612DC3 /* README in Resources */,
 				EAA392E828C6E3D6009438DC /* health_code_info_update.jpg in Resources */,

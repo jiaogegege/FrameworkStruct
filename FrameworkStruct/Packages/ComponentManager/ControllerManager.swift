@@ -22,7 +22,7 @@ class ControllerManager: OriginManager
     //这里记录所有存在的控制器，当控制器被创建时，这里会有弱引用，当控制器被释放时，这里也随之消失
     let allControllers: WeakArray = WeakArray.init()
     
-    //当前tabbarcontroller
+    //当前TabbarController
     //一般只有一个
     fileprivate(set) weak var tabbarVC: UITabBarController? = nil
     
@@ -65,7 +65,7 @@ extension ControllerManager: ExternalInterface
     //计算属性，rootViewController
     var rootVC: UIViewController {
         get {
-            return g_window().rootViewController!
+            return ApplicationManager.shared.window.rootViewController!
         }
     }
     
@@ -93,6 +93,7 @@ extension ControllerManager: ExternalInterface
     }
     
     ///tabbar是否隐藏，如果没有值，认为隐藏
+    ///如果是自定义tabbar，需要自定义判断
     var isTabbarHidden: Bool {
         self.tabbarVC?.tabBar.isHidden ?? true
     }

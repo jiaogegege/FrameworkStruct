@@ -58,7 +58,7 @@ class PlaceCodeViewController: BasicViewController {
         if isTodaySamp
         {
             let period = TimeEmbellisher.shared.getPeriod(Date())
-            if period == .noon || period == .afternoon || period == .evenfall || period == .evening
+            if period == .afternoon || period == .evenfall || period == .evening
             {
                 isCurrent = true
             }

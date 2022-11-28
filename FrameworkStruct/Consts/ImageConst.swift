@@ -78,6 +78,7 @@ extension UIImage: ConstantPropertyProtocol
     static var iHealthCodeNav: UIImage? = getPic("health_code_nav", ext: "jpg")
     static var iHealthCodeHead: UIImage? = getPic("health_code_head", ext: "jpg")
     static var iHealthCode: UIImage? = getPic("health_code", ext: "jpg")
+    static var iHealthNucleateInfo: UIImage? = getPic("health_nucleate_info", ext: "jpg")
     //核酸/大数据/行程卡
     static var iHealthCodeNucleate: UIImage? = getPic("health_code_nucleate", ext: "jpg")
     static var iHealthCodeVaccine: UIImage? = getPic("health_code_vaccine", ext: "jpg")

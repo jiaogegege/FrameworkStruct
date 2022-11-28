@@ -44,15 +44,26 @@ class HealthCodeViewController: BasicViewController {
     fileprivate var codeTimeLabel: UILabel!
     fileprivate var codeImgView: UIImageView!   //健康码绿码
     
+    fileprivate var nucleateScrollView: UIScrollView!       //核酸疫苗信息，左右滑动
+    //中间view
+    fileprivate var nucleateMiddleView: UIView!     //48小时核酸
     fileprivate var nucleateImgView: UIImageView!   //核酸结果
     fileprivate var vaccineImgView: UIImageView!    //疫苗结果
     fileprivate var travelImgView: UIImageView! //大数据行程卡
     fileprivate var infoUpdateImgView: UIImageView!     //信息更新
-    
     fileprivate var dataSourceLabel: UILabel!       //数据来源
     fileprivate var line: UIView!
     fileprivate var operationBtn: UIButton!     //操作说明
     fileprivate var hotLineLabel: UILabel!  //服务热线
+    //左侧view
+    fileprivate var nucleateLeftView: UIView!
+    fileprivate var nucleateSampView: UIView!       //采样信息容器
+    fileprivate var nucleateSampPosLabel: UILabel!      //采样地点
+    fileprivate var nucleateSampDetectTimeLabel: UILabel!   //检测时间
+    fileprivate var nucleateSampDetectResultLabel: UILabel!     //检测结果
+    fileprivate var nucleateInfoImgView: UIImageView!
+    //右侧view
+    fileprivate var nucleateRightView: UIView!      //疫苗view
     
     
     var canScrollContent: Bool = false       //是否可以更新UI数据，文字滚动和时间定时器
@@ -268,22 +279,163 @@ class HealthCodeViewController: BasicViewController {
             make.height.equalTo(codeImgView.snp.width)
             make.bottom.equalTo(-28)
         }
+        
+        nucleateScrollView = UIScrollView()
+        nucleateScrollView.isPagingEnabled = true
+        nucleateScrollView.showsVerticalScrollIndicator = false
+        nucleateScrollView.showsHorizontalScrollIndicator = false
+        scrollView.addSubview(nucleateScrollView)
+        nucleateScrollView.snp.makeConstraints { make in
+            make.top.equalTo(codeView.snp.bottom).offset(4)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(500)
+            make.bottom.equalToSuperview()
+        }
+        //核酸左侧view
+        nucleateLeftView = UIView()
+        nucleateScrollView.addSubview(nucleateLeftView)
+        nucleateLeftView.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+            make.width.equalTo(kScreenWidth)
+            make.height.equalTo(305)
+        }
+        nucleateSampView = UIView()
+        nucleateSampView.backgroundColor = .white
+        nucleateLeftView.addSubview(nucleateSampView)
+        nucleateSampView.snp.makeConstraints { make in
+            make.left.equalTo(12)
+            make.right.equalTo(-12)
+            make.top.equalTo(4)
+            make.height.equalTo(178)
+        }
+        let sampPosNameLabel = UILabel()
+        sampPosNameLabel.textColor = UIColor.colorFromHex(0x898989)
+        sampPosNameLabel.font = .systemFont(ofSize: 15)
+        sampPosNameLabel.text = "采样点："
+        nucleateSampView.addSubview(sampPosNameLabel)
+        sampPosNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(8)
+            make.top.equalTo(13)
+            make.height.equalTo(15)
+        }
+        nucleateSampPosLabel = UILabel()
+        nucleateSampPosLabel.textColor = UIColor.colorFromHex(0x494949)
+        nucleateSampPosLabel.font = .systemFont(ofSize: 15)
+        nucleateSampPosLabel.text = "丽景湾花园"
+        nucleateSampView.addSubview(nucleateSampPosLabel)
+        nucleateSampPosLabel.snp.makeConstraints { make in
+            make.left.equalTo(96)
+            make.top.equalTo(sampPosNameLabel)
+            make.height.equalTo(sampPosNameLabel)
+        }
+        let detectTimeNameLabel = UILabel()
+        detectTimeNameLabel.textColor = UIColor.colorFromHex(0x898989)
+        detectTimeNameLabel.font = .systemFont(ofSize: 15)
+        detectTimeNameLabel.text = "检测时间："
+        nucleateSampView.addSubview(detectTimeNameLabel)
+        detectTimeNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(sampPosNameLabel)
+            make.top.equalTo(sampPosNameLabel.snp.bottom).offset(20)
+            make.height.equalTo(15)
+        }
+        nucleateSampDetectTimeLabel = UILabel()
+        nucleateSampDetectTimeLabel.textColor = UIColor.colorFromHex(0x494949)
+        nucleateSampDetectTimeLabel.font = .systemFont(ofSize: 15)
+        var detectTimeStr = currentTimeString(format: .dashYearMonthDayHourMinSec)
+        //如果是上午则取昨天下午的时间，如果是下午则取今天下午的时间
+        let nowPeriod = TimeEmbellisher.shared.getPeriod(Date())
+        if nowPeriod == .beforeDawn || nowPeriod == .morning || nowPeriod == .forenoon
+        {
+            detectTimeStr = TimeEmbellisher.shared.string(from: nowAfter(-(7 * tSecondsInHour - 12 * tSecondsInMinute - 33)), format: .dashYearMonthDayHourMinSec)
+        }
+        else
+        {
+            detectTimeStr = TimeEmbellisher.shared.string(from: TimeEmbellisher.shared.dateByCustom(Date(), hour: Int(randomIn(13, 18)), minute: Int(randomIn(1, 59)), second: Int(randomIn(1, 59)))!, format: .dashYearMonthDayHourMinSec)
+        }
+        nucleateSampDetectTimeLabel.text = detectTimeStr
+        nucleateSampView.addSubview(nucleateSampDetectTimeLabel)
+        nucleateSampDetectTimeLabel.snp.makeConstraints { make in
+            make.left.equalTo(96)
+            make.top.equalTo(detectTimeNameLabel)
+            make.height.equalTo(detectTimeNameLabel)
+        }
+        let detectResultNameLabel = UILabel()
+        detectResultNameLabel.textColor = UIColor.colorFromHex(0x898989)
+        detectResultNameLabel.font = .systemFont(ofSize: 15)
+        detectResultNameLabel.text = "检测结果："
+        nucleateSampView.addSubview(detectResultNameLabel)
+        detectResultNameLabel.snp.makeConstraints { make in
+            make.left.equalTo(8)
+            make.top.equalTo(detectTimeNameLabel.snp.bottom).offset(20)
+            make.height.equalTo(15)
+        }
+        nucleateSampDetectResultLabel = UILabel()
+        nucleateSampDetectResultLabel.textColor = UIColor.colorFromHex(0x58C73A)
+        nucleateSampDetectResultLabel.font = .boldSystemFont(ofSize: 16)
+        nucleateSampDetectResultLabel.text = "阴性"
+        nucleateSampView.addSubview(nucleateSampDetectResultLabel)
+        nucleateSampDetectResultLabel.snp.makeConstraints { make in
+            make.left.equalTo(96)
+            make.top.equalTo(detectResultNameLabel)
+            make.height.equalTo(detectResultNameLabel)
+        }
+        //分割线
+        let nucleateLeftLine = UIView()
+        nucleateLeftLine.backgroundColor = UIColor.colorFromHex(0xDEE1E6)
+        nucleateSampView.addSubview(nucleateLeftLine)
+        nucleateLeftLine.snp.makeConstraints { make in
+            make.left.equalTo(8)
+            make.right.equalTo(-8)
+            make.height.equalTo(1)
+            make.top.equalTo(detectResultNameLabel.snp.bottom).offset(21)
+        }
+        let nucleateDescLabel = UILabel()
+        nucleateDescLabel.attributedText = StringEmbellisher.shared.attrStringWith("数据来源：江苏省卫生健康委员会，反映近7天内最近一次核酸检测情况，数据在不断汇聚和完善中。", font: .systemFont(ofSize: 12), lineSpace: 4)
+        nucleateDescLabel.numberOfLines = 2
+        nucleateDescLabel.textColor = UIColor.colorFromHex(0x777777)
+        nucleateDescLabel.font = .systemFont(ofSize: 12)
+        nucleateSampView.addSubview(nucleateDescLabel)
+        nucleateDescLabel.snp.makeConstraints { make in
+            make.left.right.equalTo(nucleateLeftLine)
+            make.top.equalTo(nucleateLeftLine.snp.bottom).offset(11)
+            make.bottom.equalTo(-4)
+        }
+        
+        nucleateInfoImgView = UIImageView()
+        nucleateInfoImgView.image = UIImage.iHealthNucleateInfo
+        nucleateLeftView.addSubview(nucleateInfoImgView)
+        nucleateInfoImgView.snp.makeConstraints { make in
+            make.left.equalTo(6)
+            make.right.equalTo(-6)
+            make.top.equalTo(nucleateSampView.snp.bottom).offset(4)
+            make.height.equalTo(125)
+        }
 
         //核酸结果
+        nucleateMiddleView = UIView()
+        nucleateScrollView.addSubview(nucleateMiddleView)
+        nucleateMiddleView.snp.makeConstraints { make in
+            make.top.equalTo(nucleateLeftView)
+            make.left.equalTo(nucleateLeftView.snp.right)
+            make.width.equalTo(kScreenWidth)
+            make.height.equalTo(500)
+        }
+        
         nucleateImgView = UIImageView()
-        scrollView.addSubview(nucleateImgView)
+        nucleateMiddleView.addSubview(nucleateImgView)
         nucleateImgView.snp.makeConstraints { make in
             make.left.equalTo(9)
-            make.top.equalTo(codeView.snp.bottom).offset(8)
+            make.top.equalTo(4)
             make.width.equalTo((kScreenWidth - 26.0) / 2.0)
             make.height.equalTo(nucleateImgView.snp.width).multipliedBy(302.0 / 354.0)
         }
         
         //疫苗结果
         vaccineImgView = UIImageView()
-        scrollView.addSubview(vaccineImgView)
+        nucleateMiddleView.addSubview(vaccineImgView)
         vaccineImgView.snp.makeConstraints { make in
-            make.top.equalTo(codeView.snp.bottom).offset(10)
+            make.top.equalTo(6)
             make.right.equalTo(-10)
             make.left.equalTo(nucleateImgView.snp.right).offset(8)
             make.height.equalTo(vaccineImgView.snp.width).multipliedBy(296.0 / 356.0)
@@ -291,7 +443,7 @@ class HealthCodeViewController: BasicViewController {
         
         //大数据行程卡
         travelImgView = UIImageView()
-        scrollView.addSubview(travelImgView)
+        nucleateMiddleView.addSubview(travelImgView)
         travelImgView.snp.makeConstraints { make in
             make.top.equalTo(nucleateImgView.snp.bottom).offset(7)
             make.left.equalTo(10)
@@ -301,9 +453,9 @@ class HealthCodeViewController: BasicViewController {
         
         //信息更新
         infoUpdateImgView = UIImageView()
-        scrollView.addSubview(infoUpdateImgView)
+        nucleateMiddleView.addSubview(infoUpdateImgView)
         infoUpdateImgView.snp.makeConstraints { make in
-            make.top.equalTo(travelImgView.snp.bottom).offset(8)
+            make.top.equalTo(travelImgView.snp.bottom).offset(2)
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.height.equalTo(infoUpdateImgView.snp.width).multipliedBy(267.0 / 711.0)
@@ -311,7 +463,7 @@ class HealthCodeViewController: BasicViewController {
         
         //数据来源
         dataSourceLabel = UILabel()
-        scrollView.addSubview(dataSourceLabel)
+        nucleateMiddleView.addSubview(dataSourceLabel)
         dataSourceLabel.snp.makeConstraints { make in
             make.top.equalTo(infoUpdateImgView.snp.bottom).offset(20)
             make.left.equalTo(infoUpdateImgView).offset(29)
@@ -320,7 +472,7 @@ class HealthCodeViewController: BasicViewController {
         
         //横线
         line = UIView()
-        scrollView.addSubview(line)
+        nucleateMiddleView.addSubview(line)
         line.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(dataSourceLabel.snp.bottom).offset(10)
@@ -329,7 +481,7 @@ class HealthCodeViewController: BasicViewController {
         
         //操作说明
         operationBtn = UIButton(type: .custom)
-        scrollView.addSubview(operationBtn)
+        nucleateMiddleView.addSubview(operationBtn)
         operationBtn.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(line.snp.bottom).offset(10)
@@ -339,7 +491,7 @@ class HealthCodeViewController: BasicViewController {
         
         //服务热线
         hotLineLabel = UILabel()
-        scrollView.addSubview(hotLineLabel)
+        nucleateMiddleView.addSubview(hotLineLabel)
         hotLineLabel.snp.makeConstraints { make in
             make.top.equalTo(operationBtn.snp.bottom).offset(5)
             make.left.equalTo(29)
@@ -347,6 +499,9 @@ class HealthCodeViewController: BasicViewController {
             make.bottom.equalTo(-25)
         }
         
+        nucleateScrollView.contentSize = CGSize(width: 2 * kScreenWidth, height: 500)
+        nucleateScrollView.contentOffset = CGPoint(x: kScreenWidth, y: 0)
+        scrollView.contentSize = CGSize(width: kScreenWidth, height: 1000)
     }
     
     override func configUI() {
@@ -389,7 +544,7 @@ class HealthCodeViewController: BasicViewController {
         if isTodaySamp
         {
             let period = TimeEmbellisher.shared.getPeriod(Date())
-            if period == .noon || period == .afternoon || period == .evenfall || period == .evening
+            if period == .afternoon || period == .evenfall || period == .evening
             {
                 isCurrent = true
             }
@@ -457,6 +612,12 @@ class HealthCodeViewController: BasicViewController {
         codeTimeLabel.text = currentTimeString(format: .dashMonthDayHourMinSec)
         
         codeImgView.image = UIImage.iHealthCode
+        
+        nucleateSampView.layer.cornerRadius = 8
+        nucleateSampView.layer.shadowColor = UIColor.black.cgColor
+        nucleateSampView.layer.shadowOffset = .zero
+        nucleateSampView.layer.shadowRadius = 5
+        nucleateSampView.layer.shadowOpacity = 0.1
         
         //核酸结果/疫苗结果/大数据行程卡
         nucleateImgView.image = UIImage.iHealthCodeNucleate
