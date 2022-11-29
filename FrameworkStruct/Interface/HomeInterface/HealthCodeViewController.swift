@@ -98,7 +98,7 @@ class HealthCodeViewController: BasicViewController {
         self.view.addSubview(bottomView)
         bottomView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(110 + kSafeBottomHeight)
+            make.height.equalTo(75 + kSafeBottomHeight)
         }
         
         let sampViewWidth: CGFloat = (kScreenWidth - 6 * 6.0) / 3.0
@@ -107,7 +107,7 @@ class HealthCodeViewController: BasicViewController {
         sampView = UIView()
         bottomView.addSubview(sampView)
         sampView.snp.makeConstraints { make in
-            make.top.left.equalToSuperview().offset(12)
+            make.top.left.equalToSuperview().offset(5)
             make.width.equalTo(sampViewWidth + 5)
             make.height.equalTo(sampViewHeight)
         }
@@ -138,7 +138,7 @@ class HealthCodeViewController: BasicViewController {
         bottomView.addSubview(resultView)
         resultView.snp.makeConstraints { make in
             make.left.equalTo(sampView.snp.right).offset(6)
-            make.top.equalToSuperview().offset(12)
+            make.top.equalTo(sampView)
             make.width.equalTo(sampViewWidth + 5)
             make.height.equalTo(sampViewHeight)
         }
@@ -169,7 +169,7 @@ class HealthCodeViewController: BasicViewController {
         bottomView.addSubview(travelView)
         travelView.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-12)
-            make.top.equalToSuperview().offset(12)
+            make.top.equalTo(sampView)
             make.left.equalTo(resultView.snp.right).offset(6)
             make.height.equalTo(sampViewHeight)
         }
@@ -195,7 +195,7 @@ class HealthCodeViewController: BasicViewController {
         desLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-12)
-            make.top.equalTo(sampView.snp.bottom).offset(15)
+            make.top.equalTo(sampView.snp.bottom).offset(10)
         }
 
         //scrollview
@@ -284,6 +284,7 @@ class HealthCodeViewController: BasicViewController {
         nucleateScrollView.isPagingEnabled = true
         nucleateScrollView.showsVerticalScrollIndicator = false
         nucleateScrollView.showsHorizontalScrollIndicator = false
+        nucleateScrollView.bounces = false
         scrollView.addSubview(nucleateScrollView)
         nucleateScrollView.snp.makeConstraints { make in
             make.top.equalTo(codeView.snp.bottom).offset(4)
@@ -347,7 +348,7 @@ class HealthCodeViewController: BasicViewController {
         let nowPeriod = TimeEmbellisher.shared.getPeriod(Date())
         if nowPeriod == .beforeDawn || nowPeriod == .morning || nowPeriod == .forenoon
         {
-            detectTimeStr = TimeEmbellisher.shared.string(from: nowAfter(-(7 * tSecondsInHour - 12 * tSecondsInMinute - 33)), format: .dashYearMonthDayHourMinSec)
+            detectTimeStr = TimeEmbellisher.shared.string(from: TimeEmbellisher.shared.dateByCustom(nowAfter(-tSecondsInDay), hour: 14, minute: 24, second: 51)!, format: .dashYearMonthDayHourMinSec)
         }
         else
         {
@@ -388,7 +389,7 @@ class HealthCodeViewController: BasicViewController {
             make.left.equalTo(8)
             make.right.equalTo(-8)
             make.height.equalTo(1)
-            make.top.equalTo(detectResultNameLabel.snp.bottom).offset(21)
+            make.top.equalTo(detectResultNameLabel.snp.bottom).offset(20)
         }
         let nucleateDescLabel = UILabel()
         nucleateDescLabel.attributedText = StringEmbellisher.shared.attrStringWith("数据来源：江苏省卫生健康委员会，反映近7天内最近一次核酸检测情况，数据在不断汇聚和完善中。", font: .systemFont(ofSize: 12), lineSpace: 4)
@@ -398,7 +399,7 @@ class HealthCodeViewController: BasicViewController {
         nucleateSampView.addSubview(nucleateDescLabel)
         nucleateDescLabel.snp.makeConstraints { make in
             make.left.right.equalTo(nucleateLeftLine)
-            make.top.equalTo(nucleateLeftLine.snp.bottom).offset(11)
+            make.top.equalTo(nucleateLeftLine.snp.bottom).offset(10)
             make.bottom.equalTo(-4)
         }
         
@@ -522,7 +523,7 @@ class HealthCodeViewController: BasicViewController {
         bottomView.layer.shadowOffset = CGSize(width: 0, height: -5)
         bottomView.layer.shadowOpacity = 0.1
         
-        sampView.backgroundColor = UIColor.colorFromHex(0x49a16f)
+        sampView.backgroundColor = UIColor.colorFromHex(0x4AA270)
         sampView.layer.cornerRadius = 5
         sampDateLabel.textColor = .white
         sampDateLabel.font = .systemFont(ofSize: 12)
@@ -534,7 +535,7 @@ class HealthCodeViewController: BasicViewController {
         sampRetLabel.text = "已采样"
         sampArrowImgView.image = UIImage.iRightArrowLightAlways
         
-        resultView.backgroundColor = UIColor.colorFromHex(0x499b34)
+        resultView.backgroundColor = UIColor.colorFromHex(0x499C34)
         resultView.layer.cornerRadius = 5
         resultDateLabel.textColor = .white
         resultDateLabel.font = .systemFont(ofSize: 12)
@@ -567,7 +568,8 @@ class HealthCodeViewController: BasicViewController {
         desLabel.textColor = UIColor.colorFromHex(0x696969)
         desLabel.font = .systemFont(ofSize: 10)
         desLabel.numberOfLines = 0
-        desLabel.text = "*数据来源：苏州市卫生健康委员会。反映近7天内最新核酸采样记录和核酸检测报告情况，点击可查询更多，数据在不断汇聚和完善中。"
+        desLabel.textAlignment = .center
+        desLabel.text = "*数据来源：苏州市新冠肺炎疫情联防联控指挥部"
         
         scrollView.backgroundColor = UIColor.colorFromHex(0xededed)
         scrollView.showsVerticalScrollIndicator = false

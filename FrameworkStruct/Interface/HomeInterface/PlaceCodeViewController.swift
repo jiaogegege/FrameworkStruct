@@ -20,6 +20,7 @@ class PlaceCodeViewController: BasicViewController {
     @IBOutlet weak var placeField: UITextField! //具体场所
     @IBOutlet weak var areaField: UITextField!  //区域
     @IBOutlet weak var timeLabel: UILabel!  //当前时间
+    @IBOutlet weak var travelCardBtn: UIButton!     //行程卡按钮
     @IBOutlet weak var sampTimeLabel: UILabel!  //采样时间
     @IBOutlet weak var sampDescLabel: UILabel!
     @IBOutlet weak var detectionTimeLabel: UILabel! //检测时间
@@ -70,6 +71,12 @@ class PlaceCodeViewController: BasicViewController {
         sender.isHidden = true
         headViewHeight.constant = 92
         digitalBtnBottom.constant = 0
+    }
+    
+    @IBAction func travelCardAction(_ sender: UIButton) {
+        let vc = TravelCardViewController.getViewController()
+        vc.provinceCity = "江苏省苏州市"
+        push(vc)
     }
     
 }
