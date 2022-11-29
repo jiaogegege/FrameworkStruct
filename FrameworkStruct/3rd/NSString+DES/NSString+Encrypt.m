@@ -2,8 +2,8 @@
 //  NSString+Encrypt.m
 //  FrameworkStruct
 //
-//  Created by 蒋旭蛟 on 2018/4/23.
-//  Copyright © 2018年 蒋旭蛟. All rights reserved.
+//  Created by jggg on 2018/4/23.
+//  Copyright © 2018年 jggg. All rights reserved.
 //
 
 #import "NSString+Encrypt.h"

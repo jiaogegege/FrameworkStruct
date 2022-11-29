@@ -2,8 +2,8 @@
 //  CountDownButton.m
 //  FrameworkStruct
 //
-//  Created by 蒋旭蛟 on 2018/5/11.
-//  Copyright © 2018年 蒋雪姣. All rights reserved.
+//  Created by jggg on 2018/5/11.
+//  Copyright © 2018年 jggg. All rights reserved.
 //
 
 #import "CountDownButton.h"

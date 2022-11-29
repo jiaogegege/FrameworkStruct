@@ -2,7 +2,7 @@
 //  OCUtility.m
 //  FrameworkStruct
 //
-//  Created by  蒋 雪姣 on 2022/5/10.
+//  Created by  jggg on 2022/5/10.
 //
 
 #import "OCUtility.h"

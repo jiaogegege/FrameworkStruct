@@ -2,7 +2,7 @@
 //  MenuInteractionManager.swift
 //  FrameworkStruct
 //
-//  Created by  蒋 雪姣 on 2022/4/7.
+//  Created by  jggg on 2022/4/7.
 //
 
 /**

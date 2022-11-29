@@ -2,7 +2,7 @@
 //  MPEmbellisher.swift
 //  FrameworkStruct
 //
-//  Created by  蒋 雪姣 on 2022/10/17.
+//  Created by  jggg on 2022/10/17.
 //
 
 /**

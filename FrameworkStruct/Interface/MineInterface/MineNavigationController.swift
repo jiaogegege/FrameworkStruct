@@ -2,7 +2,7 @@
 //  MineNavigationController.swift
 //  FrameworkStruct
 //
-//  Created by  蒋 雪姣 on 2022/2/16.
+//  Created by  jggg on 2022/2/16.
 //
 
 import UIKit

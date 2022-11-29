@@ -2,8 +2,8 @@
 //  NSObject+PropertyListing.h
 //  FrameworkStruct
 //
-//  Created by 蒋雪姣 on 2018/8/20.
-//  Copyright © 2018年 蒋雪姣. All rights reserved.
+//  Created by jggg on 2018/8/20.
+//  Copyright © 2018年 jggg. All rights reserved.
 //
 
 

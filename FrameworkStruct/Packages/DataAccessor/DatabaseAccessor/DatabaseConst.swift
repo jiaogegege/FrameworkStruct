@@ -2,7 +2,7 @@
 //  DatabaseConst.swift
 //  FrameworkStruct
 //
-//  Created by  蒋 雪姣 on 2022/1/15.
+//  Created by  jggg on 2022/1/15.
 //
 
 import Foundation

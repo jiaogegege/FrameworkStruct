@@ -2,7 +2,7 @@
 //  MPMediaLibraryModel.swift
 //  FrameworkStruct
 //
-//  Created by 蒋雪姣 on 2022/10/7.
+//  Created by jggg on 2022/10/7.
 //
 
 /**
