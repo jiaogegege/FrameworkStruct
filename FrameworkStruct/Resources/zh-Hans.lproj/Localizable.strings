@@ -21,9 +21,9 @@ appName = "框架结构";
  */
 homeVC = "主页";
 mineVC = "我的";
-healthCode = "健康码";
-placeCode = "场所码";
-travelCard = "行程卡";
+healthCode = "静态更新";
+placeCode = "动态更新";
+travelCard = "复合表";
 waterfall = "瀑布流";
 themeSelect = "主题选择";
 modalShow = "模态显示";
