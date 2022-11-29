@@ -352,6 +352,7 @@
 		EA4DFBC4291658020053BC4F /* MPLrcManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4DFBC3291658020053BC4F /* MPLrcManager.swift */; };
 		EA4FF444293595B1005D7DF5 /* place_code_travel_card.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA4FF443293595B1005D7DF5 /* place_code_travel_card.jpg */; };
 		EA4FF446293597AB005D7DF5 /* place_code_bottom_bar.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA4FF445293597AB005D7DF5 /* place_code_bottom_bar.jpg */; };
+		EA4FF44829360674005D7DF5 /* HookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4FF44729360674005D7DF5 /* HookManager.swift */; };
 		EA52494027A3E4AD002E3616 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA52493F27A3E4AD002E3616 /* UserInfoModel.m */; };
 		EA52494227A3EDEB002E3616 /* 1_0_2.sql in Resources */ = {isa = PBXBuildFile; fileRef = EA52494127A3EDEB002E3616 /* 1_0_2.sql */; };
 		EA5765B32934BC160055F411 /* health_nucleate_info.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA5765B22934BC160055F411 /* health_nucleate_info.jpg */; };
@@ -1229,6 +1230,7 @@
 		EA4DFBC3291658020053BC4F /* MPLrcManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLrcManager.swift; sourceTree = "<group>"; };
 		EA4FF443293595B1005D7DF5 /* place_code_travel_card.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_travel_card.jpg; sourceTree = "<group>"; };
 		EA4FF445293597AB005D7DF5 /* place_code_bottom_bar.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = place_code_bottom_bar.jpg; sourceTree = "<group>"; };
+		EA4FF44729360674005D7DF5 /* HookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HookManager.swift; sourceTree = "<group>"; };
 		EA52493D27A3E44B002E3616 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EA52493E27A3E4AD002E3616 /* UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		EA52493F27A3E4AD002E3616 /* UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
@@ -3210,6 +3212,7 @@
 				EA92255B276ADE2200192E2E /* FSQueue.swift */,
 				EA6CF268278D85AE003A1E43 /* FSStack.swift */,
 				EA92255D276AE48700192E2E /* FSVector.swift */,
+				EA4FF44729360674005D7DF5 /* HookManager.swift */,
 				EADB0125276242FD001B7223 /* StatusManager */,
 			);
 			path = OriginTool;
@@ -5123,6 +5126,7 @@
 				EA9A756A27C7210200A11FC8 /* TYImageStorage.m in Sources */,
 				EA3E8AEB27B77CEA006A2715 /* TrimPathNode.swift in Sources */,
 				EA99372A27994F6100480147 /* TABAnimatedPullLoadingComponent.m in Sources */,
+				EA4FF44829360674005D7DF5 /* HookManager.swift in Sources */,
 				EA9A75EA27C739DF00A11FC8 /* SRMutex.m in Sources */,
 				EA3E8B3A27B77CEA006A2715 /* MathKit.swift in Sources */,
 				EA9A758727C7216D00A11FC8 /* YYAnimatedImageView.m in Sources */,
