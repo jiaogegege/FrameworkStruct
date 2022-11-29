@@ -100,6 +100,9 @@ class BasicViewController: UIViewController
     //状态管理器，只能在本类中修改，外部和子类仅访问
     fileprivate(set) lazy var stMgr: StatusManager = StatusManager(capacity: vcStatusStep)
     
+    //hook管理器，只能在本类中修改，外部和子类仅访问
+    fileprivate(set) lazy var hook = HookManager()
+    
     //当前主题，只能在本类中修改，外部和子类仅访问
     fileprivate(set) lazy var theme = ThemeManager.shared.getCurrentOrDark()
     
