@@ -129,9 +129,11 @@ extension WebAdapter: ExternalInterface
     }
     
     ///将vc设置为当前正在显示的webviewVC，创建webviewVC的时候会自动调用
-    func showWebVC(_ vc: BasicWebViewController)
+    func showWebVC(_ vc: BasicWebViewController?)
     {
-        self.currentWebVC = vc
+        if let vc = vc {
+            self.currentWebVC = vc
+        }
     }
     
     ///获取当前页面的url，completion可能不会执行，所以调用该方法的对象要做一些回调未执行的处理

@@ -54,17 +54,16 @@ class MusicPlayViewController: BasicViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ApplicationManager.shared.screenIdle = true
-        mpr.hideMiniPlayer()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        ApplicationManager.shared.screenIdle = false
+        
+        //hook
+        hookViewWillAppear {[unowned self] in
+            ApplicationManager.shared.screenIdle = true
+            mpr.hideMiniPlayer()
+        }
+        
+        hookViewWillDisappear {
+            ApplicationManager.shared.screenIdle = false
+        }
     }
     
     override func customConfig() {

@@ -51,24 +51,23 @@ class MusicViewController: BasicViewController
         // Do any additional setup after loading the view.
         mpr.addDelegate(self)
         currentSong = mpr.currentSong
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ApplicationManager.shared.screenIdle = true
-        if mpr.isPlaying
-        {
-            jumpCurrentAction(jumpCurrentBtn)
+        
+        //设置hook
+        hookViewWillAppear {[unowned self] in
+            ApplicationManager.shared.screenIdle = true
+            if mpr.isPlaying
+            {
+                jumpCurrentAction(jumpCurrentBtn)
+            }
+            mpr.showMiniPlayer()
+            tableViewBottom.constant = 48
+            jumpBtnBottom.constant = 26 + 48
         }
-        mpr.showMiniPlayer()
-        tableViewBottom.constant = 48
-        jumpBtnBottom.constant = 26 + 48
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        ApplicationManager.shared.screenIdle = false
-        mpr.hideMiniPlayer()
+        
+        hookViewWillDisappear {[unowned self] in
+            ApplicationManager.shared.screenIdle = false
+            mpr.hideMiniPlayer()
+        }
     }
     
     override func createUI() {

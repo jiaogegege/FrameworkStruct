@@ -79,6 +79,14 @@ class HookManager: NSObject {
         }
     }
     
+    ///获取某个event下所有绑定的hook的key
+    func getKeys(_ event: HookEventType) -> [String]?
+    {
+        guard let hooks = hookContainer[event] else { return nil }
+        
+        return Array(hooks.keys) as? [String]
+    }
+    
     ///查询某个event下的key指定的hook信息
     func getMeta(_ event: HookEventType, key: String) -> HookMetaInfo?
     {

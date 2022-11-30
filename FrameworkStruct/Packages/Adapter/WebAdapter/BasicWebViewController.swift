@@ -58,11 +58,11 @@ class BasicWebViewController: BasicViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadRequest()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        WebAdapter.shared.showWebVC(self)
+        
+        //hook
+        hookViewWillAppear {[weak self] in
+            WebAdapter.shared.showWebVC(self)
+        }
     }
     
     override func createUI() {

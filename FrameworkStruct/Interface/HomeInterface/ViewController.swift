@@ -22,19 +22,19 @@ class ViewController: BasicViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //hook
+        hookViewWillAppear {[unowned self] in
+            self.statusBarStyle = .light
+            self.hideNavBar = false
+            self.navBackgroundColor = self.theme.mainColor
+            self.navTitleColor = .white
+        }
     }
     
     override func customConfig() {
         self.title = "功能选择"
         self.backStyle = .none
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.statusBarStyle = .light
-        self.hideNavBar = false
-        self.navBackgroundColor = self.theme.mainColor
-        self.navTitleColor = .white
     }
     
     //创建界面
