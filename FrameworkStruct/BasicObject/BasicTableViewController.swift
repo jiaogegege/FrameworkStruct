@@ -559,39 +559,39 @@ extension BasicTableViewController
 {
     /**************************************** hook Section Begin ***************************************/
     ///在viewWillAppear中添加hook
-    func hookViewWillAppear(_ action: @escaping VoidClosure)
+    func hookViewWillAppear(key: String? = nil, action: @escaping VoidClosure)
     {
-        hook.add(HookEvent.viewWillAppear, action: action)
+        hook.add(HookEvent.viewWillAppear, key: key, action: action)
     }
     
     ///在viewDidAppear中添加hook
-    func hookViewDidAppear(_ action: @escaping VoidClosure)
+    func hookViewDidAppear(key: String? = nil, action: @escaping VoidClosure)
     {
-        hook.add(HookEvent.viewDidAppear, action: action)
+        hook.add(HookEvent.viewDidAppear, key: key, action: action)
     }
     
     ///在viewWillDisappear中添加hook
-    func hookViewWillDisappear(_ action: @escaping VoidClosure)
+    func hookViewWillDisappear(key: String? = nil, action: @escaping VoidClosure)
     {
-        hook.add(HookEvent.viewWillDisappear, action: action)
+        hook.add(HookEvent.viewWillDisappear, key: key, action: action)
     }
     
     ///在viewDidDisappear中添加hook
-    func hookViewDidDisappear(_ action: @escaping VoidClosure)
+    func hookViewDidDisappear(key: String? = nil, action: @escaping VoidClosure)
     {
-        hook.add(HookEvent.viewDidDisappear, action: action)
+        hook.add(HookEvent.viewDidDisappear, key: key, action: action)
     }
     
     ///在viewDidLayoutSubviews中添加hook
-    func hookViewDidLayoutSubviews(_ action: @escaping VoidClosure)
+    func hookViewDidLayoutSubviews(key: String? = nil, action: @escaping VoidClosure)
     {
-        hook.add(HookEvent.viewDidLayoutSubviews, action: action)
+        hook.add(HookEvent.viewDidLayoutSubviews, key: key, action: action)
     }
     
     ///在dealloc中添加hook
-    func hookDealloc(_ action: @escaping VoidClosure)
+    func hookDealloc(key: String? = nil, action: @escaping VoidClosure)
     {
-        hook.add(HookEvent.dealloc, action: action)
+        hook.add(HookEvent.dealloc, key: key, action: action)
     }
     
     /**************************************** hook Section End ***************************************/
