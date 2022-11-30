@@ -21,7 +21,7 @@ class ViewController: BasicViewController
     }
 
     override func viewDidLoad() {
-            super.viewDidLoad()
+        super.viewDidLoad()
     }
     
     override func customConfig() {

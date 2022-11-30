@@ -145,17 +145,33 @@ class BasicViewController: UIViewController
         self.basicMultiConfig()
         //显示为当前控制器
         ControllerManager.shared.displayController(self)
+        
+        //执行hook
+        hook.perform(HookEvent.viewWillAppear)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.basicMultiDidConfig()
+        
+        //执行hook
+        hook.perform(HookEvent.viewDidAppear)
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
+        
+        //执行hook
+        hook.perform(HookEvent.viewWillDisappear)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //执行hook
+        hook.perform(HookEvent.viewDidDisappear)
     }
     
     //在这里可以对UI的布局进行更新和修改
@@ -166,6 +182,9 @@ class BasicViewController: UIViewController
         
         //更新UI布局
         self.layoutUI()
+        
+        //执行hook
+        hook.perform(HookEvent.viewDidLayoutSubviews)
     }
     
     //设置是否跟随系统暗黑模式
@@ -502,6 +521,9 @@ class BasicViewController: UIViewController
     deinit {
         NotificationCenter.default.removeObserver(self)
         
+        //执行hook
+        hook.perform(HookEvent.dealloc)
+        
         FSLog(self.className + " dealloc")
     }
     
@@ -532,9 +554,26 @@ extension BasicViewController: UIGestureRecognizerDelegate
 }
 
 
+//内部类型
+extension BasicViewController
+{
+    //HookEvent
+    struct HookEvent {
+        static let viewWillAppear: HookManager.HookEventType = "viewWillAppear"
+        static let viewDidAppear: HookManager.HookEventType = "viewDidAppear"
+        static let viewWillDisappear: HookManager.HookEventType = "viewWillDisappear"
+        static let viewDidDisappear: HookManager.HookEventType = "viewDidDisappear"
+        static let viewDidLayoutSubviews: HookManager.HookEventType = "viewDidLayoutSubviews"
+        static let dealloc: HookManager.HookEventType = "dealloc"
+    }
+    
+}
+
+
 //接口方法
 extension BasicViewController
 {
+    /**************************************** present VC Section Begin ***************************************/
     //是否可以push一个VC，取决于自身有没有navigationVC
     func canPush() -> Bool
     {
@@ -614,5 +653,45 @@ extension BasicViewController
             }
         }
     }
+    /**************************************** present VC Section End ***************************************/
+    
+    /**************************************** hook Section Begin ***************************************/
+    ///在viewWillAppear中添加hook
+    func hookViewWillAppear(_ action: @escaping VoidClosure)
+    {
+        hook.add(HookEvent.viewWillAppear, action: action)
+    }
+    
+    ///在viewDidAppear中添加hook
+    func hookViewDidAppear(_ action: @escaping VoidClosure)
+    {
+        hook.add(HookEvent.viewDidAppear, action: action)
+    }
+    
+    ///在viewWillDisappear中添加hook
+    func hookViewWillDisappear(_ action: @escaping VoidClosure)
+    {
+        hook.add(HookEvent.viewWillDisappear, action: action)
+    }
+    
+    ///在viewDidDisappear中添加hook
+    func hookViewDidDisappear(_ action: @escaping VoidClosure)
+    {
+        hook.add(HookEvent.viewDidDisappear, action: action)
+    }
+    
+    ///在viewDidLayoutSubviews中添加hook
+    func hookViewDidLayoutSubviews(_ action: @escaping VoidClosure)
+    {
+        hook.add(HookEvent.viewDidLayoutSubviews, action: action)
+    }
+    
+    ///在dealloc中添加hook
+    func hookDealloc(_ action: @escaping VoidClosure)
+    {
+        hook.add(HookEvent.dealloc, action: action)
+    }
+    
+    /**************************************** hook Section End ***************************************/
     
 }
