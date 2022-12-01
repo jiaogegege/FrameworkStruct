@@ -539,6 +539,11 @@ extension Dictionary
         return newDic
     }
     
+    ///获取所有的key数组
+    var allKeys: [AnyHashable] {
+        Array(self.keys)
+    }
+    
     ///字典转json字符串
     func toJsonString() -> String?
     {

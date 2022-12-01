@@ -211,9 +211,7 @@ extension OriginContainer: ContainerProtocol
     
     //获取所有已保存的key，不建议子类覆写该方法
     func getAllKeys() -> [AnyHashable] {
-        container.keys.map { key in
-            key as AnyHashable
-        }
+        container.allKeys
     }
     
     //不建议覆写这个方法

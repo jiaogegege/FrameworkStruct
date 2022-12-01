@@ -84,17 +84,21 @@ class HookManager: NSObject {
     {
         guard let hooks = hookContainer[event] else { return nil }
         
-        return Array(hooks.keys) as? [String]
+        return hooks.allKeys as? [String]
+    }
+    
+    ///查询某个hook
+    func getHook(_ event: HookEventType, key: String) -> HookDataStruct?
+    {
+        guard let hooks = hookContainer[event] else { return nil }
+        
+        return hooks[key]
     }
     
     ///查询某个event下的key指定的hook信息
     func getMeta(_ event: HookEventType, key: String) -> HookMetaInfo?
     {
-        if let hooks = hookContainer[event] {
-            return hooks[key]?.meta
-        }
-        
-        return nil
+        getHook(event, key: key)?.meta
     }
     
     ///修改某个event下的key指定的hook信息
