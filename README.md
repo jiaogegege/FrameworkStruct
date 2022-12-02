@@ -259,6 +259,7 @@ iOS App基础架构设计
 	* FSQueue：队列容器，先进先出
 	* FSStack：栈容器
 	* FSVector：向量容器
+    * HookManager：hook管理器
 	* StatusManager：状态管理器
 * OriginModel：数据模型基类
 * OriginMonitor：监控器基类
@@ -455,11 +456,12 @@ iOS App基础架构设计
 工具集
 
 * Utility：通用工具集，一般是将调用较麻烦的方法缩短，提供更加便利的调用方式
-* HigherTool：高阶函数工具
 * NumberTool：数字工具集
 * TimeTool：时间日期工具集
 * DeviceTool：设备相关工具集
 * UnitTool：物理单位工具集
+* HigherTool：高阶函数工具
+* AlgorithmTool：算法工具
 * SystemExtension：系统组件扩展，String/Array/Dictionary等
 * UIExtension：系统UI组件扩展，UIView/UIViewController/UIColor等
 
@@ -482,7 +484,7 @@ iOS App基础架构设计
 * `Videos`：视频文件
 * `lotties`：lotties动画文件
 * `Assets`：图标和颜色
-* `InfoPlist`：系统info.plist文件字段国际化
+* `InfoPlist`：系统info.plist字段国际化
 * `Localizable`：自定义文案国际化
 
 #### 3rd
