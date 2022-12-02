@@ -13,9 +13,27 @@ import Foundation
 
 /**************************************** 排序算法 Section Begin ***************************************/
 
+///冒泡排序，默认从小到大
+///参数：arr：要排序的数组；asc：是否升序
+func a_bubbleSort<T: Comparable>(_ arr: [T], asc: Bool = true) -> [T]
+{
+    var newArr = arr
+    for i in 0..<arr.count - 1
+    {
+        for j in 0..<arr.count - 1 - i
+        {
+            if asc ? (newArr[j] > newArr[j + 1]) : (newArr[j] < newArr[j + 1])
+            {
+                newArr.swapAt(j, j + 1)
+            }
+        }
+    }
+    return newArr
+}
+
 ///选择排序，默认从小到大
 ///参数：arr：要排序的数组；asc：是否升序
-func a_selectionSort<T: Comparable>(_ arr: [T], asc: Bool = true) -> [T]
+func a_selectSort<T: Comparable>(_ arr: [T], asc: Bool = true) -> [T]
 {
     //如果只有一个直接返回
     if arr.count <= 1
@@ -82,6 +100,28 @@ func a_selectionSort<T: Comparable>(_ arr: [T], asc: Bool = true) -> [T]
         }
         return leftArr + rightArr
     }
+}
+
+///插入排序，默认从小到大
+///参数：arr：要排序的数组；asc：是否升序
+func a_insertSort<T: Comparable>(_ arr: [T], asc: Bool = true) -> [T]
+{
+    var newArr: [T] = []
+    for item in arr
+    {
+        var insertIndex = 0     //新元素应该被插入的位置
+        for (index, it) in newArr.enumerated()
+        {
+            //如果是最后一个了，那么不需要检查`index + 1`
+            if ((asc ? item >= it : item <= it) && index >= newArr.count - 1) || ((asc ? item >= it : item <= it) && (asc ? item < newArr[index + 1] : item > newArr[index + 1]))
+            {
+                insertIndex = index + 1
+                break
+            }
+        }
+        newArr.insert(item, at: insertIndex)
+    }
+    return newArr
 }
 
 
