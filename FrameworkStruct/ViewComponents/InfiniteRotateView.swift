@@ -107,7 +107,7 @@ class InfiniteRotateView: UIView
     {
         let sliceValue = Self.oneRoundRadian / (animationTime / 0.1)
         let originValue = animationFromValue      //记录动画开始时的位置
-        animationTimer = TimerManager.shared.dispatchTimer(interval: 0.1, onMain: true, exact: true, hostId: self.className, action: {[weak self] in
+        animationTimer = TimerManager.shared.dispatchTimer(interval: 0.1, onMain: true, exact: true, hostId: self.className, action: {[weak self] timer in
             self?.animationFromValue += sliceValue
             self?.animationToValue += sliceValue
             if self?.animationFromValue ?? 0.0 > Self.oneRoundRadian + originValue

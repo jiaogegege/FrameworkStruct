@@ -105,7 +105,7 @@ extension TimerManager: ExternalInterface
                        onMain: Bool?,
                        exact: Bool = false,
                        hostId: String = g_uuid(),
-                       action: @escaping VoidClosure) -> DispatchSourceTimer
+                       action: @escaping ((DispatchSourceTimer?) -> Void)) -> DispatchSourceTimer
     {
         //计算所在队列
         var queue = ThreadManager.shared.currentQueue()
@@ -125,7 +125,7 @@ extension TimerManager: ExternalInterface
         timer.setEventHandler {[weak timer] in
             if canPerform
             {
-                action()
+                action(timer)
                 //只执行一次
                 if !repeats
                 {
@@ -178,7 +178,7 @@ extension TimerManager: ExternalInterface
         var canFinish = false   //是否可以结束
         let timerId = g_uuid()    //创建的定时器id
         
-        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, hostId: hostId) { [unowned self] in
+        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, hostId: hostId) { [unowned self] timer in
             action(restTime, &canFinish)    //执行动作
             //判断是否结束倒计时
             if canFinish    //优先判断外部状态
@@ -231,7 +231,7 @@ extension TimerManager: ExternalInterface
         var canFinish = false   //是否可以结束
         let timerId = g_uuid()    //创建的定时器id
         
-        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, hostId: hostId) { [unowned self] in
+        let timer = self.dispatchTimer(interval: interval, onMain: onMain, exact: exact, hostId: hostId) { [unowned self] timer in
             action(totalTime, &canFinish)    //执行动作
             //判断是否结束秒表
             if canFinish    //优先判断外部状态

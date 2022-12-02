@@ -641,6 +641,7 @@
 		EAAFDA742921D9D500538CBF /* SwiftyRSA+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA652921D9D500538CBF /* SwiftyRSA+ObjC.swift */; };
 		EAAFDA752921D9D500538CBF /* SwiftyRSAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA662921D9D500538CBF /* SwiftyRSAError.swift */; };
 		EAAFDA7A2921DE5900538CBF /* EncrpytConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAFDA792921DE5900538CBF /* EncrpytConst.swift */; };
+		EAB115D42939998000D47E81 /* AlgorithmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB115D32939998000D47E81 /* AlgorithmTool.swift */; };
 		EAB32C4027CA720C000108EA /* UserDefaultsConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */; };
 		EAB32C4427CA7418000108EA /* PlistConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB32C4327CA7418000108EA /* PlistConst.swift */; };
 		EAB91A65278B047C00A35FA3 /* DialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB91A64278B047C00A35FA3 /* DialogManager.swift */; };
@@ -1735,6 +1736,7 @@
 		EAAFDA662921D9D500538CBF /* SwiftyRSAError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRSAError.swift; sourceTree = "<group>"; };
 		EAAFDA782921DE2300538CBF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EAAFDA792921DE5900538CBF /* EncrpytConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncrpytConst.swift; sourceTree = "<group>"; };
+		EAB115D32939998000D47E81 /* AlgorithmTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmTool.swift; sourceTree = "<group>"; };
 		EAB32C3F27CA720C000108EA /* UserDefaultsConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConst.swift; sourceTree = "<group>"; };
 		EAB32C4327CA7418000108EA /* PlistConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistConst.swift; sourceTree = "<group>"; };
 		EAB91A64278B047C00A35FA3 /* DialogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogManager.swift; sourceTree = "<group>"; };
@@ -4522,6 +4524,7 @@
 				EACAD4EC277DA5E400FBE2DA /* DeviceTool.swift */,
 				EAFC601A27E20B430019CDEF /* UnitTool.swift */,
 				EADB74FD2908DD9F003BDBC2 /* HigherTool.swift */,
+				EAB115D32939998000D47E81 /* AlgorithmTool.swift */,
 				EA1387E12764A6D80041AB89 /* SystemExtension.swift */,
 				EAF5B8ED276778B900D2AAF7 /* UIExtension.swift */,
 			);
@@ -5259,6 +5262,7 @@
 				EA9A787027C7554C00A11FC8 /* XPathQuery.m in Sources */,
 				EA4DFBC4291658020053BC4F /* MPLrcManager.swift in Sources */,
 				EA9A759C27C730C100A11FC8 /* GCDAsyncSocket.m in Sources */,
+				EAB115D42939998000D47E81 /* AlgorithmTool.swift in Sources */,
 				EA99373027994F6100480147 /* TABBinAnimation.m in Sources */,
 				EA3E8B0927B77CEA006A2715 /* ShapeContainerLayer.swift in Sources */,
 				EA92257E276B3E7C00192E2E /* SVIndefiniteAnimatedView.m in Sources */,
