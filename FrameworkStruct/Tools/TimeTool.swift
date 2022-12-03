@@ -315,7 +315,7 @@ func isTimePasted(_ timeStr: String, criticalTimeStr: String?, format: TimeStrin
 ///在某个时间基础上增加一定秒数
 func dateByAdd(_ interal: TimeInterval, baseDate: Date) -> Date
 {
-    return baseDate.addingTimeInterval(interal)
+    baseDate.addingTimeInterval(interal)
 }
 
 ///在某个日期的基础上加上或减去几天返回新的日期
@@ -329,13 +329,18 @@ func dateByAdd(days: Int, baseDate: Date) -> Date
 ///当前时间往后一定时间，传入负值则往前
 func nowAfter(_ interval: TimeInterval) -> Date
 {
-    return dateByAdd(interval, baseDate: Date())
+    dateByAdd(interval, baseDate: Date())
+}
+
+///两个日期之间间隔的秒数
+func intervalBetween(_ aDate: Date, _ another: Date) -> TimeInterval
+{
+    abs(another.timeIntervalSince1970 - aDate.timeIntervalSince1970)
 }
 
 ///两个日期之间间隔的天数，计算结果取整数部分
-func daysBetween(aDate: Date, another: Date)-> Int
+func daysBetween(_ aDate: Date, _ another: Date)-> Int
 {
     let interval = another.timeIntervalSince1970 - aDate.timeIntervalSince1970
-    let days = abs(Int(interval / tSecondsInDay))
-    return days
+    return abs(Int(interval / tSecondsInDay))
 }
