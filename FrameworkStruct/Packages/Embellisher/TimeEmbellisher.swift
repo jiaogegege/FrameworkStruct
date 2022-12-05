@@ -96,8 +96,7 @@ extension TimeEmbellisher: ExternalInterface
     ///参数：format：时间字符串格式
     func date(from str: String, format: TimeStringFormat = .slashYearMonthDayHourMinSec) -> Date?
     {
-        let formatter = format.getFormatter()
-        return formatter.date(from: str)
+        format.getFormatter().date(from: str)
     }
     
     ///格式化年/月/日(时/分/秒)字符串为日期
@@ -111,22 +110,19 @@ extension TimeEmbellisher: ExternalInterface
     ///从一个时间戳获得Date
     func date(from timeStamp: TimeInterval) -> Date
     {
-        let date = Date(timeIntervalSince1970: timeStamp)
-        return date
+        Date(timeIntervalSince1970: timeStamp)
     }
     
     ///将一个Date转成时间字符串
     func string(from aDate: Date, format: TimeStringFormat = .slashYearMonthDayHourMinSec) -> String
     {
-        let formatter = format.getFormatter()
-        return formatter.string(from: aDate)
+        format.getFormatter().string(from: aDate)
     }
     
     ///从一个时间戳获得日期字符串
     func string(from timeStamp: TimeInterval, format: TimeStringFormat = .slashYearMonthDayHourMinSec) -> String
     {
-        let date = self.date(from: timeStamp)
-        return self.string(from: date, format: format)
+        string(from: date(from: timeStamp), format: format)
     }
     
     ///格式化日期为年/月/日(时/分/秒)形式
@@ -141,8 +137,7 @@ extension TimeEmbellisher: ExternalInterface
     ///参数：aDate：一个日期；components：需要获取的日期组件
     func dateComponents(from aDate: Date, components: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]) -> DateComponents
     {
-        let calendar = Calendar.current
-        return calendar.dateComponents(components, from: aDate)
+        Calendar.current.dateComponents(components, from: aDate)
     }
     
     ///将秒数转换为分秒字符串
@@ -164,10 +159,11 @@ extension TimeEmbellisher: ExternalInterface
     }
     
     ///得到一个日期并修改指定的日期组件，可修改项：年月日时分秒毫秒
-    func dateByCustom(_ aDate: Date, year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, second: Int? = nil, nanosecond: Int? = nil) -> Date?
+    ///默认以当前日期为基准
+    func dateByComponent(_ aDate: Date = Date(), year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, second: Int? = nil, nanosecond: Int? = nil) -> Date?
     {
         let calendar = Calendar.current
-        var components: DateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: aDate)
+        var components: DateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: aDate)
         if let year = year {
             components.year = year
         }
@@ -196,7 +192,7 @@ extension TimeEmbellisher: ExternalInterface
     ///得到一个日期当天0点的日期，就是当天的0时0分0秒
     func dateByZeroTime(_ aDate: Date) -> Date?
     {
-        return self.dateByCustom(aDate, year: nil, month: nil, day: nil, hour: 0, minute: 0, second: 0, nanosecond: 0)
+        dateByComponent(aDate, year: nil, month: nil, day: nil, hour: 0, minute: 0, second: 0, nanosecond: 0)
     }
     
     ///获取具体的时间的时间段描述

@@ -332,15 +332,15 @@ func nowAfter(_ interval: TimeInterval) -> Date
     dateByAdd(interval, baseDate: Date())
 }
 
-///两个日期之间间隔的秒数
+///两个日期之间间隔的秒数，如果`aDate`比`another`晚，那么返回负数
 func intervalBetween(_ aDate: Date, _ another: Date) -> TimeInterval
 {
-    abs(another.timeIntervalSince1970 - aDate.timeIntervalSince1970)
+    another.timeIntervalSince1970 - aDate.timeIntervalSince1970
 }
 
-///两个日期之间间隔的天数，计算结果取整数部分
+///两个日期之间间隔的天数，计算结果取整数部分，如果`aDate`比`another`晚，那么返回负数
 func daysBetween(_ aDate: Date, _ another: Date)-> Int
 {
     let interval = another.timeIntervalSince1970 - aDate.timeIntervalSince1970
-    return abs(Int(interval / tSecondsInDay))
+    return Int(interval / tSecondsInDay)
 }

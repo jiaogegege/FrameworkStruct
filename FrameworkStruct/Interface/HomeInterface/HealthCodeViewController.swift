@@ -348,11 +348,17 @@ class HealthCodeViewController: BasicViewController {
         let nowPeriod = TimeEmbellisher.shared.getPeriod(Date())
         if nowPeriod == .beforeDawn || nowPeriod == .morning || nowPeriod == .forenoon
         {
-            detectTimeStr = TimeEmbellisher.shared.string(from: TimeEmbellisher.shared.dateByCustom(nowAfter(-tSecondsInDay), hour: 14, minute: 24, second: 51)!, format: .dashYearMonthDayHourMinSec)
+            detectTimeStr = TimeEmbellisher.shared.string(from: TimeEmbellisher.shared.dateByComponent(nowAfter(-tSecondsInDay), hour: 14, minute: 24, second: 51)!, format: .dashYearMonthDayHourMinSec)
         }
         else
         {
-            detectTimeStr = TimeEmbellisher.shared.string(from: TimeEmbellisher.shared.dateByCustom(Date(), hour: Int(randomIn(13, 18)), minute: Int(randomIn(1, 59)), second: Int(randomIn(1, 59)))!, format: .dashYearMonthDayHourMinSec)
+            //时间不超过当前时间
+            var date = TimeEmbellisher.shared.dateByComponent(Date(), hour: Int(randomIn(13, 18)), minute: Int(randomIn(1, 59)), second: Int(randomIn(1, 59)))!
+            if intervalBetween(date, Date()) < 0
+            {
+                date = Date()
+            }
+            detectTimeStr = TimeEmbellisher.shared.string(from: date, format: .dashYearMonthDayHourMinSec)
         }
         nucleateSampDetectTimeLabel.text = detectTimeStr
         nucleateSampView.addSubview(nucleateSampDetectTimeLabel)
