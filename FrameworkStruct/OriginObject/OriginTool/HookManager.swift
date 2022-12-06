@@ -102,7 +102,7 @@ class HookManager: NSObject {
     }
     
     ///修改某个event下的key指定的hook信息
-    func updateMeta(_ event: HookEventType, key: String, meta: HookMetaInfo)
+    func setMeta(_ event: HookEventType, key: String, meta: HookMetaInfo)
     {
         if var hooks = hookContainer[event] {
             if var hook = hooks[key] {
@@ -120,7 +120,7 @@ class HookManager: NSObject {
     {
         if var meta = getMeta(event, key: key) {    //已经有了才可以修改
             meta.canPerform = canPerform
-            updateMeta(event, key: key, meta: meta)
+            setMeta(event, key: key, meta: meta)
         }
     }
     
