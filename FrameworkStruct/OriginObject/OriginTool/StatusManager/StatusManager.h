@@ -57,10 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)clear:(id)key;
 
 ///清空所有状态
--(void)reset;
-
-///清理所有资源
 -(void)clear;
+
+///清空所有资源，包括状态和action和delegate
+-(void)reset;
 
 ///订阅状态，如果在其他地方修改了该状态，那么会将变化结果发送到所有订阅者，包括新状态和上一个旧状态，如果是清空状态，那么返回nil
 -(void)subscribe:(id)key action:(SMSubscribeAction)action;

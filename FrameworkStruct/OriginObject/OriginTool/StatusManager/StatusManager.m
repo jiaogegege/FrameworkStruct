@@ -78,13 +78,7 @@
     ///获得上一次的状态
 -(id)perviousStatus:(id)key
 {
-    SMVector *vec = [_dict objectForKey:key];
-    if (!vec)
-    {
-        return nil;
-    }
-    id obj = [[vec objectAtIndex:1] copy];
-    return obj;
+    return [self before:1 status:key];
 }
 
     ///获得之前某次的状态，参数：times指定之前第几次，当前为0，上一次为1，上上一次为2，最大不超过指定容量，没有返回nil
@@ -142,7 +136,7 @@
     }
 }
 
-///清理所有资源
+///清空所有资源，包括状态和action和delegate
 -(void)reset
 {
     [self clear];
