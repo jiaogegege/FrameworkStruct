@@ -697,8 +697,9 @@ extension UIColor
 {
     //暗黑模式级别
     enum DarkModeLevel {
-        case deepen                     //最底层的黑色或最顶层的白色
-        case dodge                      //比最底层的黑色亮一点或比最顶层的白色暗一点
+//        case deepest                    //最底层的黑色或最顶层的白色
+        case deepen                     //中间层的黑色或中间层的白色
+        case dodge                      //较亮的黑色或较暗的白色
         
         //获取颜色，dark：是否是黑色，否则就是白色
         func getColor(dark: Bool) -> UIColor
