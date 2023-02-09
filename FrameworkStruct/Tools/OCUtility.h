@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)catchException:(void(^)(void))tryBlock error:(__autoreleasing NSError **)error;
 
+//获取文本行数
++ (int)getNumberOfLinesWithText:(NSAttributedString *)text andLabelWidth:(CGFloat)width;
 
 @end
 

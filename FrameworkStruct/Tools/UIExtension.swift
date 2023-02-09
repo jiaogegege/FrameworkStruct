@@ -296,6 +296,7 @@ extension UIView
      */
     func addRadiusAndShadow(cornerSide: UIViewSide = .all, bgColor: UIColor = .white, cornerRadius: CGFloat = 10.0, needShadow: Bool = true, shadowColor: UIColor = .black, shadowOffset: CGSize = .zero, shadowOpacity: Float = 0.5, shadowRadius: CGFloat = 5.0)
     {
+        self.removeAllSubviews()
         self.backgroundColor = .clear
         let cornerView = UIView()
         cornerView.backgroundColor = bgColor
@@ -343,6 +344,53 @@ extension UIView
     //边的位置：left/top/right/bottom/all
     enum UIViewSide {
     case left, top, right, bottom, all
+    }
+    
+}
+
+
+//MARK: UILabel
+/**
+ * UILabel
+ */
+extension UILabel {
+    
+    /// UILabel根据文字的需要的高度
+    public var requiredHeight: CGFloat {
+        let label = UILabel(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: frame.width,
+            height: CGFloat.greatestFiniteMagnitude)
+        )
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = font
+        label.text = text
+        if let attr = attributedText {
+            label.attributedText = attr
+        }
+        label.sizeToFit()
+        return label.frame.height
+    }
+    
+    /// UILabel根据文字实际的行数，不太准，谨慎使用
+    public var realLines: Int {
+        return Int(requiredHeight / font.lineHeight)
+    }
+    
+    ///设置行高
+    func setText(_ text: String, lineSpace: CGFloat)
+    {
+        guard lineSpace > 0.01 else {
+            return
+        }
+        let parah = NSMutableParagraphStyle()
+        parah.lineSpacing = lineSpace
+        parah.lineBreakMode = self.lineBreakMode
+        parah.alignment = self.textAlignment
+        let attrStr = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.paragraphStyle: parah])
+        self.attributedText = attrStr
     }
     
 }
