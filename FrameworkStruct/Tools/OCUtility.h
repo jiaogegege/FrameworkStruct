@@ -9,6 +9,7 @@
  OC特定工具类方法
  */
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,8 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)catchException:(void(^)(void))tryBlock error:(__autoreleasing NSError **)error;
 
-//获取文本行数
-+ (int)getNumberOfLinesWithText:(NSAttributedString *)text andLabelWidth:(CGFloat)width;
+//获取带行高的属性文本
++ (NSMutableAttributedString *)textAttrLine:(NSString *)text attributes:(NSDictionary *)attr lineSpacing:(CGFloat)lineSpacing;
+
+//计算文本行数和每行文本
++ (NSArray *)getLinesArrayOfStringInLabel:(NSString *)string font:(UIFont *)font andLableWidth:(CGFloat)lableWidth andLineSpace:(CGFloat)lineSpace;
 
 @end
 

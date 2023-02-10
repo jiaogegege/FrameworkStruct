@@ -28,21 +28,45 @@
     }
 }
 
-//获取文本行数
-+ (int)getNumberOfLinesWithText:(NSAttributedString *)text andLabelWidth:(CGFloat)width
+//获取带行高的属性文本
++ (NSMutableAttributedString *)textAttrLine:(NSString *)text attributes:(NSDictionary *)attr lineSpacing:(CGFloat)lineSpacing
 {
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)text);
-    CGMutablePathRef Path = CGPathCreateMutable();
-    CGPathAddRect(Path, NULL ,CGRectMake(0 , 0 , width, INT_MAX));
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), Path, NULL);
-    // 得到字串在frame中被自动分成了多少个行。
-    CFArrayRef rows = CTFrameGetLines(frame);
-    // 实际行数
-    int numberOfLines = (int)CFArrayGetCount(rows);
-    CFRelease(frame);
-    CGPathRelease(Path);
-    CFRelease(framesetter);
-    return numberOfLines;
+    NSMutableAttributedString *textAttr = [[NSMutableAttributedString alloc] initWithString:text attributes:attr];
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = lineSpacing;
+    [textAttr addAttribute:NSParagraphStyleAttributeName
+                                     value:paragraph
+                                     range:NSMakeRange(0, [textAttr length])];
+    return textAttr;
+}
+
+//计算文本行数和每行文本
++ (NSArray *)getLinesArrayOfString:(NSString *)string font:(UIFont *)font labelWidth:(CGFloat)labelWidth lineSpace:(CGFloat)lineSpace
+{
+    CTFontRef myFont = CTFontCreateWithName(( CFStringRef)([font fontName]), [font pointSize], NULL);
+    NSMutableAttributedString *attStr = [self textAttrLine:string attributes:@{NSFontAttributeName: font} lineSpacing:lineSpace];
+    [attStr addAttribute:(NSString *)kCTFontAttributeName value:(__bridge  id)myFont range:NSMakeRange(0, attStr.length)];
+    CFRelease(myFont);
+    CTFramesetterRef frameSetter = CTFramesetterCreateWithAttributedString(( CFAttributedStringRef)attStr);
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, CGRectMake(0,0,labelWidth,100000));
+    CTFrameRef frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, NULL);
+    NSArray *lines = ( NSArray *)CTFrameGetLines(frame);
+    NSMutableArray *linesArray = [[NSMutableArray alloc]init];
+    for (id line in lines) {
+        CTLineRef lineRef = (__bridge  CTLineRef )line;
+        CFRange lineRange = CTLineGetStringRange(lineRef);
+        NSRange range = NSMakeRange(lineRange.location, lineRange.length);
+        NSString *lineString = [string substringWithRange:range];
+        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attStr, lineRange, kCTKernAttributeName, (CFTypeRef)([NSNumber numberWithFloat:0.0]));
+        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attStr, lineRange, kCTKernAttributeName, (CFTypeRef)([NSNumber numberWithInt:0.0]));
+        [linesArray addObject:lineString];
+    }
+    
+    CGPathRelease(path);
+    CFRelease( frame );
+    CFRelease(frameSetter);
+    return (NSArray *)linesArray;
 }
 
 
