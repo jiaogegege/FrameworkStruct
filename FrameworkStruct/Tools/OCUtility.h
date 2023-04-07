@@ -6,7 +6,7 @@
 //
 
 /**
- OC特定工具类方法
+ OC通用工具类方法
  */
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSMutableAttributedString *)textAttrLine:(NSString *)text attributes:(NSDictionary *)attr lineSpacing:(CGFloat)lineSpacing;
 
 //计算文本行数和每行文本
-+ (NSArray *)getLinesArrayOfStringInLabel:(NSString *)string font:(UIFont *)font andLableWidth:(CGFloat)lableWidth andLineSpace:(CGFloat)lineSpace;
++ (NSArray *)getLinesArrayOfString:(NSString *)string font:(UIFont *)font labelWidth:(CGFloat)labelWidth lineSpace:(CGFloat)lineSpace;
 
 @end
 
