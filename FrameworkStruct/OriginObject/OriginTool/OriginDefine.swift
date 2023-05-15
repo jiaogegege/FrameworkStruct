@@ -55,6 +55,17 @@ protocol OriginProtocol
 }
 
 /**
+ * 单例协议
+ */
+protocol SingletonProtocol {
+    //任何实现该协议的类型
+    associatedtype AnyType = Self
+    
+    static var shared: AnyType { get }
+    
+}
+
+/**
  * 接口协议
  * 表示这个extension中实现的方法都是其他接口协议中定义的，为了扩展该类型的功能，比如`Equatable`，`Comparable`或者自定义协议等
  * 建议只在最终子类中使用该修饰性协议
