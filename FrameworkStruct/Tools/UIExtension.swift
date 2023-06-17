@@ -472,8 +472,12 @@ extension UITableView
     ///滚动到顶部
     func scrollToTop()
     {
-        self.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+        if self.numberOfRows(inSection: 0) > 0
+        {
+            self.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+        }
         self.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+        self.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     ///滚动到底部
@@ -607,8 +611,12 @@ extension UICollectionView
     ///滚动到顶部
     func scrollToTop()
     {
-        self.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
+        if self.numberOfItems(inSection: 0) > 0
+        {
+            self.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: true)
+        }
         self.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true)
+        self.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     ///滚动到底部
