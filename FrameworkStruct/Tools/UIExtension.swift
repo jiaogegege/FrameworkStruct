@@ -402,6 +402,37 @@ extension UILabel {
  */
 extension UIButton
 {
+    /**************************************** 图标和文本位置调整 Section Begin ***************************************/
+    ///将图片设置在文字的右侧
+    func imageRightTextLeft()
+    {
+        self.imageEdgeInsets = UIEdgeInsets(top: 0, left: (self.width / 2.0 + (self.titleLabel?.width ?? 0) / 2.0), bottom: 0, right: 0)
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(self.imageView?.intrinsicContentSize.width ?? 0), bottom: 0, right: 0)
+    }
+    
+    ///图标和文字都居中
+    func imageCenterTextCenter()
+    {
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(self.imageView?.width ?? 0), bottom: 0, right: 0)
+        self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -(self.titleLabel?.intrinsicContentSize.width ?? 0))
+    }
+    
+    ///图标在上，文字在下，水平居中；offset：文本和图标的间距
+    func imageTopTextBottom(_ offset: CGFloat = 0)
+    {
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(self.imageView?.width ?? 0), bottom: -(self.imageView?.height ?? 0) - offset / 2.0, right: 0)
+        self.imageEdgeInsets = UIEdgeInsets(top: -(self.titleLabel?.intrinsicContentSize.height ?? 0) - offset / 2.0, left: 0, bottom: 0, right: -(self.titleLabel?.intrinsicContentSize.width ?? 0))
+    }
+    
+    ///文本左对齐，图标右对齐
+    func textLeftAlignImageRightAlign()
+    {
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(self.imageView?.width ?? 0) - self.width + (self.titleLabel?.intrinsicContentSize.width ?? 0), bottom: 0, right: 0)
+        self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -(self.titleLabel?.width ?? 0) - self.width + (self.imageView?.width ?? 0))
+    }
+    
+    /**************************************** 图标和文本位置调整 Section End ***************************************/
+    
     /**************************************** UIButton点击后延时不可点击 Section Begin ***************************************/
     ///设置button点击后在一定时间内不可再次点击，默认0
     var disableInterval: TimeInterval {
