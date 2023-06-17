@@ -244,6 +244,12 @@ func isOdd(_ num: Int) -> Bool
     return true
 }
 
+///判断一个浮点数是否是整数
+func isInteger<T: FloatingPoint>(_ num: T) -> Bool
+{
+    floor(num) == num
+}
+
 ///产生一个[0, +∞)或(-∞, 0]之间的随机整数，不包含`border`
 ///如果边界是负数，必定返回负数；正数同理
 ///reset：重置随机数种子
