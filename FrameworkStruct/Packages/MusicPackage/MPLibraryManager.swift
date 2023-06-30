@@ -250,7 +250,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///保存iCloud库
-    func saveiCloudSongs(_ songs: [MPSongModel], success: @escaping BoolClosure)
+    func saveiCloudSongs(_ songs: [MPSongModel], success: @escaping BoClo)
     {
         container.getiCloudLibrary {[weak self] lib in
             if let lib = lib {
@@ -268,7 +268,7 @@ extension MPLibraryManager: ExternalInterface
     
     ///我喜欢列表新增或删除一首歌曲
     ///参数：favorite：收藏/取消收藏
-    func saveSongToFavorite(_ song: MPSongModel, favorite: Bool, success: @escaping BoolClosure)
+    func saveSongToFavorite(_ song: MPSongModel, favorite: Bool, success: @escaping BoClo)
     {
         //先读取我喜欢列表
         container.getFavoriteSongs {[weak self] favoriteSongs in
@@ -304,7 +304,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///在当前播放列表中删除一首歌
-    func deleteSongInCurrentPlaylist(_ song: MPAudioProtocol, success: @escaping BoolClosure)
+    func deleteSongInCurrentPlaylist(_ song: MPAudioProtocol, success: @escaping BoClo)
     {
         readCurrentPlaylist {[weak self] playlist in
             if let playlist = playlist {
@@ -323,7 +323,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///在历史列表中删除一首歌
-    func deleteSongInHistory(_ song: MPAudioProtocol, success: @escaping BoolClosure)
+    func deleteSongInHistory(_ song: MPAudioProtocol, success: @escaping BoClo)
     {
         readHistorySongs { [weak self] history in
             if let his = history {
@@ -378,7 +378,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///保存歌单
-    func saveSonglist(_ songlist: MPSonglistModel, success: @escaping BoolClosure)
+    func saveSonglist(_ songlist: MPSonglistModel, success: @escaping BoClo)
     {
         container.getSonglists {[weak self] songlists in
             if var songlists = songlists {
@@ -403,7 +403,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///删除某个歌单，包括歌单下所有歌曲
-    func deleteSonglist(_ songlistId: String, success: @escaping BoolClosure)
+    func deleteSonglist(_ songlistId: String, success: @escaping BoClo)
     {
         //先查询歌单列表
         container.getSonglists {[weak self] songlists in
@@ -504,7 +504,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///删除某个歌单中的歌曲
-    func deleteSongsInSonglist(_ songs: [MPSongModel], songlistId: String, success: @escaping BoolClosure)
+    func deleteSongsInSonglist(_ songs: [MPSongModel], songlistId: String, success: @escaping BoClo)
     {
         container.getSonglists { songlists in
             if let songlists = songlists {

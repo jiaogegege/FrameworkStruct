@@ -20,7 +20,7 @@ class HookManager: NSObject {
     //MARK: 方法
     ///在某个event下添加一个hook，多次添加则会存在多个hook
     //参数：event：要添加hook的事件；key：用于标记指定hook；meta：绑定的hook的元信息；action：要执行的hook
-    func add(_ event: HookEventType, key: String? = nil, meta: HookMetaInfo = HookMetaInfo(), action: @escaping VoidClosure)
+    func add(_ event: HookEventType, key: String? = nil, meta: HookMetaInfo = HookMetaInfo(), action: @escaping VoClo)
     {
         var hooks = hookContainer[event]
         if hooks == nil
@@ -136,7 +136,7 @@ extension HookManager: InternalType
     //hook结构体
     struct HookDataStruct {
         var key: String             //用于标记一个action的key，方便查找和修改；如果用户不设置，则自动从0开始计数
-        var action: VoidClosure     //要执行的动作
+        var action: VoClo     //要执行的动作
         var meta: HookMetaInfo      //hook描述信息
         
         //执行hook

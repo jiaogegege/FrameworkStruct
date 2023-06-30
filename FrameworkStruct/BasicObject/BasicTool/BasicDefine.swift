@@ -32,7 +32,7 @@ protocol Archivable: NSCoding {
     
     //归档
     func archive() -> Data?
-    func archive(completion: @escaping OptionalDataClosure)
+    func archive(completion: @escaping OpDataClo)
     
     //解档
     static func unarchive(_ data: Data) -> AnyType?
@@ -46,7 +46,7 @@ extension Archivable {
         ArchiverAdapter.shared.archive(self)
     }
     
-    func archive(completion: @escaping OptionalDataClosure)
+    func archive(completion: @escaping OpDataClo)
     {
         ArchiverAdapter.shared.archive(self) { (data) in
             completion(data)

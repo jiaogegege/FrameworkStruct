@@ -53,7 +53,7 @@ extension RegisterLoginWorker: ExternalInterface
     }
     
     ///验证码登录
-    func login(verificationCode: String, success: @escaping ((UserInfoModel) -> Void), failure: @escaping NSErrorClosure) throws
+    func login(verificationCode: String, success: @escaping ((UserInfoModel) -> Void), failure: @escaping NSErrClo) throws
     {
         try startWork()
         

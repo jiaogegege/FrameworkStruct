@@ -85,7 +85,7 @@ extension ThreadManager: InternalType
     }
     
     ///异步操作闭包类型，传入一个名为finish的无返回闭包，表示结束该任务，需要在异步操作完成后调用，不管异步操作是否成功都需要调用
-    typealias DispatchGroupClosure = ((_ finish: @escaping VoidClosure) -> Void)
+    typealias DispatchGroupClosure = ((_ finish: @escaping VoClo) -> Void)
     
 }
 
@@ -94,7 +94,7 @@ extension ThreadManager: InternalType
 extension ThreadManager: ExternalInterface
 {
     ///在线程中异步执行代码
-    func async(onMain: Bool = true, action: @escaping VoidClosure)
+    func async(onMain: Bool = true, action: @escaping VoClo)
     {
         if onMain
         {
@@ -119,7 +119,7 @@ extension ThreadManager: ExternalInterface
     
     ///在线程中同步执行代码
     ///注意：一般不会这么使用
-    func sync(onMain: Bool = true, action: @escaping VoidClosure)
+    func sync(onMain: Bool = true, action: @escaping VoClo)
     {
         if onMain
         {
@@ -142,7 +142,7 @@ extension ThreadManager: ExternalInterface
     ///groupQueueLabel：在哪个线程中执行操作
     ///ops:操作列表，也就是多个网络请求操作，传入闭包，对闭包的要求是提供一个接收DispatchGroup的参数
     ///completion:完成后的操作
-    func asyncGroup(ops: Array<DispatchGroupClosure>, groupQueueLabel: ThreadLabel = .main, completion: @escaping VoidClosure)
+    func asyncGroup(ops: Array<DispatchGroupClosure>, groupQueueLabel: ThreadLabel = .main, completion: @escaping VoClo)
     {
         //先从容器中获取已有的队列看是否相等
         let group: DispatchGroup
@@ -207,11 +207,11 @@ extension ThreadManager: ExternalInterface
     ///
     ///returns:返回队列，外部程序可以向队列中添加更多操作
     func concurrentQueue(identifier: String,
-                         ops: Array<VoidClosure>,
-                         dependencyOps: Array<VoidClosure>? = nil,
+                         ops: Array<VoClo>,
+                         dependencyOps: Array<VoClo>? = nil,
                          onMain: Bool = false,
                          maxConcurrent: Int = -1,
-                         completion: VoidClosure? = nil) -> OperationQueue
+                         completion: VoClo? = nil) -> OperationQueue
     {
         let queue: OperationQueue
         if onMain
@@ -290,7 +290,7 @@ extension ThreadManager: ExternalInterface
     
     ///向特定id的并发队列添加完成操作，如果不存在该队列则什么都不做
     ///如果调用了`addOpToConcurrentQueue`方法向队列中添加操作，如果需要监控所有操作完成的事件，那么一定要调用该方法
-    func concurrentQueueAddCompletion(identifier: String, completion: @escaping VoidClosure)
+    func concurrentQueueAddCompletion(identifier: String, completion: @escaping VoClo)
     {
         if let queue = self.operationQueueDict[identifier]
         {

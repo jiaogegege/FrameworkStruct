@@ -13,8 +13,8 @@ import UIKit
 class TeenagerModeDialog: FSDialog
 {
     //回调
-    var enterTeenModeCallback: VoidClosure? = nil   //进入青少年模式
-    var confirmCallback: VoidClosure? = nil     //我知道了
+    var enterTeenModeCallback: VoClo? = nil   //进入青少年模式
+    var confirmCallback: VoClo? = nil     //我知道了
     
     //UI组件
     fileprivate var headImageView: UIImageView! //头图
@@ -142,7 +142,7 @@ class TeenagerModeDialog: FSDialog
     }
     
     //显示时的动画效果
-    override func showAnimation(completion: @escaping VoidClosure) {
+    override func showAnimation(completion: @escaping VoClo) {
         super.showAnimation(completion: completion)
         UIView.animate(withDuration: self.animateInterval, delay: 0.0, options: .curveEaseOut) {
             self.containerView.snp.updateConstraints { make in

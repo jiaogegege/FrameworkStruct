@@ -184,7 +184,7 @@ extension UIViewController
     ///modal显示一个VC
     ///参数：
     ///mode：modal模式；isModal：是否禁止手动下滑让modal的VC消失，默认不禁止
-    func modal(_ vc: UIViewController, mode: UIModalPresentationStyle = .fullScreen, isModal: Bool = false, animated: Bool = true, completion: VoidClosure? = nil)
+    func modal(_ vc: UIViewController, mode: UIModalPresentationStyle = .fullScreen, isModal: Bool = false, animated: Bool = true, completion: VoClo? = nil)
     {
         vc.modalPresentationStyle = mode
         vc.isModalInPresentation = isModal
@@ -490,7 +490,7 @@ extension UIButton
 extension UITableView
 {
     ///在此处刷新tableview可禁用动画效果，包括自动估高的抖动
-    class func refreshWithoutAnimation(_ tableView: UITableView, _ action: VoidClosure)
+    class func refreshWithoutAnimation(_ tableView: UITableView, _ action: VoClo)
     {
         UIView.performWithoutAnimation {
             tableView.beginUpdates()

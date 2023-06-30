@@ -160,7 +160,7 @@ func g_checkNum(_ str: String) -> Bool
 
 //MARK: 异步操作
 ///在线程中异步执行代码
-func g_async(onMain: Bool = true, action: @escaping VoidClosure)
+func g_async(onMain: Bool = true, action: @escaping VoClo)
 {
     ThreadManager.shared.async(onMain: onMain, action: action)
 }
@@ -172,7 +172,7 @@ func g_async(action: @escaping ((_ queue: DispatchQueue) -> Void))
 }
 
 ///延时操作
-func g_after(_ interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoidClosure)
+func g_after(_ interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoClo)
 {
     TimerManager.shared.after(interval: interval, onMain: onMain, action: action)
 }
@@ -255,9 +255,9 @@ func g_alert(title: String? = nil,
              inputPlaceHolder: String? = nil,
              usePlaceHolder: Bool = false,
              leftTitle: String? = String.cancel,
-             leftBlock: VoidClosure? = nil,
+             leftBlock: VoClo? = nil,
              rightTitle: String? = String.confirm,
-             rightBlock: OptionalStringClosure? = nil)
+             rightBlock: OpStrClo? = nil)
 {
     AlertManager.shared.wantPresentAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle) { text in
         if let rightBlock = rightBlock {

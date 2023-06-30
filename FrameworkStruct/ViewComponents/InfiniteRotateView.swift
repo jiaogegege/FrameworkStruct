@@ -28,7 +28,7 @@ class InfiniteRotateView: UIView
         }
     }
     //点击回调
-    var clickCallback: VoidClosure?
+    var clickCallback: VoClo?
     
     //旋转动画时长，请在开始动画前设置
     var animationTime: TimeInterval = 36.0

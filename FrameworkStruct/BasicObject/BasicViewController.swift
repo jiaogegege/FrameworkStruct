@@ -559,37 +559,37 @@ extension BasicViewController
 {
     /**************************************** hook Section Begin ***************************************/
     ///在viewWillAppear中添加hook
-    func hookViewWillAppear(key: String? = nil, action: @escaping VoidClosure)
+    func hookViewWillAppear(key: String? = nil, action: @escaping VoClo)
     {
         hook.add(HookEvent.viewWillAppear, key: key, action: action)
     }
     
     ///在viewDidAppear中添加hook
-    func hookViewDidAppear(key: String? = nil, action: @escaping VoidClosure)
+    func hookViewDidAppear(key: String? = nil, action: @escaping VoClo)
     {
         hook.add(HookEvent.viewDidAppear, key: key, action: action)
     }
     
     ///在viewWillDisappear中添加hook
-    func hookViewWillDisappear(key: String? = nil, action: @escaping VoidClosure)
+    func hookViewWillDisappear(key: String? = nil, action: @escaping VoClo)
     {
         hook.add(HookEvent.viewWillDisappear, key: key, action: action)
     }
     
     ///在viewDidDisappear中添加hook
-    func hookViewDidDisappear(key: String? = nil, action: @escaping VoidClosure)
+    func hookViewDidDisappear(key: String? = nil, action: @escaping VoClo)
     {
         hook.add(HookEvent.viewDidDisappear, key: key, action: action)
     }
     
     ///在viewDidLayoutSubviews中添加hook
-    func hookViewDidLayoutSubviews(key: String? = nil, action: @escaping VoidClosure)
+    func hookViewDidLayoutSubviews(key: String? = nil, action: @escaping VoClo)
     {
         hook.add(HookEvent.viewDidLayoutSubviews, key: key, action: action)
     }
     
     ///在dealloc中添加hook
-    func hookDealloc(key: String? = nil, action: @escaping VoidClosure)
+    func hookDealloc(key: String? = nil, action: @escaping VoClo)
     {
         hook.add(HookEvent.dealloc, key: key, action: action)
     }

@@ -16,7 +16,7 @@ import UIKit
 @objc protocol AlertManagerProtocol
 {
     //alert消失后，执行这个回调通知管理器
-    var dismissCallback: VoidClosure? {get set}
+    var dismissCallback: VoClo? {get set}
     
 }
 
@@ -132,7 +132,7 @@ class AlertManager: OriginManager
     //备份正在显示的alert
     //备份有两种情况：1.主动present一个VC；2.有优先级更高的alert要显示
     //参数1:要隐藏的alert，参数2:隐藏成功后的操作
-    fileprivate func backup(alert: AMAlertType, completion: VoidClosure? = nil)
+    fileprivate func backup(alert: AMAlertType, completion: VoClo? = nil)
     {
         //先保存一下
         self.stack.push(alert)
@@ -183,9 +183,9 @@ class AlertManager: OriginManager
                                  inputPlaceHolder: String? = nil,
                                  usePlaceHolder: Bool = false,
                                  leftTitle: String? = String.cancel,
-                                 leftBlock: VoidClosure? = nil,
+                                 leftBlock: VoClo? = nil,
                                  rightTitle: String? = String.confirm,
-                                 rightBlock: OptionalStringClosure? = nil) -> FSAlertView?
+                                 rightBlock: OpStrClo? = nil) -> FSAlertView?
     {
         var ident = ""
         if let ti = title
@@ -222,7 +222,7 @@ class AlertManager: OriginManager
     }
     
     //创建一个actionsheet
-    fileprivate func createActionSheet(title: String? = nil, message: String? = nil, blockArray: Array<[FSActionSheet.ASItemName: VoidClosure]>, cancelBlock: VoidClosure? = nil) -> FSActionSheet?
+    fileprivate func createActionSheet(title: String? = nil, message: String? = nil, blockArray: Array<[FSActionSheet.ASItemName: VoClo]>, cancelBlock: VoClo? = nil) -> FSActionSheet?
     {
         var ident = ""
         if let ti = title
@@ -321,9 +321,9 @@ extension AlertManager: ExternalInterface
                           inputPlaceHolder: String? = nil,
                           usePlaceHolder: Bool = false,
                           leftTitle: String? = String.cancel,
-                          leftBlock: VoidClosure? = nil,
+                          leftBlock: VoClo? = nil,
                           rightTitle: String? = String.confirm,
-                          rightBlock: OptionalStringClosure? = nil)
+                          rightBlock: OpStrClo? = nil)
     {
         if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
         {
@@ -347,9 +347,9 @@ extension AlertManager: ExternalInterface
                             inputPlaceHolder: String? = nil,
                             usePlaceHolder: Bool = false,
                             leftTitle: String? = String.cancel,
-                            leftBlock: VoidClosure? = nil,
+                            leftBlock: VoClo? = nil,
                             rightTitle: String? = String.confirm,
-                            rightBlock: OptionalStringClosure? = nil)
+                            rightBlock: OpStrClo? = nil)
     {
         if let alert = self.createAlert(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, leftTitle: leftTitle, leftBlock: leftBlock, rightTitle: rightTitle, rightBlock: rightBlock)
         {
@@ -367,8 +367,8 @@ extension AlertManager: ExternalInterface
      */
     func wantPresentSheet(title: String? = nil,
                           message: String? = nil,
-                          blockArray: Array<[FSActionSheet.ASItemName: VoidClosure]>,
-                          cancelBlock: VoidClosure? = nil)
+                          blockArray: Array<[FSActionSheet.ASItemName: VoClo]>,
+                          cancelBlock: VoClo? = nil)
     {
         if let actionSheet = self.createActionSheet(title: title, message: message, blockArray: blockArray, cancelBlock: cancelBlock)
         {
@@ -386,8 +386,8 @@ extension AlertManager: ExternalInterface
      */
     func directPresentSheet(title: String? = nil,
                           message: String? = nil,
-                          blockArray: Array<[FSActionSheet.ASItemName: VoidClosure]>,
-                          cancelBlock: VoidClosure? = nil)
+                          blockArray: Array<[FSActionSheet.ASItemName: VoClo]>,
+                          cancelBlock: VoClo? = nil)
     {
         if let actionSheet = self.createActionSheet(title: title, message: message, blockArray: blockArray, cancelBlock: cancelBlock)
         {
@@ -396,7 +396,7 @@ extension AlertManager: ExternalInterface
     }
     
     //想要显示一个照片选择弹框
-    func wantPresentPhotoSheet(photoBlock: @escaping VoidClosure, cameraBlock: @escaping VoidClosure, cancelBlock:VoidClosure? = nil)
+    func wantPresentPhotoSheet(photoBlock: @escaping VoClo, cameraBlock: @escaping VoClo, cancelBlock:VoClo? = nil)
     {
         //组装照片和相机的回调
         let photoItem = [String.selectFromPhotoLibiary: photoBlock]

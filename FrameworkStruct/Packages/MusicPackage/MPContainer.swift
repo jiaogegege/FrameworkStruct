@@ -206,7 +206,7 @@ class MPContainer: OriginContainer
     }
     
     ///查询所有iCloud中的歌曲，查询的是原始歌曲文件信息，比如mp3，返回`[MPSongModel]`
-    fileprivate func queryAlliCloudSongs(completion: @escaping ([MPSongModel]) -> Void)
+    fileprivate func queryAlliCloudSongs(completion: @escaping GnClo<[MPSongModel]>)
     {
         ia.setFilter(files: FMUTIs.audioGroup, dirs: [.MusicSong])
         ia.queryDocuments { files in
@@ -225,7 +225,7 @@ class MPContainer: OriginContainer
     }
     
     //在iCloud中创建一个新文件，返回是否创建成功
-    fileprivate func createFileIniCloud(_ data: Data, fileName: String, completion: @escaping (Bool) -> Void)
+    fileprivate func createFileIniCloud(_ data: Data, fileName: String, completion: @escaping BoClo)
     {
         if let libDir = self.libDir
         {
@@ -241,7 +241,7 @@ class MPContainer: OriginContainer
     }
     
     //从iCloud中打开一个文件，返回文件handler
-    fileprivate func openFileFromiCloud(_ fileName: String, completion: @escaping (iCloudAccessor.IADocumentHandlerType?) -> Void)
+    fileprivate func openFileFromiCloud(_ fileName: String, completion: @escaping OpGnClo<iCloudAccessor.IADocumentHandlerType>)
     {
         if let libDir = self.libDir
         {
@@ -257,7 +257,7 @@ class MPContainer: OriginContainer
     }
     
     //从iCloud中读取一个文件，返回data
-    fileprivate func readFileFromiCloud(_ fileName: String, completion: @escaping (Data?) -> Void)
+    fileprivate func readFileFromiCloud(_ fileName: String, completion: @escaping OpDataClo)
     {
         if let libDir = self.libDir
         {
@@ -290,7 +290,7 @@ class MPContainer: OriginContainer
     }
     
     //提交数据到持久性数据源，目前都保存到iCloud文件
-    override func commit(key: AnyHashable, value: Any, success: @escaping (Any?) -> Void, failure: @escaping (NSError) -> Void) {
+    override func commit(key: AnyHashable, value: Any, success: @escaping OpAnyClo, failure: @escaping NSErrClo) {
         if let k = key as? MPDataKey, let val = value as? NSCoding, self.canCommit(key: key)
         {
             ArchiverAdapter.shared.archive(val, completion: {[weak self] (data) in
@@ -417,7 +417,7 @@ extension MPContainer: InternalType
 extension MPContainer: ExternalInterface
 {
     ///获取所有库
-    func getLibrarys(_ completion: @escaping (([MPMediaLibraryModel]?) -> Void))
+    func getLibrarys(_ completion: @escaping OpGnClo<[MPMediaLibraryModel]>)
     {
         if let libs = self.get(key: MPDataKey.librarys) as? [MPMediaLibraryModel]
         {
@@ -430,7 +430,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取iCloud库
-    func getiCloudLibrary(_ completion: @escaping ((MPMediaLibraryModel?) -> Void))
+    func getiCloudLibrary(_ completion: @escaping OpGnClo<MPMediaLibraryModel>)
     {
         if let libs = self.get(key: MPDataKey.librarys) as? [MPMediaLibraryModel]
         {
@@ -450,7 +450,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///保存iCloud库
-    func setiCloudLibrary(_ iCloudLib: MPMediaLibraryModel, success: BoolClosure? = nil)
+    func setiCloudLibrary(_ iCloudLib: MPMediaLibraryModel, success: BoClo? = nil)
     {
         getLibrarys {[weak self] libs in
             if var libs = libs {
@@ -486,7 +486,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取当前播放歌曲
-    func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    func getCurrentSong(_ completion: @escaping OpGnClo<MPSongModel>)
     {
         if let song = self.get(key: MPDataKey.currentSong) as? MPSongModel
         {
@@ -585,7 +585,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取历史播放歌曲列表
-    func getHistorySongs(_ completion: @escaping (MPHistoryAudioModel?) -> Void)
+    func getHistorySongs(_ completion: @escaping OpGnClo<MPHistoryAudioModel>)
     {
         if let playlist = self.get(key: MPDataKey.historySongs) as? MPHistoryAudioModel
         {
@@ -640,7 +640,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取我喜欢歌曲列表
-    func getFavoriteSongs(_ completion: @escaping (MPFavoriteModel?) -> Void)
+    func getFavoriteSongs(_ completion: @escaping OpGnClo<MPFavoriteModel>)
     {
         if let favorite = self.get(key: MPDataKey.favoriteSongs) as? MPFavoriteModel
         {
@@ -683,7 +683,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///保存我喜欢歌曲列表
-    func setFavoriteSongs(_ favoriteSongs: MPFavoriteModel, success: BoolClosure? = nil)
+    func setFavoriteSongs(_ favoriteSongs: MPFavoriteModel, success: BoClo? = nil)
     {
         self.mutate(key: MPDataKey.favoriteSongs, value: favoriteSongs, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
@@ -700,7 +700,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取歌单列表
-    func getSonglists(_ completion: @escaping ([MPSonglistModel]?) -> Void)
+    func getSonglists(_ completion: @escaping OpGnClo<[MPSonglistModel]>)
     {
         if let songlists = self.get(key: MPDataKey.songlists) as? [MPSonglistModel]
         {
@@ -745,7 +745,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///保存歌单列表
-    func setSonglists(_ songlists: [MPSonglistModel], success: BoolClosure? = nil)
+    func setSonglists(_ songlists: [MPSonglistModel], success: BoClo? = nil)
     {
         self.mutate(key: MPDataKey.songlists, value: songlists, meta: DataModelMeta(needCopy: false, canCommit: true))
         //保存到iCloud
@@ -762,7 +762,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取历史播放列表列表，还未设计好，待定
-    func getHistoryPlaylists(_ completion: @escaping ([MPHistoryPlaylistModel]?) -> Void)
+    func getHistoryPlaylists(_ completion: @escaping OpGnClo<[MPHistoryPlaylistModel]>)
     {
         if let playlists = self.get(key: MPDataKey.historyPlaylists) as? [MPHistoryPlaylistModel]
         {

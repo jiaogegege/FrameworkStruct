@@ -20,9 +20,9 @@ class FSDialog: UIView, DialogManagerProtocol
     //MARK: 属性
     /**************************************** 接口属性 Section Begin ****************************************/
     //遵循DialogManagerProtocol协议，提供属性
-    var showCallback: VoidClosure?
-    var hideCallback: VoidClosure?
-    var dismissCallback: VoidClosure?
+    var showCallback: VoClo?
+    var hideCallback: VoClo?
+    var dismissCallback: VoClo?
     
     //背景颜色，默认黑色50%透明度
     var bgColor: UIColor = .cBlack_50Alpha {
@@ -136,7 +136,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //显示动画
     //子类可以覆写这个方法，根据具体需要调用父类方法
-    func showAnimation(completion: @escaping VoidClosure)
+    func showAnimation(completion: @escaping VoClo)
     {
         self.isHidden = false
         weak var weakSelf = self
@@ -177,7 +177,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //隐藏动画
     //子类可以覆写这个方法，根据具体需要调用父类方法
-    func hideAnimation(completion: @escaping VoidClosure)
+    func hideAnimation(completion: @escaping VoClo)
     {
         weak var weakSelf = self
         if showType == .none
@@ -217,7 +217,7 @@ class FSDialog: UIView, DialogManagerProtocol
     
     //消失动画
     //子类可以覆写这个方法，根据具体需要调用父类方法
-    func dismissAnimation(completion: @escaping VoidClosure)
+    func dismissAnimation(completion: @escaping VoClo)
     {
         weak var weakSelf = self
         if showType == .none

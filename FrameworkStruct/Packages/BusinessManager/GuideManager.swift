@@ -47,10 +47,10 @@ extension GuideManager: ExternalInterface
     func guideOrderAdd(label: UILabel,
                        button: UIButton,
                        switcher: UISwitch,
-                       didShow: VoidClosure? = nil,
-                       didNext: VoidClosure? = nil,
-                       didSkip: VoidClosure? = nil,
-                       didFinish: VoidClosure? = nil) -> FSGuideView
+                       didShow: VoClo? = nil,
+                       didNext: VoClo? = nil,
+                       didSkip: VoClo? = nil,
+                       didFinish: VoClo? = nil) -> FSGuideView
     {
         let v = FSGuideView()
         let h1 = FSGuideView.HollowViewType(hollowView: label, expandRule: .customPercentage(0.1, 0.1), rounded: .circle)

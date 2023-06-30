@@ -62,7 +62,7 @@ extension TimerManager: ExternalInterface
     
     ///延时操作
     ///参数：interval：延时时间；onMain：true在主线程，false在后台线程，为nil则为当前线程；action：要执行的回调；
-    func after(interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoidClosure)
+    func after(interval: TimeInterval, onMain: Bool? = nil, action: @escaping VoClo)
     {
         var queue = ThreadManager.shared.currentQueue()
         if let onMain = onMain

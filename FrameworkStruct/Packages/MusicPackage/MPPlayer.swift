@@ -16,7 +16,7 @@ import AVKit
 protocol MPPlayerDelegate: NSObjectProtocol {
     ///准备播放，需要外部管理器处理一下这个文件，比如下载iCloud文件到本地
     ///audio：要播放的音频；success：外部管理器处理完后执行是否成功的回调，如果成功，player将尝试播放该音频
-    func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping BoolClosure)
+    func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping BoClo)
     
     ///等待播放某个音频
     func mpPlayerWaitToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol)
@@ -92,7 +92,7 @@ class MPPlayer: OriginWorker
     fileprivate var timeObserver: Any?
     
     //播放音乐是否成功的回调，一般用于外部第一次播放一首乐曲时
-    fileprivate var playResultCallback: BoolClosure?
+    fileprivate var playResultCallback: BoClo?
     
     
     //MARK: 方法
@@ -549,7 +549,7 @@ extension MPPlayer: ExternalInterface
     
     ///播放一首音乐，用于从一个新的列表中点击一首歌曲播放，比如音乐库、歌单、历史播放列表、专辑、我喜欢、心情等
     ///参数：audio：歌曲对象；playlist：所在播放列表；completion：播放是否成功
-    func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
+    func play(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol, completion: @escaping BoClo)
     {
         //先暂停
         self.pause()
@@ -740,7 +740,7 @@ extension MPPlayer: ExternalInterface
     }
     
     ///拖动进度到某个时刻
-    func seek(_ to: TimeInterval, success: BoolClosure?)
+    func seek(_ to: TimeInterval, success: BoClo?)
     {
         if !isFree
         {
@@ -767,7 +767,7 @@ extension MPPlayer: ExternalInterface
     
     ///向前或向后跳过几秒
     ///backward：为true则向后，最小0；为false则向前，最大就是歌曲duration
-    func skip(_ by: TimeInterval, backward: Bool = false, success: BoolClosure?)
+    func skip(_ by: TimeInterval, backward: Bool = false, success: BoClo?)
     {
         if let item = playerItem
         {

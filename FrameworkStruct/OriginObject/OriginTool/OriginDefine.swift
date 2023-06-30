@@ -125,52 +125,73 @@ let originStatusStep: Int = 10
 
 //MARK: 闭包类型定义
 //参数和返回值都为空的闭包
-typealias VoidClosure = (() -> Void)
+typealias VoClo = (() -> Void)
+
+//参数为泛型，返回为空的闭包
+typealias GnClo<T> = ((T) -> Void)
+
+//参数为可选泛型，返回为空的闭包
+typealias OpGnClo<T> = ((T?) -> Void)
+
+//2个参数为泛型，返回为空的闭包
+typealias Gn2Clo<T1, T2> = ((T1, T2) -> Void)
+
+//2个参数为可选泛型，返回为空的闭包
+typealias OpGn2Clo<T1, T2> = ((T1?, T2?) -> Void)
+
+//返回值为泛型的闭包
+typealias RtGnClo<R> = (() -> R)
+
+//返回值为可选泛型的闭包
+typealias OpRtGnClo<R> = (() -> R?)
+
+//1个参数为泛型，返回值为泛型的闭包
+typealias GnRtClo<T, R> = ((T) -> R)
+
+//参数为Any的闭包
+typealias AnyClo = ((Any) -> Void)
+
+//参数为可选Any的闭包
+typealias OpAnyClo = ((Any?) -> Void)
 
 //返回值为Any的闭包
-typealias AnyClosure = ((Any) -> Void)
+typealias AnyRtClo = (() -> Any)
 
 //返回值为可选Any的闭包
-typealias OptionalAnyClosure = ((Any?) -> Void)
+typealias OpAnyRtClo = (() -> Any?)
 
-//返回值为Any的闭包
-typealias AnyReturnClosure = (() -> Any)
+//参数为Bool的闭包
+typealias BoClo = ((Bool) -> Void)
 
-//返回值为可选Any的闭包
-typealias OptionalAnyReturnClosure = (() -> Any?)
+//参数为可选Bool的闭包
+typealias OpBoClo = ((Bool?) -> Void)
 
-//返回值为Bool的闭包
-typealias BoolClosure = ((Bool) -> Void)
+//参数为Data的闭包
+typealias DataClo = ((Data) -> Void)
 
-//返回值为可选Bool的闭包
-typealias OptionalBoolClosure = ((Bool?) -> Void)
+//参数为可选Data的闭包
+typealias OpDataClo = ((Data?) -> Void)
 
-//返回值为Data的闭包
-typealias DataClosure = ((Data) -> Void)
+//参数为String的闭包
+typealias StrClo = ((String) -> Void)
 
-//返回值为可选Data的闭包
-typealias OptionalDataClosure = ((Data?) -> Void)
+//参数为可选String的闭包
+typealias OpStrClo = ((String?) -> Void)
 
-//返回值为String的闭包
-typealias StringClosure = ((String) -> Void)
+//参数为Error的闭包
+typealias ErrClo = ((Error) -> Void)
 
-//返回值为可选String的闭包
-typealias OptionalStringClosure = ((String?) -> Void)
+//参数为可选Error的闭包
+typealias OpErrClo = ((Error?) -> Void)
 
-//返回Error的闭包
-typealias ErrorClosure = ((Error) -> Void)
+//参数为NSError的闭包
+typealias NSErrClo = ((NSError) -> Void)
 
-//返回可选Error的闭包
-typealias OptionalErrorClosure = ((Error?) -> Void)
+//参数为可选NSError的闭包
+typealias OpNSErrClo = ((NSError?) -> Void)
 
-//返回NSError的闭包
-typealias NSErrorClosure = ((NSError) -> Void)
+//参数为Exception的闭包
+typealias ExpClo = ((FSException) -> Void)
 
-//返回可选NSError的闭包
-typealias OptionalNSErrorClosure = ((NSError?) -> Void)
-
-//返回Exception的闭包
-typealias ExceptionClosure = ((FSException) -> Void)
-
-//返回可选Exception的闭包
-typealias OptionalExceptionClosure = ((FSException?) -> Void)
+//参数为可选Exception的闭包
+typealias OpExpClo = ((FSException?) -> Void)

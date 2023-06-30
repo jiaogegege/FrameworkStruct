@@ -23,14 +23,14 @@ class FSGuideView: UIView
     var describeInfoArray: Array<Array<Array<HollowDescribeInfo>>>?
     
     ///新手引导view开始显示回调
-    var willShowCallback: VoidClosure?
+    var willShowCallback: VoClo?
     ///点击下一步回调，如果有多个引导页，那么每次点击后显示下一个引导页时会调用，显示第一个时也会调用
     ///参数:当前显示的引导页的index,从0开始
     var nextCallback: ((Int) -> Void)?
     ///点击跳过的回调
-    var skipCallback: VoidClosure?
+    var skipCallback: VoClo?
     ///新手引导结束，引导界面消失
-    var finishCallback: VoidClosure?
+    var finishCallback: VoClo?
 
     ///是否显示跳过按钮，多于一个引导页的时候才显示，也可随时设置显示隐藏
     var showSkip: Bool = true {

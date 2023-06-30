@@ -69,7 +69,7 @@ class MPManager: OriginManager
     static let shared = MPManager()
     
     //可以传入一个延时任务，当MPManager初始化完成或者更新完成后执行
-    fileprivate var initOrUpdateCallback: VoidClosure?
+    fileprivate var initOrUpdateCallback: VoClo?
     
     //媒体库管理器
     fileprivate var libMgr = MPLibraryManager.shared
@@ -863,7 +863,7 @@ extension MPManager: ExternalInterface
     ///执行一个延时任务,播放当前歌曲，如果有的话
     ///继续播放上一次app运行中断时播放的歌曲
     ///主要用于从桌面菜单播放歌曲
-    func wantPlayCurrent(_ completion: BoolClosure?)
+    func wantPlayCurrent(_ completion: BoClo?)
     {
         //如果是空闲状态，那么执行一个延时操作，播放当前歌曲
         if player.isFree
@@ -1013,7 +1013,7 @@ extension MPManager: ExternalInterface
     }
     
     ///设置当前播放时间
-    func setCurrentTime(_ time: TimeInterval, completion: BoolClosure?)
+    func setCurrentTime(_ time: TimeInterval, completion: BoClo?)
     {
         if !isBusy
         {
@@ -1059,7 +1059,7 @@ extension MPManager: ExternalInterface
     ///播放一首媒体库中的音乐
     ///参数：library：媒体库类型，目前只有iCloud；completion：播放是否成功
     ///说明：会生成一个播放列表，包含媒体库中所有歌曲
-    func playSong(_ song: MPSongModel , in library: MPLibraryType, completion: @escaping BoolClosure)
+    func playSong(_ song: MPSongModel , in library: MPLibraryType, completion: @escaping BoClo)
     {
         if !isBusy
         {
@@ -1088,7 +1088,7 @@ extension MPManager: ExternalInterface
     }
     
     ///播放一首播放列表中的歌曲
-    func playSong(_ song: MPSongModel, in playlist: MPPlaylistProtocol, completion: @escaping BoolClosure)
+    func playSong(_ song: MPSongModel, in playlist: MPPlaylistProtocol, completion: @escaping BoClo)
     {
         if !isBusy
         {
@@ -1214,7 +1214,7 @@ extension MPManager: ExternalInterface
     
     ///收藏一首歌曲到我喜欢列表，返回是否成功，如果已经收藏过了，那么再次收藏则失败
     ///参数：favorite：收藏/取消收藏；song：要收藏的歌曲
-    func setFavoriteSong(_ favorite: Bool, song: MPSongModel, success: @escaping BoolClosure)
+    func setFavoriteSong(_ favorite: Bool, song: MPSongModel, success: @escaping BoClo)
     {
         //因为内存中所有列表中的歌曲都共享内存，所以只需要修改歌曲的收藏状态然后保存到iCloud即可
         if song.isFavorite != favorite
@@ -1259,7 +1259,7 @@ extension MPManager: ExternalInterface
     }
     
     ///删除某个播放列表中的一首歌曲
-    func deleteSong(_ song: MPAudioProtocol, in playlist: MPPlaylistProtocol, success: @escaping BoolClosure)
+    func deleteSong(_ song: MPAudioProtocol, in playlist: MPPlaylistProtocol, success: @escaping BoClo)
     {
         switch playlist.playlistType
         {
@@ -1293,7 +1293,7 @@ extension MPManager: ExternalInterface
     }
     
     ///保存一个歌单
-    func setSonglist(_ songlist: MPSonglistModel, success: @escaping BoolClosure)
+    func setSonglist(_ songlist: MPSonglistModel, success: @escaping BoClo)
     {
         libMgr.saveSonglist(songlist) { succeed in
             success(succeed)
@@ -1301,7 +1301,7 @@ extension MPManager: ExternalInterface
     }
     
     ///删除一个歌单
-    func deleteSonglist(_ songlistId: String, success: @escaping BoolClosure)
+    func deleteSonglist(_ songlistId: String, success: @escaping BoClo)
     {
         libMgr.deleteSonglist(songlistId) { succeed in
             success(succeed)
@@ -1317,7 +1317,7 @@ extension MPManager: ExternalInterface
     }
     
     ///删除某个歌单中的一些歌曲
-    func deleteSongsInSonglist(_ songs: [MPSongModel], songlistId: String, success: @escaping BoolClosure)
+    func deleteSongsInSonglist(_ songs: [MPSongModel], songlistId: String, success: @escaping BoClo)
     {
         libMgr.deleteSongsInSonglist(songs, songlistId: songlistId) { succeed in
             success(succeed)

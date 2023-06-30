@@ -22,7 +22,7 @@ class MPLyricView: UIView {
     var locateCallback: ((TimeInterval) -> Void)?
     
     //tap回调
-    var tapCallback: VoidClosure?
+    var tapCallback: VoClo?
     
     fileprivate var headCellIndex: UITableView.IndexPathTag = .rowTag(-1)   //头部index
     fileprivate var footCellIndex: UITableView.IndexPathTag = .rowTag(-1)   //尾部index

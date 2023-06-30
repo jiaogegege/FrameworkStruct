@@ -104,7 +104,7 @@ extension UserManager: ExternalInterface
                verificationCode: String,
                privateCode: String? = nil,
                success: @escaping ((UserInfoModel) -> Void),
-               failure: @escaping NSErrorClosure)
+               failure: @escaping NSErrClo)
     {
         na.loginWithPhoneAndSms(phone: phone, token: ApplicationManager.shared.getDeviceId(), verifyCode: verificationCode, verificationCode: privateCode) {[weak self] userInfo in
             //TODO: 登录成功后做一些数据保存的操作和注册推送等操作

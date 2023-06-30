@@ -54,7 +54,7 @@ extension ArchiverAdapter: ExternalInterface
 
     ///将一个对象归档，返回Data
     ///secure：是否安全归档，如果为true，那么obj必须支持NSSecureCoding
-    func archive(_ obj: NSCoding, secure: Bool = false, completion: @escaping OptionalDataClosure)
+    func archive(_ obj: NSCoding, secure: Bool = false, completion: @escaping OpDataClo)
     {
         g_async { queue in
             do {
@@ -72,7 +72,7 @@ extension ArchiverAdapter: ExternalInterface
     }
     
     ///将对象归档到一个文件
-    func archiveToFile(_ obj: NSCoding, secure: Bool = false, fileUrl: URL, completion: BoolClosure? = nil)
+    func archiveToFile(_ obj: NSCoding, secure: Bool = false, fileUrl: URL, completion: BoClo? = nil)
     {
         g_async { queue in
             do {
@@ -108,7 +108,7 @@ extension ArchiverAdapter: ExternalInterface
     }
     
     ///将Data解档为一个对象
-    func unarchive(_ data: Data, completion: @escaping OptionalAnyClosure)
+    func unarchive(_ data: Data, completion: @escaping OpAnyClo)
     {
         g_async { queue in
             do {
@@ -134,7 +134,7 @@ extension ArchiverAdapter: ExternalInterface
     }
     
     ///从一个文件中解档为一个对象
-    func unarchiveFromFile(_ fileUrl: URL, completion: @escaping OptionalAnyClosure)
+    func unarchiveFromFile(_ fileUrl: URL, completion: @escaping OpAnyClo)
     {
         g_async { queue in
             do {

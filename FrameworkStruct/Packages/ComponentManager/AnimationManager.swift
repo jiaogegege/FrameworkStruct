@@ -80,7 +80,7 @@ extension AnimationManager: ExternalInterface
                 loopMode: LottieLoopMode = .playOnce,
                 playSpeed: CGFloat = 1.0,
                 autoPlay: Bool = true,
-                completion: (VoidClosure)? = nil) -> AnimationView
+                completion: (VoClo)? = nil) -> AnimationView
     {
         let ani = Animation.named(name)
         let v = AnimationView()
@@ -124,9 +124,9 @@ extension AnimationManager: ExternalInterface
                   repeatCount: Int = 1,
                   autoReverse: Bool = false,
                   host: AnyObject,
-                  startBlock: VoidClosure? = nil,
-                  reachToBlock: VoidClosure? = nil,
-                  completion: BoolClosure? = nil) -> String
+                  startBlock: VoClo? = nil,
+                  reachToBlock: VoClo? = nil,
+                  completion: BoClo? = nil) -> String
     {
         let ani = POPBasicAnimation(propertyNamed: propertyName)
         ani?.timingFunction = CAMediaTimingFunction(name: timingFuncName)
@@ -183,7 +183,7 @@ extension AnimationManager: ExternalInterface
                    repeatCount: Int = 1,
                    autoReverse: Bool = false,
                    host: AnyObject,
-                   completion: VoidClosure? = nil)
+                   completion: VoClo? = nil)
     {
         let ani = POPSpringAnimation(propertyNamed: propertyName)
         if let from = fromValue
@@ -226,7 +226,7 @@ extension AnimationManager: ExternalInterface
                   repeatCount: Int = 1,
                   autoReverse: Bool = false,
                   host: AnyObject,
-                  completion: VoidClosure? = nil)
+                  completion: VoClo? = nil)
     {
         let ani = POPDecayAnimation(propertyNamed: propertyName)
         if let from = fromValue
@@ -266,7 +266,7 @@ extension AnimationManager: ExternalInterface
                        delay: TimeInterval,
                        options: UIView.AnimationOptions = [],
                        on view: UIView,
-                       completion: BoolClosure? = nil)
+                       completion: BoClo? = nil)
     {
         let transform = CGAffineTransform(translationX: tranX, y: tranY).concatenating(CGAffineTransform(scaleX: scaleX, y: scaleY)).concatenating(CGAffineTransform(rotationAngle: radian))
         UIView.animate(withDuration: duration, delay: delay, options: options) {
@@ -283,7 +283,7 @@ extension AnimationManager: ExternalInterface
                    delay: TimeInterval,
                    options: UIView.AnimationOptions = [],
                    on view: UIView,
-                   completion: BoolClosure? = nil)
+                   completion: BoClo? = nil)
     {
         UIView.animate(withDuration: duration, delay: delay, options: options) {
             view.transform = CGAffineTransform.identity
@@ -303,7 +303,7 @@ extension AnimationManager: ExternalInterface
                          delay: TimeInterval,
                          options: UIView.AnimationOptions = [],
                          on view: UIView,
-                         completion: BoolClosure? = nil)
+                         completion: BoClo? = nil)
     {
         UIView.animate(withDuration: duration, delay: delay, options: options) {
             view.transform = invert ? CGAffineTransform(translationX: x, y: y).inverted() : CGAffineTransform(translationX: x, y: y)
@@ -322,7 +322,7 @@ extension AnimationManager: ExternalInterface
                    delay: TimeInterval,
                    options: UIView.AnimationOptions = [],
                    on view: UIView,
-                   completion: BoolClosure? = nil)
+                   completion: BoClo? = nil)
     {
         UIView.animate(withDuration: duration, delay: delay, options: options) {
             view.transform = invert ? CGAffineTransform(scaleX: x, y: y).inverted() : CGAffineTransform(scaleX: x, y: y)
@@ -340,7 +340,7 @@ extension AnimationManager: ExternalInterface
                     delay: TimeInterval,
                     options: UIView.AnimationOptions = [],
                     on view: UIView,
-                    completion: BoolClosure? = nil)
+                    completion: BoClo? = nil)
     {
         UIView.animate(withDuration: duration, delay: delay, options: options) {
             view.transform = invert ? CGAffineTransform(rotationAngle: radian).inverted() : CGAffineTransform(rotationAngle: radian)

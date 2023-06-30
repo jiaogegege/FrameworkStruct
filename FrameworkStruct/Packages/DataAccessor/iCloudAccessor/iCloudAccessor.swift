@@ -590,7 +590,7 @@ extension iCloudAccessor: ExternalInterface
     
     ///在iCloud中创建一个文件并传入数据，没有数据为什么要创建文件呢
     ///targetUrl:目标文件url，如果不包含文件名，只有目录，可以在`fileName`中传入文件名
-    func createDocument(_ data: Data, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
+    func createDocument(_ data: Data, targetUrl: URL, fileName: String? = nil, completion: BoClo? = nil)
     {
         //组装fileUrl
         var fileUrl = targetUrl
@@ -645,7 +645,7 @@ extension iCloudAccessor: ExternalInterface
     ///参数：
     ///id：要保存的文件id
     ///data：要保存的数据；
-    func writeDocument(_ id: IADocumentHandlerType, data: Data, completion: BoolClosure? = nil)
+    func writeDocument(_ id: IADocumentHandlerType, data: Data, completion: BoClo? = nil)
     {
         if let document = handledFiles[id]
         {
@@ -667,7 +667,7 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///关闭文件
-    func closeDocument(_ id: IADocumentHandlerType, completion: BoolClosure? = nil)
+    func closeDocument(_ id: IADocumentHandlerType, completion: BoClo? = nil)
     {
         if let document = handledFiles[id]
         {
@@ -693,7 +693,7 @@ extension iCloudAccessor: ExternalInterface
     ///sourcePath：本地文件路径；
     ///targetUrl：icloud上的目标文件路径；
     ///fileName：如果传这个参数表示前面的两个参数都不包含文件名和扩展名，用这个参数拼接
-    func copyDocument(_ sourcePath: String, targetUrl: URL, fileName: String? = nil, completion: BoolClosure? = nil)
+    func copyDocument(_ sourcePath: String, targetUrl: URL, fileName: String? = nil, completion: BoClo? = nil)
     {
         var source = sourcePath
         var target = targetUrl
@@ -732,7 +732,7 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///删除一个icloud上的文件
-    func deleteDocument(_ fileUrl: URL, completion: OptionalErrorClosure? = nil)
+    func deleteDocument(_ fileUrl: URL, completion: OpErrClo? = nil)
     {
         do {
             try fileMgr.removeItem(at: fileUrl)
