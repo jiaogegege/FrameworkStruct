@@ -152,6 +152,7 @@ extension String: ConstantPropertyProtocol
     static let sGBP = "£"                   //英镑
     static let sRUB = "₽"                   //卢布
     static let sSGD = "S$"                  //新加坡元
+    static let sNZD = "NZ$"                 //新西兰元
     static let sTHB = "฿"                   //泰铢
     static let sINR = "Rs."                 //印度卢比
     static let sVND = "₫"                   //越南盾
