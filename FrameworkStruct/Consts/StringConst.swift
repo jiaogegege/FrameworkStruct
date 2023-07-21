@@ -31,6 +31,7 @@ extension String: ConstantPropertyProtocol
     
     //"iCloud"
     static let iCloud = "iCloud"
+    static let iOS = "iOS"
     
     //汉字数字
     static let s0 = "〇"
@@ -142,6 +143,8 @@ extension String: ConstantPropertyProtocol
     static let sUSD = "$"                   //美元
     static let sFen = "¢"                   //分，美元和其他一些货币辅助单位的符号
     static let sWen = "₥"                   //文（表示千分之一元或十分之一分）
+    static let sCAD = "C$"                  //加元
+    static let sAUD = "A$"                  //澳元
     static let sEUR = "€"                   //欧元
     static let sFRF = "₣"                   //法郎
     static let sCNY = "¥"                   //人民币
@@ -162,7 +165,7 @@ extension String: ConstantPropertyProtocol
     static let sTWD = "NT$"                 //新台币
     static let sHKD = "HK$"                 //港元
     
-    //希腊字母
+    //希腊字母，大小写
     static let sUAlpha = "Α"
     static let sAlpha = "α"
     static let sUBeta = "Β"

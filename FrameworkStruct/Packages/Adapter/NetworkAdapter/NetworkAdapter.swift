@@ -48,15 +48,15 @@ extension NetworkAdapter: ProtectAvailable
     ///获取默认参数，根据项目实际需要修改
     func defaultParams() -> Dictionary<String, Any>
     {
-        return [nt_request_macAddress_key: g_deviceId(),
-                nt_request_deviceType_key: "iOS",
-                nt_request_clientTime_key: String(format: "%lld", currentTimeInterval() * 1000)]
+        [nt_request_macAddress_key: g_deviceId(),
+         nt_request_deviceType_key: String.iOS,
+         nt_request_clientTime_key: String(format: "%lld", currentTimeInterval() * 1000)]
     }
     
     //组合自定义参数和默认参数
     func combineParams(_ customParams: Dictionary<String, Any>) -> Dictionary<String, Any>
     {
-        var params = defaultParams()    //组合默认参数
+        var params = defaultParams()    //默认参数
         params.merge(customParams) { current, _ in
             current
         }   //组合自定义参数
@@ -150,7 +150,7 @@ extension NetworkAdapter: ExternalInterface
                               token: String,
                               verifyCode: String,
                               verificationCode: String? = nil,
-                              success: @escaping ((UserInfoModel) -> Void),
+                              success: @escaping GnClo<UserInfoModel>,
                               failure: @escaping RequestFailureCallback)
     {
         //处理参数
@@ -178,7 +178,7 @@ extension NetworkAdapter: ExternalInterface
     
     /**************************************** 首页数据 Section Begin ***************************************/
     ///获取首页模块、活动、banner等数据
-    func getHomeData(success: @escaping ((HomeDataModel) -> Void), failure: @escaping RequestFailureCallback) -> String
+    func getHomeData(success: @escaping GnClo<HomeDataModel>, failure: @escaping RequestFailureCallback) -> String
     {
         return request.get(urlPath: url_homeData, exact: false, params: defaultParams(), authorization: nil, timeoutInterval: nt_request_timeoutInterval, headers: nil, progressCallback: nil) { response in
             //解析数据为对象

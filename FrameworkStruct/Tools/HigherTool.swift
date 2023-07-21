@@ -51,7 +51,7 @@ func _debounce(wait interval: TimeInterval, before: Bool = true, fn: @escaping V
     return closure
 }
 
-///返回一个闭包，当他被调用n次后将马上触发func，之后调用都会触发fn
+///返回一个闭包，当它被调用n次后将马上触发fn，之后调用都会触发fn
 func _after(_ n: UInt, fn: @escaping OpAnyRtClo) -> OpAnyRtClo
 {
     var count: UInt = 0
