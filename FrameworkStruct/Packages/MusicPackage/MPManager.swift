@@ -85,7 +85,7 @@ class MPManager: OriginManager
     fileprivate var delegates: WeakArray = WeakArray.init()
     
     //快进快退时间：单位秒
-    @LimitNumRange(min: 1.0, max: 99.0) var skipTime: TimeInterval = 10.0
+    @LimitRangeWrap(min: 1.0, max: 99.0) var skipTime: TimeInterval = 10.0
     
     //上一次播放时中断时的进度，app启动播放时设置一次
     fileprivate(set) var lastTime: TimeInterval?

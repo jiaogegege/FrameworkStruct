@@ -77,7 +77,7 @@ class MPPlayer: OriginWorker
     var playMode: PlayMode = .random
     
     //播放速率，默认1.0，可设置为0.0～3.0
-    @LimitNumRange(min: 0.0, max: 3.0) fileprivate(set) var playRate: Float = 1.0
+    @LimitRangeWrap(min: 0.0, max: 3.0) fileprivate(set) var playRate: Float = 1.0
     
     //代理对象
     weak var delegate: MPPlayerDelegate?

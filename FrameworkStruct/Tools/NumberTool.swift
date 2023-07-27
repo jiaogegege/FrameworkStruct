@@ -12,14 +12,14 @@ import Foundation
 
 //MARK: 类型定义
 ///整数区间类型
-typealias IntRangeType = (Int, Int)
+typealias IntRange = (Int, Int)
 ///浮点数区间类型
-typealias FloatRangeType = (Float, Float)
-typealias DoubleRangeType = (Double, Double)
+typealias FloatRange = (Float, Float)
+typealias DoubleRange = (Double, Double)
 
 
 ///限制取值范围的属性包装器
-@propertyWrapper struct LimitNumRange<T: Comparable>
+@propertyWrapper struct LimitRangeWrap<T: Comparable>
 {
     private var value: T
     private var min: T

@@ -26,7 +26,7 @@ extension String: ConstantPropertyProtocol
     //新行
     static let sNewline = "\n"
     static let sNewLine = "\\n"
-    //通用分隔符
+    //通用分隔符，根据需要自定义
     static let sSeprator = "<=>"
     
     //"iCloud"
@@ -44,11 +44,11 @@ extension String: ConstantPropertyProtocol
     static let s7 = "七"
     static let s8 = "八"
     static let s9 = "九"
-    static let s十 = "十"
-    static let s百 = "百"
-    static let s千 = "千"
-    static let s万 = "万"
-    static let s亿 = "亿"
+    static let sShi = "十"
+    static let sBai = "百"
+    static let sQian = "千"
+    static let sWan = "万"
+    static let sYi = "亿"
     
     //人民币大写数字
     static let sRMB0 = "零"
@@ -61,11 +61,11 @@ extension String: ConstantPropertyProtocol
     static let sRMB7 = "柒"
     static let sRMB8 = "捌"
     static let sRMB9 = "玖"
-    static let sRMB十 = "拾"
-    static let sRMB百 = "佰"
-    static let sRMB千 = "仟"
-    static let sRMB万 = "万"
-    static let sRMB亿 = "亿"
+    static let sRMBShi = "拾"
+    static let sRMBBai = "佰"
+    static let sRMBQian = "仟"
+    static let sRMBWan = "万"
+    static let sRMBYi = "亿"
     
     //常用特殊字符
     static let cDot: Character = "."
