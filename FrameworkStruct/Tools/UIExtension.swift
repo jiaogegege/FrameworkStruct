@@ -204,12 +204,12 @@ extension UIViewController
 {
     //HookEvent
     struct HookEvent {
-        static let viewWillAppear: HookManager.HookEventType = "viewWillAppear"
-        static let viewDidAppear: HookManager.HookEventType = "viewDidAppear"
-        static let viewWillDisappear: HookManager.HookEventType = "viewWillDisappear"
-        static let viewDidDisappear: HookManager.HookEventType = "viewDidDisappear"
-        static let viewDidLayoutSubviews: HookManager.HookEventType = "viewDidLayoutSubviews"
-        static let dealloc: HookManager.HookEventType = "dealloc"
+        static let viewWillAppear: FSHook.HookEventType = "viewWillAppear"
+        static let viewDidAppear: FSHook.HookEventType = "viewDidAppear"
+        static let viewWillDisappear: FSHook.HookEventType = "viewWillDisappear"
+        static let viewDidDisappear: FSHook.HookEventType = "viewDidDisappear"
+        static let viewDidLayoutSubviews: FSHook.HookEventType = "viewDidLayoutSubviews"
+        static let dealloc: FSHook.HookEventType = "dealloc"
     }
     
 }

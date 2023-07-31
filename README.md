@@ -262,7 +262,7 @@ iOS Application Architecture Design
 	* FSQueue：队列容器，先进先出
 	* FSStack：栈容器
 	* FSVector：向量容器
-    * HookManager：hook管理器
+    * FSHook：hook管理器
 	* StatusManager：状态管理器
 * OriginModel：数据模型基类
 * OriginMonitor：监控器基类

@@ -1,5 +1,5 @@
 //
-//  HookManager.swift
+//  FSHook.swift
 //  FrameworkStruct
 //
 //  Created by  jggg on 2022/11/29.
@@ -12,7 +12,7 @@
  */
 import UIKit
 
-class HookManager: NSObject {
+class FSHook: NSObject {
     //MARK: 属性
     //保存hook的容器，key是事件，值是一个字典，字典的key是特定hook的标识，值是具体的hook动作和描述信息，字典的key方便查找和修改；如果用户不设置，则自动从0开始计数
     fileprivate lazy var hookContainer: [HookEventType: [AnyHashable: HookDataStruct]] = [:]
@@ -128,7 +128,7 @@ class HookManager: NSObject {
 
 
 //内部类型
-extension HookManager: InternalType
+extension FSHook: InternalType
 {
     //key类型定义，所有使用该组件的对象的hook的key都是用此定义
     typealias HookEventType = String
@@ -189,7 +189,7 @@ extension HookManager: InternalType
 
 
 //外部接口
-extension HookManager: ExternalInterface
+extension FSHook: ExternalInterface
 {
     
 }
