@@ -156,12 +156,17 @@ extension FSHook: InternalType
     
     //hook描述信息
     struct HookMetaInfo {
-        private var _canPerform: Bool = true    //记录`canPerform`的初始化值，在生命周期内保持不变
-        var canPerform: Bool = true //是否可以执行绑定的动作，可以在任何时候动态修改，以控制何时执行，何时不执行；如果为false，则不执行绑定的hook
+        //记录`canPerform`的初始化值，在生命周期内保持不变
+        private var _canPerform: Bool = true
         
-        var onlyOnce: Bool = false          //是否只执行一次绑定的hook，如果为true，那么执行一次hook后就删除该hook
+        //是否可以执行绑定的动作，可以在任何时候动态修改，以控制何时执行，何时不执行；如果为false，则不执行绑定的hook
+        var canPerform: Bool = true
         
-        var shouldReset: Bool = false       //当执行一次hook后，是否将所有设置值重置为初始化值；该设置对`canPerform`有效
+        //是否只执行一次绑定的hook，如果为true，那么执行一次hook后就删除该hook
+        var onlyOnce: Bool = false
+        
+        //当执行一次hook后，是否将所有设置值重置为初始化值；该设置对`canPerform`有效
+        var shouldReset: Bool = false
         
         //初始化方法，代替默认初始化器
         init() {
