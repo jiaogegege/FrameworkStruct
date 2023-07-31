@@ -23,7 +23,9 @@ class ViewController: BasicViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //hook
+    }
+    
+    override func configHook() {
         hookViewWillAppear {[unowned self] in
             self.statusBarStyle = .light
             self.hideNavBar = false

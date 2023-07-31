@@ -51,8 +51,9 @@ class MusicViewController: BasicViewController
         // Do any additional setup after loading the view.
         mpr.addDelegate(self)
         currentSong = mpr.currentSong
-        
-        //设置hook
+    }
+    
+    override func configHook() {
         hookViewWillAppear {[unowned self] in
             ApplicationManager.shared.screenIdle = true
             if mpr.isPlaying

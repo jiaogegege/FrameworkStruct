@@ -114,6 +114,9 @@ class BasicTableViewController: UITableViewController
     {
         super.viewDidLoad()
         
+        //初始化hook
+        self.configHook()
+        
         //初始化数据
         self.initData()
         
@@ -386,7 +389,13 @@ class BasicTableViewController: UITableViewController
     //子类可以覆写这个方法
     @objc func backAction(sender: Any?)
     {
-        self.navigationController?.popViewController(animated: true)
+        pop()
+    }
+    
+    //设置hook
+    func configHook()
+    {
+        
     }
     
     //初始化控制器数据，比如一些状态和变量，这个方法在所有方法之前调用，如果有任何基础变量和数据要设置，那么子类在这个方法中设置
@@ -397,7 +406,7 @@ class BasicTableViewController: UITableViewController
         
     }
     
-    //自定义设置，提供给子类使用，该方法会在`basicConfig`和`basicNavConfig`之前调用
+    //自定义设置，提供给子类使用，该方法会在`basicOnceConfig`和`basicMultiConfig`之前调用
     func customConfig()
     {
         

@@ -54,8 +54,9 @@ class MusicPlayViewController: BasicViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
-        //hook
+    }
+    
+    override func configHook() {
         hookViewWillAppear {[unowned self] in
             ApplicationManager.shared.screenIdle = true
             mpr.hideMiniPlayer()

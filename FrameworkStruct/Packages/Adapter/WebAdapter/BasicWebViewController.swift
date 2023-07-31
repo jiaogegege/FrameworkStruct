@@ -58,8 +58,9 @@ class BasicWebViewController: BasicViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadRequest()
-        
-        //hook
+    }
+    
+    override func configHook() {
         hookViewWillAppear {[weak self] in
             WebAdapter.shared.showWebVC(self)
         }
