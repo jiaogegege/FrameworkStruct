@@ -28,8 +28,9 @@ class FSHook: NSObject {
             hooks = [:]
         }
         //创建hook数据
-        let hook = HookDataStruct(key: (key != nil ? key! : "\(hooks!.count)"), action: action, meta: meta)
-        hooks![(key != nil ? key! : "\(hooks!.count)")] = hook
+        let hookKey = key != nil ? key! : "\(hooks!.count)"
+        let hook = HookDataStruct(key: hookKey, action: action, meta: meta)
+        hooks![hookKey] = hook
         hookContainer[event] = hooks
     }
     
@@ -189,12 +190,5 @@ extension FSHook: InternalType
             }
         }
     }
-    
-}
-
-
-//外部接口
-extension FSHook: ExternalInterface
-{
     
 }
