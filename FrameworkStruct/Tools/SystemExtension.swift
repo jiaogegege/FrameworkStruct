@@ -10,11 +10,22 @@
  */
 import Foundation
 
+//MARK: 扩展存储属性的key
+/**
+ * 扩展存储属性的key
+ * 用于给系统组件动态添加存储属性
+ */
+struct SystemExtensionPropertyKey {
+    ///NSObject对象唯一id
+    static var objUniqueIdKey: String = "objUniqueIdKey"
+    
+}
+
 //MARK: NSObject
 /**
  * NSObject
  */
-extension NSObject
+extension NSObject: UniqueProtocol
 {
     ///获取对象的类名，计算属性
     var className: String {
@@ -38,6 +49,19 @@ extension NSObject
     func isBrother(_ to: Any) -> Bool
     {
         type(of: self) == type(of: to)
+    }
+    
+    ///获取对象的唯一id，类名+时间戳+随机字符串
+    var uniqueId: String {
+        if let id = objc_getAssociatedObject(self, &SystemExtensionPropertyKey.objUniqueIdKey) as? String {
+            return id
+        }
+        else    //生成一个id
+        {
+            let id = self.className + String.sSeprator + "\(currentTimeInterval())" + String.sSeprator + g_uuid()
+            objc_setAssociatedObject(self, &SystemExtensionPropertyKey.objUniqueIdKey, id, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+            return id
+        }
     }
     
 }

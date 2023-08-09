@@ -27,7 +27,7 @@ protocol ContainerServices {
  * 要访问数据容器的对象都要实现该协议
  * 主要针对修改操作进行安全性验证，防止任意对象修改数据容器中的内容
  */
-protocol ContainerSecurityProtocol: NSObjectProtocol {
+private protocol ContainerSecurityProtocol: NSObjectProtocol {
     //返回一个container生成的token，实现该协议的对象必须保存这个token，之后对数据容器的访问需要验证token
     func containerGeneratedToken(token: String)
     //想要访问数据容器的对象需要返回获取的token来通过验证
@@ -94,6 +94,12 @@ protocol ContainerProtocol: NSObjectProtocol
     //参数：key：订阅的数据key；delegate：订阅该数据的对象，必须是class
     func subscribe<T: AnyObject & ContainerServices>(key: AnyHashable, delegate: T)
     
+    //订阅某数据模型，一般是上层业务逻辑订阅数据容器中的数据，如果该数据更新了，那么通知上层业务逻辑
+    //参数：key：订阅的数据key；obj：订阅数据的对象，一般是对象类型；action：数据变化执行的回调，返回新value，如果被清空返回nil
+    func subscribe<T: AnyObject & UniqueProtocol>(key: AnyHashable, obj: T, action: @escaping OpAnyClo)
+    //使用action订阅时，当退出界面或订阅对象消失时请调用取消订阅方法
+    func unsubscribe<T: AnyObject & UniqueProtocol>(key: AnyHashable, obj: T)
+    
     //当数据变化的时候，通知所有订阅对象
     func dispatch(key: AnyHashable, value: Any)
     
@@ -114,7 +120,7 @@ class OriginContainer: NSObject
     fileprivate(set) weak var monitor: ContainerMonitor!
     
     //数据容器；key是数据对象的key，value是具体的数据模型
-    fileprivate var container: Dictionary<AnyHashable, ContainerDataStruct> = Dictionary()
+    fileprivate var container: Dictionary<AnyHashable, DataStruct> = Dictionary()
     
     //数据容器锁，在所有对container进行访问的地方都进行加锁
     fileprivate(set) lazy var containerLock: NSRecursiveLock = NSRecursiveLock()
@@ -122,9 +128,11 @@ class OriginContainer: NSObject
     //注册安全性访问的对象
 //    fileprivate lazy var accessSecurityDict: NSMapTable<NSString, AnyObject> = NSMapTable.strongToWeakObjects()
     
-    //代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
-    fileprivate var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
+    //订阅代理对象们，如果有的话；key是数据对象的key，value是弱引用数组，数组中保存订阅对象
+    fileprivate lazy var delegates: Dictionary<AnyHashable, NSPointerArray> = Dictionary()
     
+    //订阅action的对象和他们的actions
+    fileprivate lazy var actions: Dictionary<AnyHashable, Dictionary<AnyHashable, Array<OpAnyClo>>> = Dictionary()
     
     //MARK: 方法
     override init()
@@ -164,7 +172,7 @@ class OriginContainer: NSObject
     
     //暂不实现
     //注册访问验证token
-    func registerAccessToken(_ obj: AnyObject & ContainerSecurityProtocol)
+    private func registerAccessToken(_ obj: AnyObject & ContainerSecurityProtocol)
     {
 //        let token = g_uuid()
 //        accessSecurityDict.setObject(obj, forKey: (token as NSString))
@@ -173,7 +181,7 @@ class OriginContainer: NSObject
     
     //暂不实现
     //判断是否可以访问container
-    func canAccess() -> Bool
+    private func canAccess() -> Bool
     {
         //0:本方法；1:调用本方法的方法；2:调用本方法的方法的方法
 //        let callStackStr = Thread.callStackSymbols
@@ -217,7 +225,7 @@ extension OriginContainer: ContainerProtocol
     //不建议覆写这个方法
     @objc func mutate(key: AnyHashable, value: Any, meta: DataModelMeta = DataModelMeta()) {
         containerLock.lock()
-        let dataStruct = ContainerDataStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
+        let dataStruct = DataStruct(data: (meta.needCopy ? self.getCopy(value) as Any : value), meta: meta)
         self.container[key] = dataStruct
         containerLock.unlock()
         //提交数据的时候，要对所有订阅对象发出通知
@@ -277,24 +285,38 @@ extension OriginContainer: ContainerProtocol
         containerLock.lock()
         self.container.removeValue(forKey: key)
         containerLock.unlock()
-        //清空数据的时候，要对所有订阅对象发出通知
-        let array = self.delegates[key]
-        array?.addPointer(nil)
-        array?.compact()
-        let count = array?.count ?? 0
-        if count > 0
-        {
-            for i in 0..<count
-            {
-                if let delegate = array?.object(at: i) as? ContainerServices
-                {
-                    delegate.containerDidClearData(key: key)
+        
+        //清空数据的时候，要调用所有订阅action
+        if let actionsDict = self.actions[key] {
+            //遍历dict执行所有的action
+            for objId in actionsDict.allKeys {
+                if let actionsArr = actionsDict[objId] {
+                    for action in actionsArr {
+                        action(nil)
+                    }
                 }
             }
         }
-        else    //如果没有对象，那么删除这个key/value（节省内存空间）
-        {
-            self.delegates[key] = nil
+        
+        //清空数据的时候，要对所有订阅对象发出通知
+        if let array = self.delegates[key] {
+            array.addPointer(nil)
+            array.compact()
+            let count = array.count
+            if count > 0
+            {
+                for i in 0..<count
+                {
+                    if let delegate = array.object(at: i) as? ContainerServices
+                    {
+                        delegate.containerDidClearData(key: key)
+                    }
+                }
+            }
+            else    //如果没有对象，那么删除这个key/value（节省内存空间）
+            {
+                self.delegates[key] = nil
+            }
         }
     }
     
@@ -307,7 +329,7 @@ extension OriginContainer: ContainerProtocol
         }
     }
     
-    //订阅数据
+    //delegate订阅数据
     func subscribe<T>(key: AnyHashable, delegate: T) where T : AnyObject, T : ContainerServices
     {
         if let weakArr = self.delegates[key]
@@ -323,26 +345,83 @@ extension OriginContainer: ContainerProtocol
         }
     }
     
-    //当数据变化的时候，通知所有订阅对象
+    //action订阅数据
+    func subscribe<T>(key: AnyHashable, obj: T, action: @escaping OpAnyClo) where T : AnyObject, T : UniqueProtocol
+    {
+        let objId = obj.uniqueId
+        if var actionsDict = self.actions[key]  //该key已经有订阅过
+        {
+            //该obj是否已经订阅过
+            if var actionsArr = actionsDict[objId] {
+                actionsArr.append(action)
+                //添加到actions中
+                actionsDict[objId] = actionsArr
+                self.actions[key] = actionsDict
+            }
+            else    //该obj还未订阅过，那么添加一个新的
+            {
+                var actionsArr = [OpAnyClo]()
+                actionsArr.append(action)
+                actionsDict[objId] = actionsArr
+                self.actions[key] = actionsDict
+            }
+        }
+        else    //该key还未被订阅过
+        {
+            var actionsArr = [OpAnyClo]()
+            actionsArr.append(action)
+            var actionsDict = [AnyHashable: Array<OpAnyClo>]()
+            actionsDict[objId] = actionsArr
+            self.actions[key] = actionsDict
+        }
+    }
+    
+    //取消action订阅
+    func unsubscribe<T>(key: AnyHashable, obj: T) where T : AnyObject, T : UniqueProtocol
+    {
+        if var actionsDict = self.actions[key] {
+            let objId = obj.uniqueId
+            if actionsDict[objId] != nil {
+                actionsDict.removeValue(forKey: objId)
+                self.actions[key] = actionsDict
+            }
+        }
+    }
+    
+    //当数据变化的时候，通知所有订阅对象和订阅action
     func dispatch(key: AnyHashable, value: Any)
     {
-        let array = self.delegates[key]
-        array?.addPointer(nil)
-        array?.compact()
-        let count = array?.count ?? 0
-        if count > 0
-        {
-            for i in 0..<count
-            {
-                if let delegate = array?.object(at: i) as? ContainerServices
-                {
-                    delegate.containerDidUpdateData(key: key, value: value)
+        //订阅action
+        if let actionsDict = self.actions[key] {
+            //遍历dict执行所有的action
+            for objId in actionsDict.allKeys {
+                if let actionsArr = actionsDict[objId] {
+                    for action in actionsArr {
+                        action(value)
+                    }
                 }
             }
         }
-        else    //如果没有对象，那么删除这个key/value（节省内存空间）
-        {
-            self.delegates[key] = nil
+        
+        //订阅对象
+        if let array = self.delegates[key] {
+            array.addPointer(nil)
+            array.compact()
+            let count = array.count
+            if count > 0
+            {
+                for i in 0..<count
+                {
+                    if let delegate = array.object(at: i) as? ContainerServices
+                    {
+                        delegate.containerDidUpdateData(key: key, value: value)
+                    }
+                }
+            }
+            else    //如果没有对象，那么删除这个key/value（节省内存空间）
+            {
+                self.delegates[key] = nil
+            }
         }
     }
     
@@ -355,7 +434,7 @@ extension OriginContainer: ContainerProtocol
 extension OriginContainer
 {
     //数据模型存储结构，包括数据域和元数据域
-    struct ContainerDataStruct {
+    struct DataStruct {
         var data: Any                           //数据域
         var meta: DataModelMeta                 //元数据域
     }

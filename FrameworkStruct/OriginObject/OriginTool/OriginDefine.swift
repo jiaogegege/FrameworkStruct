@@ -66,6 +66,15 @@ protocol SingletonProtocol {
 }
 
 /**
+ * 独一无二特性协议
+ */
+protocol UniqueProtocol {
+    //对象的唯一id
+    var uniqueId: String { get }
+    
+}
+
+/**
  * 接口协议
  * 表示这个extension中实现的方法都是其他接口协议中定义的，为了扩展该类型的功能，比如`Equatable`，`Comparable`或者自定义协议等
  * 建议只在最终子类中使用该修饰性协议

@@ -15,8 +15,7 @@ import UIKit
  * 扩展存储属性的key
  * 用于给系统组件动态添加存储属性
  */
-struct UIExtensionStoragePropertyKey
-{
+struct UIExtensionStoragePropertyKey {
     ///按钮点击后无法再次点击的时间间隔
     static var buttonDisableIntervalKey: String = "buttonDisableIntervalKey"
     
