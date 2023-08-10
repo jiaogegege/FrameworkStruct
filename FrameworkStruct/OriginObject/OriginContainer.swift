@@ -40,10 +40,10 @@ private protocol ContainerSecurityProtocol: NSObjectProtocol {
  */
 protocol ContainerProtocol: NSObjectProtocol
 {
-    //同步获取数据，优先从容器中获取，如果没有则从数据源获取
+    //从容器中同步获取数据
     func get(key: AnyHashable) -> Any?
     
-    //异步获取数据，优先从容器中获取，如果没有则从数据源获取
+    //异步获取数据，优先从容器中获取，如果没有则从具体的数据源获取
     func get(key: AnyHashable, completion: @escaping OpAnyClo)
     
     //获取所有已保存的key
