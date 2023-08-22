@@ -19,10 +19,10 @@ class CommunicationAdapter: OriginAdapter
     //单例
     static let shared = CommunicationAdapter()
     
-    //自定义信息回调，返回值：是否发送成功
-    var customSmsCompletionCallback: ((_ result: MessageComposeResult) -> Void)?
-    //自定义邮件回调
-    var customMailCompletionCallback: ((_ result: MFMailComposeResult) -> Void)?
+    //自定义信息回调，返回值：发送结果
+    var smsCompletionCallback: ((_ result: MessageComposeResult) -> Void)?
+    //自定义邮件回调，返回值：发送结果
+    var mailCompletionCallback: ((_ result: MFMailComposeResult) -> Void)?
     
     
     //MARK: 方法
@@ -41,6 +41,14 @@ class CommunicationAdapter: OriginAdapter
     {
         return self
     }
+    
+    //过滤有效的邮件地址
+    fileprivate func filterValidMails(_ mails: [String]) -> [String]
+    {
+        mails.filter { mail in
+            DatasChecker.shared.checkMail(mail.trim())
+        }
+    }
 
 }
 
@@ -51,17 +59,17 @@ extension CommunicationAdapter: DelegateProtocol, MFMessageComposeViewController
     //发送信息的vc完成操作
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true)
-        if let cb = self.customSmsCompletionCallback
+        if let cb = self.smsCompletionCallback
         {
             cb(result)
-            self.customSmsCompletionCallback = nil
+            self.smsCompletionCallback = nil
         }
     }
     
     //发送邮件的vc完成操作
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
-        if let cb = self.customMailCompletionCallback
+        if let cb = self.mailCompletionCallback
         {
             if let error = error {
                 FSLog(error.localizedDescription)
@@ -71,7 +79,7 @@ extension CommunicationAdapter: DelegateProtocol, MFMessageComposeViewController
             {
                 cb(result)
             }
-            self.customMailCompletionCallback = nil
+            self.mailCompletionCallback = nil
         }
     }
     
@@ -84,6 +92,11 @@ extension CommunicationAdapter: ExternalInterface
     ///获取本机号码
     ///私有API暂不接入，可通过集成运营商SDK获取
     var localPhone: String? {
+        return nil
+    }
+    
+    ///获取默认发件地址，暂不实现
+    var defaultMail: String? {
         return nil
     }
     
@@ -169,7 +182,7 @@ extension CommunicationAdapter: ExternalInterface
             //设置代理
             vc.messageComposeDelegate = self
             //设置回调，发送完信息后调用
-            self.customSmsCompletionCallback = completion
+            self.smsCompletionCallback = completion
             g_topVC().present(vc, animated: true)
         }
         else
@@ -181,24 +194,30 @@ extension CommunicationAdapter: ExternalInterface
     }
     
     ///使用系统邮件发送邮件
-    func sendSystemMail(_ mailto: String, completion: ((_ success: Bool) -> Void)? = nil)
+    ///格式：`mailto:aaa@xxx.com?cc=bbb@xxx.com&bcc=ccc@xxx.com&subject=主题&body=正文`
+    ///mailto：收件人；cc：抄送；bcc：密送
+    ///多个邮件地址用`;`分隔
+    func sendSystemMail(_ mails: [String], cc: [String]? = nil, bcc: [String]? = nil, subject: String, body: String?, completion: ((_ success: Bool) -> Void)? = nil)
     {
-        if DatasChecker.shared.checkMail(mailto.trim())
+        var address = "mailto:" + filterValidMails(mails).joined(separator: String.sSemicolon) + String.sQuestion
+        if let ccs = cc {
+            address += "cc=" + filterValidMails(ccs).joined(separator: String.sSemicolon) + String.sAnd
+        }
+        if let bccs = bcc {
+            address += "bcc=" + filterValidMails(bccs).joined(separator: String.sSemicolon) + String.sAnd
+        }
+        if let sub = subject.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+            address += "subject=" + sub
+        }
+        if let bd = body?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+            address += "&body=" + bd
+        }
+        if let url = URL(string: address)
         {
-            if let url = URL(string: String(format: "mailto://%@", mailto.trim()))
-            {
-                UIApplication.shared.open(url, options: [:]) { success in
-                    if let cb = completion
-                    {
-                        cb(success)
-                    }
-                }
-            }
-            else
-            {
+            UIApplication.shared.open(url, options: [:]) { success in
                 if let cb = completion
                 {
-                    cb(false)
+                    cb(success)
                 }
             }
         }
@@ -213,19 +232,19 @@ extension CommunicationAdapter: ExternalInterface
     
     ///发送自定义邮件
     ///参数：mails：收件人；cc：抄送；subject：主题；message：内容
-    func sendCustomMail(mailto: [String], cc: [String]? = nil, subject: String, message: String, completion: ((_ result: MFMailComposeResult) -> Void)? = nil)
+    func sendCustomMail(_ mails: [String], cc: [String]? = nil, subject: String, message: String, completion: ((_ result: MFMailComposeResult) -> Void)? = nil)
     {
         if MFMailComposeViewController.canSendMail()
         {
             let vc = MFMailComposeViewController()
             vc.setSubject(subject)
             vc.setMessageBody(message, isHTML: false)
-            vc.setToRecipients(mailto)
+            vc.setToRecipients(mails)
             if let cc = cc {
                 vc.setCcRecipients(cc)
             }
             vc.mailComposeDelegate = self
-            self.customMailCompletionCallback = completion
+            self.mailCompletionCallback = completion
             g_topVC().present(vc, animated: true)
         }
         else
@@ -235,6 +254,5 @@ extension CommunicationAdapter: ExternalInterface
             }
         }
     }
-    
     
 }

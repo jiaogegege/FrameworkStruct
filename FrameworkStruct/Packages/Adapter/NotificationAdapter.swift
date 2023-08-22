@@ -51,7 +51,7 @@ class NotificationAdapter: OriginAdapter
     //单例
     static let shared = NotificationAdapter()
     
-    ///代理对象
+    //代理对象
     var delegate: NotificationAdapterDelegate?
     
     //通知中心
@@ -141,7 +141,6 @@ class NotificationAdapter: OriginAdapter
         }
     }
     
-    
     //处理action category响应，根据action category设计
     fileprivate func handleActionCategory(response: UNNotificationResponse)
     {
@@ -182,6 +181,7 @@ class NotificationAdapter: OriginAdapter
             break
         }
     }
+    
 }
 
 
@@ -224,19 +224,19 @@ extension NotificationAdapter: InternalType
         case critical           //重要性，绕过所有静默模式，一定会提示和播放声音
         
         ///转换成系统级别
-//        @available(iOS 15.0, *)
-//        func getLevel() -> UNNotificationInterruptionLevel {
-//            switch self {
-//            case .passive:
-//                return UNNotificationInterruptionLevel.passive
-//            case .active:
-//                return UNNotificationInterruptionLevel.active
-//            case .timeSensitive:
-//                return UNNotificationInterruptionLevel.timeSensitive
-//            case .critical:
-//                return UNNotificationInterruptionLevel.critical
-//            }
-//        }
+        @available(iOS 15.0, *)
+        func getLevel() -> UNNotificationInterruptionLevel {
+            switch self {
+            case .passive:
+                return UNNotificationInterruptionLevel.passive
+            case .active:
+                return UNNotificationInterruptionLevel.active
+            case .timeSensitive:
+                return UNNotificationInterruptionLevel.timeSensitive
+            case .critical:
+                return UNNotificationInterruptionLevel.critical
+            }
+        }
     }
 
     ///附件类型
@@ -378,7 +378,6 @@ extension NotificationAdapter: InternalType
                 return UNNotificationCategory(identifier: self.getId(), actions: [confirm, cancel], intentIdentifiers: [], options: [.customDismissAction, .allowInCarPlay, .hiddenPreviewsShowTitle, .hiddenPreviewsShowSubtitle])
             }
         }
-        
         
         //注册通知类别，新增category的枚举类型后，需要在这里注册
         //Apple 引入了可以交互的通知，这是通过将一簇 action 放到一个 category 中，将这个 category 进行注册，最后在发送通知时将通知的 category 设置为要使用的 category 来实现的
@@ -564,9 +563,9 @@ extension NotificationAdapter: ExternalInterface
         //提示音
         content.sound = sound.getSound()
         //通知等级
-//        if #available(iOS 15.0, *) {
-//            content.interruptionLevel = level.getLevel()
-//        }
+        if #available(iOS 15.0, *) {
+            content.interruptionLevel = level.getLevel()
+        }
         //数字标
         content.badge = NSNumber(value: ApplicationManager.shared.app.applicationIconBadgeNumber + 1)
         //处理附件

@@ -19,8 +19,7 @@ typealias DoubleRange = (Double, Double)
 
 
 ///限制取值范围的属性包装器
-@propertyWrapper struct LimitRangeWrap<T: Comparable>
-{
+@propertyWrapper struct LimitRangeWrap<T: Comparable> {
     private var value: T
     private var min: T
     private var max: T
@@ -41,6 +40,7 @@ typealias DoubleRange = (Double, Double)
         self.max = max
     }
 }
+
 
 ///数字枚举器
 ///输入一个数字区间，按照设定的步长枚举出一个数列
@@ -98,7 +98,6 @@ struct NumberEnumerator<T: Numeric & Comparable> {
     {
         current = min - step
     }
-    
 }
 
 
@@ -294,4 +293,44 @@ func randomInOne(_ precision: UInt = 2, reset: Bool = false) -> Double
     let random: Double = Double(arc4random_uniform(UInt32(base) + 1))
     //计算小数
     return (random / Double(base))
+}
+
+
+//MARK: 数字转换
+///从一个字符串中获取第一个浮点数
+func floatFromString(_ str: String) -> Float?
+{
+    let scan = Scanner(string: str)
+    //这一步是要把扫描器的游标放到第一个数字的位置，不然scanFloat会返回nil
+    guard scan.scanUpToCharacters(from: .decimalDigits) != nil else {
+        return nil
+    }
+    let num = scan.scanFloat()
+    return num
+}
+
+///从一个字符串中获取第一个整数
+func intFromString(_ str: String) -> Int?
+{
+    let scan = Scanner(string: str)
+    //这一步是要把扫描器的游标放到第一个数字的位置，不然scanFloat会返回nil
+    guard scan.scanUpToCharacters(from: .decimalDigits) != nil else {
+        return nil
+    }
+    let num = scan.scanInt()
+    return num
+}
+
+///从一个字符串获取一组整数，如果有多个的话
+func intsFromString(_ str: String) -> [Int]
+{
+    let scan = Scanner(string: str)
+    var array = [Int]()
+    while scan.scanUpToCharacters(from: .decimalDigits) != nil {
+        if let num = scan.scanInt()
+        {
+            array.append(num)
+        }
+    }
+    return array
 }

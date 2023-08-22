@@ -80,7 +80,7 @@ extension StringEmbellisher: ExternalInterface
         return newStr
     }
     
-    ///将手机号中间几位替换为`*`
+    ///将手机号中间几位替换为`*`或其它字符
     func changePhoneWithStar(_ originStr: String, start: Int = 3, length: Int = 4, replaceChar: Character = "*", withBlank: Bool = false) -> String
     {
         self.changeStringWithChar(originStr, start: start, length: length, replaceChar: replaceChar, replaceCount: -1, compact: !withBlank)
@@ -94,8 +94,7 @@ extension StringEmbellisher: ExternalInterface
     func phoneAddSpace(_ originStr: String, start: Int = 3, length: Int = 4, count: UInt = 1) -> String?
     {
         //先判断是否手机号
-        let ret = DatasChecker.shared.checkPhone(originStr)
-        if ret
+        if DatasChecker.shared.checkPhone(originStr)
         {
             var newStr: String = ""
             var spaceStr: String = ""   //要插入的空格字符串
@@ -113,7 +112,7 @@ extension StringEmbellisher: ExternalInterface
         return nil
     }
     
-    ///返回一个富文本，可以设置以下属性：颜色/字体/行距/段落对齐/...
+    ///返回一个富文本，可以设置以下属性：字体/颜色/背景色/下划线/删除线/行距/段落间距/段落对齐/首行缩进/段落缩进/段尾缩进/最小行高/最大行高/超链接/换行模式...
     func attrStringWith(_ str: String,
                         font: UIFont,
                         color: UIColor? = nil,
@@ -196,44 +195,6 @@ extension StringEmbellisher: ExternalInterface
         
         let attrStr = NSAttributedString.init(string: str, attributes: attrs)
         return attrStr
-    }
-    
-    ///从一个字符串中获取第一个浮点数
-    func floatFromString(_ str: String) -> Float?
-    {
-        let scan = Scanner(string: str)
-        //这一步是要把扫描器的游标放到第一个数字的位置，不然scanFloat会返回nil
-        guard scan.scanUpToCharacters(from: .decimalDigits) != nil else {
-            return nil
-        }
-        let num = scan.scanFloat()
-        return num
-    }
-    
-    ///从一个字符串中获取第一个整数
-    func intFromString(_ str: String) -> Int?
-    {
-        let scan = Scanner(string: str)
-        //这一步是要把扫描器的游标放到第一个数字的位置，不然scanFloat会返回nil
-        guard scan.scanUpToCharacters(from: .decimalDigits) != nil else {
-            return nil
-        }
-        let num = scan.scanInt()
-        return num
-    }
-    
-    ///从一个字符串获取一组整数，如果有多个的话
-    func intsFromString(_ str: String) -> [Int]
-    {
-        let scan = Scanner(string: str)
-        var array = [Int]()
-        while scan.scanUpToCharacters(from: .decimalDigits) != nil {
-            if let num = scan.scanInt()
-            {
-                array.append(num)
-            }
-        }
-        return array
     }
     
     ///组合多个属性字符串，可以设置字体/颜色/行距/段落间距，行距默认可设置为4
