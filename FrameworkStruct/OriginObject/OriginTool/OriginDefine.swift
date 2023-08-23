@@ -42,8 +42,7 @@ import Foundation
 /**
  * Origin协议
  */
-protocol OriginProtocol
-{
+protocol OriginProtocol {
     //任何实现该协议的类型
     associatedtype AnyType = Self
     
@@ -113,7 +112,7 @@ protocol InternalType {
  * 这个空协议定义各种常量属性
  * 建议只在最终子类中使用该修饰性协议
  */
-protocol ConstantPropertyProtocol {
+protocol ConstantProtocol {
     
 }
 

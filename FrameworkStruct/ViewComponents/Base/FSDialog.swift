@@ -25,7 +25,7 @@ class FSDialog: UIView, DialogManagerProtocol
     var dismissCallback: VoClo?
     
     //背景颜色，默认黑色50%透明度
-    var bgColor: UIColor = .cBlack_50Alpha {
+    var bgColor: UIColor = .cBlack_50a {
         willSet {
             self.bgView.backgroundColor = newValue
         }

@@ -11,14 +11,14 @@
  */
 import Foundation
 
-extension UIColor: ConstantPropertyProtocol
+extension UIColor: ConstantProtocol
 {
     //MARK: 常量颜色值
     /**
      * 常量颜色建议以`c`开头，表示`color`，方便区分
      */
     //主题色
-    @objc static var cMainThemeColor:UIColor {
+    @objc static var cThemeColor:UIColor {
         return ThemeManager.shared.getCurrentTheme().mainColor
     }
     //红色
@@ -42,7 +42,7 @@ extension UIColor: ConstantPropertyProtocol
     //灰色dcdcdc
     @objc static let cGray_dc = UIColor.colorFromHex(0xdcdcdc)
     //E7E7E7
-    @objc static let cGray_E7E7E7 = UIColor.colorFromHex(0xE7E7E7)
+    @objc static let cGray_E7 = UIColor.colorFromHex(0xE7E7E7)
     //2C2C3D
     @objc static let cBlack_2C2C3D = UIColor.colorWithHex("2C2C3D")
     //"D6D6D9"
@@ -50,7 +50,6 @@ extension UIColor: ConstantPropertyProtocol
     //5B5B7E
     @objc static let cGray_5B5B7E = UIColor.colorFromHex(0x5B5B7E)
     //50%半透明黑色
-    @objc static let cBlack_50Alpha = UIColor(white: 0, alpha: 0.5)
-
+    @objc static let cBlack_50a = UIColor(white: 0, alpha: 0.5)
     
 }

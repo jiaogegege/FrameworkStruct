@@ -13,7 +13,7 @@ import Foundation
 //MARK: UNNotificationSoundName
 extension UNNotificationSoundName
 {
-    ///可选自定义推送提示音，根据实际项目需求修改
+    ///自定义推送提示音，根据实际项目需求修改
     enum SoundName: String {
         case sound_搞怪 = "sound_搞怪.caf"
         case sound_蛐蛐叫 = "sound_蛐蛐叫.caf"

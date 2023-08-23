@@ -55,7 +55,8 @@ extension TimeEmbellisher: InternalType
         case noon           //中午11-13
         case afternoon      //下午13-16
         case evenfall       //傍晚16-19
-        case evening        //晚上19-24
+        case evening        //晚上19-22
+        case night          //深夜22-24
         
         //根据时间返回时间段
         static func getPeriod(_ date: Date) -> TETimePeriod
@@ -75,9 +76,11 @@ extension TimeEmbellisher: InternalType
                 case 13..<16:
                     period = .afternoon
                 case 16..<19:
-                    period = evenfall
-                case 19...24:
+                    period = .evenfall
+                case 19..<22:
                     period = .evening
+                case 22...24:
+                    period = .night
                 default:
                     period = .beforeDawn
                 }
@@ -200,7 +203,5 @@ extension TimeEmbellisher: ExternalInterface
     {
         TETimePeriod.getPeriod(date)
     }
-    
-    
     
 }

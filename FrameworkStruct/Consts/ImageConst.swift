@@ -10,7 +10,7 @@
  */
 import UIKit
 
-extension UIImage: ConstantPropertyProtocol
+extension UIImage: ConstantProtocol
 {
     //MARK: 资源图片常量
     
@@ -140,7 +140,6 @@ extension UIImage: ConstantPropertyProtocol
     static let iLrcLocationBtn = UIImage(named: "mp_locate_lrc_btn")
 
 }
-
 
 //实用方法
 extension UIImage

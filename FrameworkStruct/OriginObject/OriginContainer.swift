@@ -19,7 +19,6 @@ protocol ContainerServices {
     
     //数据容器清空了某个数据,通知所有订阅对象数据被清空,订阅对象可根据实际需求作出反应
     func containerDidClearData(key: AnyHashable)
-    
 }
 
 /**
@@ -102,7 +101,6 @@ protocol ContainerProtocol: NSObjectProtocol
     
     //当数据变化的时候，通知所有订阅对象
     func dispatch(key: AnyHashable, value: Any)
-    
 }
 
 

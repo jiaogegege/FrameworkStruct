@@ -18,8 +18,7 @@ import UIKit
 /**
  * 基础协议
  */
-protocol BasicProtocol
-{
+protocol BasicProtocol {
     
 }
 
@@ -89,7 +88,7 @@ enum VCStatusBarStyle {
     case light  //浅色
 }
 
-//VC返回按钮样式
+//VC返回按钮样式，具体枚举项根据实际项目需求设计
 enum VCBackStyle
 {
     case none                   //不显示返回按钮
@@ -135,7 +134,7 @@ enum VCBackgroundStyle
     //返回颜色或者渐变图层或者图像图层
     //UIColor/CALayer
     //UIColor支持暗黑模式，如果是浅色的背景色，那么设置为一种黑色，深色的则返回深色
-    func getContent() -> Any
+    func getBg() -> Any
     {
         switch self {
         case .none:
@@ -166,5 +165,4 @@ enum VCBackgroundStyle
             return la
         }
     }
-    
 }

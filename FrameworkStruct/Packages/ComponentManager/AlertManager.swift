@@ -217,7 +217,7 @@ class AlertManager: OriginManager
                 confirm(text)
             }
         } : nil
-        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, identifierKey: ident, tintColor: UIColor.cMainThemeColor, cancelTitle: leftTitle, cancelBlock: cancelBlock, confirmTitle: rightTitle, confirmBlock: confirmBlock, inViewController: nil)
+        let alert = FSAlertView.alertView(title: title, message: message, messageAlign: messageAlign, needInput: needInput, inputPlaceHolder: inputPlaceHolder, usePlaceHolder: usePlaceHolder, identifierKey: ident, tintColor: UIColor.cThemeColor, cancelTitle: leftTitle, cancelBlock: cancelBlock, confirmTitle: rightTitle, confirmBlock: confirmBlock, inViewController: nil)
         return alert
     }
     
@@ -250,7 +250,7 @@ class AlertManager: OriginManager
                 cancel()
             }
         } : nil
-        let actionSheet = FSActionSheet.actionSheet(title: title, message: message, actionArray: actionArray, cancelAction: cancelAction, identifierKey: ident, tintColor: UIColor.cMainThemeColor, inViewController: nil)
+        let actionSheet = FSActionSheet.actionSheet(title: title, message: message, actionArray: actionArray, cancelAction: cancelAction, identifierKey: ident, tintColor: UIColor.cThemeColor, inViewController: nil)
         return actionSheet
     }
     

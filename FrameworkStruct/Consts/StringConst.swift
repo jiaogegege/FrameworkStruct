@@ -17,7 +17,7 @@ import Foundation
  */
 
 //MARK: 对String的扩展，包括一些实用方法和常量定义
-extension String: ConstantPropertyProtocol
+extension String: ConstantProtocol
 {
     //空字符
     static let sEmpty = ""

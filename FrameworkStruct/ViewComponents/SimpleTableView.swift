@@ -46,7 +46,7 @@ class SimpleTableView: UIView
     //边框线宽
     var borderWidth: CGFloat = 1.0
     //边框颜色
-    var borderColor: UIColor = .cGray_E7E7E7
+    var borderColor: UIColor = .cGray_E7
     
     //组文字颜色
     var groupTitleColor: UIColor = .cBlack_6

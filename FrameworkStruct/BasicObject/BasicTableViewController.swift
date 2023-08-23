@@ -240,7 +240,7 @@ class BasicTableViewController: UITableViewController
     //设置背景色
     fileprivate func setBackgroundColor()
     {
-        let bgContent = self.backgroundStyle.getContent()
+        let bgContent = self.backgroundStyle.getBg()
         if let color = bgContent as? UIColor
         {
             self.view.backgroundColor = color

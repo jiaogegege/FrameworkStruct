@@ -6,7 +6,7 @@
 //
 
 /**
- * 定义各种常量和变量
+ * 定义各种全局常量和变量
  * 定义各种宏表达式
  */
 import Foundation
@@ -56,6 +56,7 @@ class FSNotification
 {
     //原始值
     var rawValue: String
+    
     //如果通知有参数，那么用这个属性获得参数的key，目前只能支持一个参数key，如果有多个参数，只能手写字符串或者定义常量，或者将多个参数封装在一个对象中传递
     //返回的参数key就是类型的名字，可以是结构体名/类名/协议名
     var paramKey: String?
@@ -70,10 +71,12 @@ class FSNotification
     var name: Notification.Name {
         return Notification.Name(rawValue: "FS_" + self.rawValue + "_Notification")
     }
-    
-    
-    ///全局通知枚举值
-    static let changeTheme = FSNotification(value: "changeTheme", paramKey: "ThemeProtocol")                        //切换主题的通知
+}
+
+///全局通知
+extension FSNotification {
+    //切换主题的通知
+    static let changeTheme = FSNotification(value: "changeTheme", paramKey: "ThemeProtocol")
     
 }
 
@@ -113,7 +116,7 @@ enum FSError: Int, Error {
     //获取NSError对象
     func getError() -> NSError
     {
-        return NSError(domain: NSCocoaErrorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: self.desc, NSLocalizedFailureReasonErrorKey: self.desc])
+        return NSError(domain: Self.errorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: self.desc, NSLocalizedFailureReasonErrorKey: self.desc])
     }
 }
 

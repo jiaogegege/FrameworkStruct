@@ -40,7 +40,7 @@ class FSGuideView: UIView
     }
     
     //半透明蒙层背景色，默认黑色50%透明度
-    var maskColor: UIColor = .cBlack_50Alpha
+    var maskColor: UIColor = .cBlack_50a
     
     /**************************************** 接口属性 Section End ****************************************/
     

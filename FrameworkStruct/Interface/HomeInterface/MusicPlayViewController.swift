@@ -251,7 +251,7 @@ class MusicPlayViewController: BasicViewController {
         songNameLabel.textColor = .white
         songNameLabel.textAlignment = .center
         songNameLabel.font = .systemFont(ofSize: fitX(16))
-        artistLabel.textColor = .cGray_E7E7E7
+        artistLabel.textColor = .cGray_E7
         artistLabel.textAlignment = .center
         artistLabel.font = .systemFont(ofSize: fitX(13))
         
