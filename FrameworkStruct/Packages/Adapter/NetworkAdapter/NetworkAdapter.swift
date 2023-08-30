@@ -78,17 +78,17 @@ extension NetworkAdapter: ExternalInterface
     /**************************************** 基本网络功能 Section Begin ***************************************/
     ///当前网络状态
     var currentNetworkStatus: AFNetworkReachabilityStatus {
-        return request.networkStatus
+        request.networkStatus
     }
     
     ///当前网络是否可用
     var isNetworkOk: Bool {
-        return request.networkAvailable
+        request.networkAvailable
     }
     
     ///当前主机地址
     var currentHost: String {
-        return request.host
+        request.host
     }
     
     /**************************************** 基本网络功能 Section End ***************************************/

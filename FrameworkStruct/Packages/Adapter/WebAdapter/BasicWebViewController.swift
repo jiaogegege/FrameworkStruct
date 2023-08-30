@@ -327,7 +327,7 @@ extension BasicWebViewController: ExternalInterface
     }
     
     ///调用js方法
-    func callWebHandler(name: String, param: Any?, completion: ((Any?) -> Void)?)
+    func callWebHandler(name: String, param: Any?, completion: OpAnyClo?)
     {
         if self.canCallWebHandler(name)
         {

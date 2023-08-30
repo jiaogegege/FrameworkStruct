@@ -63,8 +63,6 @@ enum ServerHostType {
         case .dev:
             return "http://192.168.50.54"
         case .qa:
-//            return "http://218.4.182.210"    //外网ip
-//            return "http://192.168.50.63"    //内网ip
             return "https://jszhaofeng.cn"
         case .uat:
             return "https://www.awaitz.com/pre"
