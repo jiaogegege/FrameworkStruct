@@ -86,12 +86,12 @@ class MPLrcManager: OriginManager
 extension MPLrcManager: InternalType
 {
     //提取歌词相关正则表达式
-    static let titleReg: RegexExpression = "(?<=\\[ti:).*(?=\\])"           //标题
-    static let artistReg: RegexExpression = "(?<=\\[ar:).*(?=\\])"          //艺术家
-    static let albumReg: RegexExpression = "(?<=\\[al:).*(?=\\])"           //专辑
-    static let timeLrcReg: RegexExpression = "\\[\\d.*(\n|\r)"                   //时间和歌词的一行
-    static let timeReg: RegexExpression = "(?<=\\[).+(?=\\])"               //时间
-    static let lyricReg: RegexExpression = "(?<=\\]).*(?=(\n|\r))"               //歌词
+    static let titleReg: RegExp = "(?<=\\[ti:).*(?=\\])"           //标题
+    static let artistReg: RegExp = "(?<=\\[ar:).*(?=\\])"          //艺术家
+    static let albumReg: RegExp = "(?<=\\[al:).*(?=\\])"           //专辑
+    static let timeLrcReg: RegExp = "\\[\\d.*(\n|\r)"                   //时间和歌词的一行
+    static let timeReg: RegExp = "(?<=\\[).+(?=\\])"               //时间
+    static let lyricReg: RegExp = "(?<=\\]).*(?=(\n|\r))"               //歌词
     
 }
 
@@ -147,6 +147,5 @@ extension MPLrcManager: ExternalInterface
             completion(nil)
         }
     }
-    
     
 }

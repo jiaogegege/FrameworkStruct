@@ -367,7 +367,7 @@ class MusicPlayViewController: BasicViewController {
         switch mpr.playMode {
         case .random:
             return .iRandomBtn
-        case .singleCycle:
+        case .single:
             return .iSingleBtn
         case .sequence:
             return .iSequenceBtn
@@ -414,8 +414,8 @@ class MusicPlayViewController: BasicViewController {
         case .random:
             mpr.playMode = .sequence
         case .sequence:
-            mpr.playMode = .singleCycle
-        case .singleCycle:
+            mpr.playMode = .single
+        case .single:
             mpr.playMode = .random
         }
         playModeBtn.setImage(getPlayModeImage(), for: .normal)

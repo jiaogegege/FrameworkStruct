@@ -26,6 +26,7 @@ protocol MPLibraryManagerDelegate: NSObjectProtocol {
     func mpLibraryManagerDidUpdateSonglists(_ songlists: [MPSonglistModel])
 }
 
+
 class MPLibraryManager: OriginManager
 {
     //MARK: 属性

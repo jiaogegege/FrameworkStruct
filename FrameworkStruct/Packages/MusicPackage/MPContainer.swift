@@ -10,7 +10,6 @@
  */
 import UIKit
 
-
 extension FSNotification
 {
     //媒体库初始化完成的通知
@@ -18,6 +17,7 @@ extension FSNotification
     //媒体库更新完成的通知
     static let mpContainerUpdated = FSNotification(value: "mpContainerUpdated")
 }
+
 
 class MPContainer: OriginContainer
 {
@@ -837,7 +837,5 @@ extension MPContainer: ExternalInterface
             self.mutate(key: MPDataKey.iCloudSongFileInfo, value: newFiles, meta: DataModelMeta(needCopy: false, canCommit: false))
         }
     }
-    
-    
     
 }

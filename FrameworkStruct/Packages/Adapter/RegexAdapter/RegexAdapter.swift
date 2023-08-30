@@ -41,7 +41,7 @@ extension RegexAdapter: ExternalInterface
 {
     ///从一个字符串中提取字符，如果报错返回空数组
     ///参数：str：源字符串；regex：正则表达式；once：是否只提取第一个，false为提取所有匹配的字符串；options：匹配选项
-    func getSubStrIn(_ str: String, with regex: RegexExpression, once: Bool = true, options: NSRegularExpression.Options = []) -> [String]
+    func getSubStrIn(_ str: String, with regex: RegExp, once: Bool = true, options: NSRegularExpression.Options = []) -> [String]
     {
         var subStrs = [String]()
         do {

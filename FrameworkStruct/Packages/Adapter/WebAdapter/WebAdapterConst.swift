@@ -290,4 +290,4 @@ enum WebUrlPath: String {
 
 //MARK: Javascript代码片段
 ///获取h5页面标题
-let js_getTitle: JavascriptExpression = "document.title"
+let js_getTitle: JsExp = "document.title"

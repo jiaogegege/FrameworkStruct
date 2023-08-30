@@ -105,11 +105,13 @@ class MPManager: OriginManager
     private override init()
     {
         super.init()
+        //初始化状态
         self.stMgr.set(MPStatus.isIniting, key: StatusKey.currentStatus)
         self.stMgr.set(false, key: StatusKey.updated)
         self.stMgr.set(false, key: StatusKey.inBackground)
         self.libMgr.delegate = self
         self.player.delegate = self
+        //同步云端播放信息
         if let t = ia.getDouble(.mpProgress) {
             self.lastTime = t
         }
@@ -425,7 +427,7 @@ class MPManager: OriginManager
     }
     
     ///保存播放进度
-    func savePlaybackProgress(_ time: TimeInterval)
+    fileprivate func savePlaybackProgress(_ time: TimeInterval)
     {
         //保存到iCloud，每秒保存性能损耗太大，目前考虑10的整数倍才保存
         if Int(time) % 10 == 0
@@ -435,7 +437,6 @@ class MPManager: OriginManager
     }
     
 }
-
 
 extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegate
 {
@@ -617,7 +618,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     /**************************************** 媒体库管理器代理 Section End ***************************************/
     
     /**************************************** MPPlayer代理方法 Section Begin ***************************************/
-    //处理和加载播放资源
+    //处理和加载播放资源，准备播放
     func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping (Bool) -> Void) {
         stMgr.set(MPStatus.loading, key: StatusKey.currentStatus)
         delegates.compact()
@@ -712,6 +713,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         stMgr.set(MPStatus.waiting, key: StatusKey.currentStatus)
     }
     
+    //暂停播放
     func mpPlayerPauseToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         stMgr.set(MPStatus.paused, key: StatusKey.currentStatus)
         //保存进度
@@ -730,6 +732,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         NotificationCenter.default.post(name: FSNotification.mpPausePlay.name, object: nil, userInfo: [FSNotification.mpPausePlay.paramKey: currentSong!])
     }
     
+    //恢复播放
     func mpPlayerResumeToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         stMgr.set(MPStatus.playing, key: StatusKey.currentStatus)
         //在控制中心显示歌曲信息
@@ -746,6 +749,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         NotificationCenter.default.post(name: FSNotification.mpResumePlay.name, object: nil, userInfo: [FSNotification.mpResumePlay.paramKey: currentSong!])
     }
     
+    //结束播放
     func mpPlayerFinishPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         stMgr.set(MPStatus.playFinished, key: StatusKey.currentStatus)
         //播放完成后，播放进度重置为0
@@ -754,10 +758,12 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         showAudioInfoInControlCenter(audio)
     }
     
+    //停止播放
     func mpPlayerStopToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         stMgr.set(MPStatus.stopped, key: StatusKey.currentStatus)
     }
     
+    //播放失败
     func mpPlayerFailToPlay(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         stMgr.set(MPStatus.stopped, key: StatusKey.currentStatus)
         delegates.compact()
@@ -773,6 +779,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
         self.playNext()
     }
     
+    //播放列表变化
     func mpPlayerPlaylistChanged(_ audio: MPAudioProtocol, playlist: MPPlaylistProtocol) {
         //播放列表更新后保存到iCloud
         libMgr.saveCurrent(audio as! MPSongModel, in: playlist as! MPPlaylistModel)
@@ -816,7 +823,6 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
 }
 
-
 //内部类型
 extension MPManager: InternalType
 {
@@ -833,6 +839,7 @@ extension MPManager: InternalType
         case updated                    //是否更新过，会多次发生更新：Bool
     }
     
+    //播放器状态
     enum MPStatus {
         case isIniting                  //正在初始化
         case isInited                   //初始化完成
@@ -845,7 +852,6 @@ extension MPManager: InternalType
     }
     
 }
-
 
 //外部接口
 extension MPManager: ExternalInterface
@@ -973,7 +979,6 @@ extension MPManager: ExternalInterface
     {
         miniPlayView.hide()
     }
-    
     /**************************************** Mini播放器 Section End ****************************************/
     
     /**************************************** 播放音乐相关 Section Begin ***************************************/
@@ -1051,8 +1056,7 @@ extension MPManager: ExternalInterface
     }
     
     ///设置播放速率
-    func setPlayRate(_ rate: MPPlayRate)
-    {
+    func setPlayRate(_ rate: MPPlayRate) {
         player.setPlayRate(rate.rawValue)
     }
     

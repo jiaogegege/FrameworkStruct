@@ -191,7 +191,7 @@ extension String
     }
         
     /// 正则匹配第一次出现的范围，没有匹配到返回nil
-    func firstMatchWith(pattern: RegexExpression) -> NSRange?
+    func firstMatchWith(pattern: RegExp) -> NSRange?
     {
         if self.count == 0  //如果源字符串为空，返回nil
         {
@@ -213,7 +213,7 @@ extension String
     }
     
     ///该字符串是否符合正则表达式
-    func isMatch(pattern: RegexExpression) -> Bool
+    func isMatch(pattern: RegExp) -> Bool
     {
         var ret = false
         if let regex = try? NSRegularExpression(pattern: pattern, options: [])

@@ -397,7 +397,7 @@ extension iCloudAccessor: ExternalInterface
     ///针对特定扩展名和目录搜索
     func setExtFilter(exts: [FileTypeName]?, extOpposite: Bool = false, dirs: [IADocumentDir]?, dirsOpposite: Bool = false)
     {
-        var predicateStr: PredicateExpression = ""
+        var predicateStr: PredExp = ""
         var extStr = ""
         var dirStr = ""
         //处理扩展名
@@ -446,7 +446,7 @@ extension iCloudAccessor: ExternalInterface
     ///dirs：过滤文件夹；dirsOpposite：false表示只搜索该文件夹，true表示不搜索该文件夹
     func setFilter(files: [FMUTIs]?, filesOpposite: Bool = false, dirs: [IADocumentDir]?, dirsOpposite: Bool = false)
     {
-        var predicateStr: PredicateExpression = ""
+        var predicateStr: PredExp = ""
         var fileStr = ""
         var dirStr = ""
         //处理文件类型

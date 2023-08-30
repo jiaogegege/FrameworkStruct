@@ -68,13 +68,13 @@ extension Archivable {
 
 //MARK: 基础类型定义
 ///正则表达式
-typealias RegexExpression = String
+typealias RegExp = String
 
 ///谓词表达式
-typealias PredicateExpression = String
+typealias PredExp = String
 
 ///Javascript片段
-typealias JavascriptExpression = String
+typealias JsExp = String
 
 
 //MARK: 基础常量定义
