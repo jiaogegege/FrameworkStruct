@@ -17,7 +17,6 @@ import UserNotifications
 import UserNotificationsUI
 import CoreLocation
 
-
 ///推送通知适配器代理方法，根据实际需求设计
 protocol NotificationAdapterDelegate
 {
@@ -41,7 +40,6 @@ protocol NotificationAdapterDelegate
     
     ///用户在通知中点击了取消，根据action category设计
     func notificationAdapterDidClickCancel(notification: UNNotification)
-    
 }
 
 
@@ -90,7 +88,6 @@ class NotificationAdapter: OriginAdapter
         self.notificationCenter.requestAuthorization(options: [.alert, .badge, .sound, .carPlay, .providesAppNotificationSettings]) {[weak self] (isGranted, error) in
             //根据权限申请结果采取不同的操作
             //不管有没有错误都将申请结果传出去
-//            FSLog("Notification Permission Granted:\(isGranted)")
             self?.isGranted = isGranted
             if let delegate = self?.delegate {
                 delegate.notificationAdapterDidFinishAuthorization(isGranted: isGranted)
@@ -116,7 +113,7 @@ class NotificationAdapter: OriginAdapter
     fileprivate func registerForRemoteNotification()
     {
         #if targetEnvironment(simulator)
-//        FSLog("Simulator don't support remote notification")
+//        FSLog("Simulator doesn't support remote notification")
         #else
         g_async {
             ApplicationManager.shared.app.registerForRemoteNotifications()
@@ -541,10 +538,8 @@ extension NotificationAdapter: ExternalInterface
         //判断是否可以使用推送
         guard canPush else {
             let err = FSError.noPushError
-//            FSLog("push notification error: \(err.localizedDescription)")
             if let comp = completion
             {
-                
                 comp(err)
             }
             return

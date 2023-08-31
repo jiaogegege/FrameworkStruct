@@ -15,7 +15,6 @@ import AudioToolbox
 import AVFoundation
 import MediaPlayer
 
-
 /**
  应用程序管理器服务，根据实际需求设计
  */
@@ -23,7 +22,6 @@ protocol ApplicationManagerServices: NSObjectProtocol
 {
     ///应用程序管理器截屏了
     func applicationManagerDidScreenshot(image: UIImage)
-    
 }
 
 

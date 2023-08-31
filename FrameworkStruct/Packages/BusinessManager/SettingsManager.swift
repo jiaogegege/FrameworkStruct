@@ -68,15 +68,4 @@ extension SettingsManager: ExternalInterface
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
