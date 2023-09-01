@@ -274,7 +274,7 @@ extension OriginContainer: ContainerProtocol
         return nil
     }
     
-    @objc func refreshAll(completion: @escaping ((Dictionary<AnyHashable, Any>?) -> Void)) {
+    @objc func refreshAll(completion: @escaping OpGnClo<Dictionary<AnyHashable, Any>>) {
         //子类实现和具体存取器的交互
     }
     

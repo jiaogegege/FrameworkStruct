@@ -43,7 +43,7 @@ class MPLrcManager: OriginManager
     }
     
     //读取歌词文件内容并解析
-    fileprivate func parseLyricData(_ data: Data, lrcFileUrl: URL, completion: @escaping ((MPLyricModel?) -> Void))
+    fileprivate func parseLyricData(_ data: Data, lrcFileUrl: URL, completion: @escaping OpGnClo<MPLyricModel>)
     {
         if let lrcContent = data.toString()
         {
@@ -99,7 +99,7 @@ extension MPLrcManager: InternalType
 extension MPLrcManager: ExternalInterface
 {
     ///获取解析好的歌词或字幕对象
-    func getLyric(_ audio: MPAudioProtocol, completion: @escaping ((MPLyricModel?) -> Void))
+    func getLyric(_ audio: MPAudioProtocol, completion: @escaping OpGnClo<MPLyricModel>)
     {
         //如果是iCloud中的歌曲文件，那么尝试从iCloud获取歌词文件
         if ia.isiCloudFile(audio.audioUrl)

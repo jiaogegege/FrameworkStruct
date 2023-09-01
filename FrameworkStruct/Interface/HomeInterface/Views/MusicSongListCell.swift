@@ -23,8 +23,8 @@ class MusicSongListCell: UITableViewCell {
     var number: Int?        //排序序号，从1开始
     var songData: MPSongModel?
     var isCurrent: Bool = false
-    var favoriteCallback: ((MPSongModel) -> Void)?  //点击收藏按钮
-    var addSonglistCallback: ((MPSongModel) -> Void)?
+    var favoriteCallback: GnClo<MPSongModel>?  //点击收藏按钮
+    var addSonglistCallback: GnClo<MPSongModel>?
 
     override func awakeFromNib() {
         super.awakeFromNib()

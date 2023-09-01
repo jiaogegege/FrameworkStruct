@@ -131,7 +131,7 @@ extension SandBoxAccessor: ExternalInterface
                      excludeDir: Bool = false,
                      excludeFile: Bool = false,
                      fileExts: [FileTypeName]? = nil,
-                     excludefileExts: Bool = false, completion: @escaping (([String]) -> Void))
+                     excludefileExts: Bool = false, completion: @escaping GnClo<[String]>)
     {
         ThreadManager.shared.async { queue in
             var files = [String]()

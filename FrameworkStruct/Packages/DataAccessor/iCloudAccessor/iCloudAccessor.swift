@@ -62,7 +62,7 @@ class iCloudAccessor: OriginAccessor {
     //执行查询时候外部调用所在的queue，保存每次查询请求所在的queue
     fileprivate lazy var queryCallbackQueues: [DispatchQueue] = []
     //当发起一次query documents后的回调，返回查询结果，是个数组，可以同时发起多次查询
-    fileprivate lazy var queryDocumentsCallbacks: [([IADocumentSearchResult]) -> Void] = []
+    fileprivate lazy var queryDocumentsCallbacks: [GnClo<[IADocumentSearchResult]>] = []
     
     //正在操作的文件句柄dict
     fileprivate var handledFiles: [IADocumentHandlerType: iCloudDocument] = [:]
@@ -565,7 +565,7 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///查询icloud文件信息
-    func queryDocuments(_ callback: @escaping ([IADocumentSearchResult]) -> Void)
+    func queryDocuments(_ callback: @escaping GnClo<[IADocumentSearchResult]>)
     {
         self.queryCallbackQueues.append(ThreadManager.shared.currentQueue())
         self.queryDocumentsCallbacks.append(callback)
@@ -610,7 +610,7 @@ extension iCloudAccessor: ExternalInterface
     }
     
     ///打开一个文件，返回文件句柄，失败返回nil
-    func openDocument(_ fileUrl: URL, completion: @escaping ((IADocumentHandlerType?) -> Void))
+    func openDocument(_ fileUrl: URL, completion: @escaping OpGnClo<IADocumentHandlerType>)
     {
         let document = iCloudDocument(fileURL: fileUrl)
         let id = generateFileId(fileUrl: fileUrl)

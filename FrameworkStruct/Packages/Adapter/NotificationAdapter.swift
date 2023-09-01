@@ -533,7 +533,7 @@ extension NotificationAdapter: ExternalInterface
                                  launchImageName: String? = nil,
                                  trigger: NATriggerType,
                                  identifier: String = g_uuid(),
-                                 completion: ((_ error: Error?) -> Void)? = nil)
+                                 completion: OpErrClo? = nil)
     {
         //判断是否可以使用推送
         guard canPush else {
@@ -619,7 +619,7 @@ extension NotificationAdapter: ExternalInterface
     }
     
     ///获取所有未触发通知请求
-    func getAllPendingRequests(completion: @escaping ([UNNotificationRequest]) -> Void)
+    func getAllPendingRequests(completion: @escaping GnClo<[UNNotificationRequest]>)
     {
         self.notificationCenter.getPendingNotificationRequests(completionHandler: completion)
     }
@@ -637,7 +637,7 @@ extension NotificationAdapter: ExternalInterface
     }
     
     ///获取已触发通知
-    func getDeliveredNotifications(completion: @escaping ([UNNotification]) -> Void)
+    func getDeliveredNotifications(completion: @escaping GnClo<[UNNotification]>)
     {
         self.notificationCenter.getDeliveredNotifications(completionHandler: completion)
     }

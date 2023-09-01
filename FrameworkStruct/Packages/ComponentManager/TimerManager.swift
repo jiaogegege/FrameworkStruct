@@ -83,7 +83,7 @@ extension TimerManager: ExternalInterface
                repeats: Bool = true,
                mode: RunLoop.Mode = .default,
                hostId: String = g_uuid(),
-               action: @escaping ((Timer) -> Void)) -> Timer
+               action: @escaping GnClo<Timer>) -> Timer
     {
         let timer = Timer.init(timeInterval: interval, repeats: repeats, block: action)
         RunLoop.current.add(timer, forMode: mode)
@@ -105,7 +105,7 @@ extension TimerManager: ExternalInterface
                        onMain: Bool?,
                        exact: Bool = false,
                        hostId: String = g_uuid(),
-                       action: @escaping ((DispatchSourceTimer?) -> Void)) -> DispatchSourceTimer
+                       action: @escaping OpGnClo<DispatchSourceTimer>) -> DispatchSourceTimer
     {
         //计算所在队列
         var queue = ThreadManager.shared.currentQueue()

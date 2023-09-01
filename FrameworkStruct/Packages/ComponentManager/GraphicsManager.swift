@@ -381,7 +381,7 @@ extension GraphicsManager: ExternalInterface
     }
     
     ///提供一个绘图上下文，在回调中绘制图片或文字，最后返回一个图片
-    func drawContent(in boundary: CGSize, action: ((CGContext?) -> Void)) -> UIImage?
+    func drawContent(in boundary: CGSize, action: OpGnClo<CGContext>) -> UIImage?
     {
         //设置画布尺寸
         UIGraphicsBeginImageContext(boundary)
@@ -415,7 +415,7 @@ extension GraphicsManager: ExternalInterface
     ///将多个包含特定rect的图像绘制到同一个图像中
     ///参数：boundary：整体边界；images：要绘制的图像；rects：指定这些图像的rect；这两个参数必须一一对应；keepRatio：是否保持长宽比，为true则保持长宽比并按照rects指定最大尺寸绘制，位置由rects指定
     ///additionalDraw：另外的绘制命令，比如绘制一些文字，可以在这个闭包中执行
-    func drawImages(in boundary: CGSize, images: [UIImage], rects: [CGRect], keepRatio: Bool = false, additionalDraw: ((CGContext?) -> Void)? = nil) -> UIImage?
+    func drawImages(in boundary: CGSize, images: [UIImage], rects: [CGRect], keepRatio: Bool = false, additionalDraw: OpGnClo<CGContext>? = nil) -> UIImage?
     {
         guard images.count == rects.count else {
             return nil      //假设图片数量和rect数量必须一一对应

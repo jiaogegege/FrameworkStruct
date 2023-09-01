@@ -687,7 +687,7 @@ extension CalendarAdapter: ExternalInterface
     func queryRemind(startDate: Date?,
                      endDate: Date?,
                      searchType: CAReminderSearchType,
-                     completion: @escaping ([EKReminder]?) -> Void)
+                     completion: @escaping OpGnClo<[EKReminder]>)
     {
         var cals: [EKCalendar] = []
         if let cur = self.currentReminder

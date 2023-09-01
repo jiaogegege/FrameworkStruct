@@ -31,9 +31,9 @@ class MPPlaylistView: UIView {
     var needLocation: Bool = false
     
     //点击歌曲的回调，回传播放列表和点击的歌曲
-    var clickCallback: ((MPAudioProtocol, MPPlaylistProtocol) -> Void)?
+    var clickCallback: Gn2Clo<MPAudioProtocol, MPPlaylistProtocol>?
     //删除某一首歌曲的回调
-    var deleteSongCallback: ((MPAudioProtocol, MPPlaylistProtocol) -> Void)?
+    var deleteSongCallback: Gn2Clo<MPAudioProtocol, MPPlaylistProtocol>?
     
     //UI组件
     fileprivate var bgView: UIView!             //背景视图

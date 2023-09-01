@@ -205,13 +205,13 @@ class AlertManager: OriginManager
             ident += rt
         }
         //设置取消和确认的回调，有可能为nil
-        let cancelBlock: ((UIAlertAction) -> Void)? = leftBlock != nil ? {(action) in
+        let cancelBlock: GnClo<UIAlertAction>? = leftBlock != nil ? {(action) in
             if let cancel = leftBlock
             {
                 cancel()
             }
         } : nil
-        let confirmBlock: ((UIAlertAction, String?) -> Void)? = rightBlock != nil ? {(action, text) in
+        let confirmBlock: GnOpGnClo<UIAlertAction, String>? = rightBlock != nil ? {(action, text) in
             if let confirm = rightBlock
             {
                 confirm(text)
@@ -234,7 +234,7 @@ class AlertManager: OriginManager
             ident += me
         }
         
-        var actionArray = Array<[FSActionSheet.ASItemName: ((UIAlertAction) -> Void)]>()
+        var actionArray = Array<[FSActionSheet.ASItemName: GnClo<UIAlertAction>]>()
         for block in blockArray
         {
             ident += block.keys.first ?? ""
@@ -244,7 +244,7 @@ class AlertManager: OriginManager
                 closure()
             }])
         }
-        let cancelAction: ((UIAlertAction) -> Void)? = cancelBlock != nil ? {(action: UIAlertAction) in
+        let cancelAction: GnClo<UIAlertAction>? = cancelBlock != nil ? {(action: UIAlertAction) in
             if let cancel = cancelBlock
             {
                 cancel()

@@ -142,7 +142,7 @@ extension FSHook: InternalType
         var meta: HookMetaInfo      //hook描述信息
         
         //执行hook
-        mutating func performAction(_ completion: ((HookMetaInfo) -> Void)?)
+        mutating func performAction(_ completion: GnClo<HookMetaInfo>?)
         {
             if meta.canPerform
             {

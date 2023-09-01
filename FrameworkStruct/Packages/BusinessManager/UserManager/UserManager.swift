@@ -103,7 +103,7 @@ extension UserManager: ExternalInterface
     func login(phone: String,
                verificationCode: String,
                privateCode: String? = nil,
-               success: @escaping ((UserInfoModel) -> Void),
+               success: @escaping GnClo<UserInfoModel>,
                failure: @escaping NSErrClo)
     {
         na.loginWithPhoneAndSms(phone: phone, token: ApplicationManager.shared.getDeviceId(), verifyCode: verificationCode, verificationCode: privateCode) {[weak self] userInfo in

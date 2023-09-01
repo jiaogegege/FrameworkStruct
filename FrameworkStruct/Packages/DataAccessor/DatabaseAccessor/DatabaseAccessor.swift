@@ -747,7 +747,7 @@ extension DatabaseAccessor: ExternalInterface
     //MARK: 用户信息
     ///查询用户信息
     ///multithread:如果在多线程环境下执行，那么传true
-    func queryAllUsersInfo(multithread: Bool = false, callback: @escaping ((Array<UserInfoModel>?) -> Void))
+    func queryAllUsersInfo(multithread: Bool = false, callback: @escaping OpGnClo<Array<UserInfoModel>>)
     {
         let sql = "SELECT * FROM app_user"
         
@@ -777,7 +777,7 @@ extension DatabaseAccessor: ExternalInterface
     
     ///更新一个用户信息
     ///参数：multithread：是否在多线程环境下执行；user：用户信息；callback：回调，更新是否成功
-    func updateUserInfo(multithread: Bool = false, user: UserInfoModel, callback: ((Bool) -> Void)?)
+    func updateUserInfo(multithread: Bool = false, user: UserInfoModel, callback: BoClo?)
     {
         let sql = String(format: "UPDATE app_user SET user_phone='%@', user_password='%@', update_date='%@' WHERE id='%@'", user.userPhone, user.userPassword, currentTimeString(), user.id)
         

@@ -292,7 +292,7 @@ extension NetworkRequestManager: ExternalInterface
              authorization: String? = nil,
              timeoutInterval: TimeInterval = nt_request_timeoutInterval,
              headers: Dictionary<String, String>? = nil,
-             progressCallback: ((_ progress: Float) -> Void)? = nil,
+             progressCallback: FltClo? = nil,
              success: @escaping RequestSuccessCallback,
              failure: @escaping RequestFailureCallback) -> String
     {
@@ -315,7 +315,7 @@ extension NetworkRequestManager: ExternalInterface
               authorization: String? = nil,
               timeoutInterval: TimeInterval = nt_request_timeoutInterval,
               headers: Dictionary<String, String>? = nil,
-              progressCallback: ((_ progress: Float) -> Void)? = nil,
+              progressCallback: FltClo? = nil,
               success: @escaping RequestSuccessCallback,
               failure: @escaping RequestFailureCallback) -> String
     {
@@ -404,8 +404,8 @@ extension NetworkRequestManager: ExternalInterface
                   authorization: String? = nil,
                   timeoutInterval: TimeInterval = nt_request_timeoutInterval,
                   headers: Dictionary<String, String>? = nil,
-                  uploadProgressCallback: ((_ progress: Float) -> Void)? = nil,
-                  downloadProgressCallback: ((_ progress: Float) -> Void)? = nil,
+                  uploadProgressCallback: FltClo? = nil,
+                  downloadProgressCallback: FltClo? = nil,
                   success: @escaping RequestSuccessCallback,
                   failure: @escaping RequestFailureCallback) -> String
     {
@@ -487,7 +487,7 @@ extension NetworkRequestManager: ExternalInterface
                   exact: Bool = false,
                   authorization: String? = nil,
                   headers: Dictionary<String, String>? = nil,
-                  downloadProgressCallback: ((_ progress: Float) -> Void)? = nil,
+                  downloadProgressCallback: FltClo? = nil,
                   completion: @escaping ((_ filePath: String) -> Void),
                   failure: @escaping RequestFailureCallback) -> String
     {
@@ -559,7 +559,7 @@ extension NetworkRequestManager: ExternalInterface
                 authorization: String? = nil,
                 timeoutInterval: TimeInterval = nt_request_timeoutInterval,
                 headers: Dictionary<String, String>? = nil,
-                progressCallback: ((_ progress: Float) -> Void)? = nil,
+                progressCallback: FltClo? = nil,
                 success: @escaping RequestSuccessCallback,
                 failure: @escaping RequestFailureCallback) -> String
     {

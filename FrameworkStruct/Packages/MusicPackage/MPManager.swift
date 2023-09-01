@@ -619,7 +619,7 @@ extension MPManager: DelegateProtocol, MPLibraryManagerDelegate, MPPlayerDelegat
     
     /**************************************** MPPlayer代理方法 Section Begin ***************************************/
     //处理和加载播放资源，准备播放
-    func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping (Bool) -> Void) {
+    func mpPlayerPrepareToPlay(_ audio: MPAudioProtocol, success: @escaping BoClo) {
         stMgr.set(MPStatus.loading, key: StatusKey.currentStatus)
         delegates.compact()
         for i in 0..<delegates.count
@@ -1159,7 +1159,7 @@ extension MPManager: ExternalInterface
 
     /**************************************** 音乐资源相关 Section Begin ***************************************/
     ///获取所有iCloud歌曲
-    func getAlliCloudSongs(completion: @escaping ([MPSongModel]) -> Void)
+    func getAlliCloudSongs(completion: @escaping GnClo<[MPSongModel]>)
     {
         libMgr.getResource(libraryType: .iCloud, resourceType: .songs) { songs in
             if let songs = songs {
@@ -1169,7 +1169,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取iCloud中上一次播放歌曲，可能为nil
-    func getLastSong(_ completion: @escaping (MPSongModel?) -> Void)
+    func getLastSong(_ completion: @escaping OpGnClo<MPSongModel>)
     {
         libMgr.readCurrentSong { song in
             completion(song)
@@ -1177,7 +1177,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取iCloud中上一次播放列表，只在刚初始化完成还没有播放的时候调用
-    func getLastPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    func getLastPlaylist(_ completion: @escaping OpGnClo<MPPlaylistModel>)
     {
         libMgr.readCurrentPlaylist { playlist in
             completion(playlist)
@@ -1185,7 +1185,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取当前正在播放的歌曲，从缓存获取
-    func getCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    func getCurrentSong(_ completion: @escaping OpGnClo<MPSongModel>)
     {
         libMgr.readCurrentSong { song in
             completion(song)
@@ -1193,7 +1193,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取当前播放列表，从缓存获取
-    func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    func getCurrentPlaylist(_ completion: @escaping OpGnClo<MPPlaylistModel>)
     {
         libMgr.readCurrentPlaylist { playlist in
             completion(playlist)
@@ -1201,7 +1201,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取历史播放歌曲列表
-    func getHistorySongs(_ completion: @escaping (MPHistoryAudioModel?) -> Void)
+    func getHistorySongs(_ completion: @escaping OpGnClo<MPHistoryAudioModel>)
     {
         libMgr.readHistorySongs { historySongs in
             completion(historySongs)
@@ -1209,7 +1209,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取我喜欢歌曲列表
-    func getFavroiteSongs(_ completion: @escaping (MPFavoriteModel?) ->Void)
+    func getFavroiteSongs(_ completion: @escaping OpGnClo<MPFavoriteModel>)
     {
         libMgr.readFavoriteSongs { favoriteSongs in
             completion(favoriteSongs)
@@ -1281,7 +1281,7 @@ extension MPManager: ExternalInterface
     }
     
     ///创建一个新歌单
-    func createNewSonglist(_ name: String, completion: @escaping ((MPSonglistModel?) -> Void))
+    func createNewSonglist(_ name: String, completion: @escaping OpGnClo<MPSonglistModel>)
     {
         libMgr.createNewSonglist(name) { songlist in
             completion(songlist)
@@ -1289,7 +1289,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取所有歌单
-    func getAllSonglists(_ completion: @escaping ([MPSonglistModel]?) -> Void)
+    func getAllSonglists(_ completion: @escaping OpGnClo<[MPSonglistModel]>)
     {
         libMgr.readSonglists { songlists in
             completion(songlists)
@@ -1313,7 +1313,7 @@ extension MPManager: ExternalInterface
     }
     
     ///向某个歌单添加一些歌曲
-    func addSongsToSonglist(_ songs: [MPSongModel], songlistId: String, completion: @escaping (MPLibraryManager.InsertSongToSonglistResult) -> Void)
+    func addSongsToSonglist(_ songs: [MPSongModel], songlistId: String, completion: @escaping GnClo<MPLibraryManager.InsertSongToSonglistResult>)
     {
         libMgr.addSongsToSonglist(songs, songlistId: songlistId) { result in
             completion(result)
@@ -1335,7 +1335,7 @@ extension MPManager: ExternalInterface
     }
     
     ///获取歌词
-    func getLyric(_ audio: MPAudioProtocol, completion: @escaping ((MPLyricModel?) -> Void))
+    func getLyric(_ audio: MPAudioProtocol, completion: @escaping OpGnClo<MPLyricModel>)
     {
         MPLrcManager.shared.getLyric(audio) {[weak self] lyric in
             if lyric?.title == nil

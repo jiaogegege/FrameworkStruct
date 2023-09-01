@@ -108,7 +108,7 @@ extension ThreadManager: ExternalInterface
     
     ///在线程中异步执行代码，并在执行完后在原来调用的线程中返回；该方法主要用于处理耗时的后台任务并在原来的线程中返回
     ///queue：调用该方法时所在的队列
-    func async(onMain: Bool = false, action: @escaping ((_ queue: DispatchQueue) -> Void))
+    func async(onMain: Bool = false, action: @escaping GnClo<DispatchQueue>)
     {
         let currentQueue = self.currentQueue()
         let queue = onMain ? DispatchQueue.main : DispatchQueue.global()

@@ -137,7 +137,7 @@ extension WebAdapter: ExternalInterface
     }
     
     ///获取当前页面的url，completion可能不会执行，所以调用该方法的对象要做一些回调未执行的处理
-    func getCurrentPageUrl(completion: @escaping ((String?) -> Void))
+    func getCurrentPageUrl(completion: @escaping OpStrClo)
     {
         if let cur = currentWebVC
         {

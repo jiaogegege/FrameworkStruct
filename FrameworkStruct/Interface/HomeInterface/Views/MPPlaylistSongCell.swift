@@ -49,7 +49,7 @@ class MPPlaylistSongCell: UITableViewCell {
     }
     
     //删除回调
-    var deleteCallback: ((MPAudioProtocol) -> Void)?
+    var deleteCallback: GnClo<MPAudioProtocol>?
     
     fileprivate var numberLabel: UILabel!       //位置序号
     fileprivate var playingImgView: UIImageView!    //正在播放标志

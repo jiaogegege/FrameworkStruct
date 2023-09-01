@@ -35,7 +35,7 @@ protocol Archivable: NSCoding {
     
     //解档
     static func unarchive(_ data: Data) -> AnyType?
-    static func unarchive(_ data: Data, completion: @escaping ((AnyType?) -> Void))
+    static func unarchive(_ data: Data, completion: @escaping OpGnClo<AnyType>)
 }
 
 //协议基础实现
@@ -57,7 +57,7 @@ extension Archivable {
         ArchiverAdapter.shared.unarchive(data) as? AnyType
     }
     
-    static func unarchive(_ data: Data, completion: @escaping ((AnyType?) -> Void))
+    static func unarchive(_ data: Data, completion: @escaping OpGnClo<AnyType>)
     {
         ArchiverAdapter.shared.unarchive(data) { (obj) in
             completion(obj as? AnyType)

@@ -54,7 +54,7 @@ extension FSAlertView: ExternalInterface
                          identifierKey: String,
                          tintColor: UIColor,
                          cancelTitle: String? = String.cancel,
-                         cancelBlock:((UIAlertAction) -> Void)? = nil,
+                         cancelBlock:GnClo<UIAlertAction>? = nil,
                          confirmTitle: String? = String.confirm,
                          confirmBlock:((UIAlertAction, _ inputText: String?) -> Void)? = nil,
                          inViewController: UIViewController? = nil) -> FSAlertView?

@@ -386,7 +386,7 @@ extension ApplicationManager: ExternalInterface
     }
     
     //当app在后台通过shortchut打开的时候调用
-    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping BoClo) {
         //处理shortcut打开app
         HomeShortcutManager.shared.dispatchShortcut(shortcutItem)
         

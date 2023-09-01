@@ -46,8 +46,8 @@ extension FSActionSheet: ExternalInterface
     //创建一个actionsheet
     class func actionSheet(title: String? = nil,
                            message: String? = nil,
-                           actionArray: Array<[ASItemName: ((UIAlertAction) -> Void)]>,
-                           cancelAction: ((UIAlertAction) -> Void)? = nil,
+                           actionArray: Array<[ASItemName: GnClo<UIAlertAction>]>,
+                           cancelAction: GnClo<UIAlertAction>? = nil,
                            identifierKey: String,
                            tintColor: UIColor,
                            inViewController: UIViewController? = nil) -> FSActionSheet?

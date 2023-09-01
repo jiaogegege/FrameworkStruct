@@ -61,7 +61,7 @@ extension KeychainAccessor: InternalType
 extension KeychainAccessor: ExternalInterface
 {
     ///保存某个用户名的密码，如果存在则更新；用户名一般是手机号或用户设置或后台系统分配
-    func savePsd(username: String, psd: String, completion: ((Error?) -> Void))
+    func savePsd(username: String, psd: String, completion: OpErrClo)
     {
         do {
             try BCCKeychain.storeUsername(username.trim(), andPasswordString: psd.trim(), forServiceName: KADataType.password.rawValue, updateExisting: true)
@@ -81,7 +81,7 @@ extension KeychainAccessor: ExternalInterface
     }
     
     ///删除某个用户名的密码
-    func deletePsd(username: String, completion: ((Error?) -> Void))
+    func deletePsd(username: String, completion: OpErrClo)
     {
         do {
             try BCCKeychain.deleteItem(forUsername: username.trim(), andServiceName: KADataType.password.rawValue)
@@ -93,7 +93,7 @@ extension KeychainAccessor: ExternalInterface
     }
     
     ///保存某个用户名的身份证号，如果存在则更新；用户名一般是手机号或用户设置或后台系统分配
-    func saveIdCard(username: String, id: String, completion: ((Error?) -> Void))
+    func saveIdCard(username: String, id: String, completion: OpErrClo)
     {
         do {
             try BCCKeychain.storeUsername(username.trim(), andPasswordString: id.trim(), forServiceName: KADataType.idCard.rawValue, updateExisting: true)
@@ -113,7 +113,7 @@ extension KeychainAccessor: ExternalInterface
     }
     
     ///删除某个用户名的身份证号
-    func deleteIdCard(username: String, completion: ((Error?) -> Void))
+    func deleteIdCard(username: String, completion: OpErrClo)
     {
         do {
             try BCCKeychain.deleteItem(forUsername: username.trim(), andServiceName: KADataType.idCard.rawValue)

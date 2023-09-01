@@ -910,7 +910,7 @@ extension UIImage
     
     ///提取图片主色调并返回颜色，此处提取的是颜色最亮的色调，并非像素点最多的颜色
     ///type：想要提取的颜色种类
-    func getMainHue(_ type: PaletteTargetMode = [], callback: @escaping ((UIColor?) -> Void))
+    func getMainHue(_ type: PaletteTargetMode = [], callback: @escaping OpGnClo<UIColor>)
     {
         self.getPaletteImageColor(with: type) { recommendColor, allColors, error in
             guard error == nil else {
@@ -930,7 +930,7 @@ extension UIImage
     }
     
     ///提取图片的主色调，像素点最多的颜色
-    func getSubjectColor(_ completion: @escaping ((UIColor?) -> Void))
+    func getSubjectColor(_ completion: @escaping OpGnClo<UIColor>)
     {
         DispatchQueue.global().async {
             if self.cgImage == nil

@@ -147,6 +147,9 @@ typealias Gn2Clo<T1, T2> = ((T1, T2) -> Void)
 //2个参数为可选泛型，返回为空的闭包
 typealias OpGn2Clo<T1, T2> = ((T1?, T2?) -> Void)
 
+//1个参数为泛型，1个参数为可选泛型，返回为空的闭包
+typealias GnOpGnClo<T1, T2> = ((T1, T2?) -> Void)
+
 //返回值为泛型的闭包
 typealias RtGnClo<R> = (() -> R)
 
@@ -174,6 +177,24 @@ typealias BoClo = ((Bool) -> Void)
 //参数为可选Bool的闭包
 typealias OpBoClo = ((Bool?) -> Void)
 
+//参数为Int的闭包
+typealias IntClo = ((Int) -> Void)
+
+//参数为可选Int的闭包
+typealias OpIntClo = ((Int?) -> Void)
+
+//参数为Float的闭包
+typealias FltClo = ((Float) -> Void)
+
+//参数为可选Float的闭包
+typealias OpFltClo = ((Float?) -> Void)
+
+//参数为Double的闭包
+typealias DblClo = ((Double) -> Void)
+
+//参数为可选Int的闭包
+typealias OpDblClo = ((Double?) -> Void)
+
 //参数为Data的闭包
 typealias DataClo = ((Data) -> Void)
 
@@ -187,19 +208,19 @@ typealias StrClo = ((String) -> Void)
 typealias OpStrClo = ((String?) -> Void)
 
 //参数为Error的闭包
-typealias ErrClo = ((Error) -> Void)
+typealias ErrClo = ((_ err: Error) -> Void)
 
 //参数为可选Error的闭包
-typealias OpErrClo = ((Error?) -> Void)
+typealias OpErrClo = ((_ err: Error?) -> Void)
 
 //参数为NSError的闭包
-typealias NSErrClo = ((NSError) -> Void)
+typealias NSErrClo = ((_ error: NSError) -> Void)
 
 //参数为可选NSError的闭包
-typealias OpNSErrClo = ((NSError?) -> Void)
+typealias OpNSErrClo = ((_ error: NSError?) -> Void)
 
 //参数为Exception的闭包
-typealias ExpClo = ((FSException) -> Void)
+typealias ExpClo = ((_ exp: FSException) -> Void)
 
 //参数为可选Exception的闭包
-typealias OpExpClo = ((FSException?) -> Void)
+typealias OpExpClo = ((_ exp: FSException?) -> Void)

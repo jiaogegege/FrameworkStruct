@@ -167,7 +167,7 @@ extension MPLibraryManager: ExternalInterface
 {
     /**************************************** 播放资源操作 Section Begin ***************************************/
     ///获取某个资源
-    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: @escaping (([Any]?) -> Void))
+    func getResource(libraryType: MPLibraryType, resourceType: MPLibraryResourceType, completion: @escaping OpGnClo<[Any]>)
     {
         if libraryType == .iCloud
         {
@@ -182,7 +182,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///读取当前播放歌曲，可能为nil
-    func readCurrentSong(_ completion: @escaping (MPSongModel?) -> Void)
+    func readCurrentSong(_ completion: @escaping OpGnClo<MPSongModel>)
     {
         container.getCurrentSong { song in
             completion(song)
@@ -190,7 +190,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///读取当前播放列表
-    func readCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    func readCurrentPlaylist(_ completion: @escaping OpGnClo<MPPlaylistModel>)
     {
         container.getCurrentPlaylist { playlist in
             completion(playlist)
@@ -198,7 +198,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///读取历史播放歌曲
-    func readHistorySongs(_ completion: @escaping (MPHistoryAudioModel?) -> Void)
+    func readHistorySongs(_ completion: @escaping OpGnClo<MPHistoryAudioModel>)
     {
         container.getHistorySongs { history in
             completion(history)
@@ -206,7 +206,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///读取我喜欢歌曲
-    func readFavoriteSongs(_ completion: @escaping (MPFavoriteModel?) -> Void)
+    func readFavoriteSongs(_ completion: @escaping OpGnClo<MPFavoriteModel>)
     {
         container.getFavoriteSongs { favorite in
             completion(favorite)
@@ -346,7 +346,7 @@ extension MPLibraryManager: ExternalInterface
     
     /**************************************** 歌单操作 Section Begin ***************************************/
     ///创建新歌单
-    func createNewSonglist(_ name: String, completion: @escaping ((MPSonglistModel?) -> Void))
+    func createNewSonglist(_ name: String, completion: @escaping OpGnClo<MPSonglistModel>)
     {
         let songlist = MPSonglistModel(name: name)
         //读取歌单列表
@@ -371,7 +371,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///读取歌单列表
-    func readSonglists(_ completion: @escaping ([MPSonglistModel]?) -> Void)
+    func readSonglists(_ completion: @escaping OpGnClo<[MPSonglistModel]>)
     {
         container.getSonglists { songlists in
             completion(songlists)
@@ -430,7 +430,7 @@ extension MPLibraryManager: ExternalInterface
     }
     
     ///向歌单中添加一些歌曲
-    func addSongsToSonglist(_ songs: [MPSongModel], songlistId: String, completion: @escaping (InsertSongToSonglistResult) -> Void)
+    func addSongsToSonglist(_ songs: [MPSongModel], songlistId: String, completion: @escaping GnClo<InsertSongToSonglistResult>)
     {
         //先查询所有歌单
         container.getSonglists {[weak self] songlists in

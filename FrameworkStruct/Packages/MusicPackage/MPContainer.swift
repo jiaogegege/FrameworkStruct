@@ -530,7 +530,7 @@ extension MPContainer: ExternalInterface
     }
     
     ///获取当前播放列表
-    func getCurrentPlaylist(_ completion: @escaping (MPPlaylistModel?) -> Void)
+    func getCurrentPlaylist(_ completion: @escaping OpGnClo<MPPlaylistModel>)
     {
         if let playlist = self.get(key: MPDataKey.currentPlaylist) as? MPPlaylistModel
         {

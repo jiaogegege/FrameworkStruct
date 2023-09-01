@@ -19,7 +19,7 @@ class MPLyricView: UIView {
     }
     
     //定位歌词返回播放时间
-    var locateCallback: ((TimeInterval) -> Void)?
+    var locateCallback: GnClo<TimeInterval>?
     
     //tap回调
     var tapCallback: VoClo?
