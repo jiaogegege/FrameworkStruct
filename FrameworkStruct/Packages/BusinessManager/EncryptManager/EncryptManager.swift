@@ -20,8 +20,10 @@
 import UIKit
 import CommonCrypto
 
-class EncryptManager: OriginManager
+class EncryptManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = EncryptManager
+    
     //MARK: 属性
     //单例
     static let shared = EncryptManager()

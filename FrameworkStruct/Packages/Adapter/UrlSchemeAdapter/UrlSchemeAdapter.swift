@@ -12,8 +12,10 @@
  */
 import UIKit
 
-class UrlSchemeAdapter: OriginAdapter
+class UrlSchemeAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = UrlSchemeAdapter
+    
     //MARK: 属性
     //单例
     static let shared = UrlSchemeAdapter()

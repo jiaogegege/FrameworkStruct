@@ -12,8 +12,10 @@
  */
 import UIKit
 
-class CommandManager: OriginManager
+class CommandManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = CommandManager
+    
     //MARK: 属性
     //单例
     static let shared = CommandManager()

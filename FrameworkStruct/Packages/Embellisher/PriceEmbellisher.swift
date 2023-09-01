@@ -10,7 +10,10 @@
  */
 import UIKit
 
-class PriceEmbellisher: OriginEmbellisher {
+class PriceEmbellisher: OriginEmbellisher, SingletonProtocol
+{
+    typealias Singleton = PriceEmbellisher
+    
     //MARK: 属性
     //单例
     static let shared = PriceEmbellisher()

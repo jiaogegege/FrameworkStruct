@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class ClipboardAdapter: OriginAdapter
+class ClipboardAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = ClipboardAdapter
+    
     //MARK: 属性
     //单例
     static let shared = ClipboardAdapter()

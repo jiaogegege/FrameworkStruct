@@ -11,7 +11,10 @@
  */
 import UIKit
 
-class ArchiverAdapter: OriginAdapter {
+class ArchiverAdapter: OriginAdapter, SingletonProtocol
+{
+    typealias Singleton = ArchiverAdapter
+    
     //MARK: 属性
     //单例
     static let shared = ArchiverAdapter()

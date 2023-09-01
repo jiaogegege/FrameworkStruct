@@ -12,8 +12,10 @@
  */
 import UIKit
 
-class BluetoothAdapter: OriginAdapter
+class BluetoothAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = BluetoothAdapter
+    
     //单例
     static let shared = BluetoothAdapter()
     

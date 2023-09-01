@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class EmbellisherMonitor: OriginMonitor
+class EmbellisherMonitor: OriginMonitor, SingletonProtocol
 {
+    typealias Singleton = EmbellisherMonitor
+    
     //单例
     static let shared = EmbellisherMonitor()
     

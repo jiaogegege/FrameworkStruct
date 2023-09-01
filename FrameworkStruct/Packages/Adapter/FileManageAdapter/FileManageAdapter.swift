@@ -12,8 +12,10 @@
 import UIKit
 import UniformTypeIdentifiers
 
-class FileManageAdapter: OriginAdapter
+class FileManageAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = FileManageAdapter
+    
     //MARK: 属性
     //单例
     static let shared = FileManageAdapter()

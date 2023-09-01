@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class GuideManager: OriginManager
+class GuideManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = GuideManager
+    
     //MARK: 属性
     //单例
     static let shared = GuideManager()

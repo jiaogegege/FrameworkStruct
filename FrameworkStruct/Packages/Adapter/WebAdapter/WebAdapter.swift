@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class WebAdapter: OriginAdapter
+class WebAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = WebAdapter
+    
     //MARK: 属性
     //单例
     static let shared = WebAdapter()

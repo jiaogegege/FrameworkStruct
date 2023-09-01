@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class IOEmbellisher: OriginEmbellisher
+class IOEmbellisher: OriginEmbellisher, SingletonProtocol
 {
+    typealias Singleton = IOEmbellisher
+    
     //MARK: 属性
     //单例
     static let shared = IOEmbellisher()

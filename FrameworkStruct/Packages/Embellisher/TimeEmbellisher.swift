@@ -12,8 +12,10 @@
  */
 import UIKit
 
-class TimeEmbellisher: OriginEmbellisher
+class TimeEmbellisher: OriginEmbellisher, SingletonProtocol
 {
+    typealias Singleton = TimeEmbellisher
+    
     //MARK: 属性
     //单例
     static let shared = TimeEmbellisher()

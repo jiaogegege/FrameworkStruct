@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class SettingsManager: OriginManager
+class SettingsManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = SettingsManager
+    
     //MARK: 属性
     //单例
     static let shared = SettingsManager()

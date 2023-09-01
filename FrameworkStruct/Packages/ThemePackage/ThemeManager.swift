@@ -18,8 +18,10 @@ import UIKit
 //}
 
 
-class ThemeManager: OriginManager
+class ThemeManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = ThemeManager
+    
     //MARK: 属性
     //单例对象
     static let shared = ThemeManager()
@@ -105,7 +107,7 @@ extension ThemeManager: DelegateProtocol, ContainerServices
 extension ThemeManager: InternalType
 {
     //状态类型
-    enum TMStatusKey: SMKeyType {
+    enum TMStatusKey: SMKey {
         case followDarkMode             //是否跟随系统暗黑模式
     }
     

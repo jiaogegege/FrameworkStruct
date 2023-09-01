@@ -30,8 +30,10 @@ protocol SafariServiceAdapterServices: NSObjectProtocol {
     
 }
 
-class SafariServiceAdapter: OriginAdapter
+class SafariServiceAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = SafariServiceAdapter
+    
     //MARK: 属性
     //单例
     static let shared = SafariServiceAdapter()

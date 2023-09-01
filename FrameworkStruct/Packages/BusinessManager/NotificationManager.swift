@@ -13,8 +13,10 @@
  */
 import UIKit
 
-class NotificationManager: OriginManager
+class NotificationManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = NotificationManager
+    
     //单例
     static let shared = NotificationManager()
     

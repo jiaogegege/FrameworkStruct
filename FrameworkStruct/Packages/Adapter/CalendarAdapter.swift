@@ -14,8 +14,10 @@ import UIKit
 import EventKit
 import EventKitUI
 
-class CalendarAdapter: OriginAdapter
+class CalendarAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = CalendarAdapter
+    
     //MARK: 属性
     //单例
     static let shared = CalendarAdapter()

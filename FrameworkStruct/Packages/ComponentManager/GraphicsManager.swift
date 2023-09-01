@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class GraphicsManager: OriginManager
+class GraphicsManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = GraphicsManager
+    
     //MARK: 属性
     //单例
     static let shared = GraphicsManager()

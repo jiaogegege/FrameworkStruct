@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class RegexAdapter: OriginAdapter
+class RegexAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = RegexAdapter
+    
     //MARK: 属性
     //单例
     static let shared = RegexAdapter()

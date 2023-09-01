@@ -102,6 +102,12 @@ class MPPlayer: OriginWorker
         super.init()
         self.player.addObserver(self, forKeyPath: PlayerKeyPath.timeControlStatus.rawValue, options: .new, context: nil)
         self.addNotification()
+        //初始化完成后开始工作
+        do {
+            try self.startWork()
+        } catch {
+            print(error)
+        }
     }
     
     //结束工作

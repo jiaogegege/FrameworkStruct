@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class NetworkRequestManager: OriginManager
+class NetworkRequestManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = NetworkRequestManager
+    
     //MARK: 属性
     //单例
     static let shared = NetworkRequestManager()

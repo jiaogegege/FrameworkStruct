@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class KeychainAccessor: OriginAccessor
+class KeychainAccessor: OriginAccessor, SingletonProtocol
 {
+    typealias Singleton = KeychainAccessor
+    
     //MARK: 属性
     //单例
     static let shared = KeychainAccessor()

@@ -13,8 +13,10 @@
  */
 import UIKit
 
-class ControllerManager: OriginManager
+class ControllerManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = ControllerManager
+    
     //MARK: 属性
     //单例对象
     static let shared = ControllerManager()

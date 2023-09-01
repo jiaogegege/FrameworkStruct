@@ -58,9 +58,22 @@ protocol OriginProtocol {
  */
 protocol SingletonProtocol {
     //任何实现该协议的类型
-    associatedtype AnyType = Self
+    associatedtype Singleton: NSObject = Self
     
-    static var shared: AnyType { get }
+    static var shared: Singleton { get }
+    
+}
+
+/**
+ 非单例协议
+ 有些管理器对象不是单例的，那么实现这个协议
+ */
+protocol NonSingletionProtocol {
+    ///终止，调用该方法以后，任何非单例对象都要将自身从容器中移除，并不再执行任何功能性方法
+    func terminate()
+    
+    ///是否已经终止，当调用`terminate()`后变为true，变为true后不能执行任何功能性方法
+    var isTerminated: Bool { get }
     
 }
 
@@ -128,7 +141,7 @@ protocol ExternalInterface {
 
 //MARK: 常量定义
 ///Origin对象状态管理器步数定义
-let originStatusStep: Int = 10
+let originStatusStep: Int = 8
 
 
 //MARK: 闭包类型定义

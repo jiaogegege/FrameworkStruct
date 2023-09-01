@@ -62,8 +62,10 @@ extension FSNotification {
 }
 
 
-class MPManager: OriginManager
+class MPManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = MPManager
+    
     //MARK: 属性
     //单例
     static let shared = MPManager()
@@ -72,14 +74,14 @@ class MPManager: OriginManager
     fileprivate var initOrUpdateCallback: VoClo?
     
     //媒体库管理器
-    fileprivate var libMgr = MPLibraryManager.shared
+    fileprivate lazy var libMgr = MPLibraryManager.shared
     //播放器
-    fileprivate var player = MPPlayer()
+    fileprivate lazy var player = MPPlayer()
     //后台任务id
     fileprivate var backgroundTaskId: UIBackgroundTaskIdentifier = .invalid
     
     //iCloud交互
-    fileprivate var ia = iCloudAccessor.shared
+    fileprivate lazy var ia = iCloudAccessor.shared
     
     //弱引用代理数组，一般是UI组件
     fileprivate var delegates: WeakArray = WeakArray.init()
@@ -833,7 +835,7 @@ extension MPManager: InternalType
     static let openFileTimeoutTime: TimeInterval = 12.0
     
     //状态管理器的key
-    enum StatusKey: SMKeyType {
+    enum StatusKey: SMKey {
         case currentStatus              //MP当前状态：`MPStatus`
         case inBackground               //是否在后台：`Bool`
         case updated                    //是否更新过，会多次发生更新：Bool

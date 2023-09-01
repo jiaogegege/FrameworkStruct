@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class CheckerMonitor: OriginMonitor
+class CheckerMonitor: OriginMonitor, SingletonProtocol
 {
+    typealias Singleton = CheckerMonitor
+    
     //单例
     static let shared = CheckerMonitor()
     

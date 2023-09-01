@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class AnimationManager: OriginManager
+class AnimationManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = AnimationManager
+    
     //MARK: 属性
     //单例
     static let shared = AnimationManager()

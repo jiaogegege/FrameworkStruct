@@ -43,8 +43,10 @@ protocol NotificationAdapterDelegate
 }
 
 
-class NotificationAdapter: OriginAdapter
+class NotificationAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = NotificationAdapter
+    
     //MARK: 属性
     //单例
     static let shared = NotificationAdapter()

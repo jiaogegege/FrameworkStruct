@@ -50,11 +50,11 @@ class OriginWorker: NSObject
     //子类如果有自定义初始化方法，那么在最开始要设置状态为`notReady`，在最后调用父类的这个初始化方法
     override init()
     {
-        stMgr.set(WorkState.notReady, key: WorkerStatusKey.workState)  //未就绪状态
+        stMgr.set(WorkState.notReady, key: StatusKey.workState)  //未就绪状态
         self.monitor = WorkerMonitor.shared
         super.init()
         monitor.addItem(self)
-        stMgr.set(WorkState.ready, key: WorkerStatusKey.workState)     //就绪状态
+        stMgr.set(WorkState.ready, key: StatusKey.workState)     //就绪状态
     }
     
     
@@ -68,7 +68,7 @@ class OriginWorker: NSObject
 extension OriginWorker
 {
     //工作者的一些状态枚举
-    enum WorkerStatusKey: SMKeyType {
+    enum StatusKey: SMKey {
         case workState                      //当前工作状态
     }
     
@@ -96,7 +96,7 @@ extension OriginWorker
 extension OriginWorker: WorkerProtocol
 {
     var currentWorkState: WorkState {
-        return stMgr.status(WorkerStatusKey.workState) as! WorkState
+        return stMgr.status(StatusKey.workState) as! WorkState
     }
     
     var canWork: Bool {
@@ -115,7 +115,7 @@ extension OriginWorker: WorkerProtocol
         case .notReady: //如果当前未准备好，那么返回错误信息
             throw WorkerError.notReadyError
         case .ready:    //就绪状态，正常流程，将状态切换为工作状态
-            stMgr.set(WorkState.working, key: WorkerStatusKey.workState)
+            stMgr.set(WorkState.working, key: StatusKey.workState)
         case .working:  //已经处于工作状态，什么都不做
             break
         case .done:     //当前工作者不再可用
@@ -129,7 +129,7 @@ extension OriginWorker: WorkerProtocol
         if currentWorkState != .done    //如果还不是完毕状态，那么清理资源并设置为完毕状态
         {
             monitor.deleteItem(self)    //从监控器中删除
-            stMgr.set(WorkState.done, key: WorkerStatusKey.workState)  //设置状态为完毕
+            stMgr.set(WorkState.done, key: StatusKey.workState)  //设置状态为完毕
         }
     }
     

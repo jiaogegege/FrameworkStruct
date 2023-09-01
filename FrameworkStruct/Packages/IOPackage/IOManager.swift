@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class IOManager: OriginManager
+class IOManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = IOManager
+    
     //MARK: 属性
     //单例
     static let shared = IOManager()

@@ -26,7 +26,10 @@ extension FSNotification
 }
 
 
-class iCloudAccessor: OriginAccessor {
+class iCloudAccessor: OriginAccessor, SingletonProtocol
+{
+    typealias Singleton = iCloudAccessor
+    
     //MARK: 属性
     //单例
     static let shared = iCloudAccessor()

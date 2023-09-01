@@ -11,8 +11,10 @@
 import UIKit
 import AVFoundation
 
-class MPEmbellisher: OriginEmbellisher
+class MPEmbellisher: OriginEmbellisher, SingletonProtocol
 {
+    typealias Singleton = MPEmbellisher
+    
     //MARK: 属性
     //单例
     static let shared = MPEmbellisher()

@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class MenuInteractionManager: OriginManager
+class MenuInteractionManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = MenuInteractionManager
+    
     //MARK: 属性
     //单例
     static let shared = MenuInteractionManager()

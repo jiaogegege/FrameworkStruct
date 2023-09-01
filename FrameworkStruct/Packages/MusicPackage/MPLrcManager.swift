@@ -15,8 +15,10 @@
  */
 import UIKit
 
-class MPLrcManager: OriginManager
+class MPLrcManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = MPLrcManager
+    
     //MARK: 属性
     //单例
     static let shared = MPLrcManager()

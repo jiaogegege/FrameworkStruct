@@ -27,8 +27,10 @@ protocol MPLibraryManagerDelegate: NSObjectProtocol {
 }
 
 
-class MPLibraryManager: OriginManager
+class MPLibraryManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = MPLibraryManager
+    
     //MARK: 属性
     //单例
     static let shared = MPLibraryManager()

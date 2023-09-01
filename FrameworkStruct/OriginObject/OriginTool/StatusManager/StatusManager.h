@@ -24,7 +24,7 @@
 @end
 
 //建议使用该类型作为状态管理器的key
-typedef NSString * SMKeyType;
+typedef NSString * SMKey;
 
 //订阅者block类型
 typedef void(^SMSubscribeAction)(id _Nullable newStatus,id _Nullable oldStatus);

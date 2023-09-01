@@ -20,8 +20,10 @@ import UIKit
     
 }
 
-class AlertManager: OriginManager
+class AlertManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = AlertManager
+    
     //MARK: 属性
     //单例对象
     static let shared = AlertManager()
@@ -264,7 +266,7 @@ extension AlertManager: InternalType
     typealias AMAlertType = UIViewController & AlertManagerProtocol
     
     //状态key
-    enum AMStatusKey: SMKeyType
+    enum AMStatusKey: SMKey
     {
         case isShowing  //是否在显示alert：true/false
     }

@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class SandBoxAccessor: OriginAccessor
+class SandBoxAccessor: OriginAccessor, SingletonProtocol
 {
+    typealias Singleton = SandBoxAccessor
+    
     //单例
     static let shared = SandBoxAccessor()
     

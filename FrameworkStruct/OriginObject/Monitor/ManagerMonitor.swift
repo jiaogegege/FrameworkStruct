@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class ManagerMonitor: OriginMonitor
+class ManagerMonitor: OriginMonitor, SingletonProtocol
 {
+    typealias Singleton = ManagerMonitor
+    
     //单例
     static let shared = ManagerMonitor()
     

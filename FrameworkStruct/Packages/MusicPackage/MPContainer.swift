@@ -19,8 +19,10 @@ extension FSNotification
 }
 
 
-class MPContainer: OriginContainer
+class MPContainer: OriginContainer, SingletonProtocol
 {
+    typealias Singleton = MPContainer
+    
     //MARK: 属性
     //单例
     static let shared = MPContainer()

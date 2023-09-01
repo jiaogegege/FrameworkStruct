@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class PlistAccessor: OriginAccessor
+class PlistAccessor: OriginAccessor, SingletonProtocol
 {
+    typealias Singleton = PlistAccessor
+    
     //单例
     static let shared = PlistAccessor()
     

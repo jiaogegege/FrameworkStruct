@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class IOChecker: OriginChecker
+class IOChecker: OriginChecker, SingletonProtocol
 {
+    typealias Singleton = IOChecker
+    
     //MARK: 属性
     //单例
     static let shared = IOChecker()

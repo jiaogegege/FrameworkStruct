@@ -33,8 +33,10 @@ import UIKit
     
 }
 
-class DialogManager: OriginManager
+class DialogManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = DialogManager
+    
     //MARK: 属性
     //单例对象
     static let shared = DialogManager()
@@ -167,7 +169,7 @@ extension DialogManager: InternalType
     typealias DMDialogType = UIView & DialogManagerProtocol
     
     //状态key
-    enum DMStatusKey: SMKeyType
+    enum DMStatusKey: SMKey
     {
         case isShowing  //是否在显示dialog：true/false
     }

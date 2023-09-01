@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class UserDefaultsAccessor: OriginAccessor
+class UserDefaultsAccessor: OriginAccessor, SingletonProtocol
 {
+    typealias Singleton = UserDefaultsAccessor
+    
     //单例
     static let shared = UserDefaultsAccessor()
     

@@ -12,8 +12,10 @@
  */
 import UIKit
 
-class NetworkAdapter: OriginAdapter
+class NetworkAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = NetworkAdapter
+    
     //MARK: 属性
     //单例
     static let shared = NetworkAdapter()

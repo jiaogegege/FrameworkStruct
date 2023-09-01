@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class LogManager: OriginManager
+class LogManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = LogManager
+    
     //MARK: 属性
     //单例
     static let shared = LogManager()

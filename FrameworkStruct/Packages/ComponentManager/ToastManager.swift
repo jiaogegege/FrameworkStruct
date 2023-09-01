@@ -13,8 +13,10 @@
  */
 import UIKit
 
-class ToastManager: OriginManager
+class ToastManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = ToastManager
+    
     //MARK: 属性
     //单例对象
     static let shared = ToastManager()
@@ -302,7 +304,7 @@ extension ToastManager: DelegateProtocol, MBProgressHUDDelegate
 extension ToastManager: InternalType
 {
     //状态key
-    enum TMStatusKey: SMKeyType {
+    enum TMStatusKey: SMKey {
         case isShowing  //是否在显示HUD:true/false
     }
     

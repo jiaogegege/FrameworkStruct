@@ -12,8 +12,10 @@
 import UIKit
 
 
-class SocializeAdapter: OriginAdapter
+class SocializeAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = SocializeAdapter
+    
     //MARK: 属性
     //单例
     static let shared = SocializeAdapter()

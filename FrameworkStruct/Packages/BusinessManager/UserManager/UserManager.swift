@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class UserManager: OriginManager
+class UserManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = UserManager
+    
     //MARK: 属性
     //单例对象
     static let shared = UserManager()

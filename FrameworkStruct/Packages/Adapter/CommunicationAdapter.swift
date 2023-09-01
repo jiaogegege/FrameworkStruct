@@ -13,8 +13,10 @@ import UIKit
 import Messages
 import MessageUI
 
-class CommunicationAdapter: OriginAdapter
+class CommunicationAdapter: OriginAdapter, SingletonProtocol
 {
+    typealias Singleton = CommunicationAdapter
+    
     //MARK: 属性
     //单例
     static let shared = CommunicationAdapter()

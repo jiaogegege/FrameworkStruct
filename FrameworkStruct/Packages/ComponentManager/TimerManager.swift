@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class TimerManager: OriginManager
+class TimerManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = TimerManager
+    
     //MARK: 属性
     //单例
     static let shared = TimerManager()

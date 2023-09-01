@@ -34,8 +34,10 @@ extension FSNotification
 }
 
 
-class ApplicationManager: OriginManager
+class ApplicationManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = ApplicationManager
+    
     //MARK: 属性
     //单例
     static let shared = ApplicationManager()
@@ -230,7 +232,7 @@ extension ApplicationManager: DelegateProtocol
 extension ApplicationManager: InternalType
 {
     ///应用程序管理器状态key
-    enum AMStatusKey: SMKeyType {
+    enum AMStatusKey: SMKey {
         case appState                       //app状态
         case brightness                     //上一次保存的屏幕亮度，用于在某个界面高亮后退出该界面再调回正常亮度
     }

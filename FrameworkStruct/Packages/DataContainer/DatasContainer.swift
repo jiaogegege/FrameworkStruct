@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class DatasContainer: OriginContainer
+class DatasContainer: OriginContainer, SingletonProtocol
 {
+    typealias Singleton = DatasContainer
+    
     //MARK: 属性
     //单例
     static let shared = DatasContainer()

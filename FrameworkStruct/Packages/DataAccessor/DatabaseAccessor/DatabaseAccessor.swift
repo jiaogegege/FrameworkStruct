@@ -45,8 +45,10 @@ protocol DatabaseAccessorDelegate {
     
 }
 
-class DatabaseAccessor: OriginAccessor
+class DatabaseAccessor: OriginAccessor, SingletonProtocol
 {
+    typealias Singleton = DatabaseAccessor
+    
     //MARK: 属性
     //单例
     static let shared = DatabaseAccessor()
@@ -245,7 +247,7 @@ class DatabaseAccessor: OriginAccessor
 extension DatabaseAccessor: InternalType
 {
     //数据库存取器状态key
-    enum DBAStatusKey: SMKeyType {
+    enum DBAStatusKey: SMKey {
         case workState  //工作状态
     }
     

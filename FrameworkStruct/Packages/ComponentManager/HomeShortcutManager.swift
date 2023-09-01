@@ -10,8 +10,10 @@
  */
 import UIKit
 
-class HomeShortcutManager: OriginManager
+class HomeShortcutManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = HomeShortcutManager
+    
     //MARK: 属性
     //单例
     static let shared = HomeShortcutManager()

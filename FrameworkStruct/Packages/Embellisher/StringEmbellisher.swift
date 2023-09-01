@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class StringEmbellisher: OriginEmbellisher
+class StringEmbellisher: OriginEmbellisher, SingletonProtocol
 {
+    typealias Singleton = StringEmbellisher
+    
     //MARK: 属性
     //单例
     static let shared = StringEmbellisher()

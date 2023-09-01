@@ -11,8 +11,10 @@
  */
 import UIKit
 
-class ThreadManager: OriginManager
+class ThreadManager: OriginManager, SingletonProtocol
 {
+    typealias Singleton = ThreadManager
+    
     //MARK: 属性
     //单例对象
     static let shared = ThreadManager()
