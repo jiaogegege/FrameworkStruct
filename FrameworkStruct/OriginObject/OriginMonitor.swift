@@ -32,9 +32,11 @@ protocol MonitorProtocol
     //删除一个元素
     func deleteItem(_ item: NSObject)
     
-    //获取一个元素
-    //暂时不知道这个方法的作用，留作扩展
-    func getItem() -> NSObject?
+    //根据元素类型获取容器中第一个元素
+    func getItem(by type: AnyClass) -> NSObject?
+    
+    //根据元素类型获取容器中所有同类元素
+    func getItems(by type: AnyClass) -> [NSObject]
     
     //查看所有元素信息，返回元素类型信息的数组
     func getAllItemsInfo() -> [String]
@@ -66,15 +68,15 @@ class OriginMonitor: NSObject
 extension OriginMonitor: MonitorProtocol
 {
     var itemCount: Int {
-        return self.container.count()
+        return container.count()
     }
     
     func allItems() -> [NSObject] {
-        return self.container.allItems()
+        return container.allItems()
     }
     
     func isItemExist(_ item: NSObject) -> Bool {
-        let index = self.container.indexOf(item)
+        let index = container.indexOf(item)
         if index >= 0
         {
             return true
@@ -83,15 +85,32 @@ extension OriginMonitor: MonitorProtocol
     }
     
     func addItem(_ item: NSObject) {
-        self.container.pushBack(item)
+        container.pushBack(item)
     }
     
     func deleteItem(_ item: NSObject) {
-        _ = self.container.pop(item: item)
+        _ = container.pop(item: item)
     }
     
-    func getItem() -> NSObject? {
+    func getItem(by type: AnyClass) -> NSObject? {
+        container.moveToFront()
+        while let obj = container.next() {
+            if obj.isKind(of: type) {
+                return obj
+            }
+        }
         return nil
+    }
+    
+    func getItems(by type: AnyClass) -> [NSObject] {
+        var arr = [NSObject]()
+        container.moveToFront()
+        while let obj = container.next() {
+            if obj.isKind(of: type) {
+                arr.append(obj)
+            }
+        }
+        return arr
     }
     
     func getAllItemsInfo() -> [String] {
