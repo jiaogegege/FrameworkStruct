@@ -68,7 +68,7 @@ protocol SingletonProtocol {
  非单例协议
  有些管理器对象不是单例的，那么实现这个协议
  */
-protocol NonSingletionProtocol {
+protocol NonSingletonProtocol {
     ///终止，调用该方法以后，任何非单例对象都要将自身从容器中移除，并不再执行任何功能性方法
     func terminate()
     
