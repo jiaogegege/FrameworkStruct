@@ -87,12 +87,10 @@ extension EncryptManager: ExternalInterface
     ///参数：originStr：原始字符串；short：是否短格式，true返回16位，false返回32位；lower：是否小写字母
     func md5(_ originStr: String, short: Bool = false, lower: Bool = false) -> String
     {
-        if short
-        {
+        if short {
             return lower ? NSString.md5(forLower16Bate: originStr) : NSString.md5(forUpper16Bate: originStr)
         }
-        else
-        {
+        else {
             return lower ? NSString.md5(forLower32Bate: originStr) : NSString.md5(forUpper32Bate: originStr)
         }
     }
@@ -158,12 +156,11 @@ extension EncryptManager: ExternalInterface
     func rsa(_ str: String, publicKey: String) -> String
     {
         var reslutStr = ""
-        do{
+        do {
             let rsa_publicKey = try PublicKey(pemEncoded: publicKey)
             let clear = try ClearMessage(string: str, using: .utf8)
             reslutStr = try clear.encrypted(with: rsa_publicKey, padding: .PKCS1).base64String
-             
-        }catch{
+        } catch {
             FSLog("RSA encrypt failed")
         }
         return reslutStr
